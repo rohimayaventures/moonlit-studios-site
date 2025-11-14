@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- PRIMARY META TAGS -->
+    <title>Moonlit Studios | Hannah Pagade - The Nurse Who Can Code | Healthcare Web Developer</title>
+    <meta name="title" content="Moonlit Studios | Hannah Pagade - Healthcare Web Developer & AI Specialist">
+    <meta name="description" content="Healthcare operations leader turned full-stack developer & published author. Building HIPAA-compliant platforms, AI-powered solutions, and creative brands. From nursing leadership to tech innovation.">
+    <meta name="keywords" content="healthcare web developer, HIPAA compliant development, AI product development, published author developer, healthcare tech consultant, full-stack developer Denver, medical website design">
+    <meta name="author" content="Hannah Pagade">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://moonlitstudios.com/">
+    
+    <!-- OPEN GRAPH / LINKEDIN -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moonlitstudios.com/">
+    <meta property="og:title" content="Moonlit Studios | The Nurse Who Can Code">
+    <meta property="og:description" content="From nursing leadership to tech innovation, fantasy romance to AI-powered solutions—creating work that bridges worlds.">
+    <meta property="og:image" content="https://moonlitstudios.com/og-image.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Moonlit Studios">
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- PRECONNECT FOR PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    
+    <!-- SCHEMA.ORG STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Hannah Pagade",
+      "alternateName": "The Nurse Who Can Code",
+      "url": "https://moonlitstudios.com",
+      "jobTitle": "Full-Stack Developer, Healthcare Technology Consultant & Published Author",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Moonlit Studios"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of Colorado Boulder"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Westminster",
+        "addressRegion": "CO",
+        "addressCountry": "US"
+      },
+      "knowsAbout": [
+        "Healthcare Technology",
+        "Full-Stack Development",
+        "HIPAA Compliance",
+        "AI & Machine Learning",
+        "React & Node.js",
+        "Healthcare Operations",
+        "Creative Writing",
+        "Brand Development",
+        "Product Strategy"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="main-nav" id="main-nav">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon">🌙</span>
+                <span class="logo-text">Moonlit Studios</span>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li class="has-dropdown">
+                    <a href="#services" class="dropdown-toggle">
+                        Services
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="services/brand-web-experience.html">Brand & Web Experience</a></li>
+                        <li><a href="services/ai-product-experience.html">AI Product Experience</a></li>
+                        <li><a href="services/healthtech-product-ux.html">HealthTech Product & UX</a></li>
+                        <li><a href="services/writing-ghostwriting.html">Writing & Ghostwriting</a></li>
+                        <li><a href="services/strategy-coaching.html">Strategy & Coaching</a></li>
+                    </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html" class="cta-nav">Let's Talk</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-background"></div>
+        <div class="hero-container">
+            <!-- Availability Badge -->
+            <div class="availability-badge fade-in-up">
+                <span class="status-dot"></span>
+                Available for Projects
+            </div>
+            
+            <h1 class="hero-heading fade-in-up delay-1">
+                <span class="name-text">Hannah Pagade</span>
+                <span class="tagline-container">
+                    <span class="static-part">The Nurse </span>
+                    <span class="typing-text" id="typed-text"></span>
+                    <span class="cursor">|</span>
+                </span>
+            </h1>
+            
+            <p class="hero-subtitle fade-in-up delay-2">Strategic Design. Technical Excellence. Operational Precision.</p>
+            
+            <p class="hero-description fade-in-up delay-3">
+                From nursing leadership to tech innovation, fantasy romance to AI-powered solutions—creating work that bridges worlds. 
+                <strong>15 years healthcare operations meets modern full-stack development.</strong>
+            </p>
+            
+            <!-- Hero Stats -->
+            <div class="hero-stats fade-in-up delay-4">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span><span class="plus">+</span>
+                    <span class="stat-label">Years Healthcare Operations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="6">0</span>
+                    <span class="stat-label">Businesses Built & Launched</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="300">0</span><span class="plus">K+</span>
+                    <span class="stat-label">Words Published</span>
+                </div>
+            </div>
+            
+            <!-- Hero CTAs -->
+            <div class="hero-cta fade-in-up delay-5">
+                <a href="contact.html" class="btn btn-primary">Book Discovery Call</a>
+                <a href="#services" class="btn btn-secondary">View Services</a>
+                <a href="portfolio.html" class="btn btn-outline">Browse Portfolio</a>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator fade-in-up delay-6">
+                <span>Scroll to explore</span>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST SIGNALS SECTION -->
+    <section class="trust-signals-section section-padding">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-section">Why Clients Choose Moonlit Studios</h2>
+            
+            <div class="trust-grid">
+                <div class="trust-card fade-in-section">
+                    <div class="trust-icon healthcare-icon">🏥</div>
+                    <h3>For Healthcare Organizations</h3>
+                    <p>Real clinical experience + HIPAA-compliant development</p>
+                </div>
+                
+                <div class="trust-card fade-in-section">
+                    <div class="trust-icon creative-icon">✨</div>
+                    <h3>For Creative Businesses</h3>
+                    <p>Published author who understands storytelling + brand building</p>
+                </div>
+                
+                <div class="trust-card fade-in-section">
+                    <div class="trust-icon tech-icon">🚀</div>
+                    <h3>For Tech Startups</h3>
+                    <p>Full-stack developer + AI/ML expertise + operational precision</p>
+                </div>
+                
+                <div class="trust-card fade-in-section">
+                    <div class="trust-icon author-icon">📚</div>
+                    <h3>For Authors & Publishers</h3>
+                    <p>Self-publishing success + platform development experience</p>
+                </div>
+                
+                <div class="trust-card fade-in-section trust-card-wide">
+                    <div class="trust-icon available-icon">⚡</div>
+                    <h3>Available Immediately</h3>
+                    <p>No waitlist, fast turnaround, global service</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES OVERVIEW SECTION -->
+    <section id="services" class="services-section section-padding bg-alternate">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-section">What I Build</h2>
+            <p class="section-intro text-center fade-in-section">Five service suites designed to bridge worlds</p>
+            
+            <div class="services-grid">
+                <!-- Brand & Web Experience -->
+                <div class="service-card fade-in-section" data-suite="brand">
+                    <div class="service-icon">🎨</div>
+                    <h3>Brand & Web Experience</h3>
+                    <p>From concept to launch—branding, web development, and creative design for businesses and authors.</p>
+                    <ul class="service-features">
+                        <li>Branding & Identity</li>
+                        <li>Web Development</li>
+                        <li>Author Platforms</li>
+                        <li>Creative Copywriting</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="services/brand-web-experience.html" class="btn btn-suite-brand">Explore Services</a>
+                    </div>
+                </div>
+                
+                <!-- AI Product Experience -->
+                <div class="service-card fade-in-section" data-suite="ai">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI Product Experience</h3>
+                    <p>AI-powered products that actually ship. From discovery to deployment, bringing AI innovation to life.</p>
+                    <ul class="service-features">
+                        <li>AI Product Blueprint</li>
+                        <li>Custom AI Assistants</li>
+                        <li>AI-Enhanced MVPs</li>
+                        <li>Systems Engineering</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="services/ai-product-experience.html" class="btn btn-suite-ai">Explore Services</a>
+                    </div>
+                </div>
+                
+                <!-- HealthTech Product & UX -->
+                <div class="service-card fade-in-section" data-suite="health">
+                    <div class="service-icon">🏥</div>
+                    <h3>HealthTech Product & UX</h3>
+                    <p>Healthcare technology built by someone who gets it. HIPAA-compliant solutions with real clinical insight.</p>
+                    <ul class="service-features">
+                        <li>HIPAA-Aligned Design</li>
+                        <li>Clinical Workflow Tools</li>
+                        <li>Patient Interfaces</li>
+                        <li>Health Data Dashboards</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="services/healthtech-product-ux.html" class="btn btn-suite-health">Explore Services</a>
+                    </div>
+                </div>
+                
+                <!-- Writing & Ghostwriting -->
+                <div class="service-card fade-in-section" data-suite="writing">
+                    <div class="service-icon">✍️</div>
+                    <h3>Writing & Ghostwriting</h3>
+                    <p>Your voice, amplified. Brand copy, thought leadership, and ghostwriting from a published author.</p>
+                    <ul class="service-features">
+                        <li>Brand & Website Copy</li>
+                        <li>Thought Leadership</li>
+                        <li>Ghostwriting for Founders</li>
+                        <li>Content Strategy</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="services/writing-ghostwriting.html" class="btn btn-suite-writing">Explore Services</a>
+                    </div>
+                </div>
+                
+                <!-- Strategy & Coaching -->
+                <div class="service-card fade-in-section" data-suite="strategy">
+                    <div class="service-icon">🎯</div>
+                    <h3>Strategy & Coaching</h3>
+                    <p>Strategic guidance from a CEO who builds. Advisory, fractional support, and workshops.</p>
+                    <ul class="service-features">
+                        <li>Strategy Power Sessions</li>
+                        <li>Fractional Support</li>
+                        <li>Product Workshops</li>
+                        <li>Career Coaching</li>
+                    </ul>
+                    <div class="service-actions">
+                        <a href="services/strategy-coaching.html" class="btn btn-suite-strategy">Explore Services</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-cta text-center fade-in-section">
+                <a href="contact.html" class="btn btn-primary btn-large">Book Discovery Call</a>
+                <p class="cta-subtext">Let's discuss which suite fits your needs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT PREVIEW SECTION -->
+    <section id="about" class="about-preview-section section-padding">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-content">
+                    <h2 class="section-title fade-in-section">The Nurse Who Can Code</h2>
+                    <p class="lead fade-in-section">Where healthcare expertise meets technical excellence and creative storytelling</p>
+                    
+                    <div class="about-text fade-in-section">
+                        <p>I spent <strong>15 years in healthcare operations</strong>—leading teams of 130+, managing multimillion-dollar budgets, and building partnerships with Kaiser, Optum, and university health networks. I maintained 96% audit success rates and improved staff retention by 20-25%.</p>
+                        
+                        <p>Then I discovered <strong>storytelling</strong>. As a published fantasy romance author (pen name: Himani Pagade), I've written over 300,000 words across four manuscripts, learning that every product needs a compelling narrative.</p>
+                        
+                        <p>So I <strong>taught myself to code</strong>. Not from bootcamps—from building real applications, solving actual problems, and shipping production-ready platforms. Now I've built <strong>six AI-powered businesses</strong> from concept to launch.</p>
+                        
+                        <p>Today I'm completing my <strong>MS in AI/Machine Learning at CU Boulder</strong> while helping healthcare organizations, creative businesses, and tech startups build solutions that actually work.</p>
+                    </div>
+                    
+                    <div class="about-cta fade-in-section">
+                        <a href="about.html" class="btn btn-secondary">Read Full Story</a>
+                    </div>
+                </div>
+                
+                <div class="credentials-sidebar fade-in-section">
+                    <h3>Credentials & Expertise</h3>
+                    <ul class="credentials-list">
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            15+ Years Healthcare Operations Leadership
+                        </li>
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            Published Fantasy Romance Author
+                        </li>
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            Full-Stack Developer & AI Specialist
+                        </li>
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            MS in AI/ML - CU Boulder (In Progress)
+                        </li>
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            6 Successful Businesses Built & Launched
+                        </li>
+                        <li>
+                            <span class="credential-icon">✓</span>
+                            HIPAA-Compliant Solutions Expert
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO PREVIEW SECTION -->
+    <section class="portfolio-preview-section section-padding bg-alternate">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-section">Recent Work</h2>
+            <p class="section-intro text-center fade-in-section">A glimpse at the businesses and platforms I've built</p>
+            
+            <div class="portfolio-grid">
+                <!-- Rohimaya Health AI -->
+                <div class="portfolio-card fade-in-section">
+                    <div class="portfolio-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="browser-url">rohimaya-health.ai</div>
+                        </div>
+                        <div class="browser-content healthcare-gradient">
+                            <h4>Rohimaya Health AI</h4>
+                            <p>8-product clinical intelligence ecosystem</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Rohimaya Health AI</h3>
+                        <p>Enterprise healthcare platform with AI-powered clinical handoffs and recognition system. Next.js, TypeScript, advanced AI integration.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">HealthTech</span>
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">Enterprise</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- StorySpoon AI -->
+                <div class="portfolio-card fade-in-section">
+                    <div class="portfolio-browser">
+                        <div class="browser-header">
+                            <div class="browser-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="browser-url">storyspoon.ai</div>
+                        </div>
+                        <div class="browser-content creative-gradient">
+                            <h4>StorySpoon AI</h4>
+                            <p>Conversational cookbook platform</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>StorySpoon AI</h3>
+                        <p>AI-powered conversational cookbook that transforms traditional recipes into interactive experiences with voice guidance.</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">AI Product</span>
+                            <span class="tag">Content Platform</span>
+                            <span class="tag">Voice AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More projects preview -->
+                <div class="portfolio-card portfolio-card-more fade-in-section">
+                    <div class="more-content">
+                        <h3>+ 4 More Businesses</h3>
+                        <p>AuthorFlow Studio, LaidOffRise, Legendary Learn, Two Peaks Chai Co.</p>
+                        <a href="portfolio.html" class="btn btn-outline">View All Projects</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section section-padding">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-section">Technical Capabilities</h2>
+            <p class="section-intro text-center fade-in-section">200+ hours of intensive development work. Here's what I can build for you:</p>
+            
+            <div class="skills-grid">
+                <!-- Frontend -->
+                <div class="skill-category fade-in-section">
+                    <h3>Frontend Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React & Next.js</span>
+                            <span class="skill-percent">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">UI/UX Design</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Tailwind CSS</span>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="88"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend -->
+                <div class="skill-category fade-in-section">
+                    <h3>Backend & AI</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Node.js & APIs</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python & AI/ML</span>
+                            <span class="skill-percent">82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="82"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Database Design</span>
+                            <span class="skill-percent">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="78"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Healthcare -->
+                <div class="skill-category fade-in-section">
+                    <h3>Healthcare Expertise</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Clinical Workflows</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HIPAA Compliance</span>
+                            <span class="skill-percent">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="92"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Operations Management</span>
+                            <span class="skill-percent">98%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" data-percent="98"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section section-padding">
+        <div class="cta-container fade-in-section">
+            <h2>Ready to Build Something Extraordinary?</h2>
+            <p>From healthcare platforms to AI products, creative brands to strategic guidance—let's bring your vision to life.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary btn-large">Book Discovery Call</a>
+                <a href="portfolio.html" class="btn btn-outline btn-large">See Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌙</span>
+                        <span class="logo-text">Moonlit Studios</span>
+                    </div>
+                    <p class="footer-tagline">From nursing leadership to tech innovation, fantasy romance to AI-powered solutions—creating work that bridges worlds. Proudly serving clients worldwide from Westminster, Colorado.</p>
+                </div>
+                
+                <!-- Services Column -->
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="services/brand-web-experience.html">Brand & Web Experience</a></li>
+                        <li><a href="services/ai-product-experience.html">AI Product Experience</a></li>
+                        <li><a href="services/healthtech-product-ux.html">HealthTech Product & UX</a></li>
+                        <li><a href="services/writing-ghostwriting.html">Writing & Ghostwriting</a></li>
+                        <li><a href="services/strategy-coaching.html">Strategy & Coaching</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Company Column -->
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Hannah</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect Column -->
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.linkedin.com/in/hannah-pagade" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a href="mailto:hello@moonlitstudios.com">hello@moonlitstudios.com</a></li>
+                        <li><a href="tel:+19107894647">+1 (910) 789-4647</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Moonlit Studios. All rights reserved.</p>
+                <p class="footer-attribution">Built with ♥ where the Phoenix rises and the Peacock dances.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/stats-counter.js"></script>
+    <script src="js/konami.js"></script>
+</body>
+</html>

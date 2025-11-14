@@ -1,0 +1,126 @@
+# 🌊 MOONLIT STUDIOS .gitignore 🌊
+# Keeps your secrets safe and your repo clean!
+
+# ================================
+# 🔒 ENVIRONMENT VARIABLES (API KEYS!)
+# ================================
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ================================
+# 📦 DEPENDENCIES
+# ================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ================================
+# 🏗️ NEXT.JS BUILD OUTPUT
+# ================================
+.next/
+out/
+build/
+dist/
+
+# ================================
+# 🧪 TESTING
+# ================================
+coverage/
+.nyc_output/
+*.lcov
+
+# ================================
+# 💻 IDE & EDITOR FILES
+# ================================
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ/WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ================================
+# 🖥️ OPERATING SYSTEM FILES
+# ================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ================================
+# 🔧 MISC
+# ================================
+*.log
+*.swp
+*.swo
+*~
+.cache/
+.temp/
+.tmp/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Turbo
+.turbo
+
+# ================================
+# 🎨 OPTIONAL (uncomment if needed)
+# ================================
+# If you have local config files:
+# config.local.json
+# secrets.json
+
+# If you have backup files:
+# *.backup
+# *.bak
+
+# If you have local database files:
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# ================================
+# ✅ PROTECTED!
+# ================================
+# Your API keys in .env*.local files are now safe!
+# Your node_modules won't bloat your repo!
+# Your build files won't clutter GitHub!

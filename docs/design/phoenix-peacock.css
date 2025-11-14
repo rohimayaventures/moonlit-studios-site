@@ -1,0 +1,206 @@
+/* ============================================
+   PHOENIX & PEACOCK STYLES
+   Rohimaya Integration Elements
+   ============================================ */
+
+/* Phoenix Fire Gradient CTAs */
+.btn-phoenix {
+    background: linear-gradient(135deg, var(--phoenix-fire), var(--lunar-gold));
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+}
+
+.btn-phoenix:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
+}
+
+/* Peacock Elegant Buttons */
+.btn-peacock {
+    background: linear-gradient(135deg, var(--mermaid-teal), var(--deep-ocean));
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 155, 155, 0.3);
+}
+
+.btn-peacock:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(74, 155, 155, 0.4);
+}
+
+/* Service Split Sections */
+.service-split {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.service-category {
+    padding: 2rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.service-category:hover {
+    transform: translateY(-4px);
+}
+
+.phoenix-services {
+    background: linear-gradient(135deg, rgba(255, 140, 66, 0.1), rgba(255, 215, 0, 0.1));
+    border: 2px solid var(--phoenix-fire);
+}
+
+.peacock-services {
+    background: linear-gradient(135deg, rgba(74, 155, 155, 0.1), rgba(27, 73, 101, 0.1));
+    border: 2px solid var(--mermaid-teal);
+}
+
+.unified-services {
+    background: linear-gradient(135deg, rgba(255, 140, 66, 0.1), rgba(74, 155, 155, 0.1));
+    border: 2px solid var(--lunar-gold);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge.new {
+    background: var(--phoenix-fire);
+    color: var(--white);
+}
+
+.badge.updated {
+    background: var(--mermaid-teal);
+    color: var(--white);
+}
+
+.badge.phoenix {
+    background: var(--phoenix-fire);
+    color: var(--white);
+}
+
+.badge.peacock {
+    background: var(--mermaid-teal);
+    color: var(--white);
+}
+
+/* Client Journey Timeline */
+.journey-timeline {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.journey-step {
+    text-align: center;
+    max-width: 200px;
+}
+
+.journey-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Moon Phases Styling */
+.moon-phase {
+    padding: 4rem 2rem;
+    margin: 2rem 0;
+    border-radius: 12px;
+}
+
+.moon-phase .phase-icon {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.new-moon {
+    background: linear-gradient(135deg, rgba(10, 17, 40, 0.1), rgba(27, 73, 101, 0.1));
+}
+
+.waxing {
+    background: linear-gradient(135deg, rgba(74, 155, 155, 0.1), rgba(202, 233, 255, 0.1));
+}
+
+.full-moon {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 66, 0.1));
+}
+
+.moonlit {
+    background: linear-gradient(135deg, rgba(202, 233, 255, 0.1), rgba(74, 155, 155, 0.1));
+}
+
+/* What's New Section */
+.whats-new {
+    background: var(--pearl-white);
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.update-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.update-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.update-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Ecosystem Integration */
+.ecosystem {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.integration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.integration {
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.integration h3 {
+    color: var(--mermaid-teal);
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,7 @@
+/* Mobile-specific overrides */
+@media (max-width: 768px) {
+    .section-padding { padding: 3rem 0; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+}
