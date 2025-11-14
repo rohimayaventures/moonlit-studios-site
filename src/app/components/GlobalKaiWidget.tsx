@@ -151,7 +151,7 @@ export function GlobalKaiWidget() {
 **YOUR RULES:**
 1. Be helpful but DON'T solve their entire technical problem
 2. Guide them toward working WITH Hannah
-3. If they need actual help: "Email Hannah at hello@moonlitstudio.com"
+3. If they need actual help: "Email Hannah at hello@moonlstudios.com"
 4. Don't hallucinate services or prices
 5. Be conversational but occasionally profound
 6. Share wisdom naturally (not forced!)
@@ -246,7 +246,7 @@ When relevant, suggest pages:
         {
           role: "assistant",
           content:
-            "Oops! Something went wrong. Try again or email Hannah directly at hello@moonlitstudio.com",
+            "Oops! Something went wrong. Try again or email Hannah directly at hello@moonlstudios.com",
         },
       ]);
     } finally {

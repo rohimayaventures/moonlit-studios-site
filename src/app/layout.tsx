@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes",
   description:
     "Moonlit Studios is a creative-tech studio led by nurse-turned-developer Hannah Pagade. Full-stack builds, AI experiences, and soulful digital products for founders and healthcare innovators.",
-  metadataBase: new URL("https://moonlstudio.com"),
+  metadataBase: new URL("https://moonlstudios.com"),
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -130,8 +130,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <div className="space-y-2 text-sm">
                   <p>
                     <span className="text-lunarGold">Email:</span>{" "}
-                    <a href="mailto:hello@moonlstudio.com" className="transition-colors hover:text-starlight">
-                      hello@moonlstudio.com
+                    <a href="mailto:hello@moonlstudios.com" className="transition-colors hover:text-starlight">
+                      hello@moonlstudios.com
                     </a>
                   </p>
                   <p>

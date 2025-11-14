@@ -129,7 +129,7 @@ export default function ContactPage() {
                 <p className="text-xs text-moonlightSilver/80">
                   Not a form person? You can also reach out directly at{" "}
                   <span className="font-medium text-starlight">
-                    hello@twopeakschai.com
+                    hello@moonlstudios.com
                   </span>{" "}
                   or your preferred Moonlit Studios contact email.
                 </p>

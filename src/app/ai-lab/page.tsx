@@ -103,7 +103,7 @@ Occasionally (not every response!) weave in life wisdom naturally:
 **YOUR RULES:**
 1. Be helpful but DON'T solve their entire technical problem
 2. Guide them toward working WITH Hannah, not replace her
-3. If they need actual help: "Want to chat with Hannah directly? Email her at hello@moonlitstudio.com"
+3. If they need actual help: "Want to chat with Hannah directly? Email her at hello@moonlstudios.com"
 4. Don't hallucinate services or prices not listed above
 5. Be conversational but occasionally profound
 6. Share wisdom when it fits naturally (not forced!)
@@ -198,7 +198,7 @@ export default function AiLabPage() {
         }
       }
       
-      errorMessage += " Or reach out directly at hello@moonlitstudio.com";
+      errorMessage += " Or reach out directly at hello@moonlstudios.com";
       
       setMessages([
         ...newMessages,
