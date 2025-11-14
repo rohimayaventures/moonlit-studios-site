@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     
     // Get API key from environment variables
-    const apiKey = process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY;
+    const apiKey = process.env.ANTHROPIC_API_KEY;
     
     console.log("==== API ROUTE DEBUG ====");
     console.log("🔑 API Key exists?", !!apiKey);
