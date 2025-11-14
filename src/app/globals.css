@@ -1104,3 +1104,173 @@ a {
 /* ========================================
    END OF ADDITIONS for Kai Widget!
    ======================================== */
+
+/* ========================================
+   🏰 HARRY POTTER FLIP CARDS - 3D MAGIC
+   ======================================== */
+
+/* Flip Card Container */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* House Colors - Gryffindor */
+.house-gryffindor-front {
+  background: linear-gradient(135deg, #740001 0%, #AE0001 50%, #D3A625 100%);
+  border: 2px solid rgba(211, 166, 37, 0.5);
+}
+
+.house-gryffindor-back {
+  background: linear-gradient(135deg, rgba(116, 0, 1, 0.95) 0%, rgba(174, 0, 1, 0.98) 100%);
+  border: 2px solid rgba(211, 166, 37, 0.6);
+}
+
+/* House Colors - Ravenclaw */
+.house-ravenclaw-front {
+  background: linear-gradient(135deg, #0E1A40 0%, #222F5B 50%, #946B2D 100%);
+  border: 2px solid rgba(148, 107, 45, 0.5);
+}
+
+.house-ravenclaw-back {
+  background: linear-gradient(135deg, rgba(14, 26, 64, 0.95) 0%, rgba(34, 47, 91, 0.98) 100%);
+  border: 2px solid rgba(148, 107, 45, 0.6);
+}
+
+/* House Colors - Hufflepuff */
+.house-hufflepuff-front {
+  background: linear-gradient(135deg, #000000 0%, #372e29 30%, #ECB939 100%);
+  border: 2px solid rgba(236, 185, 57, 0.5);
+}
+
+.house-hufflepuff-back {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(55, 46, 41, 0.98) 100%);
+  border: 2px solid rgba(236, 185, 57, 0.6);
+}
+
+/* House Colors - Slytherin */
+.house-slytherin-front {
+  background: linear-gradient(135deg, #1A472A 0%, #2A623D 50%, #AAAAAA 100%);
+  border: 2px solid rgba(170, 170, 170, 0.5);
+}
+
+.house-slytherin-back {
+  background: linear-gradient(135deg, rgba(26, 71, 42, 0.95) 0%, rgba(42, 98, 61, 0.98) 100%);
+  border: 2px solid rgba(170, 170, 170, 0.6);
+}
+
+/* House Glow Effects on Hover */
+.flip-card:hover .house-gryffindor-front {
+  box-shadow: 0 0 30px rgba(211, 166, 37, 0.4), 0 0 60px rgba(174, 0, 1, 0.3);
+}
+
+.flip-card:hover .house-ravenclaw-front {
+  box-shadow: 0 0 30px rgba(148, 107, 45, 0.4), 0 0 60px rgba(14, 26, 64, 0.3);
+}
+
+.flip-card:hover .house-hufflepuff-front {
+  box-shadow: 0 0 30px rgba(236, 185, 57, 0.4), 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+.flip-card:hover .house-slytherin-front {
+  box-shadow: 0 0 30px rgba(170, 170, 170, 0.4), 0 0 60px rgba(26, 71, 42, 0.3);
+}
+
+/* Magical shimmer effect for cards */
+@keyframes house-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.house-shimmer {
+  background-size: 200% 100%;
+  animation: house-shimmer 3s linear infinite;
+}
+
+/* Flip card scale on hover */
+.flip-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* House crest animations */
+@keyframes crest-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.house-crest {
+  animation: crest-float 4s ease-in-out infinite;
+}
+
+/* Voice recording pulse */
+@keyframes voice-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.voice-recording {
+  animation: voice-pulse 1.5s ease-in-out infinite;
+}
+
+/* Triage level indicators */
+.triage-emergency {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.triage-urgent {
+  background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+
+.triage-routine {
+  background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.triage-selfcare {
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+/* ========================================
+   END OF HP FLIP CARDS CSS ✨
+   ======================================== */
