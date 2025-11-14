@@ -77,10 +77,10 @@ export default function ServicesPage() {
             Choose the build that fits where you are.
           </h1>
           <p className="text-moonlightSilver md:text-lg">
-            I'm Hannah - a nurse-turned full-stack developer and creative
-            technologist. Moonlit Studios offers five suites so you can pick the
-            mix of branding, product, AI, or storytelling support that fits your
-            current season.
+            Moonlit Studios is led by a nurse-turned full-stack developer and
+            creative technologist. These five suites let you pick the mix of
+            branding, product, AI, or storytelling support that fits your current
+            season.
           </p>
         </div>
       </section>

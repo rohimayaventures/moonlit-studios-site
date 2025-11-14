@@ -10,7 +10,7 @@ export default function AboutPage() {
         </div>
 
         <div className="relative mx-auto max-w-4xl space-y-6 fade-in-up">
-          <p className="text-xs tracking-[0.35em] text-starlight uppercase">About Hannah</p>
+          <p className="text-xs tracking-[0.35em] text-starlight uppercase">About Moonlit Studios</p>
           <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
             The Nurse Who Learned to Code
           </h1>
@@ -656,7 +656,7 @@ export default function AboutPage() {
                   "A nurse who writes fantasy romance AND builds AI systems. Balance isn't choosing one 
                   path—it's mastering them all and letting them strengthen each other."
                 </p>
-                <p className="text-lunarGold text-xs mt-3">— Himani Pagade (Hannah Pagade)</p>
+                <p className="text-lunarGold text-xs mt-3">— Moonlit Studios</p>
               </div>
             </div>
           </div>

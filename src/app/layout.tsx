@@ -6,7 +6,7 @@ import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes",
   description:
-    "Moonlit Studios is a creative-tech studio led by nurse-turned-developer Hannah Pagade. Full-stack builds, AI experiences, and soulful digital products for founders and healthcare innovators.",
+    "Moonlit Studios is a creative-tech studio led by a nurse-turned developer. Full-stack builds, AI experiences, and soulful digital products for founders and healthcare innovators.",
   metadataBase: new URL("https://moonlstudios.com"),
 };
 
@@ -137,7 +137,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <p>
                     <span className="text-lunarGold">LinkedIn:</span>{" "}
                     <a href="#" className="transition-colors hover:text-starlight">
-                      Hannah Pagade
+                      Moonlit Studios
                     </a>
                   </p>
                 </div>
@@ -176,7 +176,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {/* Copyright Section */}
             <div className="border-t border-deepOcean/60">
               <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-6 text-xs text-moonlightSilver/80 md:flex-row md:items-center md:justify-between">
-                <p>© 2025 Moonlit Studios | Hannah Pagade</p>
+                <p>© 2025 Moonlit Studios</p>
                 <p className="italic text-starlight/70">Mischief Managed ⚡</p>
               </div>
             </div>

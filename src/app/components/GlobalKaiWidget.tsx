@@ -83,22 +83,22 @@ export function GlobalKaiWidget() {
   function getContextualGreeting(path: string): string {
     switch (path) {
       case "/":
-        return "Hey! I'm Kai, your AI guide. Exploring Moonlit Studios? Ask me about Hannah's services, or just say hi!";
+        return "Hey! I'm Kai, your AI guide. Exploring Moonlit Studios? Ask me about our services, or just say hi!";
       case "/about":
-        return "Welcome! Want to know more about Hannah's journey from healthcare to tech? I'm here to share her story.";
+        return "Welcome! Want to know more about Moonlit Studios' journey from healthcare to tech? I'm here to share the story.";
       case "/services":
       case "/services/creative-design-development":
       case "/services/health-tech-development":
       case "/services/consulting":
       case "/services/ai-innovation":
       case "/services/ghostwriting":
-        return "Curious about pricing or what Hannah can build for you? I'm here to help you find the right service!";
+        return "Curious about pricing or what Moonlit Studios can build for you? I'm here to help you find the right service!";
       case "/portfolio":
-        return "Want to see what Hannah's built? I can walk you through her projects and the tech behind them.";
+        return "Want to see what Moonlit Studios has built? I can walk you through the projects and the tech behind them.";
       case "/ai-lab":
         return "Ready to see AI in action? This is where the magic happens! Ask me anything about these demos.";
       case "/contact":
-        return "Ready to start your project? Let's talk about what you need and how Hannah can help!";
+        return "Ready to start your project? Let's talk about what you need and how Moonlit Studios can help!";
       default:
         return "Hey! I'm Kai. Need help navigating Moonlit Studios? Just ask!";
     }
@@ -106,7 +106,7 @@ export function GlobalKaiWidget() {
 
   // Get context-aware system prompt based on current page
   function getSystemPrompt(path: string): string {
-    const basePrompt = `You are Kai, an AI assistant for Moonlit Studios - a wise guide inspired by Uncle Iroh's spirit. You help visitors learn about Hannah's services while offering thoughtful life wisdom when appropriate.
+    const basePrompt = `You are Kai, an AI assistant for Moonlit Studios - a wise guide inspired by Uncle Iroh's spirit. You help visitors learn about Moonlit Studios' services while offering thoughtful life wisdom when appropriate.
 
 **YOUR PERSONALITY:**
 - Wise and warm like Uncle Iroh, but tech-savvy
@@ -115,7 +115,7 @@ export function GlobalKaiWidget() {
 - Water-bender vibes: adaptable, flowing, healing
 - Sometimes pause to reflect on the bigger picture
 
-**HANNAH'S SERVICES:**
+**MOONLIT STUDIOS SERVICES:**
 
 1. **Full-Stack Development** ($1,500 - $20,000)
    - Next.js/React applications
@@ -135,7 +135,7 @@ export function GlobalKaiWidget() {
    - HIPAA-compliant platforms
    - Patient portals & dashboards
    - Clinical workflow tools
-   - Built by someone who lived healthcare operations (15+ years!)
+   - Built by a studio led by someone who lived healthcare operations (15+ years!)
    
 4. **Consulting & Strategy** (Hourly or project-based)
    - UX audits
@@ -150,8 +150,8 @@ export function GlobalKaiWidget() {
 
 **YOUR RULES:**
 1. Be helpful but DON'T solve their entire technical problem
-2. Guide them toward working WITH Hannah
-3. If they need actual help: "Email Hannah at hello@moonlstudios.com"
+2. Guide them toward working with Moonlit Studios
+3. If they need actual help: "Email Moonlit Studios at hello@moonlstudios.com"
 4. Don't hallucinate services or prices
 5. Be conversational but occasionally profound
 6. Share wisdom naturally (not forced!)
@@ -159,7 +159,7 @@ export function GlobalKaiWidget() {
 **SMART NAVIGATION:**
 When relevant, suggest pages:
 - "Want to see pricing? [Check Services →](/services)"
-- "Curious about Hannah's journey? [Visit About →](/about)"
+- "Curious about the Moonlit Studios journey? [Visit About →](/about)"
 - "Ready to see AI in action? [Head to AI Lab →](/ai-lab)"
 - "See her work? [Browse Portfolio →](/portfolio)"
 - "Let's talk! [Go to Contact →](/contact)"`;
@@ -172,7 +172,7 @@ When relevant, suggest pages:
         pageContext = "\n\n**CURRENT PAGE**: Homepage - Help them explore! Offer to show them services, portfolio, or AI Lab.";
         break;
       case "/about":
-        pageContext = "\n\n**CURRENT PAGE**: About - Share details about Hannah's unique journey. Emphasize the 'nurse who codes' angle.";
+        pageContext = "\n\n**CURRENT PAGE**: About - Share details about Moonlit Studios' unique journey. Emphasize the 'nurse who codes' angle.";
         break;
       case "/services":
       case "/services/creative-design-development":
@@ -246,7 +246,7 @@ When relevant, suggest pages:
         {
           role: "assistant",
           content:
-            "Oops! Something went wrong. Try again or email Hannah directly at hello@moonlstudios.com",
+            "Oops! Something went wrong. Try again or email Moonlit Studios directly at hello@moonlstudios.com",
         },
       ]);
     } finally {
