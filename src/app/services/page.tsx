@@ -9,7 +9,7 @@ const suites = [
       "Packaging & product visuals",
       "Creative visual direction",
     ],
-    starting: "$700+",
+    starting: "$1,800+",
     href: "/services/creative-design-development",
   },
   {
@@ -21,7 +21,7 @@ const suites = [
       "Nurse-to-nurse platforms",
       "Health data dashboards",
     ],
-    starting: "$1,500+",
+    starting: "$4,500+",
     href: "/services/health-tech-development",
   },
   {
@@ -33,7 +33,7 @@ const suites = [
       "UX for clinician workflows",
       "Creative/portfolio coaching",
     ],
-    starting: "$100/hr",
+    starting: "$150/hr",
     href: "/services/consulting",
   },
   {
@@ -45,7 +45,7 @@ const suites = [
       "Conversational & voice AI",
       "Moonlit Labs experiments",
     ],
-    starting: "$1,200+",
+    starting: "$5,000+",
     href: "/services/ai-innovation",
   },
   {
@@ -59,7 +59,7 @@ const suites = [
       "Speeches & launch flows",
       "Author websites + reader magnets",
     ],
-    starting: "$100+",
+    starting: "$250+",
     href: "/services/ghostwriting",
   },
 ];

@@ -16,23 +16,33 @@ Moonlit Studios is led by a nurse-turned-developer with 15+ years of healthcare 
 
 ### Creative Design & Development
 Branding, websites, and visual direction for founders, authors, and small studios.
-Starting at $700+
+- Branding & Identity: $1,800 - $4,500
+- Web Design & Development: $3,000 - $8,500
+Three tiers: Essential, Professional, Premium
 
 ### Health x Tech Development
 Clinical-grade UX and HIPAA-compliant interfaces designed by someone who understands healthcare workflows.
-Starting at $1,500+
+- $4,500 - $15,000+
+Three tiers: Foundation, Comprehensive, Enterprise
 
 ### Consulting
 Strategy, audits, and workshops at the intersection of healthcare, UX, and product.
-Starting at $100/hr
+- $150 - $200/hr
+- Discovery Sessions: $500 - $1,000
+- UX Audits: $2,000 - $5,000
 
 ### AI Innovation Suite
 Applied AI systems including RAG chatbots, voice AI, computer vision, and healthcare triage systems.
-Starting at $1,200+
+- Chatbots: $5,000 - $8,000
+- Voice AI: $8,000 - $12,000
+- Vision AI: $10,000 - $15,000
+- Enterprise Custom: $15,000 - $18,000+
 
 ### Author & Ghostwriting Studio
 Author platforms, books, cookbooks, and ongoing written content done in your voice.
-Starting at $100+
+- Written Content: $250 - $600 per piece
+- Books & Cookbooks: $18,000 - $50,000+
+- Author Platforms: $1,800 - $4,500
 
 ## Technology Stack
 - Frontend: Next.js 16, React, TypeScript, Tailwind CSS

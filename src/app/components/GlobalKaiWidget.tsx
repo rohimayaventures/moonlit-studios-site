@@ -117,30 +117,33 @@ export function GlobalKaiWidget() {
 
 **MOONLIT STUDIOS SERVICES:**
 
-1. **Full-Stack Development** ($1,500 - $20,000)
-   - Next.js/React applications
-   - Responsive websites with Tailwind CSS
-   - Custom UI/UX design
-   - Healthcare-focused apps (HIPAA-compliant)
-   - Portfolio sites, brand identity
-   
-2. **AI Innovation** ($3,000 - $8,000+ for first release)
-   - RAG chatbots (knowledge-aware assistants)
-   - Voice-enabled tools
-   - Workflow automation
-   - API integrations & custom AI tools
-   - Internal copilots for teams
-   
-3. **Healthcare Tech** (Custom pricing)
+1. **Creative Design & Development**
+   - Branding & Identity starts at $1,800
+   - Web Design & Development starts at $3,000
+   - Three tiers: Essential, Professional, Premium
+
+2. **Health x Tech Development**
+   - Starts at $4,500
    - HIPAA-compliant platforms
-   - Patient portals & dashboards
    - Clinical workflow tools
-   - Built by a studio led by someone who lived healthcare operations (15+ years!)
-   
-4. **Consulting & Strategy** (Hourly or project-based)
-   - UX audits
-   - Technical strategy
-   - Content & ghostwriting
+   - Built by someone who lived healthcare operations (15+ years!)
+   - Three tiers: Foundation, Comprehensive, Enterprise
+
+3. **Consulting**
+   - Hourly sessions start at $150/hr
+   - Discovery sessions start at $500
+   - UX audits start at $2,000
+
+4. **AI Innovation Suite**
+   - RAG Chatbots start at $5,000
+   - Voice AI starts at $8,000
+   - Vision AI starts at $10,000
+   - Enterprise custom starts at $15,000
+
+5. **Author & Ghostwriting Studio**
+   - Written content starts at $250
+   - Books & cookbooks start at $18,000
+   - Author platforms start at $1,800
 
 **STUDIO LEADER'S BACKGROUND:**
 - Self-taught full-stack developer specializing in AI/ML systems
