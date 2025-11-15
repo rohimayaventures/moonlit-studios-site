@@ -1,5 +1,7 @@
 'use client';
 
+import { TestimonialsSection } from './components/TestimonialsSection';
+
 export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -492,6 +494,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsSection limit={3} />
 
       {/* FINAL CTA */}
       <section id="cta" className="py-20 bg-gradient-to-b from-deepOcean/20 to-midnight">

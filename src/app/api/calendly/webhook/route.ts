@@ -164,6 +164,15 @@ async function handleNewBooking(payload: any) {
 
   // 3. TODO: Add to CRM/database for follow-up tracking
   // You can add code here to save to a database or send to a CRM like Notion, Airtable, etc.
+
+  // 4. Schedule post-consultation survey (send 1 hour after event)
+  const surveyDelay = eventTime.getTime() + (60 * 60 * 1000) - Date.now(); // Event time + 1 hour
+  if (surveyDelay > 0) {
+    setTimeout(() => {
+      sendPostConsultationSurvey(inviteeName, inviteeEmail, eventDetails.uri);
+    }, surveyDelay);
+    console.log(`Survey scheduled for ${new Date(Date.now() + surveyDelay).toLocaleString()}`);
+  }
 }
 
 // Handle cancellation
@@ -195,5 +204,79 @@ async function handleCancellation(payload: any) {
     });
   } catch (error) {
     console.error('Failed to send cancellation notification:', error);
+  }
+}
+
+// Send post-consultation survey
+async function sendPostConsultationSurvey(name: string, email: string, eventUri: string) {
+  const firstName = name.split(' ')[0];
+  const surveyUrl = `https://moonlstudios.com/testimonial?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&event=${encodeURIComponent(eventUri)}`;
+
+  console.log(`Sending post-consultation survey to ${name} (${email})`);
+
+  try {
+    await resend.emails.send({
+      from: 'Moonlit Studios <hello@moonlstudios.com>',
+      to: email,
+      subject: `How was our consultation, ${firstName}? 🌙`,
+      html: `
+        <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0ea5e9;">Thank You for Your Time Today!</h2>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
+            Hi ${firstName},
+          </p>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
+            I really enjoyed our conversation and learning about your project. I hope you found our
+            consultation valuable and got the insights you were looking for.
+          </p>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
+            <strong>Would you mind sharing your thoughts?</strong> Your feedback helps me continue to
+            improve and serve healthcare innovators like you even better.
+          </p>
+
+          <div style="text-align: center; margin: 40px 0;">
+            <a href="${surveyUrl}"
+               style="display: inline-block; background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(14, 165, 233, 0.3);">
+              Share Your Feedback (2 minutes)
+            </a>
+          </div>
+
+          <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #0ea5e9; margin: 30px 0;">
+            <p style="margin: 0; color: #0c4a6e; font-size: 14px;">
+              <strong>Quick & Easy:</strong> Just a few questions about your experience.
+              Your honest feedback is incredibly valuable—whether it's praise or constructive criticism.
+            </p>
+          </div>
+
+          <p style="font-size: 16px; line-height: 1.6; color: #334155;">
+            If you have any questions or need clarification on anything we discussed,
+            feel free to reply to this email. I'm here to help!
+          </p>
+
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 14px; margin: 0;">
+              Best regards,<br>
+              <strong style="color: #334155;">Destiny</strong><br>
+              <em>The Nurse Who Codes</em><br>
+              Moonlit Studios
+            </p>
+          </div>
+
+          <div style="margin-top: 30px; text-align: center;">
+            <p style="color: #94a3b8; font-size: 12px;">
+              Moonlit Studios | Where healthcare expertise meets cutting-edge development<br>
+              <a href="https://moonlstudios.com" style="color: #0ea5e9; text-decoration: none;">moonlstudios.com</a>
+            </p>
+          </div>
+        </div>
+      `,
+    });
+
+    console.log(`Survey email sent successfully to ${email}`);
+  } catch (error) {
+    console.error('Failed to send survey email:', error);
   }
 }
