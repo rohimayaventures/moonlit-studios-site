@@ -6,6 +6,8 @@ import { ChevronDown } from 'lucide-react';
 const suites = [
   {
     name: "Creative Design & Development",
+    questTitle: "The Branding Quest",
+    difficulty: 2, // ⭐⭐ Warrior
     description:
       "Branding, websites, and visual direction for founders, authors, and small studios.",
     includes: [
@@ -14,11 +16,20 @@ const suites = [
       "Packaging & product visuals",
       "Creative visual direction",
     ],
+    rewards: [
+      "Professional brand identity",
+      "Custom-built web presence",
+      "Client-ready marketing assets",
+    ],
     starting: "$1,800+",
     href: "/services/creative-design-development",
+    icon: "🎨",
+    color: "coralPink",
   },
   {
     name: "Health x Tech Development",
+    questTitle: "The Healer's Code",
+    difficulty: 3, // ⭐⭐⭐ Master
     description:
       "Clinical-grade UX and interfaces designed by a nurse who understands workflows.",
     includes: [
@@ -26,11 +37,20 @@ const suites = [
       "Nurse-to-nurse platforms",
       "Health data dashboards",
     ],
+    rewards: [
+      "HIPAA-compliant platform",
+      "Clinical workflow mastery",
+      "Healthcare-grade security",
+    ],
     starting: "$4,500+",
     href: "/services/health-tech-development",
+    icon: "⚕️",
+    color: "mermaidTeal",
   },
   {
     name: "Consulting",
+    questTitle: "The Strategy Session",
+    difficulty: 1, // ⭐ Novice
     description:
       "Strategy, audits, and workshops at the intersection of healthcare, UX, and product.",
     includes: [
@@ -38,11 +58,20 @@ const suites = [
       "UX for clinician workflows",
       "Creative/portfolio coaching",
     ],
+    rewards: [
+      "Clear product roadmap",
+      "Expert guidance",
+      "Actionable insights",
+    ],
     starting: "$150/hr",
     href: "/services/consulting",
+    icon: "🧙",
+    color: "starlight",
   },
   {
     name: "AI Innovation Suite",
+    questTitle: "The AI Architect",
+    difficulty: 3, // ⭐⭐⭐ Master
     description:
       "Applied AI systems, copilots, and creative engines that actually ship.",
     includes: [
@@ -50,11 +79,20 @@ const suites = [
       "Conversational & voice AI",
       "Moonlit Labs experiments",
     ],
+    rewards: [
+      "Intelligent automation",
+      "Custom AI copilot",
+      "Competitive advantage",
+    ],
     starting: "$5,000+",
     href: "/services/ai-innovation",
+    icon: "⚡",
+    color: "lunarGold",
   },
   {
     name: "Author & Ghostwriting Studio",
+    questTitle: "The Storyteller's Scroll",
+    difficulty: 2, // ⭐⭐ Warrior
     description:
       "Author platforms, books, cookbooks, and ongoing written content done in your voice.",
     includes: [
@@ -64,10 +102,47 @@ const suites = [
       "Speeches & launch flows",
       "Author websites + reader magnets",
     ],
+    rewards: [
+      "Published work in your voice",
+      "Author platform presence",
+      "Reader engagement system",
+    ],
     starting: "$250+",
     href: "/services/ghostwriting",
+    icon: "📖",
+    color: "roseGold",
   },
 ];
+
+// Helper function to render difficulty stars
+const getDifficultyStars = (difficulty: number) => {
+  const stars = [];
+  for (let i = 0; i < 3; i++) {
+    stars.push(
+      <span
+        key={i}
+        className={i < difficulty ? "text-lunarGold" : "text-moonlightSilver/20"}
+      >
+        ⭐
+      </span>
+    );
+  }
+  return stars;
+};
+
+// Get difficulty label
+const getDifficultyLabel = (difficulty: number) => {
+  switch (difficulty) {
+    case 1:
+      return "NOVICE";
+    case 2:
+      return "WARRIOR";
+    case 3:
+      return "MASTER";
+    default:
+      return "QUEST";
+  }
+};
 
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState('');
@@ -115,17 +190,20 @@ export default function ServicesPage() {
           </div>
 
           <div className="text-center space-y-4 sm:space-y-6">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">
-              Service Suites
-            </p>
+            {/* Quest Board Title */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/40">
+              <span className="text-2xl">📜</span>
+              <p className="text-xs sm:text-sm tracking-[0.35em] text-lunarGold uppercase font-semibold">
+                Quest Board
+              </p>
+            </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
-              Choose the build that fits where you are.
+              Choose your quest. Begin your journey.
             </h1>
             <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4">
-              Moonlit Studios is led by a nurse-turned full-stack developer and
-              creative technologist. These five suites let you pick the mix of
-              branding, product, AI, or storytelling support that fits your current
-              season.
+              Every great adventure starts with accepting the right quest. Led by a nurse-turned-developer,
+              these five service quests offer different paths—each with its own challenges, rewards, and transformations.
+              Which quest calls to you?
             </p>
 
             {/* Service Dropdown Navigation */}
@@ -156,42 +234,101 @@ export default function ServicesPage() {
 
       <section className="px-6 pb-16">
         <div className="mx-auto max-w-6xl space-y-8">
-          <div className="space-y-3">
-            <p className="text-sm tracking-[0.35em] text-starlight uppercase">
-              The Suite Catalog
-            </p>
-            <p className="text-moonlightSilver">
-              Each suite can flex up or down. Start scoped, grow as needed.
+          {/* Quest Board Header */}
+          <div className="space-y-3 text-center">
+            <div className="inline-flex items-center gap-2">
+              <span className="text-lg">⚔️</span>
+              <p className="text-sm tracking-[0.35em] text-starlight uppercase">
+                Available Quests
+              </p>
+              <span className="text-lg">🗡️</span>
+            </div>
+            <p className="text-moonlightSilver max-w-2xl mx-auto">
+              Each quest scales to your resources and timeline. Accept one to begin your transformation.
             </p>
           </div>
+
+          {/* Quest Cards - Parchment Style */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {suites.map((suite, index) => (
               <article
                 key={suite.name}
-                className="rounded-3xl border border-deepOcean/60 bg-gradient-to-b from-deepOcean/70 via-midnight/80 to-midnight/95 p-5 text-moonlightSilver shadow-xl shadow-black/40 transition-all hover:border-mermaidTeal/70 hover:shadow-mermaidTeal/30 animate-fadeInUp"
-                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+                className="relative rounded-2xl border-2 border-lunarGold/30 bg-gradient-to-br from-[#2a2520]/95 via-[#1a1510]/98 to-midnight/95 p-6 text-moonlightSilver shadow-2xl shadow-black/60 transition-all hover:border-lunarGold/70 hover:shadow-lunarGold/20 hover:-translate-y-1 animate-fadeInUp backdrop-blur-sm"
+                style={{
+                  animationDelay: `${(index + 1) * 0.1}s`,
+                  backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3CfeColorMatrix values=\'0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.03 0\' /%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' /%3E%3C/svg%3E")'
+                }}
               >
-                <h2 className="text-xl font-semibold text-pearlWhite">
-                  {suite.name}
-                </h2>
-                <p className="mt-2 text-sm">{suite.description}</p>
-                <ul className="mt-4 space-y-1 text-xs">
-                  {suite.includes.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-mermaidTeal" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 inline-flex flex-col gap-1">
-                  <span className="text-xs text-moonlightSilver/70">Starting at</span>
-                  <span className="text-2xl font-bold text-lunarGold">{suite.starting}</span>
+                {/* Quest Icon */}
+                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold/40 to-phoenixFire/30 border-2 border-lunarGold/60 flex items-center justify-center text-2xl shadow-lg backdrop-blur">
+                  {suite.icon}
                 </div>
+
+                {/* Difficulty Stars */}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex gap-0.5 text-sm">
+                    {getDifficultyStars(suite.difficulty)}
+                  </div>
+                  <span className="text-[0.65rem] tracking-[0.2em] text-lunarGold/70 font-semibold">
+                    {getDifficultyLabel(suite.difficulty)}
+                  </span>
+                </div>
+
+                {/* Quest Title */}
+                <h2 className="text-xl font-bold text-pearlWhite mb-1 font-serif">
+                  {suite.questTitle}
+                </h2>
+                <h3 className="text-sm text-lunarGold/80 mb-3">
+                  {suite.name}
+                </h3>
+
+                {/* Quest Description */}
+                <p className="mt-2 text-sm leading-relaxed">{suite.description}</p>
+
+                {/* Quest Objectives */}
+                <div className="mt-4 space-y-2">
+                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Quest Objectives:</p>
+                  <ul className="space-y-1.5 text-xs">
+                    {suite.includes.map((item) => (
+                      <li key={item} className="flex gap-2 items-start">
+                        <span className="mt-1 text-lunarGold">✦</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Rewards */}
+                <div className="mt-4 p-3 rounded-xl bg-lunarGold/10 border border-lunarGold/20">
+                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold mb-2">Quest Rewards:</p>
+                  <ul className="space-y-1 text-xs">
+                    {suite.rewards.map((reward) => (
+                      <li key={reward} className="flex gap-2 items-start">
+                        <span className="text-lunarGold">💎</span>
+                        <span className="text-pearlWhite">{reward}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Gold Cost */}
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">💰</span>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-moonlightSilver/70">Quest Fee</span>
+                      <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Accept Quest Button */}
                 <a
                   href={suite.href}
-                  className="mt-4 inline-flex text-xs font-semibold text-mermaidTeal transition-colors hover:text-lunarGold"
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-lunarGold/90 to-phoenixFire/80 px-6 py-3 text-sm font-bold text-midnight transition-all hover:from-lunarGold hover:to-phoenixFire hover:shadow-lg hover:shadow-lunarGold/40 hover:-translate-y-0.5 group"
                 >
-                  Explore this suite -&gt;
+                  <span>Accept Quest</span>
+                  <span className="group-hover:translate-x-1 transition-transform">⚔️</span>
                 </a>
               </article>
             ))}
@@ -199,16 +336,27 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-t border-deepOcean/60 bg-nightNavy/70">
-        <div className="mx-auto flex max-w-4xl flex-col gap-4 px-6 py-10 text-center">
-          <p className="text-sm text-moonlightSilver">
-            Not sure which suite you fit into? I'll help you pick the right one.
+      <section className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
+        {/* Background quest scroll */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="absolute left-10 top-10 text-6xl">📜</div>
+          <div className="absolute right-10 bottom-10 text-6xl">⚔️</div>
+        </div>
+
+        <div className="relative mx-auto flex max-w-4xl flex-col gap-4 px-6 py-10 text-center">
+          <div className="text-4xl mb-2">🧙</div>
+          <h3 className="text-2xl font-semibold text-pearlWhite mb-2">
+            Need help choosing your quest?
+          </h3>
+          <p className="text-sm text-moonlightSilver max-w-2xl mx-auto">
+            Not all who wander are lost, but sometimes a guide helps. Let's talk through which quest fits your timeline, resources, and vision.
           </p>
           <a
             href="/contact?topic=services"
-            className="mx-auto inline-flex items-center justify-center rounded-full border border-mermaidTeal/70 px-6 py-3 text-sm font-semibold text-mermaidTeal transition-colors hover:bg-mermaidTeal hover:text-midnight"
+            className="mx-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-3 text-sm font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal hover:shadow-lg hover:shadow-mermaidTeal/40 group"
           >
-            Talk through options
+            <span>Consult the Guide</span>
+            <span className="group-hover:rotate-12 transition-transform">🗺️</span>
           </a>
         </div>
       </section>
