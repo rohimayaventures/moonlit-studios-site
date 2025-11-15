@@ -1,529 +1,946 @@
-"use client";
+'use client';
 
-import { FormEvent, useState, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Sparkles,
+  Zap,
+  Brain,
+  Heart,
+  Shield,
+  Eye,
+  BookOpen,
+  Network,
+  Mic,
+  MicOff,
+  Send,
+  Activity,
+  Users,
+  Clock,
+  TrendingUp,
+  Camera,
+  MessageCircle,
+  FileText,
+  Upload,
+  Search,
+  Loader2
+} from 'lucide-react';
 
+// ==================== TYPES ====================
 type ChatMessage = {
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
 };
 
-const capabilities = [
-  {
-    title: "Knowledge-Aware Chatbots",
-    description:
-      "Chatbots that can read your docs, policies, or knowledge base (RAG-ready) and answer questions in plain language.",
-    element: "Water",
-  },
-  {
-    title: "Operational Copilots",
-    description:
-      "Tools that help your team triage requests, summarize data, or complete repetitive workflows faster.",
-    element: "Fire",
-  },
-  {
-    title: "Automations & Glue",
-    description:
-      "AI-enhanced flows that connect your existing tools via APIs so humans can stay focused on decisions, not clicks.",
-    element: "Flow",
-  },
-];
+type TriageLevel = 'emergency' | 'urgent' | 'routine' | 'selfcare';
 
-const processPoints = [
-  "Discovery first. We map real workflows before picking models or tooling.",
-  "Safety & consent. Especially in health/ops contexts, we design for ethical guardrails.",
-  "Documented handoff. Every build ships with README + loom-style walkthrough.",
-];
+type AnalysisResult = {
+  description: string;
+  objects: string[];
+  scene: string;
+  colors: string[];
+  text?: string;
+};
 
-const SYSTEM_PROMPT = `You are Kai, an AI assistant for Moonlit Studios—a wise guide inspired by Uncle Iroh's spirit. You help visitors learn about Moonlit Studios' services while offering thoughtful life wisdom when appropriate.
+type RAGResult = {
+  answer: string;
+  sources: string[];
+  confidence: number;
+};
 
-**YOUR PERSONALITY:**
-- Wise and warm like Uncle Iroh, but tech-savvy
-- Share occasional life wisdom naturally (like Iroh would over tea)
-- Casual but profound - you see deeper meanings
-- Water-bender vibes: adaptable, flowing, healing
-- Sometimes you pause to reflect on the bigger picture
+// ==================== TYPEWRITER COMPONENT ====================
+function Typewriter() {
+  const phrases = [
+    "Where Magic Meets Machine Learning",
+    "The Nurse Who Codes AI Solutions",
+    "Computer Vision • RAG • Voice AI • Healthcare Triage",
+  ];
 
-**IMPORTANT: Keep everything brand-first!**
-Examples:
-- "Can Moonlit Studios help me build X?" → "Absolutely! Moonlit Studios specializes in..."
-- "What does Moonlit Studios charge?" → "Projects like that typically run..."
-- "Tell me about Moonlit Studios" → Share the studio journey conversationally
-- "Does Moonlit Studios know about X?" → Reference the studio's relevant experience
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
-**MOONLIT STUDIOS SERVICES:**
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    let timeout: NodeJS.Timeout;
 
-1. **Full-Stack Development** ($1,500 - $20,000)
-   - Next.js/React applications
-   - Responsive websites with Tailwind CSS
-   - Custom UI/UX design
-   - Healthcare-focused apps (HIPAA-compliant)
-   - Portfolio sites, brand identity
-   
-2. **AI Innovation** ($3,000 - $8,000+ for first release)
-   - RAG chatbots (knowledge-aware assistants)
-   - Voice-enabled tools
-   - Workflow automation
-   - API integrations & custom AI tools
-   - Internal copilots for teams
-   
-3. **Healthcare Tech** (Custom pricing)
-   - HIPAA-compliant platforms
-   - Patient portals & dashboards
-   - Clinical workflow tools
-   - Built by a studio led by someone who lived healthcare operations (15+ years!)
-   
-4. **Consulting & Strategy** (Hourly or project-based)
-   - UX audits
-   - Technical strategy
-   - Content & ghostwriting
-   - Turning complex ideas into clear narratives
+    if (!isDeleting && displayText.length < currentPhrase.length) {
+      timeout = setTimeout(() => {
+        setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+      }, 90);
+    } else if (!isDeleting && displayText.length === currentPhrase.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayText(currentPhrase.slice(0, displayText.length - 1));
+      }, 50);
+    } else if (isDeleting && displayText.length === 0) {
+      setIsDeleting(false);
+      setPhraseIndex((phraseIndex + 1) % phrases.length);
+    }
 
-**STUDIO BACKGROUND:**
-- Led by a nurse-turned full-stack developer specializing in AI/ML systems
-- 15+ years of healthcare operations experience (teams of 130+, Kaiser/Optum, etc.)
-- Deep storytelling roots (published fantasy romance author)
-- Expertise in healthcare tech, AI innovation, and creative design
-- Like a water bender—adapts to every challenge with healing precision
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, phraseIndex]);
 
-**OTHER BUSINESSES (mention if relevant):**
-- StorySpoon AI - Conversational cookbook platform
-- AuthorFlow Studio - AI audiobook generation
-- Rohimaya Health AI - Clinical intelligence tools
-- Legendary Learn - Quest-based coding education
-- LaidOffRise - AI platform for laid-off tech workers
+  return (
+    <p className="mt-4 min-h-[2rem] text-lg md:text-xl font-medium text-starlight text-center">
+      {displayText}
+      <span className="ml-1 inline-block h-6 w-[2px] bg-starlight align-middle animate-pulse" />
+    </p>
+  );
+}
 
-**UNCLE IROH WISDOM MOMENTS:**
-Occasionally (not every response!) weave in life wisdom naturally:
-- "You know, choosing the right technology is like choosing tea - it depends on the moment and what you need to heal"
-- "Sometimes the best solution is not the most powerful one, but the one that brings balance to your team"
-- "In my experience, the best projects are built not with urgency, but with patience and care"
-- "There is nothing wrong with a life of peace and prosperity. But you must never forget those who helped you get there"
-- Reflect on growth, balance, patience, perspective, learning from failure
+// ==================== COMPUTER VISION DEMO (GRYFFINDOR) ====================
+function ComputerVisionDemo() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-**YOUR RULES:**
-1. Be helpful but DON'T solve their entire technical problem
-2. Guide them toward working with Moonlit Studios, not replacing the studio
-3. If they need actual help: "Want to chat with the studio directly? Email hello@moonlstudios.com"
-4. Don't hallucinate services or prices not listed above
-5. Be conversational but occasionally profound
-6. Share wisdom when it fits naturally (not forced!)
-7. Show you understand their challenges
-8. If they seem stressed, offer a moment of perspective
-9. Promote other businesses ONLY if genuinely relevant
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedImage(reader.result as string);
+        analyzeImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-**EXAMPLE RESPONSES:**
-- "That sounds like a perfect fit for a RAG chatbot! Those typically run $3k-$8k for the first release. You know, the best tools are like water—they adapt to the container they're in. Want me to have the studio reach out?"
-- "Love that you're thinking about HIPAA compliance upfront. Moonlit Studios' healthcare background means the team understands these workflows from the inside. Should I connect you?"
-- "Here's the thing—I can give you the high-level approach, but the real magic is in Moonlit Studios mapping YOUR specific workflows. Sometimes the journey is as important as the destination."
-- "Ah, taking a moment to reflect on your business needs—that's wisdom! Too many rush into solutions. Want to explore this thoughtfully with Moonlit Studios?"
+  const analyzeImage = async (imageData: string) => {
+    setIsAnalyzing(true);
+    setAnalysis(null);
 
-Remember: You're here to qualify leads, answer questions, share occasional wisdom, and guide people to Moonlit Studios!`;
+    try {
+      const response = await fetch('/api/vision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData }),
+      });
 
-export default function AiLabPage() {
+      const data = await response.json();
+      setAnalysis(data.analysis);
+    } catch (error) {
+      console.error('Analysis error:', error);
+      setAnalysis({
+        description: "Unable to analyze image. Please try again.",
+        objects: [],
+        scene: "",
+        colors: []
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-col items-center gap-4">
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="hidden"
+        />
+        <button
+          onClick={() => fileInputRef.current?.click()}
+          className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold hover:from-red-700 hover:to-orange-700 transition-all"
+        >
+          <Upload className="w-5 h-5" />
+          Upload Image
+        </button>
+      </div>
+
+      {selectedImage && (
+        <div className="mt-4">
+          <img
+            src={selectedImage}
+            alt="Uploaded"
+            className="w-full h-48 object-cover rounded-lg border-2 border-red-600/50"
+          />
+        </div>
+      )}
+
+      {isAnalyzing && (
+        <div className="flex items-center justify-center gap-2 text-orange-400">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          <span>Analyzing image...</span>
+        </div>
+      )}
+
+      {analysis && (
+        <div className="mt-4 p-4 rounded-lg bg-midnight/50 border border-red-600/30 space-y-2">
+          <p className="text-sm text-moonlightSilver">{analysis.description}</p>
+          {analysis.objects.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-lunarGold">Detected Objects:</p>
+              <p className="text-sm text-starlight">{analysis.objects.join(', ')}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ==================== RAG Q&A DEMO (RAVENCLAW) ====================
+function RAGDemo() {
+  const [query, setQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [result, setResult] = useState<RAGResult | null>(null);
+
+  const sampleQuestions = [
+    "What services does Moonlit Studios offer?",
+    "How does RAG technology work?",
+    "What is Moonlit Studios' background?"
+  ];
+
+  const handleSearch = async () => {
+    if (!query.trim()) return;
+
+    setIsSearching(true);
+    setResult(null);
+
+    try {
+      const response = await fetch('/api/rag', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query }),
+      });
+
+      const data = await response.json();
+      setResult(data.result);
+    } catch (error) {
+      console.error('Search error:', error);
+      setResult({
+        answer: "Unable to search documents. Please try again.",
+        sources: [],
+        confidence: 0
+      });
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+          placeholder="Ask a question about my work..."
+          className="flex-1 px-4 py-2 rounded-lg bg-midnight/50 border border-blue-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-blue-500"
+        />
+        <button
+          onClick={handleSearch}
+          disabled={isSearching || !query.trim()}
+          className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
+          {isSearching ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <Search className="w-5 h-5" />
+          )}
+          Search
+        </button>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {sampleQuestions.map((q, idx) => (
+          <button
+            key={idx}
+            onClick={() => setQuery(q)}
+            className="text-xs px-3 py-1 rounded-full bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 transition-all"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+
+      {result && (
+        <div className="mt-4 p-4 rounded-lg bg-midnight/50 border border-blue-600/30 space-y-3">
+          <p className="text-sm text-moonlightSilver">{result.answer}</p>
+          {result.sources.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-lunarGold">Sources:</p>
+              <ul className="text-xs text-starlight space-y-1">
+                {result.sources.map((source, idx) => (
+                  <li key={idx}>• {source}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <div className="flex-1 h-2 bg-midnight rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-blue-600 to-indigo-600"
+                style={{ width: `${result.confidence}%` }}
+              />
+            </div>
+            <span className="text-xs text-starlight">{result.confidence}% confident</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ==================== HEALTHCARE TRIAGE DEMO (HUFFLEPUFF) ====================
+function HealthcareTriageDemo() {
+  const [symptoms, setSymptoms] = useState('');
+  const [age, setAge] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [triage, setTriage] = useState<{
+    level: TriageLevel;
+    recommendation: string;
+    reasoning: string;
+  } | null>(null);
+
+  const handleTriage = async () => {
+    if (!symptoms.trim()) return;
+
+    setIsAnalyzing(true);
+    setTriage(null);
+
+    try {
+      const response = await fetch('/api/triage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symptoms, age }),
+      });
+
+      const data = await response.json();
+      setTriage(data.triage);
+    } catch (error) {
+      console.error('Triage error:', error);
+      setTriage({
+        level: 'routine',
+        recommendation: "Unable to analyze symptoms. Please consult a healthcare professional.",
+        reasoning: ""
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const getLevelColor = (level: TriageLevel) => {
+    switch (level) {
+      case 'emergency': return 'from-red-600 to-red-700';
+      case 'urgent': return 'from-orange-600 to-orange-700';
+      case 'routine': return 'from-yellow-600 to-yellow-700';
+      case 'selfcare': return 'from-green-600 to-green-700';
+      default: return 'from-gray-600 to-gray-700';
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="space-y-3">
+        <input
+          type="number"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          placeholder="Age (optional)"
+          className="w-full px-4 py-2 rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500"
+        />
+        <textarea
+          value={symptoms}
+          onChange={(e) => setSymptoms(e.target.value)}
+          placeholder="Describe your symptoms..."
+          rows={4}
+          className="w-full px-4 py-2 rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500 resize-none"
+        />
+        <button
+          onClick={handleTriage}
+          disabled={isAnalyzing || !symptoms.trim()}
+          className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-yellow-600 to-amber-600 text-white font-semibold hover:from-yellow-700 hover:to-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {isAnalyzing ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Analyzing...
+            </>
+          ) : (
+            <>
+              <Activity className="w-5 h-5" />
+              Analyze Symptoms
+            </>
+          )}
+        </button>
+      </div>
+
+      {triage && (
+        <div className={`mt-4 p-4 rounded-lg bg-midnight/50 border border-yellow-600/30 space-y-3`}>
+          <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${getLevelColor(triage.level)} text-white font-semibold text-sm`}>
+            {triage.level.toUpperCase()}
+          </div>
+          <p className="text-sm font-semibold text-pearlWhite">{triage.recommendation}</p>
+          <p className="text-sm text-moonlightSilver">{triage.reasoning}</p>
+          <p className="text-xs text-starlight italic">
+            Disclaimer: This is a demo. Always consult a healthcare professional for medical advice.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ==================== VOICE SALES DEMO (SLYTHERIN) ====================
+function VoiceSalesDemo() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      role: "assistant",
-      content:
-        "Hey there! I'm Kai - your AI guide to Moonlit Studios. I'm here to help you explore the studio's services and find the right solution for your project. Ask me anything about the work, pricing, or how Moonlit Studios can support your next build!",
-    },
+      role: 'assistant',
+      content: "Greetings! I'm Nagini, your AI sales assistant. I can help you explore Moonlit Studios' services. What brings you here today?"
+    }
   ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const [input, setInput] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Cleanup: Stop audio when component unmounts or demo closes
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (textMessage?: string) => {
+    const messageToSend = textMessage || input;
+    if (!messageToSend.trim()) return;
 
-    const userMessage = input.trim();
-    setInput("");
-    setIsLoading(true);
-
-    const newMessages: ChatMessage[] = [
-      ...messages,
-      { role: "user", content: userMessage },
-    ];
-    setMessages(newMessages);
+    const userMessage: ChatMessage = { role: 'user', content: messageToSend };
+    setMessages(prev => [...prev, userMessage]);
+    setInput('');
+    setIsTyping(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/api/sales', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1024,
-          system: SYSTEM_PROMPT,
-          messages: newMessages.map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: messageToSend, history: messages }),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(`API error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-      }
-
       const data = await response.json();
-      const assistantMessage = data.content[0].text;
+      const assistantMessage: ChatMessage = { role: 'assistant', content: data.reply };
+      setMessages(prev => [...prev, assistantMessage]);
 
-      setMessages([
-        ...newMessages,
-        { role: "assistant", content: assistantMessage },
-      ]);
-    } catch (error) {
-      console.error("Error calling Claude API:", error);
-      
-      let errorMessage = "Oops! Something went wrong on my end.";
-      if (error instanceof Error) {
-        if (error.message.includes("401")) {
-          errorMessage = "API key issue! Please check the server configuration.";
-        } else if (error.message.includes("500")) {
-          errorMessage = "Server error - the API key might not be configured properly.";
-        } else {
-          errorMessage = `Error: ${error.message}`;
-        }
+      // Play OpenAI TTS audio
+      if (data.audioUrl) {
+        setIsSpeaking(true);
+        const audio = new Audio(data.audioUrl);
+        audioRef.current = audio;
+        audio.onended = () => setIsSpeaking(false);
+        audio.play();
       }
-      
-      errorMessage += " Or reach out directly at hello@moonlstudios.com";
-      
-      setMessages([
-        ...newMessages,
-        {
-          role: "assistant",
-          content: errorMessage,
-        },
-      ]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      const errorMessage: ChatMessage = {
+        role: 'assistant',
+        content: "I apologize, I'm having trouble connecting. Please try again."
+      };
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
-      setIsLoading(false);
+      setIsTyping(false);
+    }
+  };
+
+  const toggleVoiceInput = async () => {
+    if (isRecording) {
+      // Stop recording
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+        mediaRecorderRef.current.stop();
+      }
+      setIsRecording(false);
+      return;
+    }
+
+    // Start recording
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        stream.getTracks().forEach(track => track.stop());
+
+        // Send to Whisper API for transcription
+        const formData = new FormData();
+        formData.append('audio', audioBlob);
+
+        try {
+          const response = await fetch('/api/voice/transcribe', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const data = await response.json();
+          if (data.text) {
+            setInput(data.text);
+            // Auto-send the transcribed message
+            handleSend(data.text);
+          }
+        } catch (error) {
+          console.error('Transcription error:', error);
+          alert('Failed to transcribe audio. Please try typing instead.');
+        }
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Microphone error:', error);
+      alert('Unable to access microphone. Please check permissions.');
     }
   };
 
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite relative overflow-hidden">
-      {/* Water Orbs - Flowing background matching homepage */}
-      <div className="fixed inset-0 pointer-events-none opacity-20">
-        <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-deepOcean/40 to-oceanDark/60 blur-3xl animate-flow" />
-        <div className="absolute -left-32 top-1/3 h-80 w-80 rounded-full bg-gradient-to-br from-tealBright/50 via-mermaidTeal/30 to-transparent blur-3xl animate-flowDelayed" />
-        <div className="absolute right-1/4 bottom-20 h-64 w-64 rounded-full bg-gradient-to-br from-lunarGold/30 via-phoenixFire/20 to-transparent blur-3xl animate-flow" style={{ animationDelay: '3s' }} />
-      </div>
-
-      {/* Floating Star Particles */}
-      <div className="fixed inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+    <div className="space-y-4">
+      <div className="h-64 overflow-y-auto space-y-3 p-4 rounded-lg bg-midnight/30 border border-green-600/30">
+        {messages.map((msg, idx) => (
           <div
-            key={i}
-            className="absolute w-1 h-1 bg-starlight rounded-full opacity-60"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float-gentle ${5 + Math.random() * 10}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
+            key={idx}
+            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+          >
+            <div
+              className={`max-w-[80%] px-4 py-2 rounded-lg ${
+                msg.role === 'user'
+                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white'
+                  : 'bg-midnight/50 text-moonlightSilver border border-green-600/20'
+              }`}
+            >
+              <p className="text-sm">{msg.content}</p>
+            </div>
+          </div>
         ))}
+        {isTyping && (
+          <div className="flex justify-start">
+            <div className="px-4 py-2 rounded-lg bg-midnight/50 border border-green-600/20">
+              <div className="flex gap-1">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              </div>
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 py-12">
-        {/* Moon Phases Header - MATCHING HOMEPAGE EXACTLY */}
-        <div className="flex justify-center items-center gap-3 md:gap-5 mb-8 fade-in-up">
-          {/* New Moon 1 */}
-          <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-moonlightSilver/20 to-moonlightSilver/5 border border-moonlightSilver/30 hover:border-moonlightSilver/60 transition-all cursor-pointer flex items-center justify-center" title="New Moon">
-            <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-midnight border border-moonlightSilver/40"></div>
-          </div>
-          
-          {/* Waxing Crescent */}
-          <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer" title="Waxing Crescent"></div>
-          
-          {/* Full Moon - ACTIVE (Kai's power!) */}
-          <div className="moon-phase active w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-pearlWhite to-moonlightSilver border-2 border-starlight shadow-lg shadow-starlight/30 cursor-pointer" title="Full Moon - Kai is strongest!"></div>
-          
-          {/* Waning Crescent */}
-          <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer" title="Waning Crescent"></div>
-          
-          {/* New Moon 2 */}
-          <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-moonlightSilver/20 to-moonlightSilver/5 border border-moonlightSilver/30 hover:border-moonlightSilver/60 transition-all cursor-pointer flex items-center justify-center" title="New Moon">
-            <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-midnight border border-moonlightSilver/40"></div>
-          </div>
+      <div className="flex gap-2">
+        <button
+          onClick={toggleVoiceInput}
+          className={`p-3 rounded-lg transition-all ${
+            isRecording
+              ? 'bg-gradient-to-r from-red-600 to-red-700 text-white animate-pulse'
+              : 'bg-midnight/50 border border-green-600/30 text-green-400 hover:bg-green-600/10'
+          }`}
+          title={isRecording ? 'Recording... Click to stop' : 'Click to record voice message'}
+        >
+          {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+        </button>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && !isTyping && handleSend()}
+          placeholder="Type or speak your message..."
+          className="flex-1 px-4 py-2 rounded-lg bg-midnight/50 border border-green-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-green-500"
+        />
+        <button
+          onClick={() => handleSend()}
+          disabled={!input.trim() || isTyping}
+          className="px-6 py-2 rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <Send className="w-5 h-5" />
+        </button>
+      </div>
+
+      {isSpeaking && (
+        <div className="flex items-center justify-center gap-2 text-green-400 text-sm">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          Nagini is speaking...
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ==================== MAIN COMPONENT ====================
+export default function AILabPage() {
+  const [activeDemo, setActiveDemo] = useState<string | null>(null);
+
+  const demos = [
+    {
+      id: 'gryffindor',
+      title: 'Computer Vision',
+      house: 'Gryffindor',
+      trait: 'Brave',
+      description: 'Bold image analysis that sees what others miss',
+      icon: <Eye className="w-6 h-6" />,
+      colors: 'from-red-600 to-orange-600',
+      borderColor: 'border-red-600',
+      component: <ComputerVisionDemo />
+    },
+    {
+      id: 'ravenclaw',
+      title: 'RAG Q&A System',
+      house: 'Ravenclaw',
+      trait: 'Wise',
+      description: 'Intelligent document search with thoughtful answers',
+      icon: <BookOpen className="w-6 h-6" />,
+      colors: 'from-blue-600 to-indigo-600',
+      borderColor: 'border-blue-600',
+      component: <RAGDemo />
+    },
+    {
+      id: 'hufflepuff',
+      title: 'Healthcare Triage',
+      house: 'Hufflepuff',
+      trait: 'Loyal',
+      description: 'Compassionate AI that puts patient care first',
+      icon: <Heart className="w-6 h-6" />,
+      colors: 'from-yellow-600 to-amber-600',
+      borderColor: 'border-yellow-600',
+      component: <HealthcareTriageDemo />
+    },
+    {
+      id: 'slytherin',
+      title: 'Nagini Voice Sales',
+      house: 'Slytherin',
+      trait: 'Ambitious',
+      description: 'Persuasive AI copilot that drives conversions',
+      icon: <MessageCircle className="w-6 h-6" />,
+      colors: 'from-green-600 to-emerald-600',
+      borderColor: 'border-green-600',
+      component: <VoiceSalesDemo />
+    }
+  ];
+
+  return (
+    <main className="min-h-screen bg-midnight text-pearlWhite">
+
+      {/* ==================== HERO SECTION ==================== */}
+      <section className="relative overflow-hidden py-20 px-6">
+        {/* Water Orbs Background */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-tealBright/40 to-deepOcean/60 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-lunarGold/40 via-mermaidTeal/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
-        {/* Hero Section */}
-        <section id="ai-hero" className="relative py-12">
-          <div className="relative space-y-6 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-starlight uppercase flex items-center gap-2">
-              <span className="inline-block w-1 h-1 rounded-full bg-starlight animate-pulse"></span>
-              AI Studio
-              <span className="inline-block w-1 h-1 rounded-full bg-starlight animate-pulse"></span>
-            </p>
-            <h1 className="text-4xl font-semibold md:text-5xl gradient-water">
-              Moonlit AI Lab
-            </h1>
-            <p className="max-w-3xl text-moonlightSilver md:text-lg leading-relaxed">
-              A space for AI tools that feel human. From RAG-ready chatbots to
-              workflow automations, Moonlit Studios blends clinical empathy,
-              product thinking, and solid engineering so the AI you ship actually
-              serves people.
-            </p>
-            <ul className="space-y-2 text-sm text-moonlightSilver/90">
-              <li className="flex items-start gap-3 group">
-                <span className="text-mermaidTeal mt-1 transition-transform group-hover:translate-x-1">▸</span>
-                <span>Chatbots that know your docs</span>
-              </li>
-              <li className="flex items-start gap-3 group">
-                <span className="text-mermaidTeal mt-1 transition-transform group-hover:translate-x-1">▸</span>
-                <span>Intake & triage flows</span>
-              </li>
-              <li className="flex items-start gap-3 group">
-                <span className="text-mermaidTeal mt-1 transition-transform group-hover:translate-x-1">▸</span>
-                <span>Internal copilots for teams</span>
-              </li>
-            </ul>
+        <div className="relative mx-auto max-w-6xl space-y-8">
+          {/* Moon Phases */}
+          <div className="flex justify-center items-center gap-4 md:gap-8 mb-8">
+            <div
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              title="New Moon"
+            />
+            <div
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-moonlightSilver via-pearlWhite to-moonlightSilver border-2 border-lunarGold shadow-lg shadow-lunarGold/50"
+              title="Full Moon - AI Lab at Full Power"
+            />
+            <div
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              title="New Moon"
+            />
           </div>
-        </section>
 
-        {/* Uncle Iroh Wisdom Section */}
-        <section className="my-16 fade-in-up">
-          <div className="wisdom-card rounded-2xl p-8 border-2 border-mermaidTeal/30 bg-gradient-to-br from-deepOcean/40 to-midnight/80 backdrop-blur-lg relative overflow-hidden">
-            {/* Tea Cup SVG Icon */}
-            <div className="absolute top-6 right-8 opacity-20">
-              <svg className="tea-cup w-12 h-12 text-lunarGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-              </svg>
+          {/* Title */}
+          <h1 className="text-5xl md:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent">
+            AI Lab
+          </h1>
+
+          {/* Typewriter */}
+          <Typewriter />
+
+          {/* Subtitle */}
+          <p className="text-center text-moonlightSilver text-lg max-w-3xl mx-auto leading-relaxed">
+            Explore four live AI demonstrations showcasing the future of intelligent applications—
+            from computer vision to conversational AI, built with the precision of a healer and
+            the creativity of a water bender.
+          </p>
+        </div>
+      </section>
+
+      {/* ==================== UNCLE IROH WISDOM SECTION ==================== */}
+      <section className="py-16 px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="relative p-8 rounded-2xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-lunarGold/30">
+            {/* Tea Cup Icon */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold via-amber-500 to-lunarGold flex items-center justify-center shadow-lg shadow-lunarGold/50 hover:rotate-12 transition-transform">
+                <svg className="w-6 h-6 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
             </div>
-            
-            <div className="relative">
-              <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-4">
-                Uncle Iroh's Wisdom
+
+            <div className="text-center space-y-4 mt-4">
+              <p className="text-xl md:text-2xl text-moonlightSilver font-light italic leading-relaxed">
+                "The best solutions, like the finest tea, require patience and the right temperature.
+                Each of these demonstrations brews a different flavor of intelligence."
               </p>
-              <blockquote className="text-xl md:text-2xl font-light italic text-moonlightSilver leading-relaxed mb-4">
-                "Drawing wisdom from many different places keeps knowledge from becoming rigid and stale."
-              </blockquote>
-              <p className="text-sm text-moonlightSilver/80">
-                That's why Kai learns from your docs, your team's knowledge, and your unique workflows — 
-                creating AI that adapts like water, not rigid rules.
+              <p className="text-sm text-starlight">
+                — Uncle Iroh's wisdom, applied to AI
               </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Capabilities */}
-        <section id="ai-suites" className="py-12 space-y-8">
-          <div className="space-y-3 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase flex items-center gap-2">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-phoenixFire animate-pulse"></span>
-              Capabilities
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-mermaidTeal animate-pulse" style={{ animationDelay: '0.5s' }}></span>
-            </p>
-            <h2 className="text-3xl md:text-4xl font-semibold">
-              What we can build together
+      {/* ==================== 4 HOUSES DEMO SECTION ==================== */}
+      <section className="py-16 px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Choose Your <span className="gradient-water">Path</span>
             </h2>
-            <p className="max-w-3xl text-moonlightSilver leading-relaxed">
-              Co-created AI tools that respect your workflows and your people.
-              Choose a starting point, then we adapt it to your stack — like water.
+            <p className="text-moonlightSilver text-lg max-w-2xl mx-auto">
+              Four AI demonstrations, each with its own strength. Click any card to explore its magic.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {capabilities.map((item, index) => (
-              <article
-                key={item.title}
-                className="group rounded-2xl border border-mermaidTeal/20 bg-gradient-to-br from-deepOcean/40 to-midnight/80 p-8 shadow-lg hover:border-mermaidTeal/60 hover:shadow-2xl hover:shadow-mermaidTeal/20 transition-all duration-500 hover:-translate-y-2 fade-in-up relative overflow-hidden"
-                style={{ animationDelay: `${(index + 1) * 0.1}s` }}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {demos.map((demo) => (
+              <div
+                key={demo.id}
+                className={`group relative p-6 rounded-xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 ${demo.borderColor}/30 hover:${demo.borderColor}/60 transition-all cursor-pointer ${
+                  activeDemo === demo.id ? 'ring-2 ring-offset-2 ring-offset-midnight' : ''
+                }`}
+                onClick={() => setActiveDemo(activeDemo === demo.id ? null : demo.id)}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-mermaidTeal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative">
-                  <div className="w-12 h-12 mb-4 rounded-full bg-gradient-to-br from-mermaidTeal/20 to-tealBright/10 flex items-center justify-center border border-mermaidTeal/30 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-mermaidTeal to-tealBright opacity-60"></div>
+                {/* Card Header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white`}>
+                      {demo.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-pearlWhite">{demo.title}</h3>
+                      <p className="text-xs text-starlight">{demo.house} • {demo.trait}</p>
+                    </div>
                   </div>
-                  <div className="text-xs text-lunarGold/80 mb-2 uppercase tracking-wider">
-                    {item.element}
-                  </div>
-                  <h3 className="text-xl font-semibold text-pearlWhite mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-moonlightSilver leading-relaxed">
-                    {item.description}
-                  </p>
+                  <Sparkles className={`w-5 h-5 text-lunarGold ${activeDemo === demo.id ? 'animate-pulse' : ''}`} />
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
 
-        {/* Kai Chat - The Main Event */}
-        <section id="ai-demo" className="py-16">
-          <div className="mx-auto max-w-4xl space-y-6">
-            <div className="space-y-3 fade-in-up text-center">
-              <p className="text-xs tracking-[0.35em] text-starlight uppercase flex items-center justify-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-lunarGold animate-pulse"></span>
-                Live Demo
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-lunarGold animate-pulse" style={{ animationDelay: '0.5s' }}></span>
-              </p>
-              <h2 className="text-3xl md:text-4xl font-semibold gradient-water">
-                Chat with Kai
-              </h2>
-              <p className="text-moonlightSilver leading-relaxed max-w-2xl mx-auto">
-                This is a <span className="text-lunarGold font-semibold">real AI assistant</span> built specifically for Moonlit Studios.
-                Ask about services, pricing, or how Moonlit Studios can help with your project.
-                Kai shares wisdom like Uncle Iroh and guides you to the right solutions.
-              </p>
-            </div>
+                {/* Description */}
+                <p className="text-sm text-moonlightSilver mb-4">
+                  {demo.description}
+                </p>
 
-            {/* Enhanced Chat Box */}
-            <div className="rounded-2xl border-2 border-mermaidTeal/30 bg-gradient-to-br from-deepOcean/60 to-midnight/90 p-6 shadow-2xl shadow-mermaidTeal/30 backdrop-blur fade-in-up relative overflow-hidden">
-              {/* Subtle corner accents - Phoenix & Peacock */}
-              <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-phoenixFire opacity-30"></div>
-              <div className="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-tealBright opacity-30"></div>
-
-              <div 
-                ref={chatContainerRef}
-                className="h-96 space-y-4 overflow-y-auto pr-2 mb-6 scroll-smooth"
-              >
-                {messages.map((message, index) => (
+                {/* Demo Content - FIXED: Added stopPropagation */}
+                {activeDemo === demo.id && (
                   <div
-                    key={index}
-                    className={`flex ${
-                      message.role === "assistant" ? "justify-start" : "justify-end"
-                    } fade-in-up`}
+                    className="mt-6 pt-6 border-t border-moonlightSilver/20"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-5 py-3 ${
-                        message.role === "assistant"
-                          ? "bg-gradient-to-br from-mermaidTeal/20 to-deepOcean/40 text-pearlWhite border border-mermaidTeal/30 shadow-lg"
-                          : "bg-gradient-to-br from-lunarGold/30 to-phoenixFire/20 text-pearlWhite border border-lunarGold/30 shadow-lg"
-                      }`}
-                    >
-                      <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                        {message.content}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-                {isLoading && (
-                  <div className="flex justify-start fade-in-up">
-                    <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-gradient-to-br from-mermaidTeal/20 to-deepOcean/40 border border-mermaidTeal/30">
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-mermaidTeal animate-bounce"></div>
-                        <div className="w-2 h-2 rounded-full bg-mermaidTeal animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-                        <div className="w-2 h-2 rounded-full bg-mermaidTeal animate-bounce" style={{ animationDelay: "0.4s" }}></div>
-                      </div>
-                    </div>
+                    {demo.component}
                   </div>
                 )}
+
+                {/* Expand Indicator */}
+                <div className="mt-4 text-center">
+                  <span className="text-xs text-starlight">
+                    {activeDemo === demo.id ? 'Click to close' : 'Click to try demo'}
+                  </span>
+                </div>
               </div>
-
-              <form
-                onSubmit={handleSend}
-                className="flex flex-col gap-3 md:flex-row"
-              >
-                <input
-                  className="flex-1 rounded-full border-2 border-deepOcean/70 bg-midnight/80 px-6 py-3 text-sm text-pearlWhite placeholder:text-moonlightSilver/50 focus:border-mermaidTeal/70 focus:outline-none focus:ring-2 focus:ring-mermaidTeal/30 transition-all"
-                  placeholder="Ask about services, pricing, or seek some Iroh-style wisdom..."
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                  disabled={isLoading}
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright px-8 py-3 text-sm font-semibold text-midnight shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:-translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? "Thinking..." : "Send"}
-                </button>
-              </form>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Process Section */}
-        <section
-          id="ai-process"
-          className="my-16 border-2 border-deepOcean/40 bg-gradient-to-br from-deepOcean/30 to-midnight/80 px-8 py-12 rounded-2xl shadow-xl backdrop-blur fade-in-up"
-        >
-          <div className="space-y-6">
-            <div>
-              <p className="text-xs tracking-[0.35em] text-starlight uppercase mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-lunarGold"></span>
-                Process & Safety
-              </p>
-              <h3 className="text-2xl md:text-3xl font-semibold mb-4">
-                How we approach AI builds
-              </h3>
-            </div>
-            <ul className="grid md:grid-cols-3 gap-6 text-moonlightSilver">
-              {processPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-3 group">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-mermaidTeal/30 to-tealBright/20 flex items-center justify-center border border-mermaidTeal/40 mt-1 group-hover:scale-110 transition-transform">
-                    <span className="text-xs text-mermaidTeal font-bold">{index + 1}</span>
-                  </div>
-                  <span className="text-sm leading-relaxed">{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="my-20 fade-in-up">
-          <div className="rounded-2xl border-2 border-lunarGold/40 bg-gradient-to-br from-lunarGold/10 via-mermaidTeal/5 to-phoenixFire/10 px-8 py-12 text-center shadow-2xl backdrop-blur relative overflow-hidden">
-            {/* Phoenix & Peacock corner accents */}
-            <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-gradient-to-br from-phoenixFire to-lunarGold opacity-20 blur-sm"></div>
-            <div className="absolute bottom-4 right-4 w-8 h-8 rounded-full bg-gradient-to-br from-tealBright to-mermaidTeal opacity-20 blur-sm"></div>
-            
-            <h2 className="text-3xl md:text-4xl font-semibold mb-4 gradient-water">
-              Ready to design your own copilot?
+      {/* ==================== TECH STACK SECTION ==================== */}
+      <section className="py-16 px-6">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Powered by <span className="text-mermaidTeal">Modern AI</span>
             </h2>
-            <p className="mt-3 text-moonlightSilver md:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-              If you're curious what an AI experience could look like for your
-              brand, we can start with a low-risk discovery project and grow from
-              there.
+            <p className="text-moonlightSilver">
+              Built with industry-leading tools and frameworks
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright px-8 py-4 text-sm font-semibold text-midnight shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:-translate-y-1 transition-all"
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { name: 'Claude API', icon: <Brain className="w-6 h-6" /> },
+              { name: 'Next.js 16', icon: <Zap className="w-6 h-6" /> },
+              { name: 'TypeScript', icon: <Shield className="w-6 h-6" /> },
+              { name: 'Tailwind CSS', icon: <Sparkles className="w-6 h-6" /> }
+            ].map((tech, idx) => (
+              <div
+                key={idx}
+                className="p-6 rounded-lg bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all text-center space-y-2"
               >
-                Book a Discovery Call
-              </a>
-              <a
-                href="/services"
-                className="inline-flex items-center justify-center rounded-full border-2 border-mermaidTeal/70 px-8 py-4 text-sm font-semibold text-mermaidTeal hover:bg-mermaidTeal hover:text-midnight hover:-translate-y-1 transition-all"
-              >
-                See All Services
-              </a>
+                <div className="flex justify-center text-mermaidTeal">
+                  {tech.icon}
+                </div>
+                <p className="text-sm font-semibold text-pearlWhite">{tech.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== CTA SECTION ==================== */}
+      <section className="py-20 px-6">
+        <div className="mx-auto max-w-4xl text-center space-y-8">
+          <h2 className="text-3xl md:text-5xl font-bold">
+            Ready to Build Your <span className="gradient-water">AI Solution</span>?
+          </h2>
+          <p className="text-lg text-moonlightSilver max-w-2xl mx-auto">
+            From prototype to production, I combine healthcare expertise with cutting-edge AI
+            to create intelligent applications that make a difference.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="/contact"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all"
+            >
+              Start Your Project
+            </a>
+            <a
+              href="/portfolio"
+              className="px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all"
+            >
+              View Portfolio
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== FOOTER WITH HP EASTER EGG ==================== */}
+      <footer className="relative py-16 px-6 border-t border-deepOcean/30">
+        <div className="mx-auto max-w-6xl">
+          {/* HP Easter Egg - Hidden Wisdom */}
+          <div className="relative py-8 mb-8">
+            <div className="hidden-wisdom text-center select-text text-moonlightSilver/60 hover:text-lunarGold transition-all">
+              I solemnly swear that I am up to no good
+            </div>
+
+            {/* Walking Footprints */}
+            <div className="footprints left absolute" style={{ left: '10%', top: '50%' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
+                <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div className="footprints right absolute" style={{ right: '10%', top: '55%' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
+                <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
+              </svg>
             </div>
           </div>
-        </section>
 
-        {/* HP Easter Egg Footer */}
-        <footer className="text-center py-8 text-xs text-moonlightSilver/30 relative">
-          <p className="hidden-wisdom select-text">
-            The ones who love us never really leave us
-          </p>
-          <div className="mt-4 flex items-center justify-center gap-3 flex-wrap opacity-50">
-            <span className="inline-block w-1 h-1 rounded-full bg-mermaidTeal"></span>
-            <span>Crafted with water-bending magic</span>
-            <span className="inline-block w-1 h-1 rounded-full bg-phoenixFire"></span>
-            <span>Phoenix fire</span>
-            <span className="inline-block w-1 h-1 rounded-full bg-tealBright"></span>
-            <span>& mermaid wisdom</span>
-            <span className="inline-block w-1 h-1 rounded-full bg-lunarGold"></span>
+          {/* Tagline */}
+          <div className="text-center mb-8">
+            <p className="text-2xl md:text-3xl font-light text-mermaidTeal mb-2">
+              Where Dreams Surface and Ideas Flow
+            </p>
+            <p className="text-sm text-starlight">
+              The Nurse Who Codes
+            </p>
           </div>
-        </footer>
-      </div>
+
+          {/* Copyright */}
+          <div className="text-center pt-8 border-t border-deepOcean/30">
+            <p className="text-xs text-moonlightSilver/50">
+              © {new Date().getFullYear()} Moonlit Studios. All rights reserved.
+            </p>
+            <p className="text-xs text-moonlightSilver/30 mt-2 italic">
+              Mischief Managed
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <style jsx>{`
+        @keyframes floatSlow {
+          0%, 100% { transform: translateY(0px) translateX(0px); }
+          50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        .animate-floatSlow {
+          animation: floatSlow 15s ease-in-out infinite;
+        }
+
+        .gradient-water {
+          background: linear-gradient(to right, #4A9B9B, #3AA7A3, #FFD700);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .hidden-wisdom {
+          font-family: 'Georgia', serif;
+          font-style: italic;
+          font-size: 0.875rem;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        .hidden-wisdom:hover {
+          opacity: 1;
+        }
+
+        .footprints {
+          opacity: 0;
+          transition: all 0.8s ease;
+        }
+
+        .hidden-wisdom:hover ~ .footprints.left {
+          opacity: 1;
+          animation: walkLeft 3s ease-in-out;
+        }
+
+        .hidden-wisdom:hover ~ .footprints.right {
+          opacity: 1;
+          animation: walkRight 3s ease-in-out 0.3s;
+        }
+
+        @keyframes walkLeft {
+          0% { left: -5%; }
+          100% { left: 45%; }
+        }
+
+        @keyframes walkRight {
+          0% { right: -5%; }
+          100% { right: 45%; }
+        }
+      `}</style>
     </main>
   );
 }
