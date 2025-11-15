@@ -17,10 +17,12 @@ const FormField = ({ label, children }: FormFieldProps) => (
 );
 
 type FormStatus = "idle" | "loading" | "success" | "error";
+type ThemeMode = "owlery" | "sao" | "atla" | "lotr";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [theme, setTheme] = useState<ThemeMode>("owlery");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,14 +70,74 @@ export default function ContactPage() {
     }
   };
 
+  // Theme configurations
+  const themeConfig = {
+    owlery: {
+      name: "The Owlery",
+      icon: "🦉",
+      title: "Send an Owl Post",
+      subtitle: "Attach your message to a trusted owl and send it my way",
+      buttonText: "Dispatch Owl",
+      loadingText: "Owl in flight...",
+      successTitle: "⚡ Owl successfully delivered!",
+      successMessage: "Your message has arrived. Expect a reply by owl within 24-48 hours.",
+      accentColor: "lunarGold",
+      secondaryColor: "starlight",
+    },
+    sao: {
+      name: "System Message",
+      icon: "⚔️",
+      title: "Direct Message",
+      subtitle: "Send a system message to initiate quest collaboration",
+      buttonText: "Send Message",
+      loadingText: "Transmitting...",
+      successTitle: "✓ Message Sent Successfully",
+      successMessage: "System notification sent. You'll receive a party invite within 24-48 hours.",
+      accentColor: "mermaidTeal",
+      secondaryColor: "tealBright",
+    },
+    atla: {
+      name: "Spirit Portal",
+      icon: "🌊",
+      title: "Open Spirit Portal",
+      subtitle: "Channel your message through the spirit world",
+      buttonText: "Send Through Portal",
+      loadingText: "Channeling energy...",
+      successTitle: "🌟 Message transmitted!",
+      successMessage: "Your energy has been received. Balance will be restored within 24-48 hours.",
+      accentColor: "mermaidTeal",
+      secondaryColor: "aquaMist",
+    },
+    lotr: {
+      name: "Horn of Gondor",
+      icon: "🏔️",
+      title: "Sound the Horn",
+      subtitle: "Call for aid across Middle-earth",
+      buttonText: "Sound the Horn",
+      loadingText: "Horn echoing...",
+      successTitle: "🎺 Gondor has heard!",
+      successMessage: "Your call has been answered. Aid will arrive within 24-48 hours.",
+      accentColor: "lunarGold",
+      secondaryColor: "phoenixFire",
+    },
+  };
+
+  const currentTheme = themeConfig[theme];
+
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite" id="contact-hero">
-      {/* HERO SECTION with Moon Phases */}
+    <main className="min-h-screen bg-midnight text-pearlWhite">
+      {/* OWLERY HERO - Magical Night Sky */}
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
-        {/* Background Orbs */}
-        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-lunarGold/35 to-mermaidTeal/45 blur-3xl animate-floatSlow" />
-          <div className="absolute -right-24 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        {/* Starry Night Background */}
+        <div className="absolute inset-0 overflow-hidden opacity-40 pointer-events-none">
+          {/* Floating owls silhouettes */}
+          <div className="absolute left-1/4 top-20 text-4xl opacity-20 animate-floatSlow">🦉</div>
+          <div className="absolute right-1/3 top-40 text-3xl opacity-15 animate-floatSlow" style={{ animationDelay: '2s' }}>🦉</div>
+          <div className="absolute left-2/3 top-60 text-2xl opacity-10 animate-floatSlow" style={{ animationDelay: '4s' }}>🦉</div>
+
+          {/* Magical orbs */}
+          <div className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-lunarGold/30 via-starlight/20 to-transparent blur-3xl animate-pulse" />
+          <div className="absolute -right-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/20 via-lunarGold/15 to-transparent blur-3xl" style={{ animation: 'pulse 8s ease-in-out infinite 3s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
@@ -103,15 +165,69 @@ export default function ContactPage() {
             />
           </div>
 
+          {/* Theme Switcher */}
+          <div className="flex justify-center gap-2 mb-6">
+            <button
+              onClick={() => setTheme("owlery")}
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                theme === "owlery"
+                  ? "bg-lunarGold text-midnight shadow-lg shadow-lunarGold/40"
+                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
+              }`}
+              title="Harry Potter - Owlery"
+            >
+              🦉 Owlery
+            </button>
+            <button
+              onClick={() => setTheme("sao")}
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                theme === "sao"
+                  ? "bg-mermaidTeal text-midnight shadow-lg shadow-mermaidTeal/40"
+                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
+              }`}
+              title="Sword Art Online"
+            >
+              ⚔️ SAO
+            </button>
+            <button
+              onClick={() => setTheme("atla")}
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                theme === "atla"
+                  ? "bg-aquaMist text-midnight shadow-lg shadow-aquaMist/40"
+                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
+              }`}
+              title="Avatar: The Last Airbender"
+            >
+              🌊 ATLA
+            </button>
+            <button
+              onClick={() => setTheme("lotr")}
+              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                theme === "lotr"
+                  ? "bg-phoenixFire text-midnight shadow-lg shadow-phoenixFire/40"
+                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
+              }`}
+              title="Lord of the Rings"
+            >
+              🏔️ LOTR
+            </button>
+          </div>
+
           <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 animate-fadeInUp">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">Let's Connect</p>
+            <div className="inline-block">
+              <p className="text-5xl sm:text-6xl md:text-7xl mb-4 animate-pulse">{currentTheme.icon}</p>
+            </div>
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">{currentTheme.name}</p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
-              Tell me what you're dreaming up.
+              {currentTheme.title}
             </h1>
-            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto">
-              Share as much or as little as you'd like about your project.
-              I'll follow up with next steps, suggested timelines, and
-              whether we're a good fit for each other.
+            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto italic">
+              {currentTheme.subtitle}
+            </p>
+            <p className="text-sm text-moonlightSilver/70 max-w-2xl mx-auto mt-4">
+              Share as much or as little as you&apos;d like about your project.
+              I&apos;ll follow up with next steps, suggested timelines, and
+              whether we&apos;re a good fit for each other.
             </p>
           </div>
         </div>
@@ -120,91 +236,100 @@ export default function ContactPage() {
       <section className="relative px-6 pb-20">
         <div className="relative mx-auto max-w-3xl space-y-10">
 
-          {/* Form card */}
+          {/* Magical Scroll / Parchment Form */}
           <section
-            id="contact-form"
-            className="rounded-3xl border border-deepOcean/60 bg-gradient-to-b from-deepOcean/70 via-midnight/80 to-midnight/95 p-6 md:p-8 shadow-xl shadow-black/40 backdrop-blur animate-fadeInUp"
+            className="rounded-3xl border-2 border-lunarGold/40 bg-gradient-to-b from-deepOcean/80 via-midnight/90 to-midnight/95 p-6 md:p-10 shadow-2xl shadow-lunarGold/20 backdrop-blur animate-fadeInUp relative overflow-hidden"
           >
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Parchment texture overlay */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,_rgba(212,175,55,0.1)_0%,_transparent_100%)]"></div>
+
+            {/* Golden wax seal decoration */}
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-gradient-to-br from-lunarGold to-phoenixFire opacity-20 blur-2xl animate-pulse"></div>
+
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
-                <FormField label="Name">
+                <FormField label="Your Name">
                   <input
                     type="text"
                     name="name"
-                    placeholder="Your name"
+                    placeholder="Wizard name..."
                     required
-                    className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                   />
                 </FormField>
 
-                <FormField label="Email">
+                <FormField label="Owl Post Address (Email)">
                   <input
                     type="email"
                     name="email"
-                    placeholder="you@example.com"
+                    placeholder="you@magical-realm.com"
                     required
-                    className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                   />
                 </FormField>
               </div>
 
-              <FormField label="What are you looking for?">
+              <FormField label="Type of Magic Needed">
                 <select
                   name="serviceType"
-                  className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                  className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                   defaultValue=""
+                  style={{ colorScheme: 'dark' }}
                 >
                   <option value="" disabled>
-                    Select an option
+                    Choose your quest...
                   </option>
-                  <option>Brand &amp; web foundations</option>
+                  <option>Brand & web foundations</option>
                   <option>Portfolio or launch site</option>
                   <option>AI development / automation</option>
+                  <option>Healthcare tech solutions</option>
                   <option>Ongoing support / retainer</option>
-                  <option>Not sure yet</option>
+                  <option>Not sure yet—let&apos;s explore</option>
                 </select>
               </FormField>
 
               <div className="grid gap-4 md:grid-cols-2">
-                <FormField label="Budget range">
+                <FormField label="Gold Coins Available (Budget)">
                   <input
                     type="text"
                     name="budget"
-                    placeholder="$2k–$5k, $5k–$10k, etc."
-                    className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                    placeholder="e.g., $2k–$5k, $10k+"
+                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                   />
                 </FormField>
 
-                <FormField label="Timeline">
+                <FormField label="When do you need this?">
                   <input
                     type="text"
                     name="timeline"
                     placeholder="Ideal start date or window"
-                    className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                   />
                 </FormField>
               </div>
 
-              <FormField label="Project details">
+              <FormField label="Message Details">
                 <textarea
                   name="details"
-                  rows={5}
-                  placeholder="Tell me about your project, your goals, and anything that would be helpful to know."
+                  rows={6}
+                  placeholder="Tell me about your project, your goals, your vision, and anything that would be helpful for me to know..."
                   required
-                  className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
+                  className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
                 />
               </FormField>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-4 pt-2">
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold px-8 py-3 text-sm font-semibold text-midnight shadow-lg shadow-phoenixFire/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lunarGold/40 transition-all disabled:opacity-50 disabled:cursor-not-wait disabled:hover:translate-y-0"
+                  className={`inline-flex items-center justify-center rounded-full bg-gradient-to-r from-lunarGold to-phoenixFire px-8 py-4 text-sm font-bold text-midnight shadow-xl shadow-lunarGold/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-phoenixFire/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
+                    status === "loading" ? "animate-pulse" : ""
+                  }`}
                 >
                   {status === "loading" ? (
                     <>
                       <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4"
+                        className="animate-spin -ml-1 mr-2 h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -223,36 +348,31 @@ export default function ContactPage() {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                       </svg>
-                      Sending...
+                      {currentTheme.loadingText}
                     </>
                   ) : (
-                    "Send Inquiry"
+                    <>
+                      {currentTheme.icon} {currentTheme.buttonText}
+                    </>
                   )}
                 </button>
 
-                {/* Success Message with Water Ripple Effect */}
+                {/* Success Message - Themed */}
                 {status === "success" && (
-                  <div className="rounded-2xl bg-gradient-to-r from-mermaidTeal/20 to-peacockTeal/20 border border-mermaidTeal/50 p-4 animate-fadeInUp">
+                  <div className="rounded-2xl bg-gradient-to-r from-lunarGold/20 to-starlight/20 border-2 border-lunarGold/60 p-5 animate-fadeInUp shadow-lg shadow-lunarGold/20">
                     <div className="flex gap-3 items-start">
-                      <div className="flex-shrink-0">
-                        <svg
-                          className="h-5 w-5 text-mermaidTeal"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                      <div className="flex-shrink-0 text-2xl animate-bounce">
+                        {currentTheme.icon}
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-semibold text-mermaidTeal">
-                          🌙 Your inquiry has been sent!
+                        <p className="text-base font-bold text-lunarGold mb-2">
+                          {currentTheme.successTitle}
                         </p>
-                        <p className="text-xs text-moonlightSilver mt-1">
-                          Check your email for confirmation. I'll respond within 24-48 hours.
+                        <p className="text-sm text-pearlWhite/90">
+                          {currentTheme.successMessage}
+                        </p>
+                        <p className="text-xs text-moonlightSilver/70 mt-3 italic">
+                          Check your email for confirmation from hello@moonlstudios.com
                         </p>
                       </div>
                     </div>
@@ -261,11 +381,11 @@ export default function ContactPage() {
 
                 {/* Error Message */}
                 {status === "error" && (
-                  <div className="rounded-2xl bg-gradient-to-r from-phoenixFire/20 to-red-500/20 border border-phoenixFire/50 p-4 animate-fadeInUp">
+                  <div className="rounded-2xl bg-gradient-to-r from-phoenixFire/20 to-red-500/20 border-2 border-phoenixFire/60 p-5 animate-fadeInUp">
                     <div className="flex gap-3 items-start">
                       <div className="flex-shrink-0">
                         <svg
-                          className="h-5 w-5 text-phoenixFire"
+                          className="h-6 w-6 text-phoenixFire"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -278,28 +398,41 @@ export default function ContactPage() {
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-semibold text-phoenixFire">
-                          Oops! Something went wrong.
+                          ⚠️ The owl couldn&apos;t take flight!
                         </p>
                         <p className="text-xs text-moonlightSilver mt-1">
-                          {errorMessage || "Please try again or email hello@moonlstudios.com directly."}
+                          {errorMessage || "Please try again or send a direct owl to hello@moonlstudios.com"}
                         </p>
                       </div>
                     </div>
                   </div>
                 )}
 
-                <p className="text-xs text-moonlightSilver/80">
-                  Not a form person? You can also reach out directly at{" "}
-                  <a
-                    href="mailto:hello@moonlstudios.com"
-                    className="font-medium text-starlight hover:text-mermaidTeal transition-colors"
-                  >
-                    hello@moonlstudios.com
-                  </a>
-                </p>
+                {/* Alternative Contact */}
+                <div className="p-4 rounded-xl bg-deepOcean/30 border border-starlight/20">
+                  <p className="text-xs text-moonlightSilver/90 text-center">
+                    Prefer Muggle communication? Email me directly at{" "}
+                    <a
+                      href="mailto:hello@moonlstudios.com"
+                      className="font-semibold text-lunarGold hover:text-starlight transition-colors underline decoration-lunarGold/30 hover:decoration-starlight/50"
+                    >
+                      hello@moonlstudios.com
+                    </a>
+                  </p>
+                </div>
               </div>
             </form>
           </section>
+
+          {/* Hidden Wisdom - HP Easter Egg */}
+          <div className="text-center py-8">
+            <div className="hidden-wisdom select-text mb-4">
+              I solemnly swear that I am up to good work
+            </div>
+            <p className="text-xs text-starlight/60 italic">
+              &quot;Words are, in my not-so-humble opinion, our most inexhaustible source of magic.&quot; — Dumbledore
+            </p>
+          </div>
         </div>
       </section>
     </main>
