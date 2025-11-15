@@ -1,6 +1,10 @@
 "use client";
 
 import React, { ReactNode, FormEvent, useState } from "react";
+import { AnimatedOwl } from "../components/AnimatedOwl";
+import { AnimatedSword } from "../components/AnimatedSword";
+import { AnimatedSpirit } from "../components/AnimatedSpirit";
+import { AnimatedHorn } from "../components/AnimatedHorn";
 
 type FormFieldProps = {
   label: string;
@@ -70,11 +74,26 @@ export default function ContactPage() {
     }
   };
 
+  // Get theme icon component
+  const getThemeIcon = (themeMode: ThemeMode, className?: string) => {
+    switch (themeMode) {
+      case "owlery":
+        return <AnimatedOwl className={className} />;
+      case "sao":
+        return <AnimatedSword className={className} />;
+      case "atla":
+        return <AnimatedSpirit className={className} />;
+      case "lotr":
+        return <AnimatedHorn className={className} />;
+      default:
+        return <AnimatedOwl className={className} />;
+    }
+  };
+
   // Theme configurations
   const themeConfig = {
     owlery: {
       name: "The Owlery",
-      icon: "🦉",
       title: "Send an Owl Post",
       subtitle: "Attach your message to a trusted owl and send it my way",
       buttonText: "Dispatch Owl",
@@ -86,7 +105,6 @@ export default function ContactPage() {
     },
     sao: {
       name: "System Message",
-      icon: "⚔️",
       title: "Direct Message",
       subtitle: "Send a system message to initiate quest collaboration",
       buttonText: "Send Message",
@@ -98,7 +116,6 @@ export default function ContactPage() {
     },
     atla: {
       name: "Spirit Portal",
-      icon: "🌊",
       title: "Open Spirit Portal",
       subtitle: "Channel your message through the spirit world",
       buttonText: "Send Through Portal",
@@ -110,7 +127,6 @@ export default function ContactPage() {
     },
     lotr: {
       name: "Horn of Gondor",
-      icon: "🏔️",
       title: "Sound the Horn",
       subtitle: "Call for aid across Middle-earth",
       buttonText: "Sound the Horn",
@@ -130,10 +146,16 @@ export default function ContactPage() {
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
         {/* Starry Night Background */}
         <div className="absolute inset-0 overflow-hidden opacity-40 pointer-events-none">
-          {/* Floating owls silhouettes */}
-          <div className="absolute left-1/4 top-20 text-4xl opacity-20 animate-floatSlow">🦉</div>
-          <div className="absolute right-1/3 top-40 text-3xl opacity-15 animate-floatSlow" style={{ animationDelay: '2s' }}>🦉</div>
-          <div className="absolute left-2/3 top-60 text-2xl opacity-10 animate-floatSlow" style={{ animationDelay: '4s' }}>🦉</div>
+          {/* Floating theme icons */}
+          <div className="absolute left-1/4 top-20 opacity-20 animate-floatSlow">
+            {getThemeIcon(theme, "w-16 h-16")}
+          </div>
+          <div className="absolute right-1/3 top-40 opacity-15 animate-floatSlow" style={{ animationDelay: '2s' }}>
+            {getThemeIcon(theme, "w-14 h-14")}
+          </div>
+          <div className="absolute left-2/3 top-60 opacity-10 animate-floatSlow" style={{ animationDelay: '4s' }}>
+            {getThemeIcon(theme, "w-12 h-12")}
+          </div>
 
           {/* Magical orbs */}
           <div className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-lunarGold/30 via-starlight/20 to-transparent blur-3xl animate-pulse" />
@@ -176,7 +198,10 @@ export default function ContactPage() {
               }`}
               title="Harry Potter - Owlery"
             >
-              🦉 Owlery
+              <span className="inline-flex items-center gap-1">
+                <AnimatedOwl className="w-4 h-4" />
+                <span>Owlery</span>
+              </span>
             </button>
             <button
               onClick={() => setTheme("sao")}
@@ -187,7 +212,10 @@ export default function ContactPage() {
               }`}
               title="Sword Art Online"
             >
-              ⚔️ SAO
+              <span className="inline-flex items-center gap-1">
+                <AnimatedSword className="w-4 h-4" />
+                <span>SAO</span>
+              </span>
             </button>
             <button
               onClick={() => setTheme("atla")}
@@ -198,7 +226,10 @@ export default function ContactPage() {
               }`}
               title="Avatar: The Last Airbender"
             >
-              🌊 ATLA
+              <span className="inline-flex items-center gap-1">
+                <AnimatedSpirit className="w-4 h-4" />
+                <span>ATLA</span>
+              </span>
             </button>
             <button
               onClick={() => setTheme("lotr")}
@@ -209,13 +240,16 @@ export default function ContactPage() {
               }`}
               title="Lord of the Rings"
             >
-              🏔️ LOTR
+              <span className="inline-flex items-center gap-1">
+                <AnimatedHorn className="w-4 h-4" />
+                <span>LOTR</span>
+              </span>
             </button>
           </div>
 
           <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 animate-fadeInUp">
-            <div className="inline-block">
-              <p className="text-5xl sm:text-6xl md:text-7xl mb-4 animate-pulse">{currentTheme.icon}</p>
+            <div className="inline-flex justify-center animate-pulse">
+              {getThemeIcon(theme, "w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28")}
             </div>
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">{currentTheme.name}</p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
@@ -351,9 +385,10 @@ export default function ContactPage() {
                       {currentTheme.loadingText}
                     </>
                   ) : (
-                    <>
-                      {currentTheme.icon} {currentTheme.buttonText}
-                    </>
+                    <span className="inline-flex items-center gap-2">
+                      {getThemeIcon(theme, "w-5 h-5")}
+                      <span>{currentTheme.buttonText}</span>
+                    </span>
                   )}
                 </button>
 
@@ -361,8 +396,8 @@ export default function ContactPage() {
                 {status === "success" && (
                   <div className="rounded-2xl bg-gradient-to-r from-lunarGold/20 to-starlight/20 border-2 border-lunarGold/60 p-5 animate-fadeInUp shadow-lg shadow-lunarGold/20">
                     <div className="flex gap-3 items-start">
-                      <div className="flex-shrink-0 text-2xl animate-bounce">
-                        {currentTheme.icon}
+                      <div className="flex-shrink-0 animate-bounce">
+                        {getThemeIcon(theme, "w-8 h-8")}
                       </div>
                       <div className="flex-1">
                         <p className="text-base font-bold text-lunarGold mb-2">

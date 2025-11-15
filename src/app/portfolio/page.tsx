@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import { AnimatedTrophy } from "../components/AnimatedTrophy";
+import { AnimatedSword } from "../components/AnimatedSword";
+import { AnimatedDiamond } from "../components/AnimatedDiamond";
+import { AnimatedGamepad } from "../components/AnimatedGamepad";
+import { AnimatedScroll } from "../components/AnimatedScroll";
+import { AnimatedLightning } from "../components/AnimatedLightning";
 
 export const metadata: Metadata = {
   title: "Portfolio - Selected Work | Moonlit Studios",
@@ -303,7 +309,7 @@ export default function PortfolioPage() {
           <div className="text-center space-y-4 sm:space-y-6 px-4">
             {/* Achievement Gallery Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-phoenixFire/20 to-lunarGold/20 border border-phoenixFire/40">
-              <span className="text-2xl">🏆</span>
+              <AnimatedTrophy className="w-6 h-6" />
               <p className="text-xs sm:text-sm tracking-[0.35em] text-phoenixFire uppercase font-semibold">
                 Achievement Gallery
               </p>
@@ -394,7 +400,7 @@ export default function PortfolioPage() {
                   >
                     {/* Boss Defeated Badge */}
                     <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-phoenixFire/90 to-lunarGold/80 border border-phoenixFire text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
-                      <span>⚔️</span>
+                      <AnimatedSword className="w-3 h-3" />
                       <span>DEFEATED</span>
                     </div>
 
@@ -412,7 +418,9 @@ export default function PortfolioPage() {
                     <ul className="mt-4 space-y-2 text-sm">
                       {project.points.map((point) => (
                         <li key={point} className="flex gap-2 items-start">
-                          <span className="mt-1 text-lunarGold">⭐</span>
+                          <svg className="mt-1 w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4AF37"/>
+                          </svg>
                           <span>{point}</span>
                         </li>
                       ))}
@@ -422,8 +430,13 @@ export default function PortfolioPage() {
                     <div className="mt-6 p-4 rounded-xl bg-phoenixFire/10 border border-phoenixFire/20 space-y-3">
                       {/* Tech Stack */}
                       <div>
-                        <p className="text-[0.65rem] tracking-wider text-phoenixFire/70 uppercase font-semibold mb-1">
-                          🛠️ Weapons Used
+                        <p className="text-[0.65rem] tracking-wider text-phoenixFire/70 uppercase font-semibold mb-1 flex items-center gap-1">
+                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 6L10 10M6 6V2M6 6H2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            <circle cx="17" cy="17" r="5" stroke="currentColor" strokeWidth="2"/>
+                            <path d="M12 2L10 8L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                          </svg>
+                          <span>Weapons Used</span>
                         </p>
                         <p className="text-sm font-semibold text-pearlWhite">
                           {project.tech}
@@ -433,8 +446,9 @@ export default function PortfolioPage() {
                       {/* Status with HP-bar style */}
                       <div>
                         <div className="flex justify-between items-center mb-1">
-                          <p className="text-[0.65rem] tracking-wider text-lunarGold/70 uppercase font-semibold">
-                            ⚡ Quest Status
+                          <p className="text-[0.65rem] tracking-wider text-lunarGold/70 uppercase font-semibold flex items-center gap-1">
+                            <AnimatedLightning className="w-3 h-3" />
+                            <span>Quest Status</span>
                           </p>
                           <p className="text-sm font-bold text-lunarGold">
                             {project.status}
@@ -459,7 +473,10 @@ export default function PortfolioPage() {
 
                     {/* XP Gained */}
                     <div className="mt-4 flex items-center justify-between text-xs">
-                      <span className="text-moonlightSilver/70">💎 XP Reward:</span>
+                      <span className="text-moonlightSilver/70 flex items-center gap-1">
+                        <AnimatedDiamond className="w-3 h-3" />
+                        <span>XP Reward:</span>
+                      </span>
                       <span className="font-bold text-mermaidTeal">
                         {project.status === "In Progress" || project.status === "Shipped"
                           ? "+1000 XP"
@@ -479,13 +496,21 @@ export default function PortfolioPage() {
       <section className="border-t border-deepOcean/60 bg-nightNavy/80 px-6 py-16 relative overflow-hidden">
         {/* Background achievements */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="absolute left-10 top-10 text-6xl">🏆</div>
-          <div className="absolute right-10 bottom-10 text-6xl">⚔️</div>
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl">💎</div>
+          <div className="absolute left-10 top-10">
+            <AnimatedTrophy className="w-24 h-24" />
+          </div>
+          <div className="absolute right-10 bottom-10">
+            <AnimatedSword className="w-24 h-24" />
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <AnimatedDiamond className="w-32 h-32" />
+          </div>
         </div>
 
         <div className="relative mx-auto flex max-w-4xl flex-col gap-6 text-center">
-          <div className="text-4xl mb-2">🎮</div>
+          <div className="inline-flex justify-center mb-2">
+            <AnimatedGamepad className="w-16 h-16" />
+          </div>
           <h2 className="text-3xl font-semibold text-pearlWhite">
             Ready to join the party and tackle your own boss battle?
           </h2>
@@ -499,14 +524,18 @@ export default function PortfolioPage() {
               className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold px-8 py-3 text-sm font-bold text-midnight shadow-lg shadow-phoenixFire/30 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lunarGold/40 group"
             >
               <span>Begin Your Quest</span>
-              <span className="group-hover:scale-110 transition-transform">⚡</span>
+              <span className="group-hover:scale-110 transition-transform inline-block w-4 h-4">
+                <AnimatedLightning className="w-4 h-4" />
+              </span>
             </a>
             <a
               href="/services"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-3 text-sm font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal group"
             >
               <span>View Quest Board</span>
-              <span className="group-hover:rotate-12 transition-transform">📜</span>
+              <span className="group-hover:rotate-12 transition-transform inline-block w-4 h-4">
+                <AnimatedScroll className="w-4 h-4" />
+              </span>
             </a>
           </div>
         </div>

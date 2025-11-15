@@ -2,6 +2,14 @@
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { AnimatedPalette } from '../components/AnimatedPalette';
+import { AnimatedMedical } from '../components/AnimatedMedical';
+import { AnimatedWizard } from '../components/AnimatedWizard';
+import { AnimatedLightning } from '../components/AnimatedLightning';
+import { AnimatedBook } from '../components/AnimatedBook';
+import { AnimatedScroll } from '../components/AnimatedScroll';
+import { AnimatedSword } from '../components/AnimatedSword';
+import { AnimatedDiamond } from '../components/AnimatedDiamond';
 
 const suites = [
   {
@@ -23,7 +31,6 @@ const suites = [
     ],
     starting: "$1,800+",
     href: "/services/creative-design-development",
-    icon: "🎨",
     color: "coralPink",
   },
   {
@@ -44,7 +51,6 @@ const suites = [
     ],
     starting: "$4,500+",
     href: "/services/health-tech-development",
-    icon: "⚕️",
     color: "mermaidTeal",
   },
   {
@@ -65,7 +71,6 @@ const suites = [
     ],
     starting: "$150/hr",
     href: "/services/consulting",
-    icon: "🧙",
     color: "starlight",
   },
   {
@@ -86,7 +91,6 @@ const suites = [
     ],
     starting: "$5,000+",
     href: "/services/ai-innovation",
-    icon: "⚡",
     color: "lunarGold",
   },
   {
@@ -109,22 +113,42 @@ const suites = [
     ],
     starting: "$250+",
     href: "/services/ghostwriting",
-    icon: "📖",
     color: "roseGold",
   },
 ];
+
+// Helper function to get quest icon component
+const getQuestIcon = (suiteName: string, className?: string) => {
+  switch (suiteName) {
+    case "Creative Design & Development":
+      return <AnimatedPalette className={className} />;
+    case "Health x Tech Development":
+      return <AnimatedMedical className={className} />;
+    case "Consulting":
+      return <AnimatedWizard className={className} />;
+    case "AI Innovation Suite":
+      return <AnimatedLightning className={className} />;
+    case "Author & Ghostwriting Studio":
+      return <AnimatedBook className={className} />;
+    default:
+      return <AnimatedScroll className={className} />;
+  }
+};
 
 // Helper function to render difficulty stars
 const getDifficultyStars = (difficulty: number) => {
   const stars = [];
   for (let i = 0; i < 3; i++) {
     stars.push(
-      <span
+      <svg
         key={i}
-        className={i < difficulty ? "text-lunarGold" : "text-moonlightSilver/20"}
+        className={`w-4 h-4 ${i < difficulty ? "opacity-100" : "opacity-20"}`}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        ⭐
-      </span>
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4AF37"/>
+      </svg>
     );
   }
   return stars;
@@ -192,7 +216,7 @@ export default function ServicesPage() {
           <div className="text-center space-y-4 sm:space-y-6">
             {/* Quest Board Title */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/40">
-              <span className="text-2xl">📜</span>
+              <AnimatedScroll className="w-6 h-6" />
               <p className="text-xs sm:text-sm tracking-[0.35em] text-lunarGold uppercase font-semibold">
                 Quest Board
               </p>
@@ -237,11 +261,11 @@ export default function ServicesPage() {
           {/* Quest Board Header */}
           <div className="space-y-3 text-center">
             <div className="inline-flex items-center gap-2">
-              <span className="text-lg">⚔️</span>
+              <AnimatedSword className="w-5 h-5" />
               <p className="text-sm tracking-[0.35em] text-starlight uppercase">
                 Available Quests
               </p>
-              <span className="text-lg">🗡️</span>
+              <AnimatedSword className="w-5 h-5" />
             </div>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
               Each quest scales to your resources and timeline. Accept one to begin your transformation.
@@ -260,8 +284,8 @@ export default function ServicesPage() {
                 }}
               >
                 {/* Quest Icon */}
-                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold/40 to-phoenixFire/30 border-2 border-lunarGold/60 flex items-center justify-center text-2xl shadow-lg backdrop-blur">
-                  {suite.icon}
+                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold/40 to-phoenixFire/30 border-2 border-lunarGold/60 flex items-center justify-center shadow-lg backdrop-blur">
+                  {getQuestIcon(suite.name, "w-7 h-7")}
                 </div>
 
                 {/* Difficulty Stars */}
@@ -291,7 +315,9 @@ export default function ServicesPage() {
                   <ul className="space-y-1.5 text-xs">
                     {suite.includes.map((item) => (
                       <li key={item} className="flex gap-2 items-start">
-                        <span className="mt-1 text-lunarGold">✦</span>
+                        <svg className="mt-1 w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 0L14 9L23 9L16 14L19 23L12 18L5 23L8 14L1 9L10 9L12 0Z" fill="#D4AF37"/>
+                        </svg>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -304,7 +330,9 @@ export default function ServicesPage() {
                   <ul className="space-y-1 text-xs">
                     {suite.rewards.map((reward) => (
                       <li key={reward} className="flex gap-2 items-start">
-                        <span className="text-lunarGold">💎</span>
+                        <span className="inline-block w-4 h-4">
+                          <AnimatedDiamond className="w-4 h-4" />
+                        </span>
                         <span className="text-pearlWhite">{reward}</span>
                       </li>
                     ))}
@@ -312,13 +340,20 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Gold Cost */}
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">💰</span>
-                    <div className="flex flex-col">
-                      <span className="text-xs text-moonlightSilver/70">Quest Fee</span>
-                      <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
-                    </div>
+                <div className="mt-4 flex items-center gap-2">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="url(#coinGold)" stroke="#D4AF37" strokeWidth="2"/>
+                    <text x="12" y="16" fontSize="12" fill="#654321" textAnchor="middle" fontWeight="bold">$</text>
+                    <defs>
+                      <linearGradient id="coinGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#FFD700' }} />
+                        <stop offset="100%" style={{ stopColor: '#D4AF37' }} />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-moonlightSilver/70">Quest Fee</span>
+                    <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
                   </div>
                 </div>
 
@@ -328,7 +363,9 @@ export default function ServicesPage() {
                   className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-lunarGold/90 to-phoenixFire/80 px-6 py-3 text-sm font-bold text-midnight transition-all hover:from-lunarGold hover:to-phoenixFire hover:shadow-lg hover:shadow-lunarGold/40 hover:-translate-y-0.5 group"
                 >
                   <span>Accept Quest</span>
-                  <span className="group-hover:translate-x-1 transition-transform">⚔️</span>
+                  <span className="group-hover:translate-x-1 transition-transform inline-block w-4 h-4">
+                    <AnimatedSword className="w-4 h-4" />
+                  </span>
                 </a>
               </article>
             ))}
@@ -339,12 +376,18 @@ export default function ServicesPage() {
       <section className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
         {/* Background quest scroll */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="absolute left-10 top-10 text-6xl">📜</div>
-          <div className="absolute right-10 bottom-10 text-6xl">⚔️</div>
+          <div className="absolute left-10 top-10">
+            <AnimatedScroll className="w-24 h-24" />
+          </div>
+          <div className="absolute right-10 bottom-10">
+            <AnimatedSword className="w-24 h-24" />
+          </div>
         </div>
 
         <div className="relative mx-auto flex max-w-4xl flex-col gap-4 px-6 py-10 text-center">
-          <div className="text-4xl mb-2">🧙</div>
+          <div className="inline-flex justify-center mb-2">
+            <AnimatedWizard className="w-16 h-16" />
+          </div>
           <h3 className="text-2xl font-semibold text-pearlWhite mb-2">
             Need help choosing your quest?
           </h3>
@@ -356,7 +399,13 @@ export default function ServicesPage() {
             className="mx-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-3 text-sm font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal hover:shadow-lg hover:shadow-mermaidTeal/40 group"
           >
             <span>Consult the Guide</span>
-            <span className="group-hover:rotate-12 transition-transform">🗺️</span>
+            <span className="group-hover:rotate-12 transition-transform inline-block">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.5"/>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none"/>
+                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+              </svg>
+            </span>
           </a>
         </div>
       </section>
