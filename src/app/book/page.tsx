@@ -31,9 +31,8 @@ export const metadata: Metadata = {
 };
 
 export default function BookPage() {
-  // TODO: Replace this URL with your actual Calendly link
-  // Get your link from: https://calendly.com/event_types/user/me
-  const calendlyUrl = "https://calendly.com/your-username/30min";
+  // Your Calendly booking URL
+  const calendlyUrl = "https://calendly.com/pagadeventures/30min";
 
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">

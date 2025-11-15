@@ -510,7 +510,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
             <CalendlyButton
-              url="https://calendly.com/your-username/30min"
+              url="https://calendly.com/pagadeventures/30min"
               text="Book Free Consultation"
               variant="primary"
             />
