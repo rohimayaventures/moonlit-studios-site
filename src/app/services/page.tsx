@@ -10,6 +10,7 @@ import { AnimatedBook } from '../components/AnimatedBook';
 import { AnimatedScroll } from '../components/AnimatedScroll';
 import { AnimatedSword } from '../components/AnimatedSword';
 import { AnimatedDiamond } from '../components/AnimatedDiamond';
+import { CalendlyButton } from '../components/CalendlyButton';
 
 const suites = [
   {
@@ -507,19 +508,26 @@ export default function ServicesPage() {
           <p className="text-sm text-moonlightSilver max-w-2xl mx-auto">
             Not all who wander are lost, but sometimes a guide helps. Let's talk through which quest fits your timeline, resources, and vision.
           </p>
-          <a
-            href="/contact?topic=services"
-            className="mx-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-3 text-sm font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal hover:shadow-lg hover:shadow-mermaidTeal/40 group"
-          >
-            <span>Consult the Guide</span>
-            <span className="group-hover:rotate-12 transition-transform inline-block">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.5"/>
-                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none"/>
-                <circle cx="12" cy="12" r="2" fill="currentColor"/>
-              </svg>
-            </span>
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
+            <CalendlyButton
+              url="https://calendly.com/your-username/30min"
+              text="Book Free Consultation"
+              variant="primary"
+            />
+            <a
+              href="/contact?topic=services"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-4 text-base font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal hover:shadow-lg hover:shadow-mermaidTeal/40 group"
+            >
+              <span>Send a Message</span>
+              <span className="group-hover:rotate-12 transition-transform inline-block">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.5"/>
+                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none"/>
+                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                </svg>
+              </span>
+            </a>
+          </div>
         </div>
       </section>
     </main>
