@@ -8,31 +8,46 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Core Moonlit Studios palette
-        midnight: "#0A1128",
-        deepOcean: "#1B4965",
-        mermaidTeal: "#4A9B9B",
-        lunarGold: "#FFD700",
-        phoenixFire: "#FF8C42",
-        moonlightSilver: "#E8E8E8",
-        pearlWhite: "#FAFAFA",
-        starlight: "#CAE9FF",
+        // 🌙 MOONLIGHT SPECTRUM (Backgrounds & Neutrals)
+        midnight: "#0A1128",          // Darkest navy background
+        nightNavy: "#0D1B2A",         // Dark navy
+        midnightNavy: "#1B3A4B",      // Medium navy
+        deepOcean: "#1B4965",         // Ocean blue
+        oceanDark: "#2D5F6F",         // Medium ocean
 
-        // Phoenix & Peacock (legacy)
-        peacockTeal: "#4A9B9B",
-        phoenixGold: "#FFD700",
+        // 🌊 WATER BENDING TEALS (Primary Brand Colors)
+        mermaidTeal: "#4A9B9B",       // PRIMARY brand teal
+        tealBright: "#3AA7A3",        // Vibrant teal
+        aquaMist: "#7DD3C0",          // Light aqua-teal
+        seafoamGreen: "#9FEDD7",      // Very light greenish teal
+        turquoiseBreeze: "#6FCCB1",   // Medium aqua
 
-        // Old palette (still usable)
-        moonlitTeal: "#1da6a5",
-        nightNavy: "#0D1B2A",
-        glacierWhite: "#F7F9FA",
-        silverMist: "#C9D3D8",
+        // 🔥 PHOENIX FIRE SPECTRUM (Warm Accents)
+        phoenixFire: "#FF8C42",       // Bright orange
+        lunarGold: "#FFD700",         // Gold accent
+        coralBlush: "#E8998D",        // Soft coral
+        coralPink: "#FFA07A",         // Light salmon coral
+        sunsetPink: "#FFB4A7",        // Peachy pink
+        roseGold: "#ECC5B8",          // Soft rose gold
 
-        // ATLA + HP inspired additions
-        tealBright: "#3AA7A3",
-        oceanDark: "#2D5F6F",
-        midnightNavy: "#1B3A4B",
-        coralAccent: "#E8998D",
+        // 💜 MYSTICAL PURPLES (NEW - Wisdom & Consulting)
+        lavenderMist: "#D4C5E2",      // Soft lavender
+        twilightPurple: "#B8A4D4",    // Medium purple
+        mysticViolet: "#9B8AA8",      // Deeper violet
+        auroraPurple: "#E8D5F2",      // Very light lavender
+
+        // ✨ LIGHT SPECTRUM (Text & Highlights)
+        pearlWhite: "#FAFAFA",        // Off-white
+        glacierWhite: "#F7F9FA",      // Crisp white
+        moonlightSilver: "#E8E8E8",   // Light silver
+        silverMist: "#C9D3D8",        // Medium silver
+        starlight: "#CAE9FF",         // Light sky blue
+
+        // Legacy (keeping for backward compatibility)
+        moonlitTeal: "#1da6a5",       // Old teal (use mermaidTeal instead)
+        peacockTeal: "#4A9B9B",       // Duplicate of mermaidTeal
+        phoenixGold: "#FFD700",       // Duplicate of lunarGold
+        coralAccent: "#E8998D",       // Old name (use coralBlush)
       },
       fontFamily: {
         heading: ["system-ui", "sans-serif"],

@@ -9,20 +9,6 @@
 
 :root {
   color-scheme: dark;
-  
-  /* Moonlit Studios Color Palette */
-  --moonlight-silver: #C0D6DF;
-  --deep-ocean: #2D5F6F;
-  --ocean-dark: #1B4965;
-  --mermaid-teal: #4A9B9B;
-  --teal-bright: #3AA7A3;
-  --midnight: #0A1128;
-  --midnight-navy: #1B3A4B;
-  --pearl-white: #F8F9FA;
-  --lunar-gold: #FFD700;
-  --coral-accent: #E8998D;
-  --starlight: #CAE9FF;
-  --phoenix-fire: #FF8C42;
 }
 
 body {
@@ -39,32 +25,47 @@ a {
    ======================================== */
 
 @keyframes flow {
-  0%, 100% { 
+  0%, 100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.7;
   }
-  33% { 
+  33% {
     transform: translate(30px, -30px) scale(1.05);
     opacity: 0.8;
   }
-  66% { 
+  66% {
     transform: translate(-20px, 20px) scale(0.95);
     opacity: 0.6;
   }
 }
 
-@keyframes flow-delayed {
-  0%, 100% { 
+@keyframes flowDelayed {
+  0%, 100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.6;
   }
-  33% { 
+  33% {
     transform: translate(-25px, 25px) scale(1.08);
     opacity: 0.7;
   }
-  66% { 
+  66% {
     transform: translate(15px, -15px) scale(0.92);
     opacity: 0.5;
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(15px) translateX(5px);
   }
 }
 
@@ -79,10 +80,10 @@ a {
   }
 }
 
-@keyframes moon-pulse {
+@keyframes moonPulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.7;
+    opacity: 0.9;
   }
   50% {
     transform: scale(1.1);
@@ -90,7 +91,7 @@ a {
   }
 }
 
-@keyframes float-gentle {
+@keyframes floatGentle {
   0%, 100% {
     transform: translateY(0px);
   }
@@ -108,14 +109,36 @@ a {
   }
 }
 
-@keyframes footsteps {
-  0%, 100% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
   }
   50% {
-    opacity: 0.4;
-    transform: translateX(0);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9));
+  }
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -134,12 +157,16 @@ a {
 }
 
 .animate-flowDelayed {
-  animation-name: flow-delayed;
+  animation-name: flowDelayed;
   animation-delay: 2s;
 }
 
+.animate-floatSlow {
+  animation: floatSlow 20s ease-in-out infinite;
+}
+
 /* ========================================
-   MOON PHASES - SIMPLIFIED FOR SVG
+   MOON PHASES & ELEMENTS
    ======================================== */
 
 .moon-phase-container {
@@ -148,7 +175,7 @@ a {
 }
 
 .moon-phase-container.active > * {
-  animation: moon-pulse 3s ease-in-out infinite;
+  animation: moonPulse 3s ease-in-out infinite;
 }
 
 .moon-phase-container.active::after {
@@ -160,10 +187,6 @@ a {
   animation: ripple 2s ease-out infinite;
   pointer-events: none;
 }
-
-/* ========================================
-   ELEMENT SYMBOLS (Water, Fire, Earth, Air)
-   ======================================== */
 
 .element-symbol {
   position: relative;
@@ -254,7 +277,7 @@ a {
 }
 
 /* ========================================
-   SCROLL REVEAL ANIMATIONS
+   FADE IN ANIMATIONS
    ======================================== */
 
 .fade-in-up {
@@ -263,17 +286,18 @@ a {
   animation: fadeInUp 0.8s ease forwards;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
 .stagger-4 { animation-delay: 0.4s; }
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-messageAppear {
+  animation: messageAppear 0.3s ease-out;
+}
 
 /* ========================================
    UNCLE IROH WISDOM CARD
@@ -282,8 +306,8 @@ a {
 .wisdom-card {
   position: relative;
   backdrop-filter: blur(10px);
-  background: linear-gradient(135deg, 
-    rgba(27, 73, 101, 0.4) 0%, 
+  background: linear-gradient(135deg,
+    rgba(27, 73, 101, 0.4) 0%,
     rgba(10, 17, 40, 0.6) 100%);
   border: 1px solid rgba(74, 155, 155, 0.3);
   transition: all 0.4s ease;
@@ -319,10 +343,10 @@ a {
 
 .tea-cup {
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.tea-cup:hover {
+.wisdom-card:hover .tea-cup {
   transform: rotate(-15deg) scale(1.1);
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
 }
@@ -356,49 +380,6 @@ a {
    HARRY POTTER EASTER EGGS
    ======================================== */
 
-.hidden-wisdom {
-  opacity: 0;
-  user-select: text;
-  color: transparent;
-  font-size: 0.65rem;
-  transition: opacity 0.3s ease;
-  position: relative;
-  padding-left: 20px;
-}
-
-.hidden-wisdom::before {
-  content: '👣';
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  animation: footsteps 3s ease-in-out infinite;
-}
-
-.hidden-wisdom::selection {
-  background-color: #4A9B9B;
-  color: #F8F9FA;
-}
-
-.hidden-wisdom:hover {
-  opacity: 0.1;
-}
-
-.footprints {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  animation: footstepWalk 8s ease-in-out infinite;
-}
-
-.footprints.left {
-  animation: footstepWalkLeft 8s ease-in-out infinite;
-}
-
-.footprints.right {
-  animation: footstepWalkRight 8s ease-in-out infinite;
-  animation-delay: 0.4s;
-}
-
 @keyframes footstepWalkLeft {
   0% { left: -5%; top: 50%; opacity: 0; transform: rotate(-10deg); }
   5% { opacity: 0.6; }
@@ -419,19 +400,64 @@ a {
   100% { left: 105%; top: 55%; opacity: 0; transform: rotate(8deg); }
 }
 
-.scroll-indicator {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: float-gentle 2s ease-in-out infinite;
-  opacity: 0.6;
+.hidden-wisdom {
+  opacity: 0;
+  user-select: text;
+  color: transparent;
+  font-size: 0.65rem;
   transition: opacity 0.3s ease;
-  z-index: 50;
+  position: relative;
 }
 
-.scroll-indicator:hover {
-  opacity: 1;
+.hidden-wisdom::selection {
+  background-color: #4A9B9B;
+  color: #F8F9FA;
+}
+
+.hidden-wisdom:hover {
+  opacity: 0.1;
+}
+
+.footprints {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.footprints.left {
+  animation: footstepWalkLeft 8s ease-in-out infinite;
+}
+
+.footprints.right {
+  animation: footstepWalkRight 8s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+.custom-scrollbar::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(10, 17, 40, 0.5);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(74, 155, 155, 0.4);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 155, 155, 0.6);
 }
 
 /* ========================================
@@ -457,7 +483,7 @@ a {
   .water-orb {
     animation-duration: 15s;
   }
-  
+
   .wisdom-card {
     padding: 1.5rem;
   }
@@ -483,769 +509,20 @@ a {
 }
 
 /* ========================================
-   🌊 MOONLIT AI LAB - MAGICAL ADDITIONS 🌊
-   ADD THIS TO THE BOTTOM OF YOUR globals.css
+   SCROLL INDICATOR
    ======================================== */
 
-/* Water Orb Animations */
-@keyframes flow {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-}
-
-@keyframes flow-delayed {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-30px, 30px) scale(0.9); }
-  66% { transform: translate(20px, -20px) scale(1.1); }
-}
-
-@keyframes flow-slow {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(15px, -15px) scale(1.05); }
-}
-
-/* Floating Particles */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); opacity: 0.6; }
-  50% { transform: translateY(-20px); opacity: 1; }
-}
-
-/* Text Shimmer (for gradient text) */
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Moon Glow Pulse */
-@keyframes pulse-glow {
-  0%, 100% { 
-    opacity: 1; 
-    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)); 
-  }
-  50% { 
-    opacity: 0.8; 
-    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.9)); 
-  }
-}
-
-/* Border Flow Animation */
-@keyframes border-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Message Appear Animation */
-@keyframes message-appear {
-  from { 
-    opacity: 0; 
-    transform: translateY(10px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-/* Fade In Up (for sections) */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Water Orb Base Styles */
-.water-orb {
-  animation-duration: 20s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.animate-flow {
-  animation-name: flow;
-}
-
-.animate-flow-delayed {
-  animation-name: flow-delayed;
-  animation-delay: 2s;
-}
-
-.animate-flow-slow {
-  animation-name: flow-slow;
-  animation-duration: 25s;
-}
-
-/* Text Effects */
-.animate-shimmer {
-  background-size: 200% 200%;
-  animation: shimmer 8s ease infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.animate-border-flow {
-  background-size: 200% 200%;
-  animation: border-flow 3s linear infinite;
-}
-
-.animate-message-appear {
-  animation: message-appear 0.3s ease-out;
-}
-
-/* Fade In Up */
-.fade-in-up {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-/* Uncle Iroh Wisdom Card */
-.wisdom-card {
-  position: relative;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-}
-
-.wisdom-card:hover {
-  border-color: rgba(74, 155, 155, 0.6);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(74, 155, 155, 0.15);
-}
-
-.wisdom-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(135deg, #4A9B9B, transparent, #FFD700);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.wisdom-card:hover::before {
-  opacity: 0.3;
-}
-
-/* Tea Cup Animation */
-.tea-cup {
-  display: inline-block;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.wisdom-card:hover .tea-cup {
-  transform: rotate(-15deg) scale(1.1);
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
-}
-
-/* Button Water Effect */
-.btn-water {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-water::before {
-  content: '';
-  position: absolute;
-  top: 50%;
+.scroll-indicator {
+  position: fixed;
+  bottom: 2rem;
   left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.btn-water:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-/* Kai Container Background */
-.kai-container {
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(74, 155, 155, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
-}
-
-/* Smooth Scrolling for Chat */
-.scroll-smooth {
-  scroll-behavior: smooth;
-}
-
-/* Custom Scrollbar for Chat */
-.overflow-y-auto::-webkit-scrollbar {
-  width: 8px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(10, 17, 40, 0.5);
-  border-radius: 4px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background: rgba(74, 155, 155, 0.3);
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: rgba(74, 155, 155, 0.5);
-}
-
-/* Accessibility - Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .water-orb {
-    animation-duration: 15s;
-  }
-  
-  .wisdom-card {
-    padding: 1.5rem;
-  }
-}
-
-/* ========================================
-   END OF MAGICAL ADDITIONS ✨
-   ======================================== */
-
-   /* ========================================
-   ADD THESE TO YOUR EXISTING globals.css
-   (Add to the bottom after your Tailwind directives)
-   ======================================== */
-
-/* ========================================
-   CUSTOM ANIMATIONS
-   ======================================== */
-
-@keyframes flow {
-  0%, 100% { 
-    transform: translate(0, 0) scale(1);
-    opacity: 0.7;
-  }
-  33% { 
-    transform: translate(30px, -30px) scale(1.05);
-    opacity: 0.8;
-  }
-  66% { 
-    transform: translate(-20px, 20px) scale(0.95);
-    opacity: 0.6;
-  }
-}
-
-@keyframes flow-delayed {
-  0%, 100% { 
-    transform: translate(0, 0) scale(1);
-    opacity: 0.6;
-  }
-  33% { 
-    transform: translate(-25px, 25px) scale(1.08);
-    opacity: 0.7;
-  }
-  66% { 
-    transform: translate(15px, -15px) scale(0.92);
-    opacity: 0.5;
-  }
-}
-
-@keyframes ripple {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-@keyframes moon-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-@keyframes footsteps {
-  0%, 100% {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  50% {
-    opacity: 0.4;
-    transform: translateX(0);
-  }
-}
-
-/* ========================================
-   WATER ORB EFFECTS
-   ======================================== */
-
-.water-orb {
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-}
-
-.animate-flow {
-  animation-name: flow;
-}
-
-.animate-flow-delayed {
-  animation-name: flow-delayed;
-  animation-delay: 2s;
-}
-
-/* ========================================
-   MOON PHASE STYLES
-   ======================================== */
-
-.moon-phase-container {
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.moon-phase-container.active > * {
-  animation: moon-pulse 3s ease-in-out infinite;
-}
-
-.moon-phase-container.active::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(202, 233, 255, 0.2) 0%, transparent 70%);
-  animation: ripple 2s ease-out infinite;
-  pointer-events: none;
-}
-
-/* ========================================
-   WISDOM CARD (Uncle Iroh Style)
-   ======================================== */
-
-.wisdom-card {
-  position: relative;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(135deg, 
-    rgba(27, 73, 101, 0.4) 0%, 
-    rgba(10, 17, 40, 0.6) 100%);
-  border: 1px solid rgba(74, 155, 155, 0.3);
-  transition: all 0.4s ease;
-}
-
-.wisdom-card:hover {
-  border-color: rgba(74, 155, 155, 0.6);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(74, 155, 155, 0.15);
-}
-
-.wisdom-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(135deg, #4A9B9B, transparent, #FFD700);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.wisdom-card:hover::before {
-  opacity: 0.3;
-}
-
-/* ========================================
-   CARD HOVER EFFECTS
-   ======================================== */
-
-.card-hover-lift {
-  transition: all 0.3s ease;
-}
-
-.card-hover-lift:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(74, 155, 155, 0.2);
-}
-
-/* ========================================
-   TEXT GRADIENTS
-   ======================================== */
-
-.gradient-water {
-  background: linear-gradient(90deg, #4A9B9B, #62B5B5, #4A9B9B);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-moonlight {
-  background: linear-gradient(90deg, #E8E8E8, #CAE9FF, #E8E8E8);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ========================================
-   FADE IN ANIMATIONS
-   ======================================== */
-
-.fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Stagger delays for sequential animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-/* ========================================
-   HARRY POTTER EASTER EGGS
-   ======================================== */
-
-.hidden-wisdom {
-  opacity: 0;
-  user-select: text;
-  color: transparent;
-  font-size: 0.65rem;
+  transform: translateX(-50%);
+  animation: floatGentle 2s ease-in-out infinite;
+  opacity: 0.6;
   transition: opacity 0.3s ease;
-  position: relative;
-  padding-left: 20px;
+  z-index: 50;
 }
 
-.hidden-wisdom::before {
-  content: '👣';
-  position: absolute;
-  left: 0;
-  opacity: 0;
-  animation: footsteps 3s ease-in-out infinite;
+.scroll-indicator:hover {
+  opacity: 1;
 }
-
-.hidden-wisdom::selection {
-  background-color: #4A9B9B;
-  color: #F8F9FA;
-}
-
-.hidden-wisdom:hover {
-  opacity: 0.1;
-}
-
-/* ========================================
-   RESPONSIVE UTILITIES
-   ======================================== */
-
-@media (max-width: 768px) {
-  .water-orb {
-    animation-duration: 15s;
-  }
-  
-  .wisdom-card {
-    padding: 1.5rem;
-  }
-}
-
-/* ========================================
-   ACCESSIBILITY
-   ======================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-
-   /* ========================================
-   GLOBAL KAI WIDGET - ADDITIONAL STYLES
-   ADD THESE TO THE BOTTOM OF YOUR globals.css
-   ======================================== */
-
-/* Fade in up animation for chat widget */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.3s ease-out;
-}
-
-/* Message appear animation */
-@keyframes message-appear {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-message-appear {
-  animation: message-appear 0.3s ease-out;
-}
-
-/* Custom scrollbar for chat */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(10, 17, 40, 0.5);
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(74, 155, 155, 0.4);
-  border-radius: 3px;
-  transition: background 0.2s;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(74, 155, 155, 0.6);
-}
-
-/* Moon icon pulse (if not already in your CSS) */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Ping animation for moon rings (if not already in your CSS) */
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-.animate-ping {
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* Bounce animation (if not already in your CSS) */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-
-/* ========================================
-   END OF ADDITIONS for Kai Widget!
-   ======================================== */
-
-/* ========================================
-   🌙 ENHANCED ANIMATIONS - Phase 2
-   ======================================== */
-
-/* Float Slow for Background Orbs */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-  }
-  25% {
-    transform: translateY(-20px) translateX(10px);
-  }
-  50% {
-    transform: translateY(-10px) translateX(-10px);
-  }
-  75% {
-    transform: translateY(15px) translateX(5px);
-  }
-}
-
-.animate-floatSlow {
-  animation: floatSlow 20s ease-in-out infinite;
-}
-
-/* Pulse Glow for CTAs */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-  }
-}
-
-.animate-pulseGlow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-/* Fade In Up for Content */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Moon Phase Cycle */
-@keyframes moonPhase {
-  0% { opacity: 1; transform: scale(1); }
-  20% { opacity: 0.8; transform: scale(0.95); }
-  40% { opacity: 0.6; transform: scale(0.9); }
-  60% { opacity: 0.8; transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-.animate-moonPhase {
-  animation: moonPhase 8s ease-in-out infinite;
-}
-
-/* Tea Steam Animation */
-@keyframes steam {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translateY(-10px) translateX(5px) scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-20px) translateX(-3px) scale(0.95);
-    opacity: 0;
-  }
-}
-
-.tea-steam {
-  animation: steam 3s ease-out infinite;
-}
-
-/* Water Ripple Click Effect */
-@keyframes waterRipple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-.water-ripple-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.water-ripple-effect::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  background: rgba(74, 155, 155, 0.5);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  pointer-events: none;
-}
-
-.water-ripple-effect:active::after {
-  animation: waterRipple 0.6s ease-out;
-}
-
-/* Constellation Twinkling */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-.star {
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.star:nth-child(2n) {
-  animation-delay: 0.5s;
-  animation-duration: 2.5s;
-}
-
-.star:nth-child(3n) {
-  animation-delay: 1s;
-  animation-duration: 3.5s;
-}
-
-/* ========================================
-   END OF ENHANCED ANIMATIONS ✨
-   ======================================== */

@@ -78,14 +78,14 @@ export function Header() {
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[65px] z-40 bg-midnight/98 backdrop-blur-xl md:hidden border-t border-mermaidTeal/20">
-          <nav className="flex flex-col items-center gap-6 px-6 py-8 text-center">
+        <div className="fixed inset-0 top-[65px] z-40 bg-midnight md:hidden border-t border-mermaidTeal/30 shadow-2xl">
+          <nav className="flex flex-col items-center gap-1 px-6 py-8 text-center">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xl text-pearlWhite hover:text-mermaidTeal transition-colors w-full py-3 border-b border-deepOcean/40 hover:border-mermaidTeal/60"
+                className="text-xl font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all w-full py-4 rounded-lg border-b border-deepOcean/40 hover:border-mermaidTeal/60"
               >
                 {link.label}
               </a>

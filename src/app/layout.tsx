@@ -80,7 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <p className="text-lg font-semibold text-pearlWhite">
                   Moonlit Studios
                 </p>
-                <p className="text-sm text-lunarGold">The Nurse Who Can Code</p>
+                <p className="text-sm text-lunarGold">The Nurse Who Codes</p>
                 <p className="text-xs leading-relaxed text-moonlightSilver/80">
                   Strategic design. Technical excellence. Operational precision.
                 </p>
