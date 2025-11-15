@@ -218,10 +218,17 @@ export default function ServicesPage() {
     setExpandedAccordion(expandedAccordion === suiteName ? null : suiteName);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
       {/* HERO SECTION with Moon Phases */}
-      <section className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
+      <section id="hero" className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
         {/* Background Orbs */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
           <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/60 via-lunarGold/40 to-mermaidTeal/60 blur-3xl animate-floatSlow" />
@@ -231,26 +238,46 @@ export default function ServicesPage() {
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
           {/* Moon Phases */}
           <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <button
+              onClick={() => scrollToSection('hero')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="New Moon - Top"
+              aria-label="Scroll to top"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Top</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
+            <button
+              onClick={() => scrollToSection('quests')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="Waxing Crescent - Quest Board"
+              aria-label="Scroll to quest board"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Quests</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-lunarGold/40" />
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waxing Crescent"
-            />
-            <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 transition-all shadow-lg shadow-lunarGold/30 flex-shrink-0"
               title="Full Moon - You are here"
             />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waning Crescent"
-            />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-lunarGold/40 to-phoenixFire/30" />
+            <button
+              onClick={() => scrollToSection('help')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="Waning Crescent - Get Help"
+              aria-label="Scroll to help section"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Help</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-phoenixFire/30 to-moonlightSilver/30" />
+            <button
+              onClick={() => scrollToSection('help')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="New Moon - Contact"
+              aria-label="Scroll to contact"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Contact</span>
+            </button>
           </div>
 
           <div className="text-center space-y-4 sm:space-y-6">
@@ -296,7 +323,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-6 pb-16">
+      <section id="quests" className="px-6 pb-16">
         <div className="mx-auto max-w-6xl space-y-8">
           {/* Quest Board Header */}
           <div className="space-y-3 text-center">
@@ -459,7 +486,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
+      <section id="help" className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
         {/* Background quest scroll */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute left-10 top-10">
