@@ -1,3 +1,48 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Author & Ghostwriting Studio - Books, Brand Stories & Content | Moonlit Studios",
+  description:
+    "Professional ghostwriting from a published fantasy author. Book ghostwriting ($18,000+), brand storytelling ($3,000+), website copy ($1,200+), thought leadership ($2,500+). 300K+ words published.",
+  keywords: [
+    "ghostwriting services",
+    "book ghostwriting",
+    "fantasy author",
+    "brand storytelling",
+    "thought leadership writing",
+    "website copywriting",
+    "content writing services",
+    "manuscript ghostwriting",
+    "author services",
+    "creative writing services",
+    "fiction ghostwriting",
+    "brand narrative",
+    "professional ghostwriter"
+  ],
+  openGraph: {
+    title: "Author & Ghostwriting Studio | Moonlit Studios",
+    description:
+      "Professional ghostwriting from $1,200+. Books, brand stories, website copy, thought leadership. 300K+ words published, 4 completed manuscripts.",
+    type: "website",
+    url: "https://moonlstudios.com/services/ghostwriting",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Author & Ghostwriting Studio - Moonlit Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Author & Ghostwriting Studio | Moonlit Studios",
+    description:
+      "Professional ghostwriting from $1,200+. Books, brand stories, website copy.",
+    images: ["/og-image.png"],
+  },
+};
+
 const offerings = [
   {
     title: "Book Ghostwriting",

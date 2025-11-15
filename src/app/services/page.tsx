@@ -1,3 +1,48 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
+  description:
+    "Premium tech services for founders, healthcare orgs, and creators. Creative Design & Development ($1,800+), Health x Tech ($3,500+), Consulting ($2,500+), AI Innovation ($4,500+), and Ghostwriting ($3,000+). Where clinical expertise meets cutting-edge development.",
+  keywords: [
+    "full-stack development services",
+    "AI development services",
+    "healthcare tech development",
+    "HIPAA compliant development",
+    "custom web development",
+    "RAG chatbot development",
+    "voice AI development",
+    "healthcare UX design",
+    "creative design services",
+    "brand development",
+    "tech consulting services",
+    "ghostwriting services",
+    "author website development"
+  ],
+  openGraph: {
+    title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
+    description:
+      "5 premium service suites: Creative Design, Health x Tech, Consulting, AI Innovation, Ghostwriting. From $1,800 to $20,000. Built by The Nurse Who Codes.",
+    type: "website",
+    url: "https://moonlstudios.com/services",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Moonlit Studios Services - Premium Tech & Creative Solutions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
+    description:
+      "5 service suites from $1,800+: Creative Design, Health x Tech, AI Innovation, Consulting, Ghostwriting.",
+    images: ["/og-image.png"],
+  },
+};
+
 const suites = [
   {
     name: "Creative Design & Development",

@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Portfolio - Selected Work | Moonlit Studios",
+  description:
+    "Explore healthcare tech platforms, AI-powered applications, creative brand designs, and full-stack web development projects. From HIPAA-compliant clinical systems to RAG chatbots and voice AI—see what The Nurse Who Codes builds.",
+  keywords: [
+    "web developer portfolio",
+    "healthcare tech projects",
+    "AI development portfolio",
+    "full-stack developer work",
+    "React Next.js projects",
+    "HIPAA compliant applications",
+    "RAG chatbot examples",
+    "voice AI projects",
+    "clinical workflow software",
+    "healthcare UX portfolio",
+    "TypeScript developer projects",
+    "AI ML portfolio"
+  ],
+  openGraph: {
+    title: "Portfolio - Selected Work | Moonlit Studios",
+    description:
+      "Healthcare tech, AI applications, creative brands, and full-stack web development. Case studies from The Nurse Who Codes—where clinical expertise meets cutting-edge tech.",
+    type: "website",
+    url: "https://moonlstudios.com/portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Moonlit Studios Portfolio - Healthcare Tech & AI Development",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio - Selected Work | Moonlit Studios",
+    description:
+      "Healthcare platforms, AI apps, creative brands. Projects that heal, inspire, and transform.",
+    images: ["/og-image.png"],
+  },
+};
+
 const sections = [
   {
     id: "web-brand",

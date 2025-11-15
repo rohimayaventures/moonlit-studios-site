@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About - The Nurse Who Codes | Moonlit Studios",
+  description:
+    "From 15+ years in healthcare operations to full-stack AI developer. Published fantasy author turned tech innovator. Meet the creator behind Moonlit Studios—where clinical expertise, creative storytelling, and cutting-edge development converge.",
+  keywords: [
+    "healthcare developer",
+    "nurse developer story",
+    "self-taught developer",
+    "healthcare to tech transition",
+    "published author developer",
+    "AI ML specialist background",
+    "healthcare operations to coding",
+    "full-stack developer journey",
+    "fantasy author coder",
+    "clinical workflow expert",
+    "HIPAA developer background",
+    "tech career change story"
+  ],
+  openGraph: {
+    title: "About - The Nurse Who Codes | Moonlit Studios",
+    description:
+      "From bedside healer to operations master to full-stack AI developer. 15+ years healthcare + published author + self-taught coder = products that heal, inspire, and transform.",
+    type: "website",
+    url: "https://moonlstudios.com/about",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Moonlit Studios - The Nurse Who Codes Journey",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About - The Nurse Who Codes | Moonlit Studios",
+    description:
+      "15+ years healthcare operations → published fantasy author → self-taught full-stack AI developer. The journey of transformation.",
+    images: ["/og-image.png"],
+  },
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">

@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Consulting - HealthTech & Tech Strategy | Moonlit Studios",
+  description:
+    "Expert consulting from a nurse-turned-developer. HealthTech product strategy ($150-200/hr), tech stack advisory ($150/hr), AI/ML consulting ($200/hr). 15+ years operations leadership + cutting-edge tech expertise.",
+  keywords: [
+    "healthtech consulting",
+    "tech strategy consulting",
+    "AI ML consulting",
+    "healthcare product strategy",
+    "tech stack advisory",
+    "HIPAA consulting",
+    "clinical workflow consulting",
+    "healthcare operations consulting",
+    "AI integration consulting",
+    "startup tech advisory",
+    "healthcare tech consultant",
+    "full-stack consulting"
+  ],
+  openGraph: {
+    title: "Consulting - HealthTech & Tech Strategy | Moonlit Studios",
+    description:
+      "Expert consulting from $150/hr. HealthTech strategy, tech stack advisory, AI/ML guidance. 15+ years healthcare ops + modern tech mastery.",
+    type: "website",
+    url: "https://moonlstudios.com/services/consulting",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Consulting Services - Moonlit Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Consulting - HealthTech & Tech Strategy | Moonlit Studios",
+    description:
+      "Expert consulting from $150/hr. HealthTech, tech stack, AI/ML guidance.",
+    images: ["/og-image.png"],
+  },
+};
+
 const offerings = [
   {
     title: "HealthTech Product Strategy",

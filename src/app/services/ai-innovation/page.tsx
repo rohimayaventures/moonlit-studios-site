@@ -1,3 +1,48 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AI Innovation Suite - RAG, Voice AI & Custom AI Systems | Moonlit Studios",
+  description:
+    "Custom AI solutions from $4,500+. AI product architecture ($15,000+), RAG chatbots ($9,500+), voice AI systems ($10,000+), computer vision ($8,500+). Built with Claude API, OpenAI, and cutting-edge ML.",
+  keywords: [
+    "AI development",
+    "RAG chatbot development",
+    "voice AI development",
+    "computer vision AI",
+    "Claude API integration",
+    "OpenAI integration",
+    "custom AI systems",
+    "AI product development",
+    "machine learning development",
+    "AI architecture",
+    "conversational AI",
+    "intelligent search AI",
+    "AI ML consulting"
+  ],
+  openGraph: {
+    title: "AI Innovation Suite | Moonlit Studios",
+    description:
+      "Custom AI from $4,500+. RAG chatbots, voice AI, computer vision, full AI architecture. Claude API, OpenAI, cutting-edge ML.",
+    type: "website",
+    url: "https://moonlstudios.com/services/ai-innovation",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "AI Innovation Suite - Moonlit Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Innovation Suite | Moonlit Studios",
+    description:
+      "Custom AI solutions from $4,500+. RAG, voice AI, computer vision, full architecture.",
+    images: ["/og-image.png"],
+  },
+};
+
 const offerings = [
   {
     title: "AI Product Architecture",

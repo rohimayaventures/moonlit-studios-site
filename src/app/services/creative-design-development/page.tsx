@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Creative Design & Development - Branding & Websites | Moonlit Studios",
+  description:
+    "Premium creative services for founders, authors, and studios. Branding & identity ($1,800), custom websites ($3,500+), packaging design ($2,200+), and visual direction. Built with storytelling at the core.",
+  keywords: [
+    "creative design services",
+    "brand identity design",
+    "custom website development",
+    "author website design",
+    "founder branding",
+    "packaging design",
+    "visual identity system",
+    "creative web development",
+    "Next.js website design",
+    "brand style guide",
+    "logo design services",
+    "UI UX design"
+  ],
+  openGraph: {
+    title: "Creative Design & Development | Moonlit Studios",
+    description:
+      "Branding, websites, and visual direction. From $1,800. Built by a published author who understands storytelling.",
+    type: "website",
+    url: "https://moonlstudios.com/services/creative-design-development",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Creative Design & Development Services - Moonlit Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Creative Design & Development | Moonlit Studios",
+    description:
+      "Branding, custom websites, packaging. Creative services from $1,800.",
+    images: ["/og-image.png"],
+  },
+};
+
 const offerings = [
   {
     title: "Branding & Identity",

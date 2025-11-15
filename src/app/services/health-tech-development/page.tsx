@@ -1,3 +1,47 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Health x Tech Development - HIPAA-Compliant Clinical Systems | Moonlit Studios",
+  description:
+    "Clinical-grade UX and healthcare tech built by a nurse. HIPAA-aligned app design ($4,500+), clinical workflow tools ($7,500+), patient portal builds ($8,000+). 15+ years healthcare operations experience.",
+  keywords: [
+    "healthcare app development",
+    "HIPAA compliant development",
+    "clinical workflow software",
+    "patient portal development",
+    "healthcare UX design",
+    "FHIR integration",
+    "SBAR documentation",
+    "clinical app design",
+    "healthcare tech consulting",
+    "nurse developer",
+    "EHR integration",
+    "healthcare SAAS development"
+  ],
+  openGraph: {
+    title: "Health x Tech Development | Moonlit Studios",
+    description:
+      "HIPAA-compliant clinical systems from $3,500+. Built by a nurse with 15+ years healthcare operations. Clinical flows, patient portals, workflow tools.",
+    type: "website",
+    url: "https://moonlstudios.com/services/health-tech-development",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Health x Tech Development Services - Moonlit Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Health x Tech Development | Moonlit Studios",
+    description:
+      "HIPAA-compliant healthcare tech from $3,500+. Built by a nurse who codes.",
+    images: ["/og-image.png"],
+  },
+};
+
 const offerings = [
   {
     title: "HIPAA-Aligned App/UI Design",

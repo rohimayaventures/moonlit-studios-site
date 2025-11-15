@@ -5,10 +5,65 @@ import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 import { Header } from "./components/Header";
 
 export const metadata: Metadata = {
-  title: "Moonlit Studios - The Nurse Who Codes",
+  title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
   description:
-    "Moonlit Studios is a creative-tech studio led by a nurse-turned developer. Full-stack builds, AI experiences, and soulful digital products for founders and healthcare innovators.",
+    "Award-winning full-stack development, AI innovation, and healthcare tech solutions. 15+ years healthcare ops turned tech mastery. HIPAA-compliant platforms, RAG chatbots, voice AI & creative design.",
   metadataBase: new URL("https://moonlstudios.com"),
+  keywords: [
+    "full-stack developer",
+    "AI development",
+    "healthcare technology",
+    "HIPAA compliant development",
+    "RAG chatbots",
+    "voice AI",
+    "Next.js developer",
+    "React developer",
+    "healthcare UX",
+    "nurse developer",
+    "AI innovation",
+    "custom web development",
+    "healthtech solutions",
+    "clinical workflow tools",
+    "ghostwriting services"
+  ],
+  authors: [{ name: "Moonlit Studios" }],
+  creator: "Moonlit Studios - The Nurse Who Codes",
+  publisher: "Moonlit Studios",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://moonlstudios.com",
+    siteName: "Moonlit Studios",
+    title: "Moonlit Studios - The Nurse Who Codes",
+    description:
+      "Full-stack development, AI innovation, and healthcare tech. From 15+ years healthcare ops to cutting-edge AI solutions. HIPAA-compliant platforms, RAG systems, voice AI.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Moonlit Studios - Where Dreams Surface and Ideas Flow",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Moonlit Studios - The Nurse Who Codes",
+    description:
+      "Full-stack development, AI innovation, healthcare tech. 15+ years clinical experience meets cutting-edge development.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
