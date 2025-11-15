@@ -82,9 +82,9 @@ function Typewriter() {
   }, [displayText, isDeleting, phraseIndex]);
 
   return (
-    <p className="mt-4 min-h-[2rem] text-lg md:text-xl font-medium text-starlight text-center">
+    <p className="mt-4 min-h-[2rem] text-base sm:text-lg md:text-xl font-medium text-starlight text-center px-4">
       {displayText}
-      <span className="ml-1 inline-block h-6 w-[2px] bg-starlight align-middle animate-pulse" />
+      <span className="ml-1 inline-block h-5 sm:h-6 w-[2px] bg-starlight align-middle animate-pulse" />
     </p>
   );
 }
@@ -146,7 +146,7 @@ function ComputerVisionDemo() {
         />
         <button
           onClick={() => fileInputRef.current?.click()}
-          className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold hover:from-red-700 hover:to-orange-700 transition-all"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold hover:from-red-700 hover:to-orange-700 transition-all"
         >
           <Upload className="w-5 h-5" />
           Upload Image
@@ -158,7 +158,7 @@ function ComputerVisionDemo() {
           <img
             src={selectedImage}
             alt="Uploaded"
-            className="w-full h-48 object-cover rounded-lg border-2 border-red-600/50"
+            className="w-full h-48 sm:h-64 object-cover rounded-lg border-2 border-red-600/50"
           />
         </div>
       )}
@@ -226,26 +226,26 @@ function RAGDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           placeholder="Ask a question about my work..."
-          className="flex-1 px-4 py-2 rounded-lg bg-midnight/50 border border-blue-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-blue-500"
+          className="flex-1 px-4 py-3 sm:py-2 rounded-lg bg-midnight/50 border border-blue-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-blue-500 text-base"
         />
         <button
           onClick={handleSearch}
           disabled={isSearching || !query.trim()}
-          className="px-6 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="w-full sm:w-auto px-6 py-3 sm:py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isSearching ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
             <Search className="w-5 h-5" />
           )}
-          Search
+          <span>Search</span>
         </button>
       </div>
 
@@ -254,7 +254,7 @@ function RAGDemo() {
           <button
             key={idx}
             onClick={() => setQuery(q)}
-            className="text-xs px-3 py-1 rounded-full bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 transition-all"
+            className="text-xs sm:text-xs px-3 py-2 sm:py-1 rounded-full bg-blue-600/20 text-blue-300 hover:bg-blue-600/30 transition-all"
           >
             {q}
           </button>
@@ -345,29 +345,29 @@ function HealthcareTriageDemo() {
           value={age}
           onChange={(e) => setAge(e.target.value)}
           placeholder="Age (optional)"
-          className="w-full px-4 py-2 rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500"
+          className="w-full px-4 py-3 text-base rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500"
         />
         <textarea
           value={symptoms}
           onChange={(e) => setSymptoms(e.target.value)}
           placeholder="Describe your symptoms..."
           rows={4}
-          className="w-full px-4 py-2 rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500 resize-none"
+          className="w-full px-4 py-3 text-base rounded-lg bg-midnight/50 border border-yellow-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-yellow-500 resize-none"
         />
         <button
           onClick={handleTriage}
           disabled={isAnalyzing || !symptoms.trim()}
-          className="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-yellow-600 to-amber-600 text-white font-semibold hover:from-yellow-700 hover:to-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full px-6 py-4 text-base rounded-lg bg-gradient-to-r from-yellow-600 to-amber-600 text-white font-semibold hover:from-yellow-700 hover:to-amber-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isAnalyzing ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Analyzing...
+              <span>Analyzing...</span>
             </>
           ) : (
             <>
               <Activity className="w-5 h-5" />
-              Analyze Symptoms
+              <span>Analyze Symptoms</span>
             </>
           )}
         </button>
@@ -521,20 +521,20 @@ function VoiceSalesDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="h-64 overflow-y-auto space-y-3 p-4 rounded-lg bg-midnight/30 border border-green-600/30">
+      <div className="h-64 sm:h-80 overflow-y-auto space-y-3 p-3 sm:p-4 rounded-lg bg-midnight/30 border border-green-600/30">
         {messages.map((msg, idx) => (
           <div
             key={idx}
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] px-4 py-2 rounded-lg ${
+              className={`max-w-[85%] sm:max-w-[80%] px-3 sm:px-4 py-2 rounded-lg ${
                 msg.role === 'user'
                   ? 'bg-gradient-to-r from-green-600 to-emerald-600 text-white'
                   : 'bg-midnight/50 text-moonlightSilver border border-green-600/20'
               }`}
             >
-              <p className="text-sm">{msg.content}</p>
+              <p className="text-sm break-words">{msg.content}</p>
             </div>
           </div>
         ))}
@@ -555,7 +555,7 @@ function VoiceSalesDemo() {
       <div className="flex gap-2">
         <button
           onClick={toggleVoiceInput}
-          className={`p-3 rounded-lg transition-all ${
+          className={`p-3 rounded-lg transition-all flex-shrink-0 ${
             isRecording
               ? 'bg-gradient-to-r from-red-600 to-red-700 text-white animate-pulse'
               : 'bg-midnight/50 border border-green-600/30 text-green-400 hover:bg-green-600/10'
@@ -570,12 +570,12 @@ function VoiceSalesDemo() {
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && !isTyping && handleSend()}
           placeholder="Type or speak your message..."
-          className="flex-1 px-4 py-2 rounded-lg bg-midnight/50 border border-green-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-green-500"
+          className="flex-1 min-w-0 px-3 sm:px-4 py-3 text-base rounded-lg bg-midnight/50 border border-green-600/30 text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-green-500"
         />
         <button
           onClick={() => handleSend()}
           disabled={!input.trim() || isTyping}
-          className="px-6 py-2 rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 sm:px-6 py-3 rounded-lg bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold hover:from-green-700 hover:to-emerald-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
         >
           <Send className="w-5 h-5" />
         </button>
@@ -646,40 +646,40 @@ export default function AILabPage() {
     <main className="min-h-screen bg-midnight text-pearlWhite">
 
       {/* ==================== HERO SECTION ==================== */}
-      <section className="relative overflow-hidden py-20 px-6">
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-4 sm:px-6">
         {/* Water Orbs Background */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
           <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-tealBright/40 to-deepOcean/60 blur-3xl animate-floatSlow" />
           <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-lunarGold/40 via-mermaidTeal/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
-        <div className="relative mx-auto max-w-6xl space-y-8">
+        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
           {/* Moon Phases */}
-          <div className="flex justify-center items-center gap-4 md:gap-8 mb-8">
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
             <div
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
               title="New Moon"
             />
             <div
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
               title="Waxing Crescent"
             />
             <div
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-moonlightSilver via-pearlWhite to-moonlightSilver border-2 border-lunarGold shadow-lg shadow-lunarGold/50"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-moonlightSilver via-pearlWhite to-moonlightSilver border-2 border-lunarGold shadow-lg shadow-lunarGold/50 flex-shrink-0"
               title="Full Moon - AI Lab at Full Power"
             />
             <div
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
               title="Waning Crescent"
             />
             <div
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
               title="New Moon"
             />
           </div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent px-4">
             AI Lab
           </h1>
 
@@ -687,7 +687,7 @@ export default function AILabPage() {
           <Typewriter />
 
           {/* Subtitle */}
-          <p className="text-center text-moonlightSilver text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-center text-moonlightSilver text-base sm:text-lg max-w-3xl mx-auto leading-relaxed px-4">
             Explore four live AI demonstrations showcasing the future of intelligent applications—
             from computer vision to conversational AI, built with the precision of a healer and
             the creativity of a water bender.
@@ -696,24 +696,24 @@ export default function AILabPage() {
       </section>
 
       {/* ==================== UNCLE IROH WISDOM SECTION ==================== */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
-          <div className="relative p-8 rounded-2xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-lunarGold/30">
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-lunarGold/30">
             {/* Tea Cup Icon */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold via-amber-500 to-lunarGold flex items-center justify-center shadow-lg shadow-lunarGold/50 hover:rotate-12 transition-transform">
-                <svg className="w-6 h-6 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-lunarGold via-amber-500 to-lunarGold flex items-center justify-center shadow-lg shadow-lunarGold/50 hover:rotate-12 transition-transform">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
             </div>
 
-            <div className="text-center space-y-4 mt-4">
-              <p className="text-xl md:text-2xl text-moonlightSilver font-light italic leading-relaxed">
+            <div className="text-center space-y-3 sm:space-y-4 mt-4">
+              <p className="text-base sm:text-xl md:text-2xl text-moonlightSilver font-light italic leading-relaxed px-2">
                 "The best solutions, like the finest tea, require patience and the right temperature.
                 Each of these demonstrations brews a different flavor of intelligence."
               </p>
-              <p className="text-sm text-starlight">
+              <p className="text-xs sm:text-sm text-starlight">
                 — Uncle Iroh's wisdom, applied to AI
               </p>
             </div>
@@ -722,38 +722,38 @@ export default function AILabPage() {
       </section>
 
       {/* ==================== 4 HOUSES DEMO SECTION ==================== */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
               Choose Your <span className="gradient-water">Path</span>
             </h2>
-            <p className="text-moonlightSilver text-lg max-w-2xl mx-auto">
+            <p className="text-moonlightSilver text-base sm:text-lg max-w-2xl mx-auto px-4">
               Four AI demonstrations, each with its own strength. Click any card to explore its magic.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {demos.map((demo) => (
               <div
                 key={demo.id}
-                className={`group relative p-6 rounded-xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 ${demo.borderColor}/30 hover:${demo.borderColor}/60 transition-all cursor-pointer ${
+                className={`group relative p-4 sm:p-6 rounded-xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 ${demo.borderColor}/30 hover:${demo.borderColor}/60 transition-all cursor-pointer ${
                   activeDemo === demo.id ? 'ring-2 ring-offset-2 ring-offset-midnight' : ''
                 }`}
                 onClick={() => setActiveDemo(activeDemo === demo.id ? null : demo.id)}
               >
                 {/* Card Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white`}>
+                  <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                    <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white flex-shrink-0`}>
                       {demo.icon}
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-pearlWhite">{demo.title}</h3>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-lg sm:text-xl font-semibold text-pearlWhite truncate">{demo.title}</h3>
                       <p className="text-xs text-starlight">{demo.house} • {demo.trait}</p>
                     </div>
                   </div>
-                  <Sparkles className={`w-5 h-5 text-lunarGold ${activeDemo === demo.id ? 'animate-pulse' : ''}`} />
+                  <Sparkles className={`w-4 h-4 sm:w-5 sm:h-5 text-lunarGold flex-shrink-0 ml-2 ${activeDemo === demo.id ? 'animate-pulse' : ''}`} />
                 </div>
 
                 {/* Description */}
@@ -784,18 +784,18 @@ export default function AILabPage() {
       </section>
 
       {/* ==================== TECH STACK SECTION ==================== */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
               Powered by <span className="text-mermaidTeal">Modern AI</span>
             </h2>
-            <p className="text-moonlightSilver">
+            <p className="text-sm sm:text-base text-moonlightSilver px-4">
               Built with industry-leading tools and frameworks
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {[
               { name: 'Claude API', icon: <Brain className="w-6 h-6" /> },
               { name: 'Next.js 16', icon: <Zap className="w-6 h-6" /> },
@@ -804,12 +804,12 @@ export default function AILabPage() {
             ].map((tech, idx) => (
               <div
                 key={idx}
-                className="p-6 rounded-lg bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all text-center space-y-2"
+                className="p-4 sm:p-6 rounded-lg bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all text-center space-y-2"
               >
                 <div className="flex justify-center text-mermaidTeal">
                   {tech.icon}
                 </div>
-                <p className="text-sm font-semibold text-pearlWhite">{tech.name}</p>
+                <p className="text-xs sm:text-sm font-semibold text-pearlWhite">{tech.name}</p>
               </div>
             ))}
           </div>
@@ -817,25 +817,25 @@ export default function AILabPage() {
       </section>
 
       {/* ==================== CTA SECTION ==================== */}
-      <section className="py-20 px-6">
-        <div className="mx-auto max-w-4xl text-center space-y-8">
-          <h2 className="text-3xl md:text-5xl font-bold">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl text-center space-y-6 sm:space-y-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
             Ready to Build Your <span className="gradient-water">AI Solution</span>?
           </h2>
-          <p className="text-lg text-moonlightSilver max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-moonlightSilver max-w-2xl mx-auto px-4">
             From prototype to production, I combine healthcare expertise with cutting-edge AI
             to create intelligent applications that make a difference.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <a
               href="/contact"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all text-center"
             >
               Start Your Project
             </a>
             <a
               href="/portfolio"
-              className="px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all"
+              className="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all text-center"
             >
               View Portfolio
             </a>
