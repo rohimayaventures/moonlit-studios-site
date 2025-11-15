@@ -843,50 +843,6 @@ export default function AILabPage() {
         </div>
       </section>
 
-      {/* ==================== FOOTER WITH HP EASTER EGG ==================== */}
-      <footer className="relative py-16 px-6 border-t border-deepOcean/30">
-        <div className="mx-auto max-w-6xl">
-          {/* HP Easter Egg - Hidden Wisdom */}
-          <div className="relative py-8 mb-8">
-            <div className="hidden-wisdom text-center select-text text-moonlightSilver/60 hover:text-lunarGold transition-all">
-              I solemnly swear that I am up to no good
-            </div>
-
-            {/* Walking Footprints */}
-            <div className="footprints left absolute" style={{ left: '10%', top: '50%' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
-                <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
-              </svg>
-            </div>
-            <div className="footprints right absolute" style={{ right: '10%', top: '55%' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
-                <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
-              </svg>
-            </div>
-          </div>
-
-          {/* Tagline */}
-          <div className="text-center mb-8">
-            <p className="text-2xl md:text-3xl font-light text-mermaidTeal mb-2">
-              Where Dreams Surface and Ideas Flow
-            </p>
-            <p className="text-sm text-starlight">
-              The Nurse Who Codes
-            </p>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center pt-8 border-t border-deepOcean/30">
-            <p className="text-xs text-moonlightSilver/50">
-              © {new Date().getFullYear()} Moonlit Studios. All rights reserved.
-            </p>
-            <p className="text-xs text-moonlightSilver/30 mt-2 italic">
-              Mischief Managed
-            </p>
-          </div>
-        </div>
-      </footer>
-
       <style jsx>{`
         @keyframes floatSlow {
           0%, 100% { transform: translateY(0px) translateX(0px); }
