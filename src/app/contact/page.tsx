@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, FormEvent } from "react";
+import React, { ReactNode, FormEvent, useState } from "react";
 
 type FormFieldProps = {
   label: string;
@@ -16,12 +16,56 @@ const FormField = ({ label, children }: FormFieldProps) => (
   </div>
 );
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function ContactPage() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Mock submit – no backend yet
-    // You can later swap this for a real action, API route, etc.
-    alert("Thank you! This is a mock submit for now 🤍");
+    setStatus("loading");
+    setErrorMessage("");
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      serviceType: formData.get("serviceType") as string,
+      budget: formData.get("budget") as string,
+      timeline: formData.get("timeline") as string,
+      details: formData.get("details") as string,
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send inquiry");
+      }
+
+      setStatus("success");
+      // Reset form
+      (e.target as HTMLFormElement).reset();
+
+      // Auto-hide success message after 8 seconds
+      setTimeout(() => {
+        setStatus("idle");
+      }, 8000);
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -58,6 +102,7 @@ export default function ContactPage() {
                     type="text"
                     name="name"
                     placeholder="Your name"
+                    required
                     className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
                   />
                 </FormField>
@@ -67,6 +112,7 @@ export default function ContactPage() {
                     type="email"
                     name="email"
                     placeholder="you@example.com"
+                    required
                     className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
                   />
                 </FormField>
@@ -114,6 +160,7 @@ export default function ContactPage() {
                   name="details"
                   rows={5}
                   placeholder="Tell me about your project, your goals, and anything that would be helpful to know."
+                  required
                   className="w-full rounded-2xl bg-nightNavy/80 border border-deepOcean/70 px-3 py-2 text-sm text-pearlWhite placeholder:text-silverMist focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal/70"
                 />
               </FormField>
@@ -121,17 +168,104 @@ export default function ContactPage() {
               <div className="space-y-3 pt-2">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold px-8 py-3 text-sm font-semibold text-midnight shadow-lg shadow-phoenixFire/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lunarGold/40 transition-transform transition-shadow animate-pulseGlow"
+                  disabled={status === "loading"}
+                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold px-8 py-3 text-sm font-semibold text-midnight shadow-lg shadow-phoenixFire/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lunarGold/40 transition-all disabled:opacity-50 disabled:cursor-not-wait disabled:hover:translate-y-0"
                 >
-                  Send Inquiry (mock)
+                  {status === "loading" ? (
+                    <>
+                      <svg
+                        className="animate-spin -ml-1 mr-2 h-4 w-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : (
+                    "Send Inquiry"
+                  )}
                 </button>
+
+                {/* Success Message with Water Ripple Effect */}
+                {status === "success" && (
+                  <div className="rounded-2xl bg-gradient-to-r from-mermaidTeal/20 to-peacockTeal/20 border border-mermaidTeal/50 p-4 animate-fadeInUp">
+                    <div className="flex gap-3 items-start">
+                      <div className="flex-shrink-0">
+                        <svg
+                          className="h-5 w-5 text-mermaidTeal"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-mermaidTeal">
+                          🌙 Your inquiry has been sent!
+                        </p>
+                        <p className="text-xs text-moonlightSilver mt-1">
+                          Check your email for confirmation. I'll respond within 24-48 hours.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Error Message */}
+                {status === "error" && (
+                  <div className="rounded-2xl bg-gradient-to-r from-phoenixFire/20 to-red-500/20 border border-phoenixFire/50 p-4 animate-fadeInUp">
+                    <div className="flex gap-3 items-start">
+                      <div className="flex-shrink-0">
+                        <svg
+                          className="h-5 w-5 text-phoenixFire"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold text-phoenixFire">
+                          Oops! Something went wrong.
+                        </p>
+                        <p className="text-xs text-moonlightSilver mt-1">
+                          {errorMessage || "Please try again or email hello@moonlstudios.com directly."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 <p className="text-xs text-moonlightSilver/80">
                   Not a form person? You can also reach out directly at{" "}
-                  <span className="font-medium text-starlight">
+                  <a
+                    href="mailto:hello@moonlstudios.com"
+                    className="font-medium text-starlight hover:text-mermaidTeal transition-colors"
+                  >
                     hello@moonlstudios.com
-                  </span>{" "}
-                  or your preferred Moonlit Studios contact email.
+                  </a>
                 </p>
               </div>
             </form>

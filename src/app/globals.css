@@ -1104,3 +1104,148 @@ a {
 /* ========================================
    END OF ADDITIONS for Kai Widget!
    ======================================== */
+
+/* ========================================
+   🌙 ENHANCED ANIMATIONS - Phase 2
+   ======================================== */
+
+/* Float Slow for Background Orbs */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(15px) translateX(5px);
+  }
+}
+
+.animate-floatSlow {
+  animation: floatSlow 20s ease-in-out infinite;
+}
+
+/* Pulse Glow for CTAs */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  }
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Fade In Up for Content */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Moon Phase Cycle */
+@keyframes moonPhase {
+  0% { opacity: 1; transform: scale(1); }
+  20% { opacity: 0.8; transform: scale(0.95); }
+  40% { opacity: 0.6; transform: scale(0.9); }
+  60% { opacity: 0.8; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-moonPhase {
+  animation: moonPhase 8s ease-in-out infinite;
+}
+
+/* Tea Steam Animation */
+@keyframes steam {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) translateX(-3px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+.tea-steam {
+  animation: steam 3s ease-out infinite;
+}
+
+/* Water Ripple Click Effect */
+@keyframes waterRipple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.water-ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(74, 155, 155, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+}
+
+.water-ripple-effect:active::after {
+  animation: waterRipple 0.6s ease-out;
+}
+
+/* Constellation Twinkling */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.star:nth-child(2n) {
+  animation-delay: 0.5s;
+  animation-duration: 2.5s;
+}
+
+.star:nth-child(3n) {
+  animation-delay: 1s;
+  animation-duration: 3.5s;
+}
+
+/* ========================================
+   END OF ENHANCED ANIMATIONS ✨
+   ======================================== */

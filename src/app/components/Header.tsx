@@ -30,12 +30,23 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-silverMist/20 bg-nightNavy/70 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-moonlitTeal to-phoenixGold" />
-          <span className="text-lg font-semibold tracking-wide">
-            Moonlit Studios
-          </span>
+        {/* Logo with Animated Moon Phase */}
+        <a href="/" className="flex items-center gap-3 group">
+          <div className="relative h-10 w-10">
+            {/* Animated moon that cycles through phases */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-lunarGold opacity-90 group-hover:opacity-100 transition-opacity animate-pulse" />
+            <div className="absolute inset-0 rounded-full bg-midnight opacity-0 group-hover:opacity-20 transition-opacity" style={{
+              background: 'radial-gradient(circle at 30% 30%, transparent 40%, rgba(10, 17, 40, 0.8) 40%)'
+            }} />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-lg font-semibold tracking-wide leading-tight">
+              Moonlit Studios
+            </span>
+            <span className="text-[10px] text-lunarGold/80 tracking-widest uppercase hidden sm:block">
+              The Nurse Who Codes
+            </span>
+          </div>
         </a>
 
         {/* Desktop Navigation */}
@@ -67,14 +78,14 @@ export function Header() {
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[65px] z-40 bg-nightNavy/95 backdrop-blur-lg md:hidden">
+        <div className="fixed inset-0 top-[65px] z-40 bg-midnight/98 backdrop-blur-xl md:hidden border-t border-mermaidTeal/20">
           <nav className="flex flex-col items-center gap-6 px-6 py-8 text-center">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xl text-silverMist hover:text-glacierWhite transition-colors w-full py-3 border-b border-silverMist/10"
+                className="text-xl text-pearlWhite hover:text-mermaidTeal transition-colors w-full py-3 border-b border-deepOcean/40 hover:border-mermaidTeal/60"
               >
                 {link.label}
               </a>
