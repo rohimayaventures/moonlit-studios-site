@@ -70,25 +70,55 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite" id="contact-hero">
-      <section className="relative overflow-hidden py-20">
-        {/* floating orb */}
-        <div className="pointer-events-none absolute -left-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-lunarGold/35 to-mermaidTeal/45 blur-3xl opacity-80 animate-floatSlow" />
+      {/* HERO SECTION with Moon Phases */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
+        {/* Background Orbs */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-lunarGold/35 to-mermaidTeal/45 blur-3xl animate-floatSlow" />
+          <div className="absolute -right-24 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        </div>
 
-        <div className="relative mx-auto max-w-3xl px-6 space-y-10">
-          {/* Intro */}
-          <header className="space-y-4 animate-fadeInUp">
-            <p className="text-xs font-semibold tracking-[0.35em] text-starlight uppercase">
-              LET&apos;S TALK
-            </p>
-            <h1 className="text-3xl md:text-4xl font-semibold">
-              Tell me what you&apos;re dreaming up.
+        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
+          {/* Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              title="Full Moon - You are here"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+          </div>
+
+          <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 animate-fadeInUp">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">Let's Connect</p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+              Tell me what you're dreaming up.
             </h1>
-            <p className="text-sm md:text-base text-moonlightSilver max-w-2xl">
-              Share as much or as little as you&apos;d like about your project.
-              I&apos;ll follow up with next steps, suggested timelines, and
-              whether we&apos;re a good fit for each other.
+            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto">
+              Share as much or as little as you'd like about your project.
+              I'll follow up with next steps, suggested timelines, and
+              whether we're a good fit for each other.
             </p>
-          </header>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-20">
+        <div className="relative mx-auto max-w-3xl space-y-10">
 
           {/* Form card */}
           <section

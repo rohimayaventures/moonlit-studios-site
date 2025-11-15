@@ -1,47 +1,7 @@
-import type { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
-  description:
-    "Premium tech services for founders, healthcare orgs, and creators. Creative Design & Development ($1,800+), Health x Tech ($3,500+), Consulting ($2,500+), AI Innovation ($4,500+), and Ghostwriting ($3,000+). Where clinical expertise meets cutting-edge development.",
-  keywords: [
-    "full-stack development services",
-    "AI development services",
-    "healthcare tech development",
-    "HIPAA compliant development",
-    "custom web development",
-    "RAG chatbot development",
-    "voice AI development",
-    "healthcare UX design",
-    "creative design services",
-    "brand development",
-    "tech consulting services",
-    "ghostwriting services",
-    "author website development"
-  ],
-  openGraph: {
-    title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
-    description:
-      "5 premium service suites: Creative Design, Health x Tech, Consulting, AI Innovation, Ghostwriting. From $1,800 to $20,000. Built by The Nurse Who Codes.",
-    type: "website",
-    url: "https://moonlstudios.com/services",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Moonlit Studios Services - Premium Tech & Creative Solutions",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",
-    description:
-      "5 service suites from $1,800+: Creative Design, Health x Tech, AI Innovation, Consulting, Ghostwriting.",
-    images: ["/og-image.png"],
-  },
-};
+import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 const suites = [
   {
@@ -110,23 +70,84 @@ const suites = [
 ];
 
 export default function ServicesPage() {
+  const [selectedService, setSelectedService] = useState('');
+
+  const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (value) {
+      window.location.href = value;
+    }
+  };
+
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
-      <section className="relative overflow-hidden px-6 py-20">
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/50 via-lunarGold/40 to-mermaidTeal/50 blur-3xl opacity-80 animate-floatSlow" />
-        <div className="relative mx-auto max-w-4xl space-y-6">
-          <p className="text-sm tracking-[0.35em] text-starlight uppercase">
-            Service Suites
-          </p>
-          <h1 className="text-4xl font-semibold md:text-5xl">
-            Choose the build that fits where you are.
-          </h1>
-          <p className="text-moonlightSilver md:text-lg">
-            Moonlit Studios is led by a nurse-turned full-stack developer and
-            creative technologist. These five suites let you pick the mix of
-            branding, product, AI, or storytelling support that fits your current
-            season.
-          </p>
+      {/* HERO SECTION with Moon Phases */}
+      <section className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
+        {/* Background Orbs */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/60 via-lunarGold/40 to-mermaidTeal/60 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
+          {/* Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              title="Full Moon - You are here"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+          </div>
+
+          <div className="text-center space-y-4 sm:space-y-6">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">
+              Service Suites
+            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
+              Choose the build that fits where you are.
+            </h1>
+            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4">
+              Moonlit Studios is led by a nurse-turned full-stack developer and
+              creative technologist. These five suites let you pick the mix of
+              branding, product, AI, or storytelling support that fits your current
+              season.
+            </p>
+
+            {/* Service Dropdown Navigation */}
+            <div className="max-w-md mx-auto pt-4">
+              <div className="relative">
+                <select
+                  value={selectedService}
+                  onChange={handleServiceChange}
+                  className="w-full appearance-none rounded-2xl bg-gradient-to-r from-mermaidTeal/10 to-lunarGold/10 border-2 border-mermaidTeal/50 px-6 py-4 pr-12 text-base text-pearlWhite cursor-pointer hover:border-mermaidTeal transition-all focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal"
+                >
+                  <option value="" className="bg-midnight text-pearlWhite">Select a service to explore...</option>
+                  {suites.map((suite) => (
+                    <option key={suite.href} value={suite.href} className="bg-midnight text-pearlWhite">
+                      {suite.name} — Starting at {suite.starting}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-mermaidTeal pointer-events-none" />
+              </div>
+              <p className="text-xs text-moonlightSilver/70 mt-2">Or scroll down to browse all suites</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -159,9 +180,10 @@ export default function ServicesPage() {
                     </li>
                   ))}
                 </ul>
-                <span className="mt-4 inline-flex rounded-full border border-peacockTeal/70 px-3 py-1 text-xs font-semibold text-peacockTeal">
-                  Starting at {suite.starting}
-                </span>
+                <div className="mt-4 inline-flex flex-col gap-1">
+                  <span className="text-xs text-moonlightSilver/70">Starting at</span>
+                  <span className="text-2xl font-bold text-lunarGold">{suite.starting}</span>
+                </div>
                 <a
                   href={suite.href}
                   className="mt-4 inline-flex text-xs font-semibold text-mermaidTeal transition-colors hover:text-lunarGold"

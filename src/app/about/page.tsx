@@ -46,28 +46,54 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
       
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden py-20 px-6">
+      {/* HERO SECTION with Moon Phases */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/45 via-lunarGold/30 to-mermaidTeal/35 blur-3xl animate-flow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/30 via-tealBright/25 to-deepOcean/40 blur-3xl animate-flowDelayed" />
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/45 via-lunarGold/30 to-mermaidTeal/35 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/30 via-tealBright/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
-        <div className="relative mx-auto max-w-4xl space-y-6 fade-in-up">
-          <p className="text-xs tracking-[0.35em] text-starlight uppercase">About Moonlit Studios</p>
-          <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
-            The Nurse Who Learned to Code
-          </h1>
-          <p className="text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl">
-            From bedside care to healthcare operations leadership, from fantasy romance author to 
-            full-stack developer—every transformation taught me something new about healing through technology.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-starlight">
-            <span>15+ Years Healthcare Operations</span>
-            <span>•</span>
-            <span>Full-Stack Developer</span>
-            <span>•</span>
-            <span>Published Author</span>
+        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
+          {/* Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              title="Full Moon - You are here"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+          </div>
+
+          <div className="text-center space-y-4 sm:space-y-6 fade-in-up px-4">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">About Moonlit Studios</p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+              The Nurse Who Learned to Code
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+              From bedside care to healthcare operations leadership, from fantasy romance author to
+              full-stack developer—every transformation taught me something new about healing through technology.
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-3 text-sm text-starlight">
+              <span>15+ Years Healthcare Operations</span>
+              <span>•</span>
+              <span>Full-Stack Developer</span>
+              <span>•</span>
+              <span>Published Author</span>
+            </div>
           </div>
         </div>
       </section>

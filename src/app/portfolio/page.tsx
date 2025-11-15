@@ -258,24 +258,51 @@ const sections = [
 export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
-      <section
-        id="portfolio-hero"
-        className="relative overflow-hidden px-6 py-20"
-      >
-        <div className="pointer-events-none absolute -left-20 top-10 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-peacockTeal/30 to-phoenixFire/30 blur-3xl opacity-70 animate-floatSlow" />
-        <div className="pointer-events-none absolute -right-32 -top-20 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/40 via-lunarGold/30 to-mermaidTeal/30 blur-3xl opacity-70 animate-floatSlow" />
-        <div className="relative mx-auto max-w-4xl space-y-6">
-          <p className="text-sm tracking-[0.35em] text-starlight uppercase">
-            Selected Work
-          </p>
-          <h1 className="text-4xl font-semibold md:text-5xl">
-            Brands, products, and ideas brought to life.
-          </h1>
-          <p className="text-moonlightSilver md:text-lg">
-            Case studies and concept builds across healthcare, AI, web, and
-            author experiences. Some are shipped, others live in the Moonlit Lab
-            as explorations of how tech can feel more human.
-          </p>
+      {/* HERO SECTION with Moon Phases */}
+      <section id="portfolio-hero" className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -left-20 top-10 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-peacockTeal/30 to-phoenixFire/30 blur-3xl animate-floatSlow" />
+          <div className="absolute -right-32 -top-20 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/40 via-lunarGold/30 to-mermaidTeal/30 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
+          {/* Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              title="Full Moon - You are here"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+          </div>
+
+          <div className="text-center space-y-4 sm:space-y-6 px-4">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">
+              Selected Work
+            </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+              Brands, products, and ideas brought to life.
+            </h1>
+            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto">
+              Case studies and concept builds across healthcare, AI, web, and
+              author experiences. Some are shipped, others live in the Moonlit Lab
+              as explorations of how tech can feel more human.
+            </p>
+          </div>
         </div>
       </section>
 

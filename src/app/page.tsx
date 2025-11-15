@@ -11,26 +11,28 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto max-w-6xl px-6">
-          {/* Moon Phases - COMPLETE LUNAR CYCLE (5 MOONS) */}
-          <div className="flex justify-center items-center gap-3 md:gap-5 mb-8 fade-in-up">
-            {/* New Moon 1 */}
-            <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-moonlightSilver/20 to-moonlightSilver/5 border border-moonlightSilver/30 hover:border-moonlightSilver/60 transition-all cursor-pointer flex items-center justify-center" title="New Moon">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-midnight border border-moonlightSilver/40"></div>
-            </div>
-            
-            {/* Waxing Crescent */}
-            <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer" title="Waxing Crescent"></div>
-            
-            {/* Full Moon - ACTIVE */}
-            <div className="moon-phase active w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-pearlWhite to-moonlightSilver border-2 border-starlight shadow-lg shadow-starlight/30 cursor-pointer" title="Full Moon"></div>
-            
-            {/* Waning Crescent */}
-            <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer" title="Waning Crescent"></div>
-            
-            {/* New Moon 2 */}
-            <div className="moon-phase w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-moonlightSilver/20 to-moonlightSilver/5 border border-moonlightSilver/30 hover:border-moonlightSilver/60 transition-all cursor-pointer flex items-center justify-center" title="New Moon">
-              <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-midnight border border-moonlightSilver/40"></div>
-            </div>
+          {/* Moon Phases - Standardized Style */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8 fade-in-up">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waxing Crescent"
+            />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              title="Full Moon - You are here"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              title="Waning Crescent"
+            />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              title="New Moon"
+            />
           </div>
 
           {/* Tagline */}
