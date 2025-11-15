@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { getAchievementIcon } from "./AchievementIcons";
 
 export type Achievement = {
   id: string;
   title: string;
   description: string;
-  emoji: string;
   category: "explorer" | "social" | "magic" | "secret" | "master";
   tier: "bronze" | "silver" | "gold" | "platinum" | "legendary";
   condition: (data: AchievementData) => boolean;
@@ -32,7 +32,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "first-steps",
     title: "First Steps",
     description: "Visit your first page at Moonlit Studios",
-    emoji: "👣",
     category: "explorer",
     tier: "bronze",
     condition: (data) => data.pagesVisited.length >= 1,
@@ -41,7 +40,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "curious-wanderer",
     title: "Curious Wanderer",
     description: "Explore 3 different pages",
-    emoji: "🗺️",
     category: "explorer",
     tier: "bronze",
     condition: (data) => data.pagesVisited.length >= 3,
@@ -50,7 +48,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "completionist",
     title: "The Completionist",
     description: "Visit every major page (7+ pages)",
-    emoji: "🏆",
     category: "explorer",
     tier: "gold",
     condition: (data) => data.pagesVisited.length >= 7,
@@ -61,7 +58,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "chat-initiate",
     title: "Chat Initiate",
     description: "Send your first message to Kai",
-    emoji: "💬",
     category: "social",
     tier: "bronze",
     condition: (data) => data.kaiMessagesCount >= 1,
@@ -70,7 +66,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "deep-conversation",
     title: "Deep Conversation",
     description: "Exchange 10+ messages with Kai",
-    emoji: "🗣️",
     category: "social",
     tier: "silver",
     condition: (data) => data.kaiMessagesCount >= 10,
@@ -79,7 +74,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "shapeshifter",
     title: "The Shapeshifter",
     description: "Try all 6 of Kai's personality modes",
-    emoji: "🎭",
     category: "social",
     tier: "gold",
     condition: (data) => data.personalitySwitches >= 6,
@@ -90,7 +84,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "spell-caster",
     title: "Apprentice Spell Caster",
     description: "Cast your first spell in the AI Lab",
-    emoji: "⚡",
     category: "magic",
     tier: "bronze",
     condition: (data) => data.demosTriedCount >= 1,
@@ -99,7 +92,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "hogwarts-graduate",
     title: "Hogwarts Graduate",
     description: "Cast all 4 house spells in the AI Lab",
-    emoji: "🎓",
     category: "magic",
     tier: "silver",
     condition: (data) => data.demosTriedCount >= 4,
@@ -108,7 +100,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "owl-dispatched",
     title: "Owl Dispatched",
     description: "Send a message via the contact form",
-    emoji: "🦉",
     category: "magic",
     tier: "silver",
     condition: (data) => data.contactFormSubmitted,
@@ -119,7 +110,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "konami-master",
     title: "Konami Code Master",
     description: "Discovered the legendary Konami Code",
-    emoji: "🎮",
     category: "secret",
     tier: "platinum",
     condition: (data) => data.konamiCodeEntered,
@@ -129,7 +119,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "avatar-state",
     title: "Avatar State",
     description: "Achieved the ultimate power",
-    emoji: "💎",
     category: "secret",
     tier: "legendary",
     condition: (data) => data.avatarStateActivated,
@@ -139,7 +128,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "theme-switcher",
     title: "Style Shifter",
     description: "Switch themes 5 times",
-    emoji: "🎨",
     category: "secret",
     tier: "silver",
     condition: (data) => data.themeSwitches >= 5,
@@ -150,7 +138,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "dedicated-visitor",
     title: "Dedicated Visitor",
     description: "Spend 10+ minutes exploring",
-    emoji: "⏰",
     category: "master",
     tier: "silver",
     condition: (data) => data.timeOnSite >= 600, // 10 minutes
@@ -159,7 +146,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "easter-egg-hunter",
     title: "Easter Egg Hunter",
     description: "Find 3 hidden easter eggs",
-    emoji: "🥚",
     category: "master",
     tier: "gold",
     condition: (data) => data.easterEggsFound.length >= 3,
@@ -168,7 +154,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "moonlit-legend",
     title: "Moonlit Legend",
     description: "Unlock all non-hidden achievements",
-    emoji: "🌙",
     category: "master",
     tier: "legendary",
     condition: (data) => {
@@ -387,8 +372,8 @@ export function AchievementSystem() {
 
             {/* Achievement Content */}
             <div className="p-4 flex items-center gap-4">
-              <div className={`text-5xl bg-gradient-to-br ${getTierColor(recentlyUnlocked.tier)} bg-clip-text text-transparent animate-bounce-subtle`}>
-                {recentlyUnlocked.emoji}
+              <div className={`bg-gradient-to-br ${getTierColor(recentlyUnlocked.tier)} bg-clip-text text-transparent animate-bounce-subtle`}>
+                {getAchievementIcon(recentlyUnlocked.id, "w-12 h-12")}
               </div>
               <div className="flex-1">
                 <h3 className="text-pearlWhite font-bold text-sm mb-1">

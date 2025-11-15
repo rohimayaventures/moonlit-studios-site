@@ -56,7 +56,7 @@ export function KonamiCode() {
 
   const playKonamiSound = () => {
     // Optional: Add sound effect here
-    console.log("🎮 KONAMI CODE ACTIVATED!");
+    console.log("KONAMI CODE ACTIVATED!");
   };
 
   const activateAvatarState = () => {
@@ -88,14 +88,14 @@ export function KonamiCode() {
     switch (actionId) {
       case "chaos-mode":
         // Activate maximum chaos
-        alert("🌀 CHAOS MODE ACTIVATED! Expect the unexpected...");
+        alert("CHAOS MODE ACTIVATED! Expect the unexpected...");
         break;
       case "dev-console":
         // Show dev easter egg
         console.log(`
-🌙 ═══════════════════════════════════════════ 🌙
+═══════════════════════════════════════════════
     MOONLIT STUDIOS SECRET DEV CONSOLE
-🌙 ═══════════════════════════════════════════ 🌙
+═══════════════════════════════════════════════
 
 You found the secret! Here's a message from the dev:
 
@@ -108,13 +108,13 @@ Built with:
 - TypeScript
 - Tailwind CSS
 - Claude AI API
-- A whole lot of tea ☕
+- A whole lot of tea
 
 Stack: MERN → JAMstack → Serverless → AI-First
 Journey: Nurse → Author → Full-Stack Dev
 
-🎮 Achievement Unlocked: Dev Console Explorer
-🌙 ═══════════════════════════════════════════ 🌙
+Achievement Unlocked: Dev Console Explorer
+═══════════════════════════════════════════════
         `);
         break;
       case "matrix-mode":
@@ -177,7 +177,14 @@ Journey: Nurse → Author → Full-Stack Dev
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                   <div className="relative">
-                    <div className="text-4xl mb-2">🌀</div>
+                    <div className="mb-2">
+                      <svg className="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2c5 0 8 3 8 8s-3 8-8 8-8-3-8-8 3-8 8-8z" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+                        <path d="M12 6c3 0 4 1 4 4s-1 4-4 4-4-1-4-4 1-4 4-4z" stroke="currentColor" strokeWidth="2" opacity="0.5"/>
+                        <circle cx="12" cy="10" r="2" fill="currentColor" opacity="0.7"/>
+                        <path d="M15 4l-2 4h2l-2 4M9 4l2 4H9l2 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
                     <h3 className="text-lg font-bold text-white mb-1">
                       Chaos Mode
                     </h3>
@@ -194,7 +201,13 @@ Journey: Nurse → Author → Full-Stack Dev
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                   <div className="relative">
-                    <div className="text-4xl mb-2">🖥️</div>
+                    <div className="mb-2">
+                      <svg className="w-12 h-12 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="3" width="20" height="14" rx="2" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2"/>
+                        <path d="M7 8l3 3-3 3M12 14h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2 7h20" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                    </div>
                     <h3 className="text-lg font-bold text-white mb-1">
                       Dev Console
                     </h3>
@@ -211,7 +224,12 @@ Journey: Nurse → Author → Full-Stack Dev
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                   <div className="relative">
-                    <div className="text-4xl mb-2">🟢</div>
+                    <div className="mb-2">
+                      <svg className="w-12 h-12 text-green-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 4h4v4H4zM10 4h4v4h-4zM16 4h4v4h-4zM4 10h4v4H4zM10 10h4v4h-4zM16 10h4v4h-4zM4 16h4v4H4zM10 16h4v4h-4zM16 16h4v4h-4z" fill="currentColor" opacity="0.3"/>
+                        <path d="M6 2v20M12 2v20M18 2v20" stroke="currentColor" strokeWidth="1" opacity="0.5"/>
+                      </svg>
+                    </div>
                     <h3 className="text-lg font-bold text-green-400 mb-1">
                       Matrix Mode
                     </h3>

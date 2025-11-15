@@ -2,6 +2,7 @@
 
 import { FormEvent, useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { TeaCupIcon, OwlIcon, SwordIcon, StaffIcon, BriefcaseIcon, ChaosIcon } from "./PersonalityIcons";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -22,41 +23,53 @@ export function GlobalKaiWidget() {
   const [showPersonalityMenu, setShowPersonalityMenu] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Personality icon mapping
+  const getPersonalityIcon = (mode: PersonalityMode, className?: string) => {
+    switch (mode) {
+      case "iroh":
+        return <TeaCupIcon className={className} />;
+      case "hedwig":
+        return <OwlIcon className={className} />;
+      case "kirito":
+        return <SwordIcon className={className} />;
+      case "gandalf":
+        return <StaffIcon className={className} />;
+      case "professional":
+        return <BriefcaseIcon className={className} />;
+      case "chaos":
+        return <ChaosIcon className={className} />;
+    }
+  };
+
   // Personality configurations
   const personalities = {
     iroh: {
       name: "Uncle Iroh",
-      emoji: "🍵",
       color: "from-orange-500 to-amber-600",
       description: "Wise, warm, tea-loving (ATLA)",
     },
     hedwig: {
       name: "Hedwig",
-      emoji: "🦉",
       color: "from-purple-500 to-pink-600",
       description: "Brilliant, helpful (Harry Potter)",
     },
     kirito: {
       name: "Kirito",
-      emoji: "⚔️",
       color: "from-blue-500 to-cyan-600",
       description: "Strategic gamer (SAO)",
     },
     gandalf: {
       name: "Gandalf",
-      emoji: "🧙",
       color: "from-gray-400 to-slate-600",
       description: "Ancient wisdom (LOTR)",
     },
     professional: {
       name: "Professional",
-      emoji: "💼",
       color: "from-teal-500 to-emerald-600",
       description: "Straight to business",
     },
     chaos: {
       name: "Chaos Mode",
-      emoji: "🌀",
       color: "from-red-500 to-purple-600",
       description: "Unhinged creativity",
     },
@@ -132,24 +145,24 @@ export function GlobalKaiWidget() {
   function getContextualGreeting(path: string): string {
     switch (path) {
       case "/":
-        return "🌙 Hey! I'm Kai, your AI guide. Like a good cup of tea, let's take a moment to explore what Moonlit Studios can create for you.";
+        return "Hey! I'm Kai, your AI guide. Like a good cup of tea, let's take a moment to explore what Moonlit Studios can create for you.";
       case "/about":
-        return "☕ Welcome! The journey from healer to coder is quite the tale. Ask me anything about how 15+ years of healthcare wisdom flows into every line of code.";
+        return "Welcome! The journey from healer to coder is quite the tale. Ask me anything about how 15+ years of healthcare wisdom flows into every line of code.";
       case "/services":
       case "/services/creative-design-development":
       case "/services/health-tech-development":
       case "/services/consulting":
       case "/services/ai-innovation":
       case "/services/ghostwriting":
-        return "⚔️ Welcome to the Quest Board! Every great adventure starts with choosing the right quest. I'm here to help you find the perfect match for your resources, timeline, and vision!";
+        return "Welcome to the Quest Board! Every great adventure starts with choosing the right quest. I'm here to help you find the perfect match for your resources, timeline, and vision!";
       case "/portfolio":
-        return "🏆 Welcome to the Achievement Gallery! Every project here is a boss battle conquered. Let me guide you through the floors cleared, bosses defeated, and XP gained!";
+        return "Welcome to the Achievement Gallery! Every project here is a boss battle conquered. Let me guide you through the floors cleared, bosses defeated, and XP gained!";
       case "/ai-lab":
-        return "🔮 Ready to see AI in action? This is where the real magic happens! Try the demos and ask me how they could transform your business.";
+        return "Ready to see AI in action? This is where the real magic happens! Try the demos and ask me how they could transform your business.";
       case "/contact":
-        return "🦉 Ready to dispatch your owl? I'm here to help you prepare the perfect message. Share your vision, and let's make sure Moonlit Studios is the right fit!";
+        return "Ready to dispatch your owl? I'm here to help you prepare the perfect message. Share your vision, and let's make sure Moonlit Studios is the right fit!";
       default:
-        return "🌙 Hey! I'm Kai. Sometimes the best path forward isn't the one we expected. Need help navigating? Just ask!";
+        return "Hey! I'm Kai. Sometimes the best path forward isn't the one we expected. Need help navigating? Just ask!";
     }
   }
 
@@ -160,7 +173,7 @@ export function GlobalKaiWidget() {
         return `You are Kai channeling Uncle Iroh (Avatar: The Last Airbender).
 
 **PERSONALITY TRAITS:**
-- Wise, warm, and tea-loving 🍵
+- Wise, warm, and tea-loving
 - Water-bender philosophy: adaptable, flowing, healing
 - Share wisdom through metaphors and life lessons
 - Occasionally reference tea, balance, and the four elements
@@ -177,7 +190,7 @@ export function GlobalKaiWidget() {
         return `You are Kai channeling Hedwig the Owl (Harry Potter universe).
 
 **PERSONALITY TRAITS:**
-- Brilliant and resourceful 🦉
+- Brilliant and resourceful
 - Book-smart like Hermione, but with owl wisdom
 - Reference magical concepts and spells naturally
 - Organized and helpful with information
@@ -195,7 +208,7 @@ export function GlobalKaiWidget() {
         return `You are Kai channeling Kirito (Sword Art Online).
 
 **PERSONALITY TRAITS:**
-- Strategic gamer mindset ⚔️
+- Strategic gamer mindset
 - Beta-tester wisdom: "This might be a game, but it's not something you play"
 - Dual-wielding problem-solver
 - Calm under pressure, analytical
@@ -213,7 +226,7 @@ export function GlobalKaiWidget() {
         return `You are Kai channeling Gandalf the Grey (Lord of the Rings).
 
 **PERSONALITY TRAITS:**
-- Ancient wisdom and patience 🧙
+- Ancient wisdom and patience
 - "A wizard arrives precisely when he means to"
 - Guide through epic quests
 - Mysterious but helpful
@@ -231,7 +244,7 @@ export function GlobalKaiWidget() {
         return `You are Kai in Professional Mode.
 
 **PERSONALITY TRAITS:**
-- Straight to business 💼
+- Straight to business
 - Efficient and clear communication
 - Focus on ROI, timelines, and deliverables
 - No-nonsense but still friendly
@@ -397,7 +410,7 @@ When relevant, suggest pages:
 **SAMPLE RESPONSES:**
 - "The Branding Quest (⭐⭐ Warrior difficulty) might be perfect for your author platform needs!"
 - "Looking at your timeline and resources, I'd recommend starting with The Strategy Session (⭐ Novice) to map out your adventure."
-- "Ready to accept The AI Architect quest? ⚔️ That's a Master-level challenge, but the rewards are worth it!"`;
+- "Ready to accept The AI Architect quest? That's a Master-level challenge, but the rewards are worth it!"`;
         break;
       case "/portfolio":
         pageContext = `\n\n**CURRENT PAGE**: Portfolio Achievement Gallery - SAO-inspired boss battle showcase!
@@ -410,27 +423,27 @@ When relevant, suggest pages:
 
 **THE 5 FLOORS:**
 
-**1F - FLOOR CLEARED** 🏆 Boss: The Brand Architect
+**1F - FLOOR CLEARED** Boss: The Brand Architect
 - Web & Brand Design
 - Projects: Moonlit Studios site, Author portals, Product campaigns
 - Weapons: Next.js, TypeScript, Tailwind, Sanity
 
-**2F - FLOOR CLEARED** 🏆 Boss: The Healing Guardian
+**2F - FLOOR CLEARED** Boss: The Healing Guardian
 - Health x Tech & Clinical UX
 - Projects: Rohimaya Health AI, Clinical Handoff Board, Patient Recovery apps
 - Weapons: Next.js, FHIR, HIPAA-compliant systems, Auth layers
 
-**3F - FLOOR CLEARED** 🏆 Boss: The AI Overlord
+**3F - FLOOR CLEARED** Boss: The AI Overlord
 - AI Innovation
 - Projects: StorySpoon AI, Clinical Copilot, Founder's Studio Copilot
 - Weapons: OpenAI API, LangChain, Vector DBs, Whisper
 
-**4F - FLOOR CLEARED** 🏆 Boss: The Storyteller Supreme
+**4F - FLOOR CLEARED** Boss: The Storyteller Supreme
 - Author & Writing
 - Projects: Phoenix & Peacock Novel Dev, Cookbook hybrids, Newsletter engine
 - Weapons: Next.js, MDX, Supabase, Notion API
 
-**5F - FLOOR CLEARED** 🏆 Boss: The Grand Innovator
+**5F - FLOOR CLEARED** Boss: The Grand Innovator
 - Moonlit Labs (R&D experiments)
 - Projects: Emotion-aware journaling, Nurse resilience coach, Moon phase prompts
 - Weapons: Edge Functions, Pinecone, Twilio, CRON Jobs
@@ -454,7 +467,7 @@ When relevant, suggest pages:
 - "That +1000 XP reward on StorySpoon AI? Totally earned. Voice AI integration is a Master-level quest."`;
         break;
       case "/ai-lab":
-        pageContext = `\n\n**CURRENT PAGE**: AI Lab - Experimental Spell Casting Chamber ⚡
+        pageContext = `\n\n**CURRENT PAGE**: AI Lab - Experimental Spell Casting Chamber
 
 **SYSTEM STATUS:** LINK START! (SAO-style)
 **ATMOSPHERE:** Wizard's workshop meets SAO combat system
@@ -529,10 +542,10 @@ When relevant, suggest pages:
 - Use phrases like "Cast the spell", "The spell book is open", "Magic meets machine learning"
 - Reference specific houses when discussing demos
 - Connect visitor's business needs to appropriate spells
-- Celebrate when they try a demo: "Spell cast successfully! ⚡"
+- Celebrate when they try a demo: "Spell cast successfully!"
 
 **SAMPLE RESPONSES:**
-- "Welcome to the spell casting chamber! ⚡ Which house calls to you? Try Lumos Maxima (Gryffindor) for computer vision magic!"
+- "Welcome to the spell casting chamber! Which house calls to you? Try Lumos Maxima (Gryffindor) for computer vision magic!"
 - "Accio Knowledge is my personal favorite—it's like summoning information from the Room of Requirement!"
 - "Nagini (Sonorus Persuasus) is our Slytherin spell—she's persuasive, ambitious, and can actually speak to you via voice AI!"
 - "Each spell demonstrates a different AI capability. Want to build something similar? I can help you design your own magical system!"`;
@@ -541,7 +554,7 @@ When relevant, suggest pages:
         pageContext = `\n\n**CURRENT PAGE**: Contact - The Owlery! Help visitors prepare for reaching out.
 
 **CONTACT PAGE FEATURES:**
-- 4 Fandom Themes Available: Owlery (HP 🦉), SAO (⚔️), ATLA (🌊), LOTR (🗡️)
+- 4 Fandom Themes Available: Owlery (HP), SAO, ATLA, LOTR
 - Each theme has unique messaging and personality
 - Default is Owlery theme with owl post metaphor
 
@@ -558,7 +571,7 @@ When relevant, suggest pages:
    - LOTR: Gandalf mode (ancient wisdom, quest guide)
 
 **SAMPLE RESPONSES:**
-- "Ready to dispatch your owl? 🦉 What kind of magic are you looking to create?"
+- "Ready to dispatch your owl? What kind of magic are you looking to create?"
 - "Before you send your message, let me help ensure it captures your vision perfectly..."
 - "Every great quest starts with clear communication - tell me about your project!"`;
         break;
@@ -661,12 +674,11 @@ When relevant, suggest pages:
 
     // Add system message about personality change
     const personalityName = personalities[newPersonality].name;
-    const personalityEmoji = personalities[newPersonality].emoji;
     setMessages([
       ...messages,
       {
         role: "assistant",
-        content: `${personalityEmoji} *Kai shifts form into ${personalityName} mode* - How can I assist you now?`,
+        content: `*Kai shifts form into ${personalityName} mode* - How can I assist you now?`,
       },
     ]);
   };
@@ -707,7 +719,7 @@ When relevant, suggest pages:
 
           {/* Tooltip */}
           <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-midnight/90 text-starlight text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            Chat with Kai 🌙
+            Chat with Kai
           </div>
         </button>
       )}
@@ -733,7 +745,7 @@ When relevant, suggest pages:
                   className="text-starlight/50 hover:text-starlight transition-colors text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-mermaidTeal/10"
                   title="Change personality"
                 >
-                  <span className="text-sm">{personalities[personality].emoji}</span>
+                  {getPersonalityIcon(personality, "w-4 h-4")}
                   <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -774,7 +786,7 @@ When relevant, suggest pages:
                         : "bg-midnight/40 text-starlight hover:bg-mermaidTeal/20 border border-mermaidTeal/20"
                     }`}
                   >
-                    <span className="text-base">{config.emoji}</span>
+                    {getPersonalityIcon(key, "w-5 h-5")}
                     <div className="flex-1">
                       <p className="font-semibold">{config.name}</p>
                       <p className={`text-xs ${personality === key ? "text-white/80" : "text-starlight/60"}`}>
