@@ -8,6 +8,8 @@ type ChatMessage = {
   content: string;
 };
 
+type PersonalityMode = "iroh" | "hedwig" | "kirito" | "gandalf" | "professional" | "chaos";
+
 export function GlobalKaiWidget() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -16,13 +18,60 @@ export function GlobalKaiWidget() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [personality, setPersonality] = useState<PersonalityMode>("iroh");
+  const [showPersonalityMenu, setShowPersonalityMenu] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Load chat history from sessionStorage on mount
+  // Personality configurations
+  const personalities = {
+    iroh: {
+      name: "Uncle Iroh",
+      emoji: "🍵",
+      color: "from-orange-500 to-amber-600",
+      description: "Wise, warm, tea-loving (ATLA)",
+    },
+    hedwig: {
+      name: "Hedwig",
+      emoji: "🦉",
+      color: "from-purple-500 to-pink-600",
+      description: "Brilliant, helpful (Harry Potter)",
+    },
+    kirito: {
+      name: "Kirito",
+      emoji: "⚔️",
+      color: "from-blue-500 to-cyan-600",
+      description: "Strategic gamer (SAO)",
+    },
+    gandalf: {
+      name: "Gandalf",
+      emoji: "🧙",
+      color: "from-gray-400 to-slate-600",
+      description: "Ancient wisdom (LOTR)",
+    },
+    professional: {
+      name: "Professional",
+      emoji: "💼",
+      color: "from-teal-500 to-emerald-600",
+      description: "Straight to business",
+    },
+    chaos: {
+      name: "Chaos Mode",
+      emoji: "🌀",
+      color: "from-red-500 to-purple-600",
+      description: "Unhinged creativity",
+    },
+  };
+
+  // Load chat history and personality from sessionStorage on mount
   useEffect(() => {
     const savedMessages = sessionStorage.getItem("kai-chat-history");
     const hasShown = sessionStorage.getItem("kai-initial-shown");
-    
+    const savedPersonality = sessionStorage.getItem("kai-personality") as PersonalityMode;
+
+    if (savedPersonality && personalities[savedPersonality]) {
+      setPersonality(savedPersonality);
+    }
+
     if (savedMessages) {
       setMessages(JSON.parse(savedMessages));
     } else {
@@ -104,22 +153,134 @@ export function GlobalKaiWidget() {
     }
   }
 
+  // Get personality-specific system prompt
+  function getPersonalityPrompt(mode: PersonalityMode): string {
+    switch (mode) {
+      case "iroh":
+        return `You are Kai channeling Uncle Iroh (Avatar: The Last Airbender).
+
+**PERSONALITY TRAITS:**
+- Wise, warm, and tea-loving 🍵
+- Water-bender philosophy: adaptable, flowing, healing
+- Share wisdom through metaphors and life lessons
+- Occasionally reference tea, balance, and the four elements
+- Patient and understanding, like a mentor
+- Use phrases like "Sometimes the best way to solve your own problems is to help someone else"
+
+**SPEECH STYLE:**
+- Gentle and thoughtful
+- Often pose reflective questions
+- Share wisdom organically, not preachy
+- Use nature/element metaphors when appropriate`;
+
+      case "hedwig":
+        return `You are Kai channeling Hedwig the Owl (Harry Potter universe).
+
+**PERSONALITY TRAITS:**
+- Brilliant and resourceful 🦉
+- Book-smart like Hermione, but with owl wisdom
+- Reference magical concepts and spells naturally
+- Organized and helpful with information
+- "Books! And cleverness!" energy
+- Deliver messages with precision and care
+
+**SPEECH STYLE:**
+- Clever and witty
+- Use magical metaphors
+- Reference the wizarding world naturally
+- Precise and informative
+- Occasionally hoot about efficient solutions`;
+
+      case "kirito":
+        return `You are Kai channeling Kirito (Sword Art Online).
+
+**PERSONALITY TRAITS:**
+- Strategic gamer mindset ⚔️
+- Beta-tester wisdom: "This might be a game, but it's not something you play"
+- Dual-wielding problem-solver
+- Calm under pressure, analytical
+- Gaming/RPG terminology comes naturally
+- Focus on strategy, efficiency, and winning
+
+**SPEECH STYLE:**
+- Direct and tactical
+- Use gaming metaphors (levels, quests, boss battles, XP)
+- Reference SAO systems and mechanics
+- Strategic planning approach
+- "Let's analyze this boss battle..." energy`;
+
+      case "gandalf":
+        return `You are Kai channeling Gandalf the Grey (Lord of the Rings).
+
+**PERSONALITY TRAITS:**
+- Ancient wisdom and patience 🧙
+- "A wizard arrives precisely when he means to"
+- Guide through epic quests
+- Mysterious but helpful
+- See the bigger picture and long-term consequences
+- Encourage courage in the face of challenges
+
+**SPEECH STYLE:**
+- Formal but warm
+- Epic quest language
+- Reference journeys, adventures, and great deeds
+- Wise counsel with gravitas
+- "You shall not pass... bad design decisions!" energy`;
+
+      case "professional":
+        return `You are Kai in Professional Mode.
+
+**PERSONALITY TRAITS:**
+- Straight to business 💼
+- Efficient and clear communication
+- Focus on ROI, timelines, and deliverables
+- No-nonsense but still friendly
+- Data-driven recommendations
+- Corporate-friendly language
+
+**SPEECH STYLE:**
+- Clear and concise
+- Bullet points when appropriate
+- Focus on value propositions
+- Professional but approachable
+- Skip the metaphors, get to the point`;
+
+      case "chaos":
+        return `You are Kai in CHAOS MODE.
+
+**PERSONALITY TRAITS:**
+- Unhinged creativity 🌀
+- Wild ideas and unexpected connections
+- Break all conventions
+- Maximum enthusiasm and energy
+- Mix ALL the fandoms together
+- "What if we made it GLOW?" energy
+
+**SPEECH STYLE:**
+- CAPS for emphasis
+- Mix metaphors wildly
+- Combine all fandom references
+- Suggest bold, creative solutions
+- "Why not add dragons to your healthcare app?" vibes
+- Still helpful, just... chaotic`;
+
+      default:
+        return "";
+    }
+  }
+
   // Get context-aware system prompt based on current page
   function getSystemPrompt(path: string): string {
-    const basePrompt = `You are Kai, an AI assistant for Moonlit Studios - a wise guide with multi-fandom wisdom. Your default personality is inspired by Uncle Iroh's spirit, but you can adapt your personality based on context and fandom references.
+    const personalityPrompt = getPersonalityPrompt(personality);
 
-**YOUR PERSONALITY MODES:**
-- **Default (Uncle Iroh - ATLA)**: Wise, warm, tea-loving, water-bender vibes - adaptable, flowing, healing
-- **Gandalf Mode (LOTR)**: Ancient wisdom, "A wizard arrives precisely when he means to", guide through the quest
-- **Hermione Mode (Harry Potter)**: Brilliant, helpful, "Books! And cleverness!", magical knowledge
-- **Kirito Mode (SAO)**: Strategic gamer, beta-tester wisdom, "This might be a game, but it's not something you play"
+    const basePrompt = `${personalityPrompt}
 
-**CORE TRAITS (All Modes):**
-- Tech-savvy and helpful
-- Share occasional life wisdom naturally
-- Casual but profound - you see deeper meanings
-- Sometimes pause to reflect on the bigger picture
-- Reference fandom themes when contextually appropriate (especially on contact page with Owlery/SAO/ATLA/LOTR themes)
+**CORE RESPONSIBILITIES (All Modes):**
+- Tech-savvy AI assistant for Moonlit Studios
+- Help visitors understand services and navigate the site
+- Share wisdom while staying helpful
+- Connect business needs to appropriate solutions
+- Reference fandom themes naturally when contextually appropriate
 
 **MOONLIT STUDIOS SERVICES:**
 
@@ -414,6 +575,11 @@ When relevant, suggest pages:
     setInput("");
     setIsLoading(true);
 
+    // Track message count for achievements
+    if (typeof window !== "undefined" && (window as any).trackAchievement) {
+      (window as any).trackAchievement.incrementKaiMessages();
+    }
+
     const newMessages: ChatMessage[] = [
       ...messages,
       { role: "user", content: userMessage },
@@ -483,6 +649,28 @@ When relevant, suggest pages:
     ]);
   };
 
+  const changePersonality = (newPersonality: PersonalityMode) => {
+    setPersonality(newPersonality);
+    sessionStorage.setItem("kai-personality", newPersonality);
+    setShowPersonalityMenu(false);
+
+    // Track personality switch for achievements
+    if (typeof window !== "undefined" && (window as any).trackAchievement) {
+      (window as any).trackAchievement.incrementPersonalitySwitches();
+    }
+
+    // Add system message about personality change
+    const personalityName = personalities[newPersonality].name;
+    const personalityEmoji = personalities[newPersonality].emoji;
+    setMessages([
+      ...messages,
+      {
+        role: "assistant",
+        content: `${personalityEmoji} *Kai shifts form into ${personalityName} mode* - How can I assist you now?`,
+      },
+    ]);
+  };
+
   return (
     <>
       {/* Floating Moon Icon Button */}
@@ -528,37 +716,80 @@ When relevant, suggest pages:
       {!isMinimized && (
         <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] flex flex-col shadow-2xl shadow-mermaidTeal/30 rounded-2xl overflow-hidden animate-fade-in-up">
           {/* Header */}
-          <div className="bg-gradient-to-r from-deepOcean to-midnight border-b border-mermaidTeal/30 px-4 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              {/* Mini moon icon */}
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pearlWhite to-moonlightSilver shadow-lg shadow-starlight/50 flex-shrink-0"></div>
-              <div>
-                <h3 className="text-sm font-semibold text-pearlWhite">Kai</h3>
-                <p className="text-xs text-starlight/60">Your AI Guide</p>
+          <div className="bg-gradient-to-r from-deepOcean to-midnight border-b border-mermaidTeal/30 px-4 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {/* Mini moon icon */}
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pearlWhite to-moonlightSilver shadow-lg shadow-starlight/50 flex-shrink-0"></div>
+                <div>
+                  <h3 className="text-sm font-semibold text-pearlWhite">Kai</h3>
+                  <p className="text-xs text-starlight/60">Your AI Guide</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {/* Personality switcher button */}
+                <button
+                  onClick={() => setShowPersonalityMenu(!showPersonalityMenu)}
+                  className="text-starlight/50 hover:text-starlight transition-colors text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-mermaidTeal/10"
+                  title="Change personality"
+                >
+                  <span className="text-sm">{personalities[personality].emoji}</span>
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {/* Clear chat button */}
+                <button
+                  onClick={clearChat}
+                  className="text-starlight/50 hover:text-starlight transition-colors text-xs"
+                  title="Clear chat"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+                {/* Minimize button */}
+                <button
+                  onClick={toggleWidget}
+                  className="text-starlight/50 hover:text-starlight transition-colors"
+                  aria-label="Minimize"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              {/* Clear chat button */}
-              <button
-                onClick={clearChat}
-                className="text-starlight/50 hover:text-starlight transition-colors text-xs"
-                title="Clear chat"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-              {/* Minimize button */}
-              <button
-                onClick={toggleWidget}
-                className="text-starlight/50 hover:text-starlight transition-colors"
-                aria-label="Minimize"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            </div>
+
+            {/* Personality Menu Dropdown */}
+            {showPersonalityMenu && (
+              <div className="mt-3 space-y-1 animate-fade-in-up">
+                {(Object.entries(personalities) as [PersonalityMode, typeof personalities.iroh][]).map(([key, config]) => (
+                  <button
+                    key={key}
+                    onClick={() => changePersonality(key)}
+                    className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-xs transition-all ${
+                      personality === key
+                        ? `bg-gradient-to-r ${config.color} text-white shadow-lg`
+                        : "bg-midnight/40 text-starlight hover:bg-mermaidTeal/20 border border-mermaidTeal/20"
+                    }`}
+                  >
+                    <span className="text-base">{config.emoji}</span>
+                    <div className="flex-1">
+                      <p className="font-semibold">{config.name}</p>
+                      <p className={`text-xs ${personality === key ? "text-white/80" : "text-starlight/60"}`}>
+                        {config.description}
+                      </p>
+                    </div>
+                    {personality === key && (
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Chat Messages */}

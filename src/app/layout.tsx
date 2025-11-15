@@ -3,6 +3,9 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 import { Header } from "./components/Header";
+import { AchievementSystem } from "./components/AchievementSystem";
+import { PageTracker } from "./components/PageTracker";
+import { KonamiCode } from "./components/KonamiCode";
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
@@ -220,6 +223,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* 🌙 GLOBAL KAI WIDGET - Appears on all pages */}
         <GlobalKaiWidget />
+
+        {/* 🏆 ACHIEVEMENT SYSTEM - Track visitor progress globally */}
+        <AchievementSystem />
+        <PageTracker />
+
+        {/* 🎮 KONAMI CODE & AVATAR STATE - Secret easter egg system */}
+        <KonamiCode />
       </body>
     </html>
   );

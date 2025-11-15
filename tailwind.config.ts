@@ -161,6 +161,19 @@ const config: Config = {
           "95%": { opacity: "0.3" },
           "100%": { left: "105%", top: "55%", opacity: "0", transform: "rotate(8deg)" },
         },
+        // SAO Achievement Animations
+        slideInRight: {
+          "0%": { transform: "translateX(400px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+        bounceSubtle: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+        },
+        progressBar: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
       },
       animation: {
         // Standard animations
@@ -182,6 +195,11 @@ const config: Config = {
         footsteps: "footsteps 3s ease-in-out infinite",
         footstepWalkLeft: "footstepWalkLeft 8s ease-in-out infinite",
         footstepWalkRight: "footstepWalkRight 8s ease-in-out infinite 0.4s",
+
+        // SAO Achievement animations
+        "slide-in-right": "slideInRight 0.5s ease-out forwards",
+        "bounce-subtle": "bounceSubtle 1.5s ease-in-out infinite",
+        "progress-bar": "progressBar 5s linear forwards",
       },
     },
   },
