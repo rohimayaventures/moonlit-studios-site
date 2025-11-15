@@ -32,6 +32,14 @@ const suites = [
     starting: "$1,800+",
     href: "/services/creative-design-development",
     color: "coralPink",
+    tiers: [
+      { name: "Branding Essential", price: "$1,800", features: ["Logo suite (3 variations)", "2-color palette + 2 fonts", "Basic brand guidelines", "1 round of revisions"] },
+      { name: "Branding Professional", price: "$2,800", popular: true, features: ["Logo suite (5 variations)", "Full color palette + font pairing", "Comprehensive brand guidelines", "Social media kit", "2 rounds of revisions"] },
+      { name: "Branding Premium", price: "$4,500", features: ["Everything in Professional", "Brand strategy workshop", "Extended logo suite (10+ variations)", "Print collateral designs", "3 rounds of revisions"] },
+      { name: "Web Essential", price: "$3,000", features: ["3-page website", "Mobile responsive", "Basic SEO setup", "Contact form integration", "1 month post-launch support"] },
+      { name: "Web Professional", price: "$5,500", popular: true, features: ["5-7 page website", "Blog or portfolio section", "Advanced SEO optimization", "Newsletter signup integration", "Custom animations", "2 months support"] },
+      { name: "Web Premium", price: "$8,000", features: ["10+ page site", "CMS integration", "E-commerce capabilities", "Advanced animations", "Performance optimization", "3 months support"] },
+    ],
   },
   {
     name: "Health x Tech Development",
@@ -52,6 +60,14 @@ const suites = [
     starting: "$10,000+",
     href: "/services/health-tech-development",
     color: "mermaidTeal",
+    tiers: [
+      { name: "Healthcare Platform Essential", price: "$10,000", features: ["3-5 core features", "Basic HIPAA compliance", "User authentication", "Simple dashboard", "1 user role", "1 month post-launch support"] },
+      { name: "Healthcare Platform Professional", price: "$18,000", popular: true, features: ["5-10 features", "Full HIPAA compliance (BAA)", "Multi-role user system", "Advanced workflows", "Data visualization", "Integration with 1 third-party system", "2 months support"] },
+      { name: "Healthcare Platform Premium", price: "$30,000", features: ["Complex clinical workflows", "Multi-facility support", "Advanced data analytics", "EHR/EMR integration", "Custom API development", "Regulatory documentation package", "3 months support + training"] },
+      { name: "Clinical Dashboard Basic", price: "$3,500", features: ["Census tracking", "Alert system", "Basic metrics & KPIs", "Staff directory", "Shift handoff tools"] },
+      { name: "Clinical Dashboard Advanced", price: "$6,500", popular: true, features: ["Real-time data feeds", "Custom charts & visualizations", "Predictive analytics", "Quality metrics tracking", "Automated reporting"] },
+      { name: "Patient Portal Essential", price: "$4,000", features: ["Secure messaging", "Appointment scheduling", "Medical records access", "Prescription refills", "Educational resources"] },
+    ],
   },
   {
     name: "Consulting",
@@ -72,6 +88,13 @@ const suites = [
     starting: "$250/hr",
     href: "/services/consulting",
     color: "starlight",
+    tiers: [
+      { name: "Single Session", price: "$250/hr", features: ["Product roadmap review", "Safety pattern assessment", "Clinical validation insights", "Risk reduction strategies"] },
+      { name: "Strategy Package", price: "$4,000", popular: true, features: ["Everything in Single Session", "Go-to-market planning (5 sessions)", "Pilot program design", "Regulatory pathway guidance", "Stakeholder presentation deck", "30-day Slack/email support"] },
+      { name: "Strategic Partner", price: "$8,000/mo", features: ["Everything in Strategy Package", "Weekly strategic sessions", "Unlimited async consultation", "Board/investor deck review", "Clinical advisory network access", "Priority response time"] },
+      { name: "UX Audit", price: "$2,000", features: ["Heuristic evaluation (clinical lens)", "Workflow friction analysis", "Adoption barrier identification", "Actionable improvement list"] },
+      { name: "UX Transformation", price: "$5,000", features: ["Everything in UX Audit", "User testing with clinicians", "Interface redesign recommendations", "Load reduction strategies"] },
+    ],
   },
   {
     name: "AI Innovation Suite",
@@ -92,6 +115,11 @@ const suites = [
     starting: "$12,000+",
     href: "/services/ai-innovation",
     color: "lunarGold",
+    tiers: [
+      { name: "Essential RAG", price: "$12,000", features: ["Basic RAG chatbot setup", "Document ingestion pipeline", "Claude/OpenAI integration", "Simple query handling", "Basic UI implementation"] },
+      { name: "Professional RAG", price: "$25,000", popular: true, features: ["Everything in Essential", "Multimodal capabilities (text + images)", "Context-aware conversations", "Role-based assistants", "Advanced prompt engineering", "Custom UI/UX design", "2 weeks post-launch support"] },
+      { name: "Enterprise RAG", price: "$50,000", features: ["Everything in Professional", "Multi-agent orchestration", "Custom knowledge graphs", "Real-time learning loops", "Advanced safety guardrails", "Analytics & monitoring dashboard", "30-day premium support"] },
+    ],
   },
   {
     name: "Author & Ghostwriting Studio",
@@ -114,6 +142,13 @@ const suites = [
     starting: "$250+",
     href: "/services/ghostwriting",
     color: "roseGold",
+    tiers: [
+      { name: "Short Book (50K words)", price: "$18,000", features: ["Voice alignment interviews", "Structure & chapter planning", "Full manuscript drafting (50K words)", "One revision cycle", "Final polish & formatting"] },
+      { name: "Full Novel (80K words)", price: "$35,000", popular: true, features: ["Everything in Short Book", "Extended manuscript (80K words)", "Character development sessions", "Two revision cycles", "Plot structure consulting", "Query letter & synopsis"] },
+      { name: "Premium Book (100K+ words)", price: "$50,000", features: ["Everything in Full Novel", "Extended manuscript (100K+ words)", "Multiple POV coordination", "Three revision cycles", "Author platform development", "Marketing copy & launch materials", "6 months post-completion support"] },
+      { name: "Essential Cookbook", price: "$18,000", features: ["Recipe structuring + headnotes (50 recipes)", "Cultural storytelling integration", "Testing support notes", "Interior copy & introductions", "One revision cycle"] },
+      { name: "Premium Cookbook", price: "$32,000", popular: true, features: ["75+ recipes", "Extended storytelling sections", "Recipe development collaboration", "Photography direction notes", "Two revision cycles", "Marketing copy"] },
+    ],
   },
 ];
 
@@ -170,12 +205,17 @@ const getDifficultyLabel = (difficulty: number) => {
 
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState('');
+  const [expandedAccordion, setExpandedAccordion] = useState<string | null>(null);
 
   const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     if (value) {
       window.location.href = value;
     }
+  };
+
+  const toggleAccordion = (suiteName: string) => {
+    setExpandedAccordion(expandedAccordion === suiteName ? null : suiteName);
   };
 
   return (
@@ -356,6 +396,52 @@ export default function ServicesPage() {
                     <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
                   </div>
                 </div>
+
+                {/* Pricing Tiers Accordion */}
+                {suite.tiers && suite.tiers.length > 0 && (
+                  <div className="mt-4">
+                    <button
+                      onClick={() => toggleAccordion(suite.name)}
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-lunarGold/10 border border-lunarGold/30 hover:bg-lunarGold/20 hover:border-lunarGold/50 transition-all text-left"
+                    >
+                      <span className="text-sm font-semibold text-lunarGold">View Pricing Tiers</span>
+                      <ChevronDown className={`w-4 h-4 text-lunarGold transition-transform ${expandedAccordion === suite.name ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {expandedAccordion === suite.name && (
+                      <div className="mt-2 space-y-2 animate-fade-in-up">
+                        {suite.tiers.map((tier: any, tierIndex: number) => (
+                          <div
+                            key={tierIndex}
+                            className={`p-3 rounded-lg border ${tier.popular ? 'bg-mermaidTeal/10 border-mermaidTeal/40' : 'bg-deepOcean/40 border-deepOcean/60'} hover:border-lunarGold/50 transition-all`}
+                          >
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2">
+                                  <h4 className="text-sm font-bold text-pearlWhite">{tier.name}</h4>
+                                  {tier.popular && (
+                                    <span className="px-2 py-0.5 text-[0.6rem] bg-mermaidTeal/30 text-mermaidTeal rounded-full font-semibold uppercase tracking-wide">
+                                      Popular
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="text-lg font-bold text-lunarGold mt-1">{tier.price}</p>
+                              </div>
+                            </div>
+                            <ul className="space-y-1 text-xs text-moonlightSilver">
+                              {tier.features.map((feature: string, featureIndex: number) => (
+                                <li key={featureIndex} className="flex gap-2 items-start">
+                                  <span className="text-lunarGold mt-0.5">•</span>
+                                  <span>{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Accept Quest Button */}
                 <a
