@@ -29,6 +29,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Moonlit Studios" }],
   creator: "Moonlit Studios - The Nurse Who Codes",
   publisher: "Moonlit Studios",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon?<generated>', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/apple-icon?<generated>', type: 'image/png', sizes: '180x180' },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

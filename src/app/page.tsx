@@ -90,8 +90,8 @@ export default function Home() {
             </span>
           </p>
 
-          {/* Element Symbols - NO EMOJIS */}
-          <div className="flex justify-center gap-6 mb-8 fade-in-up stagger-4">
+          {/* Element Symbols - ALL 4 ELEMENTS */}
+          <div className="flex justify-center gap-4 md:gap-6 mb-8 fade-in-up stagger-4">
             {/* Water Symbol */}
             <div className="group cursor-pointer">
               <div className="element-symbol water w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-mermaidTeal/30 to-tealBright/30 flex items-center justify-center border border-mermaidTeal/50 group-hover:border-mermaidTeal group-hover:shadow-lg group-hover:shadow-mermaidTeal/30 transition-all">
@@ -101,7 +101,17 @@ export default function Home() {
               </div>
               <p className="text-xs text-center mt-2 text-tealBright font-medium opacity-0 group-hover:opacity-100 transition-opacity">Adapt</p>
             </div>
-            
+
+            {/* Earth Symbol */}
+            <div className="group cursor-pointer">
+              <div className="element-symbol earth w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-stoneGray/30 to-silverMist/30 flex items-center justify-center border border-stoneGray/50 group-hover:border-stoneGray group-hover:shadow-lg group-hover:shadow-stoneGray/30 transition-all">
+                <svg className="w-5 h-5 text-stoneGray" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                </svg>
+              </div>
+              <p className="text-xs text-center mt-2 text-silverMist font-medium opacity-0 group-hover:opacity-100 transition-opacity">Ground</p>
+            </div>
+
             {/* Fire Symbol */}
             <div className="group cursor-pointer">
               <div className="element-symbol fire w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-phoenixFire/20 to-lunarGold/20 flex items-center justify-center border border-lunarGold/40 group-hover:border-lunarGold group-hover:shadow-lg group-hover:shadow-lunarGold/30 transition-all">
@@ -110,6 +120,16 @@ export default function Home() {
                 </svg>
               </div>
               <p className="text-xs text-center mt-2 text-lunarGold font-medium opacity-0 group-hover:opacity-100 transition-opacity">Transform</p>
+            </div>
+
+            {/* Air Symbol */}
+            <div className="group cursor-pointer">
+              <div className="element-symbol air w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-starlight/30 to-pearlWhite/20 flex items-center justify-center border border-starlight/50 group-hover:border-starlight group-hover:shadow-lg group-hover:shadow-starlight/30 transition-all">
+                <svg className="w-5 h-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+              <p className="text-xs text-center mt-2 text-starlight font-medium opacity-0 group-hover:opacity-100 transition-opacity">Flow</p>
             </div>
           </div>
 
@@ -179,7 +199,7 @@ export default function Home() {
                 Like a perfect cup of jasmine tea, great work requires balance—technical precision with creative vision, speed with quality.
               </p>
               <p className="text-xs text-starlight/60 italic text-center">
-                &quot;Happiness can be found in the darkest of times, if one only remembers to turn on the light.&quot; — Dumbledore
+                &quot;Not all those who wander are lost.&quot; — Gandalf
               </p>
             </div>
             
@@ -275,11 +295,21 @@ export default function Home() {
                   <div className="wisdom-card p-6 md:p-8 rounded-2xl">
                     <div className="text-xs tracking-wider text-starlight mb-2">PHASE ONE · NOVICE</div>
                     <h3 className="text-xl md:text-2xl font-semibold text-pearlWhite mb-3">Healthcare Foundation</h3>
-                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed">
-                      Like learning basic water forms, I started in healthcare operations—understanding workflows, 
-                      leading teams of 130+, and mastering the art of healing systems. 15+ years of clinical wisdom 
+                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed mb-4">
+                      Like learning basic water forms, I started in healthcare operations—understanding workflows,
+                      leading teams of 130+, and mastering the art of healing systems. 15+ years of clinical wisdom
                       partnering with Kaiser, Optum, and university health networks.
                     </p>
+                    {/* XP Bar */}
+                    <div className="mt-4">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-mermaidTeal font-medium">Experience Points</span>
+                        <span className="text-xs text-mermaidTeal font-mono">15+ Years</span>
+                      </div>
+                      <div className="h-2 bg-deepOcean/40 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-aquaMist via-mermaidTeal to-tealBright rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-aquaMist via-mermaidTeal to-deepOcean flex items-center justify-center border-4 border-midnight shadow-xl shadow-mermaidTeal/40 hover:scale-110 transition-transform">
@@ -298,10 +328,20 @@ export default function Home() {
                   <div className="wisdom-card p-6 md:p-8 rounded-2xl">
                     <div className="text-xs tracking-wider text-starlight mb-2">PHASE TWO · STUDENT</div>
                     <h3 className="text-xl md:text-2xl font-semibold text-pearlWhite mb-3">Creative Awakening</h3>
-                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed">
-                      Finding my voice through storytelling—300,000+ words written, published fantasy romance author. 
+                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed mb-4">
+                      Finding my voice through storytelling—300,000+ words written, published fantasy romance author.
                       Learning that code and narrative both require structure, flow, and heart. Stories heal, too.
                     </p>
+                    {/* XP Bar */}
+                    <div className="mt-4">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-coralPink font-medium">Writing Mastery</span>
+                        <span className="text-xs text-coralPink font-mono">300K+ Words</span>
+                      </div>
+                      <div className="h-2 bg-deepOcean/40 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-roseGold via-coralPink to-sunsetPink rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -312,11 +352,21 @@ export default function Home() {
                   <div className="wisdom-card p-6 md:p-8 rounded-2xl">
                     <div className="text-xs tracking-wider text-starlight mb-2">PHASE THREE · WARRIOR</div>
                     <h3 className="text-xl md:text-2xl font-semibold text-pearlWhite mb-3">Technical Mastery</h3>
-                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed">
+                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed mb-4">
                       Self-taught developer specializing in AI/ML systems. Building production-ready apps,
                       intelligent AI platforms, and HIPAA-compliant healthcare solutions. Lumos to every bug.
                       Transforming ideas into reality through code and determination.
                     </p>
+                    {/* XP Bar */}
+                    <div className="mt-4">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-lunarGold font-medium">Technical Skills</span>
+                        <span className="text-xs text-lunarGold font-mono">Level 99</span>
+                      </div>
+                      <div className="h-2 bg-deepOcean/40 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-phoenixFire via-lunarGold to-sunsetPink rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-phoenixFire via-lunarGold to-sunsetPink flex items-center justify-center border-4 border-midnight shadow-xl shadow-phoenixFire/40 hover:scale-110 transition-transform">
@@ -337,11 +387,23 @@ export default function Home() {
                   <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-mermaidTeal/20 to-lunarGold/20 border-2 border-mermaidTeal backdrop-blur">
                     <div className="text-xs tracking-wider text-lunarGold mb-2">PHASE FOUR · MASTER</div>
                     <h3 className="text-xl md:text-2xl font-semibold text-pearlWhite mb-3">Moonlit Studios</h3>
-                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed">
-                      Where all elements converge. Founder of Moonlit Studios, bringing together healthcare expertise, 
-                      creative storytelling, and technical mastery. Water (creative flow) meets Fire (transformation power). 
+                    <p className="text-sm md:text-base text-moonlightSilver leading-relaxed mb-4">
+                      Where all elements converge. Founder of Moonlit Studios, bringing together healthcare expertise,
+                      creative storytelling, and technical mastery. Water (creative flow) meets Fire (transformation power).
                       Healing through technology, adapting to every client, guided by moonlight. The Avatar state of digital creation.
                     </p>
+                    {/* EPIC XP Bar with "LEVEL UP!" */}
+                    <div className="mt-4 relative">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs text-lunarGold font-bold uppercase tracking-wider">Master Level</span>
+                        <span className="text-xs text-lunarGold font-mono animate-pulse">MAX ✦</span>
+                      </div>
+                      <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-lunarGold/30 relative">
+                        <div className="h-full bg-gradient-to-r from-aquaMist via-mermaidTeal via-lunarGold to-phoenixFire rounded-full shadow-lg shadow-lunarGold/50 animate-pulse" style={{ width: '100%' }}></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-pearlWhite/30 to-transparent animate-shimmer"></div>
+                      </div>
+                      <p className="text-xs text-center text-lunarGold font-semibold mt-2 tracking-widest animate-pulse">⚡ AVATAR STATE UNLOCKED ⚡</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -402,7 +464,8 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-pearlWhite mb-2">AI Innovation</h3>
-              <p className="text-sm text-moonlightSilver mb-4">RAG chatbots, voice-enabled tools, and intelligent automation</p>
+              <p className="text-sm text-moonlightSilver mb-3">RAG chatbots, voice-enabled tools, and intelligent automation</p>
+              <p className="text-xs text-lunarGold/70 italic mb-3">&quot;There&apos;s no way to beat the game without taking risks&quot; — Kirito</p>
               <div className="text-xs text-lunarGold font-medium">Claude API · Embeddings</div>
             </div>
 

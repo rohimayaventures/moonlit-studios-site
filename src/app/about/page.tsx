@@ -286,14 +286,22 @@ export default function AboutPage() {
             {/* Water - Adaptability */}
             <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-mermaidTeal/10 to-deepOcean/20 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all duration-300 hover:shadow-lg hover:shadow-mermaidTeal/20 fade-in-up">
               <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-mermaidTeal to-tealBright flex items-center justify-center">
-                  <svg className="w-8 h-8 text-midnight" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                {/* Circular Progress */}
+                <div className="relative flex-shrink-0 w-20 h-20">
+                  <svg className="transform -rotate-90 w-20 h-20">
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-mermaidTeal transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
                   </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-mermaidTeal" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-mermaidTeal mb-2">Water — Adaptability</h3>
-                  <p className="text-sm text-mermaidTeal/80 mb-4">The Healing Element</p>
+                  <p className="text-sm text-mermaidTeal/80 mb-2">The Healing Element</p>
+                  <p className="text-xs text-mermaidTeal font-mono">Mastery: 100%</p>
                 </div>
               </div>
               <ul className="space-y-3 text-moonlightSilver">
@@ -315,14 +323,22 @@ export default function AboutPage() {
             {/* Fire - Transformation */}
             <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-midnight border border-phoenixFire/30 hover:border-phoenixFire/60 transition-all duration-300 hover:shadow-lg hover:shadow-phoenixFire/20 fade-in-up">
               <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-phoenixFire to-lunarGold flex items-center justify-center">
-                  <svg className="w-8 h-8 text-midnight" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                {/* Circular Progress */}
+                <div className="relative flex-shrink-0 w-20 h-20">
+                  <svg className="transform -rotate-90 w-20 h-20">
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-phoenixFire transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
                   </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-phoenixFire" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                    </svg>
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-phoenixFire mb-2">Fire — Transformation</h3>
-                  <p className="text-sm text-phoenixFire/80 mb-4">The Creative Flame</p>
+                  <p className="text-sm text-phoenixFire/80 mb-2">The Creative Flame</p>
+                  <p className="text-xs text-phoenixFire font-mono">Mastery: 100%</p>
                 </div>
               </div>
               <ul className="space-y-3 text-moonlightSilver">
@@ -344,14 +360,22 @@ export default function AboutPage() {
             {/* Earth - Foundation */}
             <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-lunarGold/10 to-deepOcean/20 border border-lunarGold/30 hover:border-lunarGold/60 transition-all duration-300 hover:shadow-lg hover:shadow-lunarGold/20 fade-in-up">
               <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-lunarGold to-starlight flex items-center justify-center">
-                  <svg className="w-8 h-8 text-midnight" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                {/* Circular Progress */}
+                <div className="relative flex-shrink-0 w-20 h-20">
+                  <svg className="transform -rotate-90 w-20 h-20">
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-lunarGold transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
                   </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-lunarGold" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-lunarGold mb-2">Earth — Foundation</h3>
-                  <p className="text-sm text-lunarGold/80 mb-4">The Grounded Leader</p>
+                  <p className="text-sm text-lunarGold/80 mb-2">The Grounded Leader</p>
+                  <p className="text-xs text-lunarGold font-mono">Mastery: 100%</p>
                 </div>
               </div>
               <ul className="space-y-3 text-moonlightSilver">
@@ -373,14 +397,22 @@ export default function AboutPage() {
             {/* Air - Innovation */}
             <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-starlight/10 to-midnight border border-starlight/30 hover:border-starlight/60 transition-all duration-300 hover:shadow-lg hover:shadow-starlight/20 fade-in-up">
               <div className="flex items-start gap-4 mb-4">
-                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-starlight to-pearlWhite flex items-center justify-center">
-                  <svg className="w-8 h-8 text-midnight" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                {/* Circular Progress */}
+                <div className="relative flex-shrink-0 w-20 h-20">
+                  <svg className="transform -rotate-90 w-20 h-20">
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
+                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="22.6" className="text-starlight transition-all duration-1000" style={{ strokeDashoffset: 22.6 }} />
                   </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-starlight" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                  </div>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-starlight mb-2">Air — Innovation</h3>
-                  <p className="text-sm text-starlight/80 mb-4">The Tech Pioneer</p>
+                  <p className="text-sm text-starlight/80 mb-2">The Tech Pioneer</p>
+                  <p className="text-xs text-starlight font-mono">Mastery: 90%</p>
                 </div>
               </div>
               <ul className="space-y-3 text-moonlightSilver">
@@ -546,6 +578,120 @@ export default function AboutPage() {
               <div className="text-4xl md:text-5xl font-bold text-lunarGold mb-2">∞</div>
               <p className="text-sm text-moonlightSilver">Cups of Tea</p>
               <p className="text-xs text-starlight/60 italic mt-1">(Uncle Iroh approved)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SAO PLAYER STATS - Epic Stats Card */}
+      <section className="relative py-20 px-6 bg-gradient-to-b from-deepOcean/40 via-midnight to-deepOcean/40">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-12 fade-in-up">
+            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Player Profile</p>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-2">System Status</h2>
+            <p className="text-xs text-starlight/70 italic">&quot;Link Start&quot;</p>
+          </div>
+
+          <div className="relative fade-in-up">
+            {/* SAO-style HUD Border */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-mermaidTeal/20 to-lunarGold/10 blur-xl"></div>
+
+            <div className="relative p-8 md:p-10 rounded-2xl bg-midnight/90 border-2 border-lunarGold/50 backdrop-blur">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-8 pb-6 border-b border-mermaidTeal/30">
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-lunarGold mb-1">Player: Moonlit</h3>
+                  <p className="text-sm text-starlight">Class: Tri-Force Developer</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl md:text-4xl font-bold gradient-moonlight">∞</div>
+                  <p className="text-xs text-mermaidTeal uppercase tracking-wider">Level MAX</p>
+                </div>
+              </div>
+
+              {/* Main Stats Grid */}
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                {/* HP - Healthcare Points */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-pearlWhite font-medium">Healthcare Points (HP)</span>
+                    <span className="text-sm text-mermaidTeal font-mono">15 / 15</span>
+                  </div>
+                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-mermaidTeal/30">
+                    <div className="h-full bg-gradient-to-r from-mermaidTeal to-tealBright rounded-full shadow-lg shadow-mermaidTeal/40" style={{ width: '100%' }}></div>
+                  </div>
+                  <p className="text-xs text-moonlightSilver/70 mt-1">Years of operations mastery</p>
+                </div>
+
+                {/* MP - Mana Points (Creative Power) */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-pearlWhite font-medium">Mana Points (MP)</span>
+                    <span className="text-sm text-phoenixFire font-mono">300K / 300K</span>
+                  </div>
+                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-phoenixFire/30">
+                    <div className="h-full bg-gradient-to-r from-phoenixFire to-lunarGold rounded-full shadow-lg shadow-phoenixFire/40" style={{ width: '100%' }}></div>
+                  </div>
+                  <p className="text-xs text-moonlightSilver/70 mt-1">Words of creative power</p>
+                </div>
+
+                {/* STR - Technical Strength */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-pearlWhite font-medium">Strength (STR)</span>
+                    <span className="text-sm text-lunarGold font-mono">200+ / 200+</span>
+                  </div>
+                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-lunarGold/30">
+                    <div className="h-full bg-gradient-to-r from-lunarGold to-starlight rounded-full shadow-lg shadow-lunarGold/40" style={{ width: '100%' }}></div>
+                  </div>
+                  <p className="text-xs text-moonlightSilver/70 mt-1">Hours of intensive coding</p>
+                </div>
+
+                {/* AGI - Agility (Adaptation Speed) */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm text-pearlWhite font-medium">Agility (AGI)</span>
+                    <span className="text-sm text-tealBright font-mono">∞ / ∞</span>
+                  </div>
+                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-tealBright/30">
+                    <div className="h-full bg-gradient-to-r from-tealBright via-aquaMist to-starlight rounded-full shadow-lg shadow-tealBright/40 animate-pulse" style={{ width: '100%' }}></div>
+                  </div>
+                  <p className="text-xs text-moonlightSilver/70 mt-1">Water bender's adaptation</p>
+                </div>
+              </div>
+
+              {/* Special Abilities */}
+              <div className="mb-6">
+                <h4 className="text-sm text-lunarGold uppercase tracking-wider mb-4">Equipped Skills</h4>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="p-3 rounded-lg bg-mermaidTeal/10 border border-mermaidTeal/40 text-center">
+                    <div className="text-xl mb-1">💧</div>
+                    <p className="text-xs text-mermaidTeal font-medium">Water Bending</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-phoenixFire/10 border border-phoenixFire/40 text-center">
+                    <div className="text-xl mb-1">🔥</div>
+                    <p className="text-xs text-phoenixFire font-medium">Fire Bending</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-lunarGold/10 border border-lunarGold/40 text-center">
+                    <div className="text-xl mb-1">⚡</div>
+                    <p className="text-xs text-lunarGold font-medium">Lumos</p>
+                  </div>
+                  <div className="p-3 rounded-lg bg-starlight/10 border border-starlight/40 text-center">
+                    <div className="text-xl mb-1">🌙</div>
+                    <p className="text-xs text-starlight font-medium">Moonlight</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievement Banner */}
+              <div className="p-4 rounded-lg bg-gradient-to-r from-mermaidTeal/10 via-lunarGold/10 to-phoenixFire/10 border border-lunarGold/40">
+                <p className="text-center text-sm text-lunarGold font-semibold mb-1">
+                  ⚔️ Achievement Unlocked: Avatar State ⚔️
+                </p>
+                <p className="text-center text-xs text-moonlightSilver">
+                  Mastered all four elements: Water (Healthcare) • Earth (Operations) • Fire (Creativity) • Air (Tech)
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -758,14 +904,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* HP EASTER EGG SECTION */}
+      {/* HIDDEN WISDOM - Multiple Fandom Easter Eggs */}
       <section className="relative py-12 px-6">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-4xl text-center space-y-6">
           <div className="hidden-wisdom select-text">
             It is our choices, not our abilities, that truly show who we are
           </div>
-          <p className="text-xs text-starlight/60 italic mt-6">
+          <p className="text-xs text-starlight/60 italic">
             "After all this time?" — "Always."
+          </p>
+          <div className="hidden-wisdom select-text mt-8">
+            In the moment when I truly understand my enemy, in that moment I also love them
+          </div>
+          <p className="text-xs text-lunarGold/60 italic mt-2">
+            — Ender&apos;s Game
+          </p>
+          <div className="hidden-wisdom select-text mt-8">
+            It&apos;s dangerous to go alone
+          </div>
+          <p className="text-xs text-mermaidTeal/60 italic mt-2">
+            ⚔️ Take this wisdom with you
           </p>
         </div>
       </section>

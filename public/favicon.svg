@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Gradient for moon glow -->
+    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#F4E3B5;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#D4AF37;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- Gradient for crescent moon -->
+    <linearGradient id="moonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FAFAFA;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E8E4E4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient for Avatar arrow -->
+    <linearGradient id="arrowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FD1C5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2C7A7B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background (transparent) -->
+  <rect width="512" height="512" fill="transparent"/>
+
+  <!-- Moon glow effect -->
+  <circle cx="256" cy="256" r="220" fill="url(#moonGlow)" opacity="0.3"/>
+
+  <!-- Crescent Moon Body -->
+  <path d="M 256 80 A 176 176 0 1 1 256 432 A 140 140 0 1 0 256 80 Z"
+        fill="url(#moonGradient)"
+        stroke="#D4AF37"
+        stroke-width="3"/>
+
+  <!-- Avatar State Arrow - Centered on moon -->
+  <g transform="translate(256, 256)">
+    <!-- Arrow glow -->
+    <path d="M 0 -85 L -25 -35 L -10 -35 L -10 85 L 10 85 L 10 -35 L 25 -35 Z"
+          fill="url(#arrowGlow)"
+          opacity="0.4"
+          filter="blur(8px)"/>
+
+    <!-- Main arrow -->
+    <path d="M 0 -85 L -25 -35 L -10 -35 L -10 85 L 10 85 L 10 -35 L 25 -35 Z"
+          fill="url(#arrowGlow)"
+          stroke="#2C7A7B"
+          stroke-width="2"/>
+
+    <!-- Arrow highlight -->
+    <path d="M 0 -85 L -25 -35 L -10 -35 L -10 -20 L 10 -20 L 10 -35 L 25 -35 Z"
+          fill="#4FD1C5"
+          opacity="0.6"/>
+  </g>
+
+  <!-- Subtle stars around the moon -->
+  <circle cx="140" cy="150" r="3" fill="#FAFAFA" opacity="0.8"/>
+  <circle cx="380" cy="180" r="2.5" fill="#FAFAFA" opacity="0.7"/>
+  <circle cx="160" cy="360" r="2" fill="#FAFAFA" opacity="0.6"/>
+  <circle cx="370" cy="340" r="3.5" fill="#FAFAFA" opacity="0.8"/>
+  <circle cx="120" cy="280" r="2" fill="#D4AF37" opacity="0.7"/>
+  <circle cx="400" cy="260" r="2.5" fill="#D4AF37" opacity="0.6"/>
+</svg>
