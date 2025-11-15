@@ -55,7 +55,7 @@ const offerings = [
       "1 user role",
       "1 month post-launch support",
     ],
-    starting: "$4,500",
+    starting: "$10,000",
     popular: false,
   },
   {
@@ -71,7 +71,7 @@ const offerings = [
       "Integration with 1 third-party system",
       "2 months post-launch support",
     ],
-    starting: "$8,500",
+    starting: "$18,000",
     popular: true,
   },
   {
@@ -87,7 +87,7 @@ const offerings = [
       "Regulatory documentation package",
       "3 months post-launch support + training",
     ],
-    starting: "$15,000",
+    starting: "$30,000",
     popular: false,
   },
   {

@@ -50,7 +50,7 @@ const aiServices = [
     tiers: [
       {
         name: "Essential RAG",
-        price: 4500,
+        price: 12000,
         duration: "project-based",
         features: [
           "Basic RAG chatbot setup",
@@ -64,7 +64,7 @@ const aiServices = [
       },
       {
         name: "Professional RAG",
-        price: 9500,
+        price: 25000,
         duration: "project-based",
         features: [
           "Everything in Essential",
@@ -80,7 +80,7 @@ const aiServices = [
       },
       {
         name: "Enterprise RAG",
-        price: 15000,
+        price: 50000,
         duration: "project-based",
         features: [
           "Everything in Professional",

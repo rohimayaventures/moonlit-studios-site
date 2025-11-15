@@ -49,7 +49,7 @@ const consultingServices = [
     tiers: [
       {
         name: "Single Session",
-        price: 150,
+        price: 250,
         duration: "per hour",
         features: [
           "Product roadmap review",
@@ -62,7 +62,7 @@ const consultingServices = [
       },
       {
         name: "Strategy Package",
-        price: 2500,
+        price: 4000,
         duration: "5-session package",
         features: [
           "Everything in Single Session",
@@ -77,7 +77,7 @@ const consultingServices = [
       },
       {
         name: "Strategic Partner",
-        price: 5000,
+        price: 8000,
         duration: "per month (retainer)",
         features: [
           "Everything in Strategy Package",

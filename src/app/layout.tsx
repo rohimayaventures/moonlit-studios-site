@@ -216,7 +216,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <div className="border-t border-deepOcean/60">
               <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-6 text-xs text-moonlightSilver/80 md:flex-row md:items-center md:justify-between">
                 <p>© 2025 Moonlit Studios</p>
-                <p className="italic text-starlight/70">Mischief Managed ⚡</p>
+                <p className="italic text-starlight/70">Mischief Managed</p>
               </div>
             </div>
           </footer>

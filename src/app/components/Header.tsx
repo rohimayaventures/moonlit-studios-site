@@ -6,7 +6,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(true); // Open by default for visibility
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -145,7 +145,12 @@ export function Header() {
                 onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                 className="w-full flex items-center justify-between text-lg font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all py-4 px-4 rounded-lg"
               >
-                Services
+                <span className="flex items-center gap-2">
+                  Services
+                  <span className="px-2 py-0.5 text-xs bg-mermaidTeal/20 text-mermaidTeal rounded-full font-semibold">
+                    5
+                  </span>
+                </span>
                 <ChevronDown className={`w-5 h-5 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
               </button>
 
