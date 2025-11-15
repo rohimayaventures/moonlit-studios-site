@@ -1,8 +1,17 @@
+'use client';
+
 export default function Home() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden py-20">
+      <section id="hero" className="relative overflow-hidden py-20">
         {/* Water-like flowing gradient orbs */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
           <div className="absolute -right-32 -top-32 h-72 w-72 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-deepOcean/40 to-oceanDark/60 blur-3xl animate-flow" />
@@ -11,28 +20,52 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto max-w-6xl px-6">
-          {/* Moon Phases - Standardized Style */}
+          {/* Interactive Moon Phases Navigation */}
           <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8 fade-in-up">
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waxing Crescent"
-            />
-            <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
-              title="Full Moon - You are here"
-            />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waning Crescent"
-            />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
+            <button
+              onClick={() => scrollToSection('hero')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-starlight hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="New Moon - Top"
+              aria-label="Scroll to top"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Top</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
+            <button
+              onClick={() => scrollToSection('philosophy')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-mermaidTeal/40 to-mermaidTeal/60 border-2 border-mermaidTeal/50 hover:border-mermaidTeal hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="Waxing Crescent - Philosophy"
+              aria-label="Scroll to philosophy"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-mermaidTeal opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Philosophy</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-mermaidTeal/30 to-lunarGold/40" />
+            <button
+              onClick={() => scrollToSection('trust')}
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold hover:scale-110 transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0 group relative"
+              title="Full Moon - Trust Signals"
+              aria-label="Scroll to trust signals"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-lunarGold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Experience</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-lunarGold/40 to-phoenixFire/30" />
+            <button
+              onClick={() => scrollToSection('journey')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-phoenixFire/40 to-phoenixFire/60 border-2 border-phoenixFire/50 hover:border-phoenixFire hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="Waning Crescent - Journey"
+              aria-label="Scroll to journey"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-phoenixFire opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Journey</span>
+            </button>
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-phoenixFire/30 to-moonlightSilver/30" />
+            <button
+              onClick={() => scrollToSection('cta')}
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-starlight hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
+              title="New Moon - Contact"
+              aria-label="Scroll to contact"
+            >
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Contact</span>
+            </button>
           </div>
 
           {/* Tagline */}
@@ -100,7 +133,7 @@ export default function Home() {
       </section>
 
       {/* PHILOSOPHY SECTION */}
-      <section className="py-20 bg-gradient-to-b from-midnightNavy to-midnight">
+      <section id="philosophy" className="py-20 bg-gradient-to-b from-midnightNavy to-midnight">
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center mb-12 fade-in-up">
             {/* Tea Cup Icon - Professional */}
@@ -170,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* TRUST SIGNALS - NO EMOJIS */}
-      <section className="border-t border-deepOcean/40 py-16 bg-midnight/50 backdrop-blur">
+      <section id="trust" className="border-t border-deepOcean/40 py-16 bg-midnight/50 backdrop-blur">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {/* Healthcare Experience */}
@@ -221,7 +254,7 @@ export default function Home() {
       </section>
 
       {/* JOURNEY SECTION - NO EMOJIS */}
-      <section className="py-20 bg-gradient-to-b from-midnight to-deepOcean/20">
+      <section id="journey" className="py-20 bg-gradient-to-b from-midnight to-deepOcean/20">
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center mb-16 fade-in-up">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-pearlWhite mb-4">
@@ -249,8 +282,8 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-mermaidTeal to-deepOcean flex items-center justify-center border-4 border-midnight shadow-xl">
-                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-midnight border-2 border-mermaidTeal"></div>
+                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-aquaMist via-mermaidTeal to-deepOcean flex items-center justify-center border-4 border-midnight shadow-xl shadow-mermaidTeal/40 hover:scale-110 transition-transform">
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-midnight border-2 border-aquaMist"></div>
                 </div>
                 <div className="flex-1 hidden md:block" />
               </div>
@@ -258,8 +291,8 @@ export default function Home() {
               {/* Phase 2 */}
               <div className="flex flex-col md:flex-row items-center gap-6 fade-in-up stagger-2">
                 <div className="flex-1 hidden md:block" />
-                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-lunarGold to-coralAccent flex items-center justify-center border-4 border-midnight shadow-xl">
-                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-midnight via-lunarGold/60 to-midnight"></div>
+                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-roseGold via-coralPink to-sunsetPink flex items-center justify-center border-4 border-midnight shadow-xl shadow-coralPink/40 hover:scale-110 transition-transform">
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-r from-midnight via-roseGold/60 to-midnight"></div>
                 </div>
                 <div className="flex-1">
                   <div className="wisdom-card p-6 md:p-8 rounded-2xl">
@@ -286,7 +319,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-phoenixFire to-lunarGold flex items-center justify-center border-4 border-midnight shadow-xl">
+                <div className="timeline-dot w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full bg-gradient-to-br from-phoenixFire via-lunarGold to-sunsetPink flex items-center justify-center border-4 border-midnight shadow-xl shadow-phoenixFire/40 hover:scale-110 transition-transform">
                   <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-pearlWhite to-moonlightSilver"></div>
                 </div>
                 <div className="flex-1 hidden md:block" />
@@ -295,7 +328,7 @@ export default function Home() {
               {/* Phase 4 */}
               <div className="flex flex-col md:flex-row items-center gap-6 fade-in-up stagger-4">
                 <div className="flex-1 hidden md:block" />
-                <div className="timeline-dot w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-lunarGold flex items-center justify-center border-4 border-midnight shadow-2xl shadow-mermaidTeal/50">
+                <div className="timeline-dot w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-full bg-gradient-to-br from-aquaMist via-mermaidTeal via-lunarGold to-phoenixFire flex items-center justify-center border-4 border-midnight shadow-2xl shadow-lunarGold/60 hover:scale-110 hover:rotate-12 transition-all duration-500">
                   <svg className="w-10 h-10 md:w-12 md:h-12 text-pearlWhite" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
@@ -398,7 +431,7 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="py-20 bg-gradient-to-b from-deepOcean/20 to-midnight">
+      <section id="cta" className="py-20 bg-gradient-to-b from-deepOcean/20 to-midnight">
         <div className="mx-auto max-w-4xl px-6 text-center fade-in-up">
           <div className="mb-6">
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-starlight/20 to-mermaidTeal/20 flex items-center justify-center">
