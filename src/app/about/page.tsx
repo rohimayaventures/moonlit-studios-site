@@ -19,11 +19,11 @@ export default function AboutPage() {
             full-stack developer—every transformation taught me something new about healing through technology.
           </p>
           <div className="flex flex-wrap items-center gap-3 text-sm text-starlight">
-            <span>Westminster, Colorado</span>
+            <span>15+ Years Healthcare Operations</span>
             <span>•</span>
-            <span>MS in AI/ML at CU Boulder</span>
+            <span>Full-Stack Developer</span>
             <span>•</span>
-            <span>Published Author (Himani Pagade)</span>
+            <span>Published Author</span>
           </div>
         </div>
       </section>
@@ -116,10 +116,9 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Storyteller Emerges</h3>
                 <p className="text-moonlightSilver leading-relaxed mb-4">
-                  Under my pen name Himani Pagade, I published <span className="italic">Eclipse of Fire & Wings</span>, 
-                  the first book in The Phoenix & Peacock Chronicles. With 300,000+ words across 4 manuscripts, I discovered 
-                  that every great product needs a compelling story. Writing taught me the power of narrative in building 
-                  brands and connecting with audiences.
+                  As a published fantasy romance author with 300,000+ words across multiple manuscripts, I discovered
+                  that every great product needs a compelling story. Writing taught me the power of narrative in building
+                  brands and connecting with audiences—skills that translate directly to creating memorable digital experiences.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <span className="px-3 py-1 rounded-full bg-lunarGold/20 text-lunarGold text-sm border border-lunarGold/30">
@@ -148,8 +147,8 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Code Awakening</h3>
                 <p className="text-moonlightSilver leading-relaxed mb-4">
-                  Self-taught full-stack developer pursuing my MS in AI/ML at CU Boulder. I discovered that code is 
-                  poetry, algorithms are empathy, and AI can amplify human healing at scale. Every line of code became 
+                  Self-taught full-stack developer specializing in AI/ML systems. I discovered that code is
+                  poetry, algorithms are empathy, and AI can amplify human healing at scale. Every line of code became
                   another way to help people, just like nursing—but now I could help thousands at once.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -157,7 +156,7 @@ export default function AboutPage() {
                     Self-Taught Developer
                   </span>
                   <span className="px-3 py-1 rounded-full bg-tealBright/20 text-tealBright text-sm border border-tealBright/30">
-                    MS in AI/ML
+                    AI/ML Specialist
                   </span>
                   <span className="px-3 py-1 rounded-full bg-tealBright/20 text-tealBright text-sm border border-tealBright/30">
                     Full-Stack + AI
@@ -317,7 +316,7 @@ export default function AboutPage() {
               <ul className="space-y-3 text-moonlightSilver">
                 <li className="flex items-start gap-2">
                   <span className="text-starlight mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">AI/ML Expertise:</strong> MS in AI/ML at CU Boulder, building intelligent systems</span>
+                  <span><strong className="text-pearlWhite">AI/ML Expertise:</strong> Specialized in building intelligent systems with Claude, RAG, and computer vision</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-starlight mt-1">▸</span>
@@ -566,7 +565,7 @@ export default function AboutPage() {
             <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Published Works</p>
             <h2 className="text-3xl md:text-5xl font-semibold mb-4">The Phoenix & Peacock Chronicles</h2>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
-              A 7-book epic fantasy romance series by Himani Pagade
+              A 7-book epic fantasy romance series from our published author
             </p>
           </div>
 

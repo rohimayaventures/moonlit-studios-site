@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
+import { Header } from "./components/Header";
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes",
@@ -15,37 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className="h-full">
       <body className="min-h-screen bg-nightNavy text-glacierWhite">
         <div className="flex min-h-screen flex-col">
-          <header className="border-b border-silverMist/20 bg-nightNavy/70 backdrop-blur">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-moonlitTeal to-phoenixGold" />
-                <span className="text-lg font-semibold tracking-wide">
-                  Moonlit Studios
-                </span>
-              </div>
-              <nav className="flex gap-6 text-sm text-silverMist">
-                <a href="/" className="hover:text-glacierWhite">
-                  Home
-                </a>
-                <a href="/services" className="hover:text-glacierWhite">
-                  Services
-                </a>
-                <a href="/ai-lab" className="hover:text-glacierWhite">
-                  AI Lab
-                </a>
-                <a href="/portfolio" className="hover:text-glacierWhite">
-                  Portfolio
-                </a>
-                <a href="/about" className="hover:text-glacierWhite">
-                  About
-                </a>
-                <a href="/contact" className="hover:text-glacierWhite">
-                  Contact
-                </a>
-              </nav>
-            </div>
-          </header>
-
+          <Header />
           <main className="flex-1">{children}</main>
 
           <footer className="mt-16 bg-gradient-to-b from-deepOcean via-midnight to-midnight text-moonlightSilver">

@@ -79,10 +79,10 @@ Examples:
    - Turning complex ideas into clear narratives
 
 **STUDIO BACKGROUND:**
-- Led by a nurse-turned full-stack developer with an MS in AI/ML at CU Boulder
+- Led by a nurse-turned full-stack developer specializing in AI/ML systems
 - 15+ years of healthcare operations experience (teams of 130+, Kaiser/Optum, etc.)
-- Deep storytelling roots (published author under pen name Himani Pagade)
-- Based in Westminster, Colorado
+- Deep storytelling roots (published fantasy romance author)
+- Expertise in healthcare tech, AI innovation, and creative design
 - Like a water bender—adapts to every challenge with healing precision
 
 **OTHER BUSINESSES (mention if relevant):**

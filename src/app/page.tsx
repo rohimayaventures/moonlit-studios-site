@@ -278,9 +278,9 @@ export default function Home() {
                     <div className="text-xs tracking-wider text-starlight mb-2">PHASE THREE · WARRIOR</div>
                     <h3 className="text-xl md:text-2xl font-semibold text-pearlWhite mb-3">Technical Mastery</h3>
                     <p className="text-sm md:text-base text-moonlightSilver leading-relaxed">
-                      Self-taught developer pursuing MS in AI/ML at CU Boulder. Building production-ready apps, 
-                      AI systems, HIPAA-compliant platforms. Lumos to every bug. Transforming ideas into reality 
-                      through code and determination.
+                      Self-taught developer specializing in AI/ML systems. Building production-ready apps,
+                      intelligent AI platforms, and HIPAA-compliant healthcare solutions. Lumos to every bug.
+                      Transforming ideas into reality through code and determination.
                     </p>
                   </div>
                 </div>
