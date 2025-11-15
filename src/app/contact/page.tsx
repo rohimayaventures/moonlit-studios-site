@@ -28,6 +28,24 @@ export default function ContactPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [theme, setTheme] = useState<ThemeMode>("owlery");
 
+  // Theme-aware input styling
+  const inputStyle = {
+    backgroundColor: 'var(--theme-surface)',
+    borderWidth: '2px',
+    borderColor: 'var(--theme-border)',
+    transition: 'all 0.2s ease'
+  };
+
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.target.style.borderColor = 'var(--theme-primary)';
+    e.target.style.boxShadow = `0 0 0 3px color-mix(in srgb, var(--theme-primary) 20%, transparent)`;
+  };
+
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    e.target.style.borderColor = 'var(--theme-border)';
+    e.target.style.boxShadow = '0 0 0 0 transparent';
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
@@ -141,7 +159,7 @@ export default function ContactPage() {
   const currentTheme = themeConfig[theme];
 
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite">
+    <main className="min-h-screen text-pearlWhite" style={{ backgroundColor: 'var(--theme-background)' }}>
       {/* OWLERY HERO - Magical Night Sky */}
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
         {/* Starry Night Background */}
@@ -157,9 +175,9 @@ export default function ContactPage() {
             {getThemeIcon(theme, "w-12 h-12")}
           </div>
 
-          {/* Magical orbs */}
-          <div className="absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-lunarGold/30 via-starlight/20 to-transparent blur-3xl animate-pulse" />
-          <div className="absolute -right-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/20 via-lunarGold/15 to-transparent blur-3xl" style={{ animation: 'pulse 8s ease-in-out infinite 3s' }} />
+          {/* Magical orbs - now theme-compatible */}
+          <div className="absolute -left-32 top-10 h-96 w-96 rounded-full blur-3xl animate-pulse" style={{ background: `radial-gradient(circle, var(--theme-primary), var(--theme-secondary), transparent)`, opacity: 0.3 }} />
+          <div className="absolute -right-24 bottom-20 h-80 w-80 rounded-full blur-3xl" style={{ background: `radial-gradient(circle, var(--theme-secondary), var(--theme-primary), transparent)`, opacity: 0.2, animation: 'pulse 8s ease-in-out infinite 3s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
@@ -272,13 +290,18 @@ export default function ContactPage() {
 
           {/* Magical Scroll / Parchment Form */}
           <section
-            className="rounded-3xl border-2 border-lunarGold/40 bg-gradient-to-b from-deepOcean/80 via-midnight/90 to-midnight/95 p-6 md:p-10 shadow-2xl shadow-lunarGold/20 backdrop-blur animate-fadeInUp relative overflow-hidden"
+            className="rounded-3xl border-2 p-6 md:p-10 shadow-2xl backdrop-blur animate-fadeInUp relative overflow-hidden"
+            style={{
+              borderColor: 'var(--theme-border)',
+              background: `linear-gradient(to bottom, var(--theme-surface), var(--theme-background))`,
+              boxShadow: '0 25px 50px -12px var(--theme-border)'
+            }}
           >
             {/* Parchment texture overlay */}
-            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,_rgba(212,175,55,0.1)_0%,_transparent_100%)]"></div>
+            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 50%, var(--theme-primary), transparent)` }}></div>
 
-            {/* Golden wax seal decoration */}
-            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-gradient-to-br from-lunarGold to-phoenixFire opacity-20 blur-2xl animate-pulse"></div>
+            {/* Wax seal decoration - theme-compatible */}
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 blur-2xl animate-pulse" style={{ background: `linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary))` }}></div>
 
             <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
@@ -288,7 +311,10 @@ export default function ContactPage() {
                     name="name"
                     placeholder="Wizard name..."
                     required
-                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                    className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none transition-all"
+                    style={inputStyle}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                   />
                 </FormField>
 
@@ -298,7 +324,10 @@ export default function ContactPage() {
                     name="email"
                     placeholder="you@magical-realm.com"
                     required
-                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                    className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none transition-all"
+                    style={inputStyle}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                   />
                 </FormField>
               </div>
@@ -306,9 +335,11 @@ export default function ContactPage() {
               <FormField label="Type of Magic Needed">
                 <select
                   name="serviceType"
-                  className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                  className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite focus:outline-none transition-all"
                   defaultValue=""
-                  style={{ colorScheme: 'dark' }}
+                  style={{ ...inputStyle, colorScheme: 'dark' }}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
                 >
                   <option value="" disabled>
                     Choose your quest...
@@ -328,7 +359,10 @@ export default function ContactPage() {
                     type="text"
                     name="budget"
                     placeholder="e.g., $2k–$5k, $10k+"
-                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                    className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none transition-all"
+                    style={inputStyle}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                   />
                 </FormField>
 
@@ -337,7 +371,10 @@ export default function ContactPage() {
                     type="text"
                     name="timeline"
                     placeholder="Ideal start date or window"
-                    className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                    className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none transition-all"
+                    style={inputStyle}
+                    onFocus={handleInputFocus}
+                    onBlur={handleInputBlur}
                   />
                 </FormField>
               </div>
@@ -348,7 +385,10 @@ export default function ContactPage() {
                   rows={6}
                   placeholder="Tell me about your project, your goals, your vision, and anything that would be helpful for me to know..."
                   required
-                  className="w-full rounded-2xl bg-nightNavy/80 border-2 border-lunarGold/30 px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none focus:ring-2 focus:ring-lunarGold/70 focus:border-lunarGold transition-all"
+                  className="w-full rounded-2xl px-4 py-3 text-sm text-pearlWhite placeholder:text-silverMist/60 focus:outline-none transition-all"
+                  style={inputStyle}
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
                 />
               </FormField>
 
@@ -356,9 +396,21 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className={`inline-flex items-center justify-center rounded-full bg-gradient-to-r from-lunarGold to-phoenixFire px-8 py-4 text-sm font-bold text-midnight shadow-xl shadow-lunarGold/40 hover:-translate-y-1 hover:shadow-2xl hover:shadow-phoenixFire/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
-                    status === "loading" ? "animate-pulse" : ""
+                  className={`inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-bold text-midnight transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${
+                    status === "loading" ? "animate-pulse" : "hover:-translate-y-1"
                   }`}
+                  style={{
+                    background: `linear-gradient(to right, var(--theme-primary), var(--theme-secondary))`,
+                    boxShadow: `0 20px 25px -5px color-mix(in srgb, var(--theme-primary) 40%, transparent)`
+                  }}
+                  onMouseEnter={(e) => {
+                    if (status !== "loading") {
+                      e.currentTarget.style.boxShadow = `0 25px 50px -12px color-mix(in srgb, var(--theme-secondary) 50%, transparent)`;
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = `0 20px 25px -5px color-mix(in srgb, var(--theme-primary) 40%, transparent)`;
+                  }}
                 >
                   {status === "loading" ? (
                     <>
@@ -394,13 +446,17 @@ export default function ContactPage() {
 
                 {/* Success Message - Themed */}
                 {status === "success" && (
-                  <div className="rounded-2xl bg-gradient-to-r from-lunarGold/20 to-starlight/20 border-2 border-lunarGold/60 p-5 animate-fadeInUp shadow-lg shadow-lunarGold/20">
+                  <div className="rounded-2xl border-2 p-5 animate-fadeInUp shadow-lg" style={{
+                    background: `linear-gradient(to right, color-mix(in srgb, var(--theme-primary) 20%, transparent), color-mix(in srgb, var(--theme-secondary) 20%, transparent))`,
+                    borderColor: 'var(--theme-primary)',
+                    boxShadow: `0 10px 15px -3px color-mix(in srgb, var(--theme-primary) 20%, transparent)`
+                  }}>
                     <div className="flex gap-3 items-start">
-                      <div className="flex-shrink-0 animate-bounce">
+                      <div className="flex-shrink-0 animate-bounce" style={{ color: 'var(--theme-primary)' }}>
                         {getThemeIcon(theme, "w-8 h-8")}
                       </div>
                       <div className="flex-1">
-                        <p className="text-base font-bold text-lunarGold mb-2">
+                        <p className="text-base font-bold mb-2" style={{ color: 'var(--theme-primary)' }}>
                           {currentTheme.successTitle}
                         </p>
                         <p className="text-sm text-pearlWhite/90">
@@ -416,7 +472,10 @@ export default function ContactPage() {
 
                 {/* Error Message */}
                 {status === "error" && (
-                  <div className="rounded-2xl bg-gradient-to-r from-phoenixFire/20 to-red-500/20 border-2 border-phoenixFire/60 p-5 animate-fadeInUp">
+                  <div className="rounded-2xl border-2 p-5 animate-fadeInUp" style={{
+                    background: `linear-gradient(to right, rgba(255, 100, 66, 0.2), rgba(220, 20, 60, 0.2))`,
+                    borderColor: '#FF6442'
+                  }}>
                     <div className="flex gap-3 items-start">
                       <div className="flex-shrink-0">
                         <svg
@@ -444,12 +503,27 @@ export default function ContactPage() {
                 )}
 
                 {/* Alternative Contact */}
-                <div className="p-4 rounded-xl bg-deepOcean/30 border border-starlight/20">
+                <div className="p-4 rounded-xl border" style={{
+                  backgroundColor: 'var(--theme-surface)',
+                  borderColor: 'var(--theme-border)'
+                }}>
                   <p className="text-xs text-moonlightSilver/90 text-center">
                     Prefer Muggle communication? Email me directly at{" "}
                     <a
                       href="mailto:hello@moonlstudios.com"
-                      className="font-semibold text-lunarGold hover:text-starlight transition-colors underline decoration-lunarGold/30 hover:decoration-starlight/50"
+                      className="font-semibold transition-colors underline"
+                      style={{
+                        color: 'var(--theme-primary)',
+                        textDecorationColor: 'var(--theme-border)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'var(--theme-secondary)';
+                        e.currentTarget.style.textDecorationColor = 'var(--theme-secondary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'var(--theme-primary)';
+                        e.currentTarget.style.textDecorationColor = 'var(--theme-border)';
+                      }}
                     >
                       hello@moonlstudios.com
                     </a>
