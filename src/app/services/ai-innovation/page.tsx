@@ -6,43 +6,43 @@ const offerings = [
       "API integrations + model routing",
       "Data pipelines + auth/safety layers",
     ],
-    starting: "$2,500",
+    starting: "$15,000 - $18,000+",
   },
   {
-    title: "Conversational & Voice AI",
+    title: "RAG Chatbots",
     includes: [
       "Chatbots & multimodal experiences",
       "Voice UX + cooking/education agents",
       "Role-based assistants",
     ],
-    starting: "$1,200",
+    starting: "$5,000 - $8,000",
   },
   {
-    title: "AI Creative Systems",
+    title: "Voice AI",
     includes: [
       "Story pipelines + world-builders",
       "Interactive fiction + journaling AI",
       "Creative collaborators for authors",
     ],
-    starting: "$1,200",
+    starting: "$8,000 - $12,000",
   },
   {
-    title: "AI Systems Engineering & Integration",
+    title: "Vision AI",
     includes: [
       "Prompt engineering + orchestration",
       "Safety layers & hallucination reduction",
       "Evaluation + monitoring loops",
     ],
-    starting: "$600",
+    starting: "$10,000 - $15,000",
   },
   {
-    title: "Moonlit Labs (R&D)",
+    title: "Enterprise Custom",
     includes: [
       "Rapid prototypes + weekend sprints",
       "Creative + clinical concept tests",
       "Emergent experiments for founders",
     ],
-    starting: "$1,200",
+    starting: "$15,000 - $18,000+",
   },
 ];
 

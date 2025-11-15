@@ -8,7 +8,7 @@ const offerings = [
       "Visual identity system & mood boards",
       "Style guide PDF",
     ],
-    starting: "$750",
+    starting: "$1,800 - $4,500",
   },
   {
     title: "Web Development",
@@ -19,7 +19,7 @@ const offerings = [
       "Blog or portfolio buildouts",
       "Launch & deployment support",
     ],
-    starting: "$700",
+    starting: "$3,000 - $8,500",
   },
   {
     title: "Packaging & Product Design",
@@ -29,7 +29,7 @@ const offerings = [
       "Mockups + ingredient formatting",
       "Print-ready files",
     ],
-    starting: "$300",
+    starting: "$800 - $2,000",
   },
   {
     title: "Creative Copywriting",
@@ -39,7 +39,7 @@ const offerings = [
       "Product descriptions + social captions",
       "Newsletter copy + scripts",
     ],
-    starting: "$75",
+    starting: "$250 - $600",
   },
 ];
 

@@ -6,7 +6,7 @@ const offerings = [
       "Risk reduction + clinical validation",
       "Go-to-market + pilot planning",
     ],
-    starting: "$125/hr or $900 retainer",
+    starting: "$150 - $200/hr",
   },
   {
     title: "UX for Clinicians",
@@ -15,7 +15,7 @@ const offerings = [
       "Workflow alignment + load reduction",
       "Interface tweaks clinicians actually want",
     ],
-    starting: "$100/hr or $750 audit",
+    starting: "$2,000 - $5,000",
   },
   {
     title: "Digital Brand Strategy",
@@ -24,7 +24,7 @@ const offerings = [
       "Platform roadmaps",
       "Cross-platform consistency planning",
     ],
-    starting: "$800-$2,000 packages",
+    starting: "$2,000 - $5,000",
   },
   {
     title: "Workshops",
@@ -34,16 +34,16 @@ const offerings = [
       "Healthtech UX clinics",
       "Product accelerators",
     ],
-    starting: "2hr $600 · Half-day $1,200+",
+    starting: "$1,500 - $3,000",
   },
   {
-    title: "Portfolio / Startup Coaching",
+    title: "Discovery Sessions",
     includes: [
       "Portfolio refinement + storytelling",
       "Pitch deck review",
       "Career positioning sessions",
     ],
-    starting: "Single $150 · 4 sessions $500",
+    starting: "$500 - $1,000",
   },
 ];
 

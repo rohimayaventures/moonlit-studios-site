@@ -7,7 +7,7 @@ const offerings = [
       "Full manuscript drafting",
       "Revision & polish cycles",
     ],
-    starting: "$10,000-$35,000",
+    starting: "$18,000 - $50,000+",
   },
   {
     title: "Cookbook Ghostwriting",
@@ -17,7 +17,7 @@ const offerings = [
       "Testing support notes",
       "Interior/back-of-book copy",
     ],
-    starting: "$12,000-$25,000",
+    starting: "$18,000 - $50,000+",
   },
   {
     title: "Author Platforms & Sites",
@@ -27,16 +27,16 @@ const offerings = [
       "Email sequences & blurbs",
       "Back-of-book copy + assets",
     ],
-    starting: "$900",
+    starting: "$1,800 - $4,500",
   },
   {
-    title: "Blog & Newsletter Ghostwriting",
+    title: "Blog & Newsletter Content",
     includes: [
       "Content strategy support",
       "Cadence planning",
       "Voice consistency editing",
     ],
-    starting: "$75",
+    starting: "$250 - $600",
   },
   {
     title: "Brand Story Ghostwriting",
@@ -45,7 +45,7 @@ const offerings = [
       "About pages & bios",
       "Origin stories for launches",
     ],
-    starting: "$250",
+    starting: "$250 - $600",
   },
   {
     title: "Speech Writing",
@@ -54,7 +54,7 @@ const offerings = [
       "Rhythm/cadence notes",
       "Delivery polish & formatting",
     ],
-    starting: "$500",
+    starting: "$250 - $600",
   },
 ];
 

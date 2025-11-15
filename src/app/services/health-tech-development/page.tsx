@@ -7,7 +7,7 @@ const offerings = [
       "FHIR-friendly architecture",
       "Audit logging patterns",
     ],
-    starting: "$1,500",
+    starting: "$4,500 - $15,000+",
   },
   {
     title: "Clinical Workflow Tools",
@@ -17,7 +17,7 @@ const offerings = [
       "Assessment frameworks",
       "Red-flag logic dashboards",
     ],
-    starting: "$1,800",
+    starting: "$4,500 - $15,000+",
   },
   {
     title: "Nurse-to-Nurse Platform Builds",
@@ -26,7 +26,7 @@ const offerings = [
       "Patient tracking + shift handoffs",
       "Real nurse UX audits",
     ],
-    starting: "$500",
+    starting: "$4,500 - $15,000+",
   },
   {
     title: "Health Data Dashboards",
@@ -35,7 +35,7 @@ const offerings = [
       "Patient progress visualizations",
       "Executive-ready reporting",
     ],
-    starting: "$1,000",
+    starting: "$4,500 - $15,000+",
   },
   {
     title: "Patient-Facing Education Interfaces",
@@ -44,7 +44,7 @@ const offerings = [
       "Medication flow explanations",
       "At-home guidance UX",
     ],
-    starting: "$500",
+    starting: "$4,500 - $15,000+",
   },
 ];
 
