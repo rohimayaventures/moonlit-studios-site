@@ -599,9 +599,11 @@ export default function AILabPage() {
     {
       id: 'gryffindor',
       title: 'Computer Vision',
+      spell: 'Lumos Maxima',
       house: 'Gryffindor',
       trait: 'Brave',
       description: 'Bold image analysis that sees what others miss',
+      spellDesc: 'Cast light upon images to reveal their hidden truths',
       icon: <Eye className="w-6 h-6" />,
       colors: 'from-red-600 to-orange-600',
       borderColor: 'border-red-600',
@@ -610,9 +612,11 @@ export default function AILabPage() {
     {
       id: 'ravenclaw',
       title: 'RAG Q&A System',
+      spell: 'Accio Knowledge',
       house: 'Ravenclaw',
       trait: 'Wise',
       description: 'Intelligent document search with thoughtful answers',
+      spellDesc: 'Summon wisdom from vast libraries with a single question',
       icon: <BookOpen className="w-6 h-6" />,
       colors: 'from-blue-600 to-indigo-600',
       borderColor: 'border-blue-600',
@@ -621,9 +625,11 @@ export default function AILabPage() {
     {
       id: 'hufflepuff',
       title: 'Healthcare Triage',
+      spell: 'Episkey Diagnosticus',
       house: 'Hufflepuff',
       trait: 'Loyal',
       description: 'Compassionate AI that puts patient care first',
+      spellDesc: 'Heal through understanding—diagnose with nurse-trained precision',
       icon: <Heart className="w-6 h-6" />,
       colors: 'from-yellow-600 to-amber-600',
       borderColor: 'border-yellow-600',
@@ -632,9 +638,11 @@ export default function AILabPage() {
     {
       id: 'slytherin',
       title: 'Nagini Voice Sales',
+      spell: 'Sonorus Persuasus',
       house: 'Slytherin',
       trait: 'Ambitious',
       description: 'Persuasive AI copilot that drives conversions',
+      spellDesc: 'Amplify your voice with serpent-like persuasion and charm',
       icon: <MessageCircle className="w-6 h-6" />,
       colors: 'from-green-600 to-emerald-600',
       borderColor: 'border-green-600',
@@ -644,6 +652,29 @@ export default function AILabPage() {
 
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
+
+      {/* ==================== SAO SYSTEM ANNOUNCEMENT ==================== */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-midnight via-deepOcean to-midnight border-b-2 border-mermaidTeal/40">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-mermaidTeal/10 to-transparent animate-pulse"></div>
+
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 py-6 sm:py-8">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-mermaidTeal"></div>
+            <div className="text-center space-y-1 sm:space-y-2">
+              <p className="text-xs sm:text-sm text-mermaidTeal/70 uppercase tracking-[0.3em] font-semibold">
+                System Announcement
+              </p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-mermaidTeal tracking-wide animate-pulse">
+                ⚡ LINK START! ⚡
+              </h2>
+              <p className="text-xs sm:text-sm text-starlight">
+                AI Experimental Lab • Status: <span className="text-lunarGold">ONLINE</span>
+              </p>
+            </div>
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-mermaidTeal"></div>
+          </div>
+        </div>
+      </section>
 
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-4 sm:px-6">
@@ -756,9 +787,18 @@ export default function AILabPage() {
                   <Sparkles className={`w-4 h-4 sm:w-5 sm:h-5 text-lunarGold flex-shrink-0 ml-2 ${activeDemo === demo.id ? 'animate-pulse' : ''}`} />
                 </div>
 
+                {/* Spell Incantation */}
+                <div className="mb-3 p-2 rounded-lg bg-lunarGold/10 border border-lunarGold/20">
+                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Spell:</p>
+                  <p className="text-sm text-lunarGold font-serif italic">{demo.spell}</p>
+                </div>
+
                 {/* Description */}
-                <p className="text-sm text-moonlightSilver mb-4">
+                <p className="text-sm text-moonlightSilver mb-2">
                   {demo.description}
+                </p>
+                <p className="text-xs text-starlight/70 italic">
+                  "{demo.spellDesc}"
                 </p>
 
                 {/* Demo Content - FIXED: Added stopPropagation */}
@@ -771,11 +811,15 @@ export default function AILabPage() {
                   </div>
                 )}
 
-                {/* Expand Indicator */}
-                <div className="mt-4 text-center">
-                  <span className="text-xs text-starlight">
-                    {activeDemo === demo.id ? 'Click to close' : 'Click to try demo'}
-                  </span>
+                {/* Expand Indicator - Cast Spell Button */}
+                <div className="mt-4">
+                  <div className={`w-full px-4 py-2 rounded-lg bg-gradient-to-r ${demo.colors} text-white font-semibold text-center text-sm transition-all hover:shadow-lg cursor-pointer`}>
+                    {activeDemo === demo.id ? (
+                      <span>✨ Close Spell Book</span>
+                    ) : (
+                      <span>⚡ Cast Spell • Try Demo</span>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -829,15 +873,17 @@ export default function AILabPage() {
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
             <a
               href="/contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all text-center"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-2"
             >
-              Start Your Project
+              <span>⚡ Link Start!</span>
+              <span>Start Your AI Project</span>
             </a>
             <a
               href="/portfolio"
-              className="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all text-center"
+              className="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-2"
             >
-              View Portfolio
+              <span>🏆</span>
+              <span>View Achievement Gallery</span>
             </a>
           </div>
         </div>
