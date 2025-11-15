@@ -134,11 +134,14 @@ export default function ServicesPage() {
                 <select
                   value={selectedService}
                   onChange={handleServiceChange}
-                  className="w-full appearance-none rounded-2xl bg-gradient-to-r from-mermaidTeal/10 to-lunarGold/10 border-2 border-mermaidTeal/50 px-6 py-4 pr-12 text-base text-pearlWhite cursor-pointer hover:border-mermaidTeal transition-all focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal"
+                  className="w-full appearance-none rounded-2xl bg-gradient-to-r from-deepOcean/80 via-midnight/90 to-deepOcean/80 border-2 border-mermaidTeal/50 px-6 py-4 pr-12 text-base text-pearlWhite cursor-pointer hover:border-mermaidTeal hover:bg-gradient-to-r hover:from-deepOcean hover:to-midnight transition-all focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal backdrop-blur-sm"
+                  style={{
+                    colorScheme: 'dark'
+                  }}
                 >
-                  <option value="" className="bg-midnight text-pearlWhite">Select a service to explore...</option>
+                  <option value="" style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>Select a service to explore...</option>
                   {suites.map((suite) => (
-                    <option key={suite.href} value={suite.href} className="bg-midnight text-pearlWhite">
+                    <option key={suite.href} value={suite.href} style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>
                       {suite.name} — Starting at {suite.starting}
                     </option>
                   ))}
