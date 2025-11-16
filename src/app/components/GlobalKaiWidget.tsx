@@ -77,6 +77,8 @@ export function GlobalKaiWidget() {
 
   // Load chat history and personality from sessionStorage on mount
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const savedMessages = sessionStorage.getItem("kai-chat-history");
     const hasShown = sessionStorage.getItem("kai-initial-shown");
     const savedPersonality = sessionStorage.getItem("kai-personality") as PersonalityMode;
@@ -104,6 +106,7 @@ export function GlobalKaiWidget() {
 
   // Save chat history to sessionStorage whenever messages change
   useEffect(() => {
+    if (typeof window === "undefined") return;
     if (messages.length > 0) {
       sessionStorage.setItem("kai-chat-history", JSON.stringify(messages));
     }
@@ -706,7 +709,9 @@ Throughout the site there are Harry Potter quotes and references that reveal on 
   };
 
   const clearChat = () => {
-    sessionStorage.removeItem("kai-chat-history");
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("kai-chat-history");
+    }
     setMessages([
       {
         role: "assistant",
@@ -717,7 +722,9 @@ Throughout the site there are Harry Potter quotes and references that reveal on 
 
   const changePersonality = (newPersonality: PersonalityMode) => {
     setPersonality(newPersonality);
-    sessionStorage.setItem("kai-personality", newPersonality);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("kai-personality", newPersonality);
+    }
     setShowPersonalityMenu(false);
 
     // Track personality switch for achievements

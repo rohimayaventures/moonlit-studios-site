@@ -62,20 +62,29 @@ export function ThemeSwitcher() {
 
   // Load theme from localStorage on mount
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const savedTheme = localStorage.getItem("moonlit-theme") as ThemeMode;
     if (savedTheme && themes[savedTheme]) {
-      applyTheme(savedTheme);
+      setCurrentTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    } else {
+      // Ensure default theme is set on first load
+      document.documentElement.setAttribute("data-theme", "moonlit");
     }
   }, []);
 
   const applyTheme = (theme: ThemeMode) => {
     setCurrentTheme(theme);
-    localStorage.setItem("moonlit-theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
 
-    // Track theme switch for achievements
-    if (typeof window !== "undefined" && (window as any).trackAchievement) {
-      (window as any).trackAchievement.incrementThemeSwitches();
+    if (typeof window !== "undefined") {
+      localStorage.setItem("moonlit-theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
+
+      // Track theme switch for achievements
+      if ((window as any).trackAchievement) {
+        (window as any).trackAchievement.incrementThemeSwitches();
+      }
     }
 
     // Close menu after selection

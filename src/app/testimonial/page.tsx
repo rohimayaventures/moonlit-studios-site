@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function TestimonialPage() {
+function TestimonialForm() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -301,5 +301,20 @@ export default function TestimonialPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function TestimonialPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-midnight text-pearlWhite flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-mermaidTeal/30 border-t-mermaidTeal rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-moonlightSilver">Loading feedback form...</p>
+        </div>
+      </main>
+    }>
+      <TestimonialForm />
+    </Suspense>
   );
 }
