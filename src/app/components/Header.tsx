@@ -137,10 +137,12 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile Navigation Menu - ALWAYS RENDERED, visibility controlled by state */}
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed left-0 right-0 top-[73px] bottom-0 z-[9999] bg-midnight border-t-2 border-mermaidTeal overflow-y-auto">
-          <nav className="flex flex-col px-6 py-8 space-y-2 bg-midnight">
+      {/* Mobile Navigation Menu - ALWAYS RENDERED, visibility controlled by CSS */}
+      <div className={`md:hidden fixed inset-0 z-[60] bg-midnight/95 backdrop-blur-md transition-all duration-300 ${
+        mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
+        <div className="fixed left-0 right-0 top-[73px] bottom-0 overflow-y-auto border-t-2 border-mermaidTeal">
+          <nav className="flex flex-col px-6 py-8 space-y-2">
             {/* Navigation Links */}
             {navLinks.map((link) => (
               <Link
@@ -175,31 +177,31 @@ export function Header() {
               </button>
 
               {/* Services List */}
-              {mobileServicesOpen && (
-                <div className="bg-deepOcean/40 rounded-lg my-2 overflow-hidden">
-                  {serviceLinks.map((service) => (
-                    <Link
-                      key={service.href}
-                      href={service.href}
-                      onClick={closeMobileMenu}
-                      className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
-                    >
-                      {service.label}
-                    </Link>
-                  ))}
+              <div className={`bg-deepOcean/40 rounded-lg my-2 overflow-hidden transition-all duration-300 ${
+                mobileServicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+              }`}>
+                {serviceLinks.map((service) => (
                   <Link
-                    href="/services"
+                    key={service.href}
+                    href={service.href}
                     onClick={closeMobileMenu}
-                    className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
+                    className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
                   >
-                    View All Services →
+                    {service.label}
                   </Link>
-                </div>
-              )}
+                ))}
+                <Link
+                  href="/services"
+                  onClick={closeMobileMenu}
+                  className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
+                >
+                  View All Services →
+                </Link>
+              </div>
             </div>
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 }
