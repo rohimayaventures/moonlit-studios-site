@@ -330,6 +330,18 @@ export default function ServicesPage() {
               </div>
               <p className="text-xs text-moonlightSilver/70 mt-2">Or scroll down to browse all suites</p>
             </div>
+
+            {/* Primary CTA - Book Free Consultation */}
+            <div className="pt-6 fade-in-up">
+              <CalendlyButton
+                url="https://calendly.com/pagadeventures/30min"
+                text="Book Free Consultation"
+                variant="primary"
+              />
+              <p className="text-xs text-moonlightSilver/60 mt-3">
+                Not sure which path to choose? Let's discuss your vision.
+              </p>
+            </div>
           </div>
         </div>
       </section>

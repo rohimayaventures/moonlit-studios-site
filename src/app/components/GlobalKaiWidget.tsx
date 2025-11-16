@@ -410,10 +410,58 @@ Throughout the site there are Harry Potter quotes and references that reveal on 
     
     switch (path) {
       case "/":
-        pageContext = "\n\n**CURRENT PAGE**: Homepage - Help them explore! Offer to show them services, portfolio, or AI Lab.";
+        pageContext = `\n\n**CURRENT PAGE**: Homepage - The Five Realms Portal Hub
+
+**PORTAL NAVIGATION ORDER:**
+The homepage presents 5 themed portal cards in this order (natural user journey):
+1. **About → The Moonlit Archives** - Origin story, "The Nurse Who Codes" journey
+2. **Services → The Five Bending Paths** - ATLA-themed service suites (Water/Earth/Fire/Air/Spirit)
+3. **Portfolio → Chronicles of the Realms** - LOTR-themed project showcase (5 realms explored)
+4. **AI Lab → The AI Battle System** - SAO-themed live AI demos (4 systems: VisionScan, Echo, VoiceFlow, AutoQuote)
+5. **Contact → Send a Howler** - HP Ministry of Magic professional owl post
+
+**POSITIONING ONE-LINER:** "Healthcare meets code. Stories meet systems."
+- This appears prominently in the hero section
+- It encapsulates the unique value proposition: clinical expertise + technical mastery + creative storytelling
+
+**TRUST SIGNALS (Above fold):**
+- 15+ Years Healthcare
+- 6 Ventures Built
+- 300K+ Words Published
+- Now Taking Clients
+
+Help visitors choose which realm to explore first! Most start with About to understand the founder's story, then move to Services or AI Lab depending on their needs.`;
         break;
       case "/about":
-        pageContext = "\n\n**CURRENT PAGE**: About - Share details about Moonlit Studios' unique journey. Emphasize the 'nurse who codes' angle.";
+        pageContext = `\n\n**CURRENT PAGE**: About - The Moonlit Archives
+
+**PAGE STRUCTURE:**
+1. **Hero Section** - "The Nurse Who Learned to Code" with moon phases
+2. **The Moonlit Transformation** - 5 phases of the founder's journey:
+   - New Moon: The Bedside Healer (patient care foundation)
+   - Waxing Crescent: The Operations Master (130+ team members, 96% audit success)
+   - Full Moon: The Storyteller Emerges (300K+ words published)
+   - Waning Crescent: The Code Awakening (self-taught full-stack + AI/ML)
+   - Moonlit Studios: The Master Phase (Avatar State - all elements combined)
+3. **Mastery of All Elements** - ATLA themed skills breakdown (Water/Fire/Earth/Air at 100%, 90% mastery)
+4. **Skills Progression** - Technical skills with animated progress bars
+5. **By The Numbers** - Impact metrics (15+ years, 130+ team, 300K+ words, 200+ hours coding)
+6. **SAO Player Stats** - Gaming-style stat card with HP/MP/STR/AGI
+7. **The Trifecta** - Healthcare Expert + Creative Storyteller + Technical Builder
+8. **Phoenix & Peacock Chronicles** - 7-book fantasy romance series showcase
+9. **Meet Gracie** - Chief Design Critic (the toughest critic on the team)
+10. **Client Testimonials** - 3 success stories from real clients (NEW!)
+11. **Hidden Wisdom** - Fandom easter eggs and quotes
+
+**KEY SELLING POINTS:**
+- Unique "nurse who codes" positioning
+- 15+ years healthcare operations (not just theory)
+- Published author (storytelling + branding expertise)
+- Self-taught full-stack AI developer
+- The Trifecta: Healthcare + Creative + Tech (where all three converge)
+
+**TESTIMONIALS SECTION (New Addition!):**
+Located near the bottom before Hidden Wisdom. Shows 3 client success stories with ratings, feedback, company names, and service types. This is social proof that the unique background actually delivers results.`;
         break;
       case "/services":
       case "/services/creative-design-development":

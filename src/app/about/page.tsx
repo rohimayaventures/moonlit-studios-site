@@ -1,46 +1,6 @@
-import type { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "About - The Nurse Who Codes | Moonlit Studios",
-  description:
-    "From 15+ years in healthcare operations to full-stack AI developer. Published fantasy author turned tech innovator. Meet the creator behind Moonlit Studios—where clinical expertise, creative storytelling, and cutting-edge development converge.",
-  keywords: [
-    "healthcare developer",
-    "nurse developer story",
-    "self-taught developer",
-    "healthcare to tech transition",
-    "published author developer",
-    "AI ML specialist background",
-    "healthcare operations to coding",
-    "full-stack developer journey",
-    "fantasy author coder",
-    "clinical workflow expert",
-    "HIPAA developer background",
-    "tech career change story"
-  ],
-  openGraph: {
-    title: "About - The Nurse Who Codes | Moonlit Studios",
-    description:
-      "From bedside healer to operations master to full-stack AI developer. 15+ years healthcare + published author + self-taught coder = products that heal, inspire, and transform.",
-    type: "website",
-    url: "https://moonlstudios.com/about",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Moonlit Studios - The Nurse Who Codes Journey",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About - The Nurse Who Codes | Moonlit Studios",
-    description:
-      "15+ years healthcare operations → published fantasy author → self-taught full-stack AI developer. The journey of transformation.",
-    images: ["/og-image.png"],
-  },
-};
+import { TestimonialsSection } from '../components/TestimonialsSection';
 
 export default function AboutPage() {
   return (
@@ -901,6 +861,20 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CLIENT TESTIMONIALS */}
+      <section className="relative py-20 px-6 bg-gradient-to-b from-deepOcean/30 via-midnight to-deepOcean/30">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-12 fade-in-up">
+            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Success Stories</p>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-4">What Clients Say</h2>
+            <p className="text-moonlightSilver max-w-2xl mx-auto">
+              Real feedback from healthcare innovators who've worked with Moonlit Studios
+            </p>
+          </div>
+          <TestimonialsSection limit={3} showTitle={false} />
         </div>
       </section>
 

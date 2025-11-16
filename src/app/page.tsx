@@ -1,6 +1,5 @@
 'use client';
 
-import { TestimonialsSection } from './components/TestimonialsSection';
 import { CalendlyButton } from './components/CalendlyButton';
 import Link from 'next/link';
 
@@ -26,12 +25,13 @@ export default function Home() {
             Where <span className="gradient-water">Five Realms</span> Converge
           </h1>
 
-          <p className="text-center text-moonlightSilver text-base md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed fade-in-up stagger-2">
-            <span className="text-pearlWhite/90 font-medium">15 years of clinical operations meets full-stack mastery.</span>
-            <br />
-            <span className="text-base md:text-lg mt-2 block">
-              Four AI systems. Five creative realms. Infinite possibilities under moonlight.
-            </span>
+          <p className="text-center text-lg md:text-2xl text-pearlWhite font-medium max-w-2xl mx-auto mb-4 fade-in-up stagger-2">
+            Healthcare meets code. Stories meet systems.
+          </p>
+
+          <p className="text-center text-moonlightSilver text-base md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed fade-in-up stagger-3">
+            <span className="text-pearlWhite/90">15 years of clinical operations meets full-stack mastery.</span>
+            {' '}Four AI systems. Five creative realms. Infinite possibilities under moonlight.
           </p>
 
           {/* Trust Signals - Condensed */}
@@ -69,9 +69,42 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* PORTAL 1: Services - ATLA */}
+            {/* PORTAL 1: About - Moonlit Original */}
+            <Link href="/about" className="group block">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-starlight/10 to-moonlightSilver/10 border-2 border-starlight/30 hover:border-starlight hover:shadow-2xl hover:shadow-starlight/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-1">
+                {/* Portal Icon */}
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-starlight/30 to-moonlightSilver/20 flex items-center justify-center mb-4 border-2 border-starlight/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                  <svg className="w-8 h-8 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                </div>
+
+                {/* Realm Badge */}
+                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/40 mb-3">
+                  <span className="text-xs font-medium text-starlight tracking-wider">THE ORIGIN STORY</span>
+                </div>
+
+                <h3 className="text-2xl font-semibold text-pearlWhite mb-3 group-hover:text-starlight transition-colors">
+                  The Moonlit Archives
+                </h3>
+
+                <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
+                  From bedside nurse to bending master. From published author to code warrior. The Master&apos;s Journey through four phases: Healthcare Foundation, Creative Awakening, Technical Mastery, and the Avatar State. How 15 years of healing became digital transformation under moonlight.
+                </p>
+
+                <div className="flex items-center gap-2 text-starlight font-medium text-sm group-hover:gap-3 transition-all">
+                  Read the Archives
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+
+                {/* Moon Glow Effect */}
+                <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-starlight/30 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            </Link>
+
+            {/* PORTAL 2: Services - ATLA */}
             <Link href="/services" className="group block">
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-mermaidTeal/20 to-deepOcean/20 border-2 border-mermaidTeal/30 hover:border-mermaidTeal hover:shadow-2xl hover:shadow-mermaidTeal/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-1">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-mermaidTeal/20 to-deepOcean/20 border-2 border-mermaidTeal/30 hover:border-mermaidTeal hover:shadow-2xl hover:shadow-mermaidTeal/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-2">
                 {/* Portal Icon */}
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-mermaidTeal/40 to-tealBright/30 flex items-center justify-center mb-4 border-2 border-mermaidTeal/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
                   <svg className="w-8 h-8 text-mermaidTeal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,41 +132,6 @@ export default function Home() {
 
                 {/* Decorative Element */}
                 <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-mermaidTeal/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            </Link>
-
-            {/* PORTAL 2: AI Lab - SAO */}
-            <Link href="/ai-lab" className="group block">
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-lunarGold/10 border-2 border-lunarGold/30 hover:border-lunarGold hover:shadow-2xl hover:shadow-lunarGold/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-2">
-                {/* Portal Icon */}
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-phoenixFire/30 to-lunarGold/30 flex items-center justify-center mb-4 border-2 border-lunarGold/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <svg className="w-8 h-8 text-lunarGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-
-                {/* Realm Badge */}
-                <div className="inline-block px-3 py-1 rounded-full bg-lunarGold/20 border border-lunarGold/40 mb-3">
-                  <span className="text-xs font-medium text-lunarGold tracking-wider">LINK START!</span>
-                </div>
-
-                <h3 className="text-2xl font-semibold text-pearlWhite mb-3 group-hover:text-lunarGold transition-colors">
-                  The AI Battle System
-                </h3>
-
-                <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                  Four AI warriors ready to deploy. VisionScan analyzes PDFs with surgical precision. Echo answers customer questions 24/7. VoiceFlow brings conversations to life. AutoQuote generates instant project estimates. Each system tested, combat-ready, and waiting for activation.
-                </p>
-
-                <div className="flex items-center gap-2 text-lunarGold font-medium text-sm group-hover:gap-3 transition-all">
-                  Enter the Instance
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </div>
-
-                {/* SAO Scan Lines Effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-lunarGold/10 to-transparent animate-scan" />
-                </div>
               </div>
             </Link>
 
@@ -170,36 +168,38 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* PORTAL 4: About - Moonlit Original */}
-            <Link href="/about" className="group block">
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-starlight/10 to-moonlightSilver/10 border-2 border-starlight/30 hover:border-starlight hover:shadow-2xl hover:shadow-starlight/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-4">
+            {/* PORTAL 4: AI Lab - SAO */}
+            <Link href="/ai-lab" className="group block">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-lunarGold/10 border-2 border-lunarGold/30 hover:border-lunarGold hover:shadow-2xl hover:shadow-lunarGold/40 transition-all duration-500 p-8 card-hover-lift fade-in-up stagger-4">
                 {/* Portal Icon */}
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-starlight/30 to-moonlightSilver/20 flex items-center justify-center mb-4 border-2 border-starlight/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                  <svg className="w-8 h-8 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-phoenixFire/30 to-lunarGold/30 flex items-center justify-center mb-4 border-2 border-lunarGold/50 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                  <svg className="w-8 h-8 text-lunarGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
 
                 {/* Realm Badge */}
-                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/40 mb-3">
-                  <span className="text-xs font-medium text-starlight tracking-wider">THE ORIGIN STORY</span>
+                <div className="inline-block px-3 py-1 rounded-full bg-lunarGold/20 border border-lunarGold/40 mb-3">
+                  <span className="text-xs font-medium text-lunarGold tracking-wider">LINK START!</span>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-pearlWhite mb-3 group-hover:text-starlight transition-colors">
-                  The Moonlit Archives
+                <h3 className="text-2xl font-semibold text-pearlWhite mb-3 group-hover:text-lunarGold transition-colors">
+                  The AI Battle System
                 </h3>
 
                 <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                  From bedside nurse to bending master. From published author to code warrior. The Master&apos;s Journey through four phases: Healthcare Foundation, Creative Awakening, Technical Mastery, and the Avatar State. How 15 years of healing became digital transformation under moonlight.
+                  Four AI warriors ready to deploy. VisionScan analyzes PDFs with surgical precision. Echo answers customer questions 24/7. VoiceFlow brings conversations to life. AutoQuote generates instant project estimates. Each system tested, combat-ready, and waiting for activation.
                 </p>
 
-                <div className="flex items-center gap-2 text-starlight font-medium text-sm group-hover:gap-3 transition-all">
-                  Read the Archives
+                <div className="flex items-center gap-2 text-lunarGold font-medium text-sm group-hover:gap-3 transition-all">
+                  Enter the Instance
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
 
-                {/* Moon Glow Effect */}
-                <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-starlight/30 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* SAO Scan Lines Effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-lunarGold/10 to-transparent animate-scan" />
+                </div>
               </div>
             </Link>
 
@@ -245,9 +245,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* TESTIMONIALS SECTION */}
-      <TestimonialsSection limit={3} />
 
       {/* FINAL CTA */}
       <section id="cta" className="py-20 bg-gradient-to-b from-deepOcean/20 to-midnight">

@@ -301,6 +301,18 @@ export default function PortfolioPage() {
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Tales Written</div>
               </div>
             </div>
+
+            {/* Primary CTA - Start Your Quest */}
+            <div className="pt-6 fade-in-up">
+              <CalendlyButton
+                url="https://calendly.com/pagadeventures/30min"
+                text="Begin Your Quest"
+                variant="secondary"
+              />
+              <p className="text-xs text-moonlightSilver/60 mt-3">
+                Ready to write your own legend? Let's map the journey together.
+              </p>
+            </div>
           </div>
         </div>
       </section>

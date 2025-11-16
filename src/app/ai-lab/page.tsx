@@ -18,6 +18,7 @@ import {
   Clock,
   TrendingUp,
   Camera,
+  Award,
   MessageCircle,
   FileText,
   Upload,
@@ -50,9 +51,9 @@ type RAGResult = {
 // ==================== TYPEWRITER COMPONENT ====================
 function Typewriter() {
   const phrases = [
-    "Where Magic Meets Machine Learning",
+    "Where System Skills Meet Machine Learning",
     "The Nurse Who Codes AI Solutions",
-    "Computer Vision • RAG • Voice AI • Healthcare Triage",
+    "Vision • RAG • Voice • Triage — All Systems Online",
   ];
 
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -394,7 +395,7 @@ function VoiceSalesDemo() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: "Greetings! I'm Nagini, your AI sales assistant. I can help you explore Moonlit Studios' services. What brings you here today?"
+      content: "Greetings! I'm Echo, your AI sales assistant. I can help you explore Moonlit Studios' services. What brings you here today?"
     }
   ]);
   const [input, setInput] = useState('');
@@ -584,7 +585,7 @@ function VoiceSalesDemo() {
       {isSpeaking && (
         <div className="flex items-center justify-center gap-2 text-green-400 text-sm">
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-          Nagini is speaking...
+          Echo is speaking...
         </div>
       )}
     </div>
@@ -597,52 +598,52 @@ export default function AILabPage() {
 
   const demos = [
     {
-      id: 'gryffindor',
+      id: 'vision_system',
       title: 'Computer Vision',
-      spell: 'Lumos Maxima',
-      house: 'Gryffindor',
-      trait: 'Brave',
-      description: 'Bold image analysis that sees what others miss',
-      spellDesc: 'Cast light upon images to reveal their hidden truths',
+      systemCall: 'Initialize.VisionScan',
+      role: 'COMBAT VISION SYSTEM',
+      tier: 'S-Rank',
+      description: 'Blade-sharp image analysis for real-world scenarios',
+      systemDescription: 'Real-time visual processing with tactical precision',
       icon: <Eye className="w-6 h-6" />,
       colors: 'from-red-600 to-orange-600',
       borderColor: 'border-red-600',
       component: <ComputerVisionDemo />
     },
     {
-      id: 'ravenclaw',
+      id: 'archive_system',
       title: 'RAG Q&A System',
-      spell: 'Accio Knowledge',
-      house: 'Ravenclaw',
-      trait: 'Wise',
-      description: 'Intelligent document search with thoughtful answers',
-      spellDesc: 'Summon wisdom from vast libraries with a single question',
+      systemCall: 'Access.KnowledgeLink',
+      role: 'KNOWLEDGE ARCHIVE SYSTEM',
+      tier: 'EX-Rank',
+      description: 'Intelligence gathering through advanced RAG architecture',
+      systemDescription: 'Deep search across knowledge repositories with context awareness',
       icon: <BookOpen className="w-6 h-6" />,
       colors: 'from-blue-600 to-indigo-600',
       borderColor: 'border-blue-600',
       component: <RAGDemo />
     },
     {
-      id: 'hufflepuff',
+      id: 'support_triage',
       title: 'Healthcare Triage',
-      spell: 'Episkey Diagnosticus',
-      house: 'Hufflepuff',
-      trait: 'Loyal',
-      description: 'Compassionate AI that puts patient care first',
-      spellDesc: 'Heal through understanding—diagnose with nurse-trained precision',
+      systemCall: 'Execute.TriageAnalysis',
+      role: 'MEDICAL TRIAGE SYSTEM',
+      tier: 'A-Rank',
+      description: 'Clinical decision support powered by healthcare AI',
+      systemDescription: 'Nurse-trained precision for patient assessment and routing',
       icon: <Heart className="w-6 h-6" />,
       colors: 'from-yellow-600 to-amber-600',
       borderColor: 'border-yellow-600',
       component: <HealthcareTriageDemo />
     },
     {
-      id: 'slytherin',
-      title: 'Nagini Voice Sales',
-      spell: 'Sonorus Persuasus',
-      house: 'Slytherin',
-      trait: 'Ambitious',
-      description: 'Persuasive AI copilot that drives conversions',
-      spellDesc: 'Amplify your voice with serpent-like persuasion and charm',
+      id: 'voice_link',
+      title: 'Voice Link Console',
+      systemCall: 'Launch.VoiceRelay',
+      role: 'VOICE LINK SYSTEM',
+      tier: 'S-Rank',
+      description: 'Real-time voice synthesis for sales acceleration',
+      systemDescription: 'Conversational AI with voice input/output capabilities',
       icon: <MessageCircle className="w-6 h-6" />,
       colors: 'from-green-600 to-emerald-600',
       borderColor: 'border-green-600',
@@ -664,8 +665,10 @@ export default function AILabPage() {
               <p className="text-xs sm:text-sm text-mermaidTeal/70 uppercase tracking-[0.3em] font-semibold">
                 System Announcement
               </p>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-mermaidTeal tracking-wide animate-pulse">
-                ⚡ LINK START! ⚡
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-mermaidTeal tracking-wide flex items-center justify-center gap-2 sm:gap-3">
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 animate-pulse" />
+                <span>LINK START!</span>
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 animate-pulse" />
               </h2>
               <p className="text-xs sm:text-sm text-starlight">
                 AI Experimental Lab • Status: <span className="text-lunarGold">ONLINE</span>
@@ -678,39 +681,44 @@ export default function AILabPage() {
 
       {/* ==================== HERO SECTION ==================== */}
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-4 sm:px-6">
-        {/* Water Orbs Background */}
+        {/* SAO-style Scan Lines */}
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <div className="absolute inset-0 sao-scan-lines" />
+        </div>
+
+        {/* Digital Orbs Background */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-tealBright/40 to-deepOcean/60 blur-3xl animate-floatSlow" />
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-tealBright/40 to-deepOcean/60 blur-3xl animate-floatSlow sao-glow" />
           <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-lunarGold/40 via-mermaidTeal/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
-          {/* Moon Phases */}
+          {/* System Status Indicator */}
           <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              title="System Standby"
             />
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="Waxing Crescent"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-mermaidTeal/30 to-midnight border-2 border-mermaidTeal/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              title="System Initializing"
             />
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-moonlightSilver via-pearlWhite to-moonlightSilver border-2 border-lunarGold shadow-lg shadow-lunarGold/50 flex-shrink-0"
-              title="Full Moon - AI Lab at Full Power"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-mermaidTeal border-2 border-lunarGold shadow-lg shadow-mermaidTeal/50 flex-shrink-0 animate-pulse"
+              title="All Systems Online - Full Power"
             />
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="Waning Crescent"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-mermaidTeal/30 to-midnight border-2 border-mermaidTeal/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              title="System Active"
             />
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              title="System Standby"
             />
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent px-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent px-4 tracking-tight">
             AI Lab
           </h1>
 
@@ -719,48 +727,79 @@ export default function AILabPage() {
 
           {/* Subtitle */}
           <p className="text-center text-moonlightSilver text-base sm:text-lg max-w-3xl mx-auto leading-relaxed px-4">
-            Explore four live AI demonstrations showcasing the future of intelligent applications—
-            from computer vision to conversational AI, built with the precision of a healer and
-            the creativity of a water bender.
+            Experience four live AI demonstrations showcasing the fusion of healthcare expertise and cutting-edge technology—
+            built with the precision of a clinical nurse and the strategic mind of a full-stack developer.
           </p>
+
+          {/* Player Stats - SAO Style Showcase */}
+          <div className="mt-8 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+            <div className="group p-4 sm:p-5 rounded-lg bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all hover:scale-105">
+              <div className="text-center space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-mermaidTeal sao-glow-text">4</div>
+                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">Live Demos</div>
+                <div className="text-[10px] sm:text-xs text-starlight/60">Fully Interactive</div>
+              </div>
+            </div>
+            <div className="group p-4 sm:p-5 rounded-lg bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border border-lunarGold/30 hover:border-lunarGold/60 transition-all hover:scale-105">
+              <div className="text-center space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-lunarGold sao-glow-text">5+</div>
+                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">AI Models</div>
+                <div className="text-[10px] sm:text-xs text-starlight/60">Claude + OpenAI</div>
+              </div>
+            </div>
+            <div className="group p-4 sm:p-5 rounded-lg bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border border-tealBright/30 hover:border-tealBright/60 transition-all hover:scale-105">
+              <div className="text-center space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-tealBright sao-glow-text">10+</div>
+                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">Years RN</div>
+                <div className="text-[10px] sm:text-xs text-starlight/60">Healthcare + Tech</div>
+              </div>
+            </div>
+            <div className="group p-4 sm:p-5 rounded-lg bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border border-purple-400/30 hover:border-purple-400/60 transition-all hover:scale-105">
+              <div className="text-center space-y-1 sm:space-y-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400 sao-glow-text">∞</div>
+                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">Possibilities</div>
+                <div className="text-[10px] sm:text-xs text-starlight/60">Your Next Project</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ==================== UNCLE IROH WISDOM SECTION ==================== */}
+      {/* ==================== CARDINAL SYSTEM LOG ==================== */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-4xl">
-          <div className="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-lunarGold/30">
-            {/* Tea Cup Icon */}
+          <div className="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border border-mermaidTeal/30">
+            {/* System Crystal Icon */}
             <div className="absolute -top-5 sm:-top-6 left-1/2 -translate-x-1/2">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-lunarGold via-amber-500 to-lunarGold flex items-center justify-center shadow-lg shadow-lunarGold/50 hover:rotate-12 transition-transform">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-mermaidTeal flex items-center justify-center shadow-lg shadow-mermaidTeal/50 hover:scale-110 transition-transform">
                 <svg className="w-5 h-5 sm:w-6 sm:h-6 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
               </div>
             </div>
 
             <div className="text-center space-y-3 sm:space-y-4 mt-4">
               <p className="text-base sm:text-xl md:text-2xl text-moonlightSilver font-light italic leading-relaxed px-2">
-                "The best solutions, like the finest tea, require patience and the right temperature.
-                Each of these demonstrations brews a different flavor of intelligence."
+                "Every system, like every sword skill, requires mastery through experience.
+                Each console represents a different path to clearing the dungeon."
               </p>
-              <p className="text-xs sm:text-sm text-starlight">
-                — Uncle Iroh's wisdom, applied to AI
+              <p className="text-xs sm:text-sm text-mermaidTeal font-semibold uppercase tracking-wider">
+                — SYSTEM LOG ENTRY: CARDINAL, FLOOR 50
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== 4 HOUSES DEMO SECTION ==================== */}
+      {/* ==================== SKILL CONSOLE SECTION ==================== */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto max-w-6xl">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
-              Choose Your <span className="gradient-water">Path</span>
+              Select Your <span className="gradient-water">System</span>
             </h2>
             <p className="text-moonlightSilver text-base sm:text-lg max-w-2xl mx-auto px-4">
-              Four AI demonstrations, each with its own strength. Click any card to explore its magic.
+              Four AI consoles, each with unique capabilities. Click any card to activate the skill interface.
             </p>
           </div>
 
@@ -768,56 +807,96 @@ export default function AILabPage() {
             {demos.map((demo) => (
               <div
                 key={demo.id}
-                className={`group relative p-4 sm:p-6 rounded-xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 ${demo.borderColor}/30 hover:${demo.borderColor}/60 transition-all cursor-pointer ${
-                  activeDemo === demo.id ? 'ring-2 ring-offset-2 ring-offset-midnight' : ''
+                className={`group relative p-4 sm:p-6 rounded-xl bg-gradient-to-br from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 ${demo.borderColor}/30 hover:${demo.borderColor}/60 transition-all duration-300 cursor-pointer overflow-hidden ${
+                  activeDemo === demo.id ? `ring-2 ring-${demo.borderColor} ring-offset-2 ring-offset-midnight shadow-2xl shadow-${demo.borderColor}/40` : 'hover:shadow-xl'
                 }`}
                 onClick={() => setActiveDemo(activeDemo === demo.id ? null : demo.id)}
               >
+                {/* SAO Hexagon Pattern Background */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none">
+                  <div className="absolute inset-0 sao-hex-pattern" />
+                </div>
+
+                {/* Animated Border Glow on Active */}
+                {activeDemo === demo.id && (
+                  <div className={`absolute inset-0 rounded-xl border-2 ${demo.borderColor} animate-pulse pointer-events-none`} />
+                )}
+
                 {/* Card Header */}
-                <div className="flex items-start justify-between mb-4">
+                <div className="relative flex items-start justify-between mb-4">
                   <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                    <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white flex-shrink-0`}>
+                    <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                       {demo.icon}
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="text-lg sm:text-xl font-semibold text-pearlWhite truncate">{demo.title}</h3>
-                      <p className="text-xs text-starlight">{demo.house} • {demo.trait}</p>
+                      <p className="text-xs text-starlight truncate">
+                        <span className="hidden sm:inline">Role: </span>{demo.role} • <span className="font-bold text-lunarGold">{demo.tier}</span>
+                      </p>
                     </div>
                   </div>
-                  <Sparkles className={`w-4 h-4 sm:w-5 sm:h-5 text-lunarGold flex-shrink-0 ml-2 ${activeDemo === demo.id ? 'animate-pulse' : ''}`} />
+                  <div className={`flex-shrink-0 ml-2 px-2 sm:px-3 py-1 rounded text-[10px] sm:text-xs font-bold uppercase tracking-wide transition-all duration-300 ${
+                    activeDemo === demo.id
+                      ? 'bg-mermaidTeal/30 text-mermaidTeal border border-mermaidTeal/50 animate-pulse'
+                      : 'bg-moonlightSilver/10 text-moonlightSilver/60 border border-moonlightSilver/20'
+                  }`}>
+                    {activeDemo === demo.id ? '[ONLINE]' : '[READY]'}
+                  </div>
                 </div>
 
-                {/* Spell Incantation */}
-                <div className="mb-3 p-2 rounded-lg bg-lunarGold/10 border border-lunarGold/20">
-                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Spell:</p>
-                  <p className="text-sm text-lunarGold font-serif italic">{demo.spell}</p>
+                {/* System Call */}
+                <div className={`relative mb-3 p-2 sm:p-3 rounded-lg transition-all duration-300 ${
+                  activeDemo === demo.id
+                    ? 'bg-mermaidTeal/20 border-2 border-mermaidTeal/40 shadow-lg shadow-mermaidTeal/20'
+                    : 'bg-mermaidTeal/10 border border-mermaidTeal/20'
+                }`}>
+                  <p className="text-[10px] sm:text-xs text-mermaidTeal/70 uppercase tracking-wider font-semibold mb-1">SYSTEM CALL:</p>
+                  <p className="text-xs sm:text-sm text-mermaidTeal font-mono break-all">&lt;&lt;{demo.systemCall}&gt;&gt;</p>
                 </div>
 
                 {/* Description */}
-                <p className="text-sm text-moonlightSilver mb-2">
-                  {demo.description}
-                </p>
-                <p className="text-xs text-starlight/70 italic">
-                  "{demo.spellDesc}"
-                </p>
+                <div className="relative space-y-2 mb-4">
+                  <p className="text-sm sm:text-base text-moonlightSilver leading-relaxed">
+                    {demo.description}
+                  </p>
+                  <p className="text-xs text-starlight/70 italic leading-relaxed">
+                    {demo.systemDescription}
+                  </p>
+                </div>
 
                 {/* Demo Content - FIXED: Added stopPropagation */}
                 {activeDemo === demo.id && (
                   <div
-                    className="mt-6 pt-6 border-t border-moonlightSilver/20"
+                    className="relative mt-6 pt-6 border-t-2 border-mermaidTeal/30 animate-fadeIn"
                     onClick={(e) => e.stopPropagation()}
                   >
+                    <div className="mb-3 flex items-center gap-2 text-xs sm:text-sm text-mermaidTeal font-semibold uppercase tracking-wider">
+                      <div className="w-2 h-2 rounded-full bg-mermaidTeal animate-pulse" />
+                      <span>CONSOLE ACTIVE</span>
+                    </div>
                     {demo.component}
                   </div>
                 )}
 
-                {/* Expand Indicator - Cast Spell Button */}
-                <div className="mt-4">
-                  <div className={`w-full px-4 py-2 rounded-lg bg-gradient-to-r ${demo.colors} text-white font-semibold text-center text-sm transition-all hover:shadow-lg cursor-pointer`}>
+                {/* Activate Skill Button */}
+                <div className="relative mt-4">
+                  <div className={`w-full px-4 py-2.5 sm:py-3 rounded-lg bg-gradient-to-r ${demo.colors} text-white font-bold text-center text-xs sm:text-sm transition-all duration-300 hover:shadow-xl hover:scale-[1.02] active:scale-95 cursor-pointer group-hover:shadow-2xl`}>
                     {activeDemo === demo.id ? (
-                      <span>✨ Close Spell Book</span>
+                      <span className="flex items-center justify-center gap-2">
+                        <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="hidden sm:inline">EXIT INSTANCE</span>
+                        <span className="sm:hidden">EXIT</span>
+                        <span>•</span>
+                        <span>Close Console</span>
+                      </span>
                     ) : (
-                      <span>⚡ Cast Spell • Try Demo</span>
+                      <span className="flex items-center justify-center gap-2">
+                        <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+                        <span className="hidden sm:inline">ACTIVATE SKILL</span>
+                        <span className="sm:hidden">ACTIVATE</span>
+                        <span>•</span>
+                        <span>Open Console</span>
+                      </span>
                     )}
                   </div>
                 </div>
@@ -860,32 +939,158 @@ export default function AILabPage() {
         </div>
       </section>
 
+      {/* ==================== WHY HIRE ME SECTION ==================== */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-midnight via-deepOcean/40 to-midnight">
+        <div className="mx-auto max-w-6xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
+              Why This <span className="gradient-water">Combination Works</span>
+            </h2>
+            <p className="text-sm sm:text-base text-moonlightSilver max-w-2xl mx-auto px-4">
+              The rare intersection of clinical expertise and technical mastery
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            {/* Healthcare Expertise Card */}
+            <div className="group p-6 sm:p-8 rounded-xl bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border-2 border-lunarGold/30 hover:border-lunarGold/60 transition-all duration-300 hover:scale-[1.02]">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-gradient-to-r from-yellow-600 to-amber-600 text-white flex-shrink-0">
+                  <Heart className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-lunarGold mb-2">10+ Years Clinical RN</h3>
+                  <p className="text-xs sm:text-sm text-starlight uppercase tracking-wider">Healthcare Operations Expert</p>
+                </div>
+              </div>
+              <ul className="space-y-3 text-sm sm:text-base text-moonlightSilver">
+                <li className="flex items-start gap-2">
+                  <span className="text-lunarGold mt-1 flex-shrink-0">✓</span>
+                  <span>Deep understanding of clinical workflows and pain points</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-lunarGold mt-1 flex-shrink-0">✓</span>
+                  <span>HIPAA compliance and healthcare security expertise</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-lunarGold mt-1 flex-shrink-0">✓</span>
+                  <span>Real-world experience with patient data and triage systems</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-lunarGold mt-1 flex-shrink-0">✓</span>
+                  <span>Built solutions that actually work for frontline staff</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Technical Mastery Card */}
+            <div className="group p-6 sm:p-8 rounded-xl bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border-2 border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all duration-300 hover:scale-[1.02]">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-3 rounded-lg bg-gradient-to-r from-mermaidTeal to-tealBright text-white flex-shrink-0">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-mermaidTeal mb-2">Full-Stack AI Developer</h3>
+                  <p className="text-xs sm:text-sm text-starlight uppercase tracking-wider">Cutting-Edge Tech Stack</p>
+                </div>
+              </div>
+              <ul className="space-y-3 text-sm sm:text-base text-moonlightSilver">
+                <li className="flex items-start gap-2">
+                  <span className="text-mermaidTeal mt-1 flex-shrink-0">✓</span>
+                  <span>Production AI: Claude API, OpenAI, RAG systems, voice AI</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-mermaidTeal mt-1 flex-shrink-0">✓</span>
+                  <span>Modern stack: Next.js 16, TypeScript, React, Tailwind</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-mermaidTeal mt-1 flex-shrink-0">✓</span>
+                  <span>Backend: Python, Node.js, PostgreSQL, Supabase</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-mermaidTeal mt-1 flex-shrink-0">✓</span>
+                  <span>Shipped real products used by actual users daily</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Unique Value Proposition */}
+          <div className="mt-6 sm:mt-8 p-6 sm:p-8 rounded-xl bg-gradient-to-r from-deepOcean/40 via-midnight/60 to-deepOcean/40 border-2 border-purple-400/30 text-center">
+            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed">
+              <span className="text-purple-400 font-bold">The Result?</span> AI solutions that aren't just technically impressive—
+              they're <span className="text-lunarGold font-semibold">actually useful</span>,
+              <span className="text-mermaidTeal font-semibold"> user-friendly</span>, and
+              <span className="text-tealBright font-semibold"> production-ready</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ==================== CTA SECTION ==================== */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6">
-        <div className="mx-auto max-w-4xl text-center space-y-6 sm:space-y-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold px-4">
+      <section className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-lunarGold blur-3xl animate-pulse" />
+        </div>
+
+        <div className="relative mx-auto max-w-4xl text-center space-y-6 sm:space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mermaidTeal/20 border border-mermaidTeal/40 text-mermaidTeal text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4">
+            <div className="w-2 h-2 rounded-full bg-mermaidTeal animate-pulse" />
+            <span>Ready to Deploy</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold px-4 leading-tight">
             Ready to Build Your <span className="gradient-water">AI Solution</span>?
           </h2>
-          <p className="text-base sm:text-lg text-moonlightSilver max-w-2xl mx-auto px-4">
-            From prototype to production, I combine healthcare expertise with cutting-edge AI
-            to create intelligent applications that make a difference.
+
+          <p className="text-base sm:text-lg md:text-xl text-moonlightSilver max-w-2xl mx-auto px-4 leading-relaxed">
+            From <span className="text-mermaidTeal font-semibold">prototype to production</span>,
+            I combine healthcare expertise with cutting-edge AI to create
+            <span className="text-lunarGold font-semibold"> intelligent applications</span> that make a real difference.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4">
+
+          {/* Stats Row */}
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 py-4 sm:py-6">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-mermaidTeal">Fast</div>
+              <div className="text-xs sm:text-sm text-starlight">Rapid Prototyping</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-lunarGold">Secure</div>
+              <div className="text-xs sm:text-sm text-starlight">HIPAA Compliant</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-tealBright">Scalable</div>
+              <div className="text-xs sm:text-sm text-starlight">Production Ready</div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 pt-4">
             <a
               href="/contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-semibold shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-2"
+              className="group w-full sm:w-auto px-8 py-4 sm:py-5 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-bold text-base sm:text-lg shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 active:scale-95 transition-all text-center"
             >
-              <span>⚡ Link Start!</span>
-              <span>Start Your AI Project</span>
+              <span className="flex items-center justify-center gap-3">
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 group-hover:animate-pulse" />
+                <span>Start Your AI Project</span>
+              </span>
             </a>
             <a
               href="/portfolio"
-              className="w-full sm:w-auto px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-semibold hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-2"
+              className="group w-full sm:w-auto px-8 py-4 sm:py-5 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-bold text-base sm:text-lg hover:bg-mermaidTeal hover:text-white hover:-translate-y-1 active:scale-95 transition-all text-center"
             >
-              <span>🏆</span>
-              <span>View Achievement Gallery</span>
+              <span className="flex items-center justify-center gap-3">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span>View Portfolio</span>
+              </span>
             </a>
           </div>
+
+          {/* Trust Signal */}
+          <p className="text-xs sm:text-sm text-starlight/70 italic px-4 pt-4">
+            Fully interactive demos above • No signup required • Try it now
+          </p>
         </div>
       </section>
 
