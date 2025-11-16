@@ -43,7 +43,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-[10000] border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
+    <header className="sticky top-0 z-[40] border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         {/* Logo with Animated Moon Phase */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -138,7 +138,7 @@ export function Header() {
       </div>
 
       {/* Mobile Navigation Menu - ALWAYS RENDERED, visibility controlled by CSS */}
-      <div className={`md:hidden fixed inset-0 z-[10002] bg-midnight/95 backdrop-blur-md transition-all duration-300 ${
+      <div className={`md:hidden fixed inset-0 z-[20000] bg-midnight/95 backdrop-blur-md transition-all duration-300 ${
         mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>
         <div className="fixed left-0 right-0 top-[73px] bottom-0 overflow-y-auto border-t-2 border-mermaidTeal">
