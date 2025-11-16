@@ -1,7 +1,8 @@
 "use client";
 
 import React, { ReactNode, FormEvent, useState, useEffect } from "react";
-import { AnimatedOwl } from "../components/AnimatedOwl";
+import { HedwigOwl } from "../components/HedwigOwl";
+import { OwlIcon } from "../components/OwlIcon";
 import { AnimatedSword } from "../components/AnimatedSword";
 import { AnimatedSpirit } from "../components/AnimatedSpirit";
 import { AnimatedHorn } from "../components/AnimatedHorn";
@@ -138,7 +139,7 @@ export default function ContactPage() {
   const getThemeIcon = (themeMode: ThemeMode, className?: string) => {
     switch (themeMode) {
       case "owlery":
-        return <AnimatedOwl className={className} />;
+        return <HedwigOwl />;
       case "sao":
         return <AnimatedSword className={className} />;
       case "atla":
@@ -146,7 +147,7 @@ export default function ContactPage() {
       case "lotr":
         return <AnimatedHorn className={className} />;
       default:
-        return <AnimatedOwl className={className} />;
+        return <HedwigOwl />;
     }
   };
 
@@ -259,7 +260,7 @@ export default function ContactPage() {
               title="Harry Potter - Owlery"
             >
               <span className="inline-flex items-center gap-1">
-                <AnimatedOwl className="w-4 h-4" />
+                <OwlIcon className="w-4 h-4" />
                 <span>Owlery</span>
               </span>
             </button>

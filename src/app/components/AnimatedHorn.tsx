@@ -107,7 +107,7 @@ export function AnimatedHorn({ className = "w-16 h-16" }: { className?: string }
       </g>
 
       {/* Magical energy bursts */}
-      <g className="energy" opacity="0" className="animate-[flash_4s_ease-in-out_infinite]">
+      <g className="energy animate-[flash_4s_ease-in-out_infinite]" opacity="0">
         <path d="M50 0 L48 -5 L50 -3 L52 -8 L50 -4" stroke="#FFD700" strokeWidth="1.5" fill="none" />
         <path d="M50 0 L52 -5 L50 -3 L48 -8 L50 -4" stroke="#FFFFFF" strokeWidth="1.5" fill="none" />
       </g>

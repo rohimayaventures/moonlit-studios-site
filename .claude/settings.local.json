@@ -10,7 +10,11 @@
       "Bash(find:*)",
       "Bash(npm run dev:*)",
       "Bash(git check-ignore:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(dir /b public*.png public*.jpg public*.jpeg public*.webp 2)",
+      "Bash(nul)",
+      "Bash(if exist nul del /f nul)",
+      "Bash(.gitignore)"
     ],
     "deny": [],
     "ask": []

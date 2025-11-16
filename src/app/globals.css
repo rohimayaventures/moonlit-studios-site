@@ -610,3 +610,58 @@ a {
     transition: none;
   }
 }
+
+/* ========================================
+   OWLERY — HEDWIG ANIMATION
+   ======================================== */
+
+@keyframes owlFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes owlWingFlap {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes owlLetterBob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.owl-float {
+  animation: owlFloat 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.owl-wing {
+  transform-origin: 130px 130px;
+  animation: owlWingFlap 3.2s ease-in-out infinite;
+}
+
+.owl-wing-left {
+  transform-origin: 90px 125px;
+}
+
+.owl-wing-right {
+  transform-origin: 170px 125px;
+  animation-delay: 0.15s;
+}
+
+.owl-letter {
+  animation: owlLetterBob 2.4s ease-in-out infinite;
+  transform-origin: 130px 140px;
+}
