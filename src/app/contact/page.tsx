@@ -345,7 +345,7 @@ export default function ContactPage() {
             {/* Wax seal decoration - theme-compatible */}
             <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 blur-2xl animate-pulse" style={{ background: `linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary))` }}></div>
 
-            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit} key={theme}>
               <div className="grid gap-4 md:grid-cols-2">
                 <FormField label="Your Name">
                   <input
