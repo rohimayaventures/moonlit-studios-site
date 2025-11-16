@@ -43,7 +43,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
+    <header className="sticky top-0 z-[10000] border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         {/* Logo with Animated Moon Phase */}
         <Link href="/" className="flex items-center gap-3 group">
