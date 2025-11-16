@@ -1,181 +1,120 @@
 export function AnimatedOwl({ className = "w-16 h-16" }: { className?: string }) {
   return (
     <svg
-      className={className}
-      viewBox="0 0 200 200"
+      viewBox="0 0 100 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
-      {/* Owl Body */}
-      <g className="animate-bounce" style={{ animationDuration: '3s' }}>
-        {/* Main body gradient */}
-        <defs>
-          <linearGradient id="owlBody" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#8B7355', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#5C4033', stopOpacity: 1 }} />
-          </linearGradient>
-          <linearGradient id="owlWing" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" style={{ stopColor: '#6B5444', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#4A3728', stopOpacity: 1 }} />
-          </linearGradient>
-          <radialGradient id="owlEye" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
-            <stop offset="70%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
-          </radialGradient>
-        </defs>
+      {/* Flying Owl with Letter - Elegant Line Art */}
 
-        {/* Body */}
-        <ellipse cx="100" cy="120" rx="50" ry="60" fill="url(#owlBody)" />
+      {/* Owl body */}
+      <path
+        d="M50 20 C35 20, 25 30, 25 45 L25 60 C25 70, 35 75, 50 75 C65 75, 75 70, 75 60 L75 45 C75 30, 65 20, 50 20Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        className="animate-[float_3s_ease-in-out_infinite]"
+      />
 
-        {/* Wings */}
-        <g className="wing-left" style={{ transformOrigin: '60px 110px' }}>
-          <ellipse cx="60" cy="110" rx="25" ry="45" fill="url(#owlWing)" opacity="0.9" />
-          <path
-            d="M 45 90 Q 35 110 45 130"
-            stroke="#4A3728"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.6"
-          />
-          <animate
-            attributeName="rx"
-            values="25;30;25"
-            dur="2s"
-            repeatCount="indefinite"
-          />
-        </g>
+      {/* Left Wing - flapping */}
+      <path
+        d="M25 45 Q10 35, 5 45 Q3 50, 5 55 Q10 65, 25 55"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="origin-[25px_50px] animate-[flap_1.5s_ease-in-out_infinite]"
+        style={{ transformBox: 'fill-box' }}
+      />
 
-        <g className="wing-right" style={{ transformOrigin: '140px 110px' }}>
-          <ellipse cx="140" cy="110" rx="25" ry="45" fill="url(#owlWing)" opacity="0.9" />
-          <path
-            d="M 155 90 Q 165 110 155 130"
-            stroke="#4A3728"
-            strokeWidth="2"
-            fill="none"
-            opacity="0.6"
-          />
-          <animate
-            attributeName="rx"
-            values="25;30;25"
-            dur="2s"
-            repeatCount="indefinite"
-          />
-        </g>
+      {/* Right Wing - flapping */}
+      <path
+        d="M75 45 Q90 35, 95 45 Q97 50, 95 55 Q90 65, 75 55"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="origin-[75px_50px] animate-[flap_1.5s_ease-in-out_infinite]"
+        style={{ transformBox: 'fill-box', animationDelay: '0.1s' }}
+      />
 
-        {/* Head */}
-        <circle cx="100" cy="80" r="40" fill="url(#owlBody)" />
+      {/* Wing detail feathers - left */}
+      <path d="M15 48 L8 52 M15 52 L8 56" stroke="currentColor" strokeWidth="1" opacity="0.6" strokeLinecap="round" />
 
-        {/* Ear tufts */}
-        <path
-          d="M 70 50 L 65 35 L 75 45 Z"
-          fill="#6B5444"
-          opacity="0.8"
-        />
-        <path
-          d="M 130 50 L 135 35 L 125 45 Z"
-          fill="#6B5444"
-          opacity="0.8"
-        />
+      {/* Wing detail feathers - right */}
+      <path d="M85 48 L92 52 M85 52 L92 56" stroke="currentColor" strokeWidth="1" opacity="0.6" strokeLinecap="round" />
 
-        {/* Eyes - with blink animation */}
-        <g className="eyes">
-          <circle cx="85" cy="75" r="15" fill="url(#owlEye)" />
-          <circle cx="115" cy="75" r="15" fill="url(#owlEye)" />
+      {/* Eyes - wise circles */}
+      <circle cx="42" cy="38" r="5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+      <circle cx="58" cy="38" r="5" stroke="currentColor" strokeWidth="1.5" fill="none" />
 
-          {/* Pupils */}
-          <circle cx="85" cy="75" r="8" fill="#2C1810">
-            <animate
-              attributeName="cy"
-              values="75;75;75;75"
-              dur="4s"
-              repeatCount="indefinite"
-            />
-          </circle>
-          <circle cx="115" cy="75" r="8" fill="#2C1810">
-            <animate
-              attributeName="cy"
-              values="75;75;75;75"
-              dur="4s"
-              repeatCount="indefinite"
-            />
-          </circle>
+      {/* Pupils - blinking */}
+      <circle cx="42" cy="38" r="2.5" fill="currentColor" className="animate-[blink_4s_ease-in-out_infinite]" />
+      <circle cx="58" cy="38" r="2.5" fill="currentColor" className="animate-[blink_4s_ease-in-out_infinite]" />
 
-          {/* Eye shine */}
-          <circle cx="88" cy="72" r="4" fill="#FFF" opacity="0.8" />
-          <circle cx="118" cy="72" r="4" fill="#FFF" opacity="0.8" />
+      {/* Beak */}
+      <path d="M48 45 L50 50 L52 45" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
 
-          {/* Blink */}
-          <rect x="70" y="60" width="30" height="0" fill="#6B5444">
-            <animate
-              attributeName="height"
-              values="0;30;0;0;0"
-              dur="4s"
-              repeatCount="indefinite"
-            />
-          </rect>
-          <rect x="100" y="60" width="30" height="0" fill="#6B5444">
-            <animate
-              attributeName="height"
-              values="0;30;0;0;0"
-              dur="4s"
-              repeatCount="indefinite"
-            />
-          </rect>
-        </g>
+      {/* Ear tufts */}
+      <path d="M32 23 L28 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="animate-[sway_3s_ease-in-out_infinite]" style={{ transformOrigin: '32px 23px' }} />
+      <path d="M68 23 L72 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="animate-[sway_3s_ease-in-out_infinite]" style={{ transformOrigin: '68px 23px', animationDelay: '0.5s' }} />
 
-        {/* Beak */}
-        <path
-          d="M 100 85 L 95 95 L 105 95 Z"
-          fill="#D4AF37"
-          opacity="0.9"
-        />
+      {/* Chest feather details */}
+      <path d="M40 60 Q50 65 60 60" stroke="currentColor" strokeWidth="1" opacity="0.5" fill="none" strokeLinecap="round" />
+      <path d="M42 65 Q50 68 58 65" stroke="currentColor" strokeWidth="1" opacity="0.5" fill="none" strokeLinecap="round" />
 
-        {/* Chest feather pattern */}
-        <g opacity="0.3">
-          <ellipse cx="100" cy="130" rx="20" ry="15" fill="#F5DEB3" />
-          <path d="M 90 125 Q 100 135 110 125" stroke="#8B7355" strokeWidth="1" fill="none" />
-          <path d="M 90 135 Q 100 145 110 135" stroke="#8B7355" strokeWidth="1" fill="none" />
-        </g>
+      {/* Talons */}
+      <path d="M45 73 L43 78 M48 73 L48 78 M51 73 L53 78" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M49 73 L47 78 M52 73 L52 78 M55 73 L57 78" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
 
-        {/* Talons */}
-        <g transform="translate(85, 175)">
-          <path d="M 0 0 L -3 8 M 5 0 L 5 8 M 10 0 L 13 8" stroke="#4A3728" strokeWidth="2" strokeLinecap="round" />
-        </g>
-        <g transform="translate(105, 175)">
-          <path d="M 0 0 L -3 8 M 5 0 L 5 8 M 10 0 L 13 8" stroke="#4A3728" strokeWidth="2" strokeLinecap="round" />
-        </g>
+      {/* LETTER IN BEAK - The Star Feature */}
+      <g className="animate-[bounce_2s_ease-in-out_infinite]">
+        {/* Envelope */}
+        <rect x="38" y="52" width="24" height="16" rx="1" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        {/* Envelope flap */}
+        <path d="M38 52 L50 62 L62 52" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Wax seal */}
+        <circle cx="50" cy="60" r="2.5" fill="currentColor" opacity="0.6" />
+        {/* Address lines */}
+        <path d="M42 56 L48 56" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
+        <path d="M42 58 L55 58" stroke="currentColor" strokeWidth="0.5" opacity="0.4" />
       </g>
 
-      {/* Flying sparkles around owl */}
-      <g className="sparkles" opacity="0.6">
-        <circle cx="40" cy="60" r="2" fill="#D4AF37">
-          <animate
-            attributeName="opacity"
-            values="0;1;0"
-            dur="2s"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="160" cy="80" r="2" fill="#D4AF37">
-          <animate
-            attributeName="opacity"
-            values="0;1;0"
-            dur="2s"
-            begin="0.5s"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="50" cy="140" r="2" fill="#D4AF37">
-          <animate
-            attributeName="opacity"
-            values="0;1;0"
-            dur="2s"
-            begin="1s"
-            repeatCount="indefinite"
-          />
-        </circle>
+      {/* Motion lines - suggesting flight */}
+      <g opacity="0.3" className="animate-pulse">
+        <path d="M10 30 Q8 32 6 30" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
+        <path d="M10 40 Q8 42 6 40" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
+        <path d="M90 30 Q92 32 94 30" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
+        <path d="M90 40 Q92 42 94 40" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" />
       </g>
+
+      {/* Sparkles around letter */}
+      <circle cx="34" cy="54" r="1" fill="currentColor" opacity="0" className="animate-[sparkle_2s_ease-in-out_infinite]" />
+      <circle cx="66" cy="54" r="1" fill="currentColor" opacity="0" className="animate-[sparkle_2s_ease-in-out_infinite]" style={{ animationDelay: '0.7s' }} />
+      <circle cx="50" cy="48" r="1" fill="currentColor" opacity="0" className="animate-[sparkle_2s_ease-in-out_infinite]" style={{ animationDelay: '1.4s' }} />
+
+      {/* Animation keyframes */}
+      <style jsx>{`
+        @keyframes flap {
+          0%, 100% { transform: rotate(0deg); }
+          50% { transform: rotate(-20deg); }
+        }
+        @keyframes blink {
+          0%, 48%, 52%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        @keyframes sway {
+          0%, 100% { transform: rotate(0deg); }
+          50% { transform: rotate(8deg); }
+        }
+        @keyframes sparkle {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </svg>
   );
 }
