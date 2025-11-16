@@ -15,10 +15,12 @@ import { CalendlyButton } from '../components/CalendlyButton';
 const suites = [
   {
     name: "Creative Design & Development",
-    questTitle: "The Branding Quest",
-    difficulty: 2, // ⭐⭐ Warrior
+    questTitle: "The Path of Water",
+    element: "Water",
+    elementDesc: "Adaptability • Flow • Creativity",
+    difficulty: 2, // Intermediate Bender
     description:
-      "Branding, websites, and visual direction for founders, authors, and small studios.",
+      "Like water flowing around obstacles, branding and design that adapts to your vision while maintaining its essential nature.",
     includes: [
       "Branding & identity systems",
       "Custom web + UI builds",
@@ -44,10 +46,12 @@ const suites = [
   },
   {
     name: "Health x Tech Development",
-    questTitle: "The Healer's Code",
-    difficulty: 3, // ⭐⭐⭐ Master
+    questTitle: "The Path of Earth",
+    element: "Earth",
+    elementDesc: "Foundation • Stability • Strength",
+    difficulty: 3, // Master Bender
     description:
-      "Clinical-grade UX and interfaces designed by a nurse who understands workflows.",
+      "Rooted in clinical reality like bedrock beneath your feet. Healthcare platforms built with the unwavering strength and stability of stone.",
     includes: [
       "HIPAA-aligned UI and flows",
       "Nurse-to-nurse platforms",
@@ -72,10 +76,12 @@ const suites = [
   },
   {
     name: "Consulting",
-    questTitle: "The Strategy Session",
-    difficulty: 1, // ⭐ Novice
+    questTitle: "The Path of Air",
+    element: "Air",
+    elementDesc: "Wisdom • Freedom • Perspective",
+    difficulty: 1, // Novice Path
     description:
-      "Strategy, audits, and workshops at the intersection of healthcare, UX, and product.",
+      "Strategic wisdom that flows freely, seeing from heights others cannot reach. Guidance as light and adaptable as the wind itself.",
     includes: [
       "Healthtech product strategy",
       "UX for clinician workflows",
@@ -99,10 +105,12 @@ const suites = [
   },
   {
     name: "AI Innovation Suite",
-    questTitle: "The AI Architect",
-    difficulty: 3, // ⭐⭐⭐ Master
+    questTitle: "The Path of Fire",
+    element: "Fire",
+    elementDesc: "Power • Innovation • Transformation",
+    difficulty: 3, // Master Bender
     description:
-      "Applied AI systems, copilots, and creative engines that actually ship.",
+      "Transformative AI forged in the flames of innovation. Power that burns away the impossible, creating entirely new possibilities.",
     includes: [
       "AI product architecture",
       "Conversational & voice AI",
@@ -124,10 +132,12 @@ const suites = [
   },
   {
     name: "Author & Ghostwriting Studio",
-    questTitle: "The Storyteller's Scroll",
-    difficulty: 2, // ⭐⭐ Warrior
+    questTitle: "The Path of Spirit",
+    element: "Spirit",
+    elementDesc: "Connection • Balance • Voice",
+    difficulty: 2, // Intermediate Bender
     description:
-      "Author platforms, books, cookbooks, and ongoing written content done in your voice.",
+      "Channel the spiritual essence of your authentic voice. Stories that bridge worlds and connect deeply with readers' spirits.",
     includes: [
       "Book & cookbook ghostwriting",
       "Blogs + newsletters",
@@ -190,17 +200,17 @@ const getDifficultyStars = (difficulty: number) => {
   return stars;
 };
 
-// Get difficulty label
-const getDifficultyLabel = (difficulty: number) => {
+// Get mastery level label (ATLA theme)
+const getMasteryLabel = (difficulty: number) => {
   switch (difficulty) {
     case 1:
-      return "NOVICE";
+      return "NOVICE PATH";
     case 2:
-      return "WARRIOR";
+      return "INTERMEDIATE BENDER";
     case 3:
-      return "MASTER";
+      return "MASTER BENDER";
     default:
-      return "QUEST";
+      return "BENDING PATH";
   }
 };
 
@@ -282,20 +292,20 @@ export default function ServicesPage() {
           </div>
 
           <div className="text-center space-y-4 sm:space-y-6">
-            {/* Quest Board Title */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/40">
+            {/* Bending Paths Title */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-mermaidTeal/20 to-tealBright/20 border border-mermaidTeal/40">
               <AnimatedScroll className="w-6 h-6" />
-              <p className="text-xs sm:text-sm tracking-[0.35em] text-lunarGold uppercase font-semibold">
-                Quest Board
+              <p className="text-xs sm:text-sm tracking-[0.35em] text-mermaidTeal uppercase font-semibold">
+                Five Bending Paths
               </p>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
-              Choose your quest. Begin your journey.
+              Choose your element. Master your path.
             </h1>
             <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4">
-              Every great adventure starts with accepting the right quest. Led by a nurse-turned-developer,
-              these five service quests offer different paths—each with its own challenges, rewards, and transformations.
-              Which quest calls to you?
+              Like the Avatar mastering all four elements, every journey begins by choosing your path. Led by a nurse who codes,
+              these five bending disciplines offer unique approaches—each with distinct philosophies, techniques, and transformations.
+              Which element resonates with your vision?
             </p>
 
             {/* Service Dropdown Navigation */}
@@ -326,17 +336,17 @@ export default function ServicesPage() {
 
       <section id="quests" className="px-6 pb-16">
         <div className="mx-auto max-w-6xl space-y-8">
-          {/* Quest Board Header */}
+          {/* Bending Paths Header */}
           <div className="space-y-3 text-center">
             <div className="inline-flex items-center gap-2">
               <AnimatedSword className="w-5 h-5" />
               <p className="text-sm tracking-[0.35em] text-starlight uppercase">
-                Available Quests
+                Master The Elements
               </p>
               <AnimatedSword className="w-5 h-5" />
             </div>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
-              Each quest scales to your resources and timeline. Accept one to begin your transformation.
+              Each path adapts to your resources and timeline. Choose your element to begin training.
             </p>
           </div>
 
@@ -362,7 +372,7 @@ export default function ServicesPage() {
                     {getDifficultyStars(suite.difficulty)}
                   </div>
                   <span className="text-[0.65rem] tracking-[0.2em] text-lunarGold/70 font-semibold">
-                    {getDifficultyLabel(suite.difficulty)}
+                    {getMasteryLabel(suite.difficulty)}
                   </span>
                 </div>
 
@@ -377,9 +387,9 @@ export default function ServicesPage() {
                 {/* Quest Description */}
                 <p className="mt-2 text-sm leading-relaxed">{suite.description}</p>
 
-                {/* Quest Objectives */}
+                {/* Training Focus */}
                 <div className="mt-4 space-y-2">
-                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Quest Objectives:</p>
+                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Training Focus:</p>
                   <ul className="space-y-1.5 text-xs">
                     {suite.includes.map((item) => (
                       <li key={item} className="flex gap-2 items-start">
@@ -392,9 +402,9 @@ export default function ServicesPage() {
                   </ul>
                 </div>
 
-                {/* Rewards */}
+                {/* Mastery Achievements */}
                 <div className="mt-4 p-3 rounded-xl bg-lunarGold/10 border border-lunarGold/20">
-                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold mb-2">Quest Rewards:</p>
+                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold mb-2">Mastery Achievements:</p>
                   <ul className="space-y-1 text-xs">
                     {suite.rewards.map((reward) => (
                       <li key={reward} className="flex gap-2 items-start">
@@ -407,7 +417,7 @@ export default function ServicesPage() {
                   </ul>
                 </div>
 
-                {/* Gold Cost */}
+                {/* Training Investment */}
                 <div className="mt-4 flex items-center gap-2">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="12" cy="12" r="10" fill="url(#coinGold)" stroke="#D4AF37" strokeWidth="2"/>
@@ -420,7 +430,7 @@ export default function ServicesPage() {
                     </defs>
                   </svg>
                   <div className="flex flex-col">
-                    <span className="text-xs text-moonlightSilver/70">Quest Fee</span>
+                    <span className="text-xs text-moonlightSilver/70">Training Investment</span>
                     <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
                   </div>
                 </div>
@@ -471,18 +481,73 @@ export default function ServicesPage() {
                   </div>
                 )}
 
-                {/* Accept Quest Button */}
+                {/* Begin Training Button */}
                 <a
                   href={suite.href}
                   className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-lunarGold/90 to-phoenixFire/80 px-6 py-3 text-sm font-bold text-midnight transition-all hover:from-lunarGold hover:to-phoenixFire hover:shadow-lg hover:shadow-lunarGold/40 hover:-translate-y-0.5 group"
                 >
-                  <span>Accept Quest</span>
+                  <span>Begin Training</span>
                   <span className="group-hover:translate-x-1 transition-transform inline-block w-4 h-4">
                     <AnimatedSword className="w-4 h-4" />
                   </span>
                 </a>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CROSS-REALM PORTALS */}
+      <section className="py-16 bg-gradient-to-b from-midnight to-midnightNavy border-t border-deepOcean/40">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-semibold text-pearlWhite mb-3">
+              Explore Other Realms
+            </h2>
+            <p className="text-moonlightSilver text-sm">
+              Your journey doesn&apos;t end here. Each realm offers unique wisdom and power.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {/* AI Lab Portal */}
+            <a href="/ai-lab" className="group block">
+              <div className="p-6 rounded-xl bg-gradient-to-br from-lunarGold/10 to-phoenixFire/10 border border-lunarGold/30 hover:border-lunarGold transition-all hover:shadow-lg hover:shadow-lunarGold/20">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lunarGold/30 to-phoenixFire/30 flex items-center justify-center mb-3 border border-lunarGold/50 group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-lunarGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-lunarGold transition-colors">AI Battle System</h3>
+                <p className="text-xs text-moonlightSilver">Four AI warriors ready to deploy. See the systems in action.</p>
+              </div>
+            </a>
+
+            {/* Portfolio Portal */}
+            <a href="/portfolio" className="group block">
+              <div className="p-6 rounded-xl bg-gradient-to-br from-silverMist/10 to-stoneGray/10 border border-silverMist/30 hover:border-silverMist transition-all hover:shadow-lg hover:shadow-silverMist/20">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-silverMist/30 to-lunarGold/20 flex items-center justify-center mb-3 border border-silverMist/50 group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-silverMist" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-silverMist transition-colors">Quest Chronicles</h3>
+                <p className="text-xs text-moonlightSilver">Journey through five realms of completed legends and victories.</p>
+              </div>
+            </a>
+
+            {/* About Portal */}
+            <a href="/about" className="group block">
+              <div className="p-6 rounded-xl bg-gradient-to-br from-starlight/10 to-moonlightSilver/10 border border-starlight/30 hover:border-starlight transition-all hover:shadow-lg hover:shadow-starlight/20">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-starlight/30 to-moonlightSilver/20 flex items-center justify-center mb-3 border border-starlight/50 group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-starlight transition-colors">Moonlit Archives</h3>
+                <p className="text-xs text-moonlightSilver">The Master&apos;s Journey from nurse to code warrior to Avatar State.</p>
+              </div>
+            </a>
           </div>
         </div>
       </section>
@@ -503,10 +568,10 @@ export default function ServicesPage() {
             <AnimatedWizard className="w-16 h-16" />
           </div>
           <h3 className="text-2xl font-semibold text-pearlWhite mb-2">
-            Need help choosing your quest?
+            Need guidance choosing your element?
           </h3>
           <p className="text-sm text-moonlightSilver max-w-2xl mx-auto">
-            Not all who wander are lost, but sometimes a guide helps. Let's talk through which quest fits your timeline, resources, and vision.
+            Finding balance between elements requires wisdom. Let's discuss which bending path aligns with your vision, timeline, and resources.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
             <CalendlyButton

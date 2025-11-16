@@ -1,62 +1,23 @@
-import type { Metadata } from "next";
+'use client';
+
 import { AnimatedTrophy } from "../components/AnimatedTrophy";
 import { AnimatedSword } from "../components/AnimatedSword";
 import { AnimatedDiamond } from "../components/AnimatedDiamond";
 import { AnimatedGamepad } from "../components/AnimatedGamepad";
 import { AnimatedScroll } from "../components/AnimatedScroll";
 import { AnimatedLightning } from "../components/AnimatedLightning";
-
-export const metadata: Metadata = {
-  title: "Portfolio - Selected Work | Moonlit Studios",
-  description:
-    "Explore healthcare tech platforms, AI-powered applications, creative brand designs, and full-stack web development projects. From HIPAA-compliant clinical systems to RAG chatbots and voice AI—see what The Nurse Who Codes builds.",
-  keywords: [
-    "web developer portfolio",
-    "healthcare tech projects",
-    "AI development portfolio",
-    "full-stack developer work",
-    "React Next.js projects",
-    "HIPAA compliant applications",
-    "RAG chatbot examples",
-    "voice AI projects",
-    "clinical workflow software",
-    "healthcare UX portfolio",
-    "TypeScript developer projects",
-    "AI ML portfolio"
-  ],
-  openGraph: {
-    title: "Portfolio - Selected Work | Moonlit Studios",
-    description:
-      "Healthcare tech, AI applications, creative brands, and full-stack web development. Case studies from The Nurse Who Codes—where clinical expertise meets cutting-edge tech.",
-    type: "website",
-    url: "https://moonlstudios.com/portfolio",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Moonlit Studios Portfolio - Healthcare Tech & AI Development",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Portfolio - Selected Work | Moonlit Studios",
-    description:
-      "Healthcare platforms, AI apps, creative brands. Projects that heal, inspire, and transform.",
-    images: ["/og-image.png"],
-  },
-};
+import { CalendlyButton } from "../components/CalendlyButton";
 
 const sections = [
   {
     id: "web-brand",
     label: "WEB & BRAND DESIGN",
     title: "Web & Brand Design",
-    floor: 1, // SAO Floor number
-    bossName: "The Brand Architect",
+    realm: "The Shire",
+    realmDesc: "Where Journeys Begin",
+    questGiver: "The Storyteller of Hobbiton",
     description:
-      "Story-driven marketing sites, founder portfolios, and campaign microsites built with clarity and conversion in mind.",
+      "Like Bag End welcoming travelers, brands and sites that feel like home—crafted with care, rooted in story, ready for adventure.",
     projects: [
       {
         tag: "STUDIO SITE / MARKETING",
@@ -67,7 +28,7 @@ const sections = [
           "Modular layout for future services",
         ],
         tech: "Next.js · TypeScript · Tailwind · Sanity-ready",
-        status: "In Progress",
+        status: "Journey Ongoing",
       },
       {
         tag: "AUTHOR PORTAL",
@@ -78,7 +39,7 @@ const sections = [
           "Light CMS structure for ongoing drops",
         ],
         tech: "Next.js · Tailwind · MDX · Email API",
-        status: "Concept",
+        status: "Tale Conceived",
       },
       {
         tag: "PRODUCT CAMPAIGN",
@@ -89,7 +50,7 @@ const sections = [
           "Launch-ready assets + analytics hooks",
         ],
         tech: "Next.js · Tailwind · Vercel · Analytics",
-        status: "Template",
+        status: "Ready to Depart",
       },
     ],
   },
@@ -97,10 +58,11 @@ const sections = [
     id: "health-tech",
     label: "HEALTH x TECH & CLINICAL UX",
     title: "Health x Tech & Clinical UX",
-    floor: 2,
-    bossName: "The Healing Guardian",
+    realm: "Rivendell",
+    realmDesc: "House of Healing",
+    questGiver: "The Healer of Imladris",
     description:
-      "Clinical-grade UX concepts built by a nurse who understands workflows, safety, and documentation.",
+      "As Elrond's house mends the weary, healthcare platforms built with clinical precision and healing intent. Wisdom meeting innovation.",
     projects: [
       {
         tag: "AI PLATFORM / HEALTHCARE",
@@ -111,7 +73,7 @@ const sections = [
           "Safety-aligned workflow guidance",
         ],
         tech: "Next.js · TypeScript · Tailwind · API-first",
-        status: "Concept",
+        status: "Tale Conceived",
       },
       {
         tag: "SHIFT HANDOFF",
@@ -122,7 +84,7 @@ const sections = [
           "Printable summary + audit log",
         ],
         tech: "Next.js · Node · FHIR-ready · Auth layer",
-        status: "Prototype",
+        status: "First Draft",
       },
       {
         tag: "PATIENT UX",
@@ -133,7 +95,7 @@ const sections = [
           "Care team messaging + check-ins",
         ],
         tech: "Next.js · Tailwind · React Query · Notifications",
-        status: "Concept",
+        status: "Tale Conceived",
       },
     ],
   },
@@ -141,10 +103,11 @@ const sections = [
     id: "ai-innovation",
     label: "AI INNOVATION",
     title: "AI Innovation",
-    floor: 3,
-    bossName: "The AI Overlord",
+    realm: "Lothlórien",
+    realmDesc: "Forest of Vision",
+    questGiver: "The Seer of the Golden Wood",
     description:
-      "Copilots, applied AI products, and creative engines that blend clinical empathy with technical engineering.",
+      "Like Galadriel's mirror revealing what might be, AI that sees patterns invisible to mortal eyes. Innovation blessed with foresight.",
     projects: [
       {
         tag: "VOICE + CHAT AI",
@@ -155,7 +118,7 @@ const sections = [
           "Adaptive prompts based on pantry data",
         ],
         tech: "Next.js · OpenAI API · Vercel KV · Whisper",
-        status: "In Progress",
+        status: "Journey Ongoing",
       },
       {
         tag: "CLINICAL COPILOT",
@@ -166,7 +129,7 @@ const sections = [
           "Escalation suggestions for nurses",
         ],
         tech: "Next.js · LangChain · Vector DB · Azure OpenAI",
-        status: "Concept",
+        status: "Tale Conceived",
       },
       {
         tag: "FOUNDER AUTOMATION",
@@ -177,7 +140,7 @@ const sections = [
           "Roadmap and backlog notes",
         ],
         tech: "Next.js · Supabase · OpenAI · Airtable",
-        status: "Prototype",
+        status: "First Draft",
       },
     ],
   },
@@ -185,10 +148,11 @@ const sections = [
     id: "author-writing",
     label: "AUTHOR & WRITING",
     title: "Author & Writing",
-    floor: 4,
-    bossName: "The Storyteller Supreme",
+    realm: "Gondor",
+    realmDesc: "City of Kings",
+    questGiver: "The Loremaster of Minas Tirith",
     description:
-      "Narrative systems and content engines for books, cookbooks, newsletters, and founder storytelling.",
+      "As the libraries of Gondor preserve ancient lore, stories and words that build legacies. Every tale a kingdom waiting to rise.",
     projects: [
       {
         tag: "NOVEL WORLD",
@@ -199,7 +163,7 @@ const sections = [
           "Draft handoff workflows",
         ],
         tech: "Next.js · Tailwind · Supabase · Notion API",
-        status: "Concept",
+        status: "Tale Conceived",
       },
       {
         tag: "COOKBOOK / STORY",
@@ -210,7 +174,7 @@ const sections = [
           "Interactive shopping + prep notes",
         ],
         tech: "Next.js · MDX · Tailwind · Animation API",
-        status: "In Progress",
+        status: "Journey Ongoing",
       },
       {
         tag: "NEWSLETTER ENGINE",
@@ -221,7 +185,7 @@ const sections = [
           "Publishing + analytics overview",
         ],
         tech: "Next.js · Resend · Supabase · Server Actions",
-        status: "Prototype",
+        status: "First Draft",
       },
     ],
   },
@@ -229,10 +193,11 @@ const sections = [
     id: "moonlit-labs",
     label: "MOONLIT LABS",
     title: "Moonlit Labs",
-    floor: 5,
-    bossName: "The Grand Innovator",
+    realm: "The Grey Havens",
+    realmDesc: "Port of Departure",
+    questGiver: "The Voyager of Mithlond",
     description:
-      "Small experiments and R&D sprints exploring clinical empathy, creative writing, and AI.",
+      "Where experiments depart for unexplored lands. Labs where the next great journey begins, blessed by moonlight and possibility.",
     projects: [
       {
         tag: "JOURNALING AI",
@@ -243,7 +208,7 @@ const sections = [
           "Exportable insights for therapy",
         ],
         tech: "Next.js · OpenAI · Prisma · Edge Functions",
-        status: "Lab",
+        status: "Experimental Voyage",
       },
       {
         tag: "NURSE MICRO-COACH",
@@ -254,7 +219,7 @@ const sections = [
           "Resource library w/ consent prompts",
         ],
         tech: "Next.js · Twilio · Pinecone · Node",
-        status: "Lab",
+        status: "Experimental Voyage",
       },
       {
         tag: "CREATIVE PROMPTS",
@@ -265,7 +230,7 @@ const sections = [
           "Community submission hooks",
         ],
         tech: "Next.js · Tailwind · CRON Jobs · Email API",
-        status: "Lab",
+        status: "Experimental Voyage",
       },
     ],
   },
@@ -307,33 +272,33 @@ export default function PortfolioPage() {
           </div>
 
           <div className="text-center space-y-4 sm:space-y-6 px-4">
-            {/* Achievement Gallery Badge */}
+            {/* Chronicle Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-phoenixFire/20 to-lunarGold/20 border border-phoenixFire/40">
               <AnimatedTrophy className="w-6 h-6" />
               <p className="text-xs sm:text-sm tracking-[0.35em] text-phoenixFire uppercase font-semibold">
-                Achievement Gallery
+                Chronicle of Legends
               </p>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
-              Bosses defeated. Floors cleared. Victory achieved.
+              Quests completed. Realms explored. Legends forged.
             </h1>
             <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto">
-              Every project is a boss battle—from branding quests to AI innovations. Each floor represents
-              mastery in a different domain. Some are complete victories, others are ongoing campaigns in the Moonlit Labs.
+              Every project is a legendary quest—from brand journeys in the Shire to AI visions in Lothlórien. Each realm represents
+              mastery in a different craft. Some are complete tales, others are ongoing voyages from the Grey Havens.
             </p>
             {/* Stats Display */}
             <div className="flex justify-center gap-6 sm:gap-8 mt-6">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-phoenixFire">5</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Floors Cleared</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Realms Explored</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-lunarGold">15+</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Bosses Defeated</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Quests Completed</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-mermaidTeal">∞</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">XP Gained</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Tales Written</div>
               </div>
             </div>
           </div>
@@ -348,37 +313,40 @@ export default function PortfolioPage() {
             sectionIndex % 2 === 0 ? "bg-midnight" : "bg-nightNavy/60"
           }`}
         >
-          {/* SAO-Style FLOOR CLEARED Banner */}
+          {/* LOTR-Style REALM EXPLORED Banner */}
           <div className="mx-auto max-w-6xl mb-12">
             <div className="relative">
-              {/* Main Floor Banner */}
+              {/* Main Realm Banner */}
               <div className="bg-gradient-to-r from-transparent via-phoenixFire/20 to-transparent border-y-2 border-phoenixFire/40 py-6 relative overflow-hidden">
                 {/* Animated glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-phoenixFire/10 to-transparent animate-pulse"></div>
 
                 <div className="relative text-center space-y-2">
-                  {/* Floor Number */}
-                  <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-phoenixFire/30 leading-none">
-                    {section.floor}F
+                  {/* Realm Name */}
+                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-phoenixFire/60 leading-none">
+                    {section.realm}
+                  </div>
+                  <div className="text-sm sm:text-base text-lunarGold/70 italic">
+                    {section.realmDesc}
                   </div>
 
-                  {/* FLOOR CLEARED text */}
-                  <div className="flex items-center justify-center gap-3">
+                  {/* REALM EXPLORED text */}
+                  <div className="flex items-center justify-center gap-3 pt-2">
                     <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-phoenixFire"></div>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-phoenixFire tracking-[0.3em] uppercase">
-                      Floor Cleared
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-phoenixFire tracking-[0.3em] uppercase">
+                      Realm Explored
                     </h2>
                     <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-phoenixFire"></div>
                   </div>
 
-                  {/* Boss Name */}
-                  <p className="text-lg sm:text-xl text-lunarGold font-semibold">
-                    Boss Defeated: <span className="text-pearlWhite">{section.bossName}</span>
+                  {/* Quest Giver */}
+                  <p className="text-base sm:text-lg text-lunarGold font-semibold">
+                    Quest Giver: <span className="text-pearlWhite">{section.questGiver}</span>
                   </p>
                 </div>
               </div>
 
-              {/* Floor Info */}
+              {/* Realm Info */}
               <div className="mt-6 space-y-3 text-center">
                 <p className="text-sm tracking-[0.35em] text-starlight uppercase">
                   {section.label}
@@ -398,10 +366,10 @@ export default function PortfolioPage() {
                     className="relative rounded-2xl border-2 border-phoenixFire/30 bg-gradient-to-br from-[#1a0a0a]/95 via-midnight/98 to-deepOcean/95 p-6 text-moonlightSilver shadow-2xl shadow-black/60 backdrop-blur transition-all hover:border-phoenixFire/60 hover:shadow-phoenixFire/20 hover:-translate-y-1 animate-fadeInUp group"
                     style={{ animationDelay: `${(index + 1) * 0.1}s` }}
                   >
-                    {/* Boss Defeated Badge */}
+                    {/* Quest Complete Badge */}
                     <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-phoenixFire/90 to-lunarGold/80 border border-phoenixFire text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
                       <AnimatedSword className="w-3 h-3" />
-                      <span>DEFEATED</span>
+                      <span>COMPLETED</span>
                     </div>
 
                     {/* Project Tag */}
@@ -414,7 +382,7 @@ export default function PortfolioPage() {
                       {project.title}
                     </h3>
 
-                    {/* Achievement Points */}
+                    {/* Journey Milestones */}
                     <ul className="mt-4 space-y-2 text-sm">
                       {project.points.map((point) => (
                         <li key={point} className="flex gap-2 items-start">
@@ -426,7 +394,7 @@ export default function PortfolioPage() {
                       ))}
                     </ul>
 
-                    {/* Stats Section - SAO Style */}
+                    {/* Stats Section - LOTR Style */}
                     <div className="mt-6 p-4 rounded-xl bg-phoenixFire/10 border border-phoenixFire/20 space-y-3">
                       {/* Tech Stack */}
                       <div>
@@ -436,19 +404,19 @@ export default function PortfolioPage() {
                             <circle cx="17" cy="17" r="5" stroke="currentColor" strokeWidth="2"/>
                             <path d="M12 2L10 8L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                           </svg>
-                          <span>Weapons Used</span>
+                          <span>Tools of the Trade</span>
                         </p>
                         <p className="text-sm font-semibold text-pearlWhite">
                           {project.tech}
                         </p>
                       </div>
 
-                      {/* Status with HP-bar style */}
+                      {/* Status with Journey Progress */}
                       <div>
                         <div className="flex justify-between items-center mb-1">
                           <p className="text-[0.65rem] tracking-wider text-lunarGold/70 uppercase font-semibold flex items-center gap-1">
                             <AnimatedLightning className="w-3 h-3" />
-                            <span>Quest Status</span>
+                            <span>Journey Status</span>
                           </p>
                           <p className="text-sm font-bold text-lunarGold">
                             {project.status}
@@ -458,12 +426,14 @@ export default function PortfolioPage() {
                         <div className="h-2 bg-deepOcean/60 rounded-full overflow-hidden">
                           <div
                             className={`h-full rounded-full transition-all ${
-                              project.status === "In Progress"
+                              project.status === "Journey Ongoing"
                                 ? "bg-gradient-to-r from-lunarGold to-phoenixFire w-3/4 animate-pulse"
-                                : project.status === "Concept" || project.status === "Lab"
+                                : project.status === "Tale Conceived" || project.status === "Experimental Voyage"
                                 ? "bg-gradient-to-r from-mermaidTeal to-tealBright w-1/4"
-                                : project.status === "Prototype"
+                                : project.status === "First Draft"
                                 ? "bg-gradient-to-r from-lunarGold to-sunsetPink w-1/2"
+                                : project.status === "Ready to Depart"
+                                ? "bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire w-2/3"
                                 : "bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire w-full"
                             }`}
                           ></div>
@@ -471,18 +441,18 @@ export default function PortfolioPage() {
                       </div>
                     </div>
 
-                    {/* XP Gained */}
+                    {/* Honor Earned */}
                     <div className="mt-4 flex items-center justify-between text-xs">
                       <span className="text-moonlightSilver/70 flex items-center gap-1">
                         <AnimatedDiamond className="w-3 h-3" />
-                        <span>XP Reward:</span>
+                        <span>Honor Earned:</span>
                       </span>
                       <span className="font-bold text-mermaidTeal">
-                        {project.status === "In Progress" || project.status === "Shipped"
-                          ? "+1000 XP"
-                          : project.status === "Prototype"
-                          ? "+500 XP"
-                          : "+250 XP"}
+                        {project.status === "Journey Ongoing" || project.status === "Legend Complete"
+                          ? "+1000 Honor"
+                          : project.status === "First Draft"
+                          ? "+500 Honor"
+                          : "+250 Honor"}
                       </span>
                     </div>
                   </article>
@@ -511,27 +481,23 @@ export default function PortfolioPage() {
             <AnimatedGamepad className="w-16 h-16" />
           </div>
           <h2 className="text-3xl font-semibold text-pearlWhite">
-            Ready to join the party and tackle your own boss battle?
+            Ready to begin your own legendary quest?
           </h2>
           <p className="text-moonlightSilver max-w-2xl mx-auto">
-            Every project is a unique quest with its own challenges and rewards. Whether you need
-            a brand makeover, healthcare platform, or AI innovation—let's strategize your victory.
+            Every project is a journey through uncharted realms. Whether you seek a brand forged in the Shire,
+            healing platforms from Rivendell, or AI visions from Lothlórien—let's map your path to legend.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
+            <CalendlyButton
+              url="https://calendly.com/pagadeventures/30min"
+              text="Book Discovery Call"
+              variant="secondary"
+            />
             <a
               href="/contact?topic=portfolio"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold px-8 py-3 text-sm font-bold text-midnight shadow-lg shadow-phoenixFire/30 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lunarGold/40 group"
-            >
-              <span>Begin Your Quest</span>
-              <span className="group-hover:scale-110 transition-transform inline-block w-4 h-4">
-                <AnimatedLightning className="w-4 h-4" />
-              </span>
-            </a>
-            <a
-              href="/services"
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-3 text-sm font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal group"
             >
-              <span>View Quest Board</span>
+              <span>Send a Message</span>
               <span className="group-hover:rotate-12 transition-transform inline-block w-4 h-4">
                 <AnimatedScroll className="w-4 h-4" />
               </span>
