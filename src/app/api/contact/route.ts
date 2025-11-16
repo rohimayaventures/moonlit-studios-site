@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { supabaseAdmin } from "@/lib/supabase";
+import { createNotionLead } from "@/lib/notion";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -23,6 +25,49 @@ export async function POST(req: NextRequest) {
         { error: "Invalid email address." },
         { status: 400 }
       );
+    }
+
+    // Save to Supabase leads table
+    const { data: leadData, error: dbError } = await supabaseAdmin
+      .from('leads')
+      .insert({
+        source: 'contact_form',
+        name,
+        email,
+        company: null,
+        message: details,
+        metadata: {
+          serviceType,
+          budget,
+          timeline
+        }
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error('Supabase error:', dbError);
+      // Continue anyway - don't fail the whole request if DB fails
+    }
+
+    // Sync to Notion CRM
+    const notionPageId = await createNotionLead({
+      name,
+      email,
+      source: 'Contact Form',
+      service: serviceType || undefined,
+      budget: budget || undefined,
+      priority: '⚡ Warm',
+      notes: `Contact Form Inquiry:\n\n${details}\n\nTimeline: ${timeline || 'Not specified'}`,
+      supabaseId: leadData?.id
+    });
+
+    // Update lead with Notion page ID if successful
+    if (notionPageId && leadData) {
+      await supabaseAdmin
+        .from('leads')
+        .update({ notion_page_id: notionPageId })
+        .eq('id', leadData.id);
     }
 
     // Send notification email to Moonlit Studios
@@ -320,12 +365,15 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
+        ok: true,
         success: true,
         message: "Your inquiry has been sent! Check your email for confirmation.",
-        data: {
+        data: leadData || {
           ownerEmailId: ownerEmail.data?.id,
           userEmailId: userEmail.data?.id
-        }
+        },
+        leadId: leadData?.id,
+        notionPageId
       },
       { status: 200 }
     );
