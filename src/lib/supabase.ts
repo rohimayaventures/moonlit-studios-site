@@ -2,14 +2,14 @@ import { createClient } from '@supabase/supabase-js';
 
 // Supabase client for browser/client-side operations
 // Uses anon key - protected by Row Level Security (RLS)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Supabase admin client for server-side operations
 // Uses service key - bypasses RLS (use with caution!)
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
 
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
