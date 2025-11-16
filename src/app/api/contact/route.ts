@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { supabaseAdmin } from "@/lib/supabase";
 import { createNotionLead } from "@/lib/notion";
+import { notifyNewContact } from "@/lib/slack";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -69,6 +70,16 @@ export async function POST(req: NextRequest) {
         .update({ notion_page_id: notionPageId })
         .eq('id', leadData.id);
     }
+
+    // Send Slack notification
+    await notifyNewContact({
+      name,
+      email,
+      serviceType,
+      budget,
+      timeline,
+      details
+    });
 
     // Send notification email to Moonlit Studios
     const ownerEmail = await resend.emails.send({

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { createNotionLead } from '@/lib/notion';
+import { notifyNewQuote } from '@/lib/slack';
 
 /**
  * POST /api/quote
@@ -113,6 +114,18 @@ export async function POST(request: NextRequest) {
         .update({ notion_page_id: notionPageId })
         .eq('id', leadData.id);
     }
+
+    // Send Slack notification
+    await notifyNewQuote({
+      name,
+      email,
+      company,
+      project_type,
+      budget,
+      timeline,
+      description,
+      estimated_cost
+    });
 
     return NextResponse.json({
       ok: true,

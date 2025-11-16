@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { createNotionLead } from '@/lib/notion';
+import { notifyNewTestimonial } from '@/lib/slack';
 
 /**
  * POST /api/testimonial
@@ -106,6 +107,17 @@ export async function POST(request: NextRequest) {
         .update({ notion_page_id: notionPageId })
         .eq('id', leadData.id);
     }
+
+    // Send Slack notification
+    await notifyNewTestimonial({
+      name,
+      email,
+      company,
+      role,
+      rating,
+      content,
+      project_type
+    });
 
     return NextResponse.json({
       ok: true,
