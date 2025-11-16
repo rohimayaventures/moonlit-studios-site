@@ -253,7 +253,7 @@ export async function testNotionConnection() {
       database: {
         id: database.id,
         title: (database as any).title?.[0]?.plain_text || 'Untitled',
-        url: database.url,
+        url: (database as any).url || '',
       },
     };
   } catch (error: any) {
