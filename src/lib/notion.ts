@@ -209,57 +209,26 @@ export async function updateNotionLead(pageId: string, updates: Partial<NotionLe
 
 /**
  * Get all leads from Notion CRM
+ * Note: This function is available but not currently used in the app.
+ * Uncomment and use if you need to query leads from Notion.
  */
-export async function getNotionLeads(filter?: {
-  status?: NotionLeadStatus;
-  source?: NotionLeadSource;
-  priority?: NotionPriority;
-}) {
-  try {
-    if (!DATABASE_ID) {
-      console.warn('Notion database ID not configured');
-      return [];
-    }
-
-    const queryFilter: any = {};
-
-    if (filter?.status) {
-      queryFilter.and = queryFilter.and || [];
-      queryFilter.and.push({
-        property: 'Status',
-        status: {
-          equals: filter.status,
-        },
-      });
-    }
-
-    if (filter?.source) {
-      queryFilter.and = queryFilter.and || [];
-      queryFilter.and.push({
-        property: 'Source',
-        select: {
-          equals: filter.source,
-        },
-      });
-    }
-
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: Object.keys(queryFilter).length > 0 ? queryFilter : undefined,
-      sorts: [
-        {
-          property: 'Created',
-          direction: 'descending',
-        },
-      ],
-    });
-
-    return response.results;
-  } catch (error: any) {
-    console.error('❌ Notion query error:', error.message);
-    return [];
-  }
-}
+// export async function getNotionLeads(filter?: {
+//   status?: NotionLeadStatus;
+//   source?: NotionLeadSource;
+//   priority?: NotionPriority;
+// }) {
+//   try {
+//     if (!DATABASE_ID) {
+//       console.warn('Notion database ID not configured');
+//       return [];
+//     }
+//     // Implementation available if needed in the future
+//     return [];
+//   } catch (error: any) {
+//     console.error('❌ Notion query error:', error.message);
+//     return [];
+//   }
+// }
 
 /**
  * Test Notion connection
