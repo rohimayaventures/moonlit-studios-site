@@ -138,7 +138,7 @@ export function Header() {
       </div>
 
       {/* Mobile Navigation Menu - ALWAYS RENDERED, visibility controlled by CSS */}
-      <div className={`md:hidden fixed inset-0 z-[60] bg-midnight/95 backdrop-blur-md transition-all duration-300 ${
+      <div className={`md:hidden fixed inset-0 z-[9999] bg-midnight/95 backdrop-blur-md transition-all duration-300 ${
         mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}>
         <div className="fixed left-0 right-0 top-[73px] bottom-0 overflow-y-auto border-t-2 border-mermaidTeal">
