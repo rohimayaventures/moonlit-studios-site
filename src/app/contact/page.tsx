@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, FormEvent, useState } from "react";
+import React, { ReactNode, FormEvent, useState, useEffect } from "react";
 import { AnimatedOwl } from "../components/AnimatedOwl";
 import { AnimatedSword } from "../components/AnimatedSword";
 import { AnimatedSpirit } from "../components/AnimatedSpirit";
@@ -27,6 +27,48 @@ export default function ContactPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [theme, setTheme] = useState<ThemeMode>("owlery");
+
+  // Update CSS variables when theme changes
+  useEffect(() => {
+    const themeColors = {
+      owlery: {
+        primary: '#FFD700', // lunarGold
+        secondary: '#F5F5DC', // starlight
+        background: '#0A1128', // midnight
+        surface: '#1B4965', // deepOcean
+        border: 'rgba(255, 215, 0, 0.3)',
+      },
+      sao: {
+        primary: '#4A9B9B', // mermaidTeal
+        secondary: '#62B6B7', // tealBright
+        background: '#0A1128', // midnight
+        surface: '#1B4965', // deepOcean
+        border: 'rgba(74, 155, 155, 0.3)',
+      },
+      atla: {
+        primary: '#4A9B9B', // mermaidTeal
+        secondary: '#B0E0E6', // aquaMist
+        background: '#0A1128', // midnight
+        surface: '#1B4965', // deepOcean
+        border: 'rgba(74, 155, 155, 0.3)',
+      },
+      lotr: {
+        primary: '#FFD700', // lunarGold
+        secondary: '#FF8C42', // phoenixFire
+        background: '#0A1128', // midnight
+        surface: '#1B4965', // deepOcean
+        border: 'rgba(255, 215, 0, 0.3)',
+      },
+    };
+
+    const colors = themeColors[theme];
+    const root = document.documentElement;
+    root.style.setProperty('--theme-primary', colors.primary);
+    root.style.setProperty('--theme-secondary', colors.secondary);
+    root.style.setProperty('--theme-background', colors.background);
+    root.style.setProperty('--theme-surface', colors.surface);
+    root.style.setProperty('--theme-border', colors.border);
+  }, [theme]);
 
   // Theme-aware input styling
   const inputStyle = {
