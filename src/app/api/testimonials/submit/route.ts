@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { supabase } from '@/lib/supabase';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,25 +18,50 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Store testimonial (for now, we'll use a JSON file - you can replace with a database later)
-    const testimonial = {
-      id: `testimonial_${Date.now()}`,
+    // Save testimonial to Supabase
+    const { data: testimonial, error: dbError } = await supabase
+      .from('testimonials')
+      .insert({
+        name,
+        email,
+        role: role || null,
+        company: company || null,
+        rating,
+        content: feedback,
+        project_type: service || 'General Consultation',
+        approved: false, // Requires admin approval
+        featured: false
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error('Database error:', dbError);
+      return NextResponse.json(
+        { error: 'Failed to save testimonial', details: dbError.message },
+        { status: 500 }
+      );
+    }
+
+    // Create lead entry for CRM tracking
+    await supabase.from('leads').insert({
+      source: 'testimonial',
       name,
       email,
-      role: role || '',
-      company: company || '',
-      rating,
-      feedback,
-      service: service || 'General Consultation',
-      eventId: eventId || '',
-      status: 'pending', // 'pending' | 'approved' | 'rejected'
-      submittedAt: new Date().toISOString(),
-    };
+      company: company || null,
+      message: feedback,
+      metadata: {
+        rating,
+        service,
+        eventId,
+        testimonial_id: testimonial.id
+      }
+    });
 
     // Send notification to you that a new testimonial was submitted
     await resend.emails.send({
       from: 'Moonlit Studios <notifications@moonlstudios.com>',
-      to: 'your-email@gmail.com', // TODO: Update with your email
+      to: BUSINESS_EMAIL,
       subject: `⭐ New Testimonial Submitted: ${rating}/5 stars from ${name}`,
       html: `
         <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -72,9 +99,6 @@ export async function POST(request: NextRequest) {
         </div>
       `,
     });
-
-    // TODO: Save to database (for now, we'll just log it)
-    console.log('New testimonial submitted:', testimonial);
 
     // Send thank you email to client
     await resend.emails.send({
@@ -117,7 +141,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Thank you for your feedback!',
-      testimonialId: testimonial.id,
+      testimonialId: testimonial?.id,
     });
 
   } catch (error: any) {

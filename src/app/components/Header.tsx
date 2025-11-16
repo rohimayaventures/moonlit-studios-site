@@ -125,8 +125,14 @@ export function Header() {
       </div>
 
       {/* Mobile Navigation Menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[73px] z-40 bg-midnight/98 backdrop-blur-lg md:hidden border-t border-mermaidTeal/40 shadow-2xl overflow-y-auto">
+      <div
+        className={`fixed inset-0 top-[73px] z-40 md:hidden transition-all duration-300 ${
+          mobileMenuOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-4 pointer-events-none'
+        }`}
+      >
+        <div className="absolute inset-0 bg-midnight/98 backdrop-blur-lg border-t border-mermaidTeal/40 shadow-2xl overflow-y-auto">
           <nav className="flex flex-col px-4 py-6 text-left max-w-md mx-auto">
             {navLinks.map((link) => (
               <a
@@ -154,31 +160,35 @@ export function Header() {
                 <ChevronDown className={`w-5 h-5 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {mobileServicesOpen && (
-                <div className="bg-deepOcean/40 rounded-lg mb-2 overflow-hidden animate-fade-in-up">
-                  {serviceLinks.map((service) => (
-                    <a
-                      key={service.href}
-                      href={service.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
-                    >
-                      {service.label}
-                    </a>
-                  ))}
+              <div
+                className={`bg-deepOcean/40 rounded-lg mb-2 overflow-hidden transition-all duration-300 ${
+                  mobileServicesOpen
+                    ? 'max-h-[500px] opacity-100'
+                    : 'max-h-0 opacity-0'
+                }`}
+              >
+                {serviceLinks.map((service) => (
                   <a
-                    href="/services"
+                    key={service.href}
+                    href={service.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
+                    className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
                   >
-                    View All Services →
+                    {service.label}
                   </a>
-                </div>
-              )}
+                ))}
+                <a
+                  href="/services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
+                >
+                  View All Services →
+                </a>
+              </div>
             </div>
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 }
