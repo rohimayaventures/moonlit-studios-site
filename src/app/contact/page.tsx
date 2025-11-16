@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, FormEvent, useState, useEffect } from "react";
-import { HedwigOwl } from "../components/HedwigOwl";
+import { MagicalLetter } from "../components/MagicalLetter";
 import { OwlIcon } from "../components/OwlIcon";
 import { AnimatedSword } from "../components/AnimatedSword";
 import { AnimatedSpirit } from "../components/AnimatedSpirit";
@@ -139,7 +139,7 @@ export default function ContactPage() {
   const getThemeIcon = (themeMode: ThemeMode, className?: string) => {
     switch (themeMode) {
       case "owlery":
-        return <HedwigOwl />;
+        return <MagicalLetter />;
       case "sao":
         return <AnimatedSword className={className} />;
       case "atla":
@@ -147,7 +147,7 @@ export default function ContactPage() {
       case "lotr":
         return <AnimatedHorn className={className} />;
       default:
-        return <HedwigOwl />;
+        return <MagicalLetter />;
     }
   };
 
