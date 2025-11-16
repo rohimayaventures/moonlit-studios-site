@@ -92,7 +92,7 @@ export function Header() {
               <div
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
-                className="absolute top-full right-0 mt-2 w-72 bg-deepOcean/98 backdrop-blur-lg border border-mermaidTeal/40 rounded-lg shadow-2xl shadow-midnight/60 overflow-hidden animate-fade-in-up"
+                className="absolute top-full right-0 mt-2 w-72 bg-deepOcean backdrop-blur-lg border border-mermaidTeal/40 rounded-lg shadow-2xl shadow-midnight/60 overflow-hidden animate-fade-in-up"
               >
                 <div className="py-2">
                   {serviceLinks.map((service) => (

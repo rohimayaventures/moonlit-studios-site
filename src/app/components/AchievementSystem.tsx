@@ -357,7 +357,7 @@ export function AchievementSystem() {
     <>
       {/* SAO-Style Achievement Notification */}
       {recentlyUnlocked && (
-        <div className="fixed top-6 right-6 z-[100] animate-slide-in-right">
+        <div className="fixed top-6 right-6 z-[10001] animate-slide-in-right">
           <div className="bg-gradient-to-r from-midnight via-deepOcean to-midnight border-2 border-lunarGold/60 rounded-lg shadow-2xl shadow-lunarGold/50 overflow-hidden max-w-sm">
             {/* Achievement Header */}
             <div className="bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 px-4 py-2 border-b border-lunarGold/40">
