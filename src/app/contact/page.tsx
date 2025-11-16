@@ -3,9 +3,6 @@
 import React, { ReactNode, FormEvent, useState, useEffect } from "react";
 import { MagicalLetter } from "../components/MagicalLetter";
 import { OwlIcon } from "../components/OwlIcon";
-import { AnimatedSword } from "../components/AnimatedSword";
-import { AnimatedSpirit } from "../components/AnimatedSpirit";
-import { AnimatedHorn } from "../components/AnimatedHorn";
 
 type FormFieldProps = {
   label: string;
@@ -22,54 +19,31 @@ const FormField = ({ label, children }: FormFieldProps) => (
 );
 
 type FormStatus = "idle" | "loading" | "success" | "error";
-type ThemeMode = "owlery" | "sao" | "atla" | "lotr";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [theme, setTheme] = useState<ThemeMode>("owlery");
 
-  // Update CSS variables when theme changes
+  // Fixed to HP "Ministry of Magic" theme (owlery)
+  const theme = "owlery";
+
+  // Set CSS variables for owlery theme
   useEffect(() => {
-    const themeColors = {
-      owlery: {
-        primary: '#FFD700', // lunarGold
-        secondary: '#F5F5DC', // starlight
-        background: '#0A1128', // midnight
-        surface: '#1B4965', // deepOcean
-        border: 'rgba(255, 215, 0, 0.3)',
-      },
-      sao: {
-        primary: '#4A9B9B', // mermaidTeal
-        secondary: '#62B6B7', // tealBright
-        background: '#0A1128', // midnight
-        surface: '#1B4965', // deepOcean
-        border: 'rgba(74, 155, 155, 0.3)',
-      },
-      atla: {
-        primary: '#4A9B9B', // mermaidTeal
-        secondary: '#B0E0E6', // aquaMist
-        background: '#0A1128', // midnight
-        surface: '#1B4965', // deepOcean
-        border: 'rgba(74, 155, 155, 0.3)',
-      },
-      lotr: {
-        primary: '#FFD700', // lunarGold
-        secondary: '#FF8C42', // phoenixFire
-        background: '#0A1128', // midnight
-        surface: '#1B4965', // deepOcean
-        border: 'rgba(255, 215, 0, 0.3)',
-      },
+    const colors = {
+      primary: '#FFD700', // lunarGold
+      secondary: '#F5F5DC', // starlight
+      background: '#0A1128', // midnight
+      surface: '#1B4965', // deepOcean
+      border: 'rgba(255, 215, 0, 0.3)',
     };
 
-    const colors = themeColors[theme];
     const root = document.documentElement;
     root.style.setProperty('--theme-primary', colors.primary);
     root.style.setProperty('--theme-secondary', colors.secondary);
     root.style.setProperty('--theme-background', colors.background);
     root.style.setProperty('--theme-surface', colors.surface);
     root.style.setProperty('--theme-border', colors.border);
-  }, [theme]);
+  }, []);
 
   // Theme-aware input styling
   const inputStyle = {
@@ -135,71 +109,18 @@ export default function ContactPage() {
     }
   };
 
-  // Get theme icon component
-  const getThemeIcon = (themeMode: ThemeMode, className?: string) => {
-    switch (themeMode) {
-      case "owlery":
-        return <MagicalLetter />;
-      case "sao":
-        return <AnimatedSword className={className} />;
-      case "atla":
-        return <AnimatedSpirit className={className} />;
-      case "lotr":
-        return <AnimatedHorn className={className} />;
-      default:
-        return <MagicalLetter />;
-    }
+  // HP "Ministry of Magic" theme - Professional owl post
+  const currentTheme = {
+    name: "The Owlery",
+    title: "Send an Owl Post",
+    subtitle: "Professional correspondence via magical post",
+    buttonText: "Dispatch Owl",
+    loadingText: "Owl in flight...",
+    successTitle: "⚡ Owl successfully delivered!",
+    successMessage: "Your message has arrived. Expect a reply by owl within 24-48 hours.",
+    accentColor: "lunarGold",
+    secondaryColor: "starlight",
   };
-
-  // Theme configurations
-  const themeConfig = {
-    owlery: {
-      name: "The Owlery",
-      title: "Send an Owl Post",
-      subtitle: "Attach your message to a trusted owl and send it my way",
-      buttonText: "Dispatch Owl",
-      loadingText: "Owl in flight...",
-      successTitle: "⚡ Owl successfully delivered!",
-      successMessage: "Your message has arrived. Expect a reply by owl within 24-48 hours.",
-      accentColor: "lunarGold",
-      secondaryColor: "starlight",
-    },
-    sao: {
-      name: "System Message",
-      title: "Direct Message",
-      subtitle: "Send a system message to initiate quest collaboration",
-      buttonText: "Send Message",
-      loadingText: "Transmitting...",
-      successTitle: "✓ Message Sent Successfully",
-      successMessage: "System notification sent. You'll receive a party invite within 24-48 hours.",
-      accentColor: "mermaidTeal",
-      secondaryColor: "tealBright",
-    },
-    atla: {
-      name: "Spirit Portal",
-      title: "Open Spirit Portal",
-      subtitle: "Channel your message through the spirit world",
-      buttonText: "Send Through Portal",
-      loadingText: "Channeling energy...",
-      successTitle: "🌟 Message transmitted!",
-      successMessage: "Your energy has been received. Balance will be restored within 24-48 hours.",
-      accentColor: "mermaidTeal",
-      secondaryColor: "aquaMist",
-    },
-    lotr: {
-      name: "Horn of Gondor",
-      title: "Sound the Horn",
-      subtitle: "Call for aid across Middle-earth",
-      buttonText: "Sound the Horn",
-      loadingText: "Horn echoing...",
-      successTitle: "🎺 Gondor has heard!",
-      successMessage: "Your call has been answered. Aid will arrive within 24-48 hours.",
-      accentColor: "lunarGold",
-      secondaryColor: "phoenixFire",
-    },
-  };
-
-  const currentTheme = themeConfig[theme];
 
   return (
     <main className="min-h-screen text-pearlWhite" style={{ backgroundColor: 'var(--theme-background)' }}>
@@ -207,15 +128,15 @@ export default function ContactPage() {
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
         {/* Starry Night Background */}
         <div className="absolute inset-0 overflow-hidden opacity-40 pointer-events-none">
-          {/* Floating theme icons */}
+          {/* Floating magical letters */}
           <div className="absolute left-1/4 top-20 opacity-20 animate-floatSlow">
-            {getThemeIcon(theme, "w-16 h-16")}
+            <OwlIcon className="w-16 h-16" />
           </div>
           <div className="absolute right-1/3 top-40 opacity-15 animate-floatSlow" style={{ animationDelay: '2s' }}>
-            {getThemeIcon(theme, "w-14 h-14")}
+            <MagicalLetter />
           </div>
           <div className="absolute left-2/3 top-60 opacity-10 animate-floatSlow" style={{ animationDelay: '4s' }}>
-            {getThemeIcon(theme, "w-12 h-12")}
+            <OwlIcon className="w-12 h-12" />
           </div>
 
           {/* Magical orbs - now theme-compatible */}
@@ -248,69 +169,9 @@ export default function ContactPage() {
             />
           </div>
 
-          {/* Theme Switcher */}
-          <div className="flex justify-center gap-2 mb-6">
-            <button
-              onClick={() => setTheme("owlery")}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                theme === "owlery"
-                  ? "bg-lunarGold text-midnight shadow-lg shadow-lunarGold/40"
-                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
-              }`}
-              title="Harry Potter - Owlery"
-            >
-              <span className="inline-flex items-center gap-1">
-                <OwlIcon className="w-4 h-4" />
-                <span>Owlery</span>
-              </span>
-            </button>
-            <button
-              onClick={() => setTheme("sao")}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                theme === "sao"
-                  ? "bg-mermaidTeal text-midnight shadow-lg shadow-mermaidTeal/40"
-                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
-              }`}
-              title="Sword Art Online"
-            >
-              <span className="inline-flex items-center gap-1">
-                <AnimatedSword className="w-4 h-4" />
-                <span>SAO</span>
-              </span>
-            </button>
-            <button
-              onClick={() => setTheme("atla")}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                theme === "atla"
-                  ? "bg-aquaMist text-midnight shadow-lg shadow-aquaMist/40"
-                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
-              }`}
-              title="Avatar: The Last Airbender"
-            >
-              <span className="inline-flex items-center gap-1">
-                <AnimatedSpirit className="w-4 h-4" />
-                <span>ATLA</span>
-              </span>
-            </button>
-            <button
-              onClick={() => setTheme("lotr")}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                theme === "lotr"
-                  ? "bg-phoenixFire text-midnight shadow-lg shadow-phoenixFire/40"
-                  : "bg-deepOcean/40 text-moonlightSilver hover:bg-deepOcean/60"
-              }`}
-              title="Lord of the Rings"
-            >
-              <span className="inline-flex items-center gap-1">
-                <AnimatedHorn className="w-4 h-4" />
-                <span>LOTR</span>
-              </span>
-            </button>
-          </div>
-
           <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 animate-fadeInUp">
             <div className="inline-flex justify-center animate-pulse">
-              {getThemeIcon(theme, "w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28")}
+              <MagicalLetter />
             </div>
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">{currentTheme.name}</p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
@@ -481,7 +342,7 @@ export default function ContactPage() {
                     </>
                   ) : (
                     <span className="inline-flex items-center gap-2">
-                      {getThemeIcon(theme, "w-5 h-5")}
+                      <OwlIcon className="w-5 h-5" />
                       <span>{currentTheme.buttonText}</span>
                     </span>
                   )}
@@ -496,7 +357,7 @@ export default function ContactPage() {
                   }}>
                     <div className="flex gap-3 items-start">
                       <div className="flex-shrink-0 animate-bounce" style={{ color: 'var(--theme-primary)' }}>
-                        {getThemeIcon(theme, "w-8 h-8")}
+                        <OwlIcon className="w-8 h-8" />
                       </div>
                       <div className="flex-1">
                         <p className="text-base font-bold mb-2" style={{ color: 'var(--theme-primary)' }}>
