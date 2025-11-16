@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(true); // Open by default for visibility
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -36,11 +37,16 @@ export function Header() {
     { href: '/contact', label: 'Contact' },
   ];
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileServicesOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         {/* Logo with Animated Moon Phase */}
-        <a href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-10 w-10">
             {/* Animated moon that cycles through phases */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-lunarGold opacity-90 group-hover:opacity-100 transition-opacity animate-pulse" />
@@ -56,18 +62,18 @@ export function Header() {
               The Nurse Who Codes
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 text-sm text-moonlightSilver items-center">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="hover:text-mermaidTeal transition-colors font-medium"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
 
           {/* Services Dropdown */}
@@ -90,20 +96,20 @@ export function Header() {
               >
                 <div className="py-2">
                   {serviceLinks.map((service) => (
-                    <a
+                    <Link
                       key={service.href}
                       href={service.href}
                       className="block px-4 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/40 last:border-b-0"
                     >
                       {service.label}
-                    </a>
+                    </Link>
                   ))}
-                  <a
+                  <Link
                     href="/services"
                     className="block px-4 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 hover:text-lunarGold font-semibold transition-all"
                   >
                     View All Services →
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}
@@ -112,9 +118,16 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-mermaidTeal hover:text-lunarGold transition-colors rounded-lg hover:bg-mermaidTeal/10"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Mobile menu button clicked!', !mobileMenuOpen);
+            setMobileMenuOpen(!mobileMenuOpen);
+          }}
+          className="md:hidden p-2 text-mermaidTeal hover:text-lunarGold transition-colors rounded-lg hover:bg-mermaidTeal/10 z-50"
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? (
             <X className="h-7 w-7" />
@@ -124,32 +137,33 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      <div
-        className={`fixed inset-0 top-[73px] z-40 md:hidden transition-all duration-300 ${
-          mobileMenuOpen
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
-      >
-        <div className="absolute inset-0 bg-midnight/98 backdrop-blur-lg border-t border-mermaidTeal/40 shadow-2xl overflow-y-auto">
-          <nav className="flex flex-col px-4 py-6 text-left max-w-md mx-auto">
+      {/* Mobile Navigation Menu - ALWAYS RENDERED, visibility controlled by state */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed left-0 right-0 top-[73px] bottom-0 z-[9999] bg-midnight border-t-2 border-mermaidTeal overflow-y-auto">
+          <nav className="flex flex-col px-6 py-8 space-y-2 bg-midnight">
+            {/* Navigation Links */}
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-lg font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all py-4 px-4 rounded-lg border-b border-deepOcean/40"
+                onClick={closeMobileMenu}
+                className="text-lg font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all py-3 px-4 rounded-lg border-b border-deepOcean/40"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
 
-            {/* Mobile Services Accordion */}
+            {/* Services Accordion */}
             <div className="border-b border-deepOcean/40">
               <button
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="w-full flex items-center justify-between text-lg font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all py-4 px-4 rounded-lg"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('Services accordion clicked!', !mobileServicesOpen);
+                  setMobileServicesOpen(!mobileServicesOpen);
+                }}
+                className="w-full flex items-center justify-between text-lg font-medium text-pearlWhite hover:text-mermaidTeal hover:bg-mermaidTeal/10 transition-all py-3 px-4 rounded-lg"
               >
                 <span className="flex items-center gap-2">
                   Services
@@ -160,35 +174,32 @@ export function Header() {
                 <ChevronDown className={`w-5 h-5 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              <div
-                className={`bg-deepOcean/40 rounded-lg mb-2 overflow-hidden transition-all duration-300 ${
-                  mobileServicesOpen
-                    ? 'max-h-[500px] opacity-100'
-                    : 'max-h-0 opacity-0'
-                }`}
-              >
-                {serviceLinks.map((service) => (
-                  <a
-                    key={service.href}
-                    href={service.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
+              {/* Services List */}
+              {mobileServicesOpen && (
+                <div className="bg-deepOcean/40 rounded-lg my-2 overflow-hidden">
+                  {serviceLinks.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      onClick={closeMobileMenu}
+                      className="block px-6 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/20 last:border-b-0"
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/services"
+                    onClick={closeMobileMenu}
+                    className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
                   >
-                    {service.label}
-                  </a>
-                ))}
-                <a
-                  href="/services"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-6 py-3 text-sm text-lunarGold hover:bg-lunarGold/10 font-semibold transition-all"
-                >
-                  View All Services →
-                </a>
-              </div>
+                    View All Services →
+                  </Link>
+                </div>
+              )}
             </div>
           </nav>
         </div>
-      </div>
+      )}
     </header>
   );
 }

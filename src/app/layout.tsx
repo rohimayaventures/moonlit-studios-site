@@ -6,7 +6,6 @@ import { Header } from "./components/Header";
 import { AchievementSystem } from "./components/AchievementSystem";
 import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
-import { ThemeSwitcher } from "./components/ThemeSwitcher";
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
@@ -224,9 +223,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* 🌙 GLOBAL KAI WIDGET - Appears on all pages */}
         <GlobalKaiWidget />
-
-        {/* 🎨 THEME SWITCHER - 6 master themes */}
-        <ThemeSwitcher />
 
         {/* 🏆 ACHIEVEMENT SYSTEM - Track visitor progress globally */}
         <AchievementSystem />
