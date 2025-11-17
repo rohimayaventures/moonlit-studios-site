@@ -1548,6 +1548,13 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
                   <span>❓</span>
                   <span>Ask Question</span>
                 </button>
+                <button
+                  onClick={() => handleQuickAction('/portal/login')}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
+                >
+                  <span>🔑</span>
+                  <span>Client Portal</span>
+                </button>
               </div>
             </div>
           )}

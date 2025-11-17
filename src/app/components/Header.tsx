@@ -109,6 +109,18 @@ export function Header() {
               </div>
             )}
           </div>
+
+          {/* Client Portal Login - Highlighted CTA */}
+          <Link
+            href="/portal/login"
+            className="px-4 py-2 bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 text-midnight text-sm font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md flex items-center gap-2"
+            aria-label="Client Portal Login"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+            Client Portal
+          </Link>
         </nav>
 
         {/* MOBILE/TABLET Navigation - Horizontal Scrollable Magic */}
@@ -132,6 +144,15 @@ export function Header() {
               aria-label="Navigate to Services"
             >
               Services ✨
+            </Link>
+
+            {/* Client Portal for mobile */}
+            <Link
+              href="/portal/login"
+              className="px-3 py-1.5 text-xs font-semibold text-midnight bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold rounded-full hover:from-lunarGold hover:to-phoenixFire transition-all whitespace-nowrap flex items-center gap-1"
+              aria-label="Client Portal Login"
+            >
+              🔑 Portal
             </Link>
 
             {/* Get Quote CTA for mobile */}
