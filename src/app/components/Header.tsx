@@ -130,7 +130,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-1.5 text-xs font-medium text-pearlWhite bg-gradient-to-r from-mermaidTeal/20 to-deepOcean/40 border border-mermaidTeal/30 rounded-full hover:from-mermaidTeal/30 hover:to-deepOcean/60 transition-all whitespace-nowrap"
+                className="px-4 py-2.5 min-h-[44px] text-xs font-medium text-pearlWhite bg-gradient-to-r from-mermaidTeal/20 to-deepOcean/40 border border-mermaidTeal/30 rounded-full hover:from-mermaidTeal/30 hover:to-deepOcean/60 transition-all whitespace-nowrap flex items-center"
                 aria-label={`Navigate to ${link.label}`}
               >
                 {link.label}
@@ -140,7 +140,7 @@ export function Header() {
             {/* Services button for mobile */}
             <Link
               href="/services"
-              className="px-3 py-1.5 text-xs font-medium text-lunarGold bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/30 rounded-full hover:from-lunarGold/30 hover:to-phoenixFire/40 transition-all whitespace-nowrap"
+              className="px-4 py-2.5 min-h-[44px] text-xs font-medium text-lunarGold bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/30 rounded-full hover:from-lunarGold/30 hover:to-phoenixFire/40 transition-all whitespace-nowrap flex items-center"
               aria-label="Navigate to Services"
             >
               Services ✨
@@ -149,7 +149,7 @@ export function Header() {
             {/* Client Portal for mobile */}
             <Link
               href="/portal/login"
-              className="px-3 py-1.5 text-xs font-semibold text-midnight bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold rounded-full hover:from-lunarGold hover:to-phoenixFire transition-all whitespace-nowrap flex items-center gap-1"
+              className="px-4 py-2.5 min-h-[44px] text-xs font-semibold text-midnight bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold rounded-full hover:from-lunarGold hover:to-phoenixFire transition-all whitespace-nowrap flex items-center gap-1"
               aria-label="Client Portal Login"
             >
               🔑 Portal
@@ -158,7 +158,7 @@ export function Header() {
             {/* Get Quote CTA for mobile */}
             <Link
               href="/get-quote"
-              className="px-3 py-1.5 text-xs font-bold text-midnight bg-gradient-to-r from-lunarGold to-phoenixFire rounded-full hover:shadow-lg transition-all whitespace-nowrap"
+              className="px-4 py-2.5 min-h-[44px] text-xs font-bold text-midnight bg-gradient-to-r from-lunarGold to-phoenixFire rounded-full hover:shadow-lg transition-all whitespace-nowrap flex items-center"
               aria-label="Get a quote"
             >
               💰 Get Quote

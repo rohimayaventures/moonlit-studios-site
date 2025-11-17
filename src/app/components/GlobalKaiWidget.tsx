@@ -1410,7 +1410,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
                 {/* Personality switcher button */}
                 <button
                   onClick={() => setShowPersonalityMenu(!showPersonalityMenu)}
-                  className="text-starlight/50 hover:text-starlight transition-colors text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-mermaidTeal/10"
+                  className="text-starlight/50 hover:text-starlight transition-colors text-xs flex items-center gap-1 px-3 py-2.5 min-h-[44px] rounded hover:bg-mermaidTeal/10"
                   title="Change personality"
                 >
                   {getPersonalityIcon(personality, "w-4 h-4")}
@@ -1421,17 +1421,17 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
                 {/* Clear chat button */}
                 <button
                   onClick={clearChat}
-                  className="text-starlight/50 hover:text-starlight transition-colors text-xs"
+                  className="text-starlight/50 hover:text-starlight transition-colors text-xs p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded hover:bg-mermaidTeal/10"
                   title="Clear chat"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
                 </button>
                 {/* Minimize button */}
                 <button
                   onClick={toggleWidget}
-                  className="text-starlight/50 hover:text-starlight transition-colors"
+                  className="text-starlight/50 hover:text-starlight transition-colors p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center rounded hover:bg-mermaidTeal/10"
                   aria-label="Minimize"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1522,35 +1522,35 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleQuickAction('/get-quote')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold text-midnight text-xs font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold text-midnight text-xs font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md"
                 >
                   <span>💰</span>
                   <span>Get Quote</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('/contact')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
                 >
                   <span>📅</span>
                   <span>Book Call</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('/portfolio')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
                 >
                   <span>👀</span>
                   <span>View Work</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction("What services do you offer?")}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
                 >
                   <span>❓</span>
                   <span>Ask Question</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('/portal/login')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
                 >
                   <span>🔑</span>
                   <span>Client Portal</span>
@@ -1569,13 +1569,13 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Kai anything..."
-              className="flex-1 px-4 py-2 bg-midnight/80 border border-mermaidTeal/30 rounded-full text-sm text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-mermaidTeal/70 focus:ring-2 focus:ring-mermaidTeal/30 transition-all"
+              className="flex-1 px-4 py-3 min-h-[44px] bg-midnight/80 border border-mermaidTeal/30 rounded-full text-sm text-pearlWhite placeholder-moonlightSilver/50 focus:outline-none focus:border-mermaidTeal/70 focus:ring-2 focus:ring-mermaidTeal/30 transition-all"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={!input.trim() || isLoading}
-              className="px-5 py-2 bg-gradient-to-r from-mermaidTeal to-tealBright text-midnight font-semibold rounded-full text-sm hover:shadow-lg hover:shadow-mermaidTeal/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-5 py-3 min-h-[44px] bg-gradient-to-r from-mermaidTeal to-tealBright text-midnight font-semibold rounded-full text-sm hover:shadow-lg hover:shadow-mermaidTeal/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "..." : "Send"}
             </button>

@@ -29,7 +29,8 @@
       "Bash(SETUP_COMPLETE.md)",
       "Bash(tree:*)",
       "Bash(grep:*)",
-      "Bash(npx tsc --noEmit)"
+      "Bash(npx tsc --noEmit)",
+      "Bash(del compress-logo.js)"
     ],
     "deny": [],
     "ask": []
