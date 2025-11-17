@@ -749,8 +749,8 @@ export default function AILabPage() {
             </div>
             <div className="group p-4 sm:p-5 rounded-lg bg-gradient-to-br from-deepOcean/60 via-midnight/80 to-deepOcean/60 border border-tealBright/30 hover:border-tealBright/60 transition-all hover:scale-105">
               <div className="text-center space-y-1 sm:space-y-2">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-tealBright sao-glow-text">10+</div>
-                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">Years RN</div>
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-tealBright sao-glow-text">15+</div>
+                <div className="text-xs sm:text-sm text-moonlightSilver uppercase tracking-wider">Years as a Nurse & Healthcare Leader</div>
                 <div className="text-[10px] sm:text-xs text-starlight/60">Healthcare + Tech</div>
               </div>
             </div>
