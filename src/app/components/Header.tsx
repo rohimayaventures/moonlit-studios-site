@@ -133,6 +133,15 @@ export function Header() {
             >
               Services ✨
             </Link>
+
+            {/* Get Quote CTA for mobile */}
+            <Link
+              href="/get-quote"
+              className="px-3 py-1.5 text-xs font-bold text-midnight bg-gradient-to-r from-lunarGold to-phoenixFire rounded-full hover:shadow-lg transition-all whitespace-nowrap"
+              aria-label="Get a quote"
+            >
+              💰 Get Quote
+            </Link>
           </div>
         </nav>
       </div>
