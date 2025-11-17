@@ -94,10 +94,6 @@ export default function SmallBusinessPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight">
-      {/* Moon Phase Navigation */}
-      <div className="sticky top-16 z-40 bg-midnight/95 backdrop-blur-md border-b border-mermaidTeal/20 py-4">
-        <MoonPhaseNav sections={sections} />
-      </div>
 
       {/* Hero Section */}
       <section id="hero" className="relative overflow-hidden border-b border-mermaidTeal/20 bg-gradient-to-br from-midnight via-deepOcean to-nightNavy py-20">
@@ -109,6 +105,34 @@ export default function SmallBusinessPage() {
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
+          {/* Studio Ghibli Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-green-400/40 hover:border-green-400/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-400/30"
+              title="New Moon - Journey Begins"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-400/30 to-purple-400/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-purple-400/30 to-purple-400/60 border-2 border-purple-400/50 hover:border-purple-400/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-400/30"
+              title="Waxing Crescent - Growing Dreams"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-purple-400/30 to-amber-400/30" />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-400 via-purple-400 to-amber-400 border-2 border-amber-400/70 shadow-lg shadow-amber-400/40 flex-shrink-0 animate-pulse"
+              title="Full Moon - You Are Here"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-amber-400/30 to-green-400/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-green-400/30 to-green-400/60 border-2 border-green-400/50 hover:border-green-400/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-400/30"
+              title="Waning Crescent - Infinite Potential"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-400/30 to-purple-400/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-purple-400/40 hover:border-purple-400/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-400/30"
+              title="New Moon - New Beginnings"
+            />
+          </div>
+
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-lunarGold/30 bg-lunarGold/10 px-4 py-2 text-sm text-lunarGold">
             <Sparkles className="h-4 w-4" />
             <span>Small Business. Big Dreams. Pure Magic.</span>
