@@ -1,14 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
+import dynamic from "next/dynamic";
 import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 import { Header } from "./components/Header";
-import { AchievementSystem } from "./components/AchievementSystem";
-import { PageTracker } from "./components/PageTracker";
-import { KonamiCode } from "./components/KonamiCode";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { StructuredData } from "./components/StructuredData";
 import Image from "next/image";
+
+// Lazy load heavy components for better performance
+const AchievementSystem = dynamic(() => import("./components/AchievementSystem").then(mod => ({ default: mod.AchievementSystem })), {
+  ssr: false,
+  loading: () => null,
+});
+
+const PageTracker = dynamic(() => import("./components/PageTracker").then(mod => ({ default: mod.PageTracker })), {
+  ssr: false,
+  loading: () => null,
+});
+
+const KonamiCode = dynamic(() => import("./components/KonamiCode").then(mod => ({ default: mod.KonamiCode })), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
