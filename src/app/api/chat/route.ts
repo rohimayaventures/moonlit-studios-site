@@ -66,6 +66,57 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     log.debug("Success! Returning response to client");
 
+    // 🎯 SMART NOTIFICATION SYSTEM - Detect high-intent signals
+    try {
+      const userMessage = body.messages[body.messages.length - 1]?.content || '';
+      const kaiResponse = data.content[0]?.text || '';
+
+      // High-intent keywords for notification triggers
+      const highIntentSignals = {
+        quote_interest: /\b(quote|pricing|price|cost|how much|estimate|budget)\b/i,
+        lead_qualified: /\b(interested|want to|need|looking for|project|hire|work with)\b/i,
+        high_intent: /\b(ready|when can|start|available|book|schedule|calendar|let's do)\b/i
+      };
+
+      let notificationType: string | null = null;
+
+      // Check for high-intent signals (prioritized)
+      if (highIntentSignals.high_intent.test(userMessage)) {
+        notificationType = 'high_intent';
+      } else if (highIntentSignals.lead_qualified.test(userMessage)) {
+        notificationType = 'lead_qualified';
+      } else if (highIntentSignals.quote_interest.test(userMessage)) {
+        notificationType = 'quote_interest';
+      }
+
+      // Send notification if high intent detected
+      if (notificationType) {
+        const pathname = request.headers.get('referer')?.split('/').pop() || 'unknown';
+
+        // Don't await - fire and forget to not slow down chat response
+        fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/kai/notify`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            visitorMessage: userMessage,
+            kaiResponse: kaiResponse,
+            notificationType: notificationType,
+            visitorContext: {
+              page: pathname,
+              personality: body.personality || 'iroh',
+              messagesCount: body.messages.length,
+              timeOnSite: 'Active conversation'
+            }
+          })
+        }).catch(err => log.error('Failed to send notification:', err));
+
+        log.info(`📧 Notification triggered: ${notificationType} for message: "${userMessage.substring(0, 50)}..."`);
+      }
+    } catch (notificationError) {
+      // Don't let notification errors break the chat
+      log.error('Notification error (non-critical):', notificationError);
+    }
+
     // Add rate limit headers to successful response
     const headers = new Headers();
     addRateLimitHeaders(headers, rateLimitResult);
