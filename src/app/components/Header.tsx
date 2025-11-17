@@ -9,6 +9,7 @@ export function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
 
   const serviceLinks = [
+    { href: '/services/small-business', label: 'Small Business Launchpads' },
     { href: '/services/creative-design-development', label: 'Creative Design & Development' },
     { href: '/services/health-tech-development', label: 'Health x Tech Development' },
     { href: '/services/consulting', label: 'Consulting' },

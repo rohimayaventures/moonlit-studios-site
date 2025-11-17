@@ -14,6 +14,34 @@ import { CalendlyButton } from '../components/CalendlyButton';
 
 const suites = [
   {
+    name: "Small Business Launchpads",
+    questTitle: "The Path of the Crossroads",
+    element: "Commerce",
+    elementDesc: "Local • Accessible • Practical",
+    difficulty: 1, // Novice Path
+    description:
+      "Where local heroes meet digital magic. Approachable websites and systems for cafés, studios, salons, and service providers—big dreams start small.",
+    includes: [
+      "Single-page to 5-page websites",
+      "Booking & contact integrations",
+      "Google Business + SEO setup",
+      "Social media connections",
+    ],
+    rewards: [
+      "Professional web presence",
+      "Lead capture system",
+      "Mobile-friendly design",
+    ],
+    starting: "$1,500+",
+    href: "/services/small-business",
+    color: "lunarGold",
+    tiers: [
+      { name: "Totoro's Garden", price: "$1,500+", popular: true, features: ["Beautiful single-page website", "Mobile-responsive design", "Contact form with email notifications", "Google Business Profile setup", "Basic SEO optimization", "Social media integration", "1 month of support & updates"] },
+      { name: "Howl's Moving Castle", price: "$3,500+", features: ["3-5 page custom website", "Advanced booking calendar", "Payment processing (Stripe/Square)", "Blog or portfolio section", "Newsletter signup system", "Enhanced SEO + local search", "2 months support & updates"] },
+      { name: "Spirited Away", price: "$6,000+", features: ["Full e-commerce capabilities", "Customer portal with login", "Inventory management", "Email automation sequences", "Analytics dashboard", "Advanced integrations", "3 months premium support"] },
+    ],
+  },
+  {
     name: "Creative Design & Development",
     questTitle: "The Path of Water",
     element: "Water",
@@ -166,6 +194,8 @@ const suites = [
 // Helper function to get quest icon component
 const getQuestIcon = (suiteName: string, className?: string) => {
   switch (suiteName) {
+    case "Small Business Launchpads":
+      return <AnimatedDiamond className={className} />;
     case "Creative Design & Development":
       return <AnimatedPalette className={className} />;
     case "Health x Tech Development":
@@ -296,16 +326,16 @@ export default function ServicesPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-mermaidTeal/20 to-tealBright/20 border border-mermaidTeal/40">
               <AnimatedScroll className="w-6 h-6" />
               <p className="text-xs sm:text-sm tracking-[0.35em] text-mermaidTeal uppercase font-semibold">
-                Five Bending Paths
+                Six Bending Paths
               </p>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
               Choose your element. Master your path.
             </h1>
             <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4">
-              Like the Avatar mastering all four elements, every journey begins by choosing your path. Led by a nurse who codes,
-              these five bending disciplines offer unique approaches—each with distinct philosophies, techniques, and transformations.
-              Which element resonates with your vision?
+              Like the Avatar mastering all elements, every journey begins by choosing your path. Led by a nurse who codes,
+              these six bending disciplines offer unique approaches—from local business magic to enterprise AI.
+              Which path resonates with your vision?
             </p>
 
             {/* Service Dropdown Navigation */}
