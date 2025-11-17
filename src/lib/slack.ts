@@ -125,3 +125,56 @@ _Source: Testimonial Form_
 
   await sendSlackMessage(message);
 }
+
+/**
+ * Format a new consultation booking for Slack
+ */
+export async function notifyNewBooking(data: {
+  name: string;
+  email: string;
+  eventName: string;
+  eventTime: Date;
+  answers?: any;
+}): Promise<void> {
+  const message = `
+🌙 *NEW CONSULTATION BOOKED* 📅
+
+*Client:* ${data.name}
+*Email:* ${data.email}
+*Event:* ${data.eventName}
+*Time:* ${data.eventTime.toLocaleString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  timeZoneName: 'short'
+})}
+
+${data.answers ? `*Pre-call Questionnaire:* Answered` : ''}
+
+_Source: Calendly_
+  `.trim();
+
+  await sendSlackMessage(message);
+}
+
+/**
+ * Format a consultation cancellation for Slack
+ */
+export async function notifyCancellation(data: {
+  name: string;
+  email: string;
+}): Promise<void> {
+  const message = `
+❌ *CONSULTATION CANCELED*
+
+*Client:* ${data.name}
+*Email:* ${data.email}
+
+_Consider reaching out to reschedule!_
+  `.trim();
+
+  await sendSlackMessage(message);
+}

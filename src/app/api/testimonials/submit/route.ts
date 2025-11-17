@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { supabase } from '@/lib/supabase';
+import { notifyNewTestimonial } from '@/lib/slack';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com';
@@ -56,6 +57,17 @@ export async function POST(request: NextRequest) {
         eventId,
         testimonial_id: testimonial.id
       }
+    });
+
+    // Send Slack notification
+    await notifyNewTestimonial({
+      name,
+      email,
+      company,
+      role,
+      rating,
+      content: feedback,
+      project_type: service
     });
 
     // Send notification to you that a new testimonial was submitted

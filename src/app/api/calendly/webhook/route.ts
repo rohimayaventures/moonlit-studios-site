@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { notifyNewBooking, notifyCancellation } from '@/lib/slack';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -70,7 +71,16 @@ async function handleNewBooking(payload: any) {
 
   console.log(`New booking: ${inviteeName} (${inviteeEmail}) for ${eventName} at ${eventTime}`);
 
-  // 1. Send notification to you (the owner)
+  // 1. Send Slack notification
+  await notifyNewBooking({
+    name: inviteeName,
+    email: inviteeEmail,
+    eventName,
+    eventTime,
+    answers: invitee.questions_and_answers
+  });
+
+  // 2. Send email notification to you (the owner)
   try {
     await resend.emails.send({
       from: 'Moonlit Studios <notifications@moonlstudios.com>', // Update with your verified domain
@@ -183,7 +193,13 @@ async function handleCancellation(payload: any) {
 
   console.log(`Cancellation: ${inviteeName} (${inviteeEmail})`);
 
-  // Send notification to you about cancellation
+  // Send Slack notification
+  await notifyCancellation({
+    name: inviteeName,
+    email: inviteeEmail
+  });
+
+  // Send email notification to you about cancellation
   try {
     await resend.emails.send({
       from: 'Moonlit Studios <notifications@moonlstudios.com>',

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { Resend } from 'resend';
 import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import { notifyNewQuote } from '@/lib/slack';
 
 // COST OPTIMIZATION: Using OpenAI GPT-4o-mini instead of Claude
 // Cost per quote: ~$0.001 (vs $0.015 with Claude) = 10x cheaper!
@@ -209,6 +210,20 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
     });
 
     console.log('📧 Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com');
+
+    // Send Slack notification
+    await notifyNewQuote({
+      name,
+      email,
+      company,
+      project_type: serviceType,
+      budget,
+      timeline,
+      description: projectDescription,
+      estimated_cost: typeof aiAnalysis.estimatedPrice === 'string'
+        ? parseInt(aiAnalysis.estimatedPrice.replace(/[^0-9]/g, ''))
+        : aiAnalysis.estimatedPrice
+    });
 
     return NextResponse.json({
       success: true,
