@@ -16,6 +16,34 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto max-w-6xl px-6">
+          {/* Moon Phase Indicator (5 Phases) */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-moonlightSilver/30"
+              title="New Moon - Journey Begins"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-moonlightSilver/30"
+              title="Waxing Crescent - Growing Dreams"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 shadow-lg shadow-lunarGold/30 flex-shrink-0 animate-pulse"
+              title="Full Moon - You Are Here"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-mermaidTeal/30 to-moonlightSilver/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-moonlightSilver/30"
+              title="Waning Crescent - Infinite Potential"
+            />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-mermaidTeal/30 to-moonlightSilver/30" />
+            <div
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-moonlightSilver/30"
+              title="New Moon - New Beginnings"
+            />
+          </div>
+
           {/* Tagline */}
           <div className="text-xs md:text-sm tracking-[0.4em] text-starlight text-center mb-3 font-medium fade-in-up">
             THE NURSE WHO CODES
