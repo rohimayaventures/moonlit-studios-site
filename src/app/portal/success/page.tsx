@@ -53,16 +53,20 @@ function SuccessContent() {
             <h3 className="text-lg font-semibold text-starlight mb-3">What happens next?</h3>
             <ul className="space-y-2 text-moonlightSilver/80">
               <li className="flex items-start">
+                <span className="mr-2">✅</span>
+                <span>Your project has been automatically created in the client portal</span>
+              </li>
+              <li className="flex items-start">
                 <span className="mr-2">📧</span>
-                <span>You'll receive a confirmation email with your receipt</span>
+                <span>Check your email for portal access instructions and your receipt</span>
               </li>
               <li className="flex items-start">
                 <span className="mr-2">👤</span>
-                <span>Our team will reach out within 24 hours to begin your project</span>
+                <span>We'll reach out within 24 hours to schedule your project kickoff</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">📅</span>
-                <span>You can track your project progress in your client portal</span>
+                <span className="mr-2">📊</span>
+                <span>Track progress, download files, and message us anytime in your portal</span>
               </li>
             </ul>
           </div>
@@ -70,16 +74,19 @@ function SuccessContent() {
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/"
-              className="px-6 py-3 bg-lunarGold text-midnight rounded-lg font-semibold hover:bg-starlight transition-all"
+              href="/portal/dashboard"
+              className="px-6 py-3 bg-gradient-to-r from-lunarGold to-phoenixFire text-midnight rounded-lg font-semibold hover:shadow-xl hover:shadow-lunarGold/40 hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
-              Return to Home
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+              </svg>
+              Go to Your Client Portal
             </Link>
             <Link
-              href="/contact"
+              href="/"
               className="px-6 py-3 bg-deepOcean border border-moonlightSilver/20 text-moonlightSilver rounded-lg font-semibold hover:border-starlight/40 transition-all"
             >
-              Contact Support
+              Return to Home
             </Link>
           </div>
 

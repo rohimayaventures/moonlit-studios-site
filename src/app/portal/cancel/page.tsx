@@ -52,16 +52,16 @@ export default function PaymentCancelPage() {
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/test-payment"
-              className="px-6 py-3 bg-lunarGold text-midnight rounded-lg font-semibold hover:bg-starlight transition-all"
+              href="/get-quote"
+              className="px-6 py-3 bg-gradient-to-r from-lunarGold to-phoenixFire text-midnight rounded-lg font-semibold hover:shadow-xl hover:shadow-lunarGold/40 hover:scale-105 transition-all"
             >
-              Try Again
+              Get Instant Quote
             </Link>
             <Link
-              href="/contact"
+              href="/services"
               className="px-6 py-3 bg-deepOcean border border-moonlightSilver/20 text-moonlightSilver rounded-lg font-semibold hover:border-starlight/40 transition-all"
             >
-              Contact Support
+              View Services
             </Link>
           </div>
 
