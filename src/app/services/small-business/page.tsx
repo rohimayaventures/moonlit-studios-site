@@ -113,9 +113,9 @@ export default function SmallBusinessPage() {
             <span>Small Business. Big Dreams. Pure Magic.</span>
           </div>
 
-          <h1 className="mb-6 text-4xl font-bold leading-tight text-pearlWhite md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-4xl font-bold text-pearlWhite md:text-6xl lg:text-7xl" style={{ lineHeight: '1.3' }}>
             Your Journey
-            <span className="block bg-gradient-to-r from-green-400 via-purple-400 to-amber-400 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-green-400 via-purple-400 to-amber-400 bg-clip-text text-transparent mt-2">
               Begins Here
             </span>
           </h1>
@@ -150,12 +150,13 @@ export default function SmallBusinessPage() {
             Every Great Story Starts Small
           </h2>
           <p className="mb-4 text-lg leading-relaxed text-moonlightSilver">
-            I've worked with billion-dollar healthcare systems and solo practitioners just starting out.
+            I've built platforms for Fortune 500 companies and local startups just finding their footing.
             Here's what I know: <span className="text-lunarGold font-semibold">the magic isn't in the budget—it's in the care you put into your work</span>.
           </p>
           <p className="text-lg leading-relaxed text-moonlightSilver">
             These packages are designed for local heroes—the coffee shop owner who knows every regular's order,
-            the therapist changing lives one session at a time, the baker who makes birthdays special.
+            the therapist changing lives one session at a time, the salon stylist who makes people feel beautiful,
+            the creative studio bringing visions to life.
             <span className="text-mermaidTeal font-semibold"> You deserve a website as beautiful as what you create</span>.
           </p>
         </div>
