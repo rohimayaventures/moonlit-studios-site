@@ -22,6 +22,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('StripeWebhook');
 
 // Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -32,7 +35,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 // Helper to get Supabase client (lazy initialization)
 function getSupabaseClient() {
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn('⚠️ Supabase credentials not configured - database updates disabled');
+    log.warn('Supabase credentials not configured - database updates disabled');
     return null;
   }
   return createClient(

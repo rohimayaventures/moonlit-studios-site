@@ -37,14 +37,14 @@
 Project Settings → API
 ├─ Project URL → NEXT_PUBLIC_SUPABASE_URL
 ├─ anon public → NEXT_PUBLIC_SUPABASE_ANON_KEY
-└─ service_role → SUPABASE_SERVICE_KEY (keep secret!)
+└─ service_role → SUPABASE_SERVICE_ROLE_KEY (keep secret!)
 ```
 
 **Add to `.env.local`:**
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 **Create Tables (Run in Supabase SQL Editor):**
@@ -423,7 +423,7 @@ CALENDLY_USERNAME=pagadeventures
 # Supabase (Database)
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxx
-SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxx
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxx
 
 # Notion (CRM)
 NOTION_API_KEY=secret_xxxxxxxxxxxxx

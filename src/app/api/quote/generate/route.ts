@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { Resend } from 'resend';
+import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 
 // COST OPTIMIZATION: Using OpenAI GPT-4o-mini instead of Claude
 // Cost per quote: ~$0.001 (vs $0.015 with Claude) = 10x cheaper!
@@ -81,6 +82,23 @@ const PRICING_DATABASE = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting - 20 requests per 5 minutes for AI operations
+    const identifier = getClientIdentifier(request);
+    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+
+    if (!rateLimitResult.success) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+
+      return NextResponse.json(
+        {
+          error: 'Too many quote requests. Please try again in a few minutes.',
+          resetAt: new Date(rateLimitResult.reset).toISOString()
+        },
+        { status: 429, headers }
+      );
+    }
+
     const body: QuoteRequest = await request.json();
     const { name, email, company, serviceType, projectDescription, timeline, budget, features, complexity, additionalNotes } = body;
 

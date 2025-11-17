@@ -8,8 +8,8 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Supabase admin client for server-side operations
-// Uses service key - bypasses RLS (use with caution!)
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || '';
+// Uses service role key - bypasses RLS (use with caution!)
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 

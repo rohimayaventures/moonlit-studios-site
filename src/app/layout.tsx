@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { AchievementSystem } from "./components/AchievementSystem";
 import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
@@ -82,9 +83,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full">
       <body className="min-h-screen bg-nightNavy text-glacierWhite">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
+        <ErrorBoundary>
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">
+              <ErrorBoundary>{children}</ErrorBoundary>
+            </main>
 
           <footer className="mt-16 bg-gradient-to-b from-deepOcean via-midnight to-midnight text-moonlightSilver">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-12 md:grid-cols-2 lg:grid-cols-4">
@@ -219,17 +223,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               </div>
             </div>
           </footer>
-        </div>
+          </div>
 
-        {/* 🌙 GLOBAL KAI WIDGET - Appears on all pages */}
-        <GlobalKaiWidget />
+          {/* 🌙 GLOBAL KAI WIDGET - Appears on all pages */}
+          <ErrorBoundary>
+            <GlobalKaiWidget />
+          </ErrorBoundary>
 
-        {/* 🏆 ACHIEVEMENT SYSTEM - Track visitor progress globally */}
-        <AchievementSystem />
-        <PageTracker />
+          {/* 🏆 ACHIEVEMENT SYSTEM - Track visitor progress globally */}
+          <ErrorBoundary>
+            <AchievementSystem />
+            <PageTracker />
+          </ErrorBoundary>
 
-        {/* 🎮 KONAMI CODE & AVATAR STATE - Secret easter egg system */}
-        <KonamiCode />
+          {/* 🎮 KONAMI CODE & AVATAR STATE - Secret easter egg system */}
+          <ErrorBoundary>
+            <KonamiCode />
+          </ErrorBoundary>
+        </ErrorBoundary>
       </body>
     </html>
   );
