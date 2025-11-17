@@ -21,6 +21,7 @@ export function GlobalKaiWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [personality, setPersonality] = useState<PersonalityMode>("iroh");
   const [showPersonalityMenu, setShowPersonalityMenu] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(true); // Show quick actions initially
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Personality icon mapping
@@ -750,6 +751,24 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
     return basePrompt + pageContext;
   }
 
+  // Handle quick action button clicks
+  const handleQuickAction = (action: string) => {
+    setShowQuickActions(false); // Hide quick actions after first interaction
+
+    if (action.startsWith('/')) {
+      // It's a URL - open it
+      window.location.href = action;
+    } else {
+      // It's a message - send it
+      setInput(action);
+      // Trigger submit by creating synthetic event
+      const form = document.querySelector('form') as HTMLFormElement;
+      if (form) {
+        form.requestSubmit();
+      }
+    }
+  };
+
   const handleSend = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -757,6 +776,7 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
     const userMessage = input.trim();
     setInput("");
     setIsLoading(true);
+    setShowQuickActions(false); // Hide quick actions after first message
 
     // Track message count for achievements
     if (typeof window !== "undefined" && (window as any).trackAchievement) {
@@ -1076,6 +1096,43 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
               </div>
             )}
           </div>
+
+          {/* Quick Action Buttons */}
+          {showQuickActions && messages.length <= 1 && (
+            <div className="bg-gradient-to-r from-deepOcean/50 to-midnight/50 border-t border-mermaidTeal/20 p-3">
+              <div className="text-xs text-starlight/60 mb-2">Quick actions:</div>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => handleQuickAction('/get-quote')}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/40 text-lunarGold text-xs font-semibold rounded-lg hover:bg-lunarGold/30 hover:scale-105 transition-all"
+                >
+                  <span>💰</span>
+                  <span>Get Quote</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction('/contact')}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/20 to-tealBright/20 border border-mermaidTeal/40 text-mermaidTeal text-xs font-semibold rounded-lg hover:bg-mermaidTeal/30 hover:scale-105 transition-all"
+                >
+                  <span>📅</span>
+                  <span>Book Call</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction('/portfolio')}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/10 to-moonlightSilver/10 border border-starlight/30 text-starlight text-xs font-semibold rounded-lg hover:bg-starlight/20 hover:scale-105 transition-all"
+                >
+                  <span>👀</span>
+                  <span>View Work</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction("What services do you offer?")}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/10 to-moonlightSilver/10 border border-starlight/30 text-starlight text-xs font-semibold rounded-lg hover:bg-starlight/20 hover:scale-105 transition-all"
+                >
+                  <span>❓</span>
+                  <span>Ask Question</span>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Input Form */}
           <form

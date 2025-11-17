@@ -66,12 +66,66 @@ export async function POST(request: NextRequest) {
     const data = await response.json();
     log.debug("Success! Returning response to client");
 
-    // 🎯 SMART NOTIFICATION SYSTEM - Detect high-intent signals
+    // 🎯 SMART NOTIFICATION SYSTEM - Lead Scoring & Detection
     try {
       const userMessage = body.messages[body.messages.length - 1]?.content || '';
       const kaiResponse = data.content[0]?.text || '';
+      const conversationHistory = body.messages || [];
 
-      // High-intent keywords for notification triggers
+      // 🔢 LEAD SCORING ALGORITHM (0-100 points)
+      let leadScore = 0;
+      const signals: string[] = [];
+
+      // High-intent keywords for scoring
+      const scoringSignals = {
+        budget_mention: { regex: /\b(budget|pricing|price|cost|how much|estimate|\$\d+|dollar|afford)\b/i, points: 30, label: 'Budget Mentioned' },
+        timeline_urgent: { regex: /\b(asap|urgent|now|immediately|today|this week|next week|soon)\b/i, points: 25, label: 'Urgent Timeline' },
+        timeline_near: { regex: /\b(next month|this month|planning|launching|starting)\b/i, points: 20, label: 'Near-term Timeline' },
+        ready_to_buy: { regex: /\b(ready|let's do|let's go|let's start|sign me up|I'm in|sold)\b/i, points: 35, label: 'Ready to Buy' },
+        business_type: { regex: /\b(cafe|restaurant|salon|studio|clinic|practice|shop|store|boutique|agency)\b/i, points: 20, label: 'Business Type Identified' },
+        specific_service: { regex: /\b(website|web design|app|ai system|chatbot|automation|branding|logo)\b/i, points: 15, label: 'Specific Service Request' },
+        project_details: { regex: /\b(need|want|looking for|interested in|require|help with)\b/i, points: 15, label: 'Project Details Shared' },
+        booking_intent: { regex: /\b(book|schedule|call|meeting|consultation|discuss|talk)\b/i, points: 25, label: 'Booking Intent' },
+        return_visitor: { regex: null, points: 10, label: 'Return Visitor' }, // Checked via conversation length
+        multiple_messages: { regex: null, points: 5, label: 'Engaged Conversation' }, // 3+ exchanges
+      };
+
+      // Score the current message
+      Object.entries(scoringSignals).forEach(([key, signal]) => {
+        if (signal.regex && signal.regex.test(userMessage)) {
+          leadScore += signal.points;
+          signals.push(signal.label);
+        }
+      });
+
+      // Bonus: Return visitor (3+ messages in conversation)
+      if (conversationHistory.length >= 6) { // 3 exchanges = 6 messages
+        leadScore += scoringSignals.return_visitor.points;
+        signals.push(scoringSignals.return_visitor.label);
+      }
+
+      // Bonus: Engaged conversation
+      if (conversationHistory.length >= 4) {
+        leadScore += scoringSignals.multiple_messages.points;
+        signals.push(scoringSignals.multiple_messages.label);
+      }
+
+      // Cap at 100
+      leadScore = Math.min(leadScore, 100);
+
+      // 🌡️ Determine lead temperature
+      let leadTemperature: 'hot' | 'warm' | 'cold' = 'cold';
+      let urgencyEmoji = '❄️';
+
+      if (leadScore >= 70) {
+        leadTemperature = 'hot';
+        urgencyEmoji = '🔥';
+      } else if (leadScore >= 40) {
+        leadTemperature = 'warm';
+        urgencyEmoji = '🟡';
+      }
+
+      // Legacy notification type (for backwards compatibility)
       const highIntentSignals = {
         quote_interest: /\b(quote|pricing|price|cost|how much|estimate|budget)\b/i,
         lead_qualified: /\b(interested|want to|need|looking for|project|hire|work with)\b/i,
@@ -92,8 +146,10 @@ export async function POST(request: NextRequest) {
         notificationType = 'quote_interest';
       }
 
-      // Send notification if high intent detected
-      if (notificationType) {
+      // Send notification if high intent detected OR lead score is significant
+      const shouldNotify = notificationType || leadScore >= 30; // Notify on warm+ leads
+
+      if (shouldNotify) {
         const pathname = request.headers.get('referer')?.split('/').pop() || 'unknown';
 
         // Don't await - fire and forget to not slow down chat response
@@ -103,17 +159,24 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             visitorMessage: userMessage,
             kaiResponse: kaiResponse,
-            notificationType: notificationType,
+            notificationType: notificationType || 'lead_scored',
+            leadScore: {
+              score: leadScore,
+              temperature: leadTemperature,
+              emoji: urgencyEmoji,
+              signals: signals
+            },
             visitorContext: {
               page: pathname,
               personality: body.personality || 'iroh',
               messagesCount: body.messages.length,
+              conversationLength: conversationHistory.length,
               timeOnSite: 'Active conversation'
             }
           })
         }).catch(err => log.error('Failed to send notification:', err));
 
-        log.info(`📧 Notification triggered: ${notificationType} for message: "${userMessage.substring(0, 50)}..."`);
+        log.info(`${urgencyEmoji} Lead scored: ${leadScore}/100 (${leadTemperature.toUpperCase()}) - Type: ${notificationType || 'scored'} - Message: "${userMessage.substring(0, 50)}..."`);
       }
     } catch (notificationError) {
       // Don't let notification errors break the chat

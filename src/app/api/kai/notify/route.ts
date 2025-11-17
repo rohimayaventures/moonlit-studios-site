@@ -9,7 +9,8 @@ export async function POST(request: NextRequest) {
     const {
       visitorMessage,
       kaiResponse,
-      notificationType, // 'lead_qualified' | 'quote_interest' | 'high_intent'
+      notificationType, // 'lead_qualified' | 'quote_interest' | 'high_intent' | 'business_inquiry' | 'lead_scored'
+      leadScore, // { score, temperature, emoji, signals }
       visitorContext
     } = body;
 
@@ -20,8 +21,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Determine notification priority and emoji based on type
-    const notificationConfig = {
+    // Determine notification priority and emoji based on lead score or type
+    const baseNotificationConfig = {
       lead_qualified: {
         emoji: '🎯',
         title: 'Qualified Lead Detected',
@@ -39,10 +40,32 @@ export async function POST(request: NextRequest) {
         title: 'High-Intent Visitor',
         color: '#FF6B35', // phoenixFire
         priority: 'Urgent'
+      },
+      business_inquiry: {
+        emoji: '💼',
+        title: 'Business Inquiry via Kai',
+        color: '#4A9B9B', // mermaidTeal
+        priority: 'High'
+      },
+      lead_scored: {
+        emoji: '📊',
+        title: 'Lead Scored',
+        color: '#4A9B9B', // mermaidTeal
+        priority: 'Medium'
       }
     };
 
-    const config = notificationConfig[notificationType as keyof typeof notificationConfig];
+    // Override with lead score data if available
+    let config = baseNotificationConfig[notificationType as keyof typeof baseNotificationConfig];
+
+    if (leadScore) {
+      config = {
+        ...config,
+        emoji: leadScore.emoji,
+        title: `${leadScore.emoji} ${leadScore.temperature.toUpperCase()} Lead (Score: ${leadScore.score}/100)`,
+        priority: leadScore.temperature === 'hot' ? 'URGENT 🚨' : leadScore.temperature === 'warm' ? 'High' : 'Medium'
+      };
+    }
 
     // Email to business owner
     const ownerEmailHtml = `
@@ -174,6 +197,26 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="content">
+      ${leadScore ? `
+      <div class="section">
+        <div class="section-title">📊 Lead Score Analysis</div>
+        <div style="background: linear-gradient(135deg, ${config.color} 0%, #1A2332 100%); color: white; padding: 24px; border-radius: 12px; margin-bottom: 16px;">
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 48px; font-weight: 900; letter-spacing: -2px;">${leadScore.score}/100</div>
+            <div style="font-size: 18px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px;">${leadScore.emoji} ${leadScore.temperature.toUpperCase()} LEAD</div>
+          </div>
+          ${leadScore.signals && leadScore.signals.length > 0 ? `
+          <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px;">
+            <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Buying Signals Detected:</div>
+            <ul style="margin: 0; padding-left: 20px;">
+              ${leadScore.signals.map((signal: string) => `<li style="margin-bottom: 4px;">${signal}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+        </div>
+      </div>
+      ` : ''}
+
       <div class="section">
         <div class="section-title">💬 Visitor Message</div>
         <div class="message-box visitor-message">
@@ -256,47 +299,81 @@ export async function POST(request: NextRequest) {
 
     // Optional: Send to Slack webhook if configured
     if (process.env.SLACK_WEBHOOK_URL) {
+      const slackBlocks: any[] = [
+        {
+          type: 'header',
+          text: {
+            type: 'plain_text',
+            text: `${config.emoji} ${config.title}`,
+          },
+        },
+      ];
+
+      // Add lead score block if available
+      if (leadScore) {
+        slackBlocks.push({
+          type: 'section',
+          fields: [
+            {
+              type: 'mrkdwn',
+              text: `*Lead Score:*\n${leadScore.score}/100 (${leadScore.emoji} ${leadScore.temperature.toUpperCase()})`,
+            },
+            {
+              type: 'mrkdwn',
+              text: `*Priority:*\n${config.priority}`,
+            },
+          ],
+        });
+
+        if (leadScore.signals && leadScore.signals.length > 0) {
+          slackBlocks.push({
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `*Buying Signals:*\n${leadScore.signals.map((s: string) => `• ${s}`).join('\n')}`,
+            },
+          });
+        }
+      } else {
+        slackBlocks.push({
+          type: 'section',
+          fields: [
+            {
+              type: 'mrkdwn',
+              text: `*Priority:*\n${config.priority}`,
+            },
+            {
+              type: 'mrkdwn',
+              text: `*Page:*\n${visitorContext?.page || 'Unknown'}`,
+            },
+          ],
+        });
+      }
+
+      // Add message blocks
+      slackBlocks.push(
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Visitor Message:*\n${visitorMessage.substring(0, 500)}`,
+          },
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Kai's Response:*\n${kaiResponse.substring(0, 500)}`,
+          },
+        }
+      );
+
       await fetch(process.env.SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text: `${config.emoji} *${config.title}*`,
-          blocks: [
-            {
-              type: 'header',
-              text: {
-                type: 'plain_text',
-                text: `${config.emoji} ${config.title}`,
-              },
-            },
-            {
-              type: 'section',
-              fields: [
-                {
-                  type: 'mrkdwn',
-                  text: `*Priority:*\n${config.priority}`,
-                },
-                {
-                  type: 'mrkdwn',
-                  text: `*Page:*\n${visitorContext?.page || 'Unknown'}`,
-                },
-              ],
-            },
-            {
-              type: 'section',
-              text: {
-                type: 'mrkdwn',
-                text: `*Visitor Message:*\n${visitorMessage.substring(0, 500)}`,
-              },
-            },
-            {
-              type: 'section',
-              text: {
-                type: 'mrkdwn',
-                text: `*Kai's Response:*\n${kaiResponse.substring(0, 500)}`,
-              },
-            },
-          ],
+          blocks: slackBlocks,
         }),
       });
     }
