@@ -14,8 +14,8 @@ interface MoonPhaseProps {
 // Calculate actual moon phase based on current date
 function calculateMoonPhase(): number {
   const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
   const day = date.getDate();
 
   // Simplified moon phase calculation

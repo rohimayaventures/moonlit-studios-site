@@ -482,7 +482,9 @@ export function GlobalKaiWidget() {
   function getSystemPrompt(path: string): string {
     const personalityPrompt = getPersonalityPrompt(personality);
 
-    const basePrompt = `${personalityPrompt}
+    // Build base prompt with personality and core instructions
+    const basePart1 = personalityPrompt;
+    const basePart2 = `
 
 **⚡ RESPONSE LENGTH RULES (CRITICAL):**
 - Keep responses under 75 words (3-4 sentences) unless specifically asked for detail
@@ -704,15 +706,13 @@ You can trigger a beautiful email capture modal to collect visitor emails for fo
 6. **Return Visitor** - If someone comes back later, capture email this time
 
 **How to Trigger:**
-Add `[CAPTURE_EMAIL]` anywhere in your response. The modal will appear automatically.
+Add [CAPTURE_EMAIL] anywhere in your response. The modal will appear automatically.
 The trigger will be removed from your visible message, so place it at the end.
 
 **Example Usage:**
-```
-"I'd love to send you a personalized quote based on your cafe's needs! [CAPTURE_EMAIL]"
-"Perfect! Let me connect you with Moonlit Studios for a custom proposal. [CAPTURE_EMAIL]"
-"Since you're exploring options, I'll send you portfolio examples + pricing breakdown for your $3,500 budget. [CAPTURE_EMAIL]"
-```
+- "I'd love to send you a personalized quote based on your cafe's needs! [CAPTURE_EMAIL]"
+- "Perfect! Let me connect you with Moonlit Studios for a custom proposal. [CAPTURE_EMAIL]"
+- "Since you're exploring options, I'll send you portfolio examples + pricing breakdown for your $3,500 budget. [CAPTURE_EMAIL]"
 
 **IMPORTANT RULES:**
 - ONLY use [CAPTURE_EMAIL] when visitor has shown genuine interest (lead score 40+)
@@ -746,11 +746,9 @@ Use the /contact page which has the contact form. For direct calendar link (if y
 - If Moonlit Studios adds CALENDLY_URL to .env.local, you can use: [Book Discovery Call →](CALENDLY_URL)
 
 **Example Responses:**
-```
-"Perfect! Let's get on a call to discuss your cafe's website. [Schedule a discovery call →](/contact)"
-"Ready to dive deeper? Book a 15-min consultation: [Find a time →](/contact)"
-"I'd love to connect you with the founder directly. [Pick a time that works →](/contact)"
-```
+- "Perfect! Let's get on a call to discuss your cafe's website. [Schedule a discovery call →](/contact)"
+- "Ready to dive deeper? Book a 15-min consultation: [Find a time →](/contact)"
+- "I'd love to connect you with the founder directly. [Pick a time that works →](/contact)"
 
 **IMPORTANT RULES:**
 - Only offer calendar booking for qualified leads (not first message)
@@ -1109,6 +1107,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
 - If they've shown high intent, push harder for conversion (quote/call)`;
     }
 
+    const basePrompt = basePart1 + basePart2;
     return basePrompt + pageContext + contextMemory;
   }
 
