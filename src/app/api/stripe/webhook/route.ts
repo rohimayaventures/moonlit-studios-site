@@ -23,6 +23,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 import { createLogger } from '@/lib/logger';
+import { initPortalStorage, getClient, createClient as createPortalClient, createProject } from '@/lib/portal/storage';
 
 const log = createLogger('StripeWebhook');
 
@@ -135,6 +136,69 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   const metadata = session.metadata || {};
   const amount = (session.amount_total || 0) / 100;
   const customerEmail = session.customer_email;
+
+  // 🌙 CLIENT PORTAL INTEGRATION - Auto-create client and project
+  if (customerEmail && session.payment_status === 'paid') {
+    try {
+      await initPortalStorage();
+
+      // Check if client already exists
+      let client = await getClient(customerEmail);
+
+      if (!client) {
+        // Create new client account
+        const customerName = session.customer_details?.name || customerEmail.split('@')[0];
+        client = await createPortalClient({
+          email: customerEmail,
+          name: customerName,
+          stripeCustomerId: session.customer as string || undefined,
+          notificationPreferences: {
+            email: true,
+            projectUpdates: true,
+            fileUploads: true,
+            messages: true,
+          },
+        });
+
+        if (client) {
+          console.log(`✅ Created portal client: ${customerEmail}`);
+        }
+      }
+
+      // Create project for this payment
+      if (client) {
+        const packageName = metadata.packageName || 'Custom Project';
+        const projectTitle = `${packageName} - ${client.name}`;
+
+        const project = await createProject({
+          clientId: client.id,
+          title: projectTitle,
+          description: metadata.description || `Project purchased via Stripe on ${new Date().toLocaleDateString()}`,
+          status: 'not_started',
+          packageName,
+          packagePrice: amount,
+          stripePaymentId: session.payment_intent as string || undefined,
+          stripeSessionId: session.id,
+          paymentStatus: 'paid',
+          milestones: [
+            { id: crypto.randomUUID(), title: 'Project Kickoff', description: 'Initial consultation and requirements gathering', status: 'pending', order: 1 },
+            { id: crypto.randomUUID(), title: 'Design Phase', description: 'Create mockups and gather feedback', status: 'pending', order: 2 },
+            { id: crypto.randomUUID(), title: 'Development', description: 'Build out the project', status: 'pending', order: 3 },
+            { id: crypto.randomUUID(), title: 'Testing & QA', description: 'Thorough testing and bug fixes', status: 'pending', order: 4 },
+            { id: crypto.randomUUID(), title: 'Launch', description: 'Deploy to production', status: 'pending', order: 5 },
+          ],
+          files: [],
+        });
+
+        if (project) {
+          console.log(`✅ Created portal project: ${projectTitle} (${project.id})`);
+        }
+      }
+    } catch (portalError) {
+      console.error('❌ Portal integration error:', portalError);
+      // Don't fail the webhook if portal creation fails
+    }
+  }
 
   // Send confirmation email to customer via Brevo
   if (customerEmail) {

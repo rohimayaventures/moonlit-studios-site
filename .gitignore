@@ -103,6 +103,14 @@ next-env.d.ts
 .turbo
 
 # ================================
+# 🗄️ CLIENT PORTAL DATA
+# ================================
+portal-data/
+
+# Analytics
+analytics/
+
+# ================================
 # 🎨 OPTIONAL (uncomment if needed)
 # ================================
 # If you have local config files:
