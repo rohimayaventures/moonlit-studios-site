@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import { supabase } from '@/lib/supabase';
 
 /**

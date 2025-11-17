@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client';
+import { createLogger } from "@/lib/logger";
 
 // Initialize Notion client
 const notion = new Client({

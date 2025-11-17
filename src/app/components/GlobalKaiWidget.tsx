@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState, useRef, useEffect } from "react";
+import { createLogger } from "@/lib/logger";
 import { usePathname } from "next/navigation";
 import { TeaCupIcon, OwlIcon, SwordIcon, StaffIcon, BriefcaseIcon, ChaosIcon } from "./PersonalityIcons";
 import { KaiEmailCapture } from "./KaiEmailCapture";
@@ -554,7 +555,7 @@ export function GlobalKaiWidget() {
 **YOUR RULES:**
 1. Be helpful but DON'T solve their entire technical problem
 2. Guide them toward working with Moonlit Studios
-3. If they need actual help: "Email Moonlit Studios at hello@moonlstudios.com"
+3. If they need actual help: "Email Moonlit Studios at hello@moonlitstudios.com"
 4. Don't hallucinate services or prices
 5. Be conversational but occasionally profound
 6. Share wisdom naturally (not forced!)
@@ -1198,7 +1199,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
         {
           role: "assistant",
           content:
-            "Oops! Something went wrong. Try again or email Moonlit Studios directly at hello@moonlstudios.com",
+            "Oops! Something went wrong. Try again or email Moonlit Studios directly at hello@moonlitstudios.com",
         },
       ]);
     } finally {
@@ -1290,7 +1291,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
         ...prev,
         {
           role: "assistant",
-          content: "Hmm, something went wrong capturing your email. No worries - you can always reach out directly at hello@moonlstudios.com!",
+          content: "Hmm, something went wrong capturing your email. No worries - you can always reach out directly at hello@moonlitstudios.com!",
         },
       ]);
     }

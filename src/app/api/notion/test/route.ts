@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import { testNotionConnection } from '@/lib/notion';
 
 /**

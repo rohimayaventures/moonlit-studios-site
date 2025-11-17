@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Professional ghostwriting. Books, brand stories, website copy, thought leadership. 300K+ words published, 4 completed manuscripts.",
     type: "website",
-    url: "https://moonlstudios.com/services/ghostwriting",
+    url: "https://www.moonlitstudios.com/services/ghostwriting",
     images: [
       {
         url: "/og-image.png",

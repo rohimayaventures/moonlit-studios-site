@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import { Resend } from 'resend';
 import { notifyNewBooking, notifyCancellation } from '@/lib/slack';
 
@@ -21,7 +22,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
  * Setup Instructions:
  * 1. Go to https://calendly.com/integrations/webhooks
  * 2. Click "Create Webhook"
- * 3. Set URL to: https://moonlstudios.com/api/calendly/webhook
+ * 3. Set URL to: https://www.moonlitstudios.com/api/calendly/webhook
  * 4. Subscribe to events: invitee.created, invitee.canceled
  * 5. Copy the webhook signing key and add to .env.local as CALENDLY_WEBHOOK_SECRET
  */
@@ -83,7 +84,7 @@ async function handleNewBooking(payload: any) {
   // 2. Send email notification to you (the owner)
   try {
     await resend.emails.send({
-      from: 'Moonlit Studios <notifications@moonlstudios.com>', // Update with your verified domain
+      from: 'Moonlit Studios <notifications@moonlitstudios.com>', // Update with your verified domain
       to: 'your-email@gmail.com', // Replace with your email
       subject: `🎯 New Consultation Booked: ${inviteeName}`,
       html: `
@@ -120,7 +121,7 @@ async function handleNewBooking(payload: any) {
   // 2. Send welcome email to the client
   try {
     await resend.emails.send({
-      from: 'Moonlit Studios <hello@moonlstudios.com>', // Update with your verified domain
+      from: 'Moonlit Studios <hello@moonlitstudios.com>', // Update with your verified domain
       to: inviteeEmail,
       subject: `Looking forward to our chat, ${inviteeName.split(' ')[0]}!`,
       html: `
@@ -161,7 +162,7 @@ async function handleNewBooking(payload: any) {
 
           <p style="color: #6b7280; font-size: 12px;">
             Moonlit Studios | Where healthcare expertise meets cutting-edge development<br/>
-            <a href="https://moonlstudios.com" style="color: #0EA5E9;">moonlstudios.com</a>
+            <a href="https://www.moonlitstudios.com" style="color: #0EA5E9;">moonlstudios.com</a>
           </p>
         </div>
       `,
@@ -202,7 +203,7 @@ async function handleCancellation(payload: any) {
   // Send email notification to you about cancellation
   try {
     await resend.emails.send({
-      from: 'Moonlit Studios <notifications@moonlstudios.com>',
+      from: 'Moonlit Studios <notifications@moonlitstudios.com>',
       to: 'your-email@gmail.com', // Replace with your email
       subject: `❌ Consultation Canceled: ${inviteeName}`,
       html: `
@@ -226,13 +227,13 @@ async function handleCancellation(payload: any) {
 // Send post-consultation survey
 async function sendPostConsultationSurvey(name: string, email: string, eventUri: string) {
   const firstName = name.split(' ')[0];
-  const surveyUrl = `https://moonlstudios.com/testimonial?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&event=${encodeURIComponent(eventUri)}`;
+  const surveyUrl = `https://www.moonlitstudios.com/testimonial?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&event=${encodeURIComponent(eventUri)}`;
 
   console.log(`Sending post-consultation survey to ${name} (${email})`);
 
   try {
     await resend.emails.send({
-      from: 'Moonlit Studios <hello@moonlstudios.com>',
+      from: 'Moonlit Studios <hello@moonlitstudios.com>',
       to: email,
       subject: `How was our consultation, ${firstName}? 🌙`,
       html: `
@@ -284,7 +285,7 @@ async function sendPostConsultationSurvey(name: string, email: string, eventUri:
           <div style="margin-top: 30px; text-align: center;">
             <p style="color: #94a3b8; font-size: 12px;">
               Moonlit Studios | Where healthcare expertise meets cutting-edge development<br>
-              <a href="https://moonlstudios.com" style="color: #0ea5e9; text-decoration: none;">moonlstudios.com</a>
+              <a href="https://www.moonlitstudios.com" style="color: #0ea5e9; text-decoration: none;">moonlstudios.com</a>
             </p>
           </div>
         </div>

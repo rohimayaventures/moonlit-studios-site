@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { createLogger } from "@/lib/logger";
 import {
   Sparkles,
   Zap,

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
   description:
     "Award-winning full-stack development, AI innovation, and healthcare tech solutions. 15+ years healthcare ops turned tech mastery. HIPAA-compliant platforms, RAG chatbots, voice AI & creative design.",
-  metadataBase: new URL("https://moonlstudios.com"),
+  metadataBase: new URL("https://www.moonlitstudios.com"),
   keywords: [
     "full-stack developer",
     "AI development",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://moonlstudios.com",
+    url: "https://www.moonlitstudios.com",
     siteName: "Moonlit Studios",
     title: "Moonlit Studios - The Nurse Who Codes",
     description:
@@ -198,8 +198,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <div className="space-y-2 text-sm">
                   <p>
                     <span className="text-lunarGold">Email:</span>{" "}
-                    <a href="mailto:hello@moonlstudios.com" className="transition-colors hover:text-starlight">
-                      hello@moonlstudios.com
+                    <a href="mailto:hello@moonlitstudios.com" className="transition-colors hover:text-starlight">
+                      hello@moonlitstudios.com
                     </a>
                   </p>
                   <p>

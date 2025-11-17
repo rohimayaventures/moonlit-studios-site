@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -192,7 +193,7 @@ export async function POST(request: NextRequest) {
 <body>
   <div class="container">
     <div class="header">
-      <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com/'}square-logo.png" alt="Moonlit Studios" class="logo" />
+      <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com/'}square-logo.png" alt="Moonlit Studios" class="logo" />
       <h1 style="margin: 0; font-size: 28px;">${config.emoji} ${config.title}</h1>
       <div class="priority-badge">Priority: ${config.priority}</div>
     </div>
@@ -294,7 +295,7 @@ export async function POST(request: NextRequest) {
             : '💰 Visitor showed interest in getting a quote or booking a consultation.'}
         </p>
         <a href="mailto:${process.env.BUSINESS_EMAIL}" class="button">Reply via Email</a>
-        <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com/'}admin" class="button">View Dashboard</a>
+        <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com/'}admin" class="button">View Dashboard</a>
       </div>
     </div>
 
@@ -313,8 +314,8 @@ export async function POST(request: NextRequest) {
 
     // Send email notification
     await resend.emails.send({
-      from: 'Kai @ Moonlit Studios <kai@moonlstudios.com>',
-      to: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
+      from: 'Kai @ Moonlit Studios <kai@moonlitstudios.com>',
+      to: process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com',
       subject: `${config.emoji} ${config.title} - Moonlit Studios`,
       html: ownerEmailHtml,
     });

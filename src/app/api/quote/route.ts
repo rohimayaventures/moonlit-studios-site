@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import { supabaseAdmin } from '@/lib/supabase';
 import { createNotionLead } from '@/lib/notion';
 import { notifyNewQuote } from '@/lib/slack';

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic({

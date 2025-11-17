@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
 import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 
@@ -56,7 +57,7 @@ Author platforms, books, cookbooks, and ongoing written content done in your voi
 "Where Dreams Surface and Ideas Flow" - Moonlit Studios combines the adaptability of water (inspired by Avatar: The Last Airbender) with the precision of technical excellence. Every project is approached with patience, balance, and a focus on healing broken systems.
 
 ## Contact
-Email: hello@moonlstudios.com
+Email: hello@moonlitstudios.com
 `;
 
 export async function POST(req: NextRequest) {

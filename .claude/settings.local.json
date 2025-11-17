@@ -26,7 +26,8 @@
       "Bash(curl:*)",
       "Bash(git reset:*)",
       "Bash(echo:*)",
-      "Bash(SETUP_COMPLETE.md)"
+      "Bash(SETUP_COMPLETE.md)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

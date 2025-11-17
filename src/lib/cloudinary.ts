@@ -5,6 +5,7 @@
  */
 
 import { v2 as cloudinary } from 'cloudinary';
+import { createLogger } from "@/lib/logger";
 
 // Configure Cloudinary
 cloudinary.config({

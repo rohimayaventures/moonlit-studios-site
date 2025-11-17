@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createLogger } from "@/lib/logger";
 import { AnimatedWaterDrop } from "./AnimatedWaterDrop";
 import { AnimatedFlame } from "./AnimatedFlame";
 import { AnimatedEarth } from "./AnimatedEarth";

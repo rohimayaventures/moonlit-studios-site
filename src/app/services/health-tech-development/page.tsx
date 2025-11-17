@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "HIPAA-compliant clinical systems starting at $4,500. Built by a nurse with 15+ years healthcare operations. Clinical flows, patient portals, workflow tools.",
     type: "website",
-    url: "https://moonlstudios.com/services/health-tech-development",
+    url: "https://www.moonlitstudios.com/services/health-tech-development",
     images: [
       {
         url: "/og-image.png",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Custom AI solutions. RAG chatbots, voice AI, computer vision, full AI architecture. Claude API, OpenAI, cutting-edge ML.",
     type: "website",
-    url: "https://moonlstudios.com/services/ai-innovation",
+    url: "https://www.moonlitstudios.com/services/ai-innovation",
     images: [
       {
         url: "/og-image.png",

@@ -39,7 +39,7 @@ Moonlit Studios is a full-stack freelance business offering five specialized ser
 
 This website showcases portfolio work, service offerings, and includes interactive AI demonstrations.
 
-**Live Site:** [moonlitstudios.com](https://moonlitstudios.com)
+**Live Site:** [www.moonlitstudios.com](https://www.moonlitstudios.com)
 
 ---
 
@@ -358,9 +358,11 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 ### Custom Domain Setup
 
 1. In Vercel dashboard → Domains
-2. Add your domain: `moonlitstudios.com`
+2. Add your domain: `www.moonlitstudios.com`
 3. Follow DNS configuration instructions
 4. SSL certificate auto-generated
+
+**Note:** All references use `www.moonlitstudios.com` (with the 't' in moonlit)
 
 ---
 
@@ -501,7 +503,7 @@ SOFTWARE.
 **Moonlit Studios**  
 Founded by Hannah Pagade - "The Nurse Who Codes"
 
-- **Website:** [moonlitstudios.com](https://moonlitstudios.com)
+- **Website:** [www.moonlitstudios.com](https://www.moonlitstudios.com)
 - **Email:** hello@moonlitstudios.com
 - **GitHub:** [@rohimayaventures](https://github.com/rohimayaventures)
 - **Location:** Westminster, Colorado, USA

@@ -8,7 +8,7 @@
  *    - STRIPE_SECRET_KEY=sk_live_...
  *    - STRIPE_WEBHOOK_SECRET=whsec_live_...
  * 2. Create a webhook endpoint in Stripe Dashboard (live mode):
- *    - URL: https://moonlstudios.com/api/stripe/webhook
+ *    - URL: https://www.moonlitstudios.com/api/stripe/webhook
  *    - Events: checkout.session.completed, payment_intent.succeeded,
  *              payment_intent.payment_failed, invoice.paid, invoice.payment_failed
  * 3. Copy the webhook secret (whsec_live_...) to .env
@@ -149,7 +149,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
         body: JSON.stringify({
           sender: {
             name: 'Moonlit Studios',
-            email: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
+            email: process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com',
           },
           to: [{ email: customerEmail }],
           subject: `Payment Confirmation - $${amount.toFixed(2)} - Moonlit Studios`,
@@ -182,7 +182,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
                 </ul>
 
                 <div style="margin-top: 30px; text-align: center;">
-                  <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}"
+                  <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com'}"
                      style="background: #f4d03f; color: #1a1a2e; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                     Visit Your Portal
                   </a>
@@ -191,7 +191,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
 
               <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">
                 <p>Moonlit Studios - Where Dreams Surface and Ideas Flow</p>
-                <p>hello@moonlstudios.com</p>
+                <p>hello@moonlitstudios.com</p>
               </div>
             </div>
           `,

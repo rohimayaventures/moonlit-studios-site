@@ -95,7 +95,7 @@ function SuccessContent() {
 
         {/* Additional Info */}
         <div className="mt-6 text-center text-moonlightSilver/60 text-sm">
-          <p>Questions? Email us at <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:text-lunarGold">hello@moonlstudios.com</a></p>
+          <p>Questions? Email us at <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:text-lunarGold">hello@moonlitstudios.com</a></p>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Expert consulting. HealthTech strategy, tech stack advisory, AI/ML guidance. 15+ years healthcare ops + modern tech mastery.",
     type: "website",
-    url: "https://moonlstudios.com/services/consulting",
+    url: "https://www.moonlitstudios.com/services/consulting",
     images: [
       {
         url: "/og-image.png",

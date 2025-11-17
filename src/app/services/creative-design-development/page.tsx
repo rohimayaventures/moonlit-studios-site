@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Branding, websites, and visual direction. Starting at $1,800. Built by a published author who understands storytelling.",
     type: "website",
-    url: "https://moonlstudios.com/services/creative-design-development",
+    url: "https://www.moonlitstudios.com/services/creative-design-development",
     images: [
       {
         url: "/og-image.png",

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "5 premium service suites: Creative Design, Health x Tech, Consulting, AI Innovation, Ghostwriting. Built by The Nurse Who Codes.",
     type: "website",
-    url: "https://moonlstudios.com/services",
+    url: "https://www.moonlitstudios.com/services",
     images: [
       {
         url: "/og-image.png",

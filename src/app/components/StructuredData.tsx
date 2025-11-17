@@ -17,8 +17,8 @@ export function StructuredData({ type, data }: StructuredDataProps) {
           '@type': 'Organization',
           name: 'Moonlit Studios',
           alternateName: 'The Nurse Who Codes',
-          url: 'https://moonlstudios.com',
-          logo: 'https://moonlstudios.com/square-logo.png',
+          url: 'https://www.moonlitstudios.com',
+          logo: 'https://www.moonlitstudios.com/square-logo.png',
           description:
             'Award-winning full-stack development, AI innovation, and healthcare tech solutions. 15+ years healthcare ops turned tech mastery.',
           founder: {
@@ -34,7 +34,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
           contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'Customer Service',
-            email: 'hello@moonlstudios.com',
+            email: 'hello@moonlitstudios.com',
             availableLanguage: 'English',
           },
           areaServed: {
@@ -49,13 +49,13 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         return {
           '@context': 'https://schema.org',
           '@type': 'ProfessionalService',
-          '@id': 'https://moonlstudios.com/#business',
+          '@id': 'https://www.moonlitstudios.com/#business',
           name: 'Moonlit Studios',
           alternateName: 'The Nurse Who Codes',
-          image: 'https://moonlstudios.com/square-logo.png',
-          url: 'https://moonlstudios.com',
+          image: 'https://www.moonlitstudios.com/square-logo.png',
+          url: 'https://www.moonlitstudios.com',
           telephone: '',
-          email: 'hello@moonlstudios.com',
+          email: 'hello@moonlitstudios.com',
           priceRange: '$$$',
           address: {
             '@type': 'PostalAddress',

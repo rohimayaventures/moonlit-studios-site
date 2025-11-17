@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { createLogger } from "@/lib/logger";
 
 // Supabase client for browser/client-side operations
 // Uses anon key - protected by Row Level Security (RLS)

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Transform your vision into reality. Full-stack development, AI innovation, healthcare tech, creative design, ghostwriting. Let's create something extraordinary.",
     type: "website",
-    url: "https://moonlstudios.com/contact",
+    url: "https://www.moonlitstudios.com/contact",
     images: [
       {
         url: "/og-image.png",

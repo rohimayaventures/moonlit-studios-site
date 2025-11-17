@@ -16,7 +16,7 @@ You already have `SLACK_WEBHOOK_URL` in your `.env.local` - that's all you need!
 
 **What You Have:**
 ```
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR_WORKSPACE_ID/YOUR_CHANNEL_ID/YOUR_SECRET_TOKEN
 ```
 
 This is **sufficient** for receiving Kai notifications!
@@ -103,7 +103,7 @@ This format is **correct** for Slack Block Kit.
 
 ### Option 1: Test with curl (Quick)
 ```bash
-curl -X POST https://hooks.slack.com/services/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 \
+curl -X POST YOUR_SLACK_WEBHOOK_URL \
   -H "Content-Type: application/json" \
   -d '{"text":"Test from Moonlit Studios - Webhook is working! 🌙"}'
 ```
@@ -150,15 +150,12 @@ https://api.slack.com/apps
 5. Click **Allow**
 
 ### Step 4: Copy the New Webhook URL
-You'll see something like:
-```
-https://hooks.slack.com/services/T09U1RRGW2C/B09XXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX
-```
+You'll see a webhook URL that looks like a long URL starting with `hooks.slack.com/services/...`
 
 ### Step 5: Update Your .env.local
 Replace the old webhook URL with the new one:
 ```
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR_NEW_WEBHOOK_URL
+SLACK_WEBHOOK_URL=YOUR_FULL_WEBHOOK_URL_HERE
 ```
 
 ### Step 6: Restart Your Dev Server

@@ -23,6 +23,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import Stripe from 'stripe';
 
 // Initialize Stripe with secret key
@@ -77,7 +78,7 @@ export async function POST(req: NextRequest) {
             product_data: {
               name: description,
               description: 'Professional development services by Moonlit Studios',
-              images: ['https://moonlstudios.com/og-image.png'], // TODO: Update with actual logo URL
+              images: ['https://www.moonlitstudios.com/og-image.png'], // TODO: Update with actual logo URL
             },
             unit_amount: amount,
           },

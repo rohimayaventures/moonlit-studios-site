@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createLogger } from "@/lib/logger";
 import OpenAI from 'openai';
 import { Resend } from 'resend';
 import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
@@ -193,7 +194,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
 
     // Send detailed quote email to client
     const clientEmail = await resend.emails.send({
-      from: 'Moonlit Studios <hello@moonlstudios.com>',
+      from: 'Moonlit Studios <hello@moonlitstudios.com>',
       to: email,
       subject: `Your Custom Quote: ${serviceType} - ${aiAnalysis.recommendedTier}`,
       html: generateClientQuoteEmail(quote, aiAnalysis),
@@ -203,13 +204,13 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
 
     // Send notification to owner with full analysis
     const ownerEmail = await resend.emails.send({
-      from: 'Moonlit Studios <notifications@moonlstudios.com>',
-      to: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
+      from: 'Moonlit Studios <notifications@moonlitstudios.com>',
+      to: process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com',
       subject: `💰 New Auto-Quote: $${aiAnalysis.estimatedPrice} - ${name}`,
       html: generateOwnerNotificationEmail(quote, aiAnalysis, body),
     });
 
-    console.log('📧 Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com');
+    console.log('📧 Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com');
 
     // Send Slack notification
     await notifyNewQuote({
@@ -248,7 +249,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
 
 // Email template for client
 function generateClientQuoteEmail(quote: any, analysis: any): string {
-  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}square-logo.png`;
+  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com'}square-logo.png`;
   return `
     <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 650px; margin: 0 auto; background: linear-gradient(135deg, #0A1128 0%, #1B4965 100%); color: #F8F9FA; padding: 40px 20px;">
       <!-- Header -->
@@ -320,7 +321,7 @@ function generateClientQuoteEmail(quote: any, analysis: any): string {
 
       <!-- CTA Button -->
       <div style="text-align: center; margin: 40px 0;">
-        <a href="https://moonlstudios.com/book"
+        <a href="https://www.moonlitstudios.com/book"
            style="display: inline-block; background: linear-gradient(135deg, #4A9B9B 0%, #3AA7A3 100%); color: white; padding: 18px 40px; text-decoration: none; border-radius: 30px; font-weight: 700; font-size: 16px; box-shadow: 0 8px 20px rgba(74, 155, 155, 0.4); text-transform: uppercase; letter-spacing: 1px;">
           Book Free Consultation
         </a>
@@ -357,7 +358,7 @@ function generateClientQuoteEmail(quote: any, analysis: any): string {
 
 // Email template for owner
 function generateOwnerNotificationEmail(quote: any, analysis: any, fullRequest: any): string {
-  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}square-logo.png`;
+  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com'}square-logo.png`;
   return `
     <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 700px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 20px;">

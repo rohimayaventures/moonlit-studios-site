@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description:
       "15 years of clinical operations meets full-stack mastery. The origin story of healthcare meets code.",
     type: "website",
-    url: "https://moonlstudios.com/about",
+    url: "https://www.moonlitstudios.com/about",
     images: [
       {
         url: "/og-image.png",

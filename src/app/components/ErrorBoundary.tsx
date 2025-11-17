@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Component, ReactNode, ErrorInfo } from 'react';
+import { createLogger } from "@/lib/logger";
 
 interface Props {
   children: ReactNode;
