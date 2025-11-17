@@ -1,6 +1,7 @@
 'use client';
 
 import { TestimonialsSection } from '../components/TestimonialsSection';
+import { PageCTASection } from '../components/PageCTASection';
 
 export default function AboutPage() {
   return (
@@ -901,6 +902,12 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {/* CTA SECTION */}
+      <PageCTASection
+        title="Let's Build Something Amazing Together"
+        description="With a unique blend of healthcare expertise and full-stack development, I bring a perspective that transforms ideas into impactful solutions."
+      />
 
     </main>
   );
