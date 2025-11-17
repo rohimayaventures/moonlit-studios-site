@@ -124,6 +124,135 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   console.log(`   Payment Status: ${session.payment_status}`);
 
   const metadata = session.metadata || {};
+  const amount = (session.amount_total || 0) / 100;
+  const customerEmail = session.customer_email;
+
+  // Send confirmation email to customer via Brevo
+  if (customerEmail) {
+    try {
+      await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': process.env.BREVO_API_KEY!,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          sender: {
+            name: 'Moonlit Studios',
+            email: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
+          },
+          to: [{ email: customerEmail }],
+          subject: `Payment Confirmation - $${amount.toFixed(2)} - Moonlit Studios`,
+          htmlContent: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 30px; border-radius: 10px; text-align: center;">
+                <h1 style="color: #f4d03f; margin: 0;">Payment Confirmed! ✨</h1>
+              </div>
+
+              <div style="background: #ffffff; padding: 30px; border-radius: 10px; margin-top: 20px;">
+                <p style="font-size: 16px; color: #333;">Thank you for your payment!</p>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                  <p style="margin: 10px 0; color: #666;">
+                    <strong>Amount Paid:</strong> $${amount.toFixed(2)}
+                  </p>
+                  <p style="margin: 10px 0; color: #666;">
+                    <strong>Transaction ID:</strong> ${session.id}
+                  </p>
+                  <p style="margin: 10px 0; color: #666;">
+                    <strong>Date:</strong> ${new Date().toLocaleDateString()}
+                  </p>
+                </div>
+
+                <h3 style="color: #1a1a2e; margin-top: 30px;">What's Next?</h3>
+                <ul style="color: #666; line-height: 1.8;">
+                  <li>Our team will reach out within 24 hours to begin your project</li>
+                  <li>You can track your project progress in your client portal</li>
+                  <li>Questions? Just reply to this email!</li>
+                </ul>
+
+                <div style="margin-top: 30px; text-align: center;">
+                  <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}"
+                     style="background: #f4d03f; color: #1a1a2e; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                    Visit Your Portal
+                  </a>
+                </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">
+                <p>Moonlit Studios - Where Dreams Surface and Ideas Flow</p>
+                <p>hello@moonlstudios.com</p>
+              </div>
+            </div>
+          `,
+        }),
+      });
+      console.log(`   ✅ Confirmation email sent to ${customerEmail}`);
+    } catch (emailError) {
+      console.error(`   ❌ Failed to send email:`, emailError);
+    }
+  }
+
+  // Send Slack notification to admin
+  if (process.env.SLACK_WEBHOOK_URL) {
+    try {
+      await fetch(process.env.SLACK_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: `💰 *New Payment Received!*`,
+          blocks: [
+            {
+              type: 'header',
+              text: {
+                type: 'plain_text',
+                text: '💰 New Payment Received!',
+                emoji: true,
+              },
+            },
+            {
+              type: 'section',
+              fields: [
+                {
+                  type: 'mrkdwn',
+                  text: `*Amount:*\n$${amount.toFixed(2)}`,
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*Customer:*\n${customerEmail || 'N/A'}`,
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*Session ID:*\n${session.id}`,
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*Quote ID:*\n${metadata.quoteId || 'N/A'}`,
+                },
+              ],
+            },
+            {
+              type: 'actions',
+              elements: [
+                {
+                  type: 'button',
+                  text: {
+                    type: 'plain_text',
+                    text: 'View in Stripe',
+                  },
+                  url: `https://dashboard.stripe.com/payments/${session.payment_intent}`,
+                },
+              ],
+            },
+          ],
+        }),
+      });
+      console.log(`   ✅ Slack notification sent`);
+    } catch (slackError) {
+      console.error(`   ❌ Failed to send Slack notification:`, slackError);
+    }
+  }
 
   // TODO: Update your Supabase database here
   // Example:
@@ -137,9 +266,6 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   //     })
   //     .eq('id', metadata.quoteId);
   // }
-
-  // TODO: Send confirmation email to customer
-  // TODO: Send notification to admin via Slack/email
 
   console.log('   Metadata:', metadata);
 }

@@ -17,7 +17,11 @@
       "Bash(.gitignore)",
       "Bash(if exist .nextdevlock del /f .nextdevlock)",
       "Bash(git config:*)",
-      "Bash(del WHATS_NEW.md AUTOMATION_COMPLETE.md AUTOMATION_MASTER_PLAN.md COMPLETE_AUTOMATION_SUMMARY.md TESTIMONIALS_AUTOMATION.md ATLA_SERVICES_PLAN.md LOTR_PORTFOLIO_PLAN.md)"
+      "Bash(del WHATS_NEW.md AUTOMATION_COMPLETE.md AUTOMATION_MASTER_PLAN.md COMPLETE_AUTOMATION_SUMMARY.md TESTIMONIALS_AUTOMATION.md ATLA_SERVICES_PLAN.md LOTR_PORTFOLIO_PLAN.md)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(if exist \".next\\dev\\lock\" del /f \".next\\dev\\lock\")",
+      "Bash(del /f \".next\\dev\\lock\" 2)"
     ],
     "deny": [],
     "ask": []
