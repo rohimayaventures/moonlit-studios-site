@@ -22,7 +22,8 @@
       "Bash(findstr:*)",
       "Bash(if exist \".next\\dev\\lock\" del /f \".next\\dev\\lock\")",
       "Bash(del /f \".next\\dev\\lock\" 2)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

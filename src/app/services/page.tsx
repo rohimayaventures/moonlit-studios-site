@@ -11,6 +11,7 @@ import { AnimatedScroll } from '../components/AnimatedScroll';
 import { AnimatedSword } from '../components/AnimatedSword';
 import { AnimatedDiamond } from '../components/AnimatedDiamond';
 import { CalendlyButton } from '../components/CalendlyButton';
+import { TestimonialsSection } from '../components/TestimonialsSection';
 
 const suites = [
   {
@@ -593,6 +594,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsSection limit={6} showTitle={true} />
 
       <section id="help" className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
         {/* Background quest scroll */}

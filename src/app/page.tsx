@@ -1,6 +1,7 @@
 'use client';
 
 import { CalendlyButton } from './components/CalendlyButton';
+import { TestimonialsSection } from './components/TestimonialsSection';
 import Link from 'next/link';
 
 export default function Home() {
@@ -273,6 +274,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsSection limit={3} showTitle={true} />
 
       {/* FINAL CTA */}
       <section id="cta" className="py-20 bg-gradient-to-b from-deepOcean/20 to-midnight">

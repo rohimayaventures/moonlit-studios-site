@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { MoonPhaseNav } from '@/app/components/MoonPhaseNav';
+import { TestimonialsSection } from '@/app/components/TestimonialsSection';
 
 export default function SmallBusinessPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -389,6 +390,9 @@ export default function SmallBusinessPage() {
           </div>
         </div>
       </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsSection limit={3} showTitle={true} />
 
       {/* CTA Section */}
       <section className="py-20">
