@@ -21,7 +21,8 @@
       "Bash(netstat:*)",
       "Bash(findstr:*)",
       "Bash(if exist \".next\\dev\\lock\" del /f \".next\\dev\\lock\")",
-      "Bash(del /f \".next\\dev\\lock\" 2)"
+      "Bash(del /f \".next\\dev\\lock\" 2)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
+import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -77,6 +78,19 @@ Remember: You're here to have natural conversations, qualify leads, and book dis
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting - AI operations
+    const identifier = getClientIdentifier(req);
+    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+
+    if (!rateLimitResult.success) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429, headers }
+      );
+    }
+
     const { message, history = [] } = await req.json();
 
     if (!message || typeof message !== 'string') {

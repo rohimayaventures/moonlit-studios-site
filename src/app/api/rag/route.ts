@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
+import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -60,6 +61,19 @@ Email: hello@moonlstudios.com
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting - AI operations
+    const identifier = getClientIdentifier(req);
+    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+
+    if (!rateLimitResult.success) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429, headers }
+      );
+    }
+
     const { query } = await req.json();
 
     if (!query || typeof query !== 'string') {

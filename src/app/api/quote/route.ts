@@ -39,26 +39,28 @@ export async function POST(request: NextRequest) {
     const quoteId = `QT-${Date.now()}-${crypto.randomUUID().substring(0, 8)}`;
 
     // Insert into Supabase quotes table
-    const { data, error } = await supabaseAdmin
-      .from('quotes')
-      .insert({
-        id: quoteId,
-        name,
-        email,
-        company: company || null,
-        project_type,
-        budget: budget || null,
-        timeline: timeline || null,
-        description,
-        features: features || null,
-        ai_generated_quote: ai_generated_quote || null,
-        estimated_cost: estimated_cost || null,
-        estimated_timeline: estimated_timeline || null,
-        status: status || 'new',
-        notes: notes || null
-      })
-      .select()
-      .single();
+    const { data, error } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('quotes')
+          .insert({
+            id: quoteId,
+            name,
+            email,
+            company: company || null,
+            project_type,
+            budget: budget || null,
+            timeline: timeline || null,
+            description,
+            features: features || null,
+            ai_generated_quote: ai_generated_quote || null,
+            estimated_cost: estimated_cost || null,
+            estimated_timeline: estimated_timeline || null,
+            status: status || 'new',
+            notes: notes || null
+          })
+          .select()
+          .single()
+      : { data: null, error: null };
 
     if (error) {
       console.error('Supabase error:', error);
@@ -69,9 +71,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Create lead entry in Supabase
-    const { data: leadData, error: leadError } = await supabaseAdmin
-      .from('leads')
-      .insert({
+    const { data: leadData, error: leadError } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('leads')
+          .insert({
         source: 'quote_request',
         name,
         email,
@@ -86,8 +89,9 @@ export async function POST(request: NextRequest) {
           estimated_timeline
         }
       })
-      .select()
-      .single();
+          .select()
+          .single()
+      : { data: null, error: null };
 
     if (leadError) {
       console.error('Lead creation error:', leadError);
@@ -108,7 +112,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Update lead with Notion page ID if successful
-    if (notionPageId && leadData) {
+    if (notionPageId && leadData && supabaseAdmin) {
       await supabaseAdmin
         .from('leads')
         .update({ notion_page_id: notionPageId })

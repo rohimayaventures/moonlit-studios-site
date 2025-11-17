@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -26,14 +27,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-mermaidTeal/30 bg-midnight/95 backdrop-blur-md shadow-lg shadow-midnight/50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        {/* Logo with Animated Moon Phase */}
+        {/* Logo with Business Mark */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative h-10 w-10">
-            {/* Animated moon that cycles through phases */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-lunarGold opacity-90 group-hover:opacity-100 transition-opacity animate-pulse" />
-            <div className="absolute inset-0 rounded-full bg-midnight opacity-0 group-hover:opacity-20 transition-opacity" style={{
-              background: 'radial-gradient(circle at 30% 30%, transparent 40%, rgba(10, 17, 40, 0.8) 40%)'
-            }} />
+            {/* Square Business Logo */}
+            <Image
+              src="/square-logo.png"
+              alt="Moonlit Studios Logo"
+              width={40}
+              height={40}
+              className="rounded-lg transition-transform group-hover:scale-110"
+              priority
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-semibold tracking-wide leading-tight text-pearlWhite">

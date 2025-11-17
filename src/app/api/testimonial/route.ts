@@ -40,9 +40,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Insert into Supabase testimonials table
-    const { data, error } = await supabaseAdmin
-      .from('testimonials')
-      .insert({
+    if (!supabaseAdmin) {
+      console.warn('⚠️ Supabase admin not configured - skipping database insert');
+    }
+
+    const { data, error } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('testimonials')
+          .insert({
         name,
         email,
         company: company || null,
@@ -53,8 +58,9 @@ export async function POST(request: NextRequest) {
         approved: approved ?? false, // Default to false (requires approval)
         featured: featured ?? false
       })
-      .select()
-      .single();
+          .select()
+          .single()
+      : { data: null, error: null };
 
     if (error) {
       console.error('Supabase error:', error);
@@ -65,9 +71,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Create lead entry in Supabase
-    const { data: leadData, error: leadError } = await supabaseAdmin
-      .from('leads')
-      .insert({
+    const { data: leadData, error: leadError } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('leads')
+          .insert({
         source: 'testimonial',
         name,
         email,
@@ -80,8 +87,9 @@ export async function POST(request: NextRequest) {
           project_type
         }
       })
-      .select()
-      .single();
+          .select()
+          .single()
+      : { data: null, error: null };
 
     if (leadError) {
       console.error('Lead creation error:', leadError);
@@ -97,11 +105,11 @@ export async function POST(request: NextRequest) {
       priority: rating >= 5 ? '🔥 Hot' : rating >= 4 ? '⚡ Warm' : '❄️ Cold',
       status: '🎉 Won', // They're already a satisfied client
       notes: `Testimonial Submission (${rating}/5 ⭐):\n\n${content}\n\n${role ? `Role: ${role}` : ''}${company ? `\nCompany: ${company}` : ''}`,
-      supabaseId: leadData?.id || data.id
+      supabaseId: leadData?.id || data?.id
     });
 
     // Update lead with Notion page ID if successful
-    if (notionPageId && leadData) {
+    if (notionPageId && leadData && supabaseAdmin) {
       await supabaseAdmin
         .from('leads')
         .update({ notion_page_id: notionPageId })

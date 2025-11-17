@@ -29,22 +29,24 @@ export async function POST(req: NextRequest) {
     }
 
     // Save to Supabase leads table
-    const { data: leadData, error: dbError } = await supabaseAdmin
-      .from('leads')
-      .insert({
-        source: 'contact_form',
-        name,
-        email,
-        company: null,
-        message: details,
-        metadata: {
-          serviceType,
-          budget,
-          timeline
-        }
-      })
-      .select()
-      .single();
+    const { data: leadData, error: dbError } = supabaseAdmin
+      ? await supabaseAdmin
+          .from('leads')
+          .insert({
+            source: 'contact_form',
+            name,
+            email,
+            company: null,
+            message: details,
+            metadata: {
+              serviceType,
+              budget,
+              timeline
+            }
+          })
+          .select()
+          .single()
+      : { data: null, error: null };
 
     if (dbError) {
       console.error('Supabase error:', dbError);
@@ -64,7 +66,7 @@ export async function POST(req: NextRequest) {
     });
 
     // Update lead with Notion page ID if successful
-    if (notionPageId && leadData) {
+    if (notionPageId && leadData && supabaseAdmin) {
       await supabaseAdmin
         .from('leads')
         .update({ notion_page_id: notionPageId })

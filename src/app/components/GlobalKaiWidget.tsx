@@ -105,10 +105,20 @@ export function GlobalKaiWidget() {
   }, []);
 
   // Save chat history to sessionStorage whenever messages change
+  // ⚠️ MEMORY LEAK FIX: Cap at 50 messages to prevent sessionStorage overflow
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (messages.length > 0) {
-      sessionStorage.setItem("kai-chat-history", JSON.stringify(messages));
+      // Keep only the latest 50 messages (25 exchanges)
+      const cappedMessages = messages.length > 50
+        ? messages.slice(-50)
+        : messages;
+      sessionStorage.setItem("kai-chat-history", JSON.stringify(cappedMessages));
+
+      // If we capped messages, update state to match
+      if (messages.length > 50) {
+        setMessages(cappedMessages);
+      }
     }
   }, [messages]);
 
@@ -135,7 +145,8 @@ export function GlobalKaiWidget() {
         },
       ]);
     }
-  }, [pathname]);
+    // Include messages.length dependency to avoid stale closure
+  }, [pathname, messages.length]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -781,9 +792,10 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
     }
 
     // Add system message about personality change
+    // ⚠️ RACE CONDITION FIX: Use functional update to avoid stale state
     const personalityName = personalities[newPersonality].name;
-    setMessages([
-      ...messages,
+    setMessages(prev => [
+      ...prev,
       {
         role: "assistant",
         content: `*Kai shifts form into ${personalityName} mode* - How can I assist you now?`,

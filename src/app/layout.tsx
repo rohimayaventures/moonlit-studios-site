@@ -7,6 +7,7 @@ import { AchievementSystem } from "./components/AchievementSystem";
 import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
@@ -93,10 +94,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <footer className="mt-16 bg-gradient-to-b from-deepOcean via-midnight to-midnight text-moonlightSilver">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-12 md:grid-cols-2 lg:grid-cols-4">
               <div className="space-y-3">
-                <p className="text-lg font-semibold text-pearlWhite">
-                  Moonlit Studios
-                </p>
-                <p className="text-sm text-lunarGold">The Nurse Who Codes</p>
+                <div className="flex items-center gap-3">
+                  <Image
+                    src="/square-logo.png"
+                    alt="Moonlit Studios"
+                    width={48}
+                    height={48}
+                    className="rounded-lg"
+                  />
+                  <div>
+                    <p className="text-lg font-semibold text-pearlWhite">
+                      Moonlit Studios
+                    </p>
+                    <p className="text-sm text-lunarGold">The Nurse Who Codes</p>
+                  </div>
+                </div>
                 <p className="text-xs leading-relaxed text-moonlightSilver/80">
                   Strategic design. Technical excellence. Operational precision.
                 </p>
