@@ -233,11 +233,13 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
 
 // Email template for client
 function generateClientQuoteEmail(quote: any, analysis: any): string {
+  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}square-logo.png`;
   return `
     <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 650px; margin: 0 auto; background: linear-gradient(135deg, #0A1128 0%, #1B4965 100%); color: #F8F9FA; padding: 40px 20px;">
       <!-- Header -->
       <div style="text-align: center; margin-bottom: 40px;">
-        <h1 style="color: #4A9B9B; font-size: 32px; margin: 0;">🌙 Moonlit Studios</h1>
+        <img src="${logoUrl}" alt="Moonlit Studios" style="width: 80px; height: 80px; border-radius: 16px; margin-bottom: 20px;" />
+        <h1 style="color: #4A9B9B; font-size: 32px; margin: 0;">Moonlit Studios</h1>
         <p style="color: #A8DADC; font-size: 14px; margin: 10px 0;">Your Custom Project Quote</p>
       </div>
 
@@ -340,8 +342,12 @@ function generateClientQuoteEmail(quote: any, analysis: any): string {
 
 // Email template for owner
 function generateOwnerNotificationEmail(quote: any, analysis: any, fullRequest: any): string {
+  const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}square-logo.png`;
   return `
     <div style="font-family: system-ui, -apple-system, sans-serif; max-width: 700px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="${logoUrl}" alt="Moonlit Studios" style="width: 60px; height: 60px; border-radius: 12px;" />
+      </div>
       <h2 style="color: #0ea5e9;">💰 New Auto-Quote Generated!</h2>
 
       <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #0ea5e9; margin: 20px 0;">

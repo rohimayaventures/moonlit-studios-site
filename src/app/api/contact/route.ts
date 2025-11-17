@@ -167,6 +167,7 @@ export async function POST(req: NextRequest) {
           </head>
           <body>
             <div class="header">
+              <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://moonlstudios.com'}square-logo.png" alt="Moonlit Studios" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px;" />
               <h1>🌙 New Contact Form Submission</h1>
               <p>Someone is interested in working with Moonlit Studios!</p>
             </div>
