@@ -1068,12 +1068,21 @@ export default function AILabPage() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-4 pt-4">
             <a
+              href="/get-quote"
+              className="group w-full sm:w-auto px-8 py-4 sm:py-5 rounded-full bg-gradient-to-r from-lunarGold to-phoenixFire text-midnight font-bold text-base sm:text-lg shadow-xl shadow-lunarGold/40 hover:shadow-2xl hover:shadow-phoenixFire/60 hover:-translate-y-1 active:scale-95 transition-all text-center"
+            >
+              <span className="flex items-center justify-center gap-3">
+                <span>💰</span>
+                <span>Get Instant Quote</span>
+              </span>
+            </a>
+            <a
               href="/contact"
               className="group w-full sm:w-auto px-8 py-4 sm:py-5 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright text-white font-bold text-base sm:text-lg shadow-xl shadow-mermaidTeal/40 hover:shadow-2xl hover:shadow-tealBright/60 hover:-translate-y-1 active:scale-95 transition-all text-center"
             >
               <span className="flex items-center justify-center gap-3">
                 <Zap className="w-5 h-5 sm:w-6 sm:h-6 group-hover:animate-pulse" />
-                <span>Start Your AI Project</span>
+                <span>Book Consultation</span>
               </span>
             </a>
             <a
