@@ -4,6 +4,8 @@ import { getAuthenticatedClient } from '@/lib/portal/auth';
 import { getClientProjects, getProjectMessages } from '@/lib/portal/storage';
 import type { Project } from '@/lib/portal/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PortalDashboardPage() {
   // Require authentication
   const auth = await getAuthenticatedClient();
