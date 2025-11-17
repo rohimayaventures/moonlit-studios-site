@@ -185,12 +185,12 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
     // Send notification to owner with full analysis
     const ownerEmail = await resend.emails.send({
       from: 'Moonlit Studios <notifications@moonlstudios.com>',
-      to: 'your-email@gmail.com', // TODO: Update with your email
+      to: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
       subject: `💰 New Auto-Quote: $${aiAnalysis.estimatedPrice} - ${name}`,
       html: generateOwnerNotificationEmail(quote, aiAnalysis, body),
     });
 
-    console.log('📧 Owner notification sent');
+    console.log('📧 Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com');
 
     return NextResponse.json({
       success: true,

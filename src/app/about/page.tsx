@@ -838,26 +838,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* MEET GRACIE - Chief Design Critic */}
+      {/* MEET THE TEAM - Chief Design Critic */}
       <section className="relative py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/20 to-midnight">
         <div className="mx-auto max-w-4xl text-center fade-in-up">
           <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">The Team</p>
-          <h2 className="text-3xl md:text-5xl font-semibold mb-8">Meet Gracie</h2>
-          
+          <h2 className="text-3xl md:text-5xl font-semibold mb-8">Meet Our Chief Critic</h2>
+
           <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-mermaidTeal/10 border-2 border-lunarGold/40">
             <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-lunarGold to-phoenixFire flex items-center justify-center">
             </div>
-            <h3 className="text-2xl font-semibold text-lunarGold mb-2">Gracie Pagade</h3>
+            <h3 className="text-2xl font-semibold text-lunarGold mb-2">G.P.</h3>
             <p className="text-phoenixFire mb-4 text-sm uppercase tracking-widest">Chief Design Critic</p>
             <div className="max-w-md mx-auto">
               <p className="text-moonlightSilver leading-relaxed mb-4">
-                The toughest critic on the team. If Gracie doesn't approve the design, it goes back to the drawing board.
+                The toughest critic on the team. If our chief critic doesn't approve the design, it goes back to the drawing board.
               </p>
               <div className="p-4 rounded-lg bg-midnight/40 border border-starlight/20">
                 <p className="text-starlight italic">
                   "Classy, not flashy."
                 </p>
-                <p className="text-xs text-moonlightSilver/60 mt-2">— Gracie's Design Philosophy</p>
+                <p className="text-xs text-moonlightSilver/60 mt-2">— Design Philosophy</p>
               </div>
             </div>
           </div>
