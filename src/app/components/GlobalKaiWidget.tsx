@@ -1522,28 +1522,28 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleQuickAction('/get-quote')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/40 text-lunarGold text-xs font-semibold rounded-lg hover:bg-lunarGold/30 hover:scale-105 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 border border-lunarGold text-midnight text-xs font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md"
                 >
                   <span>💰</span>
                   <span>Get Quote</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('/contact')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/20 to-tealBright/20 border border-mermaidTeal/40 text-mermaidTeal text-xs font-semibold rounded-lg hover:bg-mermaidTeal/30 hover:scale-105 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-mermaidTeal/70 to-tealBright/70 border border-mermaidTeal text-midnight text-xs font-semibold rounded-lg hover:from-mermaidTeal hover:to-tealBright hover:scale-105 transition-all shadow-md"
                 >
                   <span>📅</span>
                   <span>Book Call</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('/portfolio')}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/10 to-moonlightSilver/10 border border-starlight/30 text-starlight text-xs font-semibold rounded-lg hover:bg-starlight/20 hover:scale-105 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
                 >
                   <span>👀</span>
                   <span>View Work</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction("What services do you offer?")}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/10 to-moonlightSilver/10 border border-starlight/30 text-starlight text-xs font-semibold rounded-lg hover:bg-starlight/20 hover:scale-105 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-starlight/60 to-moonlightSilver/60 border border-starlight text-midnight text-xs font-semibold rounded-lg hover:from-starlight hover:to-moonlightSilver hover:scale-105 transition-all shadow-md"
                 >
                   <span>❓</span>
                   <span>Ask Question</span>
