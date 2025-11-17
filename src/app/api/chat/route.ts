@@ -75,7 +75,8 @@ export async function POST(request: NextRequest) {
       const highIntentSignals = {
         quote_interest: /\b(quote|pricing|price|cost|how much|estimate|budget)\b/i,
         lead_qualified: /\b(interested|want to|need|looking for|project|hire|work with)\b/i,
-        high_intent: /\b(ready|when can|start|available|book|schedule|calendar|let's do)\b/i
+        high_intent: /\b(ready|when can|start|available|book|schedule|calendar|let's do)\b/i,
+        business_inquiry: /\b(business|website|site|company|startup|cafe|restaurant|salon|studio|shop|store|service|build|create|develop|design)\b/i
       };
 
       let notificationType: string | null = null;
@@ -83,6 +84,8 @@ export async function POST(request: NextRequest) {
       // Check for high-intent signals (prioritized)
       if (highIntentSignals.high_intent.test(userMessage)) {
         notificationType = 'high_intent';
+      } else if (highIntentSignals.business_inquiry.test(userMessage)) {
+        notificationType = 'business_inquiry';
       } else if (highIntentSignals.lead_qualified.test(userMessage)) {
         notificationType = 'lead_qualified';
       } else if (highIntentSignals.quote_interest.test(userMessage)) {

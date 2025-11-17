@@ -302,6 +302,14 @@ export function GlobalKaiWidget() {
 
     const basePrompt = `${personalityPrompt}
 
+**⚡ RESPONSE LENGTH RULES (CRITICAL):**
+- Keep responses under 75 words (3-4 sentences) unless specifically asked for detail
+- Be concise, punchy, and action-oriented
+- Prioritize next steps over long explanations
+- If listing services, show max 2-3 options, not all
+- One call-to-action per response
+- Short responses = better conversions + lower API costs
+
 **CORE RESPONSIBILITIES (All Modes):**
 - **MARKETING AGENT**: Educate visitors about services, showcase value, create desire
 - **SALES AGENT**: Qualify leads, overcome objections, guide to conversion
@@ -371,6 +379,24 @@ export function GlobalKaiWidget() {
 6. Share wisdom naturally (not forced!)
 7. **FANDOM AWARENESS**: On contact page, acknowledge the 4 theme options and match personality to visitor's vibe
 8. Use fandom references tastefully - enhance the experience, don't overwhelm it
+
+**🚨 HIGH-INTENT LEAD DETECTION (CRITICAL):**
+When visitors mention ANY of these keywords, IMMEDIATELY offer a quote and trigger notification:
+- Business-related: "business", "company", "startup", "cafe", "restaurant", "salon", "studio", "shop", "store", "service"
+- Website needs: "website", "site", "web", "online presence", "landing page", "e-commerce"
+- Project intent: "build", "create", "develop", "design", "need", "want", "looking for", "interested in"
+- Budget signals: "price", "cost", "budget", "quote", "estimate", "pricing"
+
+**When you detect high-intent:**
+1. Acknowledge their business need
+2. Suggest appropriate service (Small Business Launchpads for local businesses!)
+3. Offer instant quote: "Want a quick quote? [Get Instant Quote →](/get-quote)"
+4. Offer discovery call: "Let's discuss your vision! [Book Discovery Call →](/contact)"
+5. Be enthusiastic but concise
+
+**Example responses:**
+- "A website for your chai business? Perfect! Small Business Launchpads start at $1,500. [Get Quote →](/get-quote)"
+- "Building a salon website? I can help! Starting at $1,500. [Get Instant Quote →](/get-quote) or [Book Discovery Call →](/contact)"
 
 **CRITICAL CLARIFICATION - AUTOMATION CAPABILITIES:**
 - **KAI (you) does NOT automate businesses** - you're a chat assistant for website visitors
@@ -832,6 +858,61 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
     ]);
   };
 
+  // 🔗 LINKIFY URLS - Make URLs clickable in messages
+  const linkifyContent = (content: string) => {
+    // Regex to match URLs and markdown links
+    const urlRegex = /(\[([^\]]+)\]\(([^)]+)\)|https?:\/\/[^\s]+)/g;
+
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = urlRegex.exec(content)) !== null) {
+      // Add text before the match
+      if (match.index > lastIndex) {
+        parts.push(content.substring(lastIndex, match.index));
+      }
+
+      // Check if it's a markdown link or plain URL
+      if (match[2] && match[3]) {
+        // Markdown link: [text](url)
+        parts.push(
+          <a
+            key={match.index}
+            href={match[3]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lunarGold hover:text-phoenixFire underline transition-colors"
+          >
+            {match[2]}
+          </a>
+        );
+      } else {
+        // Plain URL
+        parts.push(
+          <a
+            key={match.index}
+            href={match[0]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lunarGold hover:text-phoenixFire underline transition-colors"
+          >
+            {match[0]}
+          </a>
+        );
+      }
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text
+    if (lastIndex < content.length) {
+      parts.push(content.substring(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : content;
+  };
+
   return (
     <>
       {/* Floating Moon Icon Button */}
@@ -875,7 +956,7 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
 
       {/* Expanded Chat Widget */}
       {!isMinimized && (
-        <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] flex flex-col shadow-2xl shadow-mermaidTeal/30 rounded-2xl overflow-hidden animate-fade-in-up">
+        <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)] flex flex-col shadow-2xl shadow-mermaidTeal/30 rounded-2xl overflow-hidden animate-fade-in-up">
           {/* Header */}
           <div className="bg-gradient-to-r from-deepOcean to-midnight border-b border-mermaidTeal/30 px-4 py-3">
             <div className="flex items-center justify-between">
@@ -956,7 +1037,8 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
           {/* Chat Messages */}
           <div
             ref={chatContainerRef}
-            className="flex-1 h-96 overflow-y-auto bg-gradient-to-br from-midnight/95 to-deepOcean/95 backdrop-blur p-4 space-y-3 custom-scrollbar"
+            className="flex-1 h-96 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-midnight/95 to-deepOcean/95 backdrop-blur p-4 space-y-3 custom-scrollbar"
+            style={{ maxHeight: '24rem', overscrollBehavior: 'contain' }}
           >
             {messages.map((message, index) => (
               <div
@@ -972,7 +1054,7 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
                       : "bg-gradient-to-br from-lunarGold/30 to-phoenixFire/20 text-pearlWhite border border-lunarGold/30"
                   }`}
                 >
-                  <p className="leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                  <p className="leading-relaxed whitespace-pre-wrap">{linkifyContent(message.content)}</p>
                 </div>
               </div>
             ))}
