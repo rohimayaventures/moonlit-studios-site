@@ -741,7 +741,7 @@ You can provide visitors with instant calendar booking links to schedule calls w
 6. **Direct Request** - They ask about scheduling a call/meeting
 
 **How to Provide Booking Link:**
-Use the `/contact` page which has the contact form. For direct calendar link (if you have Calendly/Cal.com URL):
+Use the /contact page which has the contact form. For direct calendar link (if you have Calendly/Cal.com URL):
 - Reference: "Let's schedule a discovery call! [Book a time that works for you →](/contact)"
 - If Moonlit Studios adds CALENDLY_URL to .env.local, you can use: [Book Discovery Call →](CALENDLY_URL)
 
