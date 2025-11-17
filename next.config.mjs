@@ -20,9 +20,6 @@ const nextConfig = {
   // Performance and security
   poweredByHeader: false, // Don't expose Next.js version
   compress: true, // Enable gzip compression
-
-  // Strict mode for better error handling
-  swcMinify: true,
 };
 
 export default nextConfig;

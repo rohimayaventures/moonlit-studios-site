@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 import { createLogger } from '@/lib/logger';
+import OpenAI from 'openai';
 
 const log = createLogger('KaiChat');
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,51 +30,67 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    
+
     // Get API key from environment variables
-    const apiKey = process.env.ANTHROPIC_API_KEY;
-    
+    const apiKey = process.env.OPENAI_API_KEY;
+
     log.debug("API Key exists?", !!apiKey);
     log.debug("Request body:", JSON.stringify(body, null, 2));
-    
+
     if (!apiKey) {
-      log.error("API key not found!");
+      log.error("OpenAI API key not found!");
       return NextResponse.json(
         { error: 'API key not configured' },
         { status: 500 }
       );
     }
 
-    // Call Anthropic API from the server (no CORS issues!)
-    log.debug("Calling Anthropic API...");
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(body),
+    // Convert Anthropic-style messages to OpenAI format
+    const messages = body.messages.map((msg: any) => ({
+      role: msg.role === 'assistant' ? 'assistant' : 'user',
+      content: typeof msg.content === 'string' ? msg.content : msg.content[0]?.text || ''
+    }));
+
+    // Add system message with personality
+    const systemMessage = {
+      role: 'system' as const,
+      content: body.system || 'You are Kai, a helpful AI assistant for Moonlit Studios.'
+    };
+
+    // Call OpenAI API (GPT-4o-mini - 10x cheaper than Claude!)
+    log.debug("Calling OpenAI API with GPT-4o-mini...");
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [systemMessage, ...messages],
+      max_tokens: body.max_tokens || 1024,
+      temperature: 0.7,
     });
 
-    log.debug(`Response status: ${response.status}`);
+    log.debug(`Response received successfully`);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      log.error("Anthropic API Error:", errorData);
-      return NextResponse.json(
-        { error: errorData },
-        { status: response.status }
-      );
-    }
+    const responseText = completion.choices[0]?.message?.content || '';
 
-    const data = await response.json();
+    // Convert OpenAI response to Anthropic-style format (for backwards compatibility)
+    const data = {
+      id: completion.id,
+      type: 'message',
+      role: 'assistant',
+      content: [
+        {
+          type: 'text',
+          text: responseText
+        }
+      ],
+      model: completion.model,
+      usage: completion.usage
+    };
+
     log.debug("Success! Returning response to client");
 
     // 🎯 SMART NOTIFICATION SYSTEM - Lead Scoring & Detection
     try {
       const userMessage = body.messages[body.messages.length - 1]?.content || '';
-      const kaiResponse = data.content[0]?.text || '';
+      const kaiResponse = responseText;
       const conversationHistory = body.messages || [];
 
       // 🔢 LEAD SCORING ALGORITHM (0-100 points)
