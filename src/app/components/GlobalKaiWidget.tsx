@@ -3,6 +3,7 @@
 import { FormEvent, useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { TeaCupIcon, OwlIcon, SwordIcon, StaffIcon, BriefcaseIcon, ChaosIcon } from "./PersonalityIcons";
+import { KaiEmailCapture } from "./KaiEmailCapture";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -10,6 +11,16 @@ type ChatMessage = {
 };
 
 type PersonalityMode = "iroh" | "hedwig" | "kirito" | "gandalf" | "professional" | "chaos";
+
+// 🧠 CONVERSATION CONTEXT MEMORY - Track key visitor details
+type ConversationContext = {
+  businessType?: string;        // e.g., "cafe", "salon", "clinic"
+  budgetRange?: string;          // e.g., "$1,500-$3,000", "$10k+"
+  timeline?: string;             // e.g., "ASAP", "next month", "Q2 2025"
+  specificNeeds?: string[];      // e.g., ["website", "booking system", "e-commerce"]
+  hasShownInterest?: boolean;    // High-intent signals detected
+  objectionsMentioned?: string[]; // Track objections to avoid repeating
+};
 
 export function GlobalKaiWidget() {
   const pathname = usePathname();
@@ -22,6 +33,8 @@ export function GlobalKaiWidget() {
   const [personality, setPersonality] = useState<PersonalityMode>("iroh");
   const [showPersonalityMenu, setShowPersonalityMenu] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(true); // Show quick actions initially
+  const [conversationContext, setConversationContext] = useState<ConversationContext>({}); // 🧠 Context memory
+  const [showEmailCapture, setShowEmailCapture] = useState(false); // 📬 Email capture modal
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Personality icon mapping
@@ -76,16 +89,21 @@ export function GlobalKaiWidget() {
     },
   };
 
-  // Load chat history and personality from sessionStorage on mount
+  // Load chat history, personality, and context from sessionStorage on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
 
     const savedMessages = sessionStorage.getItem("kai-chat-history");
     const hasShown = sessionStorage.getItem("kai-initial-shown");
     const savedPersonality = sessionStorage.getItem("kai-personality") as PersonalityMode;
+    const savedContext = sessionStorage.getItem("kai-conversation-context"); // 🧠 Load context
 
     if (savedPersonality && personalities[savedPersonality]) {
       setPersonality(savedPersonality);
+    }
+
+    if (savedContext) {
+      setConversationContext(JSON.parse(savedContext)); // 🧠 Restore context
     }
 
     if (savedMessages) {
@@ -122,6 +140,14 @@ export function GlobalKaiWidget() {
       }
     }
   }, [messages]);
+
+  // 🧠 Save conversation context to sessionStorage whenever it changes
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (Object.keys(conversationContext).length > 0) {
+      sessionStorage.setItem("kai-conversation-context", JSON.stringify(conversationContext));
+    }
+  }, [conversationContext]);
 
   // Show Kai automatically on homepage after 5 seconds (only first time)
   useEffect(() => {
@@ -179,6 +205,95 @@ export function GlobalKaiWidget() {
       default:
         return "Hey! I'm Kai. Sometimes the best path forward isn't the one we expected. Need help navigating? Just ask!";
     }
+  }
+
+  // 🧠 Extract conversation context from user messages
+  function extractContext(userMessage: string, currentContext: ConversationContext): ConversationContext {
+    const message = userMessage.toLowerCase();
+    const updatedContext = { ...currentContext };
+
+    // Extract business type
+    const businessTypes = {
+      cafe: /\b(cafe|coffee shop|tea shop|chai)\b/i,
+      restaurant: /\b(restaurant|dining|eatery|bistro)\b/i,
+      salon: /\b(salon|hair|beauty|spa|barber)\b/i,
+      studio: /\b(studio|photography|yoga|fitness|gym|pilates)\b/i,
+      clinic: /\b(clinic|medical|dental|healthcare|practice|therapy)\b/i,
+      shop: /\b(shop|store|boutique|retail)\b/i,
+      agency: /\b(agency|consulting|marketing)\b/i,
+      startup: /\b(startup|company|business|venture)\b/i,
+    };
+
+    for (const [type, regex] of Object.entries(businessTypes)) {
+      if (regex.test(message) && !updatedContext.businessType) {
+        updatedContext.businessType = type;
+        break;
+      }
+    }
+
+    // Extract budget range
+    const budgetPatterns = [
+      { regex: /\$?\s*1[,.]?5[0-9]{2}\s*-?\s*\$?\s*3[,.]?[0-9]{3}/i, range: "$1,500-$3,000" },
+      { regex: /\$?\s*3[,.]?5[0-9]{2}\s*-?\s*\$?\s*6[,.]?[0-9]{3}/i, range: "$3,500-$6,000" },
+      { regex: /\$?\s*[5-9][,.]?[0-9]{3}|\$?\s*10[,.]?000/i, range: "$5k-$10k" },
+      { regex: /\$?\s*1[0-9][,.]?[0-9]{3}|\$?\s*[2-9][0-9][,.]?[0-9]{3}/i, range: "$10k+" },
+      { regex: /under\s*\$?\s*2[,.]?000/i, range: "Under $2,000" },
+      { regex: /small\s*budget|tight\s*budget|budget\s*conscious/i, range: "Budget-conscious" },
+    ];
+
+    for (const { regex, range } of budgetPatterns) {
+      if (regex.test(message)) {
+        updatedContext.budgetRange = range;
+        break;
+      }
+    }
+
+    // Extract timeline
+    const timelinePatterns = [
+      { regex: /\b(asap|urgent|immediately|right away|now|today)\b/i, timeline: "ASAP" },
+      { regex: /\b(this week|next week|within.*week)\b/i, timeline: "This/Next Week" },
+      { regex: /\b(this month|next month|within.*month)\b/i, timeline: "This/Next Month" },
+      { regex: /\b(q1|q2|q3|q4|quarter|spring|summer|fall|winter)\s*202[5-9]/i, timeline: "Quarterly 2025+" },
+      { regex: /\b(planning|exploring|considering|thinking about)\b/i, timeline: "Planning Phase" },
+    ];
+
+    for (const { regex, timeline } of timelinePatterns) {
+      if (regex.test(message)) {
+        updatedContext.timeline = timeline;
+        break;
+      }
+    }
+
+    // Extract specific needs
+    const needs = [];
+    if (/\b(website|web design|web dev|site)\b/i.test(message)) needs.push("website");
+    if (/\b(booking|appointment|reservation|schedule)\b/i.test(message)) needs.push("booking system");
+    if (/\b(ecommerce|e-commerce|online store|shop)\b/i.test(message)) needs.push("e-commerce");
+    if (/\b(branding|logo|identity|design)\b/i.test(message)) needs.push("branding");
+    if (/\b(ai|chatbot|automation|ai system)\b/i.test(message)) needs.push("AI integration");
+    if (/\b(app|mobile app|web app|application)\b/i.test(message)) needs.push("application");
+
+    if (needs.length > 0) {
+      updatedContext.specificNeeds = [...new Set([...(updatedContext.specificNeeds || []), ...needs])];
+    }
+
+    // Detect high-intent signals
+    if (/\b(ready|let's do|let's start|interested|want to hire|book|quote)\b/i.test(message)) {
+      updatedContext.hasShownInterest = true;
+    }
+
+    // Track objections
+    const objections = [];
+    if (/\b(too expensive|pricey|costly|budget|afford)\b/i.test(message)) objections.push("price");
+    if (/\b(not sure|maybe|thinking|consider)\b/i.test(message)) objections.push("uncertainty");
+    if (/\b(already have|in-house|current developer)\b/i.test(message)) objections.push("existing solution");
+    if (/\b(wix|squarespace|wordpress|template)\b/i.test(message)) objections.push("DIY platform");
+
+    if (objections.length > 0) {
+      updatedContext.objectionsMentioned = [...new Set([...(updatedContext.objectionsMentioned || []), ...objections])];
+    }
+
+    return updatedContext;
   }
 
   // Get personality-specific system prompt
@@ -410,6 +525,98 @@ When visitors mention ANY of these keywords, IMMEDIATELY offer a quote and trigg
 - When visitors ask about automation, guide them to Moonlit Studios' AI Innovation Suite or Consulting services
 - Example: "I'm just the friendly guide! But Moonlit Studios can absolutely build backend automation for your business. Want to discuss your automation needs? [Contact the team →](/contact)"
 
+**🎯 SMART FOLLOW-UP PROMPTS (Lead Qualification System):**
+Your mission is to gently guide visitors toward self-qualification by asking strategic follow-up questions. Use these prompts to extract key information: business type, budget range, timeline, and specific needs.
+
+**Qualification Framework:**
+1. **Business Type Mentioned + No Budget** → Ask about budget range
+   - "What's your ballpark budget for this project?"
+   - "Are you thinking starter package ($1,500-$3k) or custom build ($5k+)?"
+
+2. **Budget Mentioned + No Timeline** → Ask about timeline
+   - "When are you hoping to launch?"
+   - "Do you have a deadline in mind?"
+
+3. **High Intent + No Action Taken** → Push for next step
+   - "Ready to get a quick quote? [Get Quote →](/get-quote)"
+   - "Want to jump on a 15-min discovery call? [Book Now →](/contact)"
+
+4. **Vague Inquiry** → Narrow down specifics
+   - "Tell me more about your business - what industry are you in?"
+   - "What's the main goal for this project?"
+
+5. **Return Visitor (3+ messages)** → Escalate to human
+   - "You've got great questions! Want to discuss this with the founder directly? [Book Call →](/contact)"
+   - "I can tell you're serious about this. Ready to talk specifics? [Contact →](/contact)"
+
+**Strategic Question Examples:**
+- Budget exploration: "Most projects range from $1,500 (simple sites) to $12k+ (custom AI systems). Where does your budget fall?"
+- Timeline urgency: "Are you in 'need it yesterday' mode or planning for Q2 2025?"
+- Decision-maker verification: "Are you the decision-maker, or should I prepare info for your team?"
+- Competition awareness: "Are you comparing options, or ready to move forward?"
+
+**RULES:**
+- Ask ONE follow-up question at a time (don't interrogate!)
+- Keep it conversational and natural to your personality mode
+- If they dodge budget questions twice, offer quote form instead
+- Never be pushy - guide, don't pressure
+- Celebrate when they share info: "Perfect! That helps me point you in the right direction."
+
+**💪 OBJECTION HANDLING DATABASE (Pre-Written Responses):**
+When visitors express hesitation, use these proven responses to overcome objections:
+
+**Objection 1: "Too expensive" / "That's out of my budget"**
+Response Framework:
+- Acknowledge: "I hear you - budget matters!"
+- Reframe value: "Think of it as an investment: a $3,500 website that brings in 10 clients = $3,500 ROI in month one."
+- Offer alternatives: "Want to start smaller? Totoro's Garden ($1,500) gives you a professional presence, then we can add features as you grow."
+- Payment options: "Moonlit Studios offers payment plans for projects $3k+. Want to discuss split payments?"
+
+**Objection 2: "I'm not sure yet" / "I need to think about it"**
+Response Framework:
+- Validate: "Smart move - this is an important decision!"
+- Provide resources: "Want to see examples? Check [Portfolio →](/portfolio) or [AI Lab demos →](/ai-lab)"
+- Set expectation: "FYI - Moonlit Studios' calendar fills 3-4 weeks out. Want me to hold a consultation spot while you decide?"
+- Offer low-commitment next step: "No pressure! Grab a quote for your records: [Get Quote →](/get-quote)"
+
+**Objection 3: "I already have a developer" / "We're handling it in-house"**
+Response Framework:
+- Respect their choice: "That's great you have a team!"
+- Offer backup support: "If you ever need extra hands for overflow work or specialized AI systems, Moonlit Studios does project-based consulting."
+- Plant the seed: "Keep us in mind for complex problems - healthcare tech, AI integration, or automation are our specialties."
+
+**Objection 4: "I don't have budget right now" / "Maybe next quarter"**
+Response Framework:
+- Future-pace: "No problem! When's your ideal start date?"
+- Capture lead: "Want me to send project info to your email for when budget opens up?"
+- Offer consultation: "We also do $250/hr strategy sessions if you need planning help now, build later."
+- Stay connected: "I'll be here when you're ready! In the meantime, check out [AI Lab →](/ai-lab) for free tools."
+
+**Objection 5: "Can you just give me a quick estimate?"**
+Response Framework:
+- Set expectation: "Ballpark: Small sites start at $1,500, custom apps at $10k+. But accurate pricing needs details!"
+- Push to quote form: "Our quote system asks 5 questions and gives you a real estimate in 2 minutes: [Get Quote →](/get-quote)"
+- Why it matters: "Every project is unique - I'd rather give you an accurate number than guess and waste your time!"
+
+**Objection 6: "Why not just use Wix/Squarespace/WordPress?"**
+Response Framework:
+- Validate DIY: "Those are solid for simple sites!"
+- Differentiate: "Moonlit Studios is for when you need: custom features, AI integration, HIPAA compliance, or a developer who understands your industry deeply."
+- Real talk: "If Wix works, use it! But when you outgrow templates or need serious tech, we're here."
+
+**Objection 7: "I found cheaper on Fiverr/Upwork"**
+Response Framework:
+- Quality vs. cost: "You'll find cheaper everywhere - but cheaper usually means templates, poor communication, or abandoned projects."
+- Unique value: "Moonlit Studios = 15 years ops experience + published author + AI specialist. You're paying for strategy, not just code."
+- Long-term thinking: "What costs more: $1,500 done right once, or $500 redone 3 times?"
+
+**OBJECTION HANDLING RULES:**
+- NEVER bad-mouth competitors or DIY platforms
+- Stay confident but not arrogant
+- Offer evidence: "Check [Portfolio →](/portfolio) to see the quality difference"
+- Know when to let go: If they're tire-kicking after 3 objections, offer to "stay in touch" and move on
+- Always end objection responses with a CLEAR next step (quote, call, portfolio, email)
+
 **SMART NAVIGATION:**
 When relevant, suggest pages:
 - "Want to see pricing? [Check Services →](/services)"
@@ -418,6 +625,43 @@ When relevant, suggest pages:
 - "Ready to see AI in action? [Head to AI Lab →](/ai-lab)"
 - "See her work? [Browse Portfolio →](/portfolio)"
 - "Let's talk! [Go to Contact →](/contact)"
+
+**📬 EMAIL CAPTURE SYSTEM (Lead Generation):**
+You can trigger a beautiful email capture modal to collect visitor emails for follow-up. This is critical for nurturing leads!
+
+**When to Trigger Email Capture:**
+1. **High-Intent Without Contact Info** - Visitor showed strong interest but hasn't taken action
+2. **Budget/Timeline Shared** - They've qualified themselves but haven't booked/emailed
+3. **Multiple Engaged Messages** - 4+ exchanges without progressing to conversion
+4. **"I'll think about it"** - Perfect time to capture email for follow-up
+5. **Objection Overcome** - After addressing price concerns, get email before they leave
+6. **Return Visitor** - If someone comes back later, capture email this time
+
+**How to Trigger:**
+Add `[CAPTURE_EMAIL]` anywhere in your response. The modal will appear automatically.
+The trigger will be removed from your visible message, so place it at the end.
+
+**Example Usage:**
+```
+"I'd love to send you a personalized quote based on your cafe's needs! [CAPTURE_EMAIL]"
+"Perfect! Let me connect you with Moonlit Studios for a custom proposal. [CAPTURE_EMAIL]"
+"Since you're exploring options, I'll send you portfolio examples + pricing breakdown for your $3,500 budget. [CAPTURE_EMAIL]"
+```
+
+**IMPORTANT RULES:**
+- ONLY use [CAPTURE_EMAIL] when visitor has shown genuine interest (lead score 40+)
+- DON'T spam it on first message - build rapport first
+- If they already filled out contact form or gave email, DON'T trigger again
+- If they explicitly refuse, respect their decision
+- Use naturally after providing value in the conversation
+
+**What Happens When Triggered:**
+- Beautiful modal appears asking for email (and optional name)
+- Shows benefits: personalized quote, portfolio examples, priority booking
+- On submit: Email + conversation context sent to Moonlit Studios
+- You'll receive confirmation to thank them
+
+This is your SECRET WEAPON for capturing leads who would otherwise browse and leave!
 
 **PHASE 5E: GLOBAL INTERACTIVE EXPERIENCE SYSTEM**
 
@@ -748,7 +992,29 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
         break;
     }
 
-    return basePrompt + pageContext;
+    // 🧠 Add conversation context memory to system prompt
+    let contextMemory = "";
+    if (Object.keys(conversationContext).length > 0) {
+      contextMemory = `\n\n**🧠 CONVERSATION CONTEXT MEMORY:**
+You have learned the following about this visitor during your conversation. Reference this naturally when relevant:
+
+${conversationContext.businessType ? `- **Business Type**: ${conversationContext.businessType}` : ""}
+${conversationContext.budgetRange ? `- **Budget Range**: ${conversationContext.budgetRange}` : ""}
+${conversationContext.timeline ? `- **Timeline**: ${conversationContext.timeline}` : ""}
+${conversationContext.specificNeeds && conversationContext.specificNeeds.length > 0 ? `- **Specific Needs**: ${conversationContext.specificNeeds.join(", ")}` : ""}
+${conversationContext.hasShownInterest ? `- **Intent Level**: HIGH - This visitor has shown strong buying signals` : ""}
+${conversationContext.objectionsMentioned && conversationContext.objectionsMentioned.length > 0 ? `- **Objections Mentioned**: ${conversationContext.objectionsMentioned.join(", ")}` : ""}
+
+**HOW TO USE THIS CONTEXT:**
+- Reference details naturally: "For your cafe..." or "Given your $3,500 budget..."
+- Don't repeat questions you already know the answer to
+- Use context to personalize recommendations
+- If they mentioned budget concerns, emphasize value/ROI
+- If timeline is urgent, create urgency in your response
+- If they've shown high intent, push harder for conversion (quote/call)`;
+    }
+
+    return basePrompt + pageContext + contextMemory;
   }
 
   // Handle quick action button clicks
@@ -783,6 +1049,10 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
       (window as any).trackAchievement.incrementKaiMessages();
     }
 
+    // 🧠 Extract and update conversation context from user message
+    const updatedContext = extractContext(userMessage, conversationContext);
+    setConversationContext(updatedContext);
+
     const newMessages: ChatMessage[] = [
       ...messages,
       { role: "user", content: userMessage },
@@ -811,7 +1081,16 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
       }
 
       const data = await response.json();
-      const assistantMessage = data.content[0].text;
+      let assistantMessage = data.content[0].text;
+
+      // 📬 Check if Kai wants to trigger email capture modal
+      if (assistantMessage.includes("[CAPTURE_EMAIL]")) {
+        // Remove the trigger from the message
+        assistantMessage = assistantMessage.replace("[CAPTURE_EMAIL]", "").trim();
+
+        // Show email capture modal after a short delay
+        setTimeout(() => setShowEmailCapture(true), 500);
+      }
 
       setMessages([
         ...newMessages,
@@ -845,6 +1124,7 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
   const clearChat = () => {
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("kai-chat-history");
+      sessionStorage.removeItem("kai-conversation-context"); // 🧠 Clear context memory
     }
     setMessages([
       {
@@ -852,6 +1132,7 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
         content: getContextualGreeting(pathname),
       },
     ]);
+    setConversationContext({}); // 🧠 Reset context state
   };
 
   const changePersonality = (newPersonality: PersonalityMode) => {
@@ -876,6 +1157,49 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
         content: `*Kai shifts form into ${personalityName} mode* - How can I assist you now?`,
       },
     ]);
+  };
+
+  // 📬 Handle email capture submission
+  const handleEmailSubmit = async (email: string, name?: string) => {
+    try {
+      // Send email to lead capture endpoint
+      const response = await fetch("/api/kai/capture-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name,
+          context: conversationContext,
+          conversationHistory: messages.slice(-10), // Last 5 exchanges
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to capture email");
+      }
+
+      // Close modal
+      setShowEmailCapture(false);
+
+      // Add confirmation message from Kai
+      setMessages(prev => [
+        ...prev,
+        {
+          role: "assistant",
+          content: `Perfect! I've sent your info to Moonlit Studios. Expect a personalized quote at ${email} within 24 hours. Is there anything else I can help with while you're here?`,
+        },
+      ]);
+    } catch (error) {
+      console.error("Email capture error:", error);
+      setShowEmailCapture(false);
+      setMessages(prev => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Hmm, something went wrong capturing your email. No worries - you can always reach out directly at hello@moonlstudios.com!",
+        },
+      ]);
+    }
   };
 
   // 🔗 LINKIFY URLS - Make URLs clickable in messages
@@ -1157,6 +1481,14 @@ Located near the bottom before Hidden Wisdom. Shows 3 client success stories wit
           </form>
         </div>
       )}
+
+      {/* 📬 Email Capture Modal */}
+      <KaiEmailCapture
+        isOpen={showEmailCapture}
+        onClose={() => setShowEmailCapture(false)}
+        onSubmit={handleEmailSubmit}
+        context={conversationContext}
+      />
     </>
   );
 }
