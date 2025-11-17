@@ -15,7 +15,9 @@
       "Bash(nul)",
       "Bash(if exist nul del /f nul)",
       "Bash(.gitignore)",
-      "Bash(if exist .nextdevlock del /f .nextdevlock)"
+      "Bash(if exist .nextdevlock del /f .nextdevlock)",
+      "Bash(git config:*)",
+      "Bash(del WHATS_NEW.md AUTOMATION_COMPLETE.md AUTOMATION_MASTER_PLAN.md COMPLETE_AUTOMATION_SUMMARY.md TESTIMONIALS_AUTOMATION.md ATLA_SERVICES_PLAN.md LOTR_PORTFOLIO_PLAN.md)"
     ],
     "deny": [],
     "ask": []
