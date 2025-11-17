@@ -5,6 +5,8 @@ import { Resend } from 'resend';
 import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
 import { notifyNewQuote } from '@/lib/slack';
 
+const log = createLogger('QuoteGenerator');
+
 // COST OPTIMIZATION: Using OpenAI GPT-4o-mini instead of Claude
 // Cost per quote: ~$0.001 (vs $0.015 with Claude) = 10x cheaper!
 // Perfect for simple quote analysis
@@ -112,7 +114,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log(`\n🤖 AI Quote Generation for: ${name} (${serviceType})`);
+    log.info(`AI Quote Generation for: ${name} (${serviceType})`);
 
     // Get pricing options for this service
     const servicePricing = PRICING_DATABASE[serviceType as keyof typeof PRICING_DATABASE] || {};
@@ -171,7 +173,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
 
     const aiAnalysis = JSON.parse(aiResponse.choices[0].message.content || '{}');
 
-    console.log('✅ AI Analysis Complete:', aiAnalysis.recommendedTier);
+    log.info('AI Analysis Complete:', aiAnalysis.recommendedTier);
 
     // Generate quote ID
     const quoteId = `QT-${Date.now()}-${name.replace(/\s/g, '').substring(0, 4).toUpperCase()}`;
@@ -190,7 +192,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
     };
 
     // TODO: Save to database
-    console.log('💾 Quote saved:', quoteId);
+    log.info('Quote saved:', quoteId);
 
     // Send detailed quote email to client
     const clientEmail = await resend.emails.send({
@@ -200,7 +202,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
       html: generateClientQuoteEmail(quote, aiAnalysis),
     });
 
-    console.log('📧 Client quote email sent');
+    log.info('Client quote email sent');
 
     // Send notification to owner with full analysis
     const ownerEmail = await resend.emails.send({
@@ -210,7 +212,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
       html: generateOwnerNotificationEmail(quote, aiAnalysis, body),
     });
 
-    console.log('📧 Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com');
+    log.info('Owner notification sent to', process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com');
 
     // Send Slack notification
     await notifyNewQuote({
@@ -239,7 +241,7 @@ Respond ONLY with valid JSON - no markdown, no explanations outside the JSON.`;
     });
 
   } catch (error: any) {
-    console.error('❌ Quote generation error:', error);
+    log.error('Quote generation error:', error);
     return NextResponse.json(
       { error: 'Failed to generate quote', details: error.message },
       { status: 500 }

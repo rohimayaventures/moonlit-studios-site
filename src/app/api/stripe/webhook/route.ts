@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     const signature = req.headers.get('stripe-signature');
 
     if (!signature) {
-      console.error('❌ Webhook Error: No signature header');
+      log.error('Webhook Error: No signature header');
       return NextResponse.json(
         { error: 'Missing stripe-signature header' },
         { status: 400 }
@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!process.env.STRIPE_WEBHOOK_SECRET) {
-      console.error('❌ Webhook Error: STRIPE_WEBHOOK_SECRET not configured');
+      log.error('Webhook Error: STRIPE_WEBHOOK_SECRET not configured');
       return NextResponse.json(
         { error: 'Webhook secret not configured' },
         { status: 500 }
@@ -76,14 +76,14 @@ export async function POST(req: NextRequest) {
         process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err: any) {
-      console.error('❌ Webhook signature verification failed:', err.message);
+      log.error('Webhook signature verification failed:', err.message);
       return NextResponse.json(
         { error: `Webhook signature verification failed: ${err.message}` },
         { status: 400 }
       );
     }
 
-    console.log(`✅ Webhook received: ${event.type} (ID: ${event.id})`);
+    log.info(`Webhook received: ${event.type} (ID: ${event.id})`);
 
     // Process different event types
     switch (event.type) {
@@ -108,14 +108,14 @@ export async function POST(req: NextRequest) {
         break;
 
       default:
-        console.log(`ℹ️ Unhandled event type: ${event.type}`);
+        log.info(`Unhandled event type: ${event.type}`);
     }
 
     // Always return 200 to acknowledge receipt
     return NextResponse.json({ received: true });
 
   } catch (error: any) {
-    console.error('❌ Webhook processing error:', error);
+    log.error('Webhook processing error:', error);
     return NextResponse.json(
       { error: 'Webhook processing failed', details: error.message },
       { status: 500 }
@@ -128,14 +128,16 @@ export async function POST(req: NextRequest) {
  * This fires when customer completes payment
  */
 async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) {
-  console.log(`💰 Checkout session completed: ${session.id}`);
-  console.log(`   Amount: $${(session.amount_total || 0) / 100}`);
-  console.log(`   Customer Email: ${session.customer_email || 'N/A'}`);
-  console.log(`   Payment Status: ${session.payment_status}`);
-
-  const metadata = session.metadata || {};
   const amount = (session.amount_total || 0) / 100;
   const customerEmail = session.customer_email;
+
+  log.info(`Checkout session completed: ${session.id}`, {
+    amount: `$${amount}`,
+    customerEmail: customerEmail || 'N/A',
+    paymentStatus: session.payment_status
+  });
+
+  const metadata = session.metadata || {};
 
   // 🌙 CLIENT PORTAL INTEGRATION - Auto-create client and project
   if (customerEmail && session.payment_status === 'paid') {
@@ -161,7 +163,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
         });
 
         if (client) {
-          console.log(`✅ Created portal client: ${customerEmail}`);
+          log.info(`Created portal client: ${customerEmail}`);
         }
       }
 
@@ -191,11 +193,11 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
         });
 
         if (project) {
-          console.log(`✅ Created portal project: ${projectTitle} (${project.id})`);
+          log.info(`Created portal project: ${projectTitle} (${project.id})`);
         }
       }
     } catch (portalError) {
-      console.error('❌ Portal integration error:', portalError);
+      log.error('Portal integration error:', portalError);
       // Don't fail the webhook if portal creation fails
     }
   }
@@ -261,9 +263,9 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
           `,
         }),
       });
-      console.log(`   ✅ Confirmation email sent to ${customerEmail}`);
+      log.info(`Confirmation email sent to ${customerEmail}`);
     } catch (emailError) {
-      console.error(`   ❌ Failed to send email:`, emailError);
+      log.error('Failed to send email:', emailError);
     }
   }
 
@@ -321,9 +323,9 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
           ],
         }),
       });
-      console.log(`   ✅ Slack notification sent`);
+      log.info('Slack notification sent');
     } catch (slackError) {
-      console.error(`   ❌ Failed to send Slack notification:`, slackError);
+      log.error('Failed to send Slack notification:', slackError);
     }
   }
 
@@ -340,7 +342,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
   //     .eq('id', metadata.quoteId);
   // }
 
-  console.log('   Metadata:', metadata);
+  log.debug('Metadata:', metadata);
 }
 
 /**
@@ -348,9 +350,10 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
  * This fires when payment is confirmed
  */
 async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent) {
-  console.log(`✅ Payment succeeded: ${paymentIntent.id}`);
-  console.log(`   Amount: $${paymentIntent.amount / 100}`);
-  console.log(`   Status: ${paymentIntent.status}`);
+  log.info(`Payment succeeded: ${paymentIntent.id}`, {
+    amount: `$${paymentIntent.amount / 100}`,
+    status: paymentIntent.status
+  });
 
   const metadata = paymentIntent.metadata || {};
 
@@ -368,16 +371,17 @@ async function handlePaymentIntentSucceeded(paymentIntent: Stripe.PaymentIntent)
   //     created_at: new Date().toISOString(),
   //   });
 
-  console.log('   Metadata:', metadata);
+  log.debug('Metadata:', metadata);
 }
 
 /**
  * Handle failed payment
  */
 async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
-  console.log(`❌ Payment failed: ${paymentIntent.id}`);
-  console.log(`   Amount: $${paymentIntent.amount / 100}`);
-  console.log(`   Failure Message: ${paymentIntent.last_payment_error?.message || 'Unknown'}`);
+  log.warn(`Payment failed: ${paymentIntent.id}`, {
+    amount: `$${paymentIntent.amount / 100}`,
+    failureMessage: paymentIntent.last_payment_error?.message || 'Unknown'
+  });
 
   const metadata = paymentIntent.metadata || {};
 
@@ -385,16 +389,17 @@ async function handlePaymentIntentFailed(paymentIntent: Stripe.PaymentIntent) {
   // TODO: Send notification to admin
   // TODO: Optionally notify customer with retry instructions
 
-  console.log('   Metadata:', metadata);
+  log.debug('Metadata:', metadata);
 }
 
 /**
  * Handle invoice paid (for subscriptions or recurring payments)
  */
 async function handleInvoicePaid(invoice: Stripe.Invoice) {
-  console.log(`📄 Invoice paid: ${invoice.id}`);
-  console.log(`   Amount: $${(invoice.amount_paid || 0) / 100}`);
-  console.log(`   Customer: ${invoice.customer}`);
+  log.info(`Invoice paid: ${invoice.id}`, {
+    amount: `$${(invoice.amount_paid || 0) / 100}`,
+    customer: invoice.customer
+  });
 
   // TODO: Update subscription status in database
   // TODO: Grant access to premium features
@@ -404,9 +409,10 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
  * Handle invoice payment failure
  */
 async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
-  console.log(`❌ Invoice payment failed: ${invoice.id}`);
-  console.log(`   Amount: $${(invoice.amount_due || 0) / 100}`);
-  console.log(`   Customer: ${invoice.customer}`);
+  log.warn(`Invoice payment failed: ${invoice.id}`, {
+    amount: `$${(invoice.amount_due || 0) / 100}`,
+    customer: invoice.customer
+  });
 
   // TODO: Send payment failure notification
   // TODO: Update subscription status
