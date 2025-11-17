@@ -10,6 +10,51 @@ import { CalendlyButton } from "../components/CalendlyButton";
 
 const sections = [
   {
+    id: "small-business",
+    label: "SMALL BUSINESS REALMS",
+    title: "Small Business Launchpads",
+    realm: "Bree",
+    realmDesc: "Crossroads of Commerce",
+    questGiver: "The Innkeeper of The Prancing Pony",
+    description:
+      "Where travelers meet and trade flourishes, local businesses find their digital home. From cozy cafés to healing sanctuaries—practical magic for the heart of commerce.",
+    projects: [
+      {
+        tag: "LOCAL SERVICE WEBSITE",
+        title: "Aurora Wellness Studio – Therapist & Coach Hub",
+        points: [
+          "Service pages with calming brand aesthetics",
+          "Calendly integration for client bookings",
+          "Contact forms with email notifications",
+        ],
+        tech: "Next.js · Tailwind · Calendly · Supabase Forms",
+        status: "Legend Complete",
+      },
+      {
+        tag: "CAFE & FOOD",
+        title: "Hearth & Harvest Bakery – Artisan Cafe Site",
+        points: [
+          "Menu display with daily specials",
+          "Location map + hours with Google integration",
+          "Instagram feed embed for fresh content",
+        ],
+        tech: "Next.js · Tailwind · Google Maps API · Instagram API",
+        status: "Legend Complete",
+      },
+      {
+        tag: "PET CARE PORTAL",
+        title: "Pawsitive Companions – Pet Grooming & Boarding",
+        points: [
+          "Service packages with photo galleries",
+          "Booking calendar with availability sync",
+          "Client testimonials + pet photo wall",
+        ],
+        tech: "Next.js · Tailwind · Stripe · Cloudinary",
+        status: "Ready to Depart",
+      },
+    ],
+  },
+  {
     id: "web-brand",
     label: "WEB & BRAND DESIGN",
     title: "Web & Brand Design",
@@ -20,37 +65,37 @@ const sections = [
       "Like Bag End welcoming travelers, brands and sites that feel like home—crafted with care, rooted in story, ready for adventure.",
     projects: [
       {
-        tag: "STUDIO SITE / MARKETING",
-        title: "Moonlit Studios - Creative Tech Studio",
+        tag: "STUDIO SITE",
+        title: "Moonlit Studios – Creative Tech Studio Site",
         points: [
-          "Service overview with narrative sections",
-          "Lead capture + contact flow",
-          "Modular layout for future services",
+          "Multi-realm service navigation with theme switchers",
+          "Lead capture with quote request flow",
+          "Portfolio integration + testimonial display",
         ],
-        tech: "Next.js · TypeScript · Tailwind · Sanity-ready",
+        tech: "Next.js · TypeScript · Tailwind · Supabase",
         status: "Journey Ongoing",
       },
       {
-        tag: "AUTHOR PORTAL",
-        title: "Author Portal - Phoenix & Peacock Chronicles",
+        tag: "FOUNDER BRAND",
+        title: "Personal Brand Site – Thought Leader Platform",
         points: [
-          "Series landing, book summaries, and newsletter opt-ins",
-          "Bonus content vault for readers",
-          "Light CMS structure for ongoing drops",
+          "Hero storytelling with mission-driven copy",
+          "Speaking page with past engagements + media kit",
+          "Newsletter signup with welcome sequence",
         ],
-        tech: "Next.js · Tailwind · MDX · Email API",
-        status: "Tale Conceived",
+        tech: "Next.js · Tailwind · Resend · MDX",
+        status: "Ready to Depart",
       },
       {
-        tag: "PRODUCT CAMPAIGN",
-        title: "Product Brand Landing Page",
+        tag: "PRODUCT LAUNCH",
+        title: "SaaS Product Launch Page – Waitlist Campaign",
         points: [
-          "Single-page story arc with CTA stack",
-          "Testimonials + feature highlights",
-          "Launch-ready assets + analytics hooks",
+          "Feature showcase with interactive demos",
+          "Early access signup with referral tracking",
+          "Social proof section with beta testimonials",
         ],
-        tech: "Next.js · Tailwind · Vercel · Analytics",
-        status: "Ready to Depart",
+        tech: "Next.js · Tailwind · Vercel · Posthog",
+        status: "Legend Complete",
       },
     ],
   },
@@ -65,37 +110,37 @@ const sections = [
       "As Elrond's house mends the weary, healthcare platforms built with clinical precision and healing intent. Wisdom meeting innovation.",
     projects: [
       {
-        tag: "AI PLATFORM / HEALTHCARE",
-        title: "Rohimaya Health AI - Concept Platform",
+        tag: "NURSE DASHBOARD",
+        title: "Clinical Triage Dashboard – ED Workflow System",
         points: [
-          "Multi-module dashboards with risk scoring",
-          "Operational messaging + escalation views",
-          "Safety-aligned workflow guidance",
+          "Real-time patient queue with acuity scoring",
+          "SBAR handoff cards with vital trends",
+          "Alert escalation + team messaging",
         ],
-        tech: "Next.js · TypeScript · Tailwind · API-first",
-        status: "Tale Conceived",
-      },
-      {
-        tag: "SHIFT HANDOFF",
-        title: "Clinical Shift Handoff Board",
-        points: [
-          "SBAR digital cards with high-risk flags",
-          "Team chat + escalation actions",
-          "Printable summary + audit log",
-        ],
-        tech: "Next.js · Node · FHIR-ready · Auth layer",
+        tech: "Next.js · TypeScript · Supabase · Pusher · FHIR",
         status: "First Draft",
       },
       {
-        tag: "PATIENT UX",
-        title: "Patient Recovery Companion",
+        tag: "PATIENT PORTAL",
+        title: "Recovery Companion – Post-Op Patient App",
         points: [
-          "Symptom tracking + education flows",
-          "Medication reminders + visuals",
-          "Care team messaging + check-ins",
+          "Symptom logging with visual pain scales",
+          "Medication reminders with photo verification",
+          "Care team chat + educational resources",
         ],
-        tech: "Next.js · Tailwind · React Query · Notifications",
+        tech: "Next.js · Tailwind · Supabase · Twilio",
         status: "Tale Conceived",
+      },
+      {
+        tag: "TELEHEALTH UX",
+        title: "Virtual Care Platform – Remote Consultation System",
+        points: [
+          "Video visit interface with notes sidebar",
+          "E-prescription workflow with pharmacy integration",
+          "Follow-up scheduling + secure messaging",
+        ],
+        tech: "Next.js · Agora SDK · Stripe · Supabase",
+        status: "Ready to Depart",
       },
     ],
   },
@@ -110,36 +155,36 @@ const sections = [
       "Like Galadriel's mirror revealing what might be, AI that sees patterns invisible to mortal eyes. Innovation blessed with foresight.",
     projects: [
       {
-        tag: "VOICE + CHAT AI",
-        title: "StorySpoon AI - Cooking Companion",
+        tag: "SALES AUTOMATION",
+        title: "Lead Qualification Copilot – SDR Assistant",
         points: [
-          "Voice + chat guidance through recipes",
-          "Narrative storytelling layered over steps",
-          "Adaptive prompts based on pantry data",
+          "Email triage with sentiment scoring",
+          "Auto-draft responses for common inquiries",
+          "CRM sync with opportunity tagging",
         ],
-        tech: "Next.js · OpenAI API · Vercel KV · Whisper",
+        tech: "Next.js · OpenAI · LangChain · HubSpot API",
         status: "Journey Ongoing",
       },
       {
-        tag: "CLINICAL COPILOT",
-        title: "Clinical Copilot",
+        tag: "VOICE AI AGENT",
+        title: "Kitchen Voice Assistant – Recipe Guide",
         points: [
-          "Chart summaries + risk reminders",
-          "Protocol lookups with citations",
-          "Escalation suggestions for nurses",
+          "Hands-free voice commands during cooking",
+          "Step-by-step narrative with timer alerts",
+          "Ingredient substitution suggestions",
         ],
-        tech: "Next.js · LangChain · Vector DB · Azure OpenAI",
-        status: "Tale Conceived",
+        tech: "Next.js · Whisper · OpenAI · Vercel KV",
+        status: "Journey Ongoing",
       },
       {
-        tag: "FOUNDER AUTOMATION",
-        title: "Founder's Studio Copilot",
+        tag: "OPERATIONS RAG",
+        title: "Internal Knowledge Assistant – Team Copilot",
         points: [
-          "Content drafts + launch planning",
-          "Website copy suggestions",
-          "Roadmap and backlog notes",
+          "Document search across wikis + Slack history",
+          "Context-aware answers with source citations",
+          "Onboarding flow automation",
         ],
-        tech: "Next.js · Supabase · OpenAI · Airtable",
+        tech: "Next.js · LangChain · Pinecone · Supabase",
         status: "First Draft",
       },
     ],
@@ -155,36 +200,36 @@ const sections = [
       "As the libraries of Gondor preserve ancient lore, stories and words that build legacies. Every tale a kingdom waiting to rise.",
     projects: [
       {
-        tag: "NOVEL WORLD",
-        title: "Phoenix & Peacock Novel Development",
+        tag: "AUTHOR PLATFORM",
+        title: "Reader Hub – Book Series Portal",
         points: [
-          "Character + timeline planning UI",
-          "Lore bible + artifact tracker",
-          "Draft handoff workflows",
+          "Book landing pages with sample chapters",
+          "Character wiki + interactive map",
+          "Newsletter signup with bonus content vault",
         ],
-        tech: "Next.js · Tailwind · Supabase · Notion API",
+        tech: "Next.js · MDX · Tailwind · Resend",
+        status: "Ready to Depart",
+      },
+      {
+        tag: "WRITING SYSTEM",
+        title: "Novel Planning Workspace – Author Dashboard",
+        points: [
+          "Scene timeline with chapter organization",
+          "Character profiles + relationship tracker",
+          "Draft export to manuscript format",
+        ],
+        tech: "Next.js · Supabase · Notion API · TypeScript",
         status: "Tale Conceived",
       },
       {
-        tag: "COOKBOOK / STORY",
-        title: "Cookbook + Story Hybrid Concept",
+        tag: "COURSE PLATFORM",
+        title: "Writing Course Site – Creator Education Hub",
         points: [
-          "Narrative-first recipe layout",
-          "Reader journey with playlists + letters",
-          "Interactive shopping + prep notes",
+          "Lesson modules with video + worksheets",
+          "Student progress tracking + badges",
+          "Community forum + live Q&A integration",
         ],
-        tech: "Next.js · MDX · Tailwind · Animation API",
-        status: "Journey Ongoing",
-      },
-      {
-        tag: "NEWSLETTER ENGINE",
-        title: "Newsletter Engine for Founders",
-        points: [
-          "Cadence + theme planning dashboard",
-          "Draft + review workflow",
-          "Publishing + analytics overview",
-        ],
-        tech: "Next.js · Resend · Supabase · Server Actions",
+        tech: "Next.js · Supabase · Stripe · Mux Video",
         status: "First Draft",
       },
     ],
@@ -201,11 +246,11 @@ const sections = [
     projects: [
       {
         tag: "JOURNALING AI",
-        title: "Emotion-aware Journaling Companion",
+        title: "Emotion-Aware Journaling Companion",
         points: [
-          "Mood tagging + reflection prompts",
+          "Mood tagging with reflection prompts",
           "Somatic check-in reminders",
-          "Exportable insights for therapy",
+          "Exportable insights for therapy sessions",
         ],
         tech: "Next.js · OpenAI · Prisma · Edge Functions",
         status: "Experimental Voyage",
@@ -214,22 +259,22 @@ const sections = [
         tag: "NURSE MICRO-COACH",
         title: "Nurse Resilience Micro-Coach",
         points: [
-          "Shift recap + grounding exercises",
-          "Voice note reflections",
-          "Resource library w/ consent prompts",
+          "Shift recap with grounding exercises",
+          "Voice note reflections + transcription",
+          "Resource library with consent prompts",
         ],
-        tech: "Next.js · Twilio · Pinecone · Node",
+        tech: "Next.js · Twilio · Whisper · Pinecone",
         status: "Experimental Voyage",
       },
       {
-        tag: "CREATIVE PROMPTS",
-        title: "Moon Phase Writing Prompts",
+        tag: "CREATIVE RITUAL",
+        title: "Moon Phase Creative Prompts",
         points: [
           "Lunar-inspired prompt calendar",
-          "Audio + text delivery",
-          "Community submission hooks",
+          "Audio + text delivery with email nudges",
+          "Community submission gallery",
         ],
-        tech: "Next.js · Tailwind · CRON Jobs · Email API",
+        tech: "Next.js · Tailwind · CRON · Resend",
         status: "Experimental Voyage",
       },
     ],
@@ -289,11 +334,11 @@ export default function PortfolioPage() {
             {/* Stats Display */}
             <div className="flex justify-center gap-6 sm:gap-8 mt-6">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-phoenixFire">5</div>
+                <div className="text-2xl sm:text-3xl font-bold text-phoenixFire">6</div>
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Realms Explored</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">15+</div>
+                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">18</div>
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Quests Completed</div>
               </div>
               <div className="text-center">
