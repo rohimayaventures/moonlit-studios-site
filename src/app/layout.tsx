@@ -158,6 +158,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </p>
                 <ul className="mt-4 space-y-2 text-sm">
                   <li>
+                    <a href="/services/small-business" className="transition-colors hover:text-starlight">
+                      Small Business Launchpads
+                    </a>
+                  </li>
+                  <li>
                     <a href="/services/creative-design-development" className="transition-colors hover:text-starlight">
                       Creative Design & Development
                     </a>
@@ -205,6 +210,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <p className="inline-flex items-center rounded-full border border-mermaidTeal/60 px-4 py-1 text-xs font-semibold text-mermaidTeal">
                   Accepting New Projects
                 </p>
+                <a
+                  href="/get-quote"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-lunarGold to-phoenixFire text-midnight font-bold rounded-lg hover:shadow-xl hover:shadow-lunarGold/40 hover:scale-105 transition-all text-sm"
+                >
+                  <span>💰</span>
+                  <span>Get Instant Quote</span>
+                </a>
               </div>
             </div>
 
