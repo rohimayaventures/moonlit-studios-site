@@ -23,7 +23,10 @@
       "Bash(if exist \".next\\dev\\lock\" del /f \".next\\dev\\lock\")",
       "Bash(del /f \".next\\dev\\lock\" 2)",
       "Bash(dir:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git reset:*)",
+      "Bash(echo:*)",
+      "Bash(SETUP_COMPLETE.md)"
     ],
     "deny": [],
     "ask": []
