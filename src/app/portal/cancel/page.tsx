@@ -28,7 +28,7 @@ export default function PaymentCancelPage() {
           </div>
 
           {/* Cancel Message */}
-          <h1 className="text-3xl md:text-4xl font-bold text-moonlightSilver mb-4">
+          <h1 className="font-elegant text-3xl md:text-4xl font-bold text-moonlightSilver mb-4">
             Payment Canceled
           </h1>
           <p className="text-xl text-moonlightSilver/70 mb-8">

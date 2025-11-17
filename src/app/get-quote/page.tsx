@@ -117,7 +117,7 @@ export default function GetQuotePage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-elegant text-4xl md:text-5xl font-bold mb-4">
               Your Quote is Ready! 💰
             </h1>
             <p className="text-lg text-moonlightSilver mb-6">
@@ -133,7 +133,7 @@ export default function GetQuotePage() {
               </p>
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-bold text-pearlWhite mb-4">
+            <h2 className="font-elegant text-2xl md:text-3xl font-bold text-pearlWhite mb-4">
               {quoteResult.recommendedTier}
             </h2>
 
@@ -231,8 +231,8 @@ export default function GetQuotePage() {
     <main className="min-h-screen bg-midnight text-pearlWhite py-12 px-6">
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-        <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl animate-floatSlow" />
-        <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl opacity-10 animate-floatSlow" />
+        <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl opacity-10" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
       </div>
 
       <div className="relative max-w-4xl mx-auto">
@@ -247,11 +247,11 @@ export default function GetQuotePage() {
             </p>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Get Your Custom Quote in 60 Seconds
           </h1>
 
-          <p className="text-lg text-moonlightSilver max-w-2xl mx-auto mb-8">
+          <p className="font-serif text-lg text-moonlightSilver max-w-2xl mx-auto mb-8 italic">
             Our AI analyzes your project requirements and instantly recommends the perfect service tier with accurate pricing. No waiting, no guesswork—just honest estimates based on your needs.
           </p>
 

@@ -50,11 +50,11 @@ export default function Home() {
             THE NURSE WHO CODES
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-center mb-6 leading-tight fade-in-up stagger-1">
+          <h1 className="font-elegant text-4xl md:text-6xl lg:text-7xl font-semibold text-center mb-6 leading-tight fade-in-up stagger-1">
             Welcome to <span className="gradient-water">Moonlit Studios</span>
           </h1>
 
-          <p className="text-center text-lg md:text-xl text-moonlightSilver font-light max-w-2xl mx-auto mb-4 fade-in-up stagger-2">
+          <p className="font-serif text-center text-lg md:text-xl text-moonlightSilver font-light max-w-2xl mx-auto mb-4 fade-in-up stagger-2 italic">
             Where Dreams Surface and Ideas Flow
           </p>
 

@@ -185,8 +185,8 @@ export default function HealthTechDevelopmentPage() {
       <section className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
         {/* Aurora Background Orbs - Aqua/Teal Theme */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-aquaMist/50 via-seafoamGreen/40 to-turquoiseBreeze/45 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/35 to-aquaMist/30 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-aquaMist/50 via-seafoamGreen/40 to-turquoiseBreeze/45 blur-3xl opacity-10 animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/35 to-aquaMist/30 blur-3xl opacity-10" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
@@ -216,10 +216,10 @@ export default function HealthTechDevelopmentPage() {
 
           <div className="text-center space-y-4 sm:space-y-6 px-4">
             <p className="text-xs sm:text-sm tracking-[0.35em] text-aquaMist uppercase">Service Suite - HealthTech</p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
               Health x Tech Development
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+            <p className="font-serif text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto italic">
               Clinical-grade UX and interfaces designed by a nurse who understands workflows.
               HIPAA-aligned builds for healthcare startups, practices, and medical organizations—where 15+ years of clinical operations meets cutting-edge development.
             </p>
@@ -243,7 +243,7 @@ export default function HealthTechDevelopmentPage() {
                 </svg>
               </div>
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-pearlWhite">Why This Costs More (And Why It's Worth It)</h3>
+                <h3 className="font-elegant text-xl font-semibold text-pearlWhite">Why This Costs More (And Why It's Worth It)</h3>
                 <ul className="space-y-2 text-sm text-moonlightSilver">
                   <li className="flex gap-2">
                     <span className="text-aquaMist">✓</span>
@@ -289,7 +289,7 @@ export default function HealthTechDevelopmentPage() {
                     ? 'border-mermaidTeal/70 bg-gradient-to-b from-mermaidTeal/10 via-aquaMist/5 to-midnight shadow-mermaidTeal/20 hover:shadow-mermaidTeal/40 hover:-translate-y-1'
                     : 'border-aquaMist/40 bg-gradient-to-b from-aquaMist/5 via-midnight/80 to-midnight/95 hover:border-tealBright/60 hover:shadow-aquaMist/20'
                   }
-                  animate-fadeInUp
+                  fade-in-up
                 `}
                 style={{ animationDelay: `${(index + 1) * 0.05}s` }}
               >
@@ -307,7 +307,7 @@ export default function HealthTechDevelopmentPage() {
                       <span className="text-mermaidTeal text-xs font-bold">{offering.tier.slice(0,3).toUpperCase()}</span>
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-pearlWhite">
+                      <h2 className="font-elegant text-lg font-semibold text-pearlWhite">
                         {offering.title}
                       </h2>
                       <p className="text-xs text-aquaMist">{offering.tier}</p>
@@ -380,7 +380,7 @@ export default function HealthTechDevelopmentPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-pearlWhite">
+            <h3 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
               Ready to build healthcare tech that actually works?
             </h3>
             <p className="text-moonlightSilver max-w-2xl mx-auto">

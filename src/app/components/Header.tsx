@@ -51,13 +51,13 @@ export function Header() {
           </div>
         </Link>
 
-        {/* DESKTOP Navigation - Hidden on Mobile */}
-        <nav className="hidden lg:flex gap-6 text-sm text-moonlightSilver items-center" aria-label="Main navigation">
+        {/* DESKTOP Navigation - Hidden on Mobile, Simplified on Tablet */}
+        <nav className="hidden md:flex gap-4 lg:gap-6 text-xs md:text-sm text-moonlightSilver items-center" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="hover:text-mermaidTeal transition-colors font-medium"
+              className="hover:text-mermaidTeal transition-colors font-medium whitespace-nowrap"
               aria-label={`Navigate to ${link.label}`}
             >
               {link.label}
@@ -69,13 +69,13 @@ export function Header() {
             <button
               onClick={() => setServicesOpen(!servicesOpen)}
               onMouseEnter={() => setServicesOpen(true)}
-              className="flex items-center gap-1 hover:text-mermaidTeal transition-colors font-medium"
+              className="flex items-center gap-1 hover:text-mermaidTeal transition-colors font-medium whitespace-nowrap"
               aria-label="Services menu"
               aria-expanded={servicesOpen}
               aria-haspopup="true"
             >
               Services
-              <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+              <ChevronDown className={`w-3 h-3 md:w-4 md:h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
 
             {/* Dropdown Menu */}
@@ -83,7 +83,7 @@ export function Header() {
               <div
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
-                className="absolute top-full right-0 mt-2 w-72 bg-deepOcean backdrop-blur-lg border border-mermaidTeal/40 rounded-lg shadow-2xl shadow-midnight/60 overflow-hidden animate-fade-in-up"
+                className="absolute top-full right-0 mt-2 w-64 md:w-72 bg-deepOcean backdrop-blur-lg border border-mermaidTeal/40 rounded-lg shadow-2xl shadow-midnight/60 overflow-hidden animate-fade-in-up"
                 role="menu"
                 aria-label="Services submenu"
               >
@@ -113,18 +113,19 @@ export function Header() {
           {/* Client Portal Login - Highlighted CTA */}
           <Link
             href="/portal/login"
-            className="px-4 py-2 bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 text-midnight text-sm font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md flex items-center gap-2"
+            className="px-3 md:px-4 py-2 bg-gradient-to-r from-lunarGold/80 to-phoenixFire/70 text-midnight text-xs md:text-sm font-semibold rounded-lg hover:from-lunarGold hover:to-phoenixFire hover:scale-105 transition-all shadow-md flex items-center gap-2 whitespace-nowrap"
             aria-label="Client Portal Login"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
             </svg>
-            Client Portal
+            <span className="hidden lg:inline">Client Portal</span>
+            <span className="lg:hidden">Portal</span>
           </Link>
         </nav>
 
-        {/* MOBILE/TABLET Navigation - Horizontal Scrollable Magic */}
-        <nav className="lg:hidden flex-1 ml-4 overflow-x-auto scrollbar-hide" aria-label="Mobile navigation">
+        {/* MOBILE Navigation - Horizontal Scrollable Magic */}
+        <nav className="md:hidden flex-1 ml-4 overflow-x-auto scrollbar-hide" aria-label="Mobile navigation">
           <div className="flex gap-3 items-center min-w-max px-2">
             {navLinks.map((link) => (
               <Link

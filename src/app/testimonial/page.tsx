@@ -57,7 +57,7 @@ function TestimonialForm() {
             </svg>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Thank You! 🙏
           </h1>
 
@@ -90,8 +90,8 @@ function TestimonialForm() {
     <main className="min-h-screen bg-midnight text-pearlWhite py-12 px-6">
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-        <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl animate-floatSlow" />
-        <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl opacity-10 animate-floatSlow" />
+        <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl opacity-10" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
       </div>
 
       <div className="relative max-w-3xl mx-auto">
@@ -106,11 +106,11 @@ function TestimonialForm() {
             </p>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             How Was Your Experience?
           </h1>
 
-          <p className="text-lg text-moonlightSilver max-w-2xl mx-auto">
+          <p className="font-serif text-lg text-moonlightSilver max-w-2xl mx-auto italic">
             Your honest feedback helps me continue to improve and serve healthcare innovators like you even better.
           </p>
         </div>

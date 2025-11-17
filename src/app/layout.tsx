@@ -10,6 +10,28 @@ import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
 import { EasterEggProvider } from "./components/EasterEggContext";
 import { Footer } from "./components/Footer";
+import { Inter, Playfair_Display, Crimson_Text } from 'next/font/google';
+
+// Professional, elegant fonts
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
+const crimson = Crimson_Text({
+  subsets: ['latin'],
+  variable: '--font-crimson',
+  display: 'swap',
+  weight: ['400', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
@@ -91,7 +113,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <StructuredData type="ProfessionalService" />
         <StructuredData type="Service" />
       </head>
-      <body className="min-h-screen bg-nightNavy text-glacierWhite">
+      <body className={`min-h-screen bg-nightNavy text-glacierWhite ${inter.variable} ${playfair.variable} ${crimson.variable}`}>
         <EasterEggProvider>
           <ErrorBoundary>
             <div className="flex min-h-screen flex-col">

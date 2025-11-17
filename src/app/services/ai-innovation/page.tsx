@@ -250,8 +250,8 @@ export default function AiInnovationPage() {
       {/* HERO SECTION - Phoenix Fire Theme */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
         {/* Phoenix Fire Aurora Background Orbs */}
-        <div className="pointer-events-none absolute -right-32 top-10 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-phoenixFire/60 via-lunarGold/50 to-sunsetPink/30 blur-3xl opacity-70 animate-floatSlow" />
-        <div className="pointer-events-none absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-lunarGold/50 via-phoenixFire/40 to-mermaidTeal/20 blur-3xl opacity-50 animate-flowDelayed" />
+        <div className="pointer-events-none absolute -right-32 top-10 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-phoenixFire/60 via-lunarGold/50 to-sunsetPink/30 blur-3xl opacity-10 animate-floatSlow" />
+        <div className="pointer-events-none absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-lunarGold/50 via-phoenixFire/40 to-mermaidTeal/20 blur-3xl opacity-10 animate-flowDelayed" />
 
         <div className="relative mx-auto max-w-5xl">
           {/* Moon Phase Navigation - Fire Gradient */}
@@ -276,10 +276,10 @@ export default function AiInnovationPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-phoenixFire uppercase font-medium">
               Service Suite · AI Innovation
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-phoenixFire via-lunarGold to-sunsetPink bg-clip-text text-transparent leading-tight px-4">
+            <h1 className="font-elegant text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-phoenixFire via-lunarGold to-sunsetPink bg-clip-text text-transparent leading-tight px-4">
               AI Innovation Suite
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="font-serif text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4 italic">
               Applied AI at the intersection of clinical empathy, creative storytelling, and technical engineering.
               We architect copilots, automations, and creative systems that actually make sense for your team.
             </p>
@@ -294,7 +294,7 @@ export default function AiInnovationPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-phoenixFire uppercase font-medium">
               AI Solutions
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
               Prototype quickly, scale thoughtfully
             </h2>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
@@ -313,7 +313,7 @@ export default function AiInnovationPage() {
                   {service.tiers.map((tier, index) => (
                     <article
                       key={tier.name}
-                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-phoenixFire/20 animate-fadeInUp ${
+                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-phoenixFire/20 fade-in-up ${
                         tier.popular
                           ? "border-phoenixFire/60 bg-gradient-to-br from-phoenixFire/20 via-deepOcean/60 to-midnight/90"
                           : "border-deepOcean/60 bg-gradient-to-br from-deepOcean/50 via-midnight/80 to-midnight/95"
@@ -394,7 +394,7 @@ export default function AiInnovationPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-phoenixFire uppercase font-medium">
               Why Moonlit AI
             </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
               Beyond the hype, into production
             </h2>
           </div>
@@ -478,7 +478,7 @@ export default function AiInnovationPage() {
 
         <div className="relative mx-auto max-w-4xl">
           <div className="rounded-3xl border border-phoenixFire/40 bg-gradient-to-br from-phoenixFire/15 via-deepOcean/40 to-midnight/90 px-8 py-12 text-center shadow-2xl backdrop-blur-sm">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-phoenixFire via-lunarGold to-sunsetPink bg-clip-text text-transparent">
+            <h2 className="font-elegant text-3xl sm:text-4xl font-bold bg-gradient-to-r from-phoenixFire via-lunarGold to-sunsetPink bg-clip-text text-transparent">
               Ready to ship an AI idea?
             </h2>
             <p className="mt-4 text-lg text-moonlightSilver max-w-2xl mx-auto">

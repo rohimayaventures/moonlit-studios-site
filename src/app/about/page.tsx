@@ -41,10 +41,10 @@ export default function AboutPage() {
 
           <div className="text-center space-y-4 sm:space-y-6 fade-in-up px-4">
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">About Moonlit Studios</p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
               The Nurse Who Learned to Code
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+            <p className="font-serif text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto italic">
               From bedside care to healthcare operations leadership, from fantasy romance author to
               full-stack developer—every transformation taught me something new about healing through technology.
             </p>

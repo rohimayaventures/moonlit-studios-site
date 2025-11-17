@@ -87,10 +87,10 @@ function LoginContent() {
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-lunarGold mb-2">🌙</h1>
-          <h2 className="text-2xl font-semibold text-moonlightSilver">
+          <h2 className="font-elegant text-2xl font-semibold text-moonlightSilver">
             Client Portal
           </h2>
-          <p className="text-moonlightSilver/70 mt-2">
+          <p className="font-serif text-moonlightSilver/70 mt-2 italic">
             Moonlit Studios
           </p>
         </div>

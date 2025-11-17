@@ -330,10 +330,10 @@ export default function ServicesPage() {
                 Six Bending Paths
               </p>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
               Choose your element. Master your path.
             </h1>
-            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4">
+            <p className="font-serif text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4 italic">
               Like the Avatar mastering all elements, every journey begins by choosing your path. Led by a nurse who codes,
               these six bending disciplines offer unique approaches—from local business magic to enterprise AI.
               Which path resonates with your vision?

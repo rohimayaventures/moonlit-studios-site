@@ -178,8 +178,8 @@ export default function CreativeDesignDevelopmentPage() {
       <section className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
         {/* Aurora Background Orbs - Coral Theme */}
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-coralPink/50 via-sunsetPink/40 to-roseGold/45 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-roseGold/40 via-coralBlush/35 to-sunsetPink/30 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-coralPink/50 via-sunsetPink/40 to-roseGold/45 blur-3xl opacity-10 animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-roseGold/40 via-coralBlush/35 to-sunsetPink/30 blur-3xl opacity-10" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
@@ -209,10 +209,10 @@ export default function CreativeDesignDevelopmentPage() {
 
           <div className="text-center space-y-4 sm:space-y-6 px-4">
             <p className="text-xs sm:text-sm tracking-[0.35em] text-coralPink uppercase">Service Suite - Creative</p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
               Creative Design & Development
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+            <p className="font-serif text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto italic">
               Visual and digital identity for founders, authors, and small businesses.
               Branding, packaging, web, and creative direction under one roof—your story stays cohesive from concept to launch.
             </p>
@@ -246,7 +246,7 @@ export default function CreativeDesignDevelopmentPage() {
                     ? 'border-coralPink/70 bg-gradient-to-b from-coralPink/10 via-sunsetPink/5 to-midnight shadow-coralPink/20 hover:shadow-coralPink/40 hover:-translate-y-1'
                     : 'border-roseGold/40 bg-gradient-to-b from-roseGold/5 via-midnight/80 to-midnight/95 hover:border-coralBlush/60 hover:shadow-roseGold/20'
                   }
-                  animate-fadeInUp
+                  fade-in-up
                 `}
                 style={{ animationDelay: `${(index + 1) * 0.05}s` }}
               >
@@ -264,7 +264,7 @@ export default function CreativeDesignDevelopmentPage() {
                       <span className="text-coralPink text-xs font-bold">{offering.tier.slice(0,3).toUpperCase()}</span>
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-pearlWhite">
+                      <h2 className="font-elegant text-lg font-semibold text-pearlWhite">
                         {offering.title}
                       </h2>
                       <p className="text-xs text-coralPink">{offering.tier}</p>
@@ -329,7 +329,7 @@ export default function CreativeDesignDevelopmentPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-pearlWhite">
+            <h3 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
               Ready to build your brand or site?
             </h3>
             <p className="text-moonlightSilver max-w-2xl mx-auto">

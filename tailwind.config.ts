@@ -50,8 +50,11 @@ const config: Config = {
         coralAccent: "#E8998D",       // Old name (use coralBlush)
       },
       fontFamily: {
-        heading: ["system-ui", "sans-serif"],
-        body: ["system-ui", "sans-serif"],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-playfair)', 'Georgia', 'serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-crimson)', 'Georgia', 'serif'],
+        elegant: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       keyframes: {
         // Fade in up animation (used throughout About page)

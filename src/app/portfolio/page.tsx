@@ -324,10 +324,10 @@ export default function PortfolioPage() {
                 Chronicle of Legends
               </p>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
               Quests completed. Realms explored. Legends forged.
             </h1>
-            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto">
+            <p className="font-serif text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto italic">
               Every project is a legendary quest—from brand journeys in the Shire to AI visions in Lothlórien. Each realm represents
               mastery in a different craft. Some are complete tales, others are ongoing voyages from the Grey Havens.
             </p>

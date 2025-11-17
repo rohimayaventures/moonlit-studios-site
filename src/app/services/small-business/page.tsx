@@ -99,9 +99,9 @@ export default function SmallBusinessPage() {
       <section id="hero" className="relative overflow-hidden border-b border-mermaidTeal/20 bg-gradient-to-br from-midnight via-deepOcean to-nightNavy py-20">
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 h-2 w-2 animate-pulse rounded-full bg-green-400/30" />
-          <div className="absolute top-40 right-20 h-3 w-3 animate-pulse rounded-full bg-purple-400/30 delay-500" />
-          <div className="absolute bottom-20 left-1/3 h-2 w-2 animate-pulse rounded-full bg-amber-400/30 delay-1000" />
+          <div className="absolute top-20 left-10 h-2 w-2 rounded-full bg-green-400/30" />
+          <div className="absolute top-40 right-20 h-3 w-3 rounded-full bg-purple-400/30 delay-500" />
+          <div className="absolute bottom-20 left-1/3 h-2 w-2 rounded-full bg-amber-400/30 delay-1000" />
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -138,14 +138,14 @@ export default function SmallBusinessPage() {
             <span>Small Business. Big Dreams. Pure Magic.</span>
           </div>
 
-          <h1 className="mb-6 text-4xl font-bold text-pearlWhite md:text-6xl lg:text-7xl" style={{ lineHeight: '1.3' }}>
+          <h1 className="font-elegant mb-6 text-4xl font-bold text-pearlWhite md:text-6xl lg:text-7xl" style={{ lineHeight: '1.3' }}>
             Your Journey
             <span className="block bg-gradient-to-r from-green-400 via-purple-400 to-amber-400 bg-clip-text text-transparent mt-2">
               Begins Here
             </span>
           </h1>
 
-          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-moonlightSilver md:text-xl">
+          <p className="font-serif mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-moonlightSilver md:text-xl italic">
             You don't need a fortune to build something beautiful. Choose the path that feels right,
             and let's grow your business together—one gentle step at a time.
           </p>
@@ -171,7 +171,7 @@ export default function SmallBusinessPage() {
       {/* Philosophy Section */}
       <section id="philosophy" className="border-b border-mermaidTeal/20 bg-midnight/50 py-16">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="mb-6 text-3xl font-bold text-pearlWhite md:text-4xl">
+          <h2 className="font-elegant mb-6 text-3xl font-bold text-pearlWhite md:text-4xl">
             Every Great Story Starts Small
           </h2>
           <p className="mb-4 text-lg leading-relaxed text-moonlightSilver">
@@ -191,7 +191,7 @@ export default function SmallBusinessPage() {
       <section id="packages" className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-pearlWhite md:text-5xl">
+            <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-5xl">
               Choose Your Path
             </h2>
             <p className="text-lg text-moonlightSilver">
@@ -272,7 +272,7 @@ export default function SmallBusinessPage() {
       {/* How It Works */}
       <section id="how-it-works" className="border-y border-mermaidTeal/20 bg-midnight/50 py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
             How We'll Work Together
           </h2>
 
@@ -322,7 +322,7 @@ export default function SmallBusinessPage() {
       {/* Why Me Section */}
       <section className="py-16">
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="mb-8 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+          <h2 className="font-elegant mb-8 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
             Why Work With Me?
           </h2>
 
@@ -357,7 +357,7 @@ export default function SmallBusinessPage() {
       {/* FAQ Section */}
       <section id="faq" className="border-y border-mermaidTeal/20 bg-midnight/50 py-16">
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
             Questions You Might Have
           </h2>
 
@@ -422,7 +422,7 @@ export default function SmallBusinessPage() {
       <section className="py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="rounded-2xl border border-lunarGold/30 bg-gradient-to-br from-lunarGold/10 via-mermaidTeal/10 to-starlight/10 p-12 backdrop-blur-sm">
-            <h2 className="mb-4 text-3xl font-bold text-pearlWhite md:text-4xl">
+            <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-4xl">
               Ready to Begin?
             </h2>
             <p className="mb-8 text-lg text-moonlightSilver">

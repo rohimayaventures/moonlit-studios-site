@@ -719,7 +719,7 @@ export default function AILabPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent px-4 tracking-tight">
+          <h1 className="font-elegant text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center bg-gradient-to-r from-mermaidTeal via-lunarGold to-tealBright bg-clip-text text-transparent px-4 tracking-tight">
             AI Lab
           </h1>
 

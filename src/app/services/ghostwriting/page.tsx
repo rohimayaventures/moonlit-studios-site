@@ -262,8 +262,8 @@ export default function GhostwritingPage() {
       {/* HERO SECTION - Starlight/Silver Theme */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
         {/* Starlight Aurora Background Orbs */}
-        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-starlight/50 via-moonlightSilver/40 to-pearlWhite/20 blur-3xl opacity-50 animate-floatSlow" />
-        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-pearlWhite/30 via-starlight/40 to-moonlightSilver/30 blur-3xl opacity-40 animate-flowDelayed" />
+        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-starlight/50 via-moonlightSilver/40 to-pearlWhite/20 blur-3xl opacity-10 animate-floatSlow" />
+        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-pearlWhite/30 via-starlight/40 to-moonlightSilver/30 blur-3xl opacity-10 animate-flowDelayed" />
 
         <div className="relative mx-auto max-w-5xl">
           {/* Moon Phase Navigation - Silver Gradient */}
@@ -288,10 +288,10 @@ export default function GhostwritingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
               Service Suite · Author & Ghostwriting
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent leading-tight px-4">
+            <h1 className="font-elegant text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent leading-tight px-4">
               Author & Ghostwriting Studio
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="font-serif text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4 italic">
               Books, cookbooks, launch flows, and ongoing content engines. A blend of clinical clarity
               and creative storytelling—every word feels human and intentional.
             </p>
@@ -306,7 +306,7 @@ export default function GhostwritingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
               Writing Services
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
               Strategic writing partnerships
             </h2>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
@@ -325,7 +325,7 @@ export default function GhostwritingPage() {
                   {service.tiers.map((tier, index) => (
                     <article
                       key={tier.name}
-                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-starlight/15 animate-fadeInUp ${
+                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-starlight/15 fade-in-up ${
                         tier.popular
                           ? "border-starlight/60 bg-gradient-to-br from-moonlightSilver/20 via-deepOcean/60 to-midnight/90"
                           : "border-deepOcean/60 bg-gradient-to-br from-deepOcean/50 via-midnight/80 to-midnight/95"
@@ -406,7 +406,7 @@ export default function GhostwritingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
               Why Moonlit Writing
             </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
               Your voice, elevated
             </h2>
           </div>
@@ -490,7 +490,7 @@ export default function GhostwritingPage() {
 
         <div className="relative mx-auto max-w-4xl">
           <div className="rounded-3xl border border-starlight/30 bg-gradient-to-br from-moonlightSilver/15 via-deepOcean/40 to-midnight/90 px-8 py-12 text-center shadow-2xl backdrop-blur-sm">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent">
+            <h2 className="font-elegant text-3xl sm:text-4xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent">
               Ready to bring your story to life?
             </h2>
             <p className="mt-4 text-lg text-moonlightSilver max-w-2xl mx-auto">

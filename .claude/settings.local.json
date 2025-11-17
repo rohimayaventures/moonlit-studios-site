@@ -30,7 +30,9 @@
       "Bash(tree:*)",
       "Bash(grep:*)",
       "Bash(npx tsc --noEmit)",
-      "Bash(del compress-logo.js)"
+      "Bash(del compress-logo.js)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

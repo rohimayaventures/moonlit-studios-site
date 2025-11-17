@@ -202,8 +202,8 @@ export default function ConsultingPage() {
       {/* HERO SECTION - Purple Aurora Theme */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
         {/* Purple Aurora Background Orbs */}
-        <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-gradient-to-br from-lavenderMist/50 via-twilightPurple/40 to-mysticViolet/30 blur-3xl opacity-60 animate-floatSlow" />
-        <div className="pointer-events-none absolute -right-40 bottom-10 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-auroraPurple/40 via-twilightPurple/30 to-lavenderMist/20 blur-3xl opacity-50 animate-flowDelayed" />
+        <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-gradient-to-br from-lavenderMist/50 via-twilightPurple/40 to-mysticViolet/30 blur-3xl opacity-10 animate-floatSlow" />
+        <div className="pointer-events-none absolute -right-40 bottom-10 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-auroraPurple/40 via-twilightPurple/30 to-lavenderMist/20 blur-3xl opacity-10 animate-flowDelayed" />
 
         <div className="relative mx-auto max-w-5xl">
           {/* Moon Phase Navigation - Purple Gradient */}
@@ -228,10 +228,10 @@ export default function ConsultingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-lavenderMist uppercase font-medium">
               Service Suite · Consulting
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-lavenderMist via-twilightPurple to-auroraPurple bg-clip-text text-transparent leading-tight px-4">
+            <h1 className="font-elegant text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-lavenderMist via-twilightPurple to-auroraPurple bg-clip-text text-transparent leading-tight px-4">
               Strategic Consulting & Advisory
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="font-serif text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4 italic">
               Product thinking, clinical operations insight, and technical depth—all in one studio.
               Perfect for founders, clinical teams, or creatives who need an outside brain to evaluate, refine, or accelerate their vision.
             </p>
@@ -246,7 +246,7 @@ export default function ConsultingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-lavenderMist uppercase font-medium">
               Strategic Services
             </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
               Book hourly consults, retainers, or workshops
             </h2>
             <p className="text-moonlightSilver max-w-2xl mx-auto">
@@ -265,7 +265,7 @@ export default function ConsultingPage() {
                   {service.tiers.map((tier, index) => (
                     <article
                       key={tier.name}
-                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-lavenderMist/20 animate-fadeInUp ${
+                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-lavenderMist/20 fade-in-up ${
                         tier.popular
                           ? "border-lavenderMist/60 bg-gradient-to-br from-twilightPurple/30 via-deepOcean/60 to-midnight/90"
                           : "border-deepOcean/60 bg-gradient-to-br from-deepOcean/50 via-midnight/80 to-midnight/95"
@@ -346,7 +346,7 @@ export default function ConsultingPage() {
             <p className="text-xs sm:text-sm tracking-[0.35em] text-lavenderMist uppercase font-medium">
               Why Strategic Consulting
             </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
               Rare combination of depth
             </h2>
           </div>
@@ -430,7 +430,7 @@ export default function ConsultingPage() {
 
         <div className="relative mx-auto max-w-4xl">
           <div className="rounded-3xl border border-lavenderMist/30 bg-gradient-to-br from-twilightPurple/20 via-deepOcean/40 to-midnight/90 px-8 py-12 text-center shadow-2xl backdrop-blur-sm">
-            <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-lavenderMist via-twilightPurple to-auroraPurple bg-clip-text text-transparent">
+            <h2 className="font-elegant text-3xl sm:text-4xl font-bold bg-gradient-to-r from-lavenderMist via-twilightPurple to-auroraPurple bg-clip-text text-transparent">
               Need a thinking partner?
             </h2>
             <p className="mt-4 text-lg text-moonlightSilver max-w-2xl mx-auto">

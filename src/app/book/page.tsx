@@ -39,8 +39,8 @@ export default function BookPage() {
       {/* HERO SECTION */}
       <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
         <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-mermaidTeal/60 via-lunarGold/40 to-tealBright/60 blur-3xl opacity-10 animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-phoenixFire/40 via-mermaidTeal/30 to-deepOcean/40 blur-3xl opacity-10" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
@@ -53,10 +53,10 @@ export default function BookPage() {
                 Let's Connect
               </p>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
               Book Your Free Consultation
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+            <p className="font-serif text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto italic">
               30-minute discovery call to discuss your project, timeline, and vision.
               No pressure, no commitment—just honest conversation about what's possible.
             </p>
@@ -97,7 +97,7 @@ export default function BookPage() {
       {/* INFO SECTION */}
       <section className="relative py-12 px-6 bg-gradient-to-b from-midnight via-deepOcean/20 to-midnight">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">What Happens Next?</h2>
+          <h2 className="font-elegant text-2xl md:text-3xl font-semibold mb-6">What Happens Next?</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="text-left p-6 rounded-xl bg-deepOcean/30 border border-moonlightSilver/20">
               <div className="flex items-center gap-3 mb-3">

@@ -169,15 +169,15 @@ export default function ContactPage() {
             />
           </div>
 
-          <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 animate-fadeInUp">
-            <div className="inline-flex justify-center animate-pulse">
+          <div className="text-center space-y-4 sm:space-y-6 px-4 mb-8 fade-in-up">
+            <div className="inline-flex justify-center">
               <MagicalLetter />
             </div>
             <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">{currentTheme.name}</p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold">
               {currentTheme.title}
             </h1>
-            <p className="text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto italic">
+            <p className="font-serif text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto italic">
               {currentTheme.subtitle}
             </p>
             <p className="text-sm text-moonlightSilver/70 max-w-2xl mx-auto mt-4">
@@ -194,7 +194,7 @@ export default function ContactPage() {
 
           {/* Magical Scroll / Parchment Form */}
           <section
-            className="rounded-3xl border-2 p-6 md:p-10 shadow-2xl backdrop-blur animate-fadeInUp relative overflow-hidden"
+            className="rounded-3xl border-2 p-6 md:p-10 shadow-2xl backdrop-blur fade-in-up relative overflow-hidden"
             style={{
               borderColor: 'var(--theme-border)',
               background: `linear-gradient(to bottom, var(--theme-surface), var(--theme-background))`,
@@ -204,8 +204,8 @@ export default function ContactPage() {
             {/* Parchment texture overlay */}
             <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ background: `radial-gradient(circle at 50% 50%, var(--theme-primary), transparent)` }}></div>
 
-            {/* Wax seal decoration - theme-compatible */}
-            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-20 blur-2xl animate-pulse" style={{ background: `linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary))` }}></div>
+            {/* Wax seal decoration - theme-compatible - subtle */}
+            <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-10 blur-2xl" style={{ background: `linear-gradient(to bottom right, var(--theme-primary), var(--theme-secondary))` }}></div>
 
             <form className="space-y-6 relative z-10" onSubmit={handleSubmit} key={theme}>
               <div className="grid gap-4 md:grid-cols-2">
