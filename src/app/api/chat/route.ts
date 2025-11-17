@@ -125,6 +125,34 @@ export async function POST(request: NextRequest) {
         urgencyEmoji = '🟡';
       }
 
+      // 😊 SENTIMENT ANALYSIS - Detect visitor emotions
+      let sentiment: 'excited' | 'frustrated' | 'confused' | 'neutral' = 'neutral';
+      const sentimentIndicators: string[] = [];
+
+      // Positive sentiment (excitement)
+      if (/\b(love|amazing|awesome|perfect|great|excellent|wonderful|fantastic|excited|can't wait)\b/i.test(userMessage)) {
+        sentiment = 'excited';
+        sentimentIndicators.push('Excited/Positive');
+      }
+
+      // Negative sentiment (frustration)
+      if (/\b(frustrated|annoyed|confused|difficult|hard|complicated|don't understand|help|stuck)\b/i.test(userMessage)) {
+        sentiment = 'frustrated';
+        sentimentIndicators.push('Frustrated/Needs Help');
+      }
+
+      // Confusion
+      if (/\b(what|how|why|confused|not sure|don't know|which|help me understand)\b/i.test(userMessage) && userMessage.includes('?')) {
+        if (sentiment !== 'frustrated') sentiment = 'confused';
+        sentimentIndicators.push('Confused/Has Questions');
+      }
+
+      // Urgency (override to excited if positive words present)
+      if (/\b(asap|urgent|immediately|now|hurry|quick)\b/i.test(userMessage)) {
+        if (sentiment === 'neutral') sentiment = 'excited';
+        sentimentIndicators.push('Urgent Need');
+      }
+
       // Legacy notification type (for backwards compatibility)
       const highIntentSignals = {
         quote_interest: /\b(quote|pricing|price|cost|how much|estimate|budget)\b/i,
@@ -169,6 +197,10 @@ export async function POST(request: NextRequest) {
               emoji: urgencyEmoji,
               signals: signals
             },
+            sentiment: {
+              emotion: sentiment,
+              indicators: sentimentIndicators
+            },
             visitorContext: {
               page: pathname,
               personality: body.personality || 'iroh',
@@ -189,6 +221,21 @@ export async function POST(request: NextRequest) {
 
         log.info(`${urgencyEmoji} Lead scored: ${leadScore}/100 (${leadTemperature.toUpperCase()}) - Type: ${notificationType || 'scored'} - Message: "${userMessage.substring(0, 50)}..."`);
       }
+
+      // 📊 LOG TO ANALYTICS (fire and forget)
+      fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/kai/analytics`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'message_sent',
+          data: {
+            leadScore,
+            sentiment,
+            messageLength: userMessage.length,
+            conversationLength: conversationHistory.length,
+          },
+        }),
+      }).catch(err => log.error('Analytics logging failed:', err));
     } catch (notificationError) {
       // Don't let notification errors break the chat
       log.error('Notification error (non-critical):', notificationError);

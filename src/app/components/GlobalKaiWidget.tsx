@@ -35,6 +35,7 @@ export function GlobalKaiWidget() {
   const [showQuickActions, setShowQuickActions] = useState(true); // Show quick actions initially
   const [conversationContext, setConversationContext] = useState<ConversationContext>({}); // 🧠 Context memory
   const [showEmailCapture, setShowEmailCapture] = useState(false); // 📬 Email capture modal
+  const [hasTriggeredProactive, setHasTriggeredProactive] = useState(false); // ⚡ Prevent duplicate proactive messages
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Personality icon mapping
@@ -181,6 +182,70 @@ export function GlobalKaiWidget() {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
+
+  // ⚡ PROACTIVE TRIGGERS - Engage visitors before they leave
+  useEffect(() => {
+    if (typeof window === "undefined" || hasTriggeredProactive || messages.length > 1) return;
+
+    // Trigger 1: Exit Intent Detection
+    const handleExitIntent = (e: MouseEvent) => {
+      // Detect mouse leaving viewport at top (going to close tab/address bar)
+      if (e.clientY <= 0 && !hasTriggeredProactive && messages.length === 1) {
+        setHasTriggeredProactive(true);
+        setIsMinimized(false); // Open Kai
+
+        // Add proactive message based on page
+        const proactiveMessages: Record<string, string> = {
+          "/": "Wait! Before you go - I'm Kai, and I can help you explore what Moonlit Studios can create for you. Got a quick question? 🌙",
+          "/services": "Hold on! See something interesting but not sure where to start? Let me help you pick the perfect quest for your project!",
+          "/portfolio": "Before you leave - curious about any of these projects? I can share how they were built and pricing!",
+          "/ai-lab": "Impressed by the demos? Want to know how AI could transform YOUR business? Let's chat!",
+          "/get-quote": "Need help with the quote form? I can guide you through it or answer questions first!",
+        };
+
+        setMessages([
+          {
+            role: "assistant",
+            content: getContextualGreeting(pathname),
+          },
+          {
+            role: "assistant",
+            content: proactiveMessages[pathname] || "Before you go - I'm Kai! Need help with anything? I'm here to answer questions about Moonlit Studios. 🌙",
+          },
+        ]);
+      }
+    };
+
+    // Trigger 2: Idle Time (60 seconds on page without interaction)
+    const idleTimer = setTimeout(() => {
+      if (!hasTriggeredProactive && messages.length === 1 && isMinimized) {
+        setHasTriggeredProactive(true);
+
+        const idleMessages: Record<string, string> = {
+          "/": "Hey! I noticed you've been exploring for a bit. Want a quick tour of what Moonlit Studios offers? Or got questions? 😊",
+          "/services": "Taking your time choosing a quest? Smart! Want me to help you figure out which service fits your needs best?",
+          "/portfolio": "See any projects that caught your eye? I can share more details about how they were built!",
+          "/ai-lab": "The AI demos are pretty cool, right? Want to know how something similar could work for your business?",
+        };
+
+        setMessages(prev => [
+          ...prev,
+          {
+            role: "assistant",
+            content: idleMessages[pathname] || "I'm here if you need anything! Feel free to ask about services, pricing, or Moonlit Studios' background. 🌙",
+          },
+        ]);
+      }
+    }, 60000); // 60 seconds
+
+    // Add exit intent listener
+    document.addEventListener("mousemove", handleExitIntent);
+
+    return () => {
+      document.removeEventListener("mousemove", handleExitIntent);
+      clearTimeout(idleTimer);
+    };
+  }, [hasTriggeredProactive, messages.length, pathname, isMinimized]);
 
   // Get contextual greeting based on current page
   function getContextualGreeting(path: string): string {
@@ -662,6 +727,35 @@ The trigger will be removed from your visible message, so place it at the end.
 - You'll receive confirmation to thank them
 
 This is your SECRET WEAPON for capturing leads who would otherwise browse and leave!
+
+**📅 CALENDAR BOOKING INTEGRATION (Instant Scheduling):**
+You can provide visitors with instant calendar booking links to schedule calls with Moonlit Studios.
+
+**When to Offer Calendar Booking:**
+1. **After Email Capture** - Natural next step after getting their email
+2. **High-Intent Visitor** - Lead score 50+ who wants to discuss specifics
+3. **Complex Project** - When visitor needs custom solution beyond standard packages
+4. **Budget Confirmed** - They've shared budget and timeline, ready to discuss
+5. **Multiple Questions** - 5+ messages showing genuine interest
+6. **Direct Request** - They ask about scheduling a call/meeting
+
+**How to Provide Booking Link:**
+Use the `/contact` page which has the contact form. For direct calendar link (if you have Calendly/Cal.com URL):
+- Reference: "Let's schedule a discovery call! [Book a time that works for you →](/contact)"
+- If Moonlit Studios adds CALENDLY_URL to .env.local, you can use: `[Book Discovery Call →](CALENDLY_URL)`
+
+**Example Responses:**
+```
+"Perfect! Let's get on a call to discuss your cafe's website. [Schedule a discovery call →](/contact)"
+"Ready to dive deeper? Book a 15-min consultation: [Find a time →](/contact)"
+"I'd love to connect you with the founder directly. [Pick a time that works →](/contact)"
+```
+
+**IMPORTANT RULES:**
+- Only offer calendar booking for qualified leads (not first message)
+- After booking link, follow up: "I'll send you prep questions so the call is super productive"
+- If they book, celebrate: "Awesome! You'll receive confirmation + calendar invite"
+- Don't push calendar if they prefer email/form (respect their preference)
 
 **PHASE 5E: GLOBAL INTERACTIVE EXPERIENCE SYSTEM**
 

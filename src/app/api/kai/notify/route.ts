@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
       kaiResponse,
       notificationType, // 'lead_qualified' | 'quote_interest' | 'high_intent' | 'business_inquiry' | 'lead_scored'
       leadScore, // { score, temperature, emoji, signals }
+      sentiment, // { emotion, indicators }
       visitorContext
     } = body;
 
@@ -217,6 +218,27 @@ export async function POST(request: NextRequest) {
       </div>
       ` : ''}
 
+      ${sentiment && sentiment.emotion !== 'neutral' ? `
+      <div class="section">
+        <div class="section-title">😊 Sentiment Analysis</div>
+        <div style="background: ${sentiment.emotion === 'excited' ? '#D4EDDA' : sentiment.emotion === 'frustrated' ? '#F8D7DA' : '#FFF3CD'}; border-left: 4px solid ${sentiment.emotion === 'excited' ? '#28A745' : sentiment.emotion === 'frustrated' ? '#DC3545' : '#FFC107'}; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+          <div style="font-weight: 600; margin-bottom: 8px;">
+            ${sentiment.emotion === 'excited' ? '😊 Excited/Positive' : sentiment.emotion === 'frustrated' ? '😤 Frustrated/Needs Help' : '🤔 Confused/Has Questions'}
+          </div>
+          ${sentiment.indicators && sentiment.indicators.length > 0 ? `
+          <div style="font-size: 14px; color: #666;">
+            Indicators: ${sentiment.indicators.join(', ')}
+          </div>
+          ` : ''}
+          ${sentiment.emotion === 'frustrated' ? `
+          <div style="background: rgba(220,53,69,0.1); padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 14px; color: #721C24;">
+            <strong>⚠️ Action Required:</strong> This visitor may need extra attention or human escalation. Respond promptly to prevent churn.
+          </div>
+          ` : ''}
+        </div>
+      </div>
+      ` : ''}
+
       <div class="section">
         <div class="section-title">💬 Visitor Message</div>
         <div class="message-box visitor-message">
@@ -347,6 +369,20 @@ export async function POST(request: NextRequest) {
               text: `*Page:*\n${visitorContext?.page || 'Unknown'}`,
             },
           ],
+        });
+      }
+
+      // Add sentiment block if available
+      if (sentiment && sentiment.emotion !== 'neutral') {
+        const sentimentEmoji = sentiment.emotion === 'excited' ? '😊' : sentiment.emotion === 'frustrated' ? '😤' : '🤔';
+        const sentimentLabel = sentiment.emotion === 'excited' ? 'Excited/Positive' : sentiment.emotion === 'frustrated' ? 'Frustrated/Needs Help' : 'Confused/Has Questions';
+
+        slackBlocks.push({
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*${sentimentEmoji} Sentiment:*\n${sentimentLabel}${sentiment.indicators && sentiment.indicators.length > 0 ? `\nIndicators: ${sentiment.indicators.join(', ')}` : ''}${sentiment.emotion === 'frustrated' ? '\n⚠️ *May need extra attention or human escalation*' : ''}`,
+          },
         });
       }
 
