@@ -52,12 +52,13 @@ export function Header() {
         </Link>
 
         {/* DESKTOP Navigation - Hidden on Mobile */}
-        <nav className="hidden lg:flex gap-6 text-sm text-moonlightSilver items-center">
+        <nav className="hidden lg:flex gap-6 text-sm text-moonlightSilver items-center" aria-label="Main navigation">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className="hover:text-mermaidTeal transition-colors font-medium"
+              aria-label={`Navigate to ${link.label}`}
             >
               {link.label}
             </Link>
@@ -69,9 +70,12 @@ export function Header() {
               onClick={() => setServicesOpen(!servicesOpen)}
               onMouseEnter={() => setServicesOpen(true)}
               className="flex items-center gap-1 hover:text-mermaidTeal transition-colors font-medium"
+              aria-label="Services menu"
+              aria-expanded={servicesOpen}
+              aria-haspopup="true"
             >
               Services
-              <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
             </button>
 
             {/* Dropdown Menu */}
@@ -80,6 +84,8 @@ export function Header() {
                 onMouseEnter={() => setServicesOpen(true)}
                 onMouseLeave={() => setServicesOpen(false)}
                 className="absolute top-full right-0 mt-2 w-72 bg-deepOcean backdrop-blur-lg border border-mermaidTeal/40 rounded-lg shadow-2xl shadow-midnight/60 overflow-hidden animate-fade-in-up"
+                role="menu"
+                aria-label="Services submenu"
               >
                 <div className="py-2">
                   {serviceLinks.map((service) => (
@@ -87,6 +93,8 @@ export function Header() {
                       key={service.href}
                       href={service.href}
                       className="block px-4 py-3 text-sm text-moonlightSilver hover:bg-mermaidTeal/20 hover:text-mermaidTeal transition-all border-b border-deepOcean/40 last:border-b-0"
+                      role="menuitem"
+                      aria-label={`Navigate to ${service.label}`}
                     >
                       {service.label}
                     </Link>
@@ -104,13 +112,14 @@ export function Header() {
         </nav>
 
         {/* MOBILE/TABLET Navigation - Horizontal Scrollable Magic */}
-        <div className="lg:hidden flex-1 ml-4 overflow-x-auto scrollbar-hide">
+        <nav className="lg:hidden flex-1 ml-4 overflow-x-auto scrollbar-hide" aria-label="Mobile navigation">
           <div className="flex gap-3 items-center min-w-max px-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className="px-3 py-1.5 text-xs font-medium text-pearlWhite bg-gradient-to-r from-mermaidTeal/20 to-deepOcean/40 border border-mermaidTeal/30 rounded-full hover:from-mermaidTeal/30 hover:to-deepOcean/60 transition-all whitespace-nowrap"
+                aria-label={`Navigate to ${link.label}`}
               >
                 {link.label}
               </Link>
@@ -120,11 +129,12 @@ export function Header() {
             <Link
               href="/services"
               className="px-3 py-1.5 text-xs font-medium text-lunarGold bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 border border-lunarGold/30 rounded-full hover:from-lunarGold/30 hover:to-phoenixFire/40 transition-all whitespace-nowrap"
+              aria-label="Navigate to Services"
             >
               Services ✨
             </Link>
           </div>
-        </div>
+        </nav>
       </div>
 
       {/* Custom scrollbar hide for mobile navigation */}
