@@ -36,12 +36,13 @@ export const metadata: Metadata = {
   publisher: "Moonlit Studios",
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/icon?<generated>', type: 'image/png', sizes: '32x32' },
+      { url: '/square-logo.png', type: 'image/png', sizes: '32x32' },
+      { url: '/square-logo.png', type: 'image/png', sizes: '16x16' },
     ],
     apple: [
-      { url: '/apple-icon?<generated>', type: 'image/png', sizes: '180x180' },
+      { url: '/square-logo.png', type: 'image/png', sizes: '180x180' },
     ],
+    shortcut: [{ url: '/square-logo.png' }],
   },
   openGraph: {
     type: "website",
