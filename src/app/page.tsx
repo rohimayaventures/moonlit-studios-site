@@ -22,11 +22,11 @@ export default function Home() {
           </div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold text-center mb-6 leading-tight fade-in-up stagger-1">
-            Where <span className="gradient-water">Five Realms</span> Converge
+            Healthcare meets code. <span className="gradient-water">Stories meet systems.</span>
           </h1>
 
-          <p className="text-center text-lg md:text-2xl text-pearlWhite font-medium max-w-2xl mx-auto mb-4 fade-in-up stagger-2">
-            Healthcare meets code. Stories meet systems.
+          <p className="text-center text-lg md:text-xl text-moonlightSilver font-light max-w-2xl mx-auto mb-4 fade-in-up stagger-2">
+            Where Dreams Surface and Ideas Flow
           </p>
 
           <p className="text-center text-moonlightSilver text-base md:text-lg max-w-3xl mx-auto mb-12 leading-relaxed fade-in-up stagger-3">
