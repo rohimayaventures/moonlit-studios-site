@@ -152,26 +152,7 @@
 
 ## ⚠️ HIGH PRIORITY FIXES
 
-### 2. **REMOVE UNUSED API KEYS**
-**Location:** `.env.local`
-
-**Remove these lines:**
-```env
-# UNUSED - Remove entirely
-BREVO_API_KEY=...
-CLOUDINARY_CLOUD_NAME=...
-CLOUDINARY_API_KEY=...
-CLOUDINARY_API_SECRET=...
-TALLY_API_KEY=...
-```
-
-**Why:** Reduces security surface, cleaner config
-**Time:** 5 minutes
-**Priority:** MEDIUM - Security hygiene
-
----
-
-### 3. **SWAP STRIPE KEYS TO TEST MODE**
+### 2. **SWAP STRIPE KEYS TO TEST MODE**
 **Current:** `.env.local` has LIVE keys (dangerous in dev)
 
 **Action Required:**
@@ -398,13 +379,12 @@ className="w-full md:w-96 max-w-[calc(100vw-3rem)]..."
 ---
 
 ### **This Month - REMAINING (8 hours):**
-1. Remove unused API keys (5 mins) - Security hygiene
-2. Swap Stripe to test keys (5 mins) - Financial security
-3. Switch Kai to GPT-4o-mini (2 hours) - Save $204/year
-4. Replace console.logs (3 hours) - Security & performance
-5. Optimize next.config.mjs (15 mins) - Performance
-6. Add tablet breakpoints (2 hours) - UX
-7. Kai widget mobile fix (5 mins) - Polish
+1. Switch Kai to GPT-4o-mini (2 hours) - Save $204/year
+2. Replace console.logs (3 hours) - Security & performance
+3. Optimize next.config.mjs (15 mins) - Performance
+4. Add tablet breakpoints (2 hours) - UX
+5. Kai widget mobile fix (5 mins) - Polish
+6. Review portal UI for polish (1 hour) - Production readiness
 
 **Impact:** Performance gains, cost savings, professional polish → Grade: A
 
@@ -432,17 +412,12 @@ className="w-full md:w-96 max-w-[calc(100vw-3rem)]..."
    - Export as PNG
    - Save to `/public/og-image.png`
 
-2. **Remove Unused API Keys** (5 mins) - Security hygiene
-   - Edit `.env.local`
-   - Delete Brevo, Cloudinary, Tally lines
-   - Reduces security surface area
-
-3. **Swap Stripe to Test Keys** (5 mins) - Financial security
+2. **Swap Stripe to Test Keys** (5 mins) - Financial security (optional)
    - Keep LIVE keys only in Vercel production
-   - Use TEST keys in local `.env.local`
+   - Use TEST keys in local `.env.local` for safer local development
 
-**Total Time:** 40 minutes
-**Impact:** Completes critical security & SEO tasks
+**Total Time:** 35 minutes
+**Impact:** Completes critical SEO task
 
 ---
 
@@ -458,12 +433,12 @@ className="w-full md:w-96 max-w-[calc(100vw-3rem)]..."
 ✅ **Portal Sign-Up:** Professional tab interface added
 ✅ **Vercel Build:** Fixed dynamic route error
 ⏳ **OG Image:** Still needs to be created
-⏳ **API Key Cleanup:** Pending
-⏳ **Stripe Test Keys:** Pending
 
 **Current Site Status:** Professional, functional, production-ready
 **Current Grade:** A- (with completed fixes)
 **With OG Image:** A (only missing optional optimizations)
+
+**Note:** API keys in `.env.local` are intentionally kept for future features
 
 ---
 
