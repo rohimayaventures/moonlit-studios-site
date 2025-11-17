@@ -368,7 +368,7 @@ export async function POST(request: NextRequest) {
         }
       );
 
-      await fetch(process.env.SLACK_WEBHOOK_URL, {
+      const slackResponse = await fetch(process.env.SLACK_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -376,11 +376,23 @@ export async function POST(request: NextRequest) {
           blocks: slackBlocks,
         }),
       });
+
+      if (!slackResponse.ok) {
+        const errorText = await slackResponse.text();
+        console.error('Slack webhook failed:', {
+          status: slackResponse.status,
+          statusText: slackResponse.statusText,
+          error: errorText
+        });
+      } else {
+        console.log('✅ Slack notification sent successfully');
+      }
     }
 
+    console.log('✅ Email notification sent successfully');
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error sending Kai notification:', error);
+    console.error('❌ Error sending Kai notification:', error);
     return NextResponse.json(
       { error: 'Failed to send notification' },
       { status: 500 }

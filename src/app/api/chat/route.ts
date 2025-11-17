@@ -153,7 +153,10 @@ export async function POST(request: NextRequest) {
         const pathname = request.headers.get('referer')?.split('/').pop() || 'unknown';
 
         // Don't await - fire and forget to not slow down chat response
-        fetch(`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/kai/notify`, {
+        const notifyUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/api/kai/notify`;
+        log.info(`📤 Sending notification to: ${notifyUrl}`);
+
+        fetch(notifyUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -174,7 +177,15 @@ export async function POST(request: NextRequest) {
               timeOnSite: 'Active conversation'
             }
           })
-        }).catch(err => log.error('Failed to send notification:', err));
+        })
+        .then(res => {
+          if (!res.ok) {
+            log.error(`❌ Notification API returned ${res.status}: ${res.statusText}`);
+            return res.text().then(text => log.error('Response body:', text));
+          }
+          log.info('✅ Notification API call successful');
+        })
+        .catch(err => log.error('❌ Failed to send notification:', err));
 
         log.info(`${urgencyEmoji} Lead scored: ${leadScore}/100 (${leadTemperature.toUpperCase()}) - Type: ${notificationType || 'scored'} - Message: "${userMessage.substring(0, 50)}..."`);
       }
