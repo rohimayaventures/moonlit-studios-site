@@ -21,7 +21,6 @@ export type AchievementData = {
   contactFormSubmitted: boolean;
   konamiCodeEntered: boolean;
   avatarStateActivated: boolean;
-  themeSwitches: number;
   easterEggsFound: string[];
   timeOnSite: number; // in seconds
 };
@@ -124,14 +123,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     condition: (data) => data.avatarStateActivated,
     hidden: true,
   },
-  {
-    id: "theme-switcher",
-    title: "Style Shifter",
-    description: "Switch themes 5 times",
-    category: "secret",
-    tier: "silver",
-    condition: (data) => data.themeSwitches >= 5,
-  },
 
   // ==================== MASTER TIER ====================
   {
@@ -175,7 +166,6 @@ export function AchievementSystem() {
     contactFormSubmitted: false,
     konamiCodeEntered: false,
     avatarStateActivated: false,
-    themeSwitches: 0,
     easterEggsFound: [],
     timeOnSite: 0,
   });
@@ -307,16 +297,6 @@ export function AchievementSystem() {
           const newData = {
             ...prev,
             avatarStateActivated: true,
-          };
-          localStorage.setItem("moonlit-achievement-data", JSON.stringify(newData));
-          return newData;
-        });
-      },
-      incrementThemeSwitches: () => {
-        setAchievementData((prev) => {
-          const newData = {
-            ...prev,
-            themeSwitches: prev.themeSwitches + 1,
           };
           localStorage.setItem("moonlit-achievement-data", JSON.stringify(newData));
           return newData;
