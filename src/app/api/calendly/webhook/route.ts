@@ -3,6 +3,7 @@ import { createLogger } from "@/lib/logger";
 import { Resend } from 'resend';
 import { notifyNewBooking, notifyCancellation } from '@/lib/slack';
 
+const log = createLogger('CalendlyWebhook');
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     const event = payload.event;
     const eventType = payload.event;
 
-    console.log('Calendly Webhook received:', eventType);
+    log.info('Calendly Webhook received:', eventType);
 
     // Handle different event types
     switch (eventType) {
@@ -46,13 +47,13 @@ export async function POST(request: NextRequest) {
         break;
 
       default:
-        console.log('Unhandled event type:', eventType);
+        log.info('Unhandled event type:', eventType);
     }
 
     return NextResponse.json({ success: true, received: true });
 
   } catch (error: any) {
-    console.error('Webhook error:', error);
+    log.error('Webhook error:', error);
     return NextResponse.json(
       { error: 'Webhook processing failed', details: error.message },
       { status: 500 }
@@ -70,7 +71,7 @@ async function handleNewBooking(payload: any) {
   const eventTime = new Date(eventDetails.start_time);
   const eventName = eventDetails.name;
 
-  console.log(`New booking: ${inviteeName} (${inviteeEmail}) for ${eventName} at ${eventTime}`);
+  log.info(`New booking: ${inviteeName} (${inviteeEmail}) for ${eventName} at ${eventTime}`);
 
   // 1. Send Slack notification
   await notifyNewBooking({
@@ -113,9 +114,9 @@ async function handleNewBooking(payload: any) {
       `,
     });
 
-    console.log('Owner notification sent successfully');
+    log.info('Owner notification sent successfully');
   } catch (error) {
-    console.error('Failed to send owner notification:', error);
+    log.error('Failed to send owner notification:', error);
   }
 
   // 2. Send welcome email to the client
@@ -168,9 +169,9 @@ async function handleNewBooking(payload: any) {
       `,
     });
 
-    console.log('Client welcome email sent successfully');
+    log.info('Client welcome email sent successfully');
   } catch (error) {
-    console.error('Failed to send client welcome email:', error);
+    log.error('Failed to send client welcome email:', error);
   }
 
   // 3. TODO: Add to CRM/database for follow-up tracking
@@ -182,7 +183,7 @@ async function handleNewBooking(payload: any) {
     setTimeout(() => {
       sendPostConsultationSurvey(inviteeName, inviteeEmail, eventDetails.uri);
     }, surveyDelay);
-    console.log(`Survey scheduled for ${new Date(Date.now() + surveyDelay).toLocaleString()}`);
+    log.info(`Survey scheduled for ${new Date(Date.now() + surveyDelay).toLocaleString()}`);
   }
 }
 
@@ -192,7 +193,7 @@ async function handleCancellation(payload: any) {
   const inviteeName = invitee.name;
   const inviteeEmail = invitee.email;
 
-  console.log(`Cancellation: ${inviteeName} (${inviteeEmail})`);
+  log.info(`Cancellation: ${inviteeName} (${inviteeEmail})`);
 
   // Send Slack notification
   await notifyCancellation({
@@ -220,7 +221,7 @@ async function handleCancellation(payload: any) {
       `,
     });
   } catch (error) {
-    console.error('Failed to send cancellation notification:', error);
+    log.error('Failed to send cancellation notification:', error);
   }
 }
 
@@ -229,7 +230,7 @@ async function sendPostConsultationSurvey(name: string, email: string, eventUri:
   const firstName = name.split(' ')[0];
   const surveyUrl = `https://www.moonlitstudios.com/testimonial?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&event=${encodeURIComponent(eventUri)}`;
 
-  console.log(`Sending post-consultation survey to ${name} (${email})`);
+  log.info(`Sending post-consultation survey to ${name} (${email})`);
 
   try {
     await resend.emails.send({
@@ -292,8 +293,8 @@ async function sendPostConsultationSurvey(name: string, email: string, eventUri:
       `,
     });
 
-    console.log(`Survey email sent successfully to ${email}`);
+    log.info(`Survey email sent successfully to ${email}`);
   } catch (error) {
-    console.error('Failed to send survey email:', error);
+    log.error('Failed to send survey email:', error);
   }
 }
