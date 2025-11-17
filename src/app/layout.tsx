@@ -8,6 +8,7 @@ import { StructuredData } from "./components/StructuredData";
 import { AchievementSystem } from "./components/AchievementSystem";
 import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
+import { EasterEggProvider } from "./components/EasterEggContext";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -91,12 +92,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <StructuredData type="Service" />
       </head>
       <body className="min-h-screen bg-nightNavy text-glacierWhite">
-        <ErrorBoundary>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
-              <ErrorBoundary>{children}</ErrorBoundary>
-            </main>
+        <EasterEggProvider>
+          <ErrorBoundary>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">
+                <ErrorBoundary>{children}</ErrorBoundary>
+              </main>
 
           <footer className="mt-16 bg-gradient-to-b from-deepOcean via-midnight to-midnight text-moonlightSilver">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-12 md:grid-cols-2 lg:grid-cols-4">
@@ -272,6 +274,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <KonamiCode />
           </ErrorBoundary>
         </ErrorBoundary>
+        </EasterEggProvider>
       </body>
     </html>
   );
