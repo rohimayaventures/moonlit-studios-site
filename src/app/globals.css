@@ -441,23 +441,23 @@ a {
    ======================================== */
 
 @keyframes footstepWalkLeft {
-  0% { left: -5%; top: 50%; opacity: 0; transform: rotate(-10deg); }
-  5% { opacity: 0.6; }
-  25% { left: 25%; top: 45%; opacity: 0.6; transform: rotate(-8deg); }
-  50% { left: 50%; top: 50%; opacity: 0.5; transform: rotate(-12deg); }
-  75% { left: 75%; top: 55%; opacity: 0.4; transform: rotate(-10deg); }
-  95% { opacity: 0.3; }
-  100% { left: 105%; top: 50%; opacity: 0; transform: rotate(-8deg); }
+  0% { left: -5%; opacity: 0; transform: translateY(-50%) rotate(-10deg); }
+  5% { opacity: 0.4; }
+  25% { left: 25%; opacity: 0.4; transform: translateY(-55%) rotate(-8deg); }
+  50% { left: 50%; opacity: 0.3; transform: translateY(-50%) rotate(-12deg); }
+  75% { left: 75%; opacity: 0.2; transform: translateY(-45%) rotate(-10deg); }
+  95% { opacity: 0.1; }
+  100% { left: 105%; opacity: 0; transform: translateY(-50%) rotate(-8deg); }
 }
 
 @keyframes footstepWalkRight {
-  0% { left: -5%; top: 55%; opacity: 0; transform: rotate(10deg); }
-  5% { opacity: 0.6; }
-  25% { left: 25%; top: 52%; opacity: 0.6; transform: rotate(8deg); }
-  50% { left: 50%; top: 55%; opacity: 0.5; transform: rotate(12deg); }
-  75% { left: 75%; top: 48%; opacity: 0.4; transform: rotate(10deg); }
-  95% { opacity: 0.3; }
-  100% { left: 105%; top: 55%; opacity: 0; transform: rotate(8deg); }
+  0% { left: -5%; opacity: 0; transform: translateY(-50%) rotate(10deg); }
+  5% { opacity: 0.4; }
+  25% { left: 25%; opacity: 0.4; transform: translateY(-48%) rotate(8deg); }
+  50% { left: 50%; opacity: 0.3; transform: translateY(-50%) rotate(12deg); }
+  75% { left: 75%; opacity: 0.2; transform: translateY(-52%) rotate(10deg); }
+  95% { opacity: 0.1; }
+  100% { left: 105%; opacity: 0; transform: translateY(-50%) rotate(8deg); }
 }
 
 .hidden-wisdom {
@@ -465,8 +465,9 @@ a {
   user-select: text;
   color: transparent;
   font-size: 0.65rem;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease, color 0.5s ease;
   position: relative;
+  cursor: help;
 }
 
 .hidden-wisdom::selection {
@@ -475,22 +476,25 @@ a {
 }
 
 .hidden-wisdom:hover {
-  opacity: 0.1;
+  opacity: 0.5;
+  color: #4A9B9B;
 }
 
 .footprints {
   position: absolute;
   pointer-events: none;
   opacity: 0;
+  top: 50%;
+  font-size: 1.5rem;
 }
 
 .footprints.left {
-  animation: footstepWalkLeft 8s ease-in-out infinite;
+  animation: footstepWalkLeft 12s ease-in-out infinite;
 }
 
 .footprints.right {
-  animation: footstepWalkRight 8s ease-in-out infinite;
-  animation-delay: 0.4s;
+  animation: footstepWalkRight 12s ease-in-out infinite;
+  animation-delay: 0.6s;
 }
 
 /* ========================================
@@ -753,4 +757,336 @@ a {
 
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ========================================
+   KONAMI CODE EASTER EGGS
+   ======================================== */
+
+/* Avatar State - ATLA (All 4 Elements Active) */
+@keyframes avatarGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(74, 155, 155, 0.6),
+      0 0 40px rgba(255, 140, 66, 0.4),
+      0 0 60px rgba(107, 142, 35, 0.3),
+      0 0 80px rgba(202, 233, 255, 0.2);
+  }
+  25% {
+    box-shadow:
+      0 0 30px rgba(74, 155, 155, 0.8),
+      0 0 50px rgba(255, 140, 66, 0.6),
+      0 0 70px rgba(107, 142, 35, 0.4),
+      0 0 90px rgba(202, 233, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 40px rgba(255, 140, 66, 0.8),
+      0 0 60px rgba(107, 142, 35, 0.6),
+      0 0 80px rgba(202, 233, 255, 0.4),
+      0 0 100px rgba(74, 155, 155, 0.3);
+  }
+  75% {
+    box-shadow:
+      0 0 30px rgba(107, 142, 35, 0.8),
+      0 0 50px rgba(202, 233, 255, 0.6),
+      0 0 70px rgba(74, 155, 155, 0.4),
+      0 0 90px rgba(255, 140, 66, 0.3);
+  }
+}
+
+@keyframes avatarAura {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+body.avatar-state-active {
+  position: relative;
+}
+
+body.avatar-state-active::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(74, 155, 155, 0.1) 0%,
+    rgba(255, 140, 66, 0.1) 25%,
+    rgba(107, 142, 35, 0.1) 50%,
+    rgba(202, 233, 255, 0.1) 75%,
+    rgba(74, 155, 155, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: avatarAura 8s ease infinite;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+body.avatar-state-active .element-symbol {
+  animation: avatarGlow 3s ease-in-out infinite;
+}
+
+/* Link Start - SAO Effect */
+@keyframes linkStartScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes linkStartText {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.link-start-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 17, 40, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.link-start-scanner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(74, 155, 155, 0.3) 50%,
+    transparent 100%
+  );
+  animation: linkStartScan 2s ease-in-out;
+}
+
+.link-start-text {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #4A9B9B;
+  text-shadow: 0 0 20px rgba(74, 155, 155, 0.8);
+  animation: linkStartText 1s ease-out;
+  z-index: 1;
+}
+
+.link-start-hex {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+}
+
+/* Owlery - Hedwig Delivery */
+@keyframes hedwigFly {
+  0% {
+    left: -10%;
+    top: 20%;
+  }
+  50% {
+    left: 50%;
+    top: 30%;
+  }
+  100% {
+    left: 110%;
+    top: 25%;
+  }
+}
+
+@keyframes scrollDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.hedwig-container {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: hedwigFly 4s ease-in-out;
+}
+
+.scroll-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, rgba(27, 73, 101, 0.95), rgba(10, 17, 40, 0.95));
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 400px;
+  z-index: 10000;
+  animation: scrollDrop 0.8s ease-out;
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+}
+
+/* Totoro Rain - Ghibli Leaves */
+@keyframes leafFall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes leafSway {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+}
+
+.totoro-leaf {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.7;
+  animation: leafFall linear, leafSway 3s ease-in-out infinite;
+}
+
+/* Chaos Mode - Theme Cycling */
+@keyframes chaosShake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-2px, 2px) rotate(1deg); }
+  20% { transform: translate(2px, -2px) rotate(-1deg); }
+  30% { transform: translate(-2px, -2px) rotate(1deg); }
+  40% { transform: translate(2px, 2px) rotate(-1deg); }
+  50% { transform: translate(-2px, 2px) rotate(1deg); }
+  60% { transform: translate(2px, -2px) rotate(-1deg); }
+  70% { transform: translate(-2px, -2px) rotate(1deg); }
+  80% { transform: translate(2px, 2px) rotate(-1deg); }
+  90% { transform: translate(-2px, 2px) rotate(1deg); }
+}
+
+@keyframes chaosRainbow {
+  0% { filter: hue-rotate(0deg) saturate(1.5); }
+  25% { filter: hue-rotate(90deg) saturate(2); }
+  50% { filter: hue-rotate(180deg) saturate(1.5); }
+  75% { filter: hue-rotate(270deg) saturate(2); }
+  100% { filter: hue-rotate(360deg) saturate(1.5); }
+}
+
+body.chaos-mode {
+  animation: chaosShake 0.5s infinite, chaosRainbow 2s infinite;
+}
+
+body.chaos-mode * {
+  transition: all 0.3s ease !important;
+}
+
+/* You Shall Not Pass - LOTR */
+@keyframes gandalfStrike {
+  0% {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(-10px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes staffGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(202, 233, 255, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 40px rgba(202, 233, 255, 1), 0 0 60px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.gandalf-block {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 17, 40, 0.98) 0%,
+    rgba(45, 95, 111, 0.95) 50%,
+    rgba(10, 17, 40, 0.98) 100%
+  );
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  animation: gandalfStrike 0.8s ease-out;
+}
+
+.gandalf-text {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #CAE9FF;
+  animation: staffGlow 2s ease-in-out infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.gandalf-staff {
+  font-size: 6rem;
+  animation: staffGlow 1.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .gandalf-text {
+    font-size: 2rem;
+  }
+  .gandalf-staff {
+    font-size: 4rem;
+  }
+  .link-start-text {
+    font-size: 2rem;
+  }
 }

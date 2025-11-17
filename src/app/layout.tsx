@@ -209,24 +209,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </div>
 
             {/* HP EASTER EGG - Marauder's Map Quote with Walking Footprints */}
-            <div className="relative border-t border-deepOcean/40 py-8">
-              <div className="mx-auto max-w-6xl px-6">
+            <div className="relative border-t border-deepOcean/40 py-8 overflow-hidden">
+              <div className="mx-auto max-w-6xl px-6 relative">
                 <div className="hidden-wisdom text-center select-text">
                   I solemnly swear that I am up to no good
                 </div>
-                
-                {/* Walking Footprints - Only visible on hover */}
-                <div className="footprints left absolute" style={{ left: '-5%', top: '50%' }}>
+
+                {/* Walking Footprints - Contained within section */}
+                <div className="footprints left">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
                     <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
                   </svg>
                 </div>
-                <div className="footprints right absolute" style={{ left: '-5%', top: '55%' }}>
+                <div className="footprints right">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-lunarGold/40">
                     <path d="M8 18c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm4-8c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zM6 14c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2zm10-4c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2 .9-2 2z" fill="currentColor"/>
                   </svg>
                 </div>
-                
+
                 {/* Uncle Iroh Quote */}
                 <p className="text-xs text-starlight/60 italic text-center mt-6">
                   &quot;It is important to draw wisdom from many different places.&quot; — Uncle Iroh
