@@ -7,6 +7,7 @@ import { AchievementSystem } from "./components/AchievementSystem";
 import { PageTracker } from "./components/PageTracker";
 import { KonamiCode } from "./components/KonamiCode";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { StructuredData } from "./components/StructuredData";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -84,6 +85,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        <StructuredData type="Organization" />
+        <StructuredData type="ProfessionalService" />
+        <StructuredData type="Service" />
+      </head>
       <body className="min-h-screen bg-nightNavy text-glacierWhite">
         <ErrorBoundary>
           <div className="flex min-h-screen flex-col">
