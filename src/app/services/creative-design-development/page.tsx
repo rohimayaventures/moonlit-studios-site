@@ -289,12 +289,12 @@ const RadialGlow = ({ className = "", color = "indigo" }: { className?: string; 
 export default function CreativeDesignDevelopmentPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // Reorganized packages - LOW to HIGH
+  // Reorganized packages - LOW to HIGH with COSMIC THEME NAMES
   const packages = [
     {
       id: 1,
       title: "Packaging & Product Design",
-      tier: "Essential",
+      tier: "Stardust ⭐",
       price: "$800",
       tagline: "Shelf-ready packaging and product visuals.",
       features: [
@@ -312,7 +312,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 2,
       title: "Packaging & Product Design",
-      tier: "Professional",
+      tier: "Nebula 🌌",
       price: "$1,200",
       tagline: "Comprehensive packaging with multiple variations.",
       features: [
@@ -332,7 +332,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 3,
       title: "Branding & Identity",
-      tier: "Essential",
+      tier: "Stardust ⭐",
       price: "$1,800",
       tagline: "Rooted visual systems for your brand or studio.",
       features: [
@@ -350,7 +350,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 4,
       title: "Branding & Identity",
-      tier: "Professional",
+      tier: "Nebula 🌌",
       price: "$2,800",
       tagline: "Full brand identity with comprehensive guidelines.",
       features: [
@@ -370,7 +370,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 5,
       title: "Web Development",
-      tier: "Essential",
+      tier: "Stardust ⭐",
       price: "$3,000",
       tagline: "Custom responsive sites ready for launch.",
       features: [
@@ -389,11 +389,11 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 6,
       title: "Branding & Identity",
-      tier: "Premium",
+      tier: "Supernova 💫",
       price: "$4,500",
       tagline: "White-glove brand strategy and execution.",
       features: [
-        "Everything in Professional, PLUS:",
+        "Everything in Nebula, PLUS:",
         "Brand strategy workshop (2 hours)",
         "Extended logo suite (10+ variations)",
         "Print collateral designs",
@@ -409,7 +409,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 7,
       title: "Web Development",
-      tier: "Professional",
+      tier: "Nebula 🌌",
       price: "$5,500",
       tagline: "Full-featured website with advanced capabilities.",
       features: [
@@ -430,7 +430,7 @@ export default function CreativeDesignDevelopmentPage() {
     {
       id: 8,
       title: "Web Development",
-      tier: "Premium",
+      tier: "Supernova 💫",
       price: "$8,500",
       tagline: "Enterprise-grade site with all the bells and whistles.",
       features: [
@@ -771,19 +771,19 @@ export default function CreativeDesignDevelopmentPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-7xl grid gap-6 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
             {packages.map((pkg, index) => (
               <div
                 key={pkg.id}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-hidden rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
+                className={`group relative overflow-visible rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
                   hoveredCard === index ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
-                } ${pkg.popular ? 'ring-2 ring-indigo-400/50' : ''}`}
+                } ${pkg.popular ? 'ring-2 ring-indigo-400/50' : ''} w-full`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-indigo-400 via-amber-300 to-teal-400 text-xs font-bold text-midnight shadow-lg">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-50">
+                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-indigo-400 via-amber-300 to-teal-400 text-xs font-bold text-midnight shadow-lg whitespace-nowrap">
                       ⭐ MOST POPULAR
                     </span>
                   </div>
