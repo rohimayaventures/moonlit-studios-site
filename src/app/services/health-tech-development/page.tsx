@@ -1,10 +1,45 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles, Droplet, Heart, Shield, Activity } from 'lucide-react';
+import { Check, Sparkles, Droplet, Heart, Shield, Activity, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-// 🌊 WATERBENDER / HEALER DECORATIVE SVG COMPONENTS
+// 🌊 WATERBENDER HEALING TEMPLE - IMMERSIVE SVG COMPONENTS
+
+// Healing Droplet with pulsing inner light
+const HealingDroplet = ({ className = "" }: { className?: string }) => (
+  <div className={`relative ${className}`}>
+    {/* Outer glow aura */}
+    <div className="absolute inset-0 animate-pulse">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-300/30 via-teal-300/20 to-sky-200/10 blur-xl" />
+    </div>
+
+    {/* Droplet SVG with healing light */}
+    <svg className="relative z-10 animate-floatDroplet" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+      {/* Main water droplet */}
+      <path
+        d="M30 5 L45 25 Q50 35, 50 45 Q50 60, 40 70 Q30 75, 20 70 Q10 60, 10 45 Q10 35, 15 25 Z"
+        fill="url(#dropletGradient)"
+        opacity="0.85"
+      />
+
+      {/* Inner healing light - pulsing */}
+      <ellipse cx="30" cy="40" rx="8" ry="12" fill="#E0F7FA" opacity="0.9" className="animate-pulse" />
+      <circle cx="30" cy="35" r="4" fill="#FFFFFF" opacity="0.7" />
+
+      {/* Gradient definition */}
+      <defs>
+        <linearGradient id="dropletGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#A5F3FC" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#67E8F9" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#22D3EE" stopOpacity="0.7" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+);
+
+// Flowing Water Wave Divider
 const WaveDivider = ({ className = "" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 1200 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path
@@ -15,6 +50,7 @@ const WaveDivider = ({ className = "" }: { className?: string }) => (
   </svg>
 );
 
+// Concentric Ripple Circles
 const RippleCircle = ({ className = "", size = "md" }: { className?: string; size?: "sm" | "md" | "lg" }) => {
   const sizeClasses = {
     sm: "w-32 h-32",
@@ -23,216 +59,284 @@ const RippleCircle = ({ className = "", size = "md" }: { className?: string; siz
   };
 
   return (
-    <div className={`absolute ${sizeClasses[size]} ${className} pointer-events-none`}>
+    <div className={`absolute ${sizeClasses[size]} ${className} pointer-events-none animate-breathe`}>
       <div className="absolute inset-0 rounded-full border border-cyan-400/20" />
       <div className="absolute inset-2 rounded-full border border-cyan-400/15" />
       <div className="absolute inset-4 rounded-full border border-cyan-400/10" />
+      <div className="absolute inset-6 rounded-full border border-cyan-400/5" />
     </div>
   );
 };
 
-const DropletIcon = ({ className = "" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      opacity="0.3"
-    />
-  </svg>
+// Protective Circle for Steps
+const ProtectiveCircle = ({ icon, color }: { icon: React.ReactNode; color: string }) => (
+  <div className="relative">
+    {/* Outer ripple */}
+    <div className={`absolute inset-0 rounded-full border-2 ${color} opacity-20 animate-ping`} style={{ animationDuration: '3s' }} />
+
+    {/* Main circle */}
+    <div className={`relative flex h-16 w-16 items-center justify-center rounded-full border-2 ${color} bg-midnight/60 backdrop-blur-sm`}>
+      {icon}
+    </div>
+  </div>
+);
+
+// Reusable FAQ Accordion Component
+const FAQItem = ({ question, answer, isOpen, onToggle, borderColor }: {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  borderColor?: string;
+}) => (
+  <details
+    open={isOpen}
+    className={`group rounded-lg border ${borderColor || 'border-white/10'} bg-white/5 p-6 hover:border-cyan-400/30 transition-all`}
+  >
+    <summary
+      className="cursor-pointer text-lg font-semibold text-pearlWhite flex items-center justify-between gap-4 list-none"
+      onClick={(e) => {
+        e.preventDefault();
+        onToggle();
+      }}
+      aria-expanded={isOpen}
+    >
+      <span>{question}</span>
+      <ChevronDown
+        className={`w-5 h-5 text-cyan-300 transition-transform duration-300 flex-shrink-0 ${
+          isOpen ? 'rotate-180' : ''
+        }`}
+      />
+    </summary>
+    <p className="mt-4 text-moonlightSilver">{answer}</p>
+  </details>
 );
 
 export default function HealthTechDevelopmentPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(0);
 
-  // Reorganized packages - LOW to HIGH
-  const packages = [
+  // ORGANIZED BY CATEGORY - Each category sorted LOW → HIGH
+  const packageCategories = [
     {
-      id: 1,
-      title: "Clinical Dashboard",
-      tier: "Essential",
-      price: "$3,500",
-      tagline: "Real-time clinical operations monitoring.",
-      features: [
-        "Census tracking",
-        "Alert system",
-        "Basic metrics & KPIs",
-        "Staff directory",
-        "Shift handoff tools",
+      name: "Clinical Dashboards",
+      description: "Real-time monitoring and clinical intelligence",
+      packages: [
+        {
+          id: 1,
+          title: "Clinical Dashboard",
+          tier: "ESS",
+          price: "$3,500",
+          tagline: "Real-time clinical operations monitoring.",
+          features: [
+            "Census tracking",
+            "Alert system",
+            "Basic metrics & KPIs",
+            "Staff directory",
+            "Shift handoff tools",
+          ],
+          ideal: "Small clinics, urgent care centers, nursing homes",
+          color: "from-cyan-600/20 to-blue-700/20",
+          borderColor: "border-cyan-500/30",
+          accentColor: "text-cyan-400",
+          glowColor: "shadow-cyan-500/20",
+        },
+        {
+          id: 4,
+          title: "Clinical Dashboard",
+          tier: "ADV",
+          price: "$6,500",
+          tagline: "Data-driven clinical intelligence platform.",
+          features: [
+            "Real-time data feeds",
+            "Custom charts & visualizations",
+            "Predictive analytics",
+            "Quality metrics tracking",
+            "Automated reporting",
+          ],
+          ideal: "Hospitals, multi-facility health systems",
+          color: "from-cyan-600/20 to-teal-700/20",
+          borderColor: "border-cyan-500/30",
+          accentColor: "text-cyan-400",
+          glowColor: "shadow-cyan-500/20",
+          popular: true,
+        },
       ],
-      ideal: "Small clinics, urgent care centers, nursing homes",
-      color: "from-cyan-600/20 to-blue-700/20",
-      borderColor: "border-cyan-500/30",
-      accentColor: "text-cyan-400",
-      glowColor: "shadow-cyan-500/20",
     },
     {
-      id: 2,
-      title: "Patient Portal",
-      tier: "Essential",
-      price: "$4,000",
-      tagline: "Secure patient engagement platform.",
-      features: [
-        "Secure messaging with providers",
-        "Appointment scheduling",
-        "Medical records access",
-        "Prescription refills",
-        "Educational resources",
+      name: "Patient Portals",
+      description: "Secure patient engagement platforms",
+      packages: [
+        {
+          id: 2,
+          title: "Patient Portal",
+          tier: "ESS",
+          price: "$4,000",
+          tagline: "Secure patient engagement platform.",
+          features: [
+            "Secure messaging with providers",
+            "Appointment scheduling",
+            "Medical records access",
+            "Prescription refills",
+            "Educational resources",
+          ],
+          ideal: "Primary care practices, specialty clinics",
+          color: "from-teal-600/20 to-cyan-700/20",
+          borderColor: "border-teal-500/30",
+          accentColor: "text-teal-400",
+          glowColor: "shadow-teal-500/20",
+        },
+        {
+          id: 5,
+          title: "Patient Portal",
+          tier: "PRO",
+          price: "$7,500",
+          tagline: "Comprehensive patient experience.",
+          features: [
+            "Everything in Essential, PLUS:",
+            "Lab results & imaging",
+            "Payment processing",
+            "Visit summaries",
+            "Health tracking tools",
+            "Insurance verification",
+          ],
+          ideal: "Multi-provider practices, health networks",
+          color: "from-teal-600/20 to-blue-700/20",
+          borderColor: "border-teal-500/30",
+          accentColor: "text-teal-400",
+          glowColor: "shadow-teal-500/20",
+          popular: true,
+        },
       ],
-      ideal: "Primary care practices, specialty clinics",
-      color: "from-teal-600/20 to-cyan-700/20",
-      borderColor: "border-teal-500/30",
-      accentColor: "text-teal-400",
-      glowColor: "shadow-teal-500/20",
     },
     {
-      id: 3,
-      title: "Telemedicine Platform",
-      tier: "Basic",
-      price: "$6,000",
-      tagline: "Virtual care essentials.",
-      features: [
-        "Video call integration",
-        "Appointment scheduling",
-        "Clinical notes",
-        "Patient intake forms",
-        "Basic billing",
+      name: "Telemedicine Platforms",
+      description: "Virtual care and telehealth solutions",
+      packages: [
+        {
+          id: 3,
+          title: "Telemedicine Platform",
+          tier: "BAS",
+          price: "$6,000",
+          tagline: "Virtual care essentials.",
+          features: [
+            "Video call integration",
+            "Appointment scheduling",
+            "Clinical notes",
+            "Patient intake forms",
+            "Basic billing",
+          ],
+          ideal: "Telehealth startups, virtual care providers",
+          color: "from-blue-600/20 to-indigo-700/20",
+          borderColor: "border-blue-500/30",
+          accentColor: "text-blue-400",
+          glowColor: "shadow-blue-500/20",
+        },
+        {
+          id: 7,
+          title: "Telemedicine Platform",
+          tier: "ADV",
+          price: "$12,000",
+          tagline: "Full-service virtual care platform.",
+          features: [
+            "Everything in Basic, PLUS:",
+            "E-prescribing integration",
+            "Insurance verification",
+            "Waiting room experience",
+            "Provider scheduling",
+            "Analytics & reporting",
+          ],
+          ideal: "Growing telehealth companies, enterprise virtual care",
+          color: "from-indigo-600/20 to-blue-700/20",
+          borderColor: "border-indigo-500/30",
+          accentColor: "text-indigo-400",
+          glowColor: "shadow-indigo-500/20",
+          popular: true,
+        },
       ],
-      ideal: "Telehealth startups, virtual care providers",
-      color: "from-blue-600/20 to-indigo-700/20",
-      borderColor: "border-blue-500/30",
-      accentColor: "text-blue-400",
-      glowColor: "shadow-blue-500/20",
     },
     {
-      id: 4,
-      title: "Clinical Dashboard",
-      tier: "Advanced",
-      price: "$6,500",
-      tagline: "Data-driven clinical intelligence platform.",
-      features: [
-        "Real-time data feeds",
-        "Custom charts & visualizations",
-        "Predictive analytics",
-        "Quality metrics tracking",
-        "Automated reporting",
+      name: "Core Healthcare Platforms",
+      description: "HIPAA-compliant custom applications",
+      packages: [
+        {
+          id: 6,
+          title: "Healthcare Platform",
+          tier: "ESS",
+          price: "$10,000",
+          tagline: "Basic HIPAA-compliant healthcare application.",
+          features: [
+            "3-5 core features",
+            "Basic HIPAA compliance (encryption, audit logs)",
+            "User authentication",
+            "Simple dashboard",
+            "1 user role",
+            "1 month post-launch support",
+          ],
+          ideal: "Healthcare startups, pilot programs",
+          color: "from-blue-600/20 to-navy-700/20",
+          borderColor: "border-blue-500/30",
+          accentColor: "text-blue-400",
+          glowColor: "shadow-blue-500/20",
+        },
+        {
+          id: 8,
+          title: "Healthcare Platform",
+          tier: "PRO",
+          price: "$18,000",
+          tagline: "Full-featured HIPAA-compliant application.",
+          features: [
+            "5-10 features",
+            "Full HIPAA compliance (BAA, encryption, audit logs)",
+            "Multi-role user system (admin, provider, patient)",
+            "Advanced workflows",
+            "Data visualization/reporting",
+            "Integration with 1 third-party system",
+            "2 months post-launch support",
+          ],
+          ideal: "Established healthtech companies, medical organizations",
+          color: "from-cyan-600/20 to-teal-700/20",
+          borderColor: "border-cyan-500/30",
+          accentColor: "text-cyan-400",
+          glowColor: "shadow-cyan-500/20",
+        },
+        {
+          id: 9,
+          title: "Healthcare Platform",
+          tier: "PREM",
+          price: "$30,000",
+          tagline: "Enterprise-grade clinical system.",
+          features: [
+            "Complex clinical workflows (triage, care coordination)",
+            "Multi-facility support",
+            "Advanced data analytics",
+            "EHR/EMR integration",
+            "Custom API development",
+            "Regulatory documentation package",
+            "3 months post-launch support + training",
+          ],
+          ideal: "Enterprise health systems, complex clinical operations",
+          color: "from-blue-600/20 to-indigo-700/20",
+          borderColor: "border-blue-500/30",
+          accentColor: "text-blue-400",
+          glowColor: "shadow-blue-500/20",
+        },
       ],
-      ideal: "Hospitals, multi-facility health systems",
-      color: "from-cyan-600/20 to-teal-700/20",
-      borderColor: "border-cyan-500/30",
-      accentColor: "text-cyan-400",
-      glowColor: "shadow-cyan-500/20",
-      popular: true,
-    },
-    {
-      id: 5,
-      title: "Patient Portal",
-      tier: "Professional",
-      price: "$7,500",
-      tagline: "Comprehensive patient experience.",
-      features: [
-        "Everything in Essential, PLUS:",
-        "Lab results & imaging",
-        "Payment processing",
-        "Visit summaries",
-        "Health tracking tools",
-        "Insurance verification",
-      ],
-      ideal: "Multi-provider practices, health networks",
-      color: "from-teal-600/20 to-blue-700/20",
-      borderColor: "border-teal-500/30",
-      accentColor: "text-teal-400",
-      glowColor: "shadow-teal-500/20",
-      popular: true,
-    },
-    {
-      id: 6,
-      title: "Healthcare Platform",
-      tier: "Essential",
-      price: "$10,000",
-      tagline: "Basic HIPAA-compliant healthcare application.",
-      features: [
-        "3-5 core features",
-        "Basic HIPAA compliance (encryption, audit logs)",
-        "User authentication",
-        "Simple dashboard",
-        "1 user role",
-        "1 month post-launch support",
-      ],
-      ideal: "Healthcare startups, pilot programs",
-      color: "from-blue-600/20 to-navy-700/20",
-      borderColor: "border-blue-500/30",
-      accentColor: "text-blue-400",
-      glowColor: "shadow-blue-500/20",
-    },
-    {
-      id: 7,
-      title: "Telemedicine Platform",
-      tier: "Advanced",
-      price: "$12,000",
-      tagline: "Full-service virtual care platform.",
-      features: [
-        "Everything in Basic, PLUS:",
-        "E-prescribing integration",
-        "Insurance verification",
-        "Waiting room experience",
-        "Provider scheduling",
-        "Analytics & reporting",
-      ],
-      ideal: "Growing telehealth companies, enterprise virtual care",
-      color: "from-indigo-600/20 to-blue-700/20",
-      borderColor: "border-indigo-500/30",
-      accentColor: "text-indigo-400",
-      glowColor: "shadow-indigo-500/20",
-      popular: true,
-    },
-    {
-      id: 8,
-      title: "Healthcare Platform",
-      tier: "Professional",
-      price: "$18,000",
-      tagline: "Full-featured HIPAA-compliant application.",
-      features: [
-        "5-10 features",
-        "Full HIPAA compliance (BAA, encryption, audit logs)",
-        "Multi-role user system (admin, provider, patient)",
-        "Advanced workflows",
-        "Data visualization/reporting",
-        "Integration with 1 third-party system",
-        "2 months post-launch support",
-      ],
-      ideal: "Established healthtech companies, medical organizations",
-      color: "from-cyan-600/20 to-teal-700/20",
-      borderColor: "border-cyan-500/30",
-      accentColor: "text-cyan-400",
-      glowColor: "shadow-cyan-500/20",
-    },
-    {
-      id: 9,
-      title: "Healthcare Platform",
-      tier: "Premium",
-      price: "$30,000",
-      tagline: "Enterprise-grade clinical system.",
-      features: [
-        "Complex clinical workflows (triage, care coordination)",
-        "Multi-facility support",
-        "Advanced data analytics",
-        "EHR/EMR integration",
-        "Custom API development",
-        "Regulatory documentation package",
-        "3 months post-launch support + training",
-      ],
-      ideal: "Enterprise health systems, complex clinical operations",
-      color: "from-blue-600/20 to-indigo-700/20",
-      borderColor: "border-blue-500/30",
-      accentColor: "text-blue-400",
-      glowColor: "shadow-blue-500/20",
     },
   ];
 
+  // ADD-ONS - Sorted by price LOW → HIGH
   const addOns = [
+    {
+      name: "HIPAA Security Audit",
+      description: "Comprehensive security review & documentation",
+      price: "+$1,500",
+    },
+    {
+      name: "EHR Integration",
+      description: "Epic, Cerner, or custom EHR connectivity",
+      price: "+$2,500",
+    },
     {
       name: "Telemedicine Features",
       description: "Video calls, virtual waiting room, e-visit notes",
@@ -243,20 +347,41 @@ export default function HealthTechDevelopmentPage() {
       description: "Connect to pharmacy networks, medication history",
       price: "+$4,000",
     },
+  ];
+
+  const faqs = [
     {
-      name: "EHR Integration",
-      description: "Epic, Cerner, or custom EHR connectivity",
-      price: "+$2,500",
+      question: "How do you ensure HIPAA compliance?",
+      answer: "HIPAA compliance is built into every layer: encrypted data at rest and in transit, comprehensive audit logs, role-based access controls, and Business Associate Agreements (BAAs). I also provide regulatory documentation and guidance throughout the project.",
     },
     {
-      name: "HIPAA Security Audit",
-      description: "Comprehensive security review & documentation",
-      price: "+$1,500",
+      question: "How long does a typical healthcare platform take to build?",
+      answer: "Clinical Dashboards: 4-6 weeks. Patient Portals: 6-10 weeks. Telemedicine Platforms: 8-12 weeks. Full Healthcare Platforms: 12-20 weeks depending on complexity. Rush timelines available with planning.",
+    },
+    {
+      question: "Can you integrate with our existing EHR or EMR system?",
+      answer: "Yes! I have experience integrating with Epic, Cerner, and other major EHR systems via HL7, FHIR, and custom APIs. EHR integration is available as an add-on or can be included in Professional/Premium tiers.",
+    },
+    {
+      question: "What happens if regulations change after launch?",
+      answer: "All packages include post-launch support to address urgent compliance updates. For ongoing regulatory maintenance, I offer retainer plans that include monitoring, updates, and documentation as healthcare regulations evolve.",
+    },
+    {
+      question: "Do you provide training for our clinical staff?",
+      answer: "Yes! Premium tier includes staff training sessions. For other tiers, training can be added on. I create user guides, video tutorials, and can conduct live training sessions tailored to your workflows.",
+    },
+    {
+      question: "Why should I choose a nurse developer over a traditional dev shop?",
+      answer: "Traditional developers learn healthcare from documentation. I learned it from 15+ years on the floor—managing patients, navigating EHRs, dealing with clinical workflows under pressure. I build systems that clinicians actually want to use, not just systems that technically work.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight">
+    <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight relative overflow-hidden">
+      {/* Breathing Background Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0 animate-breathe">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-teal-500/3 to-sky-200/5" />
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 1: HERO
@@ -266,11 +391,11 @@ export default function HealthTechDevelopmentPage() {
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <RippleCircle className="top-10 right-1/4" size="lg" />
           <RippleCircle className="bottom-20 left-1/3" size="md" />
-          <DropletIcon className="absolute top-32 right-1/3 w-16 h-16 text-cyan-400 opacity-10" />
-          <DropletIcon className="absolute bottom-40 left-1/4 w-20 h-20 text-teal-400 opacity-8" />
+          <HealingDroplet className="absolute top-32 right-1/3 w-16 h-16" />
+          <HealingDroplet className="absolute bottom-40 left-1/4 w-20 h-20" />
         </div>
 
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
           {/* Waterbender Moon Phases - EXACT PALETTE */}
           <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
             {/* Phase 1: Ice Blue (New Moon) */}
@@ -355,7 +480,7 @@ export default function HealthTechDevelopmentPage() {
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 2: WHO THIS IS FOR
       ═══════════════════════════════════════════════════════════════════ */}
-      <section id="who-this-is-for" className="relative border-b border-cyan-500/20 bg-midnight/50 py-16">
+      <section id="who-this-is-for" className="relative border-b border-cyan-500/20 bg-midnight/50 py-16 z-10">
         <div className="mx-auto max-w-5xl px-6">
           <div className="text-center mb-12">
             <div className="inline-block mb-4">
@@ -477,7 +602,7 @@ export default function HealthTechDevelopmentPage() {
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 3: HOW IT WORKS
       ═══════════════════════════════════════════════════════════════════ */}
-      <section id="how-it-works" className="border-b border-cyan-500/20 bg-deepOcean/30 py-16 relative">
+      <section id="how-it-works" className="border-b border-cyan-500/20 bg-deepOcean/30 py-16 relative z-10">
         <RippleCircle className="top-10 left-1/4" size="lg" />
 
         <div className="mx-auto max-w-6xl px-6 relative">
@@ -488,9 +613,10 @@ export default function HealthTechDevelopmentPage() {
           <div className="grid gap-8 md:grid-cols-3">
             <div className="text-center">
               <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cyan-500/20 border border-cyan-400/30 relative">
-                  <Droplet className="w-8 h-8 text-cyan-300" />
-                </div>
+                <ProtectiveCircle
+                  icon={<Droplet className="w-8 h-8 text-cyan-300" />}
+                  color="border-cyan-400/50"
+                />
               </div>
               <h3 className="mb-2 text-xl font-semibold text-cyan-400">1. Discover</h3>
               <p className="text-sm uppercase tracking-wider text-cyan-300/70 mb-3">Clinical Assessment</p>
@@ -502,9 +628,10 @@ export default function HealthTechDevelopmentPage() {
 
             <div className="text-center">
               <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/20 border border-teal-400/30 relative">
-                  <Activity className="w-8 h-8 text-teal-300" />
-                </div>
+                <ProtectiveCircle
+                  icon={<Activity className="w-8 h-8 text-teal-300" />}
+                  color="border-teal-400/50"
+                />
               </div>
               <h3 className="mb-2 text-xl font-semibold text-teal-400">2. Design & Build</h3>
               <p className="text-sm uppercase tracking-wider text-teal-300/70 mb-3">HIPAA-First Development</p>
@@ -516,9 +643,10 @@ export default function HealthTechDevelopmentPage() {
 
             <div className="text-center">
               <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sky-500/20 border border-sky-300/30 relative">
-                  <Shield className="w-8 h-8 text-sky-200" />
-                </div>
+                <ProtectiveCircle
+                  icon={<Shield className="w-8 h-8 text-sky-200" />}
+                  color="border-sky-300/50"
+                />
               </div>
               <h3 className="mb-2 text-xl font-semibold text-sky-300">3. Deliver & Support</h3>
               <p className="text-sm uppercase tracking-wider text-sky-200/70 mb-3">Launch & Monitor</p>
@@ -532,102 +660,129 @@ export default function HealthTechDevelopmentPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 4: TIERED PACKAGES (LOW → HIGH)
+          SECTION 4: ORGANIZED PACKAGES BY CATEGORY
       ═══════════════════════════════════════════════════════════════════ */}
-      <section id="packages" className="py-20">
+      <section id="packages" className="py-20 relative z-10">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center">
-            <p className="text-sm tracking-[0.35em] text-cyan-300 uppercase mb-3">Tiered Pricing</p>
+            <p className="text-sm tracking-[0.35em] text-cyan-300 uppercase mb-3">Healing Temple Offerings</p>
             <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-5xl">
               Choose Your Solution
             </h2>
             <p className="text-lg text-moonlightSilver">
-              From MVP to enterprise. Each tier designed for different stages of healthcare innovation.
+              Organized by category. Each tier designed for different stages of healthcare innovation.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {packages.map((pkg, index) => (
-              <div
-                key={pkg.id}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-hidden rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
-                  hoveredCard === index ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
-                } ${pkg.popular ? 'ring-2 ring-cyan-400/50' : ''}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 text-xs font-bold text-midnight shadow-lg">
-                      ⭐ MOST POPULAR
-                    </span>
-                  </div>
-                )}
-
-                {/* Card Header */}
-                <div className="border-b border-white/10 bg-midnight/40 p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400/30 to-teal-400/20 flex items-center justify-center border ${pkg.borderColor}`}>
-                      <span className={`text-xs font-bold ${pkg.accentColor}`}>{pkg.tier.slice(0,3).toUpperCase()}</span>
-                    </div>
-                    <div>
-                      <h3 className={`text-lg font-bold ${pkg.accentColor}`}>
-                        {pkg.title}
-                      </h3>
-                      <p className="text-xs text-moonlightSilver/70">{pkg.tier}</p>
-                    </div>
-                  </div>
-                  <p className="mb-4 text-sm italic text-moonlightSilver/80">
-                    {pkg.tagline}
-                  </p>
-                  <div className="text-3xl font-bold text-pearlWhite">
-                    {pkg.price}+
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-6">
-                  <div className="mb-6">
-                    <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-cyan-300">
-                      What's Included:
-                    </p>
-                    <ul className="space-y-2">
-                      {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
-                          <Check className={`mt-0.5 h-4 w-4 flex-shrink-0 ${pkg.accentColor}`} />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-moonlightSilver/70">
-                      Perfect For:
-                    </p>
-                    <p className="text-sm text-pearlWhite">{pkg.ideal}</p>
-                  </div>
-
-                  <Link
-                    href="/contact"
-                    className={`block w-full rounded-full border ${pkg.borderColor} py-3 text-center font-semibold ${pkg.accentColor} transition-all hover:bg-white/10`}
-                  >
-                    Request Quote →
-                  </Link>
-                </div>
+          {/* LOOP THROUGH CATEGORIES */}
+          {packageCategories.map((category, categoryIdx) => (
+            <div key={categoryIdx} className="mb-16">
+              {/* Category Header */}
+              <div className="mb-8 text-center">
+                <h3 className="font-elegant text-2xl font-bold text-pearlWhite mb-2">
+                  {category.name}
+                </h3>
+                <p className="text-moonlightSilver">{category.description}</p>
               </div>
-            ))}
-          </div>
+
+              {/* Category Packages */}
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                {category.packages.map((pkg, index) => (
+                  <div
+                    key={pkg.id}
+                    onMouseEnter={() => setHoveredCard(pkg.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    className={`group relative overflow-hidden rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
+                      hoveredCard === pkg.id ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
+                    } ${pkg.popular ? 'ring-2 ring-cyan-400/50' : ''}`}
+                  >
+                    {pkg.popular && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                        <span className="px-4 py-1 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 text-xs font-bold text-midnight shadow-lg">
+                          ⭐ MOST POPULAR
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Tier Badge */}
+                    <div className="absolute top-4 right-4 z-10">
+                      <span className={`px-3 py-1 rounded-full ${pkg.borderColor} ${pkg.accentColor} bg-midnight/80 text-xs font-bold backdrop-blur-sm`}>
+                        {pkg.tier}
+                      </span>
+                    </div>
+
+                    {/* Card Header */}
+                    <div className="border-b border-white/10 bg-midnight/40 p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400/30 to-teal-400/20 flex items-center justify-center border ${pkg.borderColor}`}>
+                          <Droplet className={`w-5 h-5 ${pkg.accentColor}`} />
+                        </div>
+                        <div>
+                          <h4 className={`text-lg font-bold ${pkg.accentColor}`}>
+                            {pkg.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <p className="mb-4 text-sm italic text-moonlightSilver/80">
+                        {pkg.tagline}
+                      </p>
+                      <div className="text-3xl font-bold text-pearlWhite">
+                        {pkg.price}+
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="p-6">
+                      <div className="mb-6">
+                        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-cyan-300">
+                          What's Included:
+                        </p>
+                        <ul className="space-y-2">
+                          {pkg.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
+                              <Check className={`mt-0.5 h-4 w-4 flex-shrink-0 ${pkg.accentColor}`} />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
+                        <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-moonlightSilver/70">
+                          Perfect For:
+                        </p>
+                        <p className="text-sm text-pearlWhite">{pkg.ideal}</p>
+                      </div>
+
+                      <Link
+                        href="/contact"
+                        className={`block w-full rounded-full border ${pkg.borderColor} py-3 text-center font-semibold ${pkg.accentColor} transition-all hover:bg-white/10`}
+                      >
+                        Request Quote →
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Category Divider */}
+              {categoryIdx < packageCategories.length - 1 && (
+                <div className="relative h-16 w-full my-8">
+                  <WaveDivider className="absolute inset-0 text-cyan-400/20" />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 5: OPTIONAL ADD-ONS
+          SECTION 5: OPTIONAL ADD-ONS (PRICE SORTED)
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="px-6 py-16 bg-nightNavy/50 border-y border-cyan-500/20">
+      <section className="px-6 py-16 bg-nightNavy/50 border-y border-cyan-500/20 relative z-10">
         <div className="mx-auto max-w-5xl space-y-6">
           <div className="text-center">
-            <p className="text-sm tracking-[0.35em] text-cyan-300 uppercase mb-3">Add-Ons Available</p>
+            <p className="text-sm tracking-[0.35em] text-cyan-300 uppercase mb-3">Healing Enhancements</p>
             <h2 className="font-elegant text-2xl font-bold text-pearlWhite mb-2">Enhance Your Platform</h2>
             <p className="text-moonlightSilver">Additional features to scale your healthcare solution.</p>
           </div>
@@ -644,76 +799,29 @@ export default function HealthTechDevelopmentPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 6: FAQ
+          SECTION 6: FAQ WITH CONSISTENT ARROWS
       ═══════════════════════════════════════════════════════════════════ */}
-      <section id="faq" className="py-16">
+      <section id="faq" className="py-16 relative z-10">
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
             Frequently Asked Questions
           </h2>
 
           <div className="space-y-6">
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-cyan-400/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                How do you ensure HIPAA compliance?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                HIPAA compliance is built into every layer: encrypted data at rest and in transit, comprehensive audit logs,
-                role-based access controls, and Business Associate Agreements (BAAs). I also provide regulatory documentation
-                and guidance throughout the project.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-teal-400/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                How long does a typical healthcare platform take to build?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Clinical Dashboards: 4-6 weeks. Patient Portals: 6-10 weeks. Telemedicine Platforms: 8-12 weeks.
-                Full Healthcare Platforms: 12-20 weeks depending on complexity. Rush timelines available with planning.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-sky-200/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Can you integrate with our existing EHR or EMR system?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Yes! I have experience integrating with Epic, Cerner, and other major EHR systems via HL7, FHIR, and custom APIs.
-                EHR integration is available as an add-on or can be included in Professional/Premium tiers.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-cyan-400/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                What happens if regulations change after launch?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                All packages include post-launch support to address urgent compliance updates. For ongoing regulatory maintenance,
-                I offer retainer plans that include monitoring, updates, and documentation as healthcare regulations evolve.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-teal-400/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Do you provide training for our clinical staff?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Yes! Premium tier includes staff training sessions. For other tiers, training can be added on.
-                I create user guides, video tutorials, and can conduct live training sessions tailored to your workflows.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-sky-200/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Why should I choose a nurse developer over a traditional dev shop?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Traditional developers learn healthcare from documentation. I learned it from 15+ years on the floor—managing patients,
-                navigating EHRs, dealing with clinical workflows under pressure. I build systems that clinicians actually want to use,
-                not just systems that technically work.
-              </p>
-            </details>
+            {faqs.map((faq, idx) => (
+              <FAQItem
+                key={idx}
+                question={faq.question}
+                answer={faq.answer}
+                isOpen={openFAQ === idx}
+                onToggle={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+                borderColor={
+                  idx % 3 === 0 ? 'border-cyan-400/20' :
+                  idx % 3 === 1 ? 'border-teal-400/20' :
+                  'border-sky-200/20'
+                }
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -721,7 +829,7 @@ export default function HealthTechDevelopmentPage() {
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 7: FINAL CTA
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-20">
+      <section className="py-20 relative z-10">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="relative rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/10 via-teal-400/10 to-sky-200/10 p-12 backdrop-blur-sm overflow-hidden">
             {/* Decorative ripples */}
@@ -760,6 +868,35 @@ export default function HealthTechDevelopmentPage() {
           </div>
         </div>
       </section>
+
+      {/* Custom Animations */}
+      <style jsx global>{`
+        @keyframes floatDroplet {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes breathe {
+          0%, 100% {
+            opacity: 0.4;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+
+        .animate-floatDroplet {
+          animation: floatDroplet 4s ease-in-out infinite;
+        }
+
+        .animate-breathe {
+          animation: breathe 6s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }
