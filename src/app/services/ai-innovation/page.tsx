@@ -101,200 +101,94 @@ const CyberDivider = () => (
 
 const aiServices = [
   {
-    id: "rag-chatbots",
-    title: "RAG Chatbots & Conversational AI",
+    id: "rapid-prototypes",
+    title: "Rapid AI Prototypes & Experiments",
     tiers: [
       {
-        name: "Essential RAG",
-        price: 12000,
-        duration: "project-based",
+        name: "Weekend Sprint",
+        price: 2500,
+        duration: "2-3 days",
         features: [
-          "Basic RAG chatbot setup",
-          "Document ingestion pipeline",
-          "Claude/OpenAI integration",
-          "Simple query handling",
-          "Basic UI implementation",
+          "Rapid concept validation for a single AI idea",
+          "Working prototype using Claude or OpenAI",
+          "Simple front-end demo (web-based)",
+          "Light integration with your existing tools (where feasible)",
+          "Recorded walkthrough + next steps",
         ],
-        cta: "Build Chatbot",
+        cta: "Sprint Prototype",
         popular: false,
       },
       {
-        name: "Professional RAG",
-        price: 25000,
-        duration: "project-based",
+        name: "Innovation Lab Week",
+        price: 5500,
+        duration: "1 week intensive",
         features: [
-          "Everything in Essential",
-          "Multimodal capabilities (text + images)",
-          "Context-aware conversations",
-          "Role-based assistants",
-          "Advanced prompt engineering",
-          "Custom UI/UX design",
-          "2 weeks post-launch support",
+          "Everything in Weekend Sprint",
+          "Deeper exploration of 1-2 concepts",
+          "More refined prototype with user flows",
+          "Feedback & iteration built into the week",
+          "Roadmap for turning prototype into a full feature/product",
         ],
-        cta: "Launch RAG System",
-        popular: true,
-      },
-      {
-        name: "Enterprise RAG",
-        price: 50000,
-        duration: "project-based",
-        features: [
-          "Everything in Professional",
-          "Multi-agent orchestration",
-          "Custom knowledge graphs",
-          "Real-time learning loops",
-          "Advanced safety guardrails",
-          "Analytics & monitoring dashboard",
-          "30-day premium support",
-        ],
-        cta: "Build Enterprise AI",
-        popular: false,
-      },
-    ],
-  },
-  {
-    id: "voice-ai",
-    title: "Voice AI & Speech Systems",
-    tiers: [
-      {
-        name: "Voice Foundation",
-        price: 8000,
-        duration: "project-based",
-        features: [
-          "Speech-to-text integration",
-          "Text-to-speech synthesis",
-          "Basic voice commands",
-          "Simple dialogue flows",
-          "Voice UI prototype",
-        ],
-        cta: "Start Voice AI",
-        popular: false,
-      },
-      {
-        name: "Voice Intelligence",
-        price: 12000,
-        duration: "project-based",
-        features: [
-          "Everything in Foundation",
-          "Natural conversation handling",
-          "Context retention across sessions",
-          "Emotion-aware responses",
-          "Multi-language support",
-          "Production-ready deployment",
-          "2 weeks optimization support",
-        ],
-        cta: "Build Voice System",
+        cta: "Launch Lab Sprint",
         popular: true,
       },
     ],
   },
   {
-    id: "vision-ai",
-    title: "Computer Vision & Visual AI",
+    id: "rag-copilots",
+    title: "AI Copilots & RAG Systems",
     tiers: [
       {
-        name: "Vision Essentials",
-        price: 8500,
+        name: "Starter Copilot",
+        price: 7000,
         duration: "project-based",
         features: [
-          "Image classification setup",
-          "Object detection pipeline",
-          "Basic visual processing",
-          "API integration",
-          "Simple dashboard",
+          "Single-domain AI copilot or Q&A assistant",
+          "Document ingestion for a focused content set",
+          "Claude or OpenAI integration",
+          "Basic web UI with search/chat interface",
+          "Simple admin configuration",
+          "Light analytics or usage summary",
         ],
-        cta: "Build Vision AI",
+        cta: "Build Copilot",
         popular: false,
       },
       {
-        name: "Vision Pro",
-        price: 14000,
+        name: "Growth Copilot",
+        price: 15000,
         duration: "project-based",
         features: [
-          "Everything in Essentials",
-          "Advanced computer vision models",
-          "Real-time processing",
-          "Custom model training",
-          "Multi-modal analysis (image + text)",
-          "Production optimization",
-          "30-day support & tuning",
+          "Everything in Starter Copilot",
+          "Better context handling & conversation memory",
+          "Role-based behaviors for different users (e.g. support vs founder)",
+          "Custom UI/UX tuned to your brand",
+          "Improved retrieval quality + prompt engineering",
+          "Playbook + training session for your team",
+          "2-4 weeks of post-launch tuning support",
         ],
-        cta: "Launch Vision System",
+        cta: "Launch Growth Copilot",
         popular: true,
       },
     ],
   },
   {
     id: "ai-architecture",
-    title: "AI Product Architecture",
+    title: "AI Architecture & Strategy",
     tiers: [
       {
         name: "Architecture Blueprint",
-        price: 15000,
-        duration: "project-based",
+        price: 6000,
+        duration: "2-3 week engagement",
         features: [
-          "Full AI system design",
-          "Backend + frontend architecture",
-          "API integrations & model routing",
-          "Data pipeline design",
-          "Auth & safety layers",
-          "Technical documentation",
-          "Implementation roadmap",
+          "Deep-dive discovery on your product and stack",
+          "High-level AI architecture design (models, APIs, data flows)",
+          "Backend + frontend integration plan",
+          "Safety, guardrails, and evaluation considerations",
+          "Implementation roadmap for your team or partners",
+          "1-2 working sessions to walk through the plan",
         ],
-        cta: "Design AI Product",
+        cta: "Get Blueprint",
         popular: false,
-      },
-      {
-        name: "Full AI Platform",
-        price: 25000,
-        duration: "project-based",
-        features: [
-          "Everything in Blueprint",
-          "Complete implementation",
-          "Multi-agent systems",
-          "Advanced orchestration",
-          "Monitoring & evaluation loops",
-          "Hallucination reduction strategies",
-          "60-day premium support & optimization",
-        ],
-        cta: "Build AI Platform",
-        popular: true,
-      },
-    ],
-  },
-  {
-    id: "rapid-prototypes",
-    title: "Rapid Prototypes & Experiments",
-    tiers: [
-      {
-        name: "Weekend Sprint",
-        price: 3500,
-        duration: "2-3 days",
-        features: [
-          "Rapid concept validation",
-          "Working prototype",
-          "Basic feature set",
-          "Quick iteration cycle",
-          "Proof-of-concept demo",
-        ],
-        cta: "Sprint Prototype",
-        popular: false,
-      },
-      {
-        name: "Innovation Lab",
-        price: 6500,
-        duration: "1 week intensive",
-        features: [
-          "Everything in Weekend Sprint",
-          "Multiple concept exploration",
-          "Advanced feature testing",
-          "User feedback integration",
-          "Refined prototype",
-          "Scale-up recommendations",
-          "2 weeks support for refinement",
-        ],
-        cta: "Launch Lab Sprint",
-        popular: true,
       },
     ],
   },
@@ -303,27 +197,27 @@ const aiServices = [
 const faqs = [
   {
     question: "What AI platforms and models do you work with?",
-    answer: "I specialize in Claude API (Anthropic), OpenAI (GPT-4, GPT-3.5), and open-source models. I also integrate computer vision APIs, voice AI systems (ElevenLabs, Deepgram), and custom ML pipelines depending on your needs."
+    answer: "I focus on Claude (Anthropic), OpenAI, and some open-source models. My specialty is building copilots, prototypes, and light architecture for small teams and founders. If you need voice or visual understanding, we can scope that as a custom add-on to any of the offerings above."
   },
   {
     question: "How long does it take to build a RAG chatbot?",
-    answer: "A basic RAG chatbot can be prototyped in a weekend sprint (2-3 days). Professional implementations with custom UI and advanced features typically take 2-4 weeks. Enterprise systems with multi-agent orchestration can take 6-12 weeks depending on complexity."
+    answer: "A Weekend Sprint gets you a working prototype in 2-3 days to validate your concept. A Growth Copilot with custom UI and better retrieval typically takes 2-4 weeks. We focus on founder-friendly timelines and real working demos, not months-long enterprise deployments."
   },
   {
     question: "Do you provide ongoing support and maintenance?",
-    answer: "Yes! All packages include post-launch support (ranging from 2 weeks to 60 days depending on tier). I also offer monthly retainer agreements for ongoing AI system optimization, monitoring, and feature additions."
+    answer: "Yes! Weekend Sprints include 1-2 weeks of support for tweaks. Growth Copilot includes 2-4 weeks of post-launch tuning. Architecture Blueprint includes advisory calls to help your team implement the roadmap. This is small-team scale support, not 24/7 enterprise ops—but enough to get you stable and confident."
   },
   {
     question: "Can you build AI systems for healthcare applications?",
-    answer: "Absolutely. With 15+ years of healthcare operations experience, I understand clinical workflows, HIPAA compliance, and patient safety requirements. I build AI systems with appropriate guardrails for healthcare contexts."
+    answer: "Absolutely. With 15+ years of healthcare experience, I understand clinical workflows and patient safety. I focus on prototypes, copilots, workflows, and advisory work for healthcare contexts. Deeper regulated deployments at enterprise scale may require larger teams or partners, but I can help you architect and validate the foundation."
   },
   {
-    question: "What's the difference between a weekend sprint and a full AI platform?",
-    answer: "Weekend sprints are rapid proof-of-concept builds to validate your idea quickly. Full AI platforms are production-grade systems with complete architecture, safety guardrails, monitoring, and scalability. Start with a sprint to test viability, then scale to a platform if it proves valuable."
+    question: "What's the difference between a Weekend Sprint and a Growth Copilot?",
+    answer: "Weekend Sprint is a proof-of-concept—rapid validation to see if your AI idea works. Growth Copilot is a more robust build with custom UI, better retrieval, role-based behaviors, and post-launch support. Think of sprints as experiments and copilots as real tools your team will use daily. Both are designed for small studios and founders, not enterprise infrastructure."
   },
   {
     question: "Do you handle AI safety and hallucination reduction?",
-    answer: "Yes, this is critical for every AI system I build. I implement prompt engineering best practices, output validation, fact-checking layers, and monitoring systems to detect and reduce hallucinations. Safety guardrails are baked in from day one."
+    answer: "Yes, safety is built in from the start. I use prompt design best practices, retrieval patterns, simple validations, and monitoring suitable for small and mid-sized deployments. This isn't enterprise-grade MLOps with 24/7 teams, but it's thoughtful, founder-friendly guardrails that work for real products at realistic scale."
   }
 ];
 
