@@ -448,7 +448,44 @@ function FAQAccordion() {
 
 export default function GhostwritingPage() {
   return (
-    <main className="relative min-h-screen bg-[#121528] text-[#F5E7C8] overflow-hidden">
+    <main className="relative min-h-screen bg-gradient-to-b from-[#121528] via-[#1A1832] to-[#0D0F1E] text-[#F5E7C8] overflow-hidden">
+      {/* 🏰 FULL PAGE LIBRARY BACKGROUND */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-10">
+        {/* Repeating Bookshelf Pattern */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            repeating-linear-gradient(90deg, #5B335F 0px, #5B335F 3px, transparent 3px, transparent 60px),
+            repeating-linear-gradient(0deg, transparent 0px, transparent 100px, #F0C979 100px, #F0C979 103px)
+          `,
+          backgroundSize: '100% 100%'
+        }} />
+
+        {/* Scattered Books Pattern Across Entire Page */}
+        {Array.from({ length: 80 }).map((_, i) => (
+          <div
+            key={`bg-book-${i}`}
+            className="absolute rounded-sm"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${6 + Math.random() * 10}px`,
+              height: `${40 + Math.random() * 60}px`,
+              background: i % 4 === 0 ? '#F0C979' : i % 4 === 1 ? '#5B335F' : i % 4 === 2 ? '#58B6B1' : '#F5E7C8',
+              opacity: 0.2 + Math.random() * 0.3,
+              transform: `rotate(${-8 + Math.random() * 16}deg)`,
+            }}
+          />
+        ))}
+
+        {/* Parchment Texture */}
+        <div className="absolute inset-0 bg-[#F5E7C8]/5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 -1.5 1.5'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)' opacity='0.3'/%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      {/* Dark Library Vignette */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-radial from-transparent via-transparent to-[#121528]/60" />
+
       {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS - MATCH AI PAGE DENSITY */}
 
       {/* 12 Floating Candles - scattered throughout */}
@@ -571,9 +608,63 @@ export default function GhostwritingPage() {
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
-        {/* Library Glow Orbs */}
-        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#F0C979]/30 via-[#5B335F]/20 to-[#58B6B1]/10 blur-3xl opacity-40" />
-        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-[#5B335F]/20 via-[#F0C979]/20 to-[#121528]/10 blur-3xl opacity-40" />
+        {/* LIBRARY BOOKSHELF BACKGROUND PATTERN */}
+        <div className="pointer-events-none absolute inset-0 opacity-20">
+          {/* Vertical Bookshelf Lines */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={`shelf-${i}`}
+              className="absolute top-0 bottom-0 w-20"
+              style={{
+                left: `${i * 8.3}%`,
+                background: `repeating-linear-gradient(
+                  to bottom,
+                  transparent 0px,
+                  transparent 80px,
+                  #5B335F 80px,
+                  #5B335F 82px,
+                  transparent 82px,
+                  transparent 160px
+                )`,
+              }}
+            />
+          ))}
+
+          {/* Book Spines Pattern */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(90deg, #5B335F 1px, transparent 1px),
+              linear-gradient(0deg, #F0C979 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 120px',
+            opacity: 0.15,
+          }} />
+
+          {/* Scattered Book Rectangles */}
+          {Array.from({ length: 40 }).map((_, i) => (
+            <div
+              key={`book-${i}`}
+              className="absolute rounded-sm opacity-30"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${8 + Math.random() * 12}px`,
+                height: `${60 + Math.random() * 80}px`,
+                background: i % 3 === 0 ? '#F0C979' : i % 3 === 1 ? '#5B335F' : '#58B6B1',
+                transform: `rotate(${-5 + Math.random() * 10}deg)`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Enhanced Library Glow Orbs */}
+        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#F0C979]/40 via-[#5B335F]/30 to-[#58B6B1]/20 blur-3xl opacity-60" />
+        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-[#5B335F]/30 via-[#F0C979]/30 to-[#121528]/20 blur-3xl opacity-60" />
+
+        {/* Parchment Texture Overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-[#F5E7C8]/5" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E")`,
+        }} />
 
         <div className="relative mx-auto max-w-5xl">
           {/* 🌙 Hogwarts Moon Phases */}
