@@ -416,7 +416,7 @@ export default function PortfolioPage() {
             </div>
           </div>
             <div className="mx-auto max-w-6xl">
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid gap-6 md:grid-cols-2 pb-24 md:pb-12">
                 {section.projects.map((project, index) => (
                   <article
                     key={project.title}

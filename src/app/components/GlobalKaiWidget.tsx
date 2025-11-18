@@ -1357,7 +1357,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
       {isMinimized && (
         <button
           onClick={toggleWidget}
-          className="fixed bottom-6 right-6 z-50 group"
+          className="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-50 group"
           aria-label="Chat with Kai"
         >
           {/* Animated Moon Icon */}
@@ -1394,7 +1394,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
 
       {/* Expanded Chat Widget */}
       {!isMinimized && (
-        <div className="fixed bottom-6 right-6 z-50 w-full md:w-96 max-w-[calc(100vw-3rem)] max-h-[calc(100vh-3rem)] flex flex-col shadow-2xl shadow-mermaidTeal/30 rounded-2xl overflow-hidden animate-fade-in-up">
+        <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 w-full md:w-96 max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-3rem)] max-h-[calc(100vh-2rem)] md:max-h-[calc(100vh-3rem)] flex flex-col shadow-2xl shadow-mermaidTeal/30 rounded-2xl overflow-hidden animate-fade-in-up">
           {/* Header */}
           <div className="bg-gradient-to-r from-deepOcean to-midnight border-b border-mermaidTeal/30 px-4 py-3">
             <div className="flex items-center justify-between">
@@ -1475,8 +1475,8 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
           {/* Chat Messages */}
           <div
             ref={chatContainerRef}
-            className="flex-1 h-96 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-midnight to-deepOcean p-4 space-y-3 custom-scrollbar"
-            style={{ maxHeight: '24rem', overscrollBehavior: 'contain' }}
+            className="flex-1 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-midnight to-deepOcean p-4 space-y-3 custom-scrollbar"
+            style={{ overscrollBehavior: 'contain' }}
           >
             {messages.map((message, index) => (
               <div
