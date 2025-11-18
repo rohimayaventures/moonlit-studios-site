@@ -95,6 +95,58 @@ const FloatingBook = ({ className = "", delay = 0 }: { className?: string; delay
   </div>
 );
 
+// Magical Sparkle
+const MagicSparkle = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-goldShimmer`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 0L9 7L8 16L7 7L8 0Z" fill="#F0C979" opacity="0.8" />
+      <path d="M0 8L7 9L16 8L7 7L0 8Z" fill="#F0C979" opacity="0.8" />
+      <path d="M2 2L8 8L14 14" stroke="#F5E7C8" strokeWidth="0.5" opacity="0.6" />
+      <path d="M14 2L8 8L2 14" stroke="#F5E7C8" strokeWidth="0.5" opacity="0.6" />
+    </svg>
+  </div>
+);
+
+// Floating Scroll
+const FloatingScroll = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none`}
+    style={{
+      animation: 'pageFloat 6s ease-in-out infinite',
+      animationDelay: `${delay}s`
+    }}
+  >
+    <div className="relative w-16 h-10">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F5E7C8] to-[#E9C97F] rounded-sm shadow-md border border-[#F0C979]/40" />
+      <div className="absolute top-1 left-1 right-1 h-px bg-[#5B335F]/20" />
+      <div className="absolute top-2.5 left-1 right-1 h-px bg-[#5B335F]/15" />
+      <div className="absolute top-4 left-1 right-1 h-px bg-[#5B335F]/15" />
+      <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] border-2 border-[#121528]/20 flex items-center justify-center">
+        <span className="text-[8px] font-bold text-[#121528]">M</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Ink Splatter
+const InkSplatter = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none opacity-20`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="3" fill="#5B335F" />
+      <circle cx="6" cy="8" r="1.5" fill="#5B335F" />
+      <circle cx="14" cy="12" r="1" fill="#5B335F" />
+      <circle cx="8" cy="14" r="0.8" fill="#5B335F" />
+      <circle cx="13" cy="7" r="1.2" fill="#5B335F" />
+    </svg>
+  </div>
+);
+
 // Wax Seal
 const WaxSeal = ({ className = "" }: { className?: string }) => (
   <div className={`${className} pointer-events-none`}>
@@ -397,34 +449,125 @@ function FAQAccordion() {
 export default function GhostwritingPage() {
   return (
     <main className="relative min-h-screen bg-[#121528] text-[#F5E7C8] overflow-hidden">
-      {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS */}
+      {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS - MATCH AI PAGE DENSITY */}
 
-      {/* Floating Candles */}
-      <FloatingCandle className="top-32 left-[8%] hidden lg:block" delay={0} />
-      <FloatingCandle className="top-48 right-[12%] hidden lg:block" delay={1.5} />
-      <FloatingCandle className="top-2/3 left-[15%] hidden lg:block" delay={3} />
-      <FloatingCandle className="bottom-40 right-[18%] hidden lg:block" delay={2} />
+      {/* 12 Floating Candles - scattered throughout */}
+      <FloatingCandle className="top-24 left-[5%] hidden lg:block" delay={0} />
+      <FloatingCandle className="top-32 right-[8%] hidden lg:block" delay={0.8} />
+      <FloatingCandle className="top-48 left-[12%] hidden lg:block" delay={1.5} />
+      <FloatingCandle className="top-56 right-[15%] hidden lg:block" delay={2.2} />
+      <FloatingCandle className="top-1/2 left-[7%] hidden lg:block" delay={3} />
+      <FloatingCandle className="top-1/2 right-[18%] hidden lg:block" delay={0.5} />
+      <FloatingCandle className="top-2/3 left-[15%] hidden lg:block" delay={1.8} />
+      <FloatingCandle className="top-2/3 right-[10%] hidden lg:block" delay={2.5} />
+      <FloatingCandle className="bottom-48 left-[9%] hidden lg:block" delay={1.2} />
+      <FloatingCandle className="bottom-48 right-[12%] hidden lg:block" delay={3.5} />
+      <FloatingCandle className="bottom-32 left-[14%] hidden lg:block" delay={2.8} />
+      <FloatingCandle className="bottom-32 right-[6%] hidden lg:block" delay={0.3} />
 
-      {/* Floating Quills */}
-      <MagicQuill className="top-1/4 right-[20%] hidden md:block" delay={0} />
-      <MagicQuill className="top-1/2 left-[10%] hidden md:block" delay={2} />
-      <MagicQuill className="bottom-1/3 right-[25%] hidden md:block" delay={1} />
+      {/* 10 Magic Quills */}
+      <MagicQuill className="top-28 right-[22%] hidden md:block" delay={0} />
+      <MagicQuill className="top-40 left-[18%] hidden md:block" delay={1.5} />
+      <MagicQuill className="top-1/3 right-[12%] hidden md:block" delay={2.5} />
+      <MagicQuill className="top-1/2 left-[10%] hidden md:block" delay={0.8} />
+      <MagicQuill className="top-1/2 right-[25%] hidden md:block" delay={3.2} />
+      <MagicQuill className="top-2/3 left-[22%] hidden md:block" delay={1.8} />
+      <MagicQuill className="bottom-1/3 right-[18%] hidden md:block" delay={2.2} />
+      <MagicQuill className="bottom-48 left-[20%] hidden md:block" delay={0.5} />
+      <MagicQuill className="bottom-40 right-[15%] hidden md:block" delay={3.8} />
+      <MagicQuill className="bottom-28 left-[12%] hidden md:block" delay={1.2} />
 
-      {/* Floating Books */}
-      <FloatingBook className="top-40 left-[12%] hidden lg:block" delay={0} />
-      <FloatingBook className="top-1/2 right-[8%] hidden lg:block" delay={2.5} />
-      <FloatingBook className="bottom-1/4 left-[18%] hidden lg:block" delay={1.5} />
+      {/* 8 Floating Books */}
+      <FloatingBook className="top-36 left-[8%] hidden lg:block" delay={0} />
+      <FloatingBook className="top-44 right-[20%] hidden lg:block" delay={1.8} />
+      <FloatingBook className="top-1/3 left-[25%] hidden lg:block" delay={2.5} />
+      <FloatingBook className="top-1/2 right-[8%] hidden lg:block" delay={0.5} />
+      <FloatingBook className="top-2/3 left-[18%] hidden lg:block" delay={3.2} />
+      <FloatingBook className="bottom-1/3 right-[22%] hidden lg:block" delay={1.5} />
+      <FloatingBook className="bottom-40 left-[14%] hidden lg:block" delay={2.8} />
+      <FloatingBook className="bottom-32 right-[16%] hidden lg:block" delay={0.8} />
 
-      {/* Dust Motes */}
-      <DustMote className="top-[15%] left-[30%]" delay={0} />
-      <DustMote className="top-[25%] right-[35%]" delay={1} />
-      <DustMote className="top-[45%] left-[40%]" delay={2} />
-      <DustMote className="top-[65%] right-[25%]" delay={0.5} />
-      <DustMote className="top-[85%] left-[50%]" delay={1.5} />
+      {/* 6 Floating Scrolls */}
+      <FloatingScroll className="top-32 right-[28%] hidden lg:block" delay={0} />
+      <FloatingScroll className="top-1/3 left-[20%] hidden lg:block" delay={2} />
+      <FloatingScroll className="top-1/2 right-[32%] hidden lg:block" delay={1.5} />
+      <FloatingScroll className="top-2/3 left-[28%] hidden lg:block" delay={3} />
+      <FloatingScroll className="bottom-48 right-[24%] hidden lg:block" delay={0.8} />
+      <FloatingScroll className="bottom-36 left-[24%] hidden lg:block" delay={2.5} />
 
-      {/* Flying Owl */}
-      <FlyingOwl className="top-20" delay={0} />
-      <FlyingOwl className="top-1/3" delay={7} />
+      {/* 30 Dust Motes - scattered everywhere */}
+      <DustMote className="top-[10%] left-[15%]" delay={0} />
+      <DustMote className="top-[12%] right-[20%]" delay={0.5} />
+      <DustMote className="top-[15%] left-[30%]" delay={1} />
+      <DustMote className="top-[18%] right-[35%]" delay={1.5} />
+      <DustMote className="top-[22%] left-[45%]" delay={2} />
+      <DustMote className="top-[25%] right-[25%]" delay={0.3} />
+      <DustMote className="top-[30%] left-[18%]" delay={2.5} />
+      <DustMote className="top-[35%] right-[40%]" delay={1.2} />
+      <DustMote className="top-[38%] left-[50%]" delay={3} />
+      <DustMote className="top-[42%] right-[15%]" delay={0.8} />
+      <DustMote className="top-[45%] left-[40%]" delay={1.8} />
+      <DustMote className="top-[48%] right-[48%]" delay={2.2} />
+      <DustMote className="top-[52%] left-[22%]" delay={0.5} />
+      <DustMote className="top-[55%] right-[28%]" delay={3.5} />
+      <DustMote className="top-[58%] left-[38%]" delay={1.5} />
+      <DustMote className="top-[62%] right-[18%]" delay={2.8} />
+      <DustMote className="top-[65%] left-[48%]" delay={0.2} />
+      <DustMote className="top-[68%] right-[32%]" delay={3.2} />
+      <DustMote className="top-[72%] left-[28%]" delay={1.8} />
+      <DustMote className="top-[75%] right-[42%]" delay={2.5} />
+      <DustMote className="top-[78%] left-[35%]" delay={0.7} />
+      <DustMote className="top-[82%] right-[22%]" delay={3.8} />
+      <DustMote className="top-[85%] left-[50%]" delay={1.2} />
+      <DustMote className="top-[88%] right-[38%]" delay={2.2} />
+      <DustMote className="top-[92%] left-[42%]" delay={0.9} />
+      <DustMote className="top-[95%] right-[28%]" delay={3.5} />
+      <DustMote className="top-[15%] left-[55%]" delay={1.7} />
+      <DustMote className="top-[45%] right-[55%]" delay={2.9} />
+      <DustMote className="top-[75%] left-[15%]" delay={0.4} />
+      <DustMote className="top-[35%] right-[8%]" delay={3.1} />
+
+      {/* 20 Magic Sparkles */}
+      <MagicSparkle className="top-[18%] left-[12%]" delay={0} />
+      <MagicSparkle className="top-[28%] right-[18%]" delay={1} />
+      <MagicSparkle className="top-[38%] left-[25%]" delay={2} />
+      <MagicSparkle className="top-[48%] right-[30%]" delay={0.5} />
+      <MagicSparkle className="top-[58%] left-[35%]" delay={1.5} />
+      <MagicSparkle className="top-[68%] right-[20%]" delay={2.5} />
+      <MagicSparkle className="top-[78%] left-[45%]" delay={0.8} />
+      <MagicSparkle className="top-[88%] right-[35%]" delay={1.8} />
+      <MagicSparkle className="top-[22%] left-[42%]" delay={2.8} />
+      <MagicSparkle className="top-[32%] right-[45%]" delay={0.3} />
+      <MagicSparkle className="top-[42%] left-[8%]" delay={3} />
+      <MagicSparkle className="top-[52%] right-[12%]" delay={1.2} />
+      <MagicSparkle className="top-[62%] left-[52%]" delay={2.2} />
+      <MagicSparkle className="top-[72%] right-[48%]" delay={0.7} />
+      <MagicSparkle className="top-[20%] left-[32%]" delay={3.5} />
+      <MagicSparkle className="top-[40%] right-[22%]" delay={1.7} />
+      <MagicSparkle className="top-[60%] left-[28%]" delay={2.7} />
+      <MagicSparkle className="top-[80%] right-[38%]" delay={0.9} />
+      <MagicSparkle className="top-[25%] left-[48%]" delay={3.2} />
+      <MagicSparkle className="top-[55%] right-[42%]" delay={1.4} />
+
+      {/* 10 Ink Splatters */}
+      <InkSplatter className="top-[20%] left-[16%]" delay={0} />
+      <InkSplatter className="top-[35%] right-[24%]" delay={1.5} />
+      <InkSplatter className="top-[50%] left-[38%]" delay={0.8} />
+      <InkSplatter className="top-[65%] right-[18%]" delay={2.2} />
+      <InkSplatter className="top-[80%] left-[26%]" delay={1.2} />
+      <InkSplatter className="top-[28%] right-[32%]" delay={2.8} />
+      <InkSplatter className="top-[42%] left-[44%]" delay={0.4} />
+      <InkSplatter className="top-[58%] right-[28%]" delay={3.2} />
+      <InkSplatter className="top-[72%] left-[34%]" delay={1.8} />
+      <InkSplatter className="top-[88%] right-[42%]" delay={2.5} />
+
+      {/* 6 Flying Owls - crossing at different times */}
+      <FlyingOwl className="top-16" delay={0} />
+      <FlyingOwl className="top-1/4" delay={5} />
+      <FlyingOwl className="top-1/3" delay={10} />
+      <FlyingOwl className="top-1/2" delay={15} />
+      <FlyingOwl className="top-2/3" delay={20} />
+      <FlyingOwl className="top-3/4" delay={25} />
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
