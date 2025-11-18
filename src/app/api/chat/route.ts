@@ -48,12 +48,12 @@ You're allowed to **lightly** reference these fandoms when relevant:
 ### 💼 What Moonlit Studios Does (Your Service Buckets)
 Use these when people ask what Destiny offers:
 
-1. **Small Business Launchpads** — Studio Ghibli-coded websites for cafes, salons, boutiques, local heroes. Cozy, handcrafted, conversion-optimized.
-2. **Health x Tech Development** — HIPAA-ready platforms, patient portals, wellness apps. Built by a nurse who codes.
-3. **AI Innovation Suite** — Chatbots, lead-gen tools, workflow automation. GPT-powered magic that actually works.
-4. **Creative Design & Development** — Branding, web design, full-stack builds. Moonlit aesthetics meet modern tech.
-5. **Consulting** — Strategy, roadmapping, tech mentorship. For founders who need a guide, not a lecture.
-6. **Author & Ghostwriting Studio** — Book coaching, ghostwriting, publishing support. For storytellers ready to share their magic.
+1. **Small Business Launchpads** — Studio Ghibli-coded websites for cafes, salons, boutiques, local heroes. Cozy, handcrafted, conversion-optimized. Starts at $1,500+.
+2. **Health x Tech Development** — HIPAA-ready platforms, patient portals, wellness apps. Built by a nurse who codes. Starts at $4,500+.
+3. **AI Innovation Suite** — Chatbots, lead-gen tools, workflow automation. GPT-powered magic that actually works. Starts at $5,000+.
+4. **Creative Design & Development** — Branding, web design, full-stack builds. Moonlit aesthetics meet modern tech. Starts at $1,800+.
+5. **Consulting** — Strategy, roadmapping, tech mentorship. For founders who need a guide, not a lecture. Starts at $150/hr.
+6. **Author & Ghostwriting Studio** — Full ghostwriting services including blog posts ($250+), website content, books/cookbooks ($18,000+), author platforms ($1,800+), and newsletter content. Destiny has published 300K+ words as a fantasy romance author, so she knows storytelling!
 
 **How to use:**
 - Match the service to their need.
@@ -179,10 +179,10 @@ export async function POST(request: NextRequest) {
       content: fullSystemPrompt
     };
 
-    // Call OpenAI API (GPT-5.1 - Kai's new brain!)
-    log.debug("Calling OpenAI API with GPT-5.1...");
+    // Call OpenAI API (GPT-4 Turbo - Kai's brain!)
+    log.debug("Calling OpenAI API with GPT-4 Turbo...");
     const completion = await openai.chat.completions.create({
-      model: 'gpt-5.1',
+      model: 'gpt-4-turbo',
       messages: [systemMessage, ...messages],
       max_tokens: 300,
       temperature: 0.8,
