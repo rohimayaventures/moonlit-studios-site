@@ -4,38 +4,228 @@ import { useState } from 'react';
 import { Check, Sparkles, Star, Palette, Code, Package } from 'lucide-react';
 import Link from 'next/link';
 
-// ✨ STARLIT ATELIER DECORATIVE SVG COMPONENTS
+// ✨ MOONLIT COSMIC CREATOR - EPIC REACT COMPONENTS FOR IMMERSIVE SPACE
+
+// ═══════════════════════════════════════════════════════════════
+//  COSMIC ARCHITECTURAL COMPONENTS - THE IMMERSIVE UNIVERSE
+// ═══════════════════════════════════════════════════════════════
+
+// Twinkling Star - Individual star with realistic shimmer
+const TwinklingStar = ({
+  size = 2,
+  color = "cyan",
+  delay = 0,
+  className = ""
+}: {
+  size?: number;
+  color?: string;
+  delay?: number;
+  className?: string;
+}) => {
+  const colorMap: Record<string, string> = {
+    cyan: "#67E8F9",
+    indigo: "#818CF8",
+    purple: "#C084FC",
+    amber: "#FCD34D",
+    teal: "#5EEAD4",
+    lavender: "#E9D5FF",
+  };
+
+  return (
+    <div
+      className={`absolute ${className} pointer-events-none animate-twinkle`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <svg width={size * 4} height={size * 4} viewBox="0 0 20 20">
+        {/* Star glow */}
+        <circle
+          cx="10"
+          cy="10"
+          r="8"
+          fill={colorMap[color] || colorMap.cyan}
+          opacity="0.2"
+          className="blur-sm"
+        />
+        {/* Star core */}
+        <circle
+          cx="10"
+          cy="10"
+          r={size}
+          fill={colorMap[color] || colorMap.cyan}
+          opacity="0.9"
+        />
+        {/* Star rays */}
+        <line x1="10" y1="2" x2="10" y2="18" stroke={colorMap[color]} strokeWidth="0.5" opacity="0.6" />
+        <line x1="2" y1="10" x2="18" y2="10" stroke={colorMap[color]} strokeWidth="0.5" opacity="0.6" />
+      </svg>
+    </div>
+  );
+};
+
+// Cosmic Starfield - 100+ stars across the viewport
+const CosmicStarfield = () => {
+  const stars = Array.from({ length: 120 }, (_, i) => {
+    const colors = ['cyan', 'indigo', 'purple', 'amber', 'teal', 'lavender'];
+    const sizes = [1.5, 2, 2.5, 3];
+
+    return {
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: sizes[Math.floor(Math.random() * sizes.length)],
+      color: colors[Math.floor(Math.random() * colors.length)],
+      delay: Math.random() * 5,
+    };
+  });
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      {stars.map((star) => (
+        <TwinklingStar
+          key={star.id}
+          size={star.size}
+          color={star.color}
+          delay={star.delay}
+          className={`left-[${star.x}%] top-[${star.y}%]`}
+          style={{ left: `${star.x}%`, top: `${star.y}%` } as React.CSSProperties}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Nebula Cloud - Swirling cosmic gas clouds
+const NebulaCloud = ({
+  position = "top-left",
+  colors = "indigo-purple",
+  size = "large"
+}: {
+  position?: string;
+  colors?: string;
+  size?: "small" | "medium" | "large";
+}) => {
+  const sizeMap = {
+    small: "w-64 h-64",
+    medium: "w-96 h-96",
+    large: "w-[600px] h-[600px]"
+  };
+
+  const colorMap: Record<string, string> = {
+    "indigo-purple": "from-indigo-500/30 via-purple-500/20 to-transparent",
+    "cyan-teal": "from-cyan-500/30 via-teal-500/20 to-transparent",
+    "amber-gold": "from-amber-500/30 via-yellow-500/20 to-transparent",
+    "lavender-pink": "from-purple-400/30 via-pink-400/20 to-transparent",
+  };
+
+  const positionMap: Record<string, string> = {
+    "top-left": "top-0 left-0 -translate-x-1/3 -translate-y-1/3",
+    "top-right": "top-0 right-0 translate-x-1/3 -translate-y-1/3",
+    "bottom-left": "bottom-0 left-0 -translate-x-1/3 translate-y-1/3",
+    "bottom-right": "bottom-0 right-0 translate-x-1/3 translate-y-1/3",
+    "center": "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+  };
+
+  return (
+    <div className={`absolute ${positionMap[position]} ${sizeMap[size]} pointer-events-none animate-nebulaShimmer`}>
+      <div className={`w-full h-full rounded-full bg-gradient-radial ${colorMap[colors]} blur-3xl opacity-40`} />
+    </div>
+  );
+};
+
+// Shooting Comet - Streaking across the cosmos
+const ShootingComet = ({ delay = 0, startPos = "top-left" }: { delay?: number; startPos?: string }) => {
+  const startPositions: Record<string, string> = {
+    "top-left": "top-10 left-10",
+    "top-right": "top-20 right-10",
+    "mid-left": "top-1/2 left-10",
+  };
+
+  return (
+    <div
+      className={`absolute ${startPositions[startPos]} pointer-events-none animate-cometTrail`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <svg width="100" height="100" viewBox="0 0 100 100" className="rotate-45">
+        {/* Comet trail */}
+        <defs>
+          <linearGradient id={`comet-trail-${delay}`} x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#67E8F9" stopOpacity="0" />
+            <stop offset="50%" stopColor="#818CF8" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#C084FC" stopOpacity="0.9" />
+          </linearGradient>
+        </defs>
+
+        {/* Trail */}
+        <path
+          d="M0 50 Q25 45, 50 50 T100 50"
+          stroke={`url(#comet-trail-${delay})`}
+          strokeWidth="3"
+          fill="none"
+          opacity="0.8"
+        />
+
+        {/* Comet head */}
+        <circle cx="95" cy="50" r="5" fill="#FCD34D" opacity="0.9" />
+        <circle cx="95" cy="50" r="8" fill="#FCD34D" opacity="0.4" className="blur-sm" />
+      </svg>
+    </div>
+  );
+};
+
+// Floating Stardust Particles
+const StardustParticle = ({ delay = 0, className = "" }: { delay?: number; className?: string }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-stardustDrift`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <div className="w-1 h-1 rounded-full bg-gradient-to-br from-cyan-300 to-purple-400 opacity-60" />
+  </div>
+);
+
+// Cosmic Constellation Lines
 const ConstellationDivider = ({ className = "" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg className={`${className} animate-glowPulse`} viewBox="0 0 400 60" fill="none" xmlns="http://www.w3.org/2000/svg">
     {/* Stars */}
-    <circle cx="50" cy="30" r="2" fill="currentColor" opacity="0.6" />
-    <circle cx="100" cy="20" r="1.5" fill="currentColor" opacity="0.5" />
-    <circle cx="150" cy="35" r="2" fill="currentColor" opacity="0.7" />
-    <circle cx="200" cy="25" r="1.5" fill="currentColor" opacity="0.5" />
-    <circle cx="250" cy="30" r="2" fill="currentColor" opacity="0.6" />
-    <circle cx="300" cy="22" r="1.5" fill="currentColor" opacity="0.5" />
-    <circle cx="350" cy="32" r="2" fill="currentColor" opacity="0.6" />
-    {/* Connecting lines */}
-    <line x1="50" y1="30" x2="100" y2="20" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-    <line x1="100" y1="20" x2="150" y2="35" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-    <line x1="150" y1="35" x2="200" y2="25" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-    <line x1="200" y1="25" x2="250" y2="30" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-    <line x1="250" y1="30" x2="300" y2="22" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-    <line x1="300" y1="22" x2="350" y2="32" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
+    <circle cx="50" cy="30" r="2.5" fill="#67E8F9" opacity="0.8" />
+    <circle cx="100" cy="20" r="2" fill="#818CF8" opacity="0.7" />
+    <circle cx="150" cy="35" r="2.5" fill="#C084FC" opacity="0.8" />
+    <circle cx="200" cy="25" r="2" fill="#FCD34D" opacity="0.7" />
+    <circle cx="250" cy="30" r="2.5" fill="#5EEAD4" opacity="0.8" />
+    <circle cx="300" cy="22" r="2" fill="#E9D5FF" opacity="0.7" />
+    <circle cx="350" cy="32" r="2.5" fill="#67E8F9" opacity="0.8" />
+
+    {/* Connecting lines with gradient */}
+    <line x1="50" y1="30" x2="100" y2="20" stroke="#67E8F9" strokeWidth="0.8" opacity="0.4" />
+    <line x1="100" y1="20" x2="150" y2="35" stroke="#818CF8" strokeWidth="0.8" opacity="0.4" />
+    <line x1="150" y1="35" x2="200" y2="25" stroke="#C084FC" strokeWidth="0.8" opacity="0.4" />
+    <line x1="200" y1="25" x2="250" y2="30" stroke="#FCD34D" strokeWidth="0.8" opacity="0.4" />
+    <line x1="250" y1="30" x2="300" y2="22" stroke="#5EEAD4" strokeWidth="0.8" opacity="0.4" />
+    <line x1="300" y1="22" x2="350" y2="32" stroke="#E9D5FF" strokeWidth="0.8" opacity="0.4" />
   </svg>
 );
 
+// Aurora Wave - Northern lights effect
+const AuroraWave = ({ position = "top" }: { position?: "top" | "bottom" }) => (
+  <div className={`absolute ${position}-0 left-0 right-0 h-96 pointer-events-none animate-auroraWave overflow-hidden`}>
+    <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-transparent opacity-50 blur-2xl" />
+    <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/15 via-teal-500/8 to-transparent opacity-40 blur-3xl"
+         style={{ animationDelay: '1s' }} />
+  </div>
+);
+
+// Radial Nebula Glow
 const RadialGlow = ({ className = "", color = "indigo" }: { className?: string; color?: string }) => {
   const colorMap: Record<string, string> = {
     indigo: "from-indigo-500/20 via-indigo-500/10 to-transparent",
     lavender: "from-purple-400/20 via-purple-400/10 to-transparent",
     teal: "from-teal-400/20 via-teal-400/10 to-transparent",
     gold: "from-amber-400/20 via-amber-400/10 to-transparent",
+    cyan: "from-cyan-400/20 via-cyan-400/10 to-transparent",
   };
 
   return (
     <div className={`absolute ${className} pointer-events-none`}>
-      <div className={`w-full h-full rounded-full bg-gradient-radial ${colorMap[color]} blur-2xl`} />
+      <div className={`w-full h-full rounded-full bg-gradient-radial ${colorMap[color]} blur-3xl animate-cosmicPulse`} />
     </div>
   );
 };
@@ -216,19 +406,48 @@ export default function CreativeDesignDevelopmentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight">
+    <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight relative overflow-hidden">
+      {/* ✨ EPIC MOONLIT COSMIC CREATOR UNIVERSE ✨ */}
+
+      {/* 120+ Twinkling Stars across the entire cosmos */}
+      <CosmicStarfield />
+
+      {/* Massive Nebula Clouds in all corners */}
+      <NebulaCloud position="top-left" colors="indigo-purple" size="large" />
+      <NebulaCloud position="top-right" colors="cyan-teal" size="large" />
+      <NebulaCloud position="bottom-left" colors="lavender-pink" size="medium" />
+      <NebulaCloud position="bottom-right" colors="amber-gold" size="large" />
+      <NebulaCloud position="center" colors="indigo-purple" size="medium" />
+
+      {/* Aurora Waves at top and bottom */}
+      <AuroraWave position="top" />
+      <AuroraWave position="bottom" />
+
+      {/* Shooting Comets streaking across */}
+      <ShootingComet delay={0} startPos="top-left" />
+      <ShootingComet delay={8} startPos="top-right" />
+      <ShootingComet delay={4} startPos="mid-left" />
+
+      {/* Stardust Particles floating throughout */}
+      {Array.from({ length: 40 }).map((_, i) => (
+        <StardustParticle
+          key={`stardust-${i}`}
+          delay={i * 0.3}
+          className={`left-[${(i * 7) % 100}%] top-[${(i * 11) % 100}%]`}
+          style={{ left: `${(i * 7) % 100}%`, top: `${(i * 11) % 100}%` } as React.CSSProperties}
+        />
+      ))}
 
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 1: HERO
       ═══════════════════════════════════════════════════════════════════ */}
-      <section id="hero" className="relative overflow-hidden border-b border-indigo-500/20 bg-gradient-to-br from-midnight via-deepOcean to-nightNavy py-20">
-        {/* Starlit ambient effects */}
+      <section id="hero" className="relative overflow-hidden border-b border-indigo-500/20 bg-gradient-to-br from-midnight/50 via-deepOcean/50 to-nightNavy/50 py-20 backdrop-blur-sm">
+        {/* Additional cosmic effects for hero */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <RadialGlow className="top-10 right-1/4 w-96 h-96" color="indigo" />
           <RadialGlow className="bottom-20 left-1/3 w-80 h-80" color="lavender" />
-          <Star className="absolute top-32 right-1/3 w-8 h-8 text-amber-300 opacity-20 animate-pulse" />
-          <Star className="absolute bottom-40 left-1/4 w-6 h-6 text-purple-300 opacity-15" style={{ animationDelay: '1s' }} />
-          <ConstellationDivider className="absolute top-1/2 left-0 w-full h-16 text-indigo-300 opacity-20" />
+          <RadialGlow className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]" color="cyan" />
+          <ConstellationDivider className="absolute top-1/2 left-0 w-full h-16 text-indigo-300 opacity-30" />
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
