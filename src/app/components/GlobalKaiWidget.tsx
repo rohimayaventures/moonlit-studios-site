@@ -1475,7 +1475,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
           {/* Chat Messages */}
           <div
             ref={chatContainerRef}
-            className="flex-1 h-96 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-midnight/95 to-deepOcean/95 backdrop-blur p-4 space-y-3 custom-scrollbar"
+            className="flex-1 h-96 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-midnight to-deepOcean p-4 space-y-3 custom-scrollbar"
             style={{ maxHeight: '24rem', overscrollBehavior: 'contain' }}
           >
             {messages.map((message, index) => (
@@ -1517,7 +1517,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
 
           {/* Quick Action Buttons */}
           {showQuickActions && messages.length <= 1 && (
-            <div className="bg-gradient-to-r from-deepOcean/50 to-midnight/50 border-t border-mermaidTeal/20 p-3">
+            <div className="bg-gradient-to-r from-deepOcean to-midnight border-t border-mermaidTeal/20 p-3">
               <div className="text-xs text-starlight/60 mb-2">Quick actions:</div>
               <div className="flex flex-wrap gap-2">
                 <button

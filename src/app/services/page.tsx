@@ -91,7 +91,7 @@ const suites = [
       "Clinical workflow mastery",
       "Healthcare-grade security",
     ],
-    starting: "$10,000+",
+    starting: "$3,500+",
     href: "/services/health-tech-development",
     color: "mermaidTeal",
     tiers: [
@@ -179,7 +179,7 @@ const suites = [
       "Author platform presence",
       "Reader engagement system",
     ],
-    starting: "$250+",
+    starting: "$18,000+",
     href: "/services/ghostwriting",
     color: "roseGold",
     tiers: [
