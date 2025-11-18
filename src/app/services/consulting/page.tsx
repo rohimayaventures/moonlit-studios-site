@@ -1,25 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Target } from 'lucide-react';
+import { Check, Target, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 
-// LOTR Council Chamber SVG Components
+// Rivendell Council Chamber - Elven SVG Components
 function ElvenScriptLine({ className = '' }: { className?: string }) {
   return (
-    <svg className={className} width="200" height="40" viewBox="0 0 200 40" fill="none">
+    <svg className={className} width="200" height="2" viewBox="0 0 200 2" fill="none">
       <path
-        d="M10 20 Q30 10, 50 20 T90 20 Q110 15, 130 20 T170 20"
-        stroke="#E9C97F"
+        d="M0 1 Q 50 0.5, 100 1 T 200 1"
+        stroke="url(#scriptGradient)"
         strokeWidth="1"
         fill="none"
-        opacity="0.3"
-        className="animate-pulse"
+        opacity="0.6"
       />
-      <circle cx="30" cy="18" r="2" fill="#E9C97F" opacity="0.4" />
-      <circle cx="70" cy="22" r="2" fill="#E9C97F" opacity="0.4" />
-      <circle cx="110" cy="18" r="2" fill="#E9C97F" opacity="0.4" />
-      <circle cx="150" cy="22" r="2" fill="#E9C97F" opacity="0.4" />
+      <defs>
+        <linearGradient id="scriptGradient" x1="0" y1="0" x2="200" y2="0">
+          <stop offset="0%" stopColor="#C9A961" stopOpacity="0" />
+          <stop offset="50%" stopColor="#F0C979" stopOpacity="1" />
+          <stop offset="100%" stopColor="#C9A961" stopOpacity="0" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -29,17 +31,29 @@ function LaurelLeaf({ className = '', delay = '0s' }: { className?: string; dela
     <svg
       className={className}
       width="40"
-      height="60"
-      viewBox="0 0 40 60"
+      height="50"
+      viewBox="0 0 40 50"
       fill="none"
       style={{ animationDelay: delay }}
     >
-      <g className="animate-pulse" opacity="0.6">
-        <ellipse cx="20" cy="15" rx="6" ry="12" fill="#8CB7CF" opacity="0.7" />
-        <ellipse cx="20" cy="30" rx="7" ry="14" fill="#E9C97F" opacity="0.6" />
-        <ellipse cx="20" cy="45" rx="6" ry="12" fill="#8CB7CF" opacity="0.5" />
-        <path d="M20 5 Q25 30 20 55" stroke="#E9C97F" strokeWidth="1.5" fill="none" opacity="0.6" />
-      </g>
+      <path
+        d="M20 5 Q 15 15, 20 25 Q 25 15, 20 5 Z"
+        fill="url(#leafGradient)"
+        className="animate-pulse"
+        opacity="0.7"
+      />
+      <path
+        d="M20 25 Q 15 35, 20 45 Q 25 35, 20 25 Z"
+        fill="url(#leafGradient)"
+        className="animate-pulse"
+        opacity="0.5"
+      />
+      <defs>
+        <linearGradient id="leafGradient" x1="20" y1="5" x2="20" y2="45">
+          <stop offset="0%" stopColor="#F0C979" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#C9A961" stopOpacity="0.6" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -54,34 +68,58 @@ function AncientSigil({ className = '', delay = '0s' }: { className?: string; de
       fill="none"
       style={{ animationDelay: delay }}
     >
-      <circle cx="40" cy="40" r="30" stroke="#E9C97F" strokeWidth="1" fill="none" opacity="0.2" className="animate-ping" />
-      <circle cx="40" cy="40" r="20" stroke="#8CB7CF" strokeWidth="1.5" fill="none" opacity="0.3" />
-      <path d="M40 20 L50 40 L40 60 L30 40 Z" stroke="#E9C97F" strokeWidth="1" fill="none" opacity="0.4" />
-      <circle cx="40" cy="40" r="5" fill="#F4E9D2" opacity="0.6" className="animate-pulse" />
+      <circle
+        cx="40"
+        cy="40"
+        r="30"
+        stroke="#F0C979"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.3"
+        className="animate-pulse"
+      />
+      <path
+        d="M 40 10 L 45 35 L 70 40 L 45 45 L 40 70 L 35 45 L 10 40 L 35 35 Z"
+        stroke="#C9A961"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.4"
+        className="animate-pulse"
+        style={{ animationDelay: '0.5s' }}
+      />
+      <circle cx="40" cy="40" r="5" fill="#F0C979" opacity="0.6" />
     </svg>
   );
 }
 
 function WisdomFlow({ className = '' }: { className?: string }) {
   return (
-    <svg className={className} width="300" height="100" viewBox="0 0 300 100" fill="none">
-      <path
-        d="M0 50 Q75 30, 150 50 T300 50"
-        stroke="#E9C97F"
-        strokeWidth="2"
-        fill="none"
-        opacity="0.2"
-        className="animate-pulse"
-      />
-      <path
-        d="M0 60 Q75 40, 150 60 T300 60"
-        stroke="#8CB7CF"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.15"
-        className="animate-pulse"
-        style={{ animationDelay: '0.5s' }}
-      />
+    <div className={className}>
+      <div className="absolute top-0 left-[15%] w-2 h-2 rounded-full bg-[#F0C979]/30 animate-bounce" style={{ animationDelay: '0s', animationDuration: '4s' }} />
+      <div className="absolute top-8 left-[30%] w-3 h-3 rounded-full bg-[#C9A961]/25 animate-bounce" style={{ animationDelay: '0.8s', animationDuration: '5s' }} />
+      <div className="absolute top-4 left-[50%] w-2 h-2 rounded-full bg-[#F0C979]/35 animate-bounce" style={{ animationDelay: '1.6s', animationDuration: '4.5s' }} />
+      <div className="absolute top-10 right-[35%] w-2 h-2 rounded-full bg-[#C9A961]/30 animate-bounce" style={{ animationDelay: '2.4s', animationDuration: '5.5s' }} />
+    </div>
+  );
+}
+
+function ParchmentScroll({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="60" height="80" viewBox="0 0 60 80" fill="none">
+      <g className="animate-pulse" opacity="0.6">
+        <rect x="10" y="5" width="40" height="70" rx="2" fill="url(#parchmentGradient)" />
+        <rect x="10" y="5" width="40" height="4" fill="#C9A961" opacity="0.4" />
+        <rect x="10" y="71" width="40" height="4" fill="#C9A961" opacity="0.4" />
+        <line x1="15" y1="20" x2="45" y2="20" stroke="#8B7355" strokeWidth="0.5" opacity="0.3" />
+        <line x1="15" y1="30" x2="45" y2="30" stroke="#8B7355" strokeWidth="0.5" opacity="0.3" />
+        <line x1="15" y1="40" x2="45" y2="40" stroke="#8B7355" strokeWidth="0.5" opacity="0.3" />
+      </g>
+      <defs>
+        <linearGradient id="parchmentGradient" x1="30" y1="5" x2="30" y2="75">
+          <stop offset="0%" stopColor="#F5E7C8" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#E8D5B5" stopOpacity="0.7" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -232,143 +270,137 @@ export default function ConsultingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#152022] via-[#2D3B45] to-midnight text-[#F4E9D2] overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#1A1410] via-[#2A1F1A] to-[#1A1410] text-[#F5E7C8] overflow-hidden">
 
-      {/* Hero Section - LOTR Council Chamber */}
+      {/* Hero Section - Rivendell Council Chamber */}
       <section className="relative px-6 py-20 overflow-hidden">
-        {/* Ancient parchment glow background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2D3B45]/40 via-[#E9C97F]/5 to-transparent animate-pulse" style={{ animationDuration: '10s' }} />
+        {/* Ambient Parchment Glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2A1F1A]/30 via-[#F0C979]/5 to-transparent animate-pulse" style={{ animationDuration: '10s' }} />
 
-        {/* Floating Elven Elements */}
-        <LaurelLeaf className="absolute top-10 left-[5%] opacity-50" delay="0s" />
-        <LaurelLeaf className="absolute top-32 left-[15%] opacity-35" delay="1s" />
-        <LaurelLeaf className="absolute top-20 right-[10%] opacity-45" delay="0.5s" />
-        <LaurelLeaf className="absolute bottom-10 right-[20%] opacity-40" delay="1.5s" />
+        {/* Elven Decorative Elements */}
+        <LaurelLeaf className="absolute top-12 left-[8%] opacity-50 hidden md:block" delay="0s" />
+        <LaurelLeaf className="absolute top-24 right-[12%] opacity-40 hidden lg:block" delay="0.8s" />
 
-        <WisdomFlow className="absolute top-1/4 left-0 opacity-40" />
-        <WisdomFlow className="absolute top-1/2 right-0 opacity-35 rotate-180" />
+        <AncientSigil className="absolute top-0 left-1/4 opacity-20 hidden lg:block" delay="0s" />
+        <AncientSigil className="absolute bottom-10 right-1/3 opacity-15 hidden lg:block" delay="1.2s" />
 
-        <AncientSigil className="absolute top-0 left-1/4 opacity-30" delay="0s" />
-        <AncientSigil className="absolute bottom-0 right-1/3 opacity-25" delay="0.8s" />
+        <ParchmentScroll className="absolute top-1/3 right-[10%] opacity-40 hidden md:block" />
 
-        <ElvenScriptLine className="absolute top-1/3 right-[8%] opacity-60" />
-        <ElvenScriptLine className="absolute bottom-1/4 left-[12%] opacity-50" />
+        <WisdomFlow className="absolute inset-0 hidden sm:block" />
 
         <div className="relative mx-auto max-w-5xl text-center">
-          {/* Moon Phases - LOTR Council: Gold → parchment → silver-blue → deep forest */}
-          <div className="mb-8 flex justify-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#E9C97F] to-[#F4E9D2] shadow-lg shadow-[#E9C97F]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F4E9D2] to-white shadow-lg shadow-[#F4E9D2]/40" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8CB7CF] to-[#F4E9D2] shadow-lg shadow-[#8CB7CF]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#2D3B45] to-[#152022] shadow-lg shadow-[#2D3B45]/50" />
+          {/* Elven Script Divider */}
+          <div className="mb-8 flex justify-center">
+            <ElvenScriptLine />
           </div>
 
-          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">
+          {/* Council Sigils - Gold, Silver-Blue, Parchment */}
+          <div className="mb-8 flex justify-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] shadow-lg shadow-[#F0C979]/50 border border-[#C9A961]/30" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] shadow-lg shadow-[#A8C5E0]/40 border border-[#6B8FA3]/30" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] shadow-lg shadow-[#F5E7C8]/30 border border-[#C9A961]/20" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] shadow-lg shadow-[#8B7355]/40 border border-[#8B7355]/30" />
+          </div>
+
+          <h1 className="mb-4 text-5xl font-elegant text-[#F5E7C8] md:text-6xl" style={{ fontFamily: 'var(--font-playfair)' }}>
             Consulting & Advisory
           </h1>
-          <p className="mb-6 text-xl text-[#E9C97F]">
-            Strategic wisdom from the Council Chamber
+          <p className="mb-6 text-xl text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Strategic wisdom from the council chamber
           </p>
-          <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-[#F4E9D2]/80">
-            Expert consulting from a nurse-turned-developer. HealthTech product strategy,
-            tech advisory, AI/ML consulting, and creative workshops—15+ years operations leadership
-            meets cutting-edge tech expertise.
+          <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-[#E8D5B5]/90">
+            A nurse-turned-developer with 15+ years in clinical operations. I offer HealthTech product strategy,
+            UX for clinicians, AI/ML advisory with guardrails, and portfolio storytelling. Strategic clarity grounded in real-world healthcare experience.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-8 py-4 font-bold text-[#152022] shadow-xl shadow-[#E9C97F]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#E9C97F]/60"
+              href="/contact?service=consulting"
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-8 py-4 font-bold text-[#1A1410] shadow-xl shadow-[#F0C979]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#F0C979]/60"
             >
-              Book a Consultation
-              <span>→</span>
+              <BookOpen className="h-5 w-5" />
+              Book Consultation
             </Link>
             <a
               href="#packages"
-              className="inline-flex items-center gap-2 rounded-lg border-2 border-[#E9C97F] bg-[#2D3B45]/60 px-8 py-4 font-semibold text-[#F4E9D2] backdrop-blur-sm transition-all hover:bg-[#E9C97F]/20 hover:shadow-lg hover:shadow-[#E9C97F]/30"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-[#F0C979] bg-[#2A1F1A]/60 px-8 py-4 font-semibold text-[#F0C979] backdrop-blur-sm transition-all hover:bg-[#F0C979]/10 hover:shadow-lg hover:shadow-[#F0C979]/30"
             >
-              View Services
+              View Packages
             </a>
+          </div>
+
+          {/* Bottom Script Line */}
+          <div className="mt-12 flex justify-center">
+            <ElvenScriptLine />
           </div>
         </div>
       </section>
 
       {/* Who This Is For */}
-      <section className="relative px-6 py-16">
-        <WisdomFlow className="absolute top-0 left-0 w-full opacity-30" />
+      <section className="relative px-6 py-16 border-t border-[#C9A961]/20">
+        <ElvenScriptLine className="absolute top-0 left-1/2 -translate-x-1/2" />
 
         <div className="relative mx-auto max-w-6xl">
-          <h2 className="mb-12 text-center text-4xl font-bold text-white">
-            Who This Is For
+          <h2 className="mb-12 text-center text-4xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Who Seeks the Council
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: '🏛️', title: 'HealthTech Founders', desc: 'Early to growth-stage startups building patient-facing tools, clinical workflows, or medical devices' },
-              { icon: '⚔️', title: 'Product Teams', desc: 'Product managers, UX designers, and engineers building tools for clinicians or patients' },
-              { icon: '📜', title: 'Creative Professionals', desc: 'Writers, designers, and creators looking to refine portfolios, pitches, or career positioning' },
-              { icon: '👑', title: 'Leadership Teams', desc: 'Executives and managers seeking strategic guidance, workshops, or team training' },
-              { icon: '🗡️', title: 'Investors & Advisors', desc: 'VC/PE firms and advisors needing clinical domain expertise for portfolio companies' },
-              { icon: '🏰', title: 'Enterprises & Health Systems', desc: 'Large organizations piloting new tech, implementing digital tools, or transforming care delivery' },
+              { title: 'HealthTech Founders', desc: 'Early to growth-stage startups building patient-facing tools, clinical workflows, or medical devices' },
+              { title: 'Product & UX Teams', desc: 'Product managers, designers, and engineers building tools for clinicians or patients' },
+              { title: 'Creative Professionals', desc: 'Writers, designers, and creators refining portfolios, pitches, or career positioning' },
+              { title: 'Leadership Teams', desc: 'Executives and managers seeking strategic guidance, workshops, or team training' },
+              { title: 'Investors & Advisors', desc: 'VC/PE firms and advisors needing clinical domain expertise for portfolio companies' },
+              { title: 'Enterprises & Health Systems', desc: 'Large organizations piloting new tech, implementing digital tools, or transforming care delivery' },
             ].map((item, i) => (
               <div
                 key={i}
-                className="group relative overflow-hidden rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/60 to-[#152022]/80 p-6 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#F4E9D2] hover:shadow-xl hover:shadow-[#E9C97F]/30"
+                className="group relative overflow-hidden rounded-xl border border-[#C9A961]/30 bg-gradient-to-br from-[#2A1F1A]/70 to-[#1A1410]/90 p-6 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#F0C979] hover:shadow-xl hover:shadow-[#F0C979]/20"
               >
-                <AncientSigil className="absolute -top-10 -right-10 opacity-10" delay={`${i * 0.2}s`} />
+                <AncientSigil className="absolute -top-8 -right-8 opacity-10" delay={`${i * 0.3}s`} />
                 <div className="relative">
-                  <div className="mb-3 text-4xl">{item.icon}</div>
-                  <h3 className="mb-2 text-lg font-semibold text-[#E9C97F]">{item.title}</h3>
-                  <p className="text-sm text-[#F4E9D2]/70">{item.desc}</p>
+                  <h3 className="mb-2 text-lg font-semibold text-[#F0C979]">{item.title}</h3>
+                  <p className="text-sm text-[#E8D5B5]/70">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="mt-8 text-center">
-            <p className="text-lg text-[#F4E9D2]/80">
-              <span className="text-[#E9C97F] font-semibold">If you need clarity, not more complexity</span>,
-              let's work together.
-            </p>
-          </div>
         </div>
       </section>
 
-      {/* How We Work Together */}
-      <section className="relative px-6 py-16">
+      {/* How We'll Work Together */}
+      <section className="relative px-6 py-16 border-t border-[#C9A961]/20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-12 text-center text-4xl font-bold text-white">
-            How We'll Work Together
+          <h2 className="mb-12 text-center text-4xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            The Council's Process
           </h2>
           <div className="grid gap-10 md:grid-cols-3">
             {[
-              { num: '1', icon: '🎯', title: 'Discover', desc: 'We\'ll clarify your goals, constraints, and success metrics. No fluff—just focused conversation about what matters most' },
-              { num: '2', icon: '💡', title: 'Design & Build', desc: 'I\'ll provide frameworks, recommendations, and actionable plans tailored to your context. You\'ll leave with clarity and direction' },
-              { num: '3', icon: '📈', title: 'Deliver & Support', desc: 'Receive deliverables, follow-up support, and strategic check-ins to ensure you\'re moving forward with confidence' },
+              { num: '1', title: 'Discover', desc: 'Clarify your goals, constraints, and success metrics in focused conversation about what matters most' },
+              { num: '2', title: 'Design & Recommend', desc: 'Receive frameworks, recommendations, and actionable plans tailored to your context with strategic clarity' },
+              { num: '3', title: 'Deliver & Support', desc: 'Get deliverables, follow-up support, and strategic check-ins to ensure forward momentum' },
             ].map((step, i) => (
               <div key={i} className="relative text-center">
-                <ElvenScriptLine className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-40" />
-                <div className="relative mb-4 text-6xl font-bold text-[#E9C97F]/20">{step.num}</div>
-                <div className="mb-3 text-5xl">{step.icon}</div>
-                <h3 className="mb-3 text-xl font-semibold text-[#E9C97F]">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-[#F4E9D2]/70">{step.desc}</p>
+                <LaurelLeaf className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-40" delay={`${i * 0.4}s`} />
+                <div className="relative mb-6 text-6xl font-bold text-[#F0C979]/20" style={{ fontFamily: 'var(--font-playfair)' }}>{step.num}</div>
+                <h3 className="mb-3 text-xl font-semibold text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed text-[#E8D5B5]/70">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Tiered Packages */}
-      <section id="packages" className="relative px-6 py-20">
-        <WisdomFlow className="absolute top-1/3 left-0 opacity-25" />
-        <WisdomFlow className="absolute bottom-1/4 right-0 opacity-25 rotate-180" />
-
+      {/* Service Packages */}
+      <section id="packages" className="relative px-6 py-20 border-t border-[#C9A961]/20">
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <p className="text-sm tracking-[0.35em] text-[#E9C97F] uppercase mb-3">Tiered Pricing</p>
-            <h2 className="mb-4 text-3xl font-bold text-white md:text-5xl">
-              Choose Your Service
+            <ElvenScriptLine className="mb-6 inline-block" />
+            <h2 className="mb-4 text-3xl font-elegant text-[#F5E7C8] md:text-5xl" style={{ fontFamily: 'var(--font-playfair)' }}>
+              Service Offerings
             </h2>
-            <p className="text-lg text-[#F4E9D2]/80">
-              From quick wins to strategic partnerships. Each tier designed for different needs and timelines.
+            <p className="text-lg text-[#E8D5B5]/80">
+              From quick wins to strategic partnerships. Each offering designed for different needs and timelines.
             </p>
           </div>
 
@@ -378,51 +410,46 @@ export default function ConsultingPage() {
                 key={pkg.id}
                 onMouseEnter={() => setHoveredCard(pkg.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-visible rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/70 to-[#152022]/90 p-8 backdrop-blur-sm transition-all ${
-                  hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#E9C97F]/40' : 'shadow-lg'
-                } ${pkg.popular ? 'border-2 border-[#E9C97F]' : ''}`}
+                className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg ${
+                  hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
+                } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#152022] shadow-lg">
-                    Most Popular
+                  <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
+                    Most Sought
                   </div>
                 )}
 
-                <AncientSigil className="absolute -top-10 -right-10 opacity-10" />
+                <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
 
                 <div className="relative">
-                  <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#8CB7CF]">
+                  <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#A8C5E0]">
                     {pkg.tier}
                   </div>
-                  <h4 className="mb-4 text-2xl font-bold text-white">{pkg.title}</h4>
-                  <p className="mb-4 text-sm text-[#F4E9D2]/60">{pkg.duration}</p>
+                  <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
+                  <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#E9C97F]">{pkg.price}</span>
+                    <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
                   </div>
-                  <div className="mb-6">
-                    <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-[#8CB7CF]">
-                      What's Included:
-                    </p>
-                    <ul className="space-y-3">
-                      {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-[#F4E9D2]/80">
-                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#E9C97F]" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mb-6 rounded-lg border border-[#E9C97F]/20 bg-[#E9C97F]/5 p-4">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#F4E9D2]/70">
+                  <ul className="mb-6 space-y-3">
+                    {pkg.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
                       Perfect For:
                     </p>
-                    <p className="text-sm text-white">{pkg.ideal}</p>
+                    <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#E9C97F] bg-[#E9C97F]/10 px-6 py-3 font-semibold text-[#E9C97F] transition-all hover:bg-[#E9C97F]/30"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
                   >
-                    Book Now →
+                    Seek Counsel
                   </Link>
                 </div>
               </div>
@@ -432,48 +459,46 @@ export default function ConsultingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative px-6 py-16">
-        <WisdomFlow className="absolute top-0 left-0 w-full opacity-20" />
-
+      <section className="relative px-6 py-16 border-t border-[#C9A961]/20">
         <div className="relative mx-auto max-w-4xl">
-          <h2 className="mb-12 text-center text-4xl font-bold text-white">
-            Frequently Asked Questions
+          <h2 className="mb-12 text-center text-4xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>
+            Counsel's Wisdom
           </h2>
           <div className="space-y-6">
             {[
               {
                 q: 'How do consulting sessions work?',
-                a: 'Most sessions are conducted via Zoom with screen sharing. You\'ll receive a calendar invite, pre-work (if applicable), and follow-up notes/deliverables within 48 hours. For workshops, we can meet in-person or virtually depending on your needs.',
+                a: 'Sessions are conducted via Zoom with screen sharing. You receive a calendar invite, pre-work if applicable, and follow-up notes within 48 hours. Workshops can be in-person or virtual based on your needs.',
               },
               {
-                q: 'What\'s the typical timeline for consulting projects?',
-                a: 'Quick wins (Portfolio Review, Pitch Deck): 1-2 weeks. Strategy packages: 4-6 weeks. UX Transformation: 6-8 weeks. Retainers are ongoing monthly engagements. Rush timelines available with planning.',
+                q: 'What are typical timelines?',
+                a: 'Quick wins (Portfolio Review, Pitch Deck): 1-2 weeks. Strategy packages: 4-6 weeks. UX Transformation: 6-8 weeks. Retainers are ongoing monthly. Rush timelines available with planning.',
               },
               {
-                q: 'Can I customize a package or mix services?',
-                a: 'Absolutely! Many clients combine HealthTech strategy with UX audits, or add workshops to retainer packages. I\'ll create a custom scope that fits your needs and budget.',
+                q: 'Can I customize a package?',
+                a: 'Absolutely. Many combine HealthTech strategy with UX audits, or add workshops to retainers. I create custom scopes that fit your needs and budget.',
               },
               {
-                q: 'What makes your consulting different?',
-                a: 'I bridge clinical operations and modern tech. I\'ve been a bedside nurse, managed healthcare teams, and built full-stack applications. You get strategic thinking grounded in real-world clinical experience—not just theory.',
+                q: 'What makes this counsel different?',
+                a: 'I bridge clinical operations and modern tech. I\'ve been a bedside nurse, managed healthcare teams, and built full-stack applications. You get strategic thinking grounded in real clinical experience—not theory.',
               },
               {
-                q: 'Do you sign NDAs or confidentiality agreements?',
-                a: 'Yes! All consulting engagements include standard confidentiality protections. If you have specific requirements or need a custom NDA, we can review and execute before any work begins.',
+                q: 'Do you sign NDAs?',
+                a: 'Yes. All engagements include standard confidentiality protections. If you have specific requirements or need a custom NDA, we review and execute before work begins.',
               },
               {
-                q: 'What if I\'m not sure which service I need?',
-                a: 'Start with a free 20-minute discovery call. We\'ll discuss your goals, challenges, and timeline—then I\'ll recommend the best fit. No pressure, no sales pitch. Just honest guidance.',
+                q: 'Not sure which service you need?',
+                a: 'Start with a free 20-minute discovery call. We discuss your goals, challenges, and timeline—then I recommend the best fit. No pressure, no sales pitch. Just honest guidance.',
               },
             ].map((faq, i) => (
               <details
                 key={i}
-                className="group rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/50 to-[#152022]/70 p-6 backdrop-blur-sm transition-all hover:border-[#E9C97F]/50 hover:bg-[#E9C97F]/10"
+                className="group rounded-xl border border-[#C9A961]/30 bg-gradient-to-br from-[#2A1F1A]/60 to-[#1A1410]/80 p-6 backdrop-blur-sm transition-all hover:border-[#F0C979]/50 hover:bg-[#F0C979]/5"
               >
-                <summary className="cursor-pointer text-lg font-semibold text-[#E9C97F] transition-colors group-hover:text-white">
+                <summary className="cursor-pointer text-lg font-semibold text-[#F0C979] transition-colors group-hover:text-[#F5E7C8]">
                   {faq.q}
                 </summary>
-                <p className="mt-4 leading-relaxed text-[#F4E9D2]/80">{faq.a}</p>
+                <p className="mt-4 leading-relaxed text-[#E8D5B5]/80">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -481,37 +506,42 @@ export default function ConsultingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="relative px-6 py-20">
-        <AncientSigil className="absolute top-1/2 left-1/4 -translate-y-1/2 opacity-15" />
-        <AncientSigil className="absolute top-1/2 right-1/4 -translate-y-1/2 opacity-15" delay="0.5s" />
-        <LaurelLeaf className="absolute top-10 left-[10%] opacity-25" />
-        <LaurelLeaf className="absolute bottom-10 right-[15%] opacity-25" />
+      <section className="relative px-6 py-20 border-t border-[#C9A961]/20">
+        <AncientSigil className="absolute top-1/2 left-1/4 -translate-y-1/2 opacity-15 hidden lg:block" />
+        <AncientSigil className="absolute top-1/2 right-1/4 -translate-y-1/2 opacity-15 hidden lg:block" delay="0.6s" />
+        <LaurelLeaf className="absolute top-10 left-[10%] opacity-30 hidden md:block" />
+        <LaurelLeaf className="absolute bottom-10 right-[15%] opacity-30 hidden md:block" delay="0.8s" />
 
         <div className="relative mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#E9C97F] to-[#F4E9D2] mx-auto mb-6 shadow-lg shadow-[#E9C97F]/40">
-            <Target className="w-10 h-10 text-[#152022]" />
+          <ElvenScriptLine className="mb-8 inline-block" />
+
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] mx-auto mb-6 shadow-lg shadow-[#F0C979]/40">
+            <Target className="w-10 h-10 text-[#1A1410]" />
           </div>
-          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
+
+          <h2 className="mb-6 text-4xl font-elegant text-[#F5E7C8] md:text-5xl" style={{ fontFamily: 'var(--font-playfair)' }}>
             Ready for Strategic Clarity?
           </h2>
-          <p className="mb-10 text-lg leading-relaxed text-[#F4E9D2]/80">
-            Whether you need a quick audit, strategic guidance, or ongoing partnership—
-            let's talk about how we can move your work forward.
+          <p className="mb-10 text-lg leading-relaxed text-[#E8D5B5]/80">
+            Whether you seek a quick audit, strategic guidance, or ongoing partnership—
+            let us discuss how to move your work forward with wisdom.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/contact?service=consulting"
-              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-10 py-5 text-lg font-bold text-[#152022] shadow-2xl shadow-[#E9C97F]/60 transition-all hover:scale-105 hover:shadow-[#E9C97F]/80"
+              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-10 py-5 text-lg font-bold text-[#1A1410] shadow-2xl shadow-[#F0C979]/60 transition-all hover:scale-105 hover:shadow-[#F0C979]/80"
             >
-              Schedule a Call
+              Convene the Council
             </Link>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-3 rounded-xl border-2 border-[#E9C97F] bg-[#2D3B45]/60 px-10 py-5 text-lg font-semibold text-[#E9C97F] backdrop-blur-sm transition-all hover:bg-[#E9C97F]/20"
+              className="inline-flex items-center gap-3 rounded-xl border-2 border-[#F0C979] bg-[#2A1F1A]/60 px-10 py-5 text-lg font-semibold text-[#F0C979] backdrop-blur-sm transition-all hover:bg-[#F0C979]/20"
             >
-              View Case Studies
+              View Chronicles
             </Link>
           </div>
+
+          <ElvenScriptLine className="mt-12 inline-block" />
         </div>
       </section>
 

@@ -108,7 +108,7 @@ export default function GhibliUXArticle() {
               This is the equivalent of someone following you around a store yelling "BUY SOMETHING!" every three seconds. Yeah, you might buy something just to make them stop. But you're not coming back. And you're definitely not recommending that store to your friends.
             </p>
 
-            <h2 className="font-elegant text-3xl text-pearlWhite mt-12 mb-6">The Ghibli Approach: Cozy > Aggressive</h2>
+            <h2 className="font-elegant text-3xl text-pearlWhite mt-12 mb-6">The Ghibli Approach: Cozy {'>'} Aggressive</h2>
 
             <p>
               Ghibli UX flips the script. Instead of <em>demanding</em> attention, it <em>earns</em> it. Instead of overwhelming users, it invites them. Instead of manipulating behavior, it builds trust.
@@ -253,7 +253,7 @@ export default function GhibliUXArticle() {
                 <strong className="text-pearlWhite">Write like a human.</strong> Ditch the corporate jargon. Talk to users like friends, not targets.
               </li>
               <li>
-                <strong className="text-pearlWhite">Make CTAs invitations, not demands.</strong> "Let's work together" > "BOOK NOW!!!"
+                <strong className="text-pearlWhite">Make CTAs invitations, not demands.</strong> "Let's work together" {'>'} "BOOK NOW!!!"
               </li>
               <li>
                 <strong className="text-pearlWhite">Prioritize delight over conversion hacks.</strong> Subtle animations, thoughtful micro-interactions, details that make users smile.

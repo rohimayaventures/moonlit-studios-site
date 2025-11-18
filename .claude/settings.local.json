@@ -33,7 +33,9 @@
       "Bash(del compress-logo.js)",
       "Bash(git checkout:*)",
       "Bash(git restore:*)",
-      "Bash(git diff:*)"
+      "Bash(git diff:*)",
+      "Bash(test:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

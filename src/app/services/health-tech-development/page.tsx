@@ -508,7 +508,7 @@ export default function HealthTechDevelopmentPage() {
               },
               {
                 q: 'Can you integrate with our existing EHR?',
-                a: 'Case-by-case. I'm familiar with HL7 and FHIR standards and typically focus on small, read-only data flows or export/import patterns. Deep, custom integrations with systems like Epic or Cerner often require collaboration with their teams or a larger dev shop. I can help scope what's realistic for a 1-2 person studio.',
+                a: 'Case-by-case. I\'m familiar with HL7 and FHIR standards and typically focus on small, read-only data flows or export/import patterns. Deep, custom integrations with systems like Epic or Cerner often require collaboration with their teams or a larger dev shop. I can help scope what\'s realistic for a 1-2 person studio.',
               },
               {
                 q: 'How long does a typical build take?',
@@ -516,11 +516,11 @@ export default function HealthTechDevelopmentPage() {
               },
               {
                 q: 'Do you offer ongoing support?',
-                a: 'Yes! Monthly support plans starting at $300/month cover bug fixes, small enhancements, and content tweaks. This is not 24/7 enterprise-level SLA support—it's practical, ongoing partnership for small teams.',
+                a: 'Yes! Monthly support plans starting at $300/month cover bug fixes, small enhancements, and content tweaks. This is not 24/7 enterprise-level SLA support—it\'s practical, ongoing partnership for small teams.',
               },
               {
                 q: 'What makes your approach different?',
-                a: 'I'm a nurse AND a developer. I've lived the clinical workflows, charted in the trenches, and experienced the frustrations of poorly designed tech firsthand. I build small, intentional tools that actually fit into how clinicians work—not bloated software that looks good in demos but fails in practice.',
+                a: 'I\'m a nurse AND a developer. I\'ve lived the clinical workflows, charted in the trenches, and experienced the frustrations of poorly designed tech firsthand. I build small, intentional tools that actually fit into how clinicians work—not bloated software that looks good in demos but fails in practice.',
               },
             ].map((faq, i) => (
               <details
