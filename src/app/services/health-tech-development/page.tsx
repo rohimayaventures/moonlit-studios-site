@@ -7,15 +7,15 @@ import Link from 'next/link';
 // 🌊 WATERBENDER HEALING TEMPLE - IMMERSIVE SVG COMPONENTS
 
 // Healing Droplet with pulsing inner light
-const HealingDroplet = ({ className = "" }: { className?: string }) => (
-  <div className={`relative ${className}`}>
+const HealingDroplet = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div className={`relative ${className}`} style={{ animationDelay: `${delay}s` }}>
     {/* Outer glow aura */}
-    <div className="absolute inset-0 animate-pulse">
+    <div className="absolute inset-0 animate-pulse" style={{ animationDelay: `${delay}s` }}>
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-300/30 via-teal-300/20 to-sky-200/10 blur-xl" />
     </div>
 
     {/* Droplet SVG with healing light */}
-    <svg className="relative z-10 animate-floatDroplet" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+    <svg className="relative z-10 animate-floatDroplet" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" style={{ animationDelay: `${delay}s` }}>
       {/* Main water droplet */}
       <path
         d="M30 5 L45 25 Q50 35, 50 45 Q50 60, 40 70 Q30 75, 20 70 Q10 60, 10 45 Q10 35, 15 25 Z"
@@ -67,6 +67,64 @@ const RippleCircle = ({ className = "", size = "md" }: { className?: string; siz
     </div>
   );
 };
+
+// Lotus Flower - Sacred healing symbol
+const LotusFlower = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Center */}
+    <circle cx="50" cy="50" r="8" fill="#67E8F9" opacity="0.8" />
+
+    {/* Inner petals */}
+    <ellipse cx="50" cy="42" rx="6" ry="12" fill="#A5F3FC" opacity="0.6" />
+    <ellipse cx="58" cy="50" rx="12" ry="6" fill="#A5F3FC" opacity="0.6" transform="rotate(72 50 50)" />
+    <ellipse cx="50" cy="58" rx="6" ry="12" fill="#A5F3FC" opacity="0.6" transform="rotate(144 50 50)" />
+    <ellipse cx="42" cy="50" rx="12" ry="6" fill="#A5F3FC" opacity="0.6" transform="rotate(216 50 50)" />
+    <ellipse cx="50" cy="42" rx="6" ry="12" fill="#A5F3FC" opacity="0.6" transform="rotate(288 50 50)" />
+
+    {/* Outer petals */}
+    <ellipse cx="50" cy="35" rx="8" ry="16" fill="#22D3EE" opacity="0.4" />
+    <ellipse cx="65" cy="50" rx="16" ry="8" fill="#22D3EE" opacity="0.4" transform="rotate(72 50 50)" />
+    <ellipse cx="50" cy="65" rx="8" ry="16" fill="#22D3EE" opacity="0.4" transform="rotate(144 50 50)" />
+    <ellipse cx="35" cy="50" rx="16" ry="8" fill="#22D3EE" opacity="0.4" transform="rotate(216 50 50)" />
+    <ellipse cx="50" cy="35" rx="8" ry="16" fill="#22D3EE" opacity="0.4" transform="rotate(288 50 50)" />
+  </svg>
+);
+
+// Flowing water stream
+const WaterStream = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path
+      d="M100 0 Q120 50, 100 100 T100 200 T100 300 T100 400"
+      stroke="url(#streamGradient)"
+      strokeWidth="3"
+      opacity="0.3"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <path
+      d="M100 0 Q80 50, 100 100 T100 200 T100 300 T100 400"
+      stroke="url(#streamGradient)"
+      strokeWidth="2"
+      opacity="0.2"
+      fill="none"
+      strokeLinecap="round"
+    />
+    <defs>
+      <linearGradient id="streamGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#A5F3FC" stopOpacity="0.8" />
+        <stop offset="50%" stopColor="#67E8F9" stopOpacity="0.5" />
+        <stop offset="100%" stopColor="#22D3EE" stopOpacity="0.2" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
+
+// Small water bubbles
+const WaterBubbles = ({ delay = 0, className = "" }: { delay?: number; className?: string }) => (
+  <div className={`absolute ${className} pointer-events-none`} style={{ animationDelay: `${delay}s` }}>
+    <div className="w-3 h-3 rounded-full bg-cyan-200/40 animate-floatDroplet border border-cyan-300/30" />
+  </div>
+);
 
 // Protective Circle for Steps
 const ProtectiveCircle = ({ icon, color }: { icon: React.ReactNode; color: string }) => (
@@ -378,10 +436,30 @@ export default function HealthTechDevelopmentPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight relative overflow-hidden">
+      {/* 🌊 AMBIENT HEALING TEMPLE ATMOSPHERE 🌊 */}
+
       {/* Breathing Background Overlay */}
       <div className="fixed inset-0 pointer-events-none z-0 animate-breathe">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-teal-500/3 to-sky-200/5" />
       </div>
+
+      {/* Floating healing droplets throughout page */}
+      <HealingDroplet delay={0} className="absolute top-20 left-10 w-12 h-16 opacity-30 pointer-events-none" />
+      <HealingDroplet delay={1.5} className="absolute top-1/3 right-20 w-16 h-20 opacity-40 pointer-events-none" />
+      <HealingDroplet delay={3} className="absolute top-2/3 left-1/4 w-14 h-18 opacity-35 pointer-events-none" />
+      <HealingDroplet delay={2} className="absolute bottom-1/4 right-1/3 w-18 h-22 opacity-45 pointer-events-none" />
+      <HealingDroplet delay={4} className="absolute bottom-40 left-1/3 w-12 h-16 opacity-30 pointer-events-none" />
+
+      {/* Water bubbles rising */}
+      <WaterBubbles delay={0} className="top-1/4 left-1/4" />
+      <WaterBubbles delay={2} className="top-1/2 right-1/4" />
+      <WaterBubbles delay={1} className="bottom-1/3 left-1/3" />
+      <WaterBubbles delay={3} className="top-2/3 right-1/2" />
+      <WaterBubbles delay={1.5} className="bottom-1/4 left-1/2" />
+
+      {/* Flowing water streams on sides */}
+      <WaterStream className="absolute top-0 left-8 w-12 h-full opacity-15 pointer-events-none" />
+      <WaterStream className="absolute top-0 right-8 w-12 h-full opacity-15 pointer-events-none" />
 
       {/* ═══════════════════════════════════════════════════════════════════
           SECTION 1: HERO
@@ -391,8 +469,14 @@ export default function HealthTechDevelopmentPage() {
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <RippleCircle className="top-10 right-1/4" size="lg" />
           <RippleCircle className="bottom-20 left-1/3" size="md" />
-          <HealingDroplet className="absolute top-32 right-1/3 w-16 h-16" />
-          <HealingDroplet className="absolute bottom-40 left-1/4 w-20 h-20" />
+          <RippleCircle className="top-1/2 left-1/4" size="sm" />
+          <HealingDroplet delay={0} className="absolute top-32 right-1/3 w-16 h-16" />
+          <HealingDroplet delay={1} className="absolute bottom-40 left-1/4 w-20 h-20" />
+          <HealingDroplet delay={2} className="absolute top-1/2 right-1/4 w-14 h-18" />
+
+          {/* Lotus flowers floating */}
+          <LotusFlower className="absolute top-20 left-1/3 w-16 h-16 opacity-20 animate-pulse" />
+          <LotusFlower className="absolute bottom-32 right-1/4 w-20 h-20 opacity-25 animate-breathe" />
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
