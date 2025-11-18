@@ -4,7 +4,250 @@ import { useState } from 'react';
 import { Check, Sparkles, BookOpen, Feather, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-// 🦉 HOGWARTS CASTLE LIBRARY - REFINED AMBIENT COMPONENTS
+// 🏰 HOGWARTS CASTLE LIBRARY - EPIC REACT COMPONENTS
+
+// ═══════════════════════════════════════════════════════════════
+//  ARCHITECTURAL COMPONENTS - THE IMMERSIVE LIBRARY STRUCTURE
+// ═══════════════════════════════════════════════════════════════
+
+// Ornate Ceiling Vault - Painted golden medallions and patterns
+const OrnateCeiling = () => (
+  <div className="fixed top-0 left-0 right-0 h-80 pointer-events-none z-0">
+    {/* Fan vault ceiling - ornate painted patterns */}
+    <div className="absolute inset-0 bg-gradient-to-b from-[#F0C979]/20 via-[#E9C97F]/10 to-transparent" />
+
+    {/* Ornate painted medallions */}
+    <div className="absolute top-8 left-1/4 w-32 h-32 rounded-full border-4 border-[#F0C979]/40 opacity-60 animate-goldShimmer"
+         style={{ boxShadow: 'inset 0 0 30px rgba(240, 201, 121, 0.3), 0 0 40px rgba(240, 201, 121, 0.2)' }} />
+    <div className="absolute top-12 right-1/4 w-32 h-32 rounded-full border-4 border-[#E9C97F]/40 opacity-60 animate-glowPulse"
+         style={{ boxShadow: 'inset 0 0 30px rgba(233, 201, 127, 0.3), 0 0 40px rgba(233, 201, 127, 0.2)' }} />
+    <div className="absolute top-6 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full border-4 border-[#F5E7C8]/40 opacity-50 animate-cosmicFloat"
+         style={{ boxShadow: 'inset 0 0 40px rgba(245, 231, 200, 0.4), 0 0 50px rgba(245, 231, 200, 0.3)' }} />
+
+    {/* Decorative painted lines radiating */}
+    <div className="absolute top-20 left-1/3 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent rotate-12 animate-dustMotes" />
+    <div className="absolute top-20 left-1/2 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent animate-candleFlicker" />
+    <div className="absolute top-20 right-1/3 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent -rotate-12 animate-dustMotes" />
+
+    {/* Warm golden glow from ceiling */}
+    <div className="absolute inset-0 bg-gradient-radial from-[#F0C979]/30 via-[#E9C97F]/15 to-transparent blur-3xl animate-glowPulse" />
+  </div>
+);
+
+// Book Spine Component - Individual books with realistic rendering
+const BookSpine = ({
+  color,
+  darkColor,
+  height,
+  tilt,
+  index,
+  position = 'left',
+}: {
+  color: string;
+  darkColor: string;
+  height: number;
+  tilt: number;
+  index: number;
+  position?: 'left' | 'right';
+}) => {
+  const gradientId = `bookGrad${position}${index}`;
+
+  return (
+    <svg
+      className="absolute transition-transform duration-300 hover:scale-110 hover:-translate-y-1"
+      style={{
+        [position === 'left' ? 'left' : 'right']: `${(index % 8) * 12 + 2}%`,
+        bottom: `${Math.floor(index / 8) * 12 + 1}%`,
+        width: '10%',
+        height: `${height}%`,
+        opacity: 0.85,
+        transform: `rotate(${tilt}deg)`,
+      }}
+      viewBox="0 0 30 100"
+      preserveAspectRatio="none"
+    >
+      <defs>
+        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style={{ stopColor: position === 'left' ? darkColor : '#000', stopOpacity: position === 'left' ? 0.9 : 0.7 }} />
+          <stop offset="15%" style={{ stopColor: position === 'left' ? color : darkColor, stopOpacity: position === 'left' ? 1 : 0.95 }} />
+          <stop offset="50%" style={{ stopColor: color, stopOpacity: 1 }} />
+          <stop offset="85%" style={{ stopColor: position === 'left' ? darkColor : color, stopOpacity: position === 'left' ? 0.95 : 1 }} />
+          <stop offset="100%" style={{ stopColor: position === 'left' ? '#000' : darkColor, stopOpacity: position === 'left' ? 0.7 : 0.9 }} />
+        </linearGradient>
+      </defs>
+
+      {/* Main spine */}
+      <path
+        d={position === 'left'
+          ? `M 2 ${index % 3} L 28 ${(index + 1) % 3} L 28 100 L 2 ${100 - (index % 2)}`
+          : `M 2 ${(index + 1) % 3} L 28 ${index % 3} L 28 ${100 - (index % 2)} L 2 100`
+        }
+        fill={`url(#${gradientId})`}
+        stroke={darkColor}
+        strokeWidth="0.5"
+      />
+
+      {/* Gold embossed title lines */}
+      <rect x="6" y="20" width="18" height="1" fill="#F0C979" opacity="0.6" />
+      <rect x="8" y="24" width="14" height="0.5" fill="#F0C979" opacity="0.5" />
+      <rect x="10" y="27" width="10" height="0.5" fill="#F0C979" opacity="0.4" />
+
+      {/* Wear marks */}
+      <line x1="2" y1="10" x2="5" y2="10" stroke="#000" strokeWidth="0.3" opacity="0.4" />
+      <line x1="25" y1="70" x2="28" y2="72" stroke="#000" strokeWidth="0.3" opacity="0.3" />
+    </svg>
+  );
+};
+
+// Towering Bookshelf Wall - Multi-story shelves with perspective
+const ToweringBookshelfWall = ({ side }: { side: 'left' | 'right' }) => {
+  const bookColors: [string, string][] = [
+    ['#8B6F47', '#6B5837'], // Brown leather
+    ['#F0C979', '#E9C97F'], // Gold
+    ['#5B335F', '#4A2550'], // Plum
+    ['#58B6B1', '#4896A1'], // Teal
+    ['#3A2112', '#2A1808'], // Dark brown
+    ['#C4A35A', '#B4934A'], // Bronze
+  ];
+
+  const isLeft = side === 'left';
+
+  return (
+    <div className={`absolute ${isLeft ? 'left-0' : 'right-0'} top-0 bottom-0 w-1/3 opacity-70`}>
+      {/* GROUND FLOOR - Dark brown shelves with books */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-1/2 transition-transform duration-500 hover:scale-[1.02]"
+        style={{
+          background: `linear-gradient(to ${isLeft ? 'right' : 'left'}, rgba(58, 33, 18, 0.9), rgba(58, 33, 18, 0.6), rgba(58, 33, 18, 0.3))`,
+          transform: `rotateY(${isLeft ? '8deg' : '-8deg'})`,
+          transformOrigin: `${isLeft ? 'right' : 'left'} center`,
+        }}
+      >
+        {/* Shelf lines */}
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={`shelf-${i}`}
+            className="absolute left-0 right-0 animate-glowPulse"
+            style={{
+              bottom: `${i * 12}%`,
+              height: '2px',
+              background: `linear-gradient(to ${isLeft ? 'right' : 'left'}, transparent, rgba(240, 201, 121, 0.5), rgba(240, 201, 121, 0.2))`,
+              animationDelay: `${i * 0.2}s`,
+            }}
+          />
+        ))}
+
+        {/* Book spines */}
+        {Array.from({ length: 40 }).map((_, i) => {
+          const [color, darkColor] = bookColors[(i + (isLeft ? 0 : 2)) % 6];
+          const height = 8 + (i % 5) * 2;
+          const tilt = ((i % 7) - 3) * 2;
+
+          return (
+            <BookSpine
+              key={`book-${i}`}
+              color={color}
+              darkColor={darkColor}
+              height={height}
+              tilt={tilt}
+              index={i}
+              position={side}
+            />
+          );
+        })}
+      </div>
+
+      {/* SECOND FLOOR - Balcony with ornate railing */}
+      <div
+        className="absolute bottom-1/2 left-0 right-0 h-8 transition-all duration-300 hover:border-[#F0C979]"
+        style={{
+          background: `linear-gradient(to ${isLeft ? 'right' : 'left'}, rgba(139, 111, 71, 0.9), rgba(139, 111, 71, 0.5))`,
+          transform: `rotateY(${isLeft ? '8deg' : '-8deg'})`,
+          transformOrigin: `${isLeft ? 'right' : 'left'} center`,
+          borderTop: '2px solid rgba(240, 201, 121, 0.6)',
+        }}
+      >
+        {/* Balcony railing */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <div
+            key={`rail-${i}`}
+            className="absolute animate-glowPulse"
+            style={{
+              [isLeft ? 'left' : 'right']: `${i * 8}%`,
+              top: 0,
+              width: '1px',
+              height: '100%',
+              background: 'rgba(240, 201, 121, 0.5)',
+              animationDelay: `${i * 0.1}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* UPPER FLOOR - Shelves receding into shadowy ceiling */}
+      <div
+        className="absolute top-0 bottom-1/2 left-0 right-0 transition-opacity duration-500 hover:opacity-80"
+        style={{
+          background: `linear-gradient(to ${isLeft ? 'right' : 'left'}, rgba(26, 16, 20, 0.9), rgba(26, 16, 20, 0.5))`,
+          transform: `rotateY(${isLeft ? '8deg' : '-8deg'})`,
+          transformOrigin: `${isLeft ? 'right' : 'left'} center`,
+        }}
+      >
+        {/* Shelf lines */}
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={`upper-shelf-${i}`}
+            className="absolute left-0 right-0 animate-dustMotes"
+            style={{
+              bottom: `${i * 16}%`,
+              height: '1px',
+              background: `linear-gradient(to ${isLeft ? 'right' : 'left'}, transparent, rgba(240, 201, 121, 0.3))`,
+              animationDelay: `${i * 0.3}s`,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Gothic Arch Component - Massive pointed arches framing the space
+const GothicArch = ({ position }: { position: 'left' | 'right' }) => (
+  <div className={`absolute ${position === 'left' ? 'left-0' : 'right-0'} top-0 bottom-0 w-1/3 group`}>
+    {/* Left pillar */}
+    <div className="absolute left-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent animate-glowPulse" />
+
+    {/* Right pillar */}
+    <div className="absolute right-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent animate-glowPulse" />
+
+    {/* Pointed arch top */}
+    <div
+      className="absolute top-0 left-0 right-0 h-32 transition-all duration-500 group-hover:scale-105"
+      style={{
+        background: 'radial-gradient(ellipse at bottom, rgba(240, 201, 121, 0.6), transparent)',
+        clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+      }}
+    />
+  </div>
+);
+
+// Atmospheric Lighting - Warm candlelight below, mysterious shadows above
+const LibraryLighting = () => (
+  <div className="fixed inset-0 pointer-events-none z-0">
+    {/* Warm golden glow from bottom (reading lamps & candles) */}
+    <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#F0C979]/15 via-[#E9C97F]/8 to-transparent animate-glowPulse" />
+
+    {/* Dark shadows at top (mysterious vaulted ceiling) */}
+    <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-[#0D0F1E]/80 to-transparent" />
+
+    {/* Vignette effect */}
+    <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#0D0F1E]/60" />
+  </div>
+);
+
+// ═══════════════════════════════════════════════════════════════
+//  AMBIENT DECORATIVE COMPONENTS
+// ═══════════════════════════════════════════════════════════════
 
 // Floating Candle – slimmer, more realistic
 const FloatingCandle = ({
@@ -462,313 +705,26 @@ function WritingPackageCard({
 export default function GhostwritingPage() {
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-[#0D0F1E] via-[#1A1014] to-[#0D0F1E] text-[#F5E7C8] overflow-hidden">
-      {/* 🏰 HOGWARTS LIBRARY - REAL ARCHITECTURAL ATMOSPHERE */}
+      {/* 🏰 EPIC HOGWARTS LIBRARY - USING REACT COMPONENTS */}
 
-      {/* ═══════════════════════════════════════════════════════════════
-          ORNATE GOLDEN CEILING VAULT - TOP PRIORITY
-      ═══════════════════════════════════════════════════════════════ */}
-      <div className="fixed top-0 left-0 right-0 h-80 pointer-events-none z-0">
-        {/* Fan vault ceiling - ornate painted patterns */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F0C979]/20 via-[#E9C97F]/10 to-transparent" />
+      {/* Ornate golden ceiling vault with animated medallions */}
+      <OrnateCeiling />
 
-        {/* Ornate painted medallions and patterns - CSS ONLY */}
-        <div className="absolute top-8 left-1/4 w-32 h-32 rounded-full border-4 border-[#F0C979]/40 opacity-60"
-             style={{ boxShadow: 'inset 0 0 30px rgba(240, 201, 121, 0.3), 0 0 40px rgba(240, 201, 121, 0.2)' }} />
-        <div className="absolute top-12 right-1/4 w-32 h-32 rounded-full border-4 border-[#E9C97F]/40 opacity-60"
-             style={{ boxShadow: 'inset 0 0 30px rgba(233, 201, 127, 0.3), 0 0 40px rgba(233, 201, 127, 0.2)' }} />
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full border-4 border-[#F5E7C8]/40 opacity-50"
-             style={{ boxShadow: 'inset 0 0 40px rgba(245, 231, 200, 0.4), 0 0 50px rgba(245, 231, 200, 0.3)' }} />
-
-        {/* Decorative painted lines radiating */}
-        <div className="absolute top-20 left-1/3 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent rotate-12" />
-        <div className="absolute top-20 left-1/2 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent" />
-        <div className="absolute top-20 right-1/3 w-1 h-40 bg-gradient-to-b from-[#F0C979]/40 to-transparent -rotate-12" />
-
-        {/* Warm golden glow from ceiling */}
-        <div className="absolute inset-0 bg-gradient-radial from-[#F0C979]/30 via-[#E9C97F]/15 to-transparent blur-3xl" />
-      </div>
-
-      {/* ═══════════════════════════════════════════════════════════════
-          MULTI-STORY TOWERING BOOKSHELVES WITH PERSPECTIVE
-      ═══════════════════════════════════════════════════════════════ */}
+      {/* 3D Perspective container for architectural elements */}
       <div className="fixed inset-0 pointer-events-none z-0" style={{ perspective: '1000px' }}>
-        {/* LEFT WALL - Multi-story shelves with balconies */}
-        <div className="absolute left-0 top-0 bottom-0 w-1/3 opacity-70">
-          {/* GROUND FLOOR - Dark brown shelves */}
-          <div className="absolute bottom-0 left-0 right-0 h-1/2"
-               style={{
-                 background: 'linear-gradient(to right, rgba(58, 33, 18, 0.9), rgba(58, 33, 18, 0.6), rgba(58, 33, 18, 0.3))',
-                 transform: 'rotateY(8deg)',
-                 transformOrigin: 'right center'
-               }}>
-            {/* Shelf lines */}
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="absolute left-0 right-0"
-                   style={{
-                     bottom: `${i * 12}%`,
-                     height: '2px',
-                     background: 'linear-gradient(to right, transparent, rgba(240, 201, 121, 0.5), rgba(240, 201, 121, 0.2))'
-                   }} />
-            ))}
-            {/* Realistic book spines - SVG */}
-            {Array.from({ length: 40 }).map((_, i) => {
-              const colors = [
-                ['#8B6F47', '#6B5837'], // Brown leather
-                ['#F0C979', '#E9C97F'], // Gold
-                ['#5B335F', '#4A2550'], // Plum
-                ['#58B6B1', '#4896A1'], // Teal
-                ['#3A2112', '#2A1808'], // Dark brown
-                ['#C4A35A', '#B4934A'], // Bronze
-              ];
-              const [baseColor, darkColor] = colors[i % 6];
-              const height = 8 + (i % 5) * 2;
-              const tilt = ((i % 7) - 3) * 2; // -6 to +6 degrees
+        {/* Towering multi-story bookshelves on both walls */}
+        <ToweringBookshelfWall side="left" />
+        <ToweringBookshelfWall side="right" />
 
-              return (
-                <svg
-                  key={i}
-                  className="absolute"
-                  style={{
-                    left: `${(i % 8) * 12 + 2}%`,
-                    bottom: `${Math.floor(i / 8) * 12 + 1}%`,
-                    width: '10%',
-                    height: `${height}%`,
-                    opacity: 0.85,
-                    transform: `rotate(${tilt}deg)`,
-                  }}
-                  viewBox="0 0 30 100"
-                  preserveAspectRatio="none"
-                >
-                  {/* Book spine with worn edges */}
-                  <defs>
-                    <linearGradient id={`bookGrad${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style={{ stopColor: darkColor, stopOpacity: 0.9 }} />
-                      <stop offset="15%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
-                      <stop offset="50%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
-                      <stop offset="85%" style={{ stopColor: darkColor, stopOpacity: 0.95 }} />
-                      <stop offset="100%" style={{ stopColor: '#000', stopOpacity: 0.7 }} />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Main spine */}
-                  <path
-                    d={`M 2 ${i % 3} L 28 ${(i + 1) % 3} L 28 100 L 2 ${100 - (i % 2)}`}
-                    fill={`url(#bookGrad${i})`}
-                    stroke={darkColor}
-                    strokeWidth="0.5"
-                  />
-
-                  {/* Spine title lines (gold embossing) */}
-                  <rect x="6" y="20" width="18" height="1" fill="#F0C979" opacity="0.6" />
-                  <rect x="8" y="24" width="14" height="0.5" fill="#F0C979" opacity="0.5" />
-                  <rect x="10" y="27" width="10" height="0.5" fill="#F0C979" opacity="0.4" />
-
-                  {/* Wear and tear marks */}
-                  <line x1="2" y1="10" x2="5" y2="10" stroke="#000" strokeWidth="0.3" opacity="0.4" />
-                  <line x1="25" y1="70" x2="28" y2="72" stroke="#000" strokeWidth="0.3" opacity="0.3" />
-                </svg>
-              );
-            })}
-          </div>
-
-          {/* SECOND FLOOR - Balcony */}
-          <div className="absolute bottom-1/2 left-0 right-0 h-8"
-               style={{
-                 background: 'linear-gradient(to right, rgba(139, 111, 71, 0.9), rgba(139, 111, 71, 0.5))',
-                 transform: 'rotateY(8deg)',
-                 transformOrigin: 'right center',
-                 borderTop: '2px solid rgba(240, 201, 121, 0.6)'
-               }}>
-            {/* Balcony railing */}
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="absolute"
-                   style={{
-                     left: `${i * 8}%`,
-                     top: 0,
-                     width: '1px',
-                     height: '100%',
-                     background: 'rgba(240, 201, 121, 0.5)'
-                   }} />
-            ))}
-          </div>
-
-          {/* UPPER FLOOR - More shelves receding into shadow */}
-          <div className="absolute top-0 bottom-1/2 left-0 right-0"
-               style={{
-                 background: 'linear-gradient(to right, rgba(26, 16, 20, 0.9), rgba(26, 16, 20, 0.5))',
-                 transform: 'rotateY(8deg)',
-                 transformOrigin: 'right center'
-               }}>
-            {/* Shelf lines */}
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="absolute left-0 right-0"
-                   style={{
-                     bottom: `${i * 16}%`,
-                     height: '1px',
-                     background: 'linear-gradient(to right, transparent, rgba(240, 201, 121, 0.3))'
-                   }} />
-            ))}
-          </div>
-        </div>
-
-        {/* RIGHT WALL - Mirror of left */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-70">
-          {/* GROUND FLOOR */}
-          <div className="absolute bottom-0 left-0 right-0 h-1/2"
-               style={{
-                 background: 'linear-gradient(to left, rgba(58, 33, 18, 0.9), rgba(58, 33, 18, 0.6), rgba(58, 33, 18, 0.3))',
-                 transform: 'rotateY(-8deg)',
-                 transformOrigin: 'left center'
-               }}>
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="absolute left-0 right-0"
-                   style={{
-                     bottom: `${i * 12}%`,
-                     height: '2px',
-                     background: 'linear-gradient(to left, transparent, rgba(240, 201, 121, 0.5), rgba(240, 201, 121, 0.2))'
-                   }} />
-            ))}
-            {/* Realistic book spines - SVG */}
-            {Array.from({ length: 40 }).map((_, i) => {
-              const colors = [
-                ['#8B6F47', '#6B5837'], // Brown leather
-                ['#F0C979', '#E9C97F'], // Gold
-                ['#5B335F', '#4A2550'], // Plum
-                ['#58B6B1', '#4896A1'], // Teal
-                ['#3A2112', '#2A1808'], // Dark brown
-                ['#C4A35A', '#B4934A'], // Bronze
-              ];
-              const [baseColor, darkColor] = colors[(i + 2) % 6]; // Offset for variety
-              const height = 8 + (i % 5) * 2;
-              const tilt = ((i % 7) - 3) * 2; // -6 to +6 degrees
-
-              return (
-                <svg
-                  key={i}
-                  className="absolute"
-                  style={{
-                    right: `${(i % 8) * 12 + 2}%`,
-                    bottom: `${Math.floor(i / 8) * 12 + 1}%`,
-                    width: '10%',
-                    height: `${height}%`,
-                    opacity: 0.85,
-                    transform: `rotate(${tilt}deg)`,
-                  }}
-                  viewBox="0 0 30 100"
-                  preserveAspectRatio="none"
-                >
-                  {/* Book spine with worn edges */}
-                  <defs>
-                    <linearGradient id={`bookGradR${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" style={{ stopColor: '#000', stopOpacity: 0.7 }} />
-                      <stop offset="15%" style={{ stopColor: darkColor, stopOpacity: 0.95 }} />
-                      <stop offset="50%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
-                      <stop offset="85%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: darkColor, stopOpacity: 0.9 }} />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Main spine */}
-                  <path
-                    d={`M 2 ${(i + 1) % 3} L 28 ${i % 3} L 28 ${100 - (i % 2)} L 2 100`}
-                    fill={`url(#bookGradR${i})`}
-                    stroke={darkColor}
-                    strokeWidth="0.5"
-                  />
-
-                  {/* Spine title lines (gold embossing) */}
-                  <rect x="6" y="20" width="18" height="1" fill="#F0C979" opacity="0.6" />
-                  <rect x="8" y="24" width="14" height="0.5" fill="#F0C979" opacity="0.5" />
-                  <rect x="10" y="27" width="10" height="0.5" fill="#F0C979" opacity="0.4" />
-
-                  {/* Wear and tear marks */}
-                  <line x1="2" y1="10" x2="5" y2="10" stroke="#000" strokeWidth="0.3" opacity="0.4" />
-                  <line x1="25" y1="70" x2="28" y2="72" stroke="#000" strokeWidth="0.3" opacity="0.3" />
-                </svg>
-              );
-            })}
-          </div>
-
-          {/* SECOND FLOOR - Balcony */}
-          <div className="absolute bottom-1/2 left-0 right-0 h-8"
-               style={{
-                 background: 'linear-gradient(to left, rgba(139, 111, 71, 0.9), rgba(139, 111, 71, 0.5))',
-                 transform: 'rotateY(-8deg)',
-                 transformOrigin: 'left center',
-                 borderTop: '2px solid rgba(240, 201, 121, 0.6)'
-               }}>
-            {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="absolute"
-                   style={{
-                     right: `${i * 8}%`,
-                     top: 0,
-                     width: '1px',
-                     height: '100%',
-                     background: 'rgba(240, 201, 121, 0.5)'
-                   }} />
-            ))}
-          </div>
-
-          {/* UPPER FLOOR */}
-          <div className="absolute top-0 bottom-1/2 left-0 right-0"
-               style={{
-                 background: 'linear-gradient(to left, rgba(26, 16, 20, 0.9), rgba(26, 16, 20, 0.5))',
-                 transform: 'rotateY(-8deg)',
-                 transformOrigin: 'left center'
-               }}>
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="absolute left-0 right-0"
-                   style={{
-                     bottom: `${i * 16}%`,
-                     height: '1px',
-                     background: 'linear-gradient(to left, transparent, rgba(240, 201, 121, 0.3))'
-                   }} />
-            ))}
-          </div>
-        </div>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            MASSIVE GOTHIC ARCHES FRAMING THE SPACE
-        ═══════════════════════════════════════════════════════════════ */}
+        {/* Massive Gothic arches framing the center space */}
         <div className="absolute top-0 left-1/4 right-1/4 h-2/3 opacity-60">
-          {/* Large pointed arch - LEFT */}
-          <div className="absolute left-0 top-0 bottom-0 w-1/3">
-            <div className="absolute left-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent" />
-            <div className="absolute right-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent" />
-            <div className="absolute top-0 left-0 right-0 h-32"
-                 style={{
-                   background: 'radial-gradient(ellipse at bottom, rgba(240, 201, 121, 0.6), transparent)',
-                   clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
-                 }} />
-          </div>
-
-          {/* Large pointed arch - RIGHT */}
-          <div className="absolute right-0 top-0 bottom-0 w-1/3">
-            <div className="absolute left-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent" />
-            <div className="absolute right-0 bottom-0 w-1 h-full bg-gradient-to-t from-[#8B6F47] via-[#F0C979]/60 to-transparent" />
-            <div className="absolute top-0 left-0 right-0 h-32"
-                 style={{
-                   background: 'radial-gradient(ellipse at bottom, rgba(240, 201, 121, 0.6), transparent)',
-                   clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)'
-                 }} />
-          </div>
+          <GothicArch position="left" />
+          <GothicArch position="right" />
         </div>
-
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          LIGHTING ATMOSPHERE - Warm below, shadowy above
-      ═══════════════════════════════════════════════════════════════ */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Warm golden glow from bottom (reading lamps) */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#F0C979]/15 via-[#E9C97F]/8 to-transparent" />
-
-        {/* Dark shadows at top (mysterious ceiling) */}
-        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-[#0D0F1E]/80 to-transparent" />
-
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#0D0F1E]/60" />
-      </div>
+      {/* Atmospheric lighting with warm candlelight and mysterious shadows */}
+      <LibraryLighting />
 
       {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS – CALMER, MORE CINEMATIC */}
 
