@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, F
 //  HOGWARTS LIBRARY SVG COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Floating Candle with realistic flame
+// Floating Candle - minimalist glow
 const FloatingCandle = ({
   className = "",
   delay = 0,
@@ -19,197 +19,201 @@ const FloatingCandle = ({
     className={`absolute ${className} pointer-events-none animate-candleFlicker`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <svg
-      width="22"
-      height="80"
-      viewBox="0 0 22 80"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Glow halo */}
-      <ellipse
-        cx="11"
-        cy="10"
-        rx="14"
-        ry="10"
-        fill="#F0C979"
-        opacity="0.12"
-      />
-      {/* Flame */}
-      <path
-        d="M11 3 C9 7 9 10 11 12 C13 10 13 7 11 3Z"
-        fill="url(#flameGradient)"
-        opacity="0.9"
-      />
-      {/* Candle body */}
-      <rect
-        x="6"
-        y="12"
-        width="10"
-        height="50"
-        rx="2"
-        fill="url(#waxGradient)"
-      />
-      {/* Wick */}
-      <rect x="10.5" y="9" width="1" height="4" fill="#3B2A1A" opacity="0.8" />
-      {/* Drips */}
-      <path
-        d="M7 20 C8 22 9 22 10 20 C10.5 22.5 11.5 22.5 12 20 C13 22 14 22 15 20"
-        fill="#F5E7C8"
-        opacity="0.9"
-      />
-      <defs>
-        <linearGradient
-          id="flameGradient"
-          x1="11"
-          y1="3"
-          x2="11"
-          y2="12"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0" stopColor="#FFEBC2" />
-          <stop offset="0.5" stopColor="#F0C979" />
-          <stop offset="1" stopColor="#F29B4C" />
-        </linearGradient>
-        <linearGradient
-          id="waxGradient"
-          x1="6"
-          y1="12"
-          x2="16"
-          y2="62"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0" stopColor="#F5E7C8" />
-          <stop offset="1" stopColor="#E1C489" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <div className="relative w-16 h-16">
+      {/* Outer glow */}
+      <div className="absolute inset-0 rounded-full bg-[#F0C979]/20 blur-xl" />
+      {/* Inner glow */}
+      <div className="absolute inset-2 rounded-full bg-[#F0C979]/40 blur-md" />
+      {/* Core light */}
+      <div className="absolute inset-4 rounded-full bg-[#F0C979]/60" />
+    </div>
   </div>
 );
 
-// Floating Book - closed book
+// Floating Book - open book with glow
 const FloatingBook = ({
   className = "",
   delay = 0,
-  tilt = -8,
 }: {
   className?: string;
   delay?: number;
-  tilt?: number;
 }) => (
   <div
-    className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
-    style={{
-      animationDelay: `${delay}s`,
-      transformOrigin: "center",
-      rotate: `${tilt}deg`,
-    }}
+    className={`absolute ${className} pointer-events-none animate-glowPulse`}
+    style={{ animationDelay: `${delay}s` }}
   >
     <svg
-      width="72"
-      height="52"
-      viewBox="0 0 72 52"
+      width="90"
+      height="60"
+      viewBox="0 0 90 60"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Shadow */}
+      {/* Glow effect */}
+      <defs>
+        <filter id={`bookGlow-${delay}`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+        </filter>
+      </defs>
+
+      {/* Outer glow */}
       <ellipse
-        cx="36"
-        cy="46"
-        rx="26"
-        ry="6"
-        fill="#000000"
-        opacity="0.25"
-      />
-      {/* Pages block */}
-      <path
-        d="M10 10 L40 8 L62 12 L62 40 L32 42 L10 38 Z"
-        fill="#F8F1E2"
-      />
-      {/* Cover */}
-      <path
-        d="M10 10 L40 8 L40 36 L10 38 Z"
-        fill="#5B335F"
-        opacity="0.95"
-      />
-      {/* Spine highlight */}
-      <path
-        d="M12 11 L14 11 L14 37 L12 37 Z"
+        cx="45"
+        cy="30"
+        rx="40"
+        ry="25"
         fill="#F0C979"
-        opacity="0.65"
+        opacity="0.15"
+        filter={`url(#bookGlow-${delay})`}
       />
-      {/* Top page lines */}
+
+      {/* Left pages */}
       <path
-        d="M40 12 L60 14"
-        stroke="#D5C7B5"
-        strokeWidth="1"
-        opacity="0.7"
+        d="M10 15 C25 5 35 8 45 12 L45 42 C35 38 25 37 10 41 Z"
+        fill="#F5E7C8"
+        opacity="0.6"
       />
+      {/* Right pages */}
       <path
-        d="M40 16 L60 18"
-        stroke="#D5C7B5"
-        strokeWidth="1"
-        opacity="0.7"
+        d="M45 12 C55 8 65 5 80 15 L80 41 C65 37 55 38 45 42 Z"
+        fill="#F5E7C8"
+        opacity="0.6"
       />
+      {/* Center fold */}
+      <path
+        d="M45 12 L45 42"
+        stroke="#F0C979"
+        strokeWidth="1"
+        opacity="0.4"
+      />
+      {/* Faint text lines */}
+      <path d="M16 22 L36 24" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
+      <path d="M16 28 L34 30" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
+      <path d="M54 24 L74 22" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
+      <path d="M56 30 L74 28" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
     </svg>
   </div>
 );
 
-// Floating Quill
-const FloatingQuill = ({
+// Flying Skeleton Key with Dragonfly Wings
+const FlyingKey = ({
   className = "",
   delay = 0,
+  keyShape = "ornate",
 }: {
   className?: string;
   delay?: number;
-}) => (
-  <div
-    className={`absolute ${className} pointer-events-none animate-quillFloat`}
-    style={{ animationDelay: `${delay}s` }}
-  >
-    <svg
-      width="60"
-      height="80"
-      viewBox="0 0 60 80"
-      xmlns="http://www.w3.org/2000/svg"
+  keyShape?: "ornate" | "simple" | "gothic";
+}) => {
+  const keyPaths = {
+    ornate: "M10 40 L10 15 C10 10 15 5 20 5 C25 5 30 10 30 15 L30 40",
+    simple: "M15 40 L15 10 C15 5 20 5 25 5 C30 5 30 10 30 10 L30 40",
+    gothic: "M12 40 L12 12 C12 7 17 3 22 3 C27 3 28 8 28 12 L28 40",
+  };
+
+  return (
+    <div
+      className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
+      style={{ animationDelay: `${delay}s` }}
     >
-      {/* Feather */}
-      <path
-        d="M30 5 Q25 15 22 30 Q20 45 18 60 L20 60 Q22 45 25 30 Q28 15 30 5Z"
-        fill="#F5E7C8"
-        opacity="0.9"
-      />
-      <path
-        d="M30 5 Q35 15 38 30 Q40 45 42 60 L40 60 Q38 45 35 30 Q32 15 30 5Z"
-        fill="#F8F1E2"
-        opacity="0.85"
-      />
-      {/* Quill shaft */}
-      <line
-        x1="30"
-        y1="5"
-        x2="30"
-        y2="60"
-        stroke="#8B6F47"
-        strokeWidth="1.5"
-        opacity="0.8"
-      />
-      {/* Nib */}
-      <path
-        d="M28 58 L30 70 L32 58 Z"
-        fill="#3B2A1A"
-        opacity="0.9"
-      />
-      <line
-        x1="30"
-        y1="58"
-        x2="30"
-        y2="70"
-        stroke="#F0C979"
-        strokeWidth="0.5"
-        opacity="0.6"
-      />
-    </svg>
-  </div>
-);
+      <svg
+        width="70"
+        height="90"
+        viewBox="0 0 70 90"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Dragonfly wings - left pair */}
+        <ellipse
+          cx="15"
+          cy="25"
+          rx="12"
+          ry="18"
+          fill="#F0C979"
+          opacity="0.2"
+          transform="rotate(-20 15 25)"
+        />
+        <ellipse
+          cx="15"
+          cy="25"
+          rx="10"
+          ry="15"
+          fill="none"
+          stroke="#F0C979"
+          strokeWidth="0.5"
+          opacity="0.4"
+          transform="rotate(-20 15 25)"
+        />
+
+        {/* Dragonfly wings - right pair */}
+        <ellipse
+          cx="55"
+          cy="25"
+          rx="12"
+          ry="18"
+          fill="#F0C979"
+          opacity="0.2"
+          transform="rotate(20 55 25)"
+        />
+        <ellipse
+          cx="55"
+          cy="25"
+          rx="10"
+          ry="15"
+          fill="none"
+          stroke="#F0C979"
+          strokeWidth="0.5"
+          opacity="0.4"
+          transform="rotate(20 55 25)"
+        />
+
+        {/* Key shaft */}
+        <path
+          d={keyPaths[keyShape]}
+          fill="none"
+          stroke="#8B6F47"
+          strokeWidth="2"
+          opacity="0.7"
+        />
+
+        {/* Key head (circular) */}
+        <circle
+          cx="20"
+          cy="12"
+          r="8"
+          fill="none"
+          stroke="#8B6F47"
+          strokeWidth="2"
+          opacity="0.7"
+        />
+        <circle
+          cx="20"
+          cy="12"
+          r="4"
+          fill="none"
+          stroke="#8B6F47"
+          strokeWidth="1.5"
+          opacity="0.7"
+        />
+
+        {/* Key teeth */}
+        <path
+          d="M10 38 L5 38 L5 42 L10 42 M15 40 L10 40 L10 44 L15 44 M20 38 L15 38 L15 42 L20 42"
+          fill="#8B6F47"
+          opacity="0.7"
+        />
+
+        {/* Subtle glow */}
+        <ellipse
+          cx="35"
+          cy="25"
+          rx="30"
+          ry="40"
+          fill="#F0C979"
+          opacity="0.1"
+        />
+      </svg>
+    </div>
+  );
+};
 
 export default function GhostwritingPage() {
   return (
@@ -217,7 +221,7 @@ export default function GhostwritingPage() {
 
       {/* HOGWARTS LIBRARY AMBIENT ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Left side candles */}
+        {/* Candle glows - minimalist background lighting */}
         <FloatingCandle className="top-28 left-[5%]" delay={0} />
         <FloatingCandle className="top-40 left-[8%]" delay={0.5} />
         <FloatingCandle className="top-52 left-[6%]" delay={1.0} />
@@ -226,7 +230,6 @@ export default function GhostwritingPage() {
         <FloatingCandle className="top-[55%] left-[5%]" delay={2.5} />
         <FloatingCandle className="top-[65%] left-[8%]" delay={3.0} />
 
-        {/* Right side candles */}
         <FloatingCandle className="top-32 right-[6%]" delay={0.3} />
         <FloatingCandle className="top-44 right-[9%]" delay={0.8} />
         <FloatingCandle className="top-56 right-[7%]" delay={1.3} />
@@ -235,16 +238,19 @@ export default function GhostwritingPage() {
         <FloatingCandle className="top-[58%] right-[6%]" delay={2.8} />
         <FloatingCandle className="top-[68%] right-[9%]" delay={3.3} />
 
-        {/* Floating books */}
+        {/* Floating open books with glow */}
         <FloatingBook className="top-36 left-[15%]" delay={0} />
         <FloatingBook className="top-48 right-[18%]" delay={1.2} />
         <FloatingBook className="top-[42%] left-[20%]" delay={2.4} />
         <FloatingBook className="top-[55%] right-[22%]" delay={3.6} />
 
-        {/* Floating quills */}
-        <FloatingQuill className="top-44 left-[25%]" delay={0.5} />
-        <FloatingQuill className="top-[38%] right-[28%]" delay={1.8} />
-        <FloatingQuill className="top-[62%] left-[24%]" delay={3.2} />
+        {/* Flying skeleton keys with dragonfly wings */}
+        <FlyingKey className="top-24 left-[18%]" delay={0.5} keyShape="ornate" />
+        <FlyingKey className="top-35 right-[25%]" delay={1.2} keyShape="gothic" />
+        <FlyingKey className="top-[38%] left-[28%]" delay={1.8} keyShape="simple" />
+        <FlyingKey className="top-[52%] right-[20%]" delay={2.5} keyShape="ornate" />
+        <FlyingKey className="top-[62%] left-[22%]" delay={3.2} keyShape="gothic" />
+        <FlyingKey className="top-[72%] right-[15%]" delay={3.9} keyShape="simple" />
 
         {/* Dust motes */}
         <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
@@ -426,8 +432,8 @@ export default function GhostwritingPage() {
 
           {/* Blog Posts & Content */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Blog Posts & Content</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Blog Posts & Content</h3>
+            <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
                 price="$400"
@@ -456,8 +462,8 @@ export default function GhostwritingPage() {
 
           {/* Newsletter Writing */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Newsletter Writing</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Newsletter Writing</h3>
+            <div className="flex justify-center">
               <PackageCard
                 title="Monthly"
                 price="$1,200"
@@ -474,8 +480,8 @@ export default function GhostwritingPage() {
 
           {/* Website Copy */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Website Copy</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Website Copy</h3>
+            <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
                 price="$1,500"
@@ -504,8 +510,8 @@ export default function GhostwritingPage() {
 
           {/* Cookbooks */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Cookbook Ghostwriting</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Cookbook Ghostwriting</h3>
+            <div className="flex justify-center">
               <PackageCard
                 title="Full Book"
                 price="$8,000"
@@ -523,8 +529,8 @@ export default function GhostwritingPage() {
 
           {/* Memoirs & Creative Nonfiction */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Memoir / Creative Nonfiction</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Memoir / Creative Nonfiction</h3>
+            <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
                 price="$12,000"
@@ -555,8 +561,8 @@ export default function GhostwritingPage() {
 
           {/* Business Books */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979]">Business / Leadership Books</h3>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Business / Leadership Books</h3>
+            <div className="flex justify-center">
               <PackageCard
                 title="Full Book"
                 price="$25,000"
@@ -763,7 +769,7 @@ function PackageCard({
   popular?: boolean;
 }) {
   return (
-    <div className="relative h-full rounded-3xl border border-[#F0C979]/20 bg-[#121528]/40 backdrop-blur-sm px-6 py-6 flex flex-col gap-4 hover:border-[#F0C979]/40 transition-all hover:-translate-y-1">
+    <div className="relative h-full w-full max-w-sm rounded-3xl border border-[#F0C979]/20 bg-[#121528]/40 backdrop-blur-sm px-6 py-6 flex flex-col gap-4 hover:border-[#F0C979]/40 transition-all hover:-translate-y-1">
       {popular && (
         <span className="absolute -top-3 left-5 inline-flex rounded-full bg-gradient-to-r from-[#F0C979] to-[#E9C97F] px-3 py-1 text-[11px] font-semibold text-[#121528] shadow-lg">
           MOST POPULAR
