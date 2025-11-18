@@ -1,27 +1,258 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, Feather } from "lucide-react";
+import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, Feather, ChevronDown } from "lucide-react";
+
+// ═══════════════════════════════════════════════════════════════
+//  HOGWARTS LIBRARY SVG COMPONENTS
+// ═══════════════════════════════════════════════════════════════
+
+// Floating Candle with realistic flame
+const FloatingCandle = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-candleFlicker`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg
+      width="22"
+      height="80"
+      viewBox="0 0 22 80"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Glow halo */}
+      <ellipse
+        cx="11"
+        cy="10"
+        rx="14"
+        ry="10"
+        fill="#F0C979"
+        opacity="0.12"
+      />
+      {/* Flame */}
+      <path
+        d="M11 3 C9 7 9 10 11 12 C13 10 13 7 11 3Z"
+        fill="url(#flameGradient)"
+        opacity="0.9"
+      />
+      {/* Candle body */}
+      <rect
+        x="6"
+        y="12"
+        width="10"
+        height="50"
+        rx="2"
+        fill="url(#waxGradient)"
+      />
+      {/* Wick */}
+      <rect x="10.5" y="9" width="1" height="4" fill="#3B2A1A" opacity="0.8" />
+      {/* Drips */}
+      <path
+        d="M7 20 C8 22 9 22 10 20 C10.5 22.5 11.5 22.5 12 20 C13 22 14 22 15 20"
+        fill="#F5E7C8"
+        opacity="0.9"
+      />
+      <defs>
+        <linearGradient
+          id="flameGradient"
+          x1="11"
+          y1="3"
+          x2="11"
+          y2="12"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#FFEBC2" />
+          <stop offset="0.5" stopColor="#F0C979" />
+          <stop offset="1" stopColor="#F29B4C" />
+        </linearGradient>
+        <linearGradient
+          id="waxGradient"
+          x1="6"
+          y1="12"
+          x2="16"
+          y2="62"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#F5E7C8" />
+          <stop offset="1" stopColor="#E1C489" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+);
+
+// Floating Book - closed book
+const FloatingBook = ({
+  className = "",
+  delay = 0,
+  tilt = -8,
+}: {
+  className?: string;
+  delay?: number;
+  tilt?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
+    style={{
+      animationDelay: `${delay}s`,
+      transformOrigin: "center",
+      rotate: `${tilt}deg`,
+    }}
+  >
+    <svg
+      width="72"
+      height="52"
+      viewBox="0 0 72 52"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Shadow */}
+      <ellipse
+        cx="36"
+        cy="46"
+        rx="26"
+        ry="6"
+        fill="#000000"
+        opacity="0.25"
+      />
+      {/* Pages block */}
+      <path
+        d="M10 10 L40 8 L62 12 L62 40 L32 42 L10 38 Z"
+        fill="#F8F1E2"
+      />
+      {/* Cover */}
+      <path
+        d="M10 10 L40 8 L40 36 L10 38 Z"
+        fill="#5B335F"
+        opacity="0.95"
+      />
+      {/* Spine highlight */}
+      <path
+        d="M12 11 L14 11 L14 37 L12 37 Z"
+        fill="#F0C979"
+        opacity="0.65"
+      />
+      {/* Top page lines */}
+      <path
+        d="M40 12 L60 14"
+        stroke="#D5C7B5"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+      <path
+        d="M40 16 L60 18"
+        stroke="#D5C7B5"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+    </svg>
+  </div>
+);
+
+// Floating Quill
+const FloatingQuill = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-quillFloat`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg
+      width="60"
+      height="80"
+      viewBox="0 0 60 80"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Feather */}
+      <path
+        d="M30 5 Q25 15 22 30 Q20 45 18 60 L20 60 Q22 45 25 30 Q28 15 30 5Z"
+        fill="#F5E7C8"
+        opacity="0.9"
+      />
+      <path
+        d="M30 5 Q35 15 38 30 Q40 45 42 60 L40 60 Q38 45 35 30 Q32 15 30 5Z"
+        fill="#F8F1E2"
+        opacity="0.85"
+      />
+      {/* Quill shaft */}
+      <line
+        x1="30"
+        y1="5"
+        x2="30"
+        y2="60"
+        stroke="#8B6F47"
+        strokeWidth="1.5"
+        opacity="0.8"
+      />
+      {/* Nib */}
+      <path
+        d="M28 58 L30 70 L32 58 Z"
+        fill="#3B2A1A"
+        opacity="0.9"
+      />
+      <line
+        x1="30"
+        y1="58"
+        x2="30"
+        y2="70"
+        stroke="#F0C979"
+        strokeWidth="0.5"
+        opacity="0.6"
+      />
+    </svg>
+  </div>
+);
 
 export default function GhostwritingPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#0D0F1E] via-[#1A1014] to-[#0D0F1E] text-[#F5E7C8] overflow-hidden relative">
 
-      {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS */}
-
-      {/* Floating candles */}
+      {/* HOGWARTS LIBRARY AMBIENT ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-32 left-[8%] w-2 h-16 bg-gradient-to-b from-[#F0C979]/60 to-transparent rounded-full blur-sm animate-candleFlicker" />
-        <div className="absolute top-40 right-[10%] w-2 h-16 bg-gradient-to-b from-[#F5E7C8]/50 to-transparent rounded-full blur-sm animate-candleFlicker" style={{ animationDelay: '0.7s' }} />
-        <div className="absolute top-56 left-[12%] w-2 h-16 bg-gradient-to-b from-[#E9C97F]/55 to-transparent rounded-full blur-sm animate-candleFlicker" style={{ animationDelay: '1.4s' }} />
+        {/* Left side candles */}
+        <FloatingCandle className="top-28 left-[5%]" delay={0} />
+        <FloatingCandle className="top-40 left-[8%]" delay={0.5} />
+        <FloatingCandle className="top-52 left-[6%]" delay={1.0} />
+        <FloatingCandle className="top-64 left-[9%]" delay={1.5} />
+        <FloatingCandle className="top-[45%] left-[7%]" delay={2.0} />
+        <FloatingCandle className="top-[55%] left-[5%]" delay={2.5} />
+        <FloatingCandle className="top-[65%] left-[8%]" delay={3.0} />
+
+        {/* Right side candles */}
+        <FloatingCandle className="top-32 right-[6%]" delay={0.3} />
+        <FloatingCandle className="top-44 right-[9%]" delay={0.8} />
+        <FloatingCandle className="top-56 right-[7%]" delay={1.3} />
+        <FloatingCandle className="top-68 right-[10%]" delay={1.8} />
+        <FloatingCandle className="top-[48%] right-[8%]" delay={2.3} />
+        <FloatingCandle className="top-[58%] right-[6%]" delay={2.8} />
+        <FloatingCandle className="top-[68%] right-[9%]" delay={3.3} />
+
+        {/* Floating books */}
+        <FloatingBook className="top-36 left-[15%]" delay={0} />
+        <FloatingBook className="top-48 right-[18%]" delay={1.2} />
+        <FloatingBook className="top-[42%] left-[20%]" delay={2.4} />
+        <FloatingBook className="top-[55%] right-[22%]" delay={3.6} />
+
+        {/* Floating quills */}
+        <FloatingQuill className="top-44 left-[25%]" delay={0.5} />
+        <FloatingQuill className="top-[38%] right-[28%]" delay={1.8} />
+        <FloatingQuill className="top-[62%] left-[24%]" delay={3.2} />
 
         {/* Dust motes */}
-        <div className="absolute top-[40%] left-[35%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
-        <div className="absolute top-[45%] right-[30%] w-1 h-1 rounded-full bg-[#F5E7C8]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
-        <div className="absolute top-[52%] left-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
-
-        {/* Owl */}
-        <div className="absolute top-20 right-[6%] text-4xl opacity-60 animate-owlFloat hidden lg:block">🦉</div>
+        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
+        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#F5E7C8]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
+        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
+        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#F5E7C8]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
+        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#F5E7C8]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
+        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
       </div>
 
       {/* Warm library glow from bottom */}
@@ -91,11 +322,11 @@ export default function GhostwritingPage() {
         </div>
       </section>
 
-      {/* Divider with wax seal */}
+      {/* Divider with burgundy wax seal */}
       <div className="relative my-16 h-px mx-auto max-w-4xl">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] border-2 border-[#121528]/20 flex items-center justify-center shadow-lg">
-          <span className="text-xs font-bold text-[#121528]">M</span>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-gradient-to-br from-[#8B2635] to-[#6B1A28] border-2 border-[#121528]/20 flex items-center justify-center shadow-lg">
+          <span className="text-xs font-bold text-[#F5E7C8]">M</span>
         </div>
       </div>
 
@@ -104,22 +335,76 @@ export default function GhostwritingPage() {
         <div className="mx-auto max-w-6xl space-y-8">
           <SectionHeader
             eyebrow="Who this is for"
-            title="Strategic writing partnerships — not one-off word dumps."
+            title="Strategic writing partnerships"
             subtitle="You bring the vision, voice notes, and lived experience. I bring narrative structure, clinical precision, and a little bit of magical chaos."
           />
 
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             <AudienceCard
               label="Aspiring Authors"
-              body="You have a book inside you—memoir, health, cookbook, or leadership—but need a partner to organize your ideas and carry the heavy writing."
+              body="Have a book idea but need help bringing it to life with structure, voice, and polish"
             />
             <AudienceCard
               label="Busy Founders"
-              body="You're leading a company and don't have 20 spare hours a week to write. We turn your brain dumps, interviews, and calls into polished assets."
+              body="Want to share your story or expertise but didn't have time to write it yourself"
             />
             <AudienceCard
               label="Healthcare Leaders"
-              body="Nurses, physicians, and health innovators who want evidence-based stories that still feel deeply human, trauma-informed, and safe."
+              body="Need thought leadership content that balances clinical precision with human warmth"
+            />
+            <AudienceCard
+              label="Creative Entrepreneurs"
+              body="Looking for ongoing blog posts, newsletters, or content engines that sound like you"
+            />
+            <AudienceCard
+              label="Cookbook Creators"
+              body="Have recipes and a vision—need someone to craft the narrative and structure"
+            />
+            <AudienceCard
+              label="Product Launchers"
+              body="Want compelling launch copy, landing pages, and storytelling that sells without feeling salesy"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="relative my-16 h-px mx-auto max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
+      </div>
+
+      {/* HOW IT WORKS */}
+      <section className="px-6 sm:px-10 lg:px-16 pb-16 relative z-10">
+        <div className="mx-auto max-w-6xl space-y-10">
+          <SectionHeader
+            eyebrow="The process"
+            title="How we'll work together"
+          />
+
+          <div className="grid gap-8 md:grid-cols-3">
+            <ProcessCard
+              number="1"
+              title="Discovery"
+              subtitle="Uncover Your Story"
+              body="We start with a conversation—your vision, audience, goals, and tone. I'll ask the right questions to understand your story."
+              icon={<BookOpen className="w-8 h-8 text-[#F0C979]" />}
+              color="[#F0C979]"
+            />
+            <ProcessCard
+              number="2"
+              title="Craft & Refine"
+              subtitle="Write & Iterate"
+              body="I'll write the first draft, share it for feedback, and refine until it sounds unmistakably you."
+              icon={<Feather className="w-8 h-8 text-[#58B6B1]" />}
+              color="[#58B6B1]"
+            />
+            <ProcessCard
+              number="3"
+              title="Deliver & Launch"
+              subtitle="Publish & Shine"
+              body="Receive polished, ready-to-publish work. For books, I'll guide you through self-publishing or trad-pub prep."
+              icon={<Sparkles className="w-8 h-8 text-[#E9C97F]" />}
+              color="[#E9C97F]"
             />
           </div>
         </div>
@@ -132,101 +417,175 @@ export default function GhostwritingPage() {
 
       {/* PACKAGES */}
       <section id="packages" className="px-6 sm:px-10 lg:px-16 pb-20 relative z-10">
-        <div className="mx-auto max-w-6xl space-y-8">
+        <div className="mx-auto max-w-7xl space-y-8">
           <SectionHeader
             eyebrow="Ways we can write together"
             title="Choose your storytelling container"
             subtitle="We'll tailor exact scope + investment on a discovery call, but here's how most clients work with me."
           />
 
-          <div className="grid gap-6 lg:grid-cols-3">
-            <PackageCard
-              badge="Flagship"
-              title="Signature Book Build"
-              price="Custom proposal"
-              idealFor="Authors & founders ready to turn an idea into a full manuscript."
-              bullets={[
-                "Book strategy, outline & chapter map",
-                "Recorded interviews + voice-note capture",
-                "2–3 rounds of collaborative revisions",
-                "Launch-aligned back matter & reader journey",
-              ]}
-            />
-            <PackageCard
-              title="Ghostwriting Retainer"
-              price="Monthly / quarterly"
-              idealFor="Leaders who want an ongoing, done-with-you content engine."
-              bullets={[
-                "Thought leadership articles & LinkedIn posts",
-                "Email sequences, launch copy & nurture flows",
-                "Light strategy support around each campaign",
-                "Slack/voice note access for quick content turns",
-              ]}
-            />
-            <PackageCard
-              title="Editorial Studio Day"
-              price="Day-rate container"
-              idealFor="When you need an intensive burst of focused writing magic."
-              bullets={[
-                "4–6 hour deep-dive sprint (virtual)",
-                "Audit + refine existing drafts or assets",
-                "Tighten voice, structure, and storytelling",
-                "Clear next steps + content roadmap",
-              ]}
-            />
+          {/* Blog Posts & Content */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Blog Posts & Content</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Essential"
+                price="$400"
+                features={[
+                  "1 blog post (800-1200 words)",
+                  "SEO keyword integration",
+                  "1 round of revisions",
+                  "Ready-to-publish formatting",
+                ]}
+                ideal="Founders, creators, ongoing content needs"
+              />
+              <PackageCard
+                title="Professional"
+                price="$1,500"
+                features={[
+                  "4 blog posts (800-1200 words each)",
+                  "SEO + content strategy",
+                  "2 rounds of revisions per post",
+                  "Social media snippets included",
+                ]}
+                ideal="Content marketers, thought leaders, monthly needs"
+                popular
+              />
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-[#F5E7C8]/70">
-            <span className="inline-flex items-center gap-2">
-              <MessageCircle className="h-4 w-4" />
-              Every project begins with a no-pressure consult.
-            </span>
-            <Link
-              href="/contact?service=ghostwriting"
-              className="inline-flex items-center gap-2 text-[#F0C979] hover:text-[#E9C97F] transition-colors"
-            >
-              Send a message
-              <ArrowRight className="h-3 w-3" />
-            </Link>
+          {/* Newsletter Writing */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Newsletter Writing</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Monthly"
+                price="$1,200"
+                features={[
+                  "4 newsletter issues per month",
+                  "500-800 words each",
+                  "Consistent voice and tone",
+                  "2 rounds of revisions total",
+                ]}
+                ideal="Founders, authors, community builders"
+              />
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Divider */}
-      <div className="relative my-16 h-px mx-auto max-w-4xl">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
-      </div>
+          {/* Website Copy */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Website Copy</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Essential"
+                price="$1,500"
+                features={[
+                  "Homepage + 2 pages",
+                  "Clear, conversion-focused messaging",
+                  "SEO foundations",
+                  "2 rounds of revisions",
+                ]}
+                ideal="New sites, landing pages, quick launches"
+              />
+              <PackageCard
+                title="Professional"
+                price="$3,000"
+                features={[
+                  "Homepage + 5 pages",
+                  "Brand voice guide",
+                  "Storytelling + conversion copy",
+                  "3 rounds of revisions",
+                ]}
+                ideal="Full site launches, rebrands, premium experiences"
+                popular
+              />
+            </div>
+          </div>
 
-      {/* PROCESS */}
-      <section className="px-6 sm:px-10 lg:px-16 pb-20 relative z-10">
-        <div className="mx-auto max-w-6xl space-y-10">
-          <SectionHeader
-            eyebrow="The process"
-            title="How we turn your ideas into something people actually finish reading"
-          />
+          {/* Cookbooks */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Cookbook Ghostwriting</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Full Book"
+                price="$8,000"
+                features={[
+                  "30-50 recipes with stories",
+                  "Chapter structure + introductions",
+                  "Voice coaching and refinement",
+                  "Recipe testing guidance",
+                  "3 rounds of revisions",
+                ]}
+                ideal="Chefs, food bloggers, culinary entrepreneurs"
+              />
+            </div>
+          </div>
 
-          <ol className="relative border-l border-[#F0C979]/30 pl-6 space-y-10">
-            <ProcessStep
-              index="01"
-              title="Story mapping & scope"
-              body="We clarify your goals, audience, deadlines, and emotional non-negotiables. We map the container—book, series, funnel, or ongoing content."
-            />
-            <ProcessStep
-              index="02"
-              title="Voice capture"
-              body="You talk, I listen. We use interviews, voice notes, and existing materials so the writing sounds like you on your best, clearest day."
-            />
-            <ProcessStep
-              index="03"
-              title="Drafts, edits, & polish"
-              body="You'll review living drafts inside a shared workspace. I handle structure, pacing, and continuity so you're never staring at a blank page."
-            />
-            <ProcessStep
-              index="04"
-              title="Launch & beyond"
-              body="We align the final deliverable with your launch plans—email lists, social presence, or product suite—so your words keep working for you."
-            />
-          </ol>
+          {/* Memoirs & Creative Nonfiction */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Memoir / Creative Nonfiction</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Essential"
+                price="$12,000"
+                features={[
+                  "40,000-50,000 words",
+                  "Developmental editing included",
+                  "Chapter outlines + structure",
+                  "4 rounds of revisions",
+                  "Self-publishing prep guidance",
+                ]}
+                ideal="First-time authors, personal stories, legacy projects"
+              />
+              <PackageCard
+                title="Premium"
+                price="$20,000"
+                features={[
+                  "60,000-80,000 words",
+                  "Developmental + line editing",
+                  "Voice coaching sessions",
+                  "5 rounds of revisions",
+                  "Trad-pub query package included",
+                ]}
+                ideal="Authors ready for trad-pub, complex narratives, premium support"
+                popular
+              />
+            </div>
+          </div>
+
+          {/* Business Books */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-serif text-[#F0C979]">Business / Leadership Books</h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <PackageCard
+                title="Full Book"
+                price="$25,000"
+                features={[
+                  "50,000-70,000 words",
+                  "Research + interviews included",
+                  "Framework development",
+                  "Case study integration",
+                  "5 rounds of revisions",
+                  "Trad-pub or self-pub support",
+                ]}
+                ideal="Executives, consultants, thought leaders"
+              />
+            </div>
+          </div>
+
+          {/* Add-Ons */}
+          <div className="mt-12 rounded-2xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#E9C97F]/10 via-[#F0C979]/5 to-transparent p-8 backdrop-blur-sm">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-serif text-[#F5E7C8] mb-2">Add-On Services</h3>
+              <p className="text-sm text-[#F5E7C8]/70">Enhance your project with these extras</p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <AddOnCard name="Book Launch Strategy" price="$1,500" />
+              <AddOnCard name="Author Website Copy" price="$2,000" />
+              <AddOnCard name="Press Release + Media Kit" price="$800" />
+              <AddOnCard name="Monthly Retainer (4 posts)" price="$1,500/mo" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -240,22 +599,78 @@ export default function GhostwritingPage() {
         <div className="mx-auto max-w-4xl space-y-8">
           <SectionHeader
             eyebrow="FAQ"
-            title="A few things you might be wondering"
+            title="Frequently asked questions"
           />
 
           <div className="space-y-4">
             <FAQItem
-              q="Will the writing still sound like me?"
-              a="Yes. My entire process is built around voice capture—interviews, transcripts, and samples of how you already speak. The goal is that your readers have no idea a ghostwriter was involved; they just feel seen."
+              q="How does ghostwriting work?"
+              a="You share your story, ideas, and voice with me through interviews and outlines. I write the manuscript in your voice, and you review and provide feedback. The final work is 100% yours to publish under your name."
             />
             <FAQItem
-              q="Do you help with publishing or launch strategy?"
-              a="I'm not a full-service publisher, but I partner beautifully with your existing team—or help you map options for self-publishing, hybrid, or traditional routes. We'll make sure the words support your bigger strategy."
+              q="What if I don't know exactly what I want to write?"
+              a="That's completely normal! Part of my process is helping you clarify your message, structure your ideas, and find your unique angle. We'll start with exploratory conversations to map out the best path forward."
             />
             <FAQItem
-              q="I'm in healthcare. Will this still be clinically accurate?"
-              a="I'm a nurse by background, so yes—clinical accuracy matters. We'll respect scope of practice, avoid over-promising, and make sure your content is both evidence-informed and trauma-aware."
+              q="Can you match my writing style?"
+              a="Yes. I study your existing content (if you have any), ask detailed questions about your preferences, and provide sample chapters early on so you can guide the tone and voice. The goal is for the final work to sound unmistakably like you."
             />
+            <FAQItem
+              q="Do I own the rights to the finished work?"
+              a="Absolutely. Once you've paid in full, you own all rights to the content. My name won't appear on it unless we agree otherwise (such as 'with' credit for memoirs)."
+            />
+            <FAQItem
+              q="How long does a book project take?"
+              a="Memoirs and creative nonfiction: 4-6 months. Business books: 6-9 months. Cookbooks: 3-5 months. Blog content and website copy: 2-4 weeks. Timelines depend on scope, interview availability, and revision rounds."
+            />
+            <FAQItem
+              q="Can you help me get published?"
+              a="For self-publishing, yes—I'll guide you through formatting, cover design coordination, and platform setup. For traditional publishing, I can help craft query letters and book proposals, but I don't guarantee agent representation or publishing deals."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="relative my-16 h-px mx-auto max-w-4xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
+      </div>
+
+      {/* FINAL CTA */}
+      <section className="px-6 sm:px-10 lg:px-16 pb-24 relative z-10">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="relative rounded-2xl border border-[#F0C979]/30 bg-gradient-to-br from-[#F0C979]/10 via-[#E9C97F]/10 to-[#58B6B1]/10 p-12 backdrop-blur-sm overflow-hidden">
+            <div className="pointer-events-none absolute -right-32 top-10 h-[30rem] w-[30rem] rounded-full bg-gradient-to-br from-[#F0C979]/40 via-[#E9C97F]/20 to-[#F5E7C8]/10 blur-3xl opacity-40" />
+            <div className="pointer-events-none absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-[#E9C97F]/30 via-[#F0C979]/20 to-[#F5E7C8]/10 blur-3xl opacity-40" />
+
+            <div className="relative z-10 space-y-6">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#F0C979] via-[#E9C97F] to-[#58B6B1] mx-auto shadow-lg shadow-[#F0C979]/40">
+                <Feather className="w-10 h-10 text-[#121528]" />
+              </div>
+
+              <h2 className="text-3xl font-serif text-[#F5E7C8] md:text-4xl">
+                Ready to Write Your Story?
+              </h2>
+
+              <p className="text-lg text-[#F5E7C8]/80 max-w-2xl mx-auto">
+                Whether it's a book, blog, or brand narrative, let's craft something that sounds unmistakably you.
+              </p>
+
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+                <Link
+                  href="/contact?service=ghostwriting"
+                  className="rounded-full bg-gradient-to-r from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] px-8 py-4 font-semibold text-[#121528] transition-all hover:shadow-lg hover:shadow-[#F0C979]/50"
+                >
+                  Request a Writing Quote
+                </Link>
+                <Link
+                  href="/portfolio"
+                  className="rounded-full border border-[#F0C979]/30 px-8 py-4 font-semibold text-[#F0C979] transition-all hover:border-[#F0C979]/50 hover:bg-[#F0C979]/10"
+                >
+                  View Writing Samples
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -284,7 +699,7 @@ function SectionHeader({
   subtitle?: string;
 }) {
   return (
-    <div className="space-y-3 max-w-3xl">
+    <div className="space-y-3 text-center max-w-3xl mx-auto">
       <p className="text-[11px] tracking-[0.28em] uppercase text-[#F0C979]/70">{eyebrow}</p>
       <h2 className="text-2xl sm:text-3xl font-serif text-[#F5E7C8]">{title}</h2>
       {subtitle && <p className="text-sm sm:text-base text-[#F5E7C8]/75">{subtitle}</p>}
@@ -294,43 +709,76 @@ function SectionHeader({
 
 function AudienceCard({ label, body }: { label: string; body: string }) {
   return (
-    <div className="rounded-2xl border border-[#F0C979]/20 bg-[#121528]/40 backdrop-blur-sm p-5 flex flex-col gap-2 hover:border-[#F0C979]/40 transition-colors">
+    <div className="group relative rounded-2xl border border-[#F0C979]/20 bg-[#121528]/40 backdrop-blur-sm p-5 flex flex-col gap-2 hover:border-[#F0C979]/40 transition-all hover:-translate-y-1">
+      <div className="absolute -top-2 -right-2 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity">
+        <Feather className="w-full h-full text-[#F0C979] animate-quillFloat" />
+      </div>
       <h3 className="text-sm font-semibold text-[#F0C979]">{label}</h3>
       <p className="text-xs sm:text-sm text-[#F5E7C8]/75">{body}</p>
     </div>
   );
 }
 
+function ProcessCard({
+  number,
+  title,
+  subtitle,
+  body,
+  icon,
+  color,
+}: {
+  number: string;
+  title: string;
+  subtitle: string;
+  body: string;
+  icon: React.ReactNode;
+  color: string;
+}) {
+  return (
+    <div className="text-center relative group">
+      <div className="mb-4 flex justify-center">
+        <div className={`flex h-16 w-16 items-center justify-center rounded-full bg-[${color}]/20 border-2 border-[${color}]/30 relative group-hover:border-[${color}] transition-all`}>
+          {icon}
+          <div className={`absolute inset-0 rounded-full bg-[${color}]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity`} />
+        </div>
+      </div>
+      <h3 className={`mb-2 text-xl font-semibold text-[${color}]`}>{number}. {title}</h3>
+      <p className={`text-sm uppercase tracking-wider text-[${color}]/70 mb-3`}>{subtitle}</p>
+      <p className="text-[#F5E7C8]/80 text-sm">{body}</p>
+    </div>
+  );
+}
+
 function PackageCard({
-  badge,
   title,
   price,
-  idealFor,
-  bullets,
+  features,
+  ideal,
+  popular,
 }: {
-  badge?: string;
   title: string;
   price: string;
-  idealFor: string;
-  bullets: string[];
+  features: string[];
+  ideal: string;
+  popular?: boolean;
 }) {
   return (
     <div className="relative h-full rounded-3xl border border-[#F0C979]/20 bg-[#121528]/40 backdrop-blur-sm px-6 py-6 flex flex-col gap-4 hover:border-[#F0C979]/40 transition-all hover:-translate-y-1">
-      {badge && (
+      {popular && (
         <span className="absolute -top-3 left-5 inline-flex rounded-full bg-gradient-to-r from-[#F0C979] to-[#E9C97F] px-3 py-1 text-[11px] font-semibold text-[#121528] shadow-lg">
-          {badge}
+          MOST POPULAR
         </span>
       )}
       <div className="pt-1 space-y-1">
         <h3 className="text-lg font-serif text-[#F5E7C8]">{title}</h3>
-        <p className="text-xs uppercase tracking-[0.18em] text-[#F0C979]/70">{price}</p>
+        <p className="text-xl font-bold text-[#F0C979]">{price}</p>
       </div>
-      <p className="text-xs sm:text-sm text-[#F5E7C8]/75">{idealFor}</p>
+      <p className="text-xs sm:text-sm text-[#F5E7C8]/75">{ideal}</p>
       <ul className="mt-1 space-y-2 text-xs sm:text-sm text-[#F5E7C8]/80">
-        {bullets.map((b, i) => (
+        {features.map((f, i) => (
           <li key={i} className="flex gap-2">
             <span className="mt-[5px] h-1.5 w-1.5 rounded-full bg-[#F0C979]/80 flex-shrink-0" />
-            <span>{b}</span>
+            <span>{f}</span>
           </li>
         ))}
       </ul>
@@ -338,18 +786,12 @@ function PackageCard({
   );
 }
 
-function ProcessStep({ index, title, body }: { index: string; title: string; body: string }) {
+function AddOnCard({ name, price }: { name: string; price: string }) {
   return (
-    <li className="relative pl-4">
-      <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border border-[#F0C979] bg-[#121528]" />
-      <div className="flex gap-4">
-        <p className="text-xs font-mono text-[#F0C979] mt-0.5">{index}</p>
-        <div className="space-y-1">
-          <h3 className="text-sm font-semibold text-[#F5E7C8]">{title}</h3>
-          <p className="text-xs sm:text-sm text-[#F5E7C8]/75">{body}</p>
-        </div>
-      </div>
-    </li>
+    <div className="rounded-lg border border-[#E9C97F]/20 bg-[#E9C97F]/5 p-4">
+      <p className="text-sm font-semibold text-[#E9C97F] mb-1">{name}</p>
+      <p className="text-lg font-bold text-[#F0C979]">{price}</p>
+    </div>
   );
 }
 
@@ -358,8 +800,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     <details className="group rounded-2xl border border-[#F0C979]/15 bg-[#121528]/40 backdrop-blur-sm px-4 py-3 hover:border-[#F0C979]/30 transition-colors">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
         <span className="text-sm font-medium text-[#F5E7C8]">{q}</span>
-        <span className="text-xs text-[#F0C979]/70 group-open:hidden">+</span>
-        <span className="text-xs text-[#F0C979]/70 hidden group-open:inline">−</span>
+        <ChevronDown className="w-4 h-4 text-[#F0C979]/70 transition-transform group-open:rotate-180" />
       </summary>
       <p className="mt-2 text-xs sm:text-sm text-[#F5E7C8]/75">{a}</p>
     </details>
