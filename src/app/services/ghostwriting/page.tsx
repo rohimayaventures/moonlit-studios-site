@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, F
 //  HOGWARTS LIBRARY SVG COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Candle Glow - minimalist background light column (Owlery Gold)
+// Candle Glow - BRIGHT magical candlelight column (Owlery Gold)
 const CandleGlow = ({
   className = "",
   delay = 0,
@@ -18,10 +18,13 @@ const CandleGlow = ({
   height?: string;
 }) => (
   <div
-    className={`absolute ${className} ${height} w-20 pointer-events-none animate-candleFlicker`}
+    className={`absolute ${className} ${height} w-24 pointer-events-none animate-candleFlicker`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="absolute inset-0 bg-gradient-to-t from-[#F0C979]/15 via-[#F0C979]/8 to-transparent blur-2xl" />
+    {/* Core bright glow */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#F0C979]/60 via-[#F0C979]/35 to-transparent blur-3xl" />
+    {/* Outer soft aura */}
+    <div className="absolute inset-0 bg-gradient-to-t from-[#E9C97F]/40 via-[#F0C979]/20 to-transparent blur-2xl scale-110" />
   </div>
 );
 
@@ -402,39 +405,59 @@ export default function GhostwritingPage() {
     <main className="min-h-screen bg-gradient-to-b from-[#121528] via-[#1A1E38] to-[#121528] text-[#F5E7C8] overflow-hidden relative">
 
       {/* MAGICAL LIBRARY AMBIENT ELEMENTS */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Candle glows - minimalist background lighting columns */}
-        <CandleGlow className="bottom-0 left-[2%]" delay={0} height="h-40" />
-        <CandleGlow className="bottom-0 left-[8%]" delay={0.5} height="h-32" />
-        <CandleGlow className="bottom-0 left-[14%]" delay={1.0} height="h-36" />
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Candle glows - BRIGHT background lighting columns */}
+        <CandleGlow className="bottom-0 left-[2%]" delay={0} height="h-64" />
+        <CandleGlow className="bottom-0 left-[8%]" delay={0.5} height="h-56" />
+        <CandleGlow className="bottom-0 left-[14%]" delay={1.0} height="h-60" />
+        <CandleGlow className="bottom-0 left-[20%]" delay={1.5} height="h-52" />
 
-        <CandleGlow className="bottom-0 right-[2%]" delay={0.3} height="h-38" />
-        <CandleGlow className="bottom-0 right-[8%]" delay={0.8} height="h-34" />
-        <CandleGlow className="bottom-0 right-[14%]" delay={1.3} height="h-40" />
+        <CandleGlow className="bottom-0 right-[2%]" delay={0.3} height="h-60" />
+        <CandleGlow className="bottom-0 right-[8%]" delay={0.8} height="h-58" />
+        <CandleGlow className="bottom-0 right-[14%]" delay={1.3} height="h-64" />
+        <CandleGlow className="bottom-0 right-[20%]" delay={1.8} height="h-54" />
 
-        {/* Floating open books with Phoenix Orange glow */}
+        {/* Floating open books with Owlery Gold glow - MORE OF THEM */}
         <FloatingOpenBook className="top-[20%] left-[6%]" delay={0} />
         <FloatingOpenBook className="top-[60%] right-[8%]" delay={1.8} />
         <FloatingOpenBook className="top-[45%] left-[10%]" delay={3.2} />
+        <FloatingOpenBook className="top-[35%] right-[15%]" delay={2.5} />
+        <FloatingOpenBook className="top-[75%] left-[12%]" delay={4.0} />
+        <FloatingOpenBook className="top-[50%] right-[6%]" delay={3.5} />
 
-        {/* Flying winged skeleton keys - different styles */}
+        {/* Flying winged skeleton keys - MORE throughout page */}
         <WingedKey className="top-[15%] left-[20%]" delay={0.5} keyShape="ornate" />
         <WingedKey className="top-[28%] right-[18%]" delay={1.2} keyShape="gothic" />
         <WingedKey className="top-[42%] left-[25%]" delay={1.8} keyShape="simple" />
         <WingedKey className="top-[55%] right-[22%]" delay={2.5} keyShape="baroque" />
         <WingedKey className="top-[68%] left-[18%]" delay={3.2} keyShape="victorian" />
+        <WingedKey className="top-[35%] left-[5%]" delay={2.0} keyShape="ornate" />
+        <WingedKey className="top-[80%] right-[12%]" delay={3.8} keyShape="simple" />
+        <WingedKey className="top-[22%] right-[8%]" delay={1.5} keyShape="baroque" />
 
-        {/* Dust motes - Warm Parchment */}
-        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
-        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#F5E7C8]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
-        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
-        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#F5E7C8]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
-        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#F5E7C8]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
-        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
+        {/* Gold sparkles and dust motes - LOTS MORE */}
+        <div className="absolute top-[30%] left-[32%] w-2 h-2 rounded-full bg-[#F0C979]/40 animate-dustMotes shadow-lg shadow-[#F0C979]/30" />
+        <div className="absolute top-[35%] right-[35%] w-1.5 h-1.5 rounded-full bg-[#F5E7C8]/50 animate-dustMotes shadow-md shadow-[#F5E7C8]/40" style={{ animationDelay: '0.8s' }} />
+        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F0C979]/35 animate-dustMotes shadow-sm shadow-[#F0C979]/20" style={{ animationDelay: '1.6s' }} />
+        <div className="absolute top-[45%] right-[40%] w-2 h-2 rounded-full bg-[#F5E7C8]/45 animate-dustMotes shadow-lg shadow-[#F5E7C8]/35" style={{ animationDelay: '2.4s' }} />
+        <div className="absolute top-[50%] left-[42%] w-1.5 h-1.5 rounded-full bg-[#F0C979]/38 animate-dustMotes shadow-md shadow-[#F0C979]/25" style={{ animationDelay: '3.2s' }} />
+        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/42 animate-dustMotes shadow-sm shadow-[#F5E7C8]/30" style={{ animationDelay: '4.0s' }} />
+        <div className="absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-[#F0C979]/45 animate-dustMotes shadow-lg shadow-[#F0C979]/35" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-[65%] right-[25%] w-1.5 h-1.5 rounded-full bg-[#F5E7C8]/40 animate-dustMotes shadow-md shadow-[#F5E7C8]/30" style={{ animationDelay: '3.5s' }} />
+        <div className="absolute top-[70%] left-[28%] w-1 h-1 rounded-full bg-[#F0C979]/50 animate-dustMotes shadow-sm shadow-[#F0C979]/40" style={{ animationDelay: '4.5s' }} />
+        <div className="absolute top-[18%] right-[45%] w-2 h-2 rounded-full bg-[#F5E7C8]/48 animate-dustMotes shadow-lg shadow-[#F5E7C8]/38" style={{ animationDelay: '1.2s' }} />
+        <div className="absolute top-[85%] left-[35%] w-1.5 h-1.5 rounded-full bg-[#F0C979]/42 animate-dustMotes shadow-md shadow-[#F0C979]/32" style={{ animationDelay: '5.0s' }} />
+        <div className="absolute top-[58%] right-[48%] w-1 h-1 rounded-full bg-[#F5E7C8]/36 animate-dustMotes shadow-sm shadow-[#F5E7C8]/26" style={{ animationDelay: '2.8s' }} />
+
+        {/* Teal shimmer particles */}
+        <div className="absolute top-[32%] left-[45%] w-1.5 h-1.5 rounded-full bg-[#58B6B1]/50 animate-dustMotes shadow-lg shadow-[#58B6B1]/40" style={{ animationDelay: '1.0s' }} />
+        <div className="absolute top-[48%] right-[30%] w-1 h-1 rounded-full bg-[#58B6B1]/40 animate-dustMotes shadow-md shadow-[#58B6B1]/30" style={{ animationDelay: '2.2s' }} />
+        <div className="absolute top-[72%] left-[50%] w-2 h-2 rounded-full bg-[#58B6B1]/45 animate-dustMotes shadow-lg shadow-[#58B6B1]/35" style={{ animationDelay: '4.2s' }} />
+        <div className="absolute top-[38%] right-[52%] w-1.5 h-1.5 rounded-full bg-[#58B6B1]/38 animate-dustMotes shadow-md shadow-[#58B6B1]/28" style={{ animationDelay: '1.8s' }} />
       </div>
 
-      {/* Warm library glow from bottom - Owlery Gold */}
-      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/10 to-transparent opacity-60" />
+      {/* Warm library glow from bottom - Owlery Gold - BRIGHTER */}
+      <div className="fixed bottom-0 left-0 right-0 h-2/5 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/20 via-[#F0C979]/10 to-transparent opacity-80" />
 
       {/* HERO */}
       <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-20 lg:pb-28">
