@@ -134,41 +134,44 @@ const NebulaCloud = ({
   );
 };
 
-// Shooting Comet - Streaking across the cosmos
-const ShootingComet = ({ delay = 0, startPos = "top-left" }: { delay?: number; startPos?: string }) => {
-  const startPositions: Record<string, string> = {
-    "top-left": "top-10 left-10",
-    "top-right": "top-20 right-10",
-    "mid-left": "top-1/2 left-10",
-  };
-
+// Shooting Comet - Diagonal shooting stars from top-left to bottom-right
+const ShootingComet = ({ delay = 0, startOffset = 0 }: { delay?: number; startOffset?: number }) => {
   return (
     <div
-      className={`absolute ${startPositions[startPos]} pointer-events-none animate-cometTrail`}
-      style={{ animationDelay: `${delay}s` }}
+      className="absolute pointer-events-none animate-shootingStar"
+      style={{
+        left: `${startOffset}%`,
+        top: '0%',
+        animationDelay: `${delay}s`,
+      }}
     >
-      <svg width="100" height="100" viewBox="0 0 100 100" className="rotate-45">
-        {/* Comet trail */}
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        {/* Diagonal trail gradient */}
         <defs>
-          <linearGradient id={`comet-trail-${delay}`} x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id={`shooting-trail-${delay}-${startOffset}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#67E8F9" stopOpacity="0" />
-            <stop offset="50%" stopColor="#818CF8" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#C084FC" stopOpacity="0.9" />
+            <stop offset="30%" stopColor="#818CF8" stopOpacity="0.4" />
+            <stop offset="60%" stopColor="#C084FC" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#FCD34D" stopOpacity="0.95" />
           </linearGradient>
         </defs>
 
-        {/* Trail */}
-        <path
-          d="M0 50 Q25 45, 50 50 T100 50"
-          stroke={`url(#comet-trail-${delay})`}
-          strokeWidth="3"
-          fill="none"
-          opacity="0.8"
+        {/* Diagonal trail line */}
+        <line
+          x1="0"
+          y1="0"
+          x2="180"
+          y2="180"
+          stroke={`url(#shooting-trail-${delay}-${startOffset})`}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          opacity="0.9"
         />
 
-        {/* Comet head */}
-        <circle cx="95" cy="50" r="5" fill="#FCD34D" opacity="0.9" />
-        <circle cx="95" cy="50" r="8" fill="#FCD34D" opacity="0.4" className="blur-sm" />
+        {/* Bright comet head */}
+        <circle cx="180" cy="180" r="4" fill="#FCD34D" opacity="1" />
+        <circle cx="180" cy="180" r="8" fill="#FCD34D" opacity="0.5" className="blur-sm" />
+        <circle cx="180" cy="180" r="12" fill="#FBBF24" opacity="0.2" className="blur-md" />
       </svg>
     </div>
   );
@@ -182,6 +185,57 @@ const StardustParticle = ({ delay = 0, className = "", style }: { delay?: number
   >
     <div className="w-1 h-1 rounded-full bg-gradient-to-br from-cyan-300 to-purple-400 opacity-60" />
   </div>
+);
+
+// Cancer Constellation - Left side of hero
+const CancerConstellation = ({ className = "" }: { className?: string }) => (
+  <svg className={`${className} animate-glowPulse`} viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Cancer stars - crab shape */}
+    <circle cx="40" cy="60" r="2.5" fill="#67E8F9" opacity="0.9" />
+    <circle cx="60" cy="50" r="3" fill="#5EEAD4" opacity="0.95" />
+    <circle cx="75" cy="55" r="2.5" fill="#67E8F9" opacity="0.9" />
+    <circle cx="90" cy="50" r="2" fill="#5EEAD4" opacity="0.85" />
+    <circle cx="110" cy="60" r="2.5" fill="#67E8F9" opacity="0.9" />
+    <circle cx="60" cy="80" r="2" fill="#5EEAD4" opacity="0.85" />
+    <circle cx="75" cy="90" r="3" fill="#67E8F9" opacity="0.95" />
+    <circle cx="90" cy="80" r="2" fill="#5EEAD4" opacity="0.85" />
+
+    {/* Connecting lines */}
+    <line x1="40" y1="60" x2="60" y2="50" stroke="#67E8F9" strokeWidth="1" opacity="0.5" />
+    <line x1="60" y1="50" x2="75" y2="55" stroke="#5EEAD4" strokeWidth="1" opacity="0.5" />
+    <line x1="75" y1="55" x2="90" y2="50" stroke="#67E8F9" strokeWidth="1" opacity="0.5" />
+    <line x1="90" y1="50" x2="110" y2="60" stroke="#5EEAD4" strokeWidth="1" opacity="0.5" />
+    <line x1="60" y1="50" x2="60" y2="80" stroke="#67E8F9" strokeWidth="1" opacity="0.5" />
+    <line x1="90" y1="50" x2="90" y2="80" stroke="#5EEAD4" strokeWidth="1" opacity="0.5" />
+    <line x1="60" y1="80" x2="75" y2="90" stroke="#67E8F9" strokeWidth="1" opacity="0.5" />
+    <line x1="75" y1="90" x2="90" y2="80" stroke="#5EEAD4" strokeWidth="1" opacity="0.5" />
+  </svg>
+);
+
+// Scorpio Constellation - Right side of hero
+const ScorpioConstellation = ({ className = "" }: { className?: string }) => (
+  <svg className={`${className} animate-glowPulse`} viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {/* Scorpio stars - scorpion shape with curved tail */}
+    <circle cx="40" cy="50" r="3" fill="#C084FC" opacity="0.95" />
+    <circle cx="55" cy="55" r="2.5" fill="#E9D5FF" opacity="0.9" />
+    <circle cx="70" cy="60" r="2.5" fill="#C084FC" opacity="0.9" />
+    <circle cx="85" cy="70" r="3" fill="#E9D5FF" opacity="0.95" />
+    <circle cx="95" cy="85" r="2.5" fill="#C084FC" opacity="0.9" />
+    <circle cx="105" cy="95" r="2" fill="#E9D5FF" opacity="0.85" />
+    <circle cx="110" cy="105" r="2.5" fill="#C084FC" opacity="0.9" />
+    <circle cx="55" cy="70" r="2" fill="#E9D5FF" opacity="0.85" />
+    <circle cx="45" cy="65" r="2" fill="#C084FC" opacity="0.85" />
+
+    {/* Connecting lines - scorpion body and tail */}
+    <line x1="40" y1="50" x2="55" y2="55" stroke="#C084FC" strokeWidth="1" opacity="0.5" />
+    <line x1="55" y1="55" x2="70" y2="60" stroke="#E9D5FF" strokeWidth="1" opacity="0.5" />
+    <line x1="70" y1="60" x2="85" y2="70" stroke="#C084FC" strokeWidth="1" opacity="0.5" />
+    <line x1="85" y1="70" x2="95" y2="85" stroke="#E9D5FF" strokeWidth="1" opacity="0.5" />
+    <line x1="95" y1="85" x2="105" y2="95" stroke="#C084FC" strokeWidth="1" opacity="0.5" />
+    <line x1="105" y1="95" x2="110" y2="105" stroke="#E9D5FF" strokeWidth="1" opacity="0.5" />
+    <line x1="55" y1="55" x2="55" y2="70" stroke="#C084FC" strokeWidth="1" opacity="0.5" />
+    <line x1="55" y1="55" x2="45" y2="65" stroke="#E9D5FF" strokeWidth="1" opacity="0.5" />
+  </svg>
 );
 
 // Cosmic Constellation Lines
@@ -425,10 +479,15 @@ export default function CreativeDesignDevelopmentPage() {
       <AuroraWave position="top" />
       <AuroraWave position="bottom" />
 
-      {/* Shooting Comets streaking across */}
-      <ShootingComet delay={0} startPos="top-left" />
-      <ShootingComet delay={8} startPos="top-right" />
-      <ShootingComet delay={4} startPos="mid-left" />
+      {/* Shooting Stars - Diagonal streaks across hero section */}
+      <ShootingComet delay={0} startOffset={5} />
+      <ShootingComet delay={3} startOffset={25} />
+      <ShootingComet delay={6} startOffset={45} />
+      <ShootingComet delay={9} startOffset={65} />
+      <ShootingComet delay={12} startOffset={15} />
+      <ShootingComet delay={15} startOffset={35} />
+      <ShootingComet delay={18} startOffset={55} />
+      <ShootingComet delay={21} startOffset={75} />
 
       {/* Stardust Particles floating throughout */}
       {Array.from({ length: 40 }).map((_, i) => (
@@ -449,6 +508,13 @@ export default function CreativeDesignDevelopmentPage() {
           <RadialGlow className="top-10 right-1/4 w-96 h-96" color="indigo" />
           <RadialGlow className="bottom-20 left-1/3 w-80 h-80" color="lavender" />
           <RadialGlow className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px]" color="cyan" />
+
+          {/* Cancer Constellation - Left side */}
+          <CancerConstellation className="absolute top-1/4 left-8 w-32 h-32 opacity-70" />
+
+          {/* Scorpio Constellation - Right side */}
+          <ScorpioConstellation className="absolute top-1/3 right-8 w-32 h-32 opacity-70" />
+
           <ConstellationDivider className="absolute top-1/2 left-0 w-full h-16 text-indigo-300 opacity-30" />
         </div>
 

@@ -1173,7 +1173,7 @@ body.chaos-mode * {
 
 @keyframes shootingStar {
   0% {
-    transform: translateX(-100px) translateY(100px);
+    transform: translateX(-100px) translateY(-100px);
     opacity: 0;
   }
   10% {
@@ -1183,7 +1183,7 @@ body.chaos-mode * {
     opacity: 1;
   }
   100% {
-    transform: translateX(1000px) translateY(-1000px);
+    transform: translateX(1200px) translateY(1200px);
     opacity: 0;
   }
 }
