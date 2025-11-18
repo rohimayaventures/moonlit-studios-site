@@ -617,11 +617,11 @@ export default function CreativeDesignDevelopmentPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-purple-400/20 bg-purple-400/5 p-6 backdrop-blur-sm">
+            <div className="rounded-lg border border-purple-300/20 bg-purple-300/5 p-6 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Palette className="w-5 h-5 text-purple-300 flex-shrink-0 mt-1" />
+                <Palette className="w-5 h-5 text-purple-200 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-purple-300 mb-2">Authors & Creatives</h3>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">Authors & Creatives</h3>
                   <p className="text-moonlightSilver text-sm">
                     Authors launching books, artists building portfolios, and creators establishing their visual identity.
                   </p>
@@ -629,11 +629,11 @@ export default function CreativeDesignDevelopmentPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-teal-400/20 bg-teal-400/5 p-6 backdrop-blur-sm">
+            <div className="rounded-lg border border-purple-300/20 bg-purple-300/5 p-6 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Code className="w-5 h-5 text-teal-300 flex-shrink-0 mt-1" />
+                <Code className="w-5 h-5 text-purple-200 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-teal-300 mb-2">Founders & Startups</h3>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">Founders & Startups</h3>
                   <p className="text-moonlightSilver text-sm">
                     Early-stage companies that need branding, websites, and design systems that grow with them.
                   </p>
@@ -641,11 +641,11 @@ export default function CreativeDesignDevelopmentPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-cyan-400/20 bg-cyan-400/5 p-6 backdrop-blur-sm">
+            <div className="rounded-lg border border-purple-300/20 bg-purple-300/5 p-6 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Package className="w-5 h-5 text-cyan-300 flex-shrink-0 mt-1" />
+                <Package className="w-5 h-5 text-purple-200 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-cyan-300 mb-2">Product Brands</h3>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">Product Brands</h3>
                   <p className="text-moonlightSilver text-sm">
                     Small batch creators, Etsy sellers, and boutique brands launching physical products.
                   </p>
@@ -653,11 +653,11 @@ export default function CreativeDesignDevelopmentPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-indigo-400/20 bg-indigo-400/5 p-6 backdrop-blur-sm">
+            <div className="rounded-lg border border-purple-300/20 bg-purple-300/5 p-6 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Sparkles className="w-5 h-5 text-indigo-300 flex-shrink-0 mt-1" />
+                <Sparkles className="w-5 h-5 text-purple-200 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-indigo-300 mb-2">Service Businesses</h3>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">Service Businesses</h3>
                   <p className="text-moonlightSilver text-sm">
                     Consultants, coaches, and service providers who need professional websites and branding.
                   </p>
@@ -665,11 +665,11 @@ export default function CreativeDesignDevelopmentPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-amber-300/20 bg-amber-300/5 p-6 backdrop-blur-sm">
+            <div className="rounded-lg border border-purple-300/20 bg-purple-300/5 p-6 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Star className="w-5 h-5 text-amber-200 flex-shrink-0 mt-1" />
+                <Star className="w-5 h-5 text-purple-200 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-amber-200 mb-2">Creative Studios</h3>
+                  <h3 className="text-lg font-semibold text-purple-200 mb-2">Creative Studios</h3>
                   <p className="text-moonlightSilver text-sm">
                     Design studios, photography businesses, and creative agencies needing portfolio sites and brand updates.
                   </p>
