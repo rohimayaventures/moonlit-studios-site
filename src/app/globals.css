@@ -1348,36 +1348,32 @@ body.chaos-mode * {
   animation: candleFlicker 3s ease-in-out infinite;
 }
 
-/* 🔥 Flame Flicker - Realistic CGI flame movement */
-@keyframes flameFlicker {
+/* ✨ Winged Key Float - Subtle dragonfly-like drift */
+@keyframes wingFloat {
   0%, 100% {
-    transform: scaleY(1) scaleX(1);
-    opacity: 0.9;
+    transform: translateY(0px) rotate(0deg);
   }
-  15% {
-    transform: scaleY(1.08) scaleX(0.92);
-    opacity: 0.95;
-  }
-  30% {
-    transform: scaleY(0.95) scaleX(1.05);
-    opacity: 0.85;
-  }
-  45% {
-    transform: scaleY(1.03) scaleX(0.97);
-    opacity: 0.92;
-  }
-  60% {
-    transform: scaleY(0.98) scaleX(1.02);
-    opacity: 0.88;
-  }
-  75% {
-    transform: scaleY(1.05) scaleX(0.95);
-    opacity: 0.93;
+  50% {
+    transform: translateY(-6px) rotate(2deg);
   }
 }
 
-.animate-flameFlicker {
-  animation: flameFlicker 2s ease-in-out infinite;
+.animate-wingFloat {
+  animation: wingFloat 5s ease-in-out infinite;
+}
+
+/* 📖 Floating Book - Gentle bobbing */
+@keyframes bookFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bookFloat {
+  animation: bookFloat 4s ease-in-out infinite;
 }
 
 /* Quill Float */
