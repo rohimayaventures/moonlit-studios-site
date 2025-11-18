@@ -1,47 +1,120 @@
-import type { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Author & Ghostwriting Studio - Books, Brand Stories & Content | Moonlit Studios",
-  description:
-    "Professional ghostwriting from a published fantasy author. Book ghostwriting, brand storytelling, website copy, thought leadership. 300K+ words published.",
-  keywords: [
-    "ghostwriting services",
-    "book ghostwriting",
-    "fantasy author",
-    "brand storytelling",
-    "thought leadership writing",
-    "website copywriting",
-    "content writing services",
-    "manuscript ghostwriting",
-    "author services",
-    "creative writing services",
-    "fiction ghostwriting",
-    "brand narrative",
-    "professional ghostwriter"
-  ],
-  openGraph: {
-    title: "Author & Ghostwriting Studio | Moonlit Studios",
-    description:
-      "Professional ghostwriting. Books, brand stories, website copy, thought leadership. 300K+ words published, 4 completed manuscripts.",
-    type: "website",
-    url: "https://www.moonlitstudios.com/services/ghostwriting",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Author & Ghostwriting Studio - Moonlit Studios",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Author & Ghostwriting Studio | Moonlit Studios",
-    description:
-      "Professional ghostwriting. Books, brand stories, website copy.",
-    images: ["/og-image.png"],
-  },
-};
+import type { Metadata } from "next";
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+
+// 🦉 HOGWARTS CASTLE LIBRARY - IMMERSIVE SVG COMPONENTS
+
+// Floating Candle
+const FloatingCandle = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-candleFlicker`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <div className="relative">
+      {/* Candle body */}
+      <div className="w-3 h-12 bg-gradient-to-b from-[#F5E7C8] to-[#E9C97F] rounded-t-sm" />
+      {/* Flame */}
+      <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+        <div className="w-4 h-6 bg-gradient-to-t from-[#F0C979] via-[#F5E7C8] to-transparent rounded-full opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F0C979]/50 to-transparent blur-sm rounded-full" />
+      </div>
+      {/* Glow */}
+      <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-8 h-8 bg-[#F0C979]/30 blur-md rounded-full" />
+    </div>
+  </div>
+);
+
+// Floating Quill
+const MagicQuill = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-quillFloat`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3 21L12 12M12 12L21 3M12 12V21M12 12H3"
+        stroke="#5B335F"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M18 6C16 8 14 10 12 12"
+        stroke="#F0C979"
+        strokeWidth="1"
+        strokeLinecap="round"
+        opacity="0.6"
+      />
+    </svg>
+  </div>
+);
+
+// Dust Motes
+const DustMote = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-dustMotes`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <div className="w-1 h-1 rounded-full bg-[#F5E7C8]/40" />
+  </div>
+);
+
+// Flying Owl Silhouette
+const FlyingOwl = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-owlFly`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="16" cy="14" rx="8" ry="6" fill="#5B335F" opacity="0.7" />
+      <circle cx="13" cy="13" r="2" fill="#F0C979" opacity="0.8" />
+      <circle cx="19" cy="13" r="2" fill="#F0C979" opacity="0.8" />
+      <path d="M8 12 L3 8 L8 14 Z" fill="#5B335F" opacity="0.6" />
+      <path d="M24 12 L29 8 L24 14 Z" fill="#5B335F" opacity="0.6" />
+    </svg>
+  </div>
+);
+
+// Floating Spellbook
+const FloatingBook = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div
+    className={`absolute ${className} pointer-events-none`}
+    style={{
+      animation: 'pageFloat 5s ease-in-out infinite',
+      animationDelay: `${delay}s`
+    }}
+  >
+    <div className="relative w-12 h-16">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#5B335F] to-[#121528] border border-[#F0C979]/30 rounded-sm shadow-lg" />
+      <div className="absolute top-2 left-2 right-2 h-0.5 bg-[#F0C979]/40" />
+      <div className="absolute top-4 left-2 right-2 h-0.5 bg-[#F0C979]/40" />
+      <div className="absolute top-6 left-2 right-2 h-0.5 bg-[#F0C979]/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent to-[#F0C979]/10 rounded-sm" />
+    </div>
+  </div>
+);
+
+// Wax Seal
+const WaxSeal = ({ className = "" }: { className?: string }) => (
+  <div className={`${className} pointer-events-none`}>
+    <div className="relative w-10 h-10">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] opacity-90" />
+      <div className="absolute inset-2 rounded-full border-2 border-[#121528]/30" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xs font-bold text-[#121528]">M</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Golden Divider
+const GoldenDivider = () => (
+  <div className="relative my-12 h-px overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
+    <WaxSeal className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+  </div>
+);
 
 const writingServices = [
   {
@@ -256,60 +329,289 @@ const writingServices = [
   },
 ];
 
+const faqs = [
+  {
+    question: "How do you capture my unique voice and writing style?",
+    answer: "Through deep voice alignment interviews where I ask about your favorite authors, how you speak naturally, what phrases you use often, and what tone feels authentic to you. I then create writing samples for you to review and adjust until it feels like you wrote it yourself."
+  },
+  {
+    question: "What's your experience with book-length projects?",
+    answer: "I've written 300K+ words across published fantasy novels, short stories, and creative non-fiction. I understand story structure, character arcs, pacing, and what makes readers care. I've completed 4 full manuscripts and have extensive experience with long-form narrative."
+  },
+  {
+    question: "Can you help with both fiction and non-fiction?",
+    answer: "Absolutely. I specialize in fantasy fiction, memoirs, cookbooks with cultural storytelling, brand narratives, and thought leadership content. My background in healthcare operations also makes me especially effective for clinical leaders and health founders."
+  },
+  {
+    question: "How does the revision process work?",
+    answer: "After each major milestone (outline, first draft, etc.), you'll review the work and provide feedback. I then revise based on your notes. The number of revision cycles depends on your package tier. I also offer unlimited minor revisions for ongoing content retainers."
+  },
+  {
+    question: "Do you offer confidentiality agreements?",
+    answer: "Yes, all ghostwriting projects include a standard NDA and work-for-hire agreement. Your story remains yours—I'm just the pen bringing it to life."
+  },
+  {
+    question: "What if I only have rough ideas or voice notes?",
+    answer: "That's perfect! Many clients start with scattered ideas, voice memos, or messy outlines. Part of my process is helping you structure those thoughts into a cohesive narrative. We'll craft a clear plan together before any writing begins."
+  }
+];
+
+function FAQAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className="space-y-4">
+      {faqs.map((faq, index) => (
+        <div
+          key={index}
+          className="rounded-xl border border-[#F0C979]/30 bg-[#121528]/60 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-[#F0C979]/60"
+        >
+          <button
+            onClick={() => setOpenIndex(openIndex === index ? null : index)}
+            className="w-full px-6 py-4 text-left flex items-center justify-between gap-4 group"
+          >
+            <span className="font-semibold text-[#F5E7C8] group-hover:text-[#F0C979] transition-colors">
+              {faq.question}
+            </span>
+            <ChevronDown
+              className={`w-5 h-5 text-[#F0C979] transition-transform flex-shrink-0 ${
+                openIndex === index ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          <div
+            className={`px-6 overflow-hidden transition-all duration-300 ${
+              openIndex === index ? 'max-h-96 pb-4' : 'max-h-0'
+            }`}
+          >
+            <p className="text-[#D5D0C8] leading-relaxed">
+              {faq.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function GhostwritingPage() {
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite">
-      {/* HERO SECTION - Starlight/Silver Theme */}
+    <main className="relative min-h-screen bg-[#121528] text-[#F5E7C8] overflow-hidden">
+      {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS */}
+
+      {/* Floating Candles */}
+      <FloatingCandle className="top-32 left-[8%] hidden lg:block" delay={0} />
+      <FloatingCandle className="top-48 right-[12%] hidden lg:block" delay={1.5} />
+      <FloatingCandle className="top-2/3 left-[15%] hidden lg:block" delay={3} />
+      <FloatingCandle className="bottom-40 right-[18%] hidden lg:block" delay={2} />
+
+      {/* Floating Quills */}
+      <MagicQuill className="top-1/4 right-[20%] hidden md:block" delay={0} />
+      <MagicQuill className="top-1/2 left-[10%] hidden md:block" delay={2} />
+      <MagicQuill className="bottom-1/3 right-[25%] hidden md:block" delay={1} />
+
+      {/* Floating Books */}
+      <FloatingBook className="top-40 left-[12%] hidden lg:block" delay={0} />
+      <FloatingBook className="top-1/2 right-[8%] hidden lg:block" delay={2.5} />
+      <FloatingBook className="bottom-1/4 left-[18%] hidden lg:block" delay={1.5} />
+
+      {/* Dust Motes */}
+      <DustMote className="top-[15%] left-[30%]" delay={0} />
+      <DustMote className="top-[25%] right-[35%]" delay={1} />
+      <DustMote className="top-[45%] left-[40%]" delay={2} />
+      <DustMote className="top-[65%] right-[25%]" delay={0.5} />
+      <DustMote className="top-[85%] left-[50%]" delay={1.5} />
+
+      {/* Flying Owl */}
+      <FlyingOwl className="top-20" delay={0} />
+      <FlyingOwl className="top-1/3" delay={7} />
+
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
-        {/* Starlight Aurora Background Orbs */}
-        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-starlight/50 via-moonlightSilver/40 to-pearlWhite/20 blur-3xl opacity-10 animate-floatSlow" />
-        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-pearlWhite/30 via-starlight/40 to-moonlightSilver/30 blur-3xl opacity-10 animate-flowDelayed" />
+        {/* Library Glow Orbs */}
+        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#F0C979]/30 via-[#5B335F]/20 to-[#58B6B1]/10 blur-3xl opacity-40" />
+        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-[#5B335F]/20 via-[#F0C979]/20 to-[#121528]/10 blur-3xl opacity-40" />
 
         <div className="relative mx-auto max-w-5xl">
-          {/* Moon Phase Navigation - Silver Gradient */}
+          {/* 🌙 Hogwarts Moon Phases */}
           <div className="mb-8 flex items-center justify-center gap-3 sm:gap-4">
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-starlight via-moonlightSilver to-pearlWhite border-2 border-starlight/70 hover:border-starlight transition-all cursor-pointer shadow-lg shadow-starlight/30 flex-shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] border-2 border-[#F0C979] hover:border-[#F5E7C8] transition-all cursor-pointer shadow-lg shadow-[#F0C979]/50 flex-shrink-0 animate-goldShimmer"
               title="Full Moon - Ghostwriting Studio"
             />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-starlight/60 to-moonlightSilver/50 flex-shrink-0" />
+            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#F0C979]/60 to-[#F5E7C8]/50 flex-shrink-0" />
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-moonlightSilver/90 to-pearlWhite/70 border border-moonlightSilver/60 hover:border-moonlightSilver transition-all cursor-pointer shadow-md shadow-moonlightSilver/20 flex-shrink-0"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E9C97F] border border-[#F5E7C8]/70 hover:border-[#F0C979] transition-all cursor-pointer shadow-md shadow-[#F5E7C8]/30 flex-shrink-0"
               title="Waning Moon"
             />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-moonlightSilver/50 to-pearlWhite/40 flex-shrink-0" />
+            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#F5E7C8]/50 to-[#5B335F]/40 flex-shrink-0" />
             <div
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-pearlWhite/70 to-starlight/50 border border-pearlWhite/40 hover:border-pearlWhite transition-all cursor-pointer shadow-sm shadow-pearlWhite/15 flex-shrink-0"
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-[#5B335F] to-[#58B6B1] border border-[#5B335F]/60 hover:border-[#F0C979] transition-all cursor-pointer shadow-sm shadow-[#5B335F]/20 flex-shrink-0"
+              title="Half Moon"
+            />
+            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#5B335F]/40 to-[#121528]/30 flex-shrink-0" />
+            <div
+              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-[#121528] border border-[#F0C979]/40 hover:border-[#F0C979] transition-all cursor-pointer shadow-sm shadow-[#121528]/10 flex-shrink-0"
+              title="Crescent Moon"
+            />
+            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#121528]/30 to-[#58B6B1]/20 flex-shrink-0" />
+            <div
+              className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded-full bg-gradient-to-br from-[#58B6B1] to-[#5B335F] border border-[#58B6B1]/30 hover:border-[#58B6B1] transition-all cursor-pointer flex-shrink-0"
               title="New Moon"
             />
           </div>
 
           <div className="space-y-6 text-center">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
-              Service Suite · Author & Ghostwriting
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-[#F0C979] uppercase font-medium">
+              🦉 Service Suite · Author & Ghostwriting
             </p>
-            <h1 className="font-elegant text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent leading-tight px-4">
+            <h1 className="font-elegant text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#F0C979] via-[#F5E7C8] to-[#E9C97F] bg-clip-text text-transparent leading-tight px-4">
               Author & Ghostwriting Studio
             </h1>
-            <p className="font-serif text-base sm:text-lg lg:text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed px-4 italic">
+            <p className="font-serif text-base sm:text-lg lg:text-xl text-[#D5D0C8] max-w-3xl mx-auto leading-relaxed px-4">
               Books, cookbooks, launch flows, and ongoing content engines. A blend of clinical clarity
               and creative storytelling—every word feels human and intentional.
             </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+              <a
+                href="/contact?service=ghostwriting"
+                className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] px-8 py-4 text-base font-bold text-[#121528] shadow-xl shadow-[#F0C979]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#F5E7C8]/70 overflow-hidden"
+              >
+                <span className="relative z-10">Start Your Story</span>
+                <svg className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                <span className="absolute inset-0 rounded-full bg-white/30 scale-0 group-hover:scale-100 transition-transform duration-500" />
+              </a>
+
+              <a
+                href="#writing-packages"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#F0C979] px-8 py-4 text-base font-bold text-[#F0C979] transition-all duration-300 hover:bg-[#F0C979]/10 hover:border-[#F5E7C8]"
+              >
+                <span>View Packages</span>
+                <svg className="h-5 w-5 transition-transform group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* WRITING SERVICES SECTION */}
-      <section className="px-6 py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl space-y-16">
-          <div className="space-y-4 text-center">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
-              Writing Services
+      <GoldenDivider />
+
+      {/* WHO THIS IS FOR */}
+      <section className="relative px-6 py-16">
+        <div className="mx-auto max-w-6xl">
+          <div className="space-y-4 text-center mb-12">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-[#F0C979] uppercase font-medium">
+              Who This Is For
             </p>
-            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-pearlWhite">
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#F5E7C8]">
               Strategic writing partnerships
             </h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: "Aspiring Authors", desc: "Have a book idea but need help bringing it to life with structure, voice, and polish" },
+              { title: "Busy Founders", desc: "Want to share your story or expertise but don't have time to write it yourself" },
+              { title: "Healthcare Leaders", desc: "Need thought leadership content that balances clinical precision with human warmth" },
+              { title: "Creative Entrepreneurs", desc: "Looking for brand storytelling that feels authentic, not corporate" },
+              { title: "Cookbook Authors", desc: "Want cultural storytelling woven into recipes with care and research" },
+              { title: "Speakers & Executives", desc: "Need speeches or LinkedIn content that sounds like you, not a template" }
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="group relative rounded-2xl border border-[#F0C979]/30 bg-[#121528]/60 backdrop-blur-sm p-6 transition-all duration-300 hover:border-[#F0C979] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#F0C979]/20"
+              >
+                <div className="absolute top-4 right-4 text-[#F0C979] opacity-20 group-hover:opacity-40 transition-opacity">
+                  📚
+                </div>
+                <h3 className="text-lg font-semibold text-[#F5E7C8] mb-2 group-hover:text-[#F0C979] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-[#D5D0C8] leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <GoldenDivider />
+
+      {/* HOW WE WORK TOGETHER */}
+      <section className="relative px-6 py-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="space-y-4 text-center mb-12">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-[#F0C979] uppercase font-medium">
+              How We Work Together
+            </p>
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#F5E7C8]">
+              From rough ideas to published words
+            </h2>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {[
+              {
+                step: "01",
+                title: "Voice Alignment",
+                desc: "Deep interviews to capture your unique voice, tone, and way of thinking. We'll create samples until it feels like you wrote it.",
+                icon: "🎤"
+              },
+              {
+                step: "02",
+                title: "Structure & Draft",
+                desc: "I craft outlines, chapter plans, and full drafts based on your vision. You review and provide feedback at each milestone.",
+                icon: "✍️"
+              },
+              {
+                step: "03",
+                title: "Polish & Deliver",
+                desc: "Revision cycles, final polish, and formatting. Plus launch materials or platform development depending on your package.",
+                icon: "✨"
+              }
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl border border-[#F0C979]/30 bg-gradient-to-br from-[#121528]/80 to-[#5B335F]/10 p-8 backdrop-blur-sm hover:border-[#F0C979] transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] flex items-center justify-center font-bold text-[#121528] shadow-lg shadow-[#F0C979]/40">
+                  {step.step}
+                </div>
+                <div className="mb-4 text-3xl">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-[#F5E7C8] mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-[#D5D0C8] leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <GoldenDivider />
+
+      {/* WRITING SERVICES PACKAGES */}
+      <section id="writing-packages" className="relative px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl space-y-16">
+          <div className="space-y-4 text-center">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-[#F0C979] uppercase font-medium">
+              Writing Services
+            </p>
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#F5E7C8]">
+              From books to brand stories
+            </h2>
+            <p className="text-[#D5D0C8] max-w-2xl mx-auto">
               For founders, clinicians, and creators who want a partner to bring their stories to life with precision and heart.
             </p>
           </div>
@@ -318,22 +620,21 @@ export default function GhostwritingPage() {
           <div className="space-y-16">
             {writingServices.map((service) => (
               <div key={service.id} className="space-y-8">
-                <h3 className="text-xl sm:text-2xl font-semibold text-starlight text-center">
+                <h3 className="text-xl sm:text-2xl font-semibold text-[#F0C979] text-center">
                   {service.title}
                 </h3>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {service.tiers.map((tier, index) => (
                     <article
                       key={tier.name}
-                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-starlight/15 fade-in-up ${
+                      className={`relative rounded-3xl border p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#F0C979]/30 backdrop-blur-sm ${
                         tier.popular
-                          ? "border-starlight/60 bg-gradient-to-br from-moonlightSilver/20 via-deepOcean/60 to-midnight/90"
-                          : "border-deepOcean/60 bg-gradient-to-br from-deepOcean/50 via-midnight/80 to-midnight/95"
+                          ? "border-[#F0C979] bg-gradient-to-br from-[#F0C979]/15 via-[#121528]/80 to-[#121528]/95"
+                          : "border-[#F0C979]/30 bg-gradient-to-br from-[#121528]/60 via-[#121528]/80 to-[#121528]/95"
                       }`}
-                      style={{ animationDelay: `${index * 0.15}s` }}
                     >
                       {tier.popular && (
-                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite px-4 py-1 text-xs font-bold text-midnight shadow-lg">
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] px-4 py-1 text-xs font-bold text-[#121528] shadow-lg">
                           MOST POPULAR
                         </div>
                       )}
@@ -341,14 +642,14 @@ export default function GhostwritingPage() {
                       <div className="space-y-6">
                         {/* Tier Header */}
                         <div className="space-y-2">
-                          <h4 className="text-xl font-semibold text-pearlWhite">
+                          <h4 className="text-xl font-semibold text-[#F5E7C8]">
                             {tier.name}
                           </h4>
                           <div className="flex items-baseline gap-2">
-                            <span className="text-3xl font-bold bg-gradient-to-r from-starlight to-moonlightSilver bg-clip-text text-transparent">
+                            <span className="text-3xl font-bold bg-gradient-to-r from-[#F0C979] to-[#E9C97F] bg-clip-text text-transparent">
                               ${tier.price.toLocaleString()}
                             </span>
-                            <span className="text-sm text-moonlightSilver">
+                            <span className="text-sm text-[#D5D0C8]">
                               {tier.duration}
                             </span>
                           </div>
@@ -359,7 +660,7 @@ export default function GhostwritingPage() {
                           {tier.features.map((feature) => (
                             <li key={feature} className="flex items-start gap-3 text-sm">
                               <svg
-                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-starlight"
+                                className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#F0C979]"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -371,7 +672,7 @@ export default function GhostwritingPage() {
                                   d="M5 13l4 4L19 7"
                                 />
                               </svg>
-                              <span className="text-moonlightSilver leading-snug">
+                              <span className="text-[#D5D0C8] leading-snug">
                                 {feature}
                               </span>
                             </li>
@@ -383,8 +684,8 @@ export default function GhostwritingPage() {
                           href={`/contact?service=ghostwriting&tier=${tier.name.toLowerCase().replace(/\s+/g, "-")}`}
                           className={`block w-full rounded-full py-3 text-center text-sm font-semibold transition-all duration-300 ${
                             tier.popular
-                              ? "bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite text-midnight shadow-lg shadow-starlight/30 hover:shadow-xl hover:shadow-moonlightSilver/50 hover:-translate-y-0.5"
-                              : "border border-starlight/40 text-starlight hover:bg-starlight/10 hover:border-starlight/60"
+                              ? "bg-gradient-to-r from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] text-[#121528] shadow-lg shadow-[#F0C979]/40 hover:shadow-xl hover:shadow-[#E9C97F]/60 hover:-translate-y-0.5"
+                              : "border border-[#F0C979]/40 text-[#F0C979] hover:bg-[#F0C979]/10 hover:border-[#F0C979]"
                           }`}
                         >
                           {tier.cta}
@@ -399,118 +700,51 @@ export default function GhostwritingPage() {
         </div>
       </section>
 
-      {/* WHY GHOSTWRITING VALUE PROP */}
-      <section className="border-t border-deepOcean/40 bg-gradient-to-b from-nightNavy/50 to-midnight px-6 py-16">
-        <div className="mx-auto max-w-4xl space-y-8">
-          <div className="space-y-4 text-center">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase font-medium">
-              Why Moonlit Writing
+      <GoldenDivider />
+
+      {/* FAQ SECTION */}
+      <section className="relative px-6 py-16">
+        <div className="mx-auto max-w-4xl">
+          <div className="space-y-4 text-center mb-12">
+            <p className="text-xs sm:text-sm tracking-[0.35em] text-[#F0C979] uppercase font-medium">
+              FAQ
             </p>
-            <h2 className="font-elegant text-2xl sm:text-3xl font-semibold text-pearlWhite">
-              Your voice, elevated
+            <h2 className="font-elegant text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#F5E7C8]">
+              Common questions about ghostwriting
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-3 rounded-2xl border border-starlight/30 bg-deepOcean/30 p-6">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-starlight/20 p-2">
-                  <svg className="h-5 w-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-starlight">
-                  Published Fantasy Author
-                </h3>
-              </div>
-              <p className="text-sm text-moonlightSilver leading-relaxed">
-                300K+ words published across fantasy novels, short stories, and creative non-fiction.
-                I understand story structure, pacing, and what makes readers care.
-              </p>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-starlight/30 bg-deepOcean/30 p-6">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-starlight/20 p-2">
-                  <svg className="h-5 w-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-starlight">
-                  Voice Matching Expertise
-                </h3>
-              </div>
-              <p className="text-sm text-moonlightSilver leading-relaxed">
-                Through deep interviews and voice alignment sessions, I capture your unique way of speaking
-                and thinking—then weave it into every sentence.
-              </p>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-starlight/30 bg-deepOcean/30 p-6">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-starlight/20 p-2">
-                  <svg className="h-5 w-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-starlight">
-                  Strategic Structure + Storytelling
-                </h3>
-              </div>
-              <p className="text-sm text-moonlightSilver leading-relaxed">
-                Not just pretty words—every piece is architected with narrative flow, emotional beats,
-                and strategic messaging that serves your goals.
-              </p>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-starlight/30 bg-deepOcean/30 p-6">
-              <div className="flex items-center gap-3">
-                <div className="rounded-full bg-starlight/20 p-2">
-                  <svg className="h-5 w-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-lg font-semibold text-starlight">
-                  Clinical Clarity Meets Creativity
-                </h3>
-              </div>
-              <p className="text-sm text-moonlightSilver leading-relaxed">
-                15+ years in healthcare ops means I write with precision, empathy, and zero fluff.
-                Perfect for health founders, clinical leaders, and mission-driven brands.
-              </p>
-            </div>
-          </div>
+          <FAQAccordion />
         </div>
       </section>
 
       {/* FINAL CTA */}
       <section className="relative overflow-hidden px-6 py-20">
-        {/* Background Orb */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-starlight/30 via-moonlightSilver/20 to-pearlWhite/10 blur-3xl" />
+        {/* Background Library Orb */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#F0C979]/30 via-[#5B335F]/20 to-[#58B6B1]/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-4xl">
-          <div className="rounded-3xl border border-starlight/30 bg-gradient-to-br from-moonlightSilver/15 via-deepOcean/40 to-midnight/90 px-8 py-12 text-center shadow-2xl backdrop-blur-sm">
-            <h2 className="font-elegant text-3xl sm:text-4xl font-bold bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite bg-clip-text text-transparent">
+          <div className="rounded-3xl border border-[#F0C979]/40 bg-gradient-to-br from-[#F0C979]/15 via-[#121528]/60 to-[#121528]/90 px-8 py-12 text-center shadow-2xl backdrop-blur-sm">
+            <h2 className="font-elegant text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#F0C979] via-[#F5E7C8] to-[#E9C97F] bg-clip-text text-transparent">
               Ready to bring your story to life?
             </h2>
-            <p className="mt-4 text-lg text-moonlightSilver max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-[#D5D0C8] max-w-2xl mx-auto">
               Share your outlines, messy drafts, or voice notes. We'll craft a writing plan
               that honors your voice and serves your vision.
             </p>
 
             <a
               href="/contact?service=ghostwriting"
-              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-starlight via-moonlightSilver to-pearlWhite px-10 py-4 text-base font-bold text-midnight shadow-xl shadow-starlight/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-moonlightSilver/60 relative overflow-hidden group"
+              className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F0C979] via-[#E9C97F] to-[#F5E7C8] px-10 py-4 text-base font-bold text-[#121528] shadow-xl shadow-[#F0C979]/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#E9C97F]/70 relative overflow-hidden group"
             >
               <span className="relative z-10">Start Your Writing Project</span>
               <svg className="relative z-10 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-              {/* Animated shimmer effect */}
               <span className="absolute inset-0 rounded-full bg-white/20 scale-0 group-hover:scale-100 transition-transform duration-500" />
             </a>
 
-            <p className="mt-6 text-xs text-starlight/80">
+            <p className="mt-6 text-xs text-[#F0C979]/80">
               Book slots available for Q2 2025 • Voice samples & outlines welcome
             </p>
           </div>

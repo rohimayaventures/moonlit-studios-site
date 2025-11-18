@@ -1319,3 +1319,113 @@ body.chaos-mode * {
 .animate-lightTrail {
   animation: lightTrail 3s ease-in-out infinite;
 }
+
+/* ========================================
+   HOGWARTS CASTLE LIBRARY - Ghostwriting
+   ======================================== */
+
+/* Candle Flicker */
+@keyframes candleFlicker {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+  75% {
+    opacity: 0.92;
+    transform: scale(0.99);
+  }
+}
+
+.animate-candleFlicker {
+  animation: candleFlicker 3s ease-in-out infinite;
+}
+
+/* Quill Float */
+@keyframes quillFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+.animate-quillFloat {
+  animation: quillFloat 4s ease-in-out infinite;
+}
+
+/* Dust Motes */
+@keyframes dustMotes {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-60px) translateX(-5px);
+    opacity: 0;
+  }
+}
+
+.animate-dustMotes {
+  animation: dustMotes 6s linear infinite;
+}
+
+/* Gold Shimmer */
+@keyframes goldShimmer {
+  0%, 100% {
+    opacity: 0.5;
+    text-shadow: 0 0 10px #F0C979;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 20px #F0C979, 0 0 30px #F5E7C8;
+  }
+}
+
+.animate-goldShimmer {
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+
+/* Owl Fly */
+@keyframes owlFly {
+  0% {
+    transform: translateX(-100px) translateY(20px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(100vw) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+.animate-owlFly {
+  animation: owlFly 15s linear infinite;
+}
+
+/* Book Page Turn */
+@keyframes pageFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateZ(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotateZ(2deg);
+  }
+}
