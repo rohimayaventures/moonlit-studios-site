@@ -757,22 +757,27 @@ export default function CreativeDesignDevelopmentPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 4: TIERED PACKAGES (LOW → HIGH)
+          SECTION 4: TIERED PACKAGES - ORGANIZED BY SERVICE TYPE
       ═══════════════════════════════════════════════════════════════════ */}
       <section id="packages" className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center">
             <p className="text-sm tracking-[0.35em] text-indigo-300 uppercase mb-3">Tiered Pricing</p>
             <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-5xl">
-              Choose Your Creative Path
+              Choose Your Creative Constellation
             </h2>
-            <p className="text-lg text-moonlightSilver">
-              Mix and match deliverables or run the full suite together. Each tier is designed for different business stages.
+            <p className="text-lg text-moonlightSilver max-w-2xl mx-auto">
+              Select from three cosmic tiers across each service: ⭐ Stardust (Essential), 🌌 Nebula (Professional), or 💫 Supernova (Premium).
             </p>
           </div>
 
-          <div className="mx-auto max-w-7xl grid gap-6 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-            {packages.map((pkg, index) => (
+          {/* BRANDING & IDENTITY PACKAGES */}
+          <div className="mb-20">
+            <h3 className="text-2xl font-elegant text-center text-purple-300 mb-12">
+              🎨 Starlit Identity — Branding & Visual Systems
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl">
+              {packages.filter(pkg => pkg.title === "Branding & Identity").map((pkg, index) => (
               <div
                 key={pkg.id}
                 onMouseEnter={() => setHoveredCard(index)}
@@ -841,16 +846,177 @@ export default function CreativeDesignDevelopmentPage() {
                   </Link>
                 </div>
               </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* WEB DEVELOPMENT PACKAGES */}
+          <div className="mb-20">
+            <h3 className="text-2xl font-elegant text-center text-cyan-300 mb-12">
+              🌐 Cosmic Canvas — Web Development
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto max-w-6xl">
+              {packages.filter(pkg => pkg.title === "Web Development").map((pkg, index) => (
+              <div
+                key={pkg.id}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className={`group relative overflow-visible rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
+                  hoveredCard === index ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
+                } ${pkg.popular ? 'ring-2 ring-indigo-400/50' : ''} w-full`}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-50">
+                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-indigo-400 via-amber-300 to-teal-400 text-xs font-bold text-midnight shadow-lg whitespace-nowrap">
+                      ⭐ MOST POPULAR
+                    </span>
+                  </div>
+                )}
+
+                {/* Card Header */}
+                <div className="border-b border-white/10 bg-midnight/40 p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400/30 to-teal-400/20 flex items-center justify-center border ${pkg.borderColor}`}>
+                      <span className={`text-xs font-bold ${pkg.accentColor}`}>{pkg.tier.slice(0,3).toUpperCase()}</span>
+                    </div>
+                    <div>
+                      <h3 className={`text-lg font-bold ${pkg.accentColor}`}>
+                        {pkg.title}
+                      </h3>
+                      <p className="text-xs text-moonlightSilver/70">{pkg.tier}</p>
+                    </div>
+                  </div>
+                  <p className="mb-4 text-sm italic text-moonlightSilver/80">
+                    {pkg.tagline}
+                  </p>
+                  <div className="text-3xl font-bold text-pearlWhite">
+                    {pkg.price}+
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-6">
+                  <div className="mb-6">
+                    <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-indigo-300">
+                      What's Included:
+                    </p>
+                    <ul className="space-y-2">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
+                          <Check className={`mt-0.5 h-4 w-4 flex-shrink-0 ${pkg.accentColor}`} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-moonlightSilver/70">
+                      Perfect For:
+                    </p>
+                    <p className="text-sm text-pearlWhite">{pkg.ideal}</p>
+                  </div>
+
+                  <Link
+                    href="/contact"
+                    className={`block w-full rounded-full border ${pkg.borderColor} py-3 text-center font-semibold ${pkg.accentColor} transition-all hover:bg-white/10`}
+                  >
+                    Start Project →
+                  </Link>
+                </div>
+              </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PACKAGING & PRODUCT DESIGN PACKAGES */}
+          <div className="mb-20">
+            <h3 className="text-2xl font-elegant text-center text-teal-300 mb-12">
+              📦 Stellar Packaging — Product Design
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2 mx-auto max-w-4xl">
+              {packages.filter(pkg => pkg.title === "Packaging & Product Design").map((pkg, index) => (
+              <div
+                key={pkg.id}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className={`group relative overflow-visible rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
+                  hoveredCard === index ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
+                } ${pkg.popular ? 'ring-2 ring-indigo-400/50' : ''} w-full`}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-50">
+                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-indigo-400 via-amber-300 to-teal-400 text-xs font-bold text-midnight shadow-lg whitespace-nowrap">
+                      ⭐ MOST POPULAR
+                    </span>
+                  </div>
+                )}
+
+                {/* Card Header */}
+                <div className="border-b border-white/10 bg-midnight/40 p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400/30 to-teal-400/20 flex items-center justify-center border ${pkg.borderColor}`}>
+                      <span className={`text-xs font-bold ${pkg.accentColor}`}>{pkg.tier.slice(0,3).toUpperCase()}</span>
+                    </div>
+                    <div>
+                      <h3 className={`text-lg font-bold ${pkg.accentColor}`}>
+                        {pkg.title}
+                      </h3>
+                      <p className="text-xs text-moonlightSilver/70">{pkg.tier}</p>
+                    </div>
+                  </div>
+                  <p className="mb-4 text-sm italic text-moonlightSilver/80">
+                    {pkg.tagline}
+                  </p>
+                  <div className="text-3xl font-bold text-pearlWhite">
+                    {pkg.price}+
+                  </div>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-6">
+                  <div className="mb-6">
+                    <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-indigo-300">
+                      What's Included:
+                    </p>
+                    <ul className="space-y-2">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
+                          <Check className={`mt-0.5 h-4 w-4 flex-shrink-0 ${pkg.accentColor}`} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-moonlightSilver/70">
+                      Perfect For:
+                    </p>
+                    <p className="text-sm text-pearlWhite">{pkg.ideal}</p>
+                  </div>
+
+                  <Link
+                    href="/contact"
+                    className={`block w-full rounded-full border ${pkg.borderColor} py-3 text-center font-semibold ${pkg.accentColor} transition-all hover:bg-white/10`}
+                  >
+                    Start Project →
+                  </Link>
+                </div>
+              </div>
+              ))}
+            </div>
           </div>
 
           {/* Copywriting Add-On */}
-          <div className="mt-16 mx-auto max-w-4xl">
+          <div className="mx-auto max-w-4xl">
+            <h3 className="text-2xl font-elegant text-center text-amber-300 mb-12">
+              ✍️ Moonlit Quill — Creative Copywriting
+            </h3>
             <div className="rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/10 via-purple-400/5 to-transparent p-8 backdrop-blur-sm">
               <div className="text-center mb-6">
-                <h3 className="font-elegant text-2xl font-bold text-pearlWhite mb-2">{copywriting.title}</h3>
-                <p className="text-sm text-moonlightSilver">{copywriting.tier}</p>
-                <p className="text-3xl font-bold text-amber-300 mt-4">{copywriting.hourly}</p>
+                <p className="text-sm text-moonlightSilver mb-2">{copywriting.tier}</p>
+                <p className="text-3xl font-bold text-amber-300">{copywriting.hourly}</p>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 {copywriting.projects.map((project, idx) => (
