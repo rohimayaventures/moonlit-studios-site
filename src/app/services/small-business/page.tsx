@@ -427,9 +427,9 @@ export default function SmallBusinessPage() {
                 } ${pkg.popular ? 'ring-2 ring-pink-400/50' : ''}`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-green-400 via-pink-300 to-purple-300 text-xs font-bold text-midnight shadow-lg">
-                      ⭐ MOST POPULAR
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                    <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-green-400 via-pink-300 to-purple-300 text-xs font-bold text-midnight shadow-lg whitespace-nowrap">
+                      MOST POPULAR
                     </span>
                   </div>
                 )}
@@ -641,11 +641,9 @@ export default function SmallBusinessPage() {
       <section className="py-20 relative overflow-hidden">
         <GhibliCloud className="absolute top-0 left-0 w-full h-16 text-purple-200 -translate-y-8 opacity-20" />
 
-        {/* Magical lanterns surrounding the CTA */}
-        <GhibliLantern className="absolute top-10 left-1/4 w-20 h-24 opacity-30" />
-        <GhibliLantern className="absolute bottom-10 right-1/4 w-24 h-28 opacity-35" />
-        <GhibliLantern className="absolute top-1/2 left-10 w-16 h-20 opacity-25" />
-        <GhibliLantern className="absolute top-1/2 right-10 w-18 h-22 opacity-28" />
+        {/* Subtle ambient glow only */}
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-green-300/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-pink-300/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
         <div className="mx-auto max-w-4xl px-6 text-center relative z-10">
           <div className="rounded-2xl border border-green-400/30 bg-gradient-to-br from-green-400/10 via-pink-300/10 to-purple-200/10 p-12 backdrop-blur-sm">

@@ -2,36 +2,21 @@
 
 import Link from "next/link";
 import { ArrowRight, BookOpen, Sparkles, ScrollText, Feather, ChevronDown } from "lucide-react";
-import { CandleGlow } from "@/components/magic/CandleGlow";
-import { WingedKey } from "@/components/magic/WingedKey";
-import { FloatingOpenBook } from "@/components/magic/FloatingOpenBook";
 
 export default function GhostwritingPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#121528] via-[#1A1E38] to-[#121528] text-[#F5E7C8] overflow-hidden relative">
 
-      {/* SUBTLE MAGICAL BACKGROUND ELEMENTS */}
+      {/* MINIMALIST AMBIENT GLOW */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Candle glows - edges only */}
-        <CandleGlow className="bottom-0 left-[5%]" delay={0} />
-        <CandleGlow className="bottom-0 left-[15%]" delay={0.8} />
-        <CandleGlow className="bottom-0 right-[5%]" delay={0.4} />
-        <CandleGlow className="bottom-0 right-[15%]" delay={1.2} />
-
-        {/* Floating books - sparse placement */}
-        <FloatingOpenBook className="top-[20%] left-[8%] opacity-40" delay={0} />
-        <FloatingOpenBook className="top-[60%] right-[10%] opacity-40" delay={2} />
-        <FloatingOpenBook className="top-[45%] left-[12%] opacity-30" delay={3.5} />
-
-        {/* Flying keys - background layer */}
-        <WingedKey className="top-[18%] left-[20%] opacity-30" delay={0.5} />
-        <WingedKey className="top-[35%] right-[18%] opacity-25" delay={1.5} />
-        <WingedKey className="top-[55%] left-[22%] opacity-30" delay={2.5} />
-        <WingedKey className="top-[72%] right-[15%] opacity-25" delay={3.5} />
+        {/* Subtle corner glows only - no decorative elements */}
+        <div className="absolute top-20 left-20 w-64 h-64 bg-[#F0C979]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#5B335F]/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#F0C979]/3 rounded-full blur-3xl" />
       </div>
 
-      {/* Warm library glow from bottom - subtle */}
-      <div className="fixed bottom-0 left-0 right-0 h-1/4 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/10 via-[#F0C979]/5 to-transparent opacity-60" />
+      {/* Warm library glow from bottom - very subtle */}
+      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/8 via-[#F0C979]/3 to-transparent opacity-50" />
 
       {/* HERO */}
       <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-20 lg:pb-28">
