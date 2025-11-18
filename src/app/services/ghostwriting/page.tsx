@@ -173,19 +173,65 @@ export default function GhostwritingPage() {
                      background: 'linear-gradient(to right, transparent, rgba(240, 201, 121, 0.5), rgba(240, 201, 121, 0.2))'
                    }} />
             ))}
-            {/* Dense books */}
-            {Array.from({ length: 40 }).map((_, i) => (
-              <div key={i} className="absolute"
-                   style={{
-                     left: `${(i % 8) * 12 + 2}%`,
-                     bottom: `${Math.floor(i / 8) * 12 + 1}%`,
-                     width: '10%',
-                     height: `${8 + Math.random() * 6}%`,
-                     background: `linear-gradient(to bottom, ${['#8B6F47', '#F0C979', '#5B335F', '#58B6B1'][i % 4]}, ${['#6B5837', '#E9C97F', '#4A2550', '#4896A1'][i % 4]})`,
-                     opacity: 0.8,
-                     boxShadow: '1px 2px 3px rgba(0,0,0,0.6)'
-                   }} />
-            ))}
+            {/* Realistic book spines - SVG */}
+            {Array.from({ length: 40 }).map((_, i) => {
+              const colors = [
+                ['#8B6F47', '#6B5837'], // Brown leather
+                ['#F0C979', '#E9C97F'], // Gold
+                ['#5B335F', '#4A2550'], // Plum
+                ['#58B6B1', '#4896A1'], // Teal
+                ['#3A2112', '#2A1808'], // Dark brown
+                ['#C4A35A', '#B4934A'], // Bronze
+              ];
+              const [baseColor, darkColor] = colors[i % 6];
+              const height = 8 + (i % 5) * 2;
+              const tilt = ((i % 7) - 3) * 2; // -6 to +6 degrees
+
+              return (
+                <svg
+                  key={i}
+                  className="absolute"
+                  style={{
+                    left: `${(i % 8) * 12 + 2}%`,
+                    bottom: `${Math.floor(i / 8) * 12 + 1}%`,
+                    width: '10%',
+                    height: `${height}%`,
+                    opacity: 0.85,
+                    transform: `rotate(${tilt}deg)`,
+                  }}
+                  viewBox="0 0 30 100"
+                  preserveAspectRatio="none"
+                >
+                  {/* Book spine with worn edges */}
+                  <defs>
+                    <linearGradient id={`bookGrad${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style={{ stopColor: darkColor, stopOpacity: 0.9 }} />
+                      <stop offset="15%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
+                      <stop offset="50%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
+                      <stop offset="85%" style={{ stopColor: darkColor, stopOpacity: 0.95 }} />
+                      <stop offset="100%" style={{ stopColor: '#000', stopOpacity: 0.7 }} />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Main spine */}
+                  <path
+                    d={`M 2 ${i % 3} L 28 ${(i + 1) % 3} L 28 100 L 2 ${100 - (i % 2)}`}
+                    fill={`url(#bookGrad${i})`}
+                    stroke={darkColor}
+                    strokeWidth="0.5"
+                  />
+
+                  {/* Spine title lines (gold embossing) */}
+                  <rect x="6" y="20" width="18" height="1" fill="#F0C979" opacity="0.6" />
+                  <rect x="8" y="24" width="14" height="0.5" fill="#F0C979" opacity="0.5" />
+                  <rect x="10" y="27" width="10" height="0.5" fill="#F0C979" opacity="0.4" />
+
+                  {/* Wear and tear marks */}
+                  <line x1="2" y1="10" x2="5" y2="10" stroke="#000" strokeWidth="0.3" opacity="0.4" />
+                  <line x1="25" y1="70" x2="28" y2="72" stroke="#000" strokeWidth="0.3" opacity="0.3" />
+                </svg>
+              );
+            })}
           </div>
 
           {/* SECOND FLOOR - Balcony */}
@@ -245,18 +291,65 @@ export default function GhostwritingPage() {
                      background: 'linear-gradient(to left, transparent, rgba(240, 201, 121, 0.5), rgba(240, 201, 121, 0.2))'
                    }} />
             ))}
-            {Array.from({ length: 40 }).map((_, i) => (
-              <div key={i} className="absolute"
-                   style={{
-                     right: `${(i % 8) * 12 + 2}%`,
-                     bottom: `${Math.floor(i / 8) * 12 + 1}%`,
-                     width: '10%',
-                     height: `${8 + Math.random() * 6}%`,
-                     background: `linear-gradient(to bottom, ${['#8B6F47', '#F0C979', '#5B335F', '#58B6B1'][i % 4]}, ${['#6B5837', '#E9C97F', '#4A2550', '#4896A1'][i % 4]})`,
-                     opacity: 0.8,
-                     boxShadow: '1px 2px 3px rgba(0,0,0,0.6)'
-                   }} />
-            ))}
+            {/* Realistic book spines - SVG */}
+            {Array.from({ length: 40 }).map((_, i) => {
+              const colors = [
+                ['#8B6F47', '#6B5837'], // Brown leather
+                ['#F0C979', '#E9C97F'], // Gold
+                ['#5B335F', '#4A2550'], // Plum
+                ['#58B6B1', '#4896A1'], // Teal
+                ['#3A2112', '#2A1808'], // Dark brown
+                ['#C4A35A', '#B4934A'], // Bronze
+              ];
+              const [baseColor, darkColor] = colors[(i + 2) % 6]; // Offset for variety
+              const height = 8 + (i % 5) * 2;
+              const tilt = ((i % 7) - 3) * 2; // -6 to +6 degrees
+
+              return (
+                <svg
+                  key={i}
+                  className="absolute"
+                  style={{
+                    right: `${(i % 8) * 12 + 2}%`,
+                    bottom: `${Math.floor(i / 8) * 12 + 1}%`,
+                    width: '10%',
+                    height: `${height}%`,
+                    opacity: 0.85,
+                    transform: `rotate(${tilt}deg)`,
+                  }}
+                  viewBox="0 0 30 100"
+                  preserveAspectRatio="none"
+                >
+                  {/* Book spine with worn edges */}
+                  <defs>
+                    <linearGradient id={`bookGradR${i}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style={{ stopColor: '#000', stopOpacity: 0.7 }} />
+                      <stop offset="15%" style={{ stopColor: darkColor, stopOpacity: 0.95 }} />
+                      <stop offset="50%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
+                      <stop offset="85%" style={{ stopColor: baseColor, stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: darkColor, stopOpacity: 0.9 }} />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Main spine */}
+                  <path
+                    d={`M 2 ${(i + 1) % 3} L 28 ${i % 3} L 28 ${100 - (i % 2)} L 2 100`}
+                    fill={`url(#bookGradR${i})`}
+                    stroke={darkColor}
+                    strokeWidth="0.5"
+                  />
+
+                  {/* Spine title lines (gold embossing) */}
+                  <rect x="6" y="20" width="18" height="1" fill="#F0C979" opacity="0.6" />
+                  <rect x="8" y="24" width="14" height="0.5" fill="#F0C979" opacity="0.5" />
+                  <rect x="10" y="27" width="10" height="0.5" fill="#F0C979" opacity="0.4" />
+
+                  {/* Wear and tear marks */}
+                  <line x1="2" y1="10" x2="5" y2="10" stroke="#000" strokeWidth="0.3" opacity="0.4" />
+                  <line x1="25" y1="70" x2="28" y2="72" stroke="#000" strokeWidth="0.3" opacity="0.3" />
+                </svg>
+              );
+            })}
           </div>
 
           {/* SECOND FLOOR - Balcony */}
@@ -341,26 +434,28 @@ export default function GhostwritingPage() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════════════
-          SPARSE FLOATING ELEMENTS - Let architecture be the star
+          SPARSE FLOATING ELEMENTS - ABOVE CONTENT WITH PROPER Z-INDEX
       ═══════════════════════════════════════════════════════════════ */}
-      {/* 8 Floating Candles (not 15) */}
-      <FloatingCandle className="top-1/4 left-[15%] hidden lg:block" delay={0} />
-      <FloatingCandle className="top-1/3 right-[18%] hidden lg:block" delay={1.5} />
-      <FloatingCandle className="top-1/2 left-[12%] hidden lg:block" delay={3} />
-      <FloatingCandle className="top-1/2 right-[15%] hidden lg:block" delay={0.8} />
-      <FloatingCandle className="top-2/3 left-[20%] hidden lg:block" delay={2.2} />
-      <FloatingCandle className="top-2/3 right-[22%] hidden lg:block" delay={1.2} />
-      <FloatingCandle className="bottom-1/3 left-[17%] hidden lg:block" delay={2.8} />
-      <FloatingCandle className="bottom-1/3 right-[19%] hidden lg:block" delay={0.5} />
+      <div className="fixed inset-0 pointer-events-none z-30">
+        {/* 8 Floating Candles (not 15) */}
+        <FloatingCandle className="absolute top-1/4 left-[15%] hidden lg:block" delay={0} />
+        <FloatingCandle className="absolute top-1/3 right-[18%] hidden lg:block" delay={1.5} />
+        <FloatingCandle className="absolute top-1/2 left-[12%] hidden lg:block" delay={3} />
+        <FloatingCandle className="absolute top-1/2 right-[15%] hidden lg:block" delay={0.8} />
+        <FloatingCandle className="absolute top-2/3 left-[20%] hidden lg:block" delay={2.2} />
+        <FloatingCandle className="absolute top-2/3 right-[22%] hidden lg:block" delay={1.2} />
+        <FloatingCandle className="absolute bottom-1/3 left-[17%] hidden lg:block" delay={2.8} />
+        <FloatingCandle className="absolute bottom-1/3 right-[19%] hidden lg:block" delay={0.5} />
 
-      {/* 20 Dust Motes (not 30) */}
-      {Array.from({ length: 20 }).map((_, i) => (
-        <DustMote
-          key={i}
-          className={`top-[${10 + i * 4}%] ${i % 2 === 0 ? 'left' : 'right'}-[${15 + (i % 5) * 10}%]`}
-          delay={i * 0.3}
-        />
-      ))}
+        {/* 20 Dust Motes (not 30) */}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <DustMote
+            key={i}
+            className={`absolute top-[${10 + i * 4}%] ${i % 2 === 0 ? 'left' : 'right'}-[${15 + (i % 5) * 10}%]`}
+            delay={i * 0.3}
+          />
+        ))}
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════
           HERO SECTION
