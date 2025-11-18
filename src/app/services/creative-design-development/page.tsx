@@ -15,12 +15,14 @@ const TwinklingStar = ({
   size = 2,
   color = "cyan",
   delay = 0,
-  className = ""
+  className = "",
+  style
 }: {
   size?: number;
   color?: string;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) => {
   const colorMap: Record<string, string> = {
     cyan: "#67E8F9",
@@ -34,7 +36,7 @@ const TwinklingStar = ({
   return (
     <div
       className={`absolute ${className} pointer-events-none animate-twinkle`}
-      style={{ animationDelay: `${delay}s` }}
+      style={{ animationDelay: `${delay}s`, ...style }}
     >
       <svg width={size * 4} height={size * 4} viewBox="0 0 20 20">
         {/* Star glow */}
