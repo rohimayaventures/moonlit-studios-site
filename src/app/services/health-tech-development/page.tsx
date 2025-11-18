@@ -124,11 +124,11 @@ export default function HealthTechDevelopmentPage() {
         <div className="relative mx-auto max-w-5xl text-center">
           {/* Moon Phases - Water Tribe Colors with Pulsing */}
           <div className="mb-8 flex justify-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] shadow-lg shadow-[#9FE8FF]/50 animate-pulse" style={{ animationDuration: '3s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#50D4D0] to-[#9FE8FF] shadow-lg shadow-[#50D4D0]/50 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D5ECFA] to-white shadow-lg shadow-[#D5ECFA]/50 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#0A2330] to-[#083B54] shadow-lg shadow-[#0A2330]/50 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] shadow-lg shadow-[#083B54]/50 animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '1.2s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] border-2 border-[#9FE8FF]/50 shadow-lg shadow-[#9FE8FF]/50 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#50D4D0] to-[#9FE8FF] border-2 border-[#50D4D0]/50 shadow-lg shadow-[#50D4D0]/50 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D5ECFA] to-white border-2 border-[#D5ECFA]/50 shadow-lg shadow-[#D5ECFA]/50 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#0A2330] to-[#083B54] border-2 border-[#0A2330]/50 shadow-lg shadow-[#0A2330]/50 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] border-2 border-[#083B54]/50 shadow-lg shadow-[#083B54]/50 animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '1.2s' }} />
           </div>
 
           <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">

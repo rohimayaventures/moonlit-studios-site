@@ -315,10 +315,10 @@ export default function ConsultingPage() {
 
           {/* Moon Phases - Rivendell Elven Style with Pulsing */}
           <div className="mb-8 flex justify-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] shadow-lg shadow-[#F0C979]/50 border border-[#C9A961]/30 animate-pulse" style={{ animationDuration: '3s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] shadow-lg shadow-[#A8C5E0]/40 border border-[#6B8FA3]/30 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] shadow-lg shadow-[#F5E7C8]/30 border border-[#C9A961]/20 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] shadow-lg shadow-[#8B7355]/40 border border-[#8B7355]/30 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/50 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] border-2 border-[#A8C5E0]/50 shadow-lg shadow-[#A8C5E0]/50 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] border-2 border-[#F5E7C8]/50 shadow-lg shadow-[#F5E7C8]/50 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] border-2 border-[#8B7355]/50 shadow-lg shadow-[#8B7355]/50 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
           </div>
 
           <h1 className="mb-4 text-5xl font-elegant text-[#F5E7C8] md:text-6xl" style={{ fontFamily: 'var(--font-playfair)' }}>
