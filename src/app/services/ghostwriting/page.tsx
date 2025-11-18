@@ -9,10 +9,18 @@ export default function GhostwritingPage() {
 
       {/* MINIMALIST AMBIENT GLOW */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Subtle corner glows only - no decorative elements */}
+        {/* Subtle corner glows */}
         <div className="absolute top-20 left-20 w-64 h-64 bg-[#F0C979]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#5B335F]/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#F0C979]/3 rounded-full blur-3xl" />
+
+        {/* Rectangular candle glows - warm ambient lighting */}
+        <div className="absolute top-32 left-12 w-20 h-64 bg-[#F0C979]/8 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4s' }} />
+        <div className="absolute top-48 right-16 w-24 h-72 bg-[#F0C979]/10 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }} />
+        <div className="absolute top-20 left-1/4 w-16 h-48 bg-[#F0C979]/6 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4.5s', animationDelay: '1s' }} />
+        <div className="absolute top-40 right-1/3 w-20 h-56 bg-[#F0C979]/7 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4s', animationDelay: '1.5s' }} />
+        <div className="absolute top-56 left-1/3 w-18 h-60 bg-[#F0C979]/9 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '0.8s' }} />
+        <div className="absolute top-28 right-1/4 w-22 h-52 bg-[#F0C979]/8 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4.2s', animationDelay: '0.3s' }} />
       </div>
 
       {/* Warm library glow from bottom - very subtle */}
@@ -22,15 +30,21 @@ export default function GhostwritingPage() {
       <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-20 lg:pb-28">
         <div className="mx-auto max-w-6xl">
 
-          {/* Moon Phases */}
-          <div className="mb-10 flex items-center justify-center gap-3 flex-wrap">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] border-2 border-[#F0C979]/60 shadow-lg shadow-[#F0C979]/40" title="Owlery Gold" />
-            <div className="h-0.5 w-16 bg-gradient-to-r from-[#F0C979]/60 to-[#F5E7C8]/50" />
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E9C97F] border border-[#F5E7C8]/60 shadow-md shadow-[#F5E7C8]/30" title="Warm Parchment" />
-            <div className="h-0.5 w-16 bg-gradient-to-r from-[#F5E7C8]/50 to-[#5B335F]/40" />
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#5B335F] to-[#3A2550] border border-[#5B335F]/60 shadow-sm" title="Ink Plum" />
-            <div className="h-0.5 w-16 bg-gradient-to-r from-[#5B335F]/40 to-[#121528]/30" />
-            <div className="w-6 h-6 rounded-full bg-[#121528] border border-[#F0C979]/40 shadow-sm" title="Midnight Stacks" />
+          {/* Moon Phases - 5 phases with pulsing animation */}
+          <div className="mb-10 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#121528] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0" title="New Moon - Dark Library" style={{ animationDuration: '3s' }} />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/40 to-[#F5E7C8]/40" />
+
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#121528] via-[#F0C979]/50 to-[#F0C979]/70 border-2 border-[#F0C979]/60 shadow-lg shadow-[#F0C979]/40 animate-pulse flex-shrink-0" title="Crescent - Stories Awakening" style={{ animationDuration: '3.5s' }} />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/50 to-[#F5E7C8]/60" />
+
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#58B6B1] border-2 border-[#F0C979]/80 shadow-xl shadow-[#F0C979]/60 animate-pulse flex-shrink-0" title="Full Moon - Your Story" style={{ animationDuration: '2.5s' }} />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#58B6B1]/60 to-[#5B335F]/50" />
+
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#5B335F]/70 via-[#5B335F]/50 to-[#121528] border-2 border-[#5B335F]/60 shadow-lg shadow-[#5B335F]/40 animate-pulse flex-shrink-0" title="Waning - Wisdom Gathered" style={{ animationDuration: '3.5s' }} />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#5B335F]/40 to-[#121528]/30" />
+
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#121528] border-2 border-[#58B6B1]/50 shadow-lg shadow-[#58B6B1]/30 animate-pulse flex-shrink-0" title="New Moon - Endless Pages" style={{ animationDuration: '3s' }} />
           </div>
 
           <div className="space-y-6">

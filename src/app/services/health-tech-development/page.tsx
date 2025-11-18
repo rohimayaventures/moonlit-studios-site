@@ -781,9 +781,9 @@ export default function HealthTechDevelopmentPage() {
                     } ${pkg.popular ? 'ring-2 ring-cyan-400/50' : ''}`}
                   >
                     {pkg.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                        <span className="px-4 py-1 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 text-xs font-bold text-midnight shadow-lg">
-                          ⭐ MOST POPULAR
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                        <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 text-xs font-bold text-midnight shadow-lg whitespace-nowrap">
+                          MOST POPULAR
                         </span>
                       </div>
                     )}
@@ -916,9 +916,9 @@ export default function HealthTechDevelopmentPage() {
       <section className="py-20 relative z-10">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <div className="relative rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/10 via-teal-400/10 to-sky-200/10 p-12 backdrop-blur-sm overflow-hidden">
-            {/* Decorative ripples */}
-            <RippleCircle className="-top-16 -right-16" size="lg" />
-            <RippleCircle className="-bottom-16 -left-16" size="md" />
+            {/* Subtle ambient glows only */}
+            <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-cyan-400/5 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-teal-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
 
             <div className="relative z-10 space-y-6">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-cyan-400 via-teal-400 to-sky-200 mx-auto shadow-lg shadow-cyan-400/40">

@@ -422,7 +422,7 @@ export default function SmallBusinessPage() {
                 key={pkg.id}
                 onMouseEnter={() => setHoveredCard(pkg.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-hidden rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
+                className={`group relative rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
                   hoveredCard === pkg.id ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
                 } ${pkg.popular ? 'ring-2 ring-pink-400/50' : ''}`}
               >
