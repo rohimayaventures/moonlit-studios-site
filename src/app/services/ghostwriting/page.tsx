@@ -7,24 +7,46 @@ import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, F
 //  HOGWARTS LIBRARY SVG COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Candle Glow - BRIGHT magical candlelight column (Owlery Gold)
+// 🕯️ CINEMATIC 4-LAYER CANDLE GLOW - CGI Movie Quality
 const CandleGlow = ({
   className = "",
   delay = 0,
-  height = "h-32",
+  height = "h-64",
 }: {
   className?: string;
   delay?: number;
   height?: string;
 }) => (
-  <div
-    className={`absolute ${className} ${height} w-24 pointer-events-none animate-candleFlicker`}
-    style={{ animationDelay: `${delay}s` }}
-  >
-    {/* Core bright glow */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#F0C979]/60 via-[#F0C979]/35 to-transparent blur-3xl" />
-    {/* Outer soft aura */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#E9C97F]/40 via-[#F0C979]/20 to-transparent blur-2xl scale-110" />
+  <div className={`absolute ${className} ${height} w-40 pointer-events-none`}>
+    {/* Layer 1: Core flame glow (brightest - like a real flame) */}
+    <div
+      className="absolute bottom-0 w-6 h-16 left-1/2 -translate-x-1/2 bg-gradient-to-t from-[#F0C979] via-[#FFA500] to-transparent blur-md opacity-90 animate-flameFlicker"
+      style={{ animationDelay: `${delay}s` }}
+    />
+
+    {/* Layer 2: Inner aura (bright golden column) */}
+    <div
+      className="absolute bottom-0 w-24 h-full left-1/2 -translate-x-1/2 bg-gradient-to-t from-[#F0C979]/80 via-[#F0C979]/50 to-transparent blur-3xl opacity-85"
+      style={{ animationDelay: `${delay * 0.8}s` }}
+    />
+
+    {/* Layer 3: Mid glow (expansive warmth) */}
+    <div
+      className="absolute bottom-0 w-32 h-[120%] left-1/2 -translate-x-1/2 bg-gradient-to-t from-[#E9C97F]/60 via-[#F0C979]/30 to-transparent blur-2xl opacity-75 scale-110"
+      style={{ animationDelay: `${delay * 1.2}s` }}
+    />
+
+    {/* Layer 4: Outer atmospheric haze (fills the space) */}
+    <div
+      className="absolute bottom-0 w-40 h-[140%] left-1/2 -translate-x-1/2 bg-gradient-to-t from-[#FFA500]/40 via-[#F0C979]/20 to-transparent blur-3xl opacity-65 scale-125 animate-candleFlicker"
+      style={{ animationDelay: `${delay * 1.5}s` }}
+    />
+
+    {/* VOLUMETRIC LIGHT RAY - The secret sauce for "CGI movie" feel */}
+    <div
+      className="absolute bottom-0 w-3 h-full left-1/2 -translate-x-1/2 bg-gradient-to-t from-[#F0C979]/70 via-[#F0C979]/25 to-transparent blur-xl opacity-60"
+      style={{ animationDelay: `${delay * 0.5}s` }}
+    />
   </div>
 );
 
@@ -98,6 +120,43 @@ const FloatingOpenBook = ({
   </div>
 );
 
+// 🌫️ MAGICAL PARTICLE SYSTEM - JavaScript-generated 50 particles
+const MagicalParticles = () => {
+  // Generate 50 unique particles with randomized properties
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    delay: Math.random() * 8,
+    duration: Math.random() * 4 + 4,
+    color: ['#F0C979', '#F5E7C8', '#58B6B1', '#E9C97F'][Math.floor(Math.random() * 4)],
+    opacity: Math.random() * 0.4 + 0.2,
+  }));
+
+  return (
+    <>
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="absolute rounded-full animate-dustMotes pointer-events-none"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            backgroundColor: p.color,
+            opacity: p.opacity,
+            boxShadow: `0 0 ${p.size * 4}px ${p.color}`,
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
+          }}
+        />
+      ))}
+    </>
+  );
+};
+
 // Winged Skeleton Key - Harry Potter style flying key with prominent dragonfly wings
 const WingedKey = ({
   className = "",
@@ -141,8 +200,14 @@ const WingedKey = ({
   return (
     <div
       className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
-      style={{ animationDelay: `${delay}s` }}
+      style={{
+        animationDelay: `${delay}s`,
+        transform: 'rotate(90deg)', // Keys fly horizontally like in the movie!
+      }}
     >
+      {/* Motion blur trail - creates that "flying fast" CGI effect */}
+      <div className="absolute -left-16 top-1/2 -translate-y-1/2 w-20 h-3 bg-gradient-to-r from-transparent via-[#58B6B1]/15 to-[#58B6B1]/35 blur-sm opacity-60" />
+
       <svg
         width="120"
         height="100"
@@ -435,25 +500,20 @@ export default function GhostwritingPage() {
         <WingedKey className="top-[80%] right-[12%]" delay={3.8} keyShape="simple" />
         <WingedKey className="top-[22%] right-[8%]" delay={1.5} keyShape="baroque" />
 
-        {/* Gold sparkles and dust motes - LOTS MORE */}
-        <div className="absolute top-[30%] left-[32%] w-2 h-2 rounded-full bg-[#F0C979]/40 animate-dustMotes shadow-lg shadow-[#F0C979]/30" />
-        <div className="absolute top-[35%] right-[35%] w-1.5 h-1.5 rounded-full bg-[#F5E7C8]/50 animate-dustMotes shadow-md shadow-[#F5E7C8]/40" style={{ animationDelay: '0.8s' }} />
-        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F0C979]/35 animate-dustMotes shadow-sm shadow-[#F0C979]/20" style={{ animationDelay: '1.6s' }} />
-        <div className="absolute top-[45%] right-[40%] w-2 h-2 rounded-full bg-[#F5E7C8]/45 animate-dustMotes shadow-lg shadow-[#F5E7C8]/35" style={{ animationDelay: '2.4s' }} />
-        <div className="absolute top-[50%] left-[42%] w-1.5 h-1.5 rounded-full bg-[#F0C979]/38 animate-dustMotes shadow-md shadow-[#F0C979]/25" style={{ animationDelay: '3.2s' }} />
-        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/42 animate-dustMotes shadow-sm shadow-[#F5E7C8]/30" style={{ animationDelay: '4.0s' }} />
-        <div className="absolute top-[25%] left-[15%] w-2 h-2 rounded-full bg-[#F0C979]/45 animate-dustMotes shadow-lg shadow-[#F0C979]/35" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute top-[65%] right-[25%] w-1.5 h-1.5 rounded-full bg-[#F5E7C8]/40 animate-dustMotes shadow-md shadow-[#F5E7C8]/30" style={{ animationDelay: '3.5s' }} />
-        <div className="absolute top-[70%] left-[28%] w-1 h-1 rounded-full bg-[#F0C979]/50 animate-dustMotes shadow-sm shadow-[#F0C979]/40" style={{ animationDelay: '4.5s' }} />
-        <div className="absolute top-[18%] right-[45%] w-2 h-2 rounded-full bg-[#F5E7C8]/48 animate-dustMotes shadow-lg shadow-[#F5E7C8]/38" style={{ animationDelay: '1.2s' }} />
-        <div className="absolute top-[85%] left-[35%] w-1.5 h-1.5 rounded-full bg-[#F0C979]/42 animate-dustMotes shadow-md shadow-[#F0C979]/32" style={{ animationDelay: '5.0s' }} />
-        <div className="absolute top-[58%] right-[48%] w-1 h-1 rounded-full bg-[#F5E7C8]/36 animate-dustMotes shadow-sm shadow-[#F5E7C8]/26" style={{ animationDelay: '2.8s' }} />
+        {/* ✨ JAVASCRIPT-GENERATED PARTICLE SYSTEM - 50 magical particles */}
+        <MagicalParticles />
+      </div>
 
-        {/* Teal shimmer particles */}
-        <div className="absolute top-[32%] left-[45%] w-1.5 h-1.5 rounded-full bg-[#58B6B1]/50 animate-dustMotes shadow-lg shadow-[#58B6B1]/40" style={{ animationDelay: '1.0s' }} />
-        <div className="absolute top-[48%] right-[30%] w-1 h-1 rounded-full bg-[#58B6B1]/40 animate-dustMotes shadow-md shadow-[#58B6B1]/30" style={{ animationDelay: '2.2s' }} />
-        <div className="absolute top-[72%] left-[50%] w-2 h-2 rounded-full bg-[#58B6B1]/45 animate-dustMotes shadow-lg shadow-[#58B6B1]/35" style={{ animationDelay: '4.2s' }} />
-        <div className="absolute top-[38%] right-[52%] w-1.5 h-1.5 rounded-full bg-[#58B6B1]/38 animate-dustMotes shadow-md shadow-[#58B6B1]/28" style={{ animationDelay: '1.8s' }} />
+      {/* 🌫️ ATMOSPHERIC FOG LAYERS - CGI movie depth */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        {/* Bottom fog layer - dense at floor */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-t from-[#121528]/70 via-[#1A1E38]/40 to-transparent backdrop-blur-[1px]" />
+
+        {/* Mid fog layer - drifting mist */}
+        <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#F0C979]/8 via-[#5B335F]/6 to-transparent opacity-50 animate-candleFlicker" style={{ animationDuration: '8s' }} />
+
+        {/* Animated atmospheric haze */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#E9C97F]/10 via-transparent to-transparent animate-floatSlow" />
       </div>
 
       {/* Warm library glow from bottom - Owlery Gold - BRIGHTER */}
@@ -627,7 +687,7 @@ export default function GhostwritingPage() {
 
           {/* Blog Posts & Content */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Blog Posts & Content</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">The Daily Prophet — Blog Posts & Content</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
@@ -657,7 +717,7 @@ export default function GhostwritingPage() {
 
           {/* Newsletter Writing */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Newsletter Writing</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Owl Post — Newsletter Writing</h3>
             <div className="flex justify-center">
               <PackageCard
                 title="Monthly"
@@ -675,7 +735,7 @@ export default function GhostwritingPage() {
 
           {/* Website Copy */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Website Copy</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Flourish & Blotts — Website Copy</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
@@ -705,7 +765,7 @@ export default function GhostwritingPage() {
 
           {/* Cookbooks */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Cookbook Ghostwriting</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">Honeydukes Recipes — Cookbook Ghostwriting</h3>
             <div className="flex justify-center">
               <PackageCard
                 title="Full Book"
@@ -724,7 +784,7 @@ export default function GhostwritingPage() {
 
           {/* Memoirs & Creative Nonfiction */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Memoir / Creative Nonfiction</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">The Pensieve — Memoir / Creative Nonfiction</h3>
             <div className="flex flex-wrap justify-center gap-6">
               <PackageCard
                 title="Essential"
@@ -756,7 +816,7 @@ export default function GhostwritingPage() {
 
           {/* Business Books */}
           <div className="space-y-4">
-            <h3 className="text-xl font-serif text-[#F0C979] text-center">Business / Leadership Books</h3>
+            <h3 className="text-xl font-serif text-[#F0C979] text-center">The Restricted Section — Business / Leadership Books</h3>
             <div className="flex justify-center">
               <PackageCard
                 title="Full Book"

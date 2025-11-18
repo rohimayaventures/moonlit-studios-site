@@ -1348,6 +1348,38 @@ body.chaos-mode * {
   animation: candleFlicker 3s ease-in-out infinite;
 }
 
+/* 🔥 Flame Flicker - Realistic CGI flame movement */
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 0.9;
+  }
+  15% {
+    transform: scaleY(1.08) scaleX(0.92);
+    opacity: 0.95;
+  }
+  30% {
+    transform: scaleY(0.95) scaleX(1.05);
+    opacity: 0.85;
+  }
+  45% {
+    transform: scaleY(1.03) scaleX(0.97);
+    opacity: 0.92;
+  }
+  60% {
+    transform: scaleY(0.98) scaleX(1.02);
+    opacity: 0.88;
+  }
+  75% {
+    transform: scaleY(1.05) scaleX(0.95);
+    opacity: 0.93;
+  }
+}
+
+.animate-flameFlicker {
+  animation: flameFlicker 2s ease-in-out infinite;
+}
+
 /* Quill Float */
 @keyframes quillFloat {
   0%, 100% {
