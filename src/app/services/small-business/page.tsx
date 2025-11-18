@@ -295,35 +295,40 @@ export default function SmallBusinessPage() {
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
-          {/* Studio Ghibli Moon Phases */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-8">
+          {/* Studio Ghibli Moon Phases - 5 phases with pulsing animation */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-8">
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-green-300/60 hover:border-green-300/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-300/50"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-green-300/60 shadow-lg shadow-green-300/30 animate-pulse flex-shrink-0"
               title="New Moon - Seeds of Dreams"
+              style={{ animationDuration: '3s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-300/40 to-orange-200/40" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-green-300/40 to-orange-200/40" />
 
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-orange-200/50 to-orange-200/80 border-2 border-orange-200/70 hover:border-orange-200/100 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-orange-200/50"
-              title="Waxing Crescent - Growth Begins"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-midnight via-orange-200/50 to-orange-200/80 border-2 border-orange-200/70 shadow-lg shadow-orange-200/40 animate-pulse flex-shrink-0"
+              title="Crescent - Growth Begins"
+              style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-orange-200/40 to-pink-300/40" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-orange-200/50 to-pink-300/60" />
 
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-300 via-pink-300 to-purple-200 border-2 border-pink-300/90 shadow-xl shadow-pink-300/60 flex-shrink-0 animate-pulse"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-green-300 via-pink-300 to-purple-200 border-2 border-pink-300/90 shadow-xl shadow-pink-300/60 animate-pulse flex-shrink-0"
               title="Full Moon - Your Journey"
+              style={{ animationDuration: '2.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-pink-300/40 to-purple-200/40" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-pink-300/60 to-purple-200/50" />
 
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-purple-200/50 to-purple-200/80 border-2 border-purple-200/70 hover:border-purple-200/100 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-200/50"
-              title="Waning Crescent - Flourishing"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-purple-200/70 via-purple-200/50 to-midnight border-2 border-purple-200/70 shadow-lg shadow-purple-200/40 animate-pulse flex-shrink-0"
+              title="Waning - Flourishing"
+              style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-purple-200/40 to-sky-300/40" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-purple-200/40 to-sky-300/30" />
 
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-sky-300/60 hover:border-sky-300/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-sky-300/50"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-sky-300/60 shadow-lg shadow-sky-300/30 animate-pulse flex-shrink-0"
               title="New Moon - Endless Horizons"
+              style={{ animationDuration: '3s' }}
             />
           </div>
 

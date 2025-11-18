@@ -14,13 +14,17 @@ export default function GhostwritingPage() {
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#5B335F]/5 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#F0C979]/3 rounded-full blur-3xl" />
 
-        {/* Rectangular candle glows - warm ambient lighting */}
-        <div className="absolute top-32 left-12 w-20 h-64 bg-[#F0C979]/8 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute top-48 right-16 w-24 h-72 bg-[#F0C979]/10 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }} />
-        <div className="absolute top-20 left-1/4 w-16 h-48 bg-[#F0C979]/6 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4.5s', animationDelay: '1s' }} />
-        <div className="absolute top-40 right-1/3 w-20 h-56 bg-[#F0C979]/7 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4s', animationDelay: '1.5s' }} />
-        <div className="absolute top-56 left-1/3 w-18 h-60 bg-[#F0C979]/9 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '0.8s' }} />
-        <div className="absolute top-28 right-1/4 w-22 h-52 bg-[#F0C979]/8 rounded-lg blur-2xl animate-pulse" style={{ animationDuration: '4.2s', animationDelay: '0.3s' }} />
+        {/* Rectangular candle glows - warm ambient lighting scattered throughout hero */}
+        <div className="absolute top-24 left-8 w-12 h-40 bg-[#F0C979]/12 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4s' }} />
+        <div className="absolute top-36 right-12 w-14 h-44 bg-[#F0C979]/15 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }} />
+        <div className="absolute top-16 left-1/4 w-10 h-36 bg-[#F0C979]/10 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4.5s', animationDelay: '1s' }} />
+        <div className="absolute top-28 right-1/3 w-13 h-42 bg-[#F0C979]/13 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4s', animationDelay: '1.5s' }} />
+        <div className="absolute top-44 left-1/3 w-11 h-38 bg-[#F0C979]/14 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '0.8s' }} />
+        <div className="absolute top-20 right-1/4 w-12 h-40 bg-[#F0C979]/12 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4.2s', animationDelay: '0.3s' }} />
+        <div className="absolute top-32 left-16 w-10 h-35 bg-[#F0C979]/11 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4.3s', animationDelay: '0.7s' }} />
+        <div className="absolute top-40 right-20 w-13 h-41 bg-[#F0C979]/13 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '3.9s', animationDelay: '1.2s' }} />
+        <div className="absolute top-52 left-20 w-11 h-37 bg-[#F0C979]/12 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '4.1s', animationDelay: '0.4s' }} />
+        <div className="absolute top-12 right-16 w-12 h-39 bg-[#F0C979]/14 rounded-lg blur-xl animate-pulse" style={{ animationDuration: '3.7s', animationDelay: '0.9s' }} />
       </div>
 
       {/* Warm library glow from bottom - very subtle */}

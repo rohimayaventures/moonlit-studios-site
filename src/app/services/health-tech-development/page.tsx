@@ -480,40 +480,40 @@ export default function HealthTechDevelopmentPage() {
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center z-10">
-          {/* Waterbender Moon Phases - EXACT PALETTE */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
-            {/* Phase 1: Ice Blue (New Moon) */}
+          {/* Waterbender Moon Phases - 5 phases with pulsing animation */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-sky-200/50 hover:border-sky-200/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-sky-200/40"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-sky-200/50 shadow-lg shadow-sky-200/30 animate-pulse flex-shrink-0"
               title="New Moon - Healing Begins"
+              style={{ animationDuration: '3s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-sky-200/30 to-cyan-300/30" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-sky-200/40 to-cyan-300/40" />
 
-            {/* Phase 2: Aqua (Waxing Crescent) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-cyan-300/40 to-cyan-300/70 border-2 border-cyan-300/60 hover:border-cyan-300/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-cyan-300/40"
-              title="Waxing Crescent - Flow Builds"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-midnight via-cyan-300/50 to-cyan-300/70 border-2 border-cyan-300/60 shadow-lg shadow-cyan-300/40 animate-pulse flex-shrink-0"
+              title="Crescent - Flow Builds"
+              style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-cyan-300/30 to-teal-400/30" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-cyan-300/50 to-teal-400/60" />
 
-            {/* Phase 3: Teal (Full Moon - CENTER) */}
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-sky-200 via-cyan-300 to-teal-400 border-2 border-teal-400/80 shadow-lg shadow-teal-400/50 flex-shrink-0 animate-pulse"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-sky-200 via-cyan-300 to-teal-400 border-2 border-teal-400/80 shadow-xl shadow-teal-400/60 animate-pulse flex-shrink-0"
               title="Full Moon - Peak Healing"
+              style={{ animationDuration: '2.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-teal-400/30 to-slate-700/30" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-teal-400/60 to-slate-700/50" />
 
-            {/* Phase 4: Navy (Waning Crescent) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-slate-700/40 to-slate-700/70 border-2 border-slate-700/60 hover:border-slate-700/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-slate-700/40"
-              title="Waning Crescent - Rest & Recovery"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-slate-700/70 via-slate-700/50 to-midnight border-2 border-slate-700/60 shadow-lg shadow-slate-700/40 animate-pulse flex-shrink-0"
+              title="Waning - Rest & Recovery"
+              style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-slate-700/30 to-slate-400/30" />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-slate-700/40 to-slate-400/30" />
 
-            {/* Phase 5: Silver (New Moon) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-slate-400/50 hover:border-slate-400/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-slate-400/40"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-slate-400/50 shadow-lg shadow-slate-400/30 animate-pulse flex-shrink-0"
               title="New Moon - New Cycle"
+              style={{ animationDuration: '3s' }}
             />
           </div>
 
