@@ -1,22 +1,42 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles } from 'lucide-react';
+import { Check, Sparkles, Leaf, Coffee, Heart } from 'lucide-react';
 import Link from 'next/link';
-import { MoonPhaseNav } from '@/app/components/MoonPhaseNav';
 import { TestimonialsSection } from '@/app/components/TestimonialsSection';
+
+// 🍃 STUDIO GHIBLI DECORATIVE SVG COMPONENTS
+const CloudBlob = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M20 40 Q30 20, 50 30 T90 35 Q110 30, 130 35 T170 30 Q180 40, 180 50 L20 50 Z"
+      fill="currentColor"
+      opacity="0.1"
+    />
+  </svg>
+);
+
+const LeafAccent = ({ className = "" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M20 12 Q12 4, 4 12 Q12 20, 20 12 M4 12 Q10 10, 14 14"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      opacity="0.4"
+    />
+  </svg>
+);
+
+const DustMote = ({ delay = 0 }: { delay?: number }) => (
+  <div
+    className="absolute h-1 w-1 rounded-full bg-green-300/40 animate-float"
+    style={{ animationDelay: `${delay}s` }}
+  />
+);
 
 export default function SmallBusinessPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
-  // Define sections for moon phase navigation
-  const sections = [
-    { id: 'hero', label: 'Welcome' },
-    { id: 'philosophy', label: 'Philosophy' },
-    { id: 'packages', label: 'Packages' },
-    { id: 'how-it-works', label: 'Process' },
-    { id: 'faq', label: 'FAQ' },
-  ];
 
   const packages = [
     {
@@ -95,40 +115,53 @@ export default function SmallBusinessPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight">
 
-      {/* Hero Section */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 1: HERO
+      ═══════════════════════════════════════════════════════════════════ */}
       <section id="hero" className="relative overflow-hidden border-b border-mermaidTeal/20 bg-gradient-to-br from-midnight via-deepOcean to-nightNavy py-20">
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 h-2 w-2 rounded-full bg-green-400/30" />
-          <div className="absolute top-40 right-20 h-3 w-3 rounded-full bg-purple-400/30 delay-500" />
-          <div className="absolute bottom-20 left-1/3 h-2 w-2 rounded-full bg-amber-400/30 delay-1000" />
+        {/* Floating dust motes */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 h-2 w-2 rounded-full bg-green-300/30" />
+          <div className="absolute top-40 right-20 h-3 w-3 rounded-full bg-pink-300/30" />
+          <div className="absolute bottom-20 left-1/3 h-2 w-2 rounded-full bg-purple-200/30" />
+          <LeafAccent className="absolute top-32 right-1/4 w-12 h-12 text-green-300 opacity-20" />
+          <LeafAccent className="absolute bottom-40 left-1/4 w-16 h-16 text-purple-200 opacity-15" />
         </div>
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
-          {/* Studio Ghibli Moon Phases */}
+          {/* Studio Ghibli Moon Phases - EXACT PALETTE */}
           <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+            {/* Phase 1: Pastel Green (New Moon) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-green-400/40 hover:border-green-400/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-400/30"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-green-300/50 hover:border-green-300/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-300/40"
               title="New Moon - Journey Begins"
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-400/30 to-purple-400/30" />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-300/30 to-orange-200/30" />
+
+            {/* Phase 2: Peach (Waxing Crescent) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-purple-400/30 to-purple-400/60 border-2 border-purple-400/50 hover:border-purple-400/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-400/30"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-orange-200/40 to-orange-200/70 border-2 border-orange-200/60 hover:border-orange-200/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-orange-200/40"
               title="Waxing Crescent - Growing Dreams"
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-purple-400/30 to-amber-400/30" />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-orange-200/30 to-pink-300/30" />
+
+            {/* Phase 3: Pink (Full Moon - CENTER) */}
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-400 via-purple-400 to-amber-400 border-2 border-amber-400/70 shadow-lg shadow-amber-400/40 flex-shrink-0 animate-pulse"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-green-300 via-pink-300 to-purple-200 border-2 border-pink-300/80 shadow-lg shadow-pink-300/50 flex-shrink-0 animate-pulse"
               title="Full Moon - You Are Here"
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-amber-400/30 to-green-400/30" />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-pink-300/30 to-purple-200/30" />
+
+            {/* Phase 4: Lilac (Waning Crescent) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-green-400/30 to-green-400/60 border-2 border-green-400/50 hover:border-green-400/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-green-400/30"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-purple-200/40 to-purple-200/70 border-2 border-purple-200/60 hover:border-purple-200/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-200/40"
               title="Waning Crescent - Infinite Potential"
             />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-green-400/30 to-purple-400/30" />
+            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-purple-200/30 to-sky-300/30" />
+
+            {/* Phase 5: Sky Blue (New Moon) */}
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-purple-400/40 hover:border-purple-400/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-purple-400/30"
+              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-sky-300/50 hover:border-sky-300/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-sky-300/40"
               title="New Moon - New Beginnings"
             />
           </div>
@@ -140,7 +173,7 @@ export default function SmallBusinessPage() {
 
           <h1 className="font-elegant mb-6 text-4xl font-bold text-pearlWhite md:text-6xl lg:text-7xl" style={{ lineHeight: '1.3' }}>
             Your Journey
-            <span className="block bg-gradient-to-r from-green-400 via-purple-400 to-amber-400 bg-clip-text text-transparent mt-2">
+            <span className="block bg-gradient-to-r from-green-300 via-pink-300 to-purple-200 bg-clip-text text-transparent mt-2">
               Begins Here
             </span>
           </h1>
@@ -168,26 +201,143 @@ export default function SmallBusinessPage() {
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section id="philosophy" className="border-b border-mermaidTeal/20 bg-midnight/50 py-16">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="font-elegant mb-6 text-3xl font-bold text-pearlWhite md:text-4xl">
-            Every Great Story Starts Small
-          </h2>
-          <p className="mb-4 text-lg leading-relaxed text-moonlightSilver">
-            I've built platforms for Fortune 500 companies and local startups just finding their footing.
-            Here's what I know: <span className="text-lunarGold font-semibold">the magic isn't in the budget—it's in the care you put into your work</span>.
-          </p>
-          <p className="text-lg leading-relaxed text-moonlightSilver">
-            These packages are designed for local heroes—the coffee shop owner who knows every regular's order,
-            the therapist changing lives one session at a time, the salon stylist who makes people feel beautiful,
-            the creative studio bringing visions to life.
-            <span className="text-mermaidTeal font-semibold"> You deserve a website as beautiful as what you create</span>.
-          </p>
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 2: WHO THIS IS FOR
+      ═══════════════════════════════════════════════════════════════════ */}
+      <section id="who-this-is-for" className="relative border-b border-mermaidTeal/20 bg-midnight/50 py-16">
+        {/* Cloud blob divider at top */}
+        <CloudBlob className="absolute top-0 left-0 w-full h-12 text-green-300 -translate-y-6" />
+
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
+              <Coffee className="w-12 h-12 text-green-300 mx-auto mb-2" />
+            </div>
+            <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-4xl">
+              Who This Is For
+            </h2>
+            <p className="text-lg text-moonlightSilver italic">
+              Built for the dreamers, the makers, and the local heroes.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-lg border border-green-300/20 bg-green-300/5 p-6 backdrop-blur-sm">
+              <div className="flex items-start gap-3">
+                <Leaf className="w-5 h-5 text-green-300 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-green-300 mb-2">Local Service Businesses</h3>
+                  <p className="text-moonlightSilver text-sm">
+                    Coffee shops, boutiques, salons, yoga studios, wellness centers, and therapy practices.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-purple-200/20 bg-purple-200/5 p-6 backdrop-blur-sm">
+              <div className="flex items-start gap-3">
+                <Heart className="w-5 h-5 text-purple-300 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-purple-300 mb-2">Creative Professionals</h3>
+                  <p className="text-moonlightSilver text-sm">
+                    Photographers, designers, artists, writers, and creative studios building their brand.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-pink-300/20 bg-pink-300/5 p-6 backdrop-blur-sm">
+              <div className="flex items-start gap-3">
+                <Sparkles className="w-5 h-5 text-pink-300 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-pink-300 mb-2">Solo Practitioners & Consultants</h3>
+                  <p className="text-moonlightSilver text-sm">
+                    Coaches, therapists, consultants, and experts who need a professional online presence.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-sky-300/20 bg-sky-300/5 p-6 backdrop-blur-sm">
+              <div className="flex items-start gap-3">
+                <Coffee className="w-5 h-5 text-sky-300 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-lg font-semibold text-sky-300 mb-2">Startups Finding Their Footing</h3>
+                  <p className="text-moonlightSilver text-sm">
+                    New businesses and entrepreneurs who need to establish their digital home base.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-lg text-moonlightSilver">
+              <span className="text-lunarGold font-semibold">If you pour your heart into what you do</span>,
+              you deserve a website that does the same for you.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Packages Section */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 3: HOW IT WORKS
+      ═══════════════════════════════════════════════════════════════════ */}
+      <section id="how-it-works" className="border-b border-mermaidTeal/20 bg-deepOcean/30 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+            How We'll Work Together
+          </h2>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-2xl border border-green-300/30">
+                  🌱
+                </div>
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-green-400">1. Discover</h3>
+              <p className="text-sm uppercase tracking-wider text-green-300/70 mb-3">Plant the Seed</p>
+              <p className="text-moonlightSilver">
+                We'll talk about your vision, your customers, and what makes your business special.
+                No tech jargon—just honest conversation.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-purple-500/20 text-2xl border border-purple-300/30">
+                  🏰
+                </div>
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-purple-400">2. Design & Build</h3>
+              <p className="text-sm uppercase tracking-wider text-purple-300/70 mb-3">Build Together</p>
+              <p className="text-moonlightSilver">
+                I'll design something beautiful that feels like YOU. You'll see previews, share feedback,
+                and watch it come to life.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20 text-2xl border border-pink-300/30">
+                  ✨
+                </div>
+              </div>
+              <h3 className="mb-2 text-xl font-semibold text-amber-400">3. Deliver & Support</h3>
+              <p className="text-sm uppercase tracking-wider text-amber-300/70 mb-3">Launch & Grow</p>
+              <p className="text-moonlightSilver">
+                Your site goes live, and I stick around to make sure everything runs smoothly.
+                You're never alone in this journey.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 4: TIERED PACKAGES (LOW → HIGH)
+      ═══════════════════════════════════════════════════════════════════ */}
       <section id="packages" className="py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mb-16 text-center">
@@ -266,95 +416,31 @@ export default function SmallBusinessPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* How It Works */}
-      <section id="how-it-works" className="border-y border-mermaidTeal/20 bg-midnight/50 py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
-            How We'll Work Together
-          </h2>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-2xl">
-                  🌱
-                </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-green-400">1. Plant the Seed</h3>
-              <p className="text-moonlightSilver">
-                We'll talk about your vision, your customers, and what makes your business special.
-                No tech jargon—just honest conversation.
+          {/* Philosophy callout below packages */}
+          <div className="mt-16 mx-auto max-w-4xl">
+            <div className="rounded-lg border border-mermaidTeal/30 bg-mermaidTeal/5 p-8 text-center">
+              <h3 className="font-elegant text-2xl font-bold text-pearlWhite mb-4">
+                Every Great Story Starts Small
+              </h3>
+              <p className="mb-4 text-lg leading-relaxed text-moonlightSilver">
+                I've built platforms for Fortune 500 companies and local startups just finding their footing.
+                Here's what I know: <span className="text-lunarGold font-semibold">the magic isn't in the budget—it's in the care you put into your work</span>.
               </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-purple-500/20 text-2xl">
-                  🏰
-                </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-purple-400">2. Build Together</h3>
-              <p className="text-moonlightSilver">
-                I'll design something beautiful that feels like YOU. You'll see previews, share feedback,
-                and watch it come to life.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20 text-2xl">
-                  ✨
-                </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-amber-400">3. Launch & Grow</h3>
-              <p className="text-moonlightSilver">
-                Your site goes live, and I stick around to make sure everything runs smoothly.
-                You're never alone in this journey.
+              <p className="text-lg leading-relaxed text-moonlightSilver">
+                These packages are designed for local heroes—the coffee shop owner who knows every regular's order,
+                the therapist changing lives one session at a time, the salon stylist who makes people feel beautiful,
+                the creative studio bringing visions to life.
+                <span className="text-mermaidTeal font-semibold"> You deserve a website as beautiful as what you create</span>.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Me Section */}
-      <section className="py-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <h2 className="font-elegant mb-8 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
-            Why Work With Me?
-          </h2>
-
-          <div className="space-y-6 text-lg leading-relaxed text-moonlightSilver">
-            <div className="rounded-lg border border-mermaidTeal/30 bg-mermaidTeal/5 p-6">
-              <h3 className="mb-2 text-xl font-semibold text-mermaidTeal">💙 I Get Small Businesses</h3>
-              <p>
-                Before I was a developer, I spent 15+ years in healthcare operations—managing budgets,
-                fighting for resources, making every dollar count. I know what it's like to wear all the hats.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-lunarGold/30 bg-lunarGold/5 p-6">
-              <h3 className="mb-2 text-xl font-semibold text-lunarGold">🌟 No Hidden Fees, Ever</h3>
-              <p>
-                The price you see is the price you pay. No "surprise" charges, no pressure to upgrade.
-                If your needs grow, we'll talk about it together—honestly and transparently.
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-starlight/30 bg-starlight/5 p-6">
-              <h3 className="mb-2 text-xl font-semibold text-starlight">✨ I Build to Last</h3>
-              <p>
-                Your website isn't just a project to me—it's your livelihood. I use enterprise-grade tools
-                and best practices, so you get Fortune 500 quality at a local business price.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 5: FAQ
+      ═══════════════════════════════════════════════════════════════════ */}
       <section id="faq" className="border-y border-mermaidTeal/20 bg-midnight/50 py-16">
         <div className="mx-auto max-w-4xl px-6">
           <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
@@ -362,9 +448,9 @@ export default function SmallBusinessPage() {
           </h2>
 
           <div className="space-y-6">
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Do I need to pay everything upfront?
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-green-300/30 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite flex items-center gap-2">
+                <span>Do I need to pay everything upfront?</span>
               </summary>
               <p className="mt-4 text-moonlightSilver">
                 Nope! We can work out a payment plan that works for you. Typically 50% to start, 50% at launch.
@@ -372,7 +458,7 @@ export default function SmallBusinessPage() {
               </p>
             </details>
 
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6">
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-purple-200/30 transition-all">
               <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
                 How long does it take?
               </summary>
@@ -382,7 +468,7 @@ export default function SmallBusinessPage() {
               </p>
             </details>
 
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6">
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-pink-300/30 transition-all">
               <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
                 What if I need changes later?
               </summary>
@@ -392,7 +478,7 @@ export default function SmallBusinessPage() {
               </p>
             </details>
 
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6">
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-sky-300/30 transition-all">
               <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
                 Can you help with hosting and domains?
               </summary>
@@ -402,7 +488,7 @@ export default function SmallBusinessPage() {
               </p>
             </details>
 
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6">
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-lunarGold/30 transition-all">
               <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
                 I'm not tech-savvy. Will this be hard?
               </summary>
@@ -411,17 +497,36 @@ export default function SmallBusinessPage() {
                 No question is too basic. I promise.
               </p>
             </details>
+
+            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-green-300/30 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
+                Why should I choose you over a DIY website builder?
+              </summary>
+              <p className="mt-4 text-moonlightSilver">
+                DIY builders are great for some, but they often feel generic and can be limiting as you grow.
+                I build custom sites that are uniquely yours, optimized for your goals, and built to scale with your business.
+                Plus, you get ongoing support—not just a template.
+              </p>
+            </details>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          TESTIMONIALS (Optional - already exists)
+      ═══════════════════════════════════════════════════════════════════ */}
       <TestimonialsSection limit={3} showTitle={true} />
 
-      {/* CTA Section */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          SECTION 6: FINAL CTA
+      ═══════════════════════════════════════════════════════════════════ */}
       <section className="py-20">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="rounded-2xl border border-lunarGold/30 bg-gradient-to-br from-lunarGold/10 via-mermaidTeal/10 to-starlight/10 p-12 backdrop-blur-sm">
+          <div className="relative rounded-2xl border border-lunarGold/30 bg-gradient-to-br from-lunarGold/10 via-mermaidTeal/10 to-starlight/10 p-12 backdrop-blur-sm overflow-hidden">
+            {/* Decorative elements */}
+            <LeafAccent className="absolute top-4 right-4 w-16 h-16 text-green-300 opacity-10" />
+            <LeafAccent className="absolute bottom-4 left-4 w-20 h-20 text-purple-200 opacity-10" />
+
             <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-4xl">
               Ready to Begin?
             </h2>
