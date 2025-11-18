@@ -122,13 +122,13 @@ export default function HealthTechDevelopmentPage() {
         <WaterBubbles className="absolute inset-0 hidden sm:block" />
 
         <div className="relative mx-auto max-w-5xl text-center">
-          {/* Moon Phases - Water Tribe Colors: Icy blues → teal → silver → navy */}
+          {/* Moon Phases - Water Tribe Colors with Pulsing */}
           <div className="mb-8 flex justify-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] shadow-lg shadow-[#9FE8FF]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#50D4D0] to-[#9FE8FF] shadow-lg shadow-[#50D4D0]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D5ECFA] to-white shadow-lg shadow-[#D5ECFA]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#0A2330] to-[#083B54] shadow-lg shadow-[#0A2330]/50" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] shadow-lg shadow-[#083B54]/50" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] shadow-lg shadow-[#9FE8FF]/50 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#50D4D0] to-[#9FE8FF] shadow-lg shadow-[#50D4D0]/50 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D5ECFA] to-white shadow-lg shadow-[#D5ECFA]/50 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#0A2330] to-[#083B54] shadow-lg shadow-[#0A2330]/50 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] shadow-lg shadow-[#083B54]/50 animate-pulse" style={{ animationDuration: '3.8s', animationDelay: '1.2s' }} />
           </div>
 
           <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">
@@ -367,26 +367,26 @@ export default function HealthTechDevelopmentPage() {
             </h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-              {/* Documentation Helper */}
+              {/* Policy & Compliance Tracker - LOWEST PRICE FIRST */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <div className="relative">
-                  <h4 className="mb-4 text-2xl font-bold text-white">Documentation Helper</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Policy & Compliance Tracker</h4>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#50D4D0]">$3,000</span>
-                    <span className="text-sm text-[#D5ECFA]/60"> - $6,000</span>
+                    <span className="text-4xl font-bold text-[#50D4D0]">$1,500</span>
+                    <span className="text-sm text-[#D5ECFA]/60"> - $3,500</span>
                   </div>
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Note prompts and templates for clinician review</span>
+                      <span>Audit logs & access tracking</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Smart templates by specialty</span>
+                      <span>Policy version control & distribution</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>No autonomous decision-making—human review required</span>
+                      <span>Training completion tracking</span>
                     </li>
                   </ul>
                   <Link
@@ -429,26 +429,26 @@ export default function HealthTechDevelopmentPage() {
                 </div>
               </div>
 
-              {/* Policy & Compliance Tracker */}
+              {/* Documentation Helper - HIGHEST PRICE LAST */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <div className="relative">
-                  <h4 className="mb-4 text-2xl font-bold text-white">Policy & Compliance Tracker</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Documentation Helper</h4>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#50D4D0]">$1,500</span>
-                    <span className="text-sm text-[#D5ECFA]/60"> - $3,500</span>
+                    <span className="text-4xl font-bold text-[#50D4D0]">$3,000</span>
+                    <span className="text-sm text-[#D5ECFA]/60"> - $6,000</span>
                   </div>
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Audit logs & access tracking</span>
+                      <span>Note prompts and templates for clinician review</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Policy version control & distribution</span>
+                      <span>Smart templates by specialty</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Training completion tracking</span>
+                      <span>No autonomous decision-making—human review required</span>
                     </li>
                   </ul>
                   <Link

@@ -127,12 +127,13 @@ function ParchmentScroll({ className = '' }: { className?: string }) {
 export default function ConsultingPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  const packages = [
+  // Quick Wins & Discovery - Sorted by price (low to high)
+  const quickWins = [
     {
       id: 1,
       title: "Portfolio Review",
-      tier: "Quick Win",
       price: "$500",
+      priceNum: 500,
       duration: "90-minute session",
       features: [
         "Portfolio refinement guidance",
@@ -141,12 +142,13 @@ export default function ConsultingPage() {
         "Quick-win recommendations",
       ],
       ideal: "Creatives, job seekers, career pivoters",
+      popular: false,
     },
     {
       id: 2,
       title: "Pitch Deck Clinic",
-      tier: "Quick Win",
       price: "$1,000",
+      priceNum: 1000,
       duration: "2-hour session",
       features: [
         "Deck structure review",
@@ -158,11 +160,15 @@ export default function ConsultingPage() {
       ideal: "Founders, fundraisers, business developers",
       popular: true,
     },
+  ];
+
+  // Workshops & Training - Sorted by price (low to high)
+  const workshops = [
     {
       id: 3,
       title: "Half-Day Workshop",
-      tier: "Training",
       price: "$1,500",
+      priceNum: 1500,
       duration: "4 hours",
       features: [
         "Creative writing intensive OR",
@@ -172,40 +178,13 @@ export default function ConsultingPage() {
         "Takeaway materials",
       ],
       ideal: "Teams, creative groups, learning organizations",
+      popular: false,
     },
     {
       id: 4,
-      title: "UX for Clinicians (Audit)",
-      tier: "UX Transformation",
-      price: "$2,000",
-      duration: "one-time",
-      features: [
-        "Heuristic evaluation (clinical lens)",
-        "Workflow friction analysis",
-        "Adoption barrier identification",
-        "Actionable improvement list",
-      ],
-      ideal: "HealthTech companies, medical device firms",
-    },
-    {
-      id: 5,
-      title: "HealthTech Product Strategy (Single Session)",
-      tier: "Strategy",
-      price: "$250/hr",
-      duration: "per hour",
-      features: [
-        "Product roadmap review",
-        "Safety pattern assessment",
-        "Clinical validation insights",
-        "Risk reduction strategies",
-      ],
-      ideal: "HealthTech startups, product managers",
-    },
-    {
-      id: 6,
       title: "Full-Day Intensive Workshop",
-      tier: "Training",
       price: "$3,000",
+      priceNum: 3000,
       duration: "8 hours",
       features: [
         "Deep-dive on chosen topic",
@@ -218,11 +197,66 @@ export default function ConsultingPage() {
       ideal: "Leadership teams, product teams, creative departments",
       popular: true,
     },
+  ];
+
+  // UX for Clinicians - Sorted by price (low to high)
+  const uxServices = [
+    {
+      id: 5,
+      title: "UX for Clinicians (Audit)",
+      price: "$2,000",
+      priceNum: 2000,
+      duration: "one-time",
+      features: [
+        "Heuristic evaluation (clinical lens)",
+        "Workflow friction analysis",
+        "Adoption barrier identification",
+        "Actionable improvement list",
+      ],
+      ideal: "HealthTech companies, medical device firms",
+      popular: false,
+    },
+    {
+      id: 6,
+      title: "UX for Clinicians (Transformation)",
+      price: "$5,000",
+      priceNum: 5000,
+      duration: "project-based",
+      features: [
+        "Heuristic evaluation (clinical lens)",
+        "User testing with clinicians",
+        "Interface redesign recommendations",
+        "Load reduction strategies",
+        "Implementation roadmap",
+        "2 weeks post-launch support",
+      ],
+      ideal: "HealthTech scale-ups, medical software companies",
+      popular: false,
+    },
+  ];
+
+  // HealthTech Strategy - Sorted by price (low to high)
+  const strategyServices = [
     {
       id: 7,
+      title: "HealthTech Product Strategy (Single Session)",
+      price: "$250/hr",
+      priceNum: 250,
+      duration: "per hour",
+      features: [
+        "Product roadmap review",
+        "Safety pattern assessment",
+        "Clinical validation insights",
+        "Risk reduction strategies",
+      ],
+      ideal: "HealthTech startups, product managers",
+      popular: false,
+    },
+    {
+      id: 8,
       title: "HealthTech Product Strategy Package",
-      tier: "Strategy",
       price: "$4,000",
+      priceNum: 4000,
       duration: "5-session package",
       features: [
         "Product roadmap review",
@@ -236,26 +270,10 @@ export default function ConsultingPage() {
       popular: true,
     },
     {
-      id: 8,
-      title: "UX for Clinicians (Transformation)",
-      tier: "UX Transformation",
-      price: "$5,000",
-      duration: "project-based",
-      features: [
-        "Heuristic evaluation (clinical lens)",
-        "User testing with clinicians",
-        "Interface redesign recommendations",
-        "Load reduction strategies",
-        "Implementation roadmap",
-        "2 weeks post-launch support",
-      ],
-      ideal: "HealthTech scale-ups, medical software companies",
-    },
-    {
       id: 9,
       title: "Strategic Partner (Retainer)",
-      tier: "Strategy",
       price: "$8,000/mo",
+      priceNum: 8000,
       duration: "monthly retainer",
       features: [
         "Weekly strategic sessions",
@@ -266,6 +284,7 @@ export default function ConsultingPage() {
         "Product roadmap alignment",
       ],
       ideal: "Funded HealthTech startups, growth-stage companies",
+      popular: false,
     },
   ];
 
@@ -294,12 +313,12 @@ export default function ConsultingPage() {
             <ElvenScriptLine />
           </div>
 
-          {/* Council Sigils - Gold, Silver-Blue, Parchment */}
+          {/* Moon Phases - Rivendell Elven Style with Pulsing */}
           <div className="mb-8 flex justify-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] shadow-lg shadow-[#F0C979]/50 border border-[#C9A961]/30" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] shadow-lg shadow-[#A8C5E0]/40 border border-[#6B8FA3]/30" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] shadow-lg shadow-[#F5E7C8]/30 border border-[#C9A961]/20" />
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] shadow-lg shadow-[#8B7355]/40 border border-[#8B7355]/30" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] shadow-lg shadow-[#F0C979]/50 border border-[#C9A961]/30 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] shadow-lg shadow-[#A8C5E0]/40 border border-[#6B8FA3]/30 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] shadow-lg shadow-[#F5E7C8]/30 border border-[#C9A961]/20 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] shadow-lg shadow-[#8B7355]/40 border border-[#8B7355]/30 animate-pulse" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
           </div>
 
           <h1 className="mb-4 text-5xl font-elegant text-[#F5E7C8] md:text-6xl" style={{ fontFamily: 'var(--font-playfair)' }}>
@@ -404,56 +423,236 @@ export default function ConsultingPage() {
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {packages.map((pkg) => (
-              <div
-                key={pkg.id}
-                onMouseEnter={() => setHoveredCard(pkg.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg ${
-                  hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
-                } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
-              >
-                {pkg.popular && (
-                  <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
-                    Most Sought
+          {/* THEMED SECTION 1: Quick Wins & Discovery */}
+          <div className="mb-16">
+            <div className="mb-8 flex items-center justify-center gap-4">
+              <ElvenScriptLine className="w-32" />
+              <h3 className="text-2xl font-elegant text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>
+                Quick Wins & Discovery
+              </h3>
+              <ElvenScriptLine className="w-32" />
+            </div>
+            <div className="grid gap-8 md:grid-cols-2">
+              {quickWins.map((pkg, i) => (
+                <div
+                  key={pkg.id}
+                  onMouseEnter={() => setHoveredCard(pkg.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg animate-fadeInUp ${
+                    hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
+                  } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
+                      Most Sought
+                    </div>
+                  )}
+                  <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
+                  <div className="relative">
+                    <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
+                    <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
+                    </div>
+                    <ul className="mb-6 space-y-3">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
+                        Perfect For:
+                      </p>
+                      <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
+                    >
+                      Seek Counsel
+                    </Link>
                   </div>
-                )}
-
-                <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
-
-                <div className="relative">
-                  <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#A8C5E0]">
-                    {pkg.tier}
-                  </div>
-                  <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
-                  <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
-                  </div>
-                  <ul className="mb-6 space-y-3">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
-                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
-                      Perfect For:
-                    </p>
-                    <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
-                  >
-                    Seek Counsel
-                  </Link>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* THEMED SECTION 2: Workshops & Training */}
+          <div className="mb-16">
+            <div className="mb-8 flex items-center justify-center gap-4">
+              <ElvenScriptLine className="w-32" />
+              <h3 className="text-2xl font-elegant text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>
+                Workshops & Training
+              </h3>
+              <ElvenScriptLine className="w-32" />
+            </div>
+            <div className="grid gap-8 md:grid-cols-2">
+              {workshops.map((pkg, i) => (
+                <div
+                  key={pkg.id}
+                  onMouseEnter={() => setHoveredCard(pkg.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg animate-fadeInUp ${
+                    hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
+                  } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
+                      Most Sought
+                    </div>
+                  )}
+                  <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
+                  <div className="relative">
+                    <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
+                    <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
+                    </div>
+                    <ul className="mb-6 space-y-3">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
+                        Perfect For:
+                      </p>
+                      <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
+                    >
+                      Seek Counsel
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* THEMED SECTION 3: UX for Clinicians */}
+          <div className="mb-16">
+            <div className="mb-8 flex items-center justify-center gap-4">
+              <ElvenScriptLine className="w-32" />
+              <h3 className="text-2xl font-elegant text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>
+                UX for Clinicians
+              </h3>
+              <ElvenScriptLine className="w-32" />
+            </div>
+            <div className="grid gap-8 md:grid-cols-2">
+              {uxServices.map((pkg, i) => (
+                <div
+                  key={pkg.id}
+                  onMouseEnter={() => setHoveredCard(pkg.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg animate-fadeInUp ${
+                    hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
+                  } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
+                      Most Sought
+                    </div>
+                  )}
+                  <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
+                  <div className="relative">
+                    <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
+                    <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
+                    </div>
+                    <ul className="mb-6 space-y-3">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
+                        Perfect For:
+                      </p>
+                      <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
+                    >
+                      Seek Counsel
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* THEMED SECTION 4: HealthTech Strategy */}
+          <div>
+            <div className="mb-8 flex items-center justify-center gap-4">
+              <ElvenScriptLine className="w-32" />
+              <h3 className="text-2xl font-elegant text-[#F0C979]" style={{ fontFamily: 'var(--font-playfair)' }}>
+                HealthTech Strategy
+              </h3>
+              <ElvenScriptLine className="w-32" />
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {strategyServices.map((pkg, i) => (
+                <div
+                  key={pkg.id}
+                  onMouseEnter={() => setHoveredCard(pkg.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative overflow-visible rounded-xl border bg-gradient-to-br from-[#2A1F1A]/80 to-[#1A1410]/95 p-8 backdrop-blur-sm transition-all shadow-lg animate-fadeInUp ${
+                    hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#F0C979]/30' : ''
+                  } ${pkg.popular ? 'border-2 border-[#F0C979]' : 'border-[#C9A961]/40'}`}
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  {pkg.popular && (
+                    <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#F0C979] to-[#C9A961] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#1A1410] shadow-lg">
+                      Most Sought
+                    </div>
+                  )}
+                  <AncientSigil className="absolute -top-12 -right-12 opacity-10" />
+                  <div className="relative">
+                    <h4 className="mb-4 text-2xl font-elegant text-[#F5E7C8]" style={{ fontFamily: 'var(--font-playfair)' }}>{pkg.title}</h4>
+                    <p className="mb-4 text-sm text-[#E8D5B5]/60">{pkg.duration}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-[#F0C979]">{pkg.price}</span>
+                    </div>
+                    <ul className="mb-6 space-y-3">
+                      {pkg.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#E8D5B5]/80">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#F0C979]" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mb-6 rounded-lg border border-[#C9A961]/30 bg-[#F0C979]/5 p-4">
+                      <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#E8D5B5]/70">
+                        Perfect For:
+                      </p>
+                      <p className="text-sm text-[#F5E7C8]">{pkg.ideal}</p>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#F0C979] bg-[#F0C979]/10 px-6 py-3 font-semibold text-[#F0C979] transition-all hover:bg-[#F0C979]/30"
+                    >
+                      Seek Counsel
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
