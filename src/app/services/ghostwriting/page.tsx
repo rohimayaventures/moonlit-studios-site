@@ -449,42 +449,108 @@ function FAQAccordion() {
 export default function GhostwritingPage() {
   return (
     <main className="relative min-h-screen bg-gradient-to-b from-[#121528] via-[#1A1832] to-[#0D0F1E] text-[#F5E7C8] overflow-hidden">
-      {/* 🏰 FULL PAGE LIBRARY BACKGROUND */}
-      <div className="pointer-events-none fixed inset-0 z-0 opacity-10">
-        {/* Repeating Bookshelf Pattern */}
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            repeating-linear-gradient(90deg, #5B335F 0px, #5B335F 3px, transparent 3px, transparent 60px),
-            repeating-linear-gradient(0deg, transparent 0px, transparent 100px, #F0C979 100px, #F0C979 103px)
-          `,
-          backgroundSize: '100% 100%'
-        }} />
+      {/* 🏰 TOWERING LIBRARY BOOKSHELVES BACKGROUND */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-30">
+        {/* LEFT WALL - Towering Bookshelves */}
+        <div className="absolute left-0 top-0 bottom-0 w-1/3">
+          {/* 5 Tall Bookshelf Units */}
+          {Array.from({ length: 5 }).map((_, shelfIndex) => (
+            <div key={`left-shelf-${shelfIndex}`} className="absolute top-0 bottom-0" style={{ left: `${shelfIndex * 20}%`, width: '18%' }}>
+              {/* Wooden Frame */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#5B335F]/60 via-[#5B335F]/40 to-[#5B335F]/60 border-r border-[#F0C979]/20" />
 
-        {/* Scattered Books Pattern Across Entire Page */}
-        {Array.from({ length: 80 }).map((_, i) => (
-          <div
-            key={`bg-book-${i}`}
-            className="absolute rounded-sm"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              width: `${6 + Math.random() * 10}px`,
-              height: `${40 + Math.random() * 60}px`,
-              background: i % 4 === 0 ? '#F0C979' : i % 4 === 1 ? '#5B335F' : i % 4 === 2 ? '#58B6B1' : '#F5E7C8',
-              opacity: 0.2 + Math.random() * 0.3,
-              transform: `rotate(${-8 + Math.random() * 16}deg)`,
-            }}
-          />
-        ))}
+              {/* 6 Shelves per unit */}
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={`shelf-${i}`} className="absolute w-full h-px bg-[#F0C979]/40" style={{ top: `${i * 16.66}%` }} />
+              ))}
 
-        {/* Parchment Texture */}
-        <div className="absolute inset-0 bg-[#F5E7C8]/5" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 -1.5 1.5'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)' opacity='0.3'/%3E%3C/svg%3E")`,
-        }} />
+              {/* Books on Shelves */}
+              {Array.from({ length: 30 }).map((_, bookIdx) => {
+                const shelfLevel = Math.floor(bookIdx / 5);
+                const posInShelf = (bookIdx % 5) * 18;
+                const bookColors = ['#F0C979', '#5B335F', '#58B6B1', '#F5E7C8', '#E9C97F'];
+                return (
+                  <div
+                    key={`book-${bookIdx}`}
+                    className="absolute rounded-sm"
+                    style={{
+                      left: `${posInShelf + 5}%`,
+                      top: `${shelfLevel * 16.66 + 2}%`,
+                      width: '14%',
+                      height: '14%',
+                      background: bookColors[bookIdx % 5],
+                      opacity: 0.5 + Math.random() * 0.3,
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                    }}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        {/* RIGHT WALL - Towering Bookshelves */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/3">
+          {/* 5 Tall Bookshelf Units */}
+          {Array.from({ length: 5 }).map((_, shelfIndex) => (
+            <div key={`right-shelf-${shelfIndex}`} className="absolute top-0 bottom-0" style={{ right: `${shelfIndex * 20}%`, width: '18%' }}>
+              {/* Wooden Frame */}
+              <div className="absolute inset-0 bg-gradient-to-l from-[#5B335F]/60 via-[#5B335F]/40 to-[#5B335F]/60 border-l border-[#F0C979]/20" />
+
+              {/* 6 Shelves per unit */}
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={`shelf-${i}`} className="absolute w-full h-px bg-[#F0C979]/40" style={{ top: `${i * 16.66}%` }} />
+              ))}
+
+              {/* Books on Shelves */}
+              {Array.from({ length: 30 }).map((_, bookIdx) => {
+                const shelfLevel = Math.floor(bookIdx / 5);
+                const posInShelf = (bookIdx % 5) * 18;
+                const bookColors = ['#F0C979', '#5B335F', '#58B6B1', '#F5E7C8', '#E9C97F'];
+                return (
+                  <div
+                    key={`book-${bookIdx}`}
+                    className="absolute rounded-sm"
+                    style={{
+                      left: `${posInShelf + 5}%`,
+                      top: `${shelfLevel * 16.66 + 2}%`,
+                      width: '14%',
+                      height: '14%',
+                      background: bookColors[bookIdx % 5],
+                      opacity: 0.5 + Math.random() * 0.3,
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
+                    }}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
+
+        {/* GOTHIC ARCHES */}
+        <div className="absolute top-0 left-1/4 w-1/2 h-64">
+          <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Left Arch */}
+            <path d="M50 200 L50 50 Q50 10, 100 10 Q150 10, 150 50 L150 200" stroke="#F0C979" strokeWidth="3" fill="none" opacity="0.3" />
+            {/* Right Arch */}
+            <path d="M250 200 L250 50 Q250 10, 300 10 Q350 10, 350 50 L350 200" stroke="#F0C979" strokeWidth="3" fill="none" opacity="0.3" />
+          </svg>
+        </div>
+      </div>
+
+      {/* WARM GOLDEN CANDLELIGHT GLOW */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div className="absolute top-0 left-1/4 w-1/2 h-1/3 bg-gradient-radial from-[#F0C979]/20 via-[#E9C97F]/10 to-transparent blur-3xl animate-candleGlow" />
+        <div className="absolute bottom-0 left-1/3 w-1/3 h-1/2 bg-gradient-radial from-[#F5E7C8]/15 via-[#F0C979]/8 to-transparent blur-3xl animate-candleGlow" style={{ animationDelay: '1.5s' }} />
       </div>
 
       {/* Dark Library Vignette */}
-      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-radial from-transparent via-transparent to-[#121528]/60" />
+      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-radial from-transparent via-[#121528]/20 to-[#121528]/80" />
+
+      {/* Parchment Texture Overlay */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-5" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence baseFrequency='0.04' numOctaves='5'/%3E%3CfeColorMatrix values='0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 -1.5 1.5'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)' opacity='0.5'/%3E%3C/svg%3E")`,
+      }} />
 
       {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS - MATCH AI PAGE DENSITY */}
 
@@ -608,63 +674,8 @@ export default function GhostwritingPage() {
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden px-6 py-20 sm:py-24 lg:py-28">
-        {/* LIBRARY BOOKSHELF BACKGROUND PATTERN */}
-        <div className="pointer-events-none absolute inset-0 opacity-20">
-          {/* Vertical Bookshelf Lines */}
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div
-              key={`shelf-${i}`}
-              className="absolute top-0 bottom-0 w-20"
-              style={{
-                left: `${i * 8.3}%`,
-                background: `repeating-linear-gradient(
-                  to bottom,
-                  transparent 0px,
-                  transparent 80px,
-                  #5B335F 80px,
-                  #5B335F 82px,
-                  transparent 82px,
-                  transparent 160px
-                )`,
-              }}
-            />
-          ))}
-
-          {/* Book Spines Pattern */}
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(90deg, #5B335F 1px, transparent 1px),
-              linear-gradient(0deg, #F0C979 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 120px',
-            opacity: 0.15,
-          }} />
-
-          {/* Scattered Book Rectangles */}
-          {Array.from({ length: 40 }).map((_, i) => (
-            <div
-              key={`book-${i}`}
-              className="absolute rounded-sm opacity-30"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${8 + Math.random() * 12}px`,
-                height: `${60 + Math.random() * 80}px`,
-                background: i % 3 === 0 ? '#F0C979' : i % 3 === 1 ? '#5B335F' : '#58B6B1',
-                transform: `rotate(${-5 + Math.random() * 10}deg)`,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Enhanced Library Glow Orbs */}
-        <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-[#F0C979]/40 via-[#5B335F]/30 to-[#58B6B1]/20 blur-3xl opacity-60" />
-        <div className="pointer-events-none absolute -right-40 bottom-20 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-[#5B335F]/30 via-[#F0C979]/30 to-[#121528]/20 blur-3xl opacity-60" />
-
-        {/* Parchment Texture Overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-[#F5E7C8]/5" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E")`,
-        }} />
+        {/* WARM GOLDEN CANDLELIGHT HALO behind headline */}
+        <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gradient-radial from-[#F0C979]/30 via-[#E9C97F]/15 to-transparent blur-3xl animate-candleGlow" />
 
         <div className="relative mx-auto max-w-5xl">
           {/* 🌙 Hogwarts Moon Phases */}
