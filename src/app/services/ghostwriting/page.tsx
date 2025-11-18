@@ -95,7 +95,7 @@ const FloatingOpenBook = ({
   </div>
 );
 
-// Winged Skeleton Key - vintage key with dragonfly wings and teal glow
+// Winged Skeleton Key - Harry Potter style flying key with prominent dragonfly wings
 const WingedKey = ({
   className = "",
   delay = 0,
@@ -107,29 +107,29 @@ const WingedKey = ({
 }) => {
   const keyDesigns = {
     ornate: {
-      shaft: "M10 42 L10 18 C10 12 14 8 20 8 C26 8 30 12 30 18 L30 42",
-      head: { cx: 20, cy: 15, r1: 9, r2: 5, r3: 3 },
-      teeth: "M10 40 L6 40 L6 44 L10 44 M16 42 L12 42 L12 46 L16 46 M22 40 L18 40 L18 44 L22 44",
+      shaft: "M50 65 L50 35 C50 28 54 22 60 22 C66 22 70 28 70 35 L70 65",
+      head: { cx: 60, cy: 30, r1: 12, r2: 7, r3: 4 },
+      teeth: "M50 63 L45 63 L45 68 L50 68 M58 65 L53 65 L53 70 L58 70 M66 63 L61 63 L61 68 L66 68",
     },
     simple: {
-      shaft: "M14 42 L14 16 C14 10 18 8 22 8 C26 8 26 12 26 16 L26 42",
-      head: { cx: 20, cy: 14, r1: 8, r2: 4, r3: 2 },
-      teeth: "M14 40 L10 40 L10 44 L14 44 M20 42 L16 42 L16 44 L20 44",
+      shaft: "M52 65 L52 33 C52 26 56 22 62 22 C68 22 68 28 68 33 L68 65",
+      head: { cx: 60, cy: 29, r1: 11, r2: 6, r3: 3 },
+      teeth: "M52 63 L47 63 L47 68 L52 68 M60 65 L55 65 L55 68 L60 68",
     },
     gothic: {
-      shaft: "M12 42 L12 16 C12 10 16 6 20 6 C24 6 28 10 28 16 L28 42",
-      head: { cx: 20, cy: 13, r1: 10, r2: 6, r3: 3 },
-      teeth: "M8 40 L5 40 L5 45 L8 45 M14 42 L11 42 L11 46 L14 46 M20 40 L17 40 L17 45 L20 45 M26 42 L23 42 L23 44 L26 44",
+      shaft: "M48 65 L48 33 C48 26 52 20 60 20 C68 20 72 26 72 33 L72 65",
+      head: { cx: 60, cy: 28, r1: 14, r2: 9, r3: 5 },
+      teeth: "M46 63 L41 63 L41 69 L46 69 M54 65 L49 65 L49 70 L54 70 M62 63 L57 63 L57 69 L62 69 M70 65 L65 65 L65 68 L70 68",
     },
     baroque: {
-      shaft: "M11 42 L11 20 C11 14 15 10 20 10 C25 10 29 14 29 20 Q29 25 27 28 L27 42",
-      head: { cx: 20, cy: 17, r1: 11, r2: 7, r3: 4 },
-      teeth: "M9 38 L6 38 L6 42 L9 42 M15 40 L12 40 L12 45 L15 45 M21 38 L18 38 L18 42 L21 42 M27 40 L24 40 L24 43 L27 43",
+      shaft: "M49 65 L49 38 C49 31 53 26 60 26 C67 26 71 31 71 38 Q71 44 68 48 L68 65",
+      head: { cx: 60, cy: 33, r1: 15, r2: 10, r3: 6 },
+      teeth: "M47 61 L42 61 L42 66 L47 66 M55 63 L50 63 L50 69 L55 69 M63 61 L58 61 L58 66 L63 66 M71 63 L66 63 L66 67 L71 67",
     },
     victorian: {
-      shaft: "M13 42 L13 18 C13 12 16 7 20 7 C24 7 27 12 27 18 L27 28 Q27 32 25 35 L25 42",
-      head: { cx: 20, cy: 14, r1: 9, r2: 5, r3: 2 },
-      teeth: "M11 39 L8 39 L8 43 L11 43 M17 41 L14 41 L14 45 L17 45 M23 39 L20 39 L20 43 L23 43",
+      shaft: "M51 65 L51 35 C51 28 55 22 60 22 C65 22 69 28 69 35 L69 48 Q69 53 66 58 L66 65",
+      head: { cx: 60, cy: 30, r1: 12, r2: 7, r3: 3 },
+      teeth: "M49 62 L44 62 L44 67 L49 67 M57 64 L52 64 L52 69 L57 69 M65 62 L60 62 L60 67 L65 67",
     },
   };
 
@@ -141,122 +141,214 @@ const WingedKey = ({
       style={{ animationDelay: `${delay}s` }}
     >
       <svg
-        width="80"
+        width="120"
         height="100"
-        viewBox="0 0 80 100"
+        viewBox="0 0 120 100"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Teal glow around wings */}
         <defs>
-          <filter id={`wingGlow-${delay}`}>
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          <filter id={`wingGlow-${delay}-${keyShape}`}>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
           </filter>
+          <radialGradient id={`wingShimmer-${delay}-${keyShape}`}>
+            <stop offset="0%" stopColor="#58B6B1" stopOpacity="0.3" />
+            <stop offset="60%" stopColor="#58B6B1" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#58B6B1" stopOpacity="0" />
+          </radialGradient>
         </defs>
 
-        {/* Left dragonfly wings - Teal Enchantment with Warm Parchment fill */}
+        {/* Wing glow aura */}
         <ellipse
-          cx="20"
-          cy="28"
-          rx="14"
-          ry="20"
+          cx="60"
+          cy="40"
+          rx="50"
+          ry="35"
+          fill={`url(#wingShimmer-${delay}-${keyShape})`}
+          filter={`url(#wingGlow-${delay}-${keyShape})`}
+        />
+
+        {/* LEFT WING PAIR - Large outer wing */}
+        <ellipse
+          cx="25"
+          cy="40"
+          rx="20"
+          ry="32"
           fill="#F5E7C8"
-          fillOpacity="0.15"
-          transform="rotate(-25 20 28)"
+          fillOpacity="0.25"
+          transform="rotate(-30 25 40)"
         />
         <ellipse
-          cx="20"
-          cy="28"
+          cx="25"
+          cy="40"
+          rx="20"
+          ry="32"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="1.2"
+          opacity="0.8"
+          transform="rotate(-30 25 40)"
+        />
+        {/* Inner vein lines */}
+        <ellipse
+          cx="25"
+          cy="40"
           rx="14"
+          ry="24"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="0.6"
+          opacity="0.5"
+          transform="rotate(-30 25 40)"
+        />
+        <ellipse
+          cx="25"
+          cy="40"
+          rx="8"
+          ry="16"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="0.4"
+          opacity="0.3"
+          transform="rotate(-30 25 40)"
+        />
+
+        {/* LEFT WING PAIR - Small inner wing */}
+        <ellipse
+          cx="35"
+          cy="50"
+          rx="12"
+          ry="20"
+          fill="#F5E7C8"
+          fillOpacity="0.2"
+          transform="rotate(-20 35 50)"
+        />
+        <ellipse
+          cx="35"
+          cy="50"
+          rx="12"
           ry="20"
           fill="none"
           stroke="#58B6B1"
-          strokeWidth="0.8"
+          strokeWidth="1"
           opacity="0.7"
-          transform="rotate(-25 20 28)"
+          transform="rotate(-20 35 50)"
         />
-        {/* Inner wing detail */}
         <ellipse
-          cx="20"
-          cy="28"
-          rx="10"
-          ry="15"
+          cx="35"
+          cy="50"
+          rx="7"
+          ry="13"
           fill="none"
           stroke="#58B6B1"
           strokeWidth="0.5"
           opacity="0.4"
-          transform="rotate(-25 20 28)"
+          transform="rotate(-20 35 50)"
         />
 
-        {/* Right dragonfly wings */}
+        {/* RIGHT WING PAIR - Large outer wing */}
         <ellipse
-          cx="60"
-          cy="28"
-          rx="14"
-          ry="20"
+          cx="95"
+          cy="40"
+          rx="20"
+          ry="32"
           fill="#F5E7C8"
-          fillOpacity="0.15"
-          transform="rotate(25 60 28)"
+          fillOpacity="0.25"
+          transform="rotate(30 95 40)"
         />
         <ellipse
-          cx="60"
-          cy="28"
+          cx="95"
+          cy="40"
+          rx="20"
+          ry="32"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="1.2"
+          opacity="0.8"
+          transform="rotate(30 95 40)"
+        />
+        {/* Inner vein lines */}
+        <ellipse
+          cx="95"
+          cy="40"
           rx="14"
+          ry="24"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="0.6"
+          opacity="0.5"
+          transform="rotate(30 95 40)"
+        />
+        <ellipse
+          cx="95"
+          cy="40"
+          rx="8"
+          ry="16"
+          fill="none"
+          stroke="#58B6B1"
+          strokeWidth="0.4"
+          opacity="0.3"
+          transform="rotate(30 95 40)"
+        />
+
+        {/* RIGHT WING PAIR - Small inner wing */}
+        <ellipse
+          cx="85"
+          cy="50"
+          rx="12"
+          ry="20"
+          fill="#F5E7C8"
+          fillOpacity="0.2"
+          transform="rotate(20 85 50)"
+        />
+        <ellipse
+          cx="85"
+          cy="50"
+          rx="12"
           ry="20"
           fill="none"
           stroke="#58B6B1"
-          strokeWidth="0.8"
+          strokeWidth="1"
           opacity="0.7"
-          transform="rotate(25 60 28)"
+          transform="rotate(20 85 50)"
         />
         <ellipse
-          cx="60"
-          cy="28"
-          rx="10"
-          ry="15"
+          cx="85"
+          cy="50"
+          rx="7"
+          ry="13"
           fill="none"
           stroke="#58B6B1"
           strokeWidth="0.5"
           opacity="0.4"
-          transform="rotate(25 60 28)"
+          transform="rotate(20 85 50)"
         />
 
-        {/* Teal Enchantment glow effect */}
-        <ellipse
-          cx="40"
-          cy="28"
-          rx="35"
-          ry="25"
-          fill="#58B6B1"
-          opacity="0.08"
-          filter={`url(#wingGlow-${delay})`}
-        />
-
-        {/* Key shaft - Owlery Gold */}
+        {/* KEY BODY - Skeleton key in Owlery Gold */}
+        {/* Key shaft */}
         <path
           d={design.shaft}
           fill="none"
           stroke="#F0C979"
-          strokeWidth="2.5"
-          opacity="0.85"
+          strokeWidth="3"
+          opacity="0.95"
         />
-        {/* Key shaft inner line - darker gold accent */}
         <path
           d={design.shaft}
           fill="none"
           stroke="#C8A560"
-          strokeWidth="1"
-          opacity="0.6"
+          strokeWidth="1.2"
+          opacity="0.7"
         />
 
-        {/* Key head (ornate circular) */}
+        {/* Key head (ornate bow) */}
         <circle
           cx={design.head.cx}
           cy={design.head.cy}
           r={design.head.r1}
           fill="none"
           stroke="#F0C979"
-          strokeWidth="2.5"
-          opacity="0.85"
+          strokeWidth="3"
+          opacity="0.95"
         />
         <circle
           cx={design.head.cx}
@@ -264,32 +356,41 @@ const WingedKey = ({
           r={design.head.r2}
           fill="none"
           stroke="#F0C979"
-          strokeWidth="1.5"
-          opacity="0.85"
+          strokeWidth="2"
+          opacity="0.95"
         />
-        {/* Inner accent */}
         <circle
           cx={design.head.cx}
           cy={design.head.cy}
           r={design.head.r3}
           fill="none"
           stroke="#C8A560"
-          strokeWidth="1"
-          opacity="0.6"
+          strokeWidth="1.5"
+          opacity="0.7"
         />
 
-        {/* Key teeth - unique to each style */}
+        {/* Key teeth (bit) */}
         <path
           d={design.teeth}
           fill="#F0C979"
-          opacity="0.85"
+          opacity="0.95"
         />
         <path
           d={design.teeth}
           fill="none"
           stroke="#C8A560"
-          strokeWidth="0.5"
-          opacity="0.6"
+          strokeWidth="0.8"
+          opacity="0.7"
+        />
+
+        {/* Decorative gold glow on key */}
+        <circle
+          cx={design.head.cx}
+          cy={design.head.cy}
+          r={design.head.r1 + 5}
+          fill="#F0C979"
+          opacity="0.1"
+          filter={`url(#wingGlow-${delay}-${keyShape})`}
         />
       </svg>
     </div>
