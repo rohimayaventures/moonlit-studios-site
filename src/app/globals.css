@@ -1430,6 +1430,22 @@ body.chaos-mode * {
   }
 }
 
+/* Candle Glow */
+@keyframes candleGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-candleGlow {
+  animation: candleGlow 4s ease-in-out infinite;
+}
+
 /* ========================================
    MOONLIT COSMIC CREATOR - Creative Design
    ======================================== */
