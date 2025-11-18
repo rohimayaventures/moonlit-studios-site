@@ -960,8 +960,8 @@ export default function AILabPage() {
                   <Heart className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-lunarGold mb-2">10+ Years Clinical RN</h3>
-                  <p className="text-xs sm:text-sm text-starlight uppercase tracking-wider">Healthcare Operations Expert</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-lunarGold mb-2">15+ Years Healthcare Leader</h3>
+                  <p className="text-xs sm:text-sm text-starlight uppercase tracking-wider">Nurse & Operations Expert</p>
                 </div>
               </div>
               <ul className="space-y-3 text-sm sm:text-base text-moonlightSilver">
