@@ -7,31 +7,26 @@ import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, F
 //  HOGWARTS LIBRARY SVG COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Floating Candle - minimalist glow
-const FloatingCandle = ({
+// Candle Glow - minimalist background light column
+const CandleGlow = ({
   className = "",
   delay = 0,
+  height = "h-32",
 }: {
   className?: string;
   delay?: number;
+  height?: string;
 }) => (
   <div
-    className={`absolute ${className} pointer-events-none animate-candleFlicker`}
+    className={`absolute ${className} ${height} w-20 pointer-events-none animate-candleFlicker`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="relative w-16 h-16">
-      {/* Outer glow */}
-      <div className="absolute inset-0 rounded-full bg-[#F0C979]/20 blur-xl" />
-      {/* Inner glow */}
-      <div className="absolute inset-2 rounded-full bg-[#F0C979]/40 blur-md" />
-      {/* Core light */}
-      <div className="absolute inset-4 rounded-full bg-[#F0C979]/60" />
-    </div>
+    <div className="absolute inset-0 bg-gradient-to-t from-[#FFB86B]/15 via-[#E2C18F]/8 to-transparent blur-2xl" />
   </div>
 );
 
-// Floating Book - open book with glow
-const FloatingBook = ({
+// Floating Open Book - line art with Phoenix Orange glow
+const FloatingOpenBook = ({
   className = "",
   delay = 0,
 }: {
@@ -39,76 +34,107 @@ const FloatingBook = ({
   delay?: number;
 }) => (
   <div
-    className={`absolute ${className} pointer-events-none animate-glowPulse`}
+    className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
     style={{ animationDelay: `${delay}s` }}
   >
     <svg
-      width="90"
-      height="60"
-      viewBox="0 0 90 60"
+      width="100"
+      height="70"
+      viewBox="0 0 100 70"
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Glow effect */}
       <defs>
-        <filter id={`bookGlow-${delay}`} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-        </filter>
+        <radialGradient id={`bookGlow-${delay}`}>
+          <stop offset="0%" stopColor="#FFB86B" stopOpacity="0.3" />
+          <stop offset="50%" stopColor="#E2C18F" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#E2C18F" stopOpacity="0" />
+        </radialGradient>
       </defs>
 
-      {/* Outer glow */}
+      {/* Phoenix Orange glow */}
       <ellipse
-        cx="45"
-        cy="30"
-        rx="40"
-        ry="25"
-        fill="#F0C979"
-        opacity="0.15"
-        filter={`url(#bookGlow-${delay})`}
+        cx="50"
+        cy="35"
+        rx="45"
+        ry="30"
+        fill={`url(#bookGlow-${delay})`}
       />
 
-      {/* Left pages */}
+      {/* Left pages - cream with silver outline */}
       <path
-        d="M10 15 C25 5 35 8 45 12 L45 42 C35 38 25 37 10 41 Z"
-        fill="#F5E7C8"
-        opacity="0.6"
+        d="M10 15 C25 8 38 10 50 14 L50 48 C38 44 25 43 10 47 Z"
+        fill="#FFF4E6"
+        stroke="#D3DAE3"
+        strokeWidth="0.5"
+        opacity="0.9"
       />
       {/* Right pages */}
       <path
-        d="M45 12 C55 8 65 5 80 15 L80 41 C65 37 55 38 45 42 Z"
-        fill="#F5E7C8"
-        opacity="0.6"
+        d="M50 14 C62 10 75 8 90 15 L90 47 C75 43 62 44 50 48 Z"
+        fill="#FFF4E6"
+        stroke="#D3DAE3"
+        strokeWidth="0.5"
+        opacity="0.9"
       />
-      {/* Center fold */}
+      {/* Center fold with subtle shadow */}
       <path
-        d="M45 12 L45 42"
-        stroke="#F0C979"
+        d="M50 14 L50 48"
+        stroke="#E2C18F"
         strokeWidth="1"
-        opacity="0.4"
+        opacity="0.5"
       />
-      {/* Faint text lines */}
-      <path d="M16 22 L36 24" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
-      <path d="M16 28 L34 30" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
-      <path d="M54 24 L74 22" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
-      <path d="M56 30 L74 28" stroke="#F0C979" strokeWidth="0.5" opacity="0.3" />
+      {/* Text lines on left page */}
+      <path d="M18 24 L42 26" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      <path d="M18 30 L40 32" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      <path d="M18 36 L42 38" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      {/* Text lines on right page */}
+      <path d="M58 26 L82 24" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      <path d="M60 32 L82 30" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      <path d="M58 38 L82 36" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
     </svg>
   </div>
 );
 
-// Flying Skeleton Key with Dragonfly Wings
-const FlyingKey = ({
+// Winged Skeleton Key - vintage key with dragonfly wings and teal glow
+const WingedKey = ({
   className = "",
   delay = 0,
   keyShape = "ornate",
 }: {
   className?: string;
   delay?: number;
-  keyShape?: "ornate" | "simple" | "gothic";
+  keyShape?: "ornate" | "simple" | "gothic" | "baroque" | "victorian";
 }) => {
-  const keyPaths = {
-    ornate: "M10 40 L10 15 C10 10 15 5 20 5 C25 5 30 10 30 15 L30 40",
-    simple: "M15 40 L15 10 C15 5 20 5 25 5 C30 5 30 10 30 10 L30 40",
-    gothic: "M12 40 L12 12 C12 7 17 3 22 3 C27 3 28 8 28 12 L28 40",
+  const keyDesigns = {
+    ornate: {
+      shaft: "M10 42 L10 18 C10 12 14 8 20 8 C26 8 30 12 30 18 L30 42",
+      head: { cx: 20, cy: 15, r1: 9, r2: 5, r3: 3 },
+      teeth: "M10 40 L6 40 L6 44 L10 44 M16 42 L12 42 L12 46 L16 46 M22 40 L18 40 L18 44 L22 44",
+    },
+    simple: {
+      shaft: "M14 42 L14 16 C14 10 18 8 22 8 C26 8 26 12 26 16 L26 42",
+      head: { cx: 20, cy: 14, r1: 8, r2: 4, r3: 2 },
+      teeth: "M14 40 L10 40 L10 44 L14 44 M20 42 L16 42 L16 44 L20 44",
+    },
+    gothic: {
+      shaft: "M12 42 L12 16 C12 10 16 6 20 6 C24 6 28 10 28 16 L28 42",
+      head: { cx: 20, cy: 13, r1: 10, r2: 6, r3: 3 },
+      teeth: "M8 40 L5 40 L5 45 L8 45 M14 42 L11 42 L11 46 L14 46 M20 40 L17 40 L17 45 L20 45 M26 42 L23 42 L23 44 L26 44",
+    },
+    baroque: {
+      shaft: "M11 42 L11 20 C11 14 15 10 20 10 C25 10 29 14 29 20 Q29 25 27 28 L27 42",
+      head: { cx: 20, cy: 17, r1: 11, r2: 7, r3: 4 },
+      teeth: "M9 38 L6 38 L6 42 L9 42 M15 40 L12 40 L12 45 L15 45 M21 38 L18 38 L18 42 L21 42 M27 40 L24 40 L24 43 L27 43",
+    },
+    victorian: {
+      shaft: "M13 42 L13 18 C13 12 16 7 20 7 C24 7 27 12 27 18 L27 28 Q27 32 25 35 L25 42",
+      head: { cx: 20, cy: 14, r1: 9, r2: 5, r3: 2 },
+      teeth: "M11 39 L8 39 L8 43 L11 43 M17 41 L14 41 L14 45 L17 45 M23 39 L20 39 L20 43 L23 43",
+    },
   };
+
+  const design = keyDesigns[keyShape];
 
   return (
     <div
@@ -116,99 +142,155 @@ const FlyingKey = ({
       style={{ animationDelay: `${delay}s` }}
     >
       <svg
-        width="70"
-        height="90"
-        viewBox="0 0 70 90"
+        width="80"
+        height="100"
+        viewBox="0 0 80 100"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Dragonfly wings - left pair */}
+        {/* Teal glow around wings */}
+        <defs>
+          <filter id={`wingGlow-${delay}`}>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          </filter>
+        </defs>
+
+        {/* Left dragonfly wings - teal with light cream fill */}
         <ellipse
-          cx="15"
-          cy="25"
-          rx="12"
-          ry="18"
-          fill="#F0C979"
-          opacity="0.2"
-          transform="rotate(-20 15 25)"
+          cx="20"
+          cy="28"
+          rx="14"
+          ry="20"
+          fill="#FFF4E6"
+          fillOpacity="0.15"
+          transform="rotate(-25 20 28)"
         />
         <ellipse
-          cx="15"
-          cy="25"
+          cx="20"
+          cy="28"
+          rx="14"
+          ry="20"
+          fill="none"
+          stroke="#4FD0C3"
+          strokeWidth="0.8"
+          opacity="0.7"
+          transform="rotate(-25 20 28)"
+        />
+        {/* Inner wing detail */}
+        <ellipse
+          cx="20"
+          cy="28"
           rx="10"
           ry="15"
           fill="none"
-          stroke="#F0C979"
+          stroke="#4FD0C3"
           strokeWidth="0.5"
           opacity="0.4"
-          transform="rotate(-20 15 25)"
+          transform="rotate(-25 20 28)"
         />
 
-        {/* Dragonfly wings - right pair */}
+        {/* Right dragonfly wings */}
         <ellipse
-          cx="55"
-          cy="25"
-          rx="12"
-          ry="18"
-          fill="#F0C979"
-          opacity="0.2"
-          transform="rotate(20 55 25)"
+          cx="60"
+          cy="28"
+          rx="14"
+          ry="20"
+          fill="#FFF4E6"
+          fillOpacity="0.15"
+          transform="rotate(25 60 28)"
         />
         <ellipse
-          cx="55"
-          cy="25"
+          cx="60"
+          cy="28"
+          rx="14"
+          ry="20"
+          fill="none"
+          stroke="#4FD0C3"
+          strokeWidth="0.8"
+          opacity="0.7"
+          transform="rotate(25 60 28)"
+        />
+        <ellipse
+          cx="60"
+          cy="28"
           rx="10"
           ry="15"
           fill="none"
-          stroke="#F0C979"
+          stroke="#4FD0C3"
           strokeWidth="0.5"
           opacity="0.4"
-          transform="rotate(20 55 25)"
+          transform="rotate(25 60 28)"
         />
 
-        {/* Key shaft */}
+        {/* Teal glow effect */}
+        <ellipse
+          cx="40"
+          cy="28"
+          rx="35"
+          ry="25"
+          fill="#4FD0C3"
+          opacity="0.08"
+          filter={`url(#wingGlow-${delay})`}
+        />
+
+        {/* Key shaft - gold */}
         <path
-          d={keyPaths[keyShape]}
+          d={design.shaft}
           fill="none"
-          stroke="#8B6F47"
-          strokeWidth="2"
-          opacity="0.7"
+          stroke="#E2C18F"
+          strokeWidth="2.5"
+          opacity="0.85"
+        />
+        {/* Key shaft inner line - darker gold accent */}
+        <path
+          d={design.shaft}
+          fill="none"
+          stroke="#B8945F"
+          strokeWidth="1"
+          opacity="0.6"
         />
 
-        {/* Key head (circular) */}
+        {/* Key head (ornate circular) */}
         <circle
-          cx="20"
-          cy="12"
-          r="8"
+          cx={design.head.cx}
+          cy={design.head.cy}
+          r={design.head.r1}
           fill="none"
-          stroke="#8B6F47"
-          strokeWidth="2"
-          opacity="0.7"
+          stroke="#E2C18F"
+          strokeWidth="2.5"
+          opacity="0.85"
         />
         <circle
-          cx="20"
-          cy="12"
-          r="4"
+          cx={design.head.cx}
+          cy={design.head.cy}
+          r={design.head.r2}
           fill="none"
-          stroke="#8B6F47"
+          stroke="#E2C18F"
           strokeWidth="1.5"
-          opacity="0.7"
+          opacity="0.85"
+        />
+        {/* Inner accent */}
+        <circle
+          cx={design.head.cx}
+          cy={design.head.cy}
+          r={design.head.r3}
+          fill="none"
+          stroke="#B8945F"
+          strokeWidth="1"
+          opacity="0.6"
         />
 
-        {/* Key teeth */}
+        {/* Key teeth - unique to each style */}
         <path
-          d="M10 38 L5 38 L5 42 L10 42 M15 40 L10 40 L10 44 L15 44 M20 38 L15 38 L15 42 L20 42"
-          fill="#8B6F47"
-          opacity="0.7"
+          d={design.teeth}
+          fill="#E2C18F"
+          opacity="0.85"
         />
-
-        {/* Subtle glow */}
-        <ellipse
-          cx="35"
-          cy="25"
-          rx="30"
-          ry="40"
-          fill="#F0C979"
-          opacity="0.1"
+        <path
+          d={design.teeth}
+          fill="none"
+          stroke="#B8945F"
+          strokeWidth="0.5"
+          opacity="0.6"
         />
       </svg>
     </div>
@@ -217,52 +299,42 @@ const FlyingKey = ({
 
 export default function GhostwritingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0D0F1E] via-[#1A1014] to-[#0D0F1E] text-[#F5E7C8] overflow-hidden relative">
+    <main className="min-h-screen bg-gradient-to-b from-[#0A0F1F] via-[#121A2C] to-[#0A0F1F] text-[#FFF4E6] overflow-hidden relative">
 
-      {/* HOGWARTS LIBRARY AMBIENT ELEMENTS */}
+      {/* MAGICAL LIBRARY AMBIENT ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Candle glows - minimalist background lighting */}
-        <FloatingCandle className="top-28 left-[5%]" delay={0} />
-        <FloatingCandle className="top-40 left-[8%]" delay={0.5} />
-        <FloatingCandle className="top-52 left-[6%]" delay={1.0} />
-        <FloatingCandle className="top-64 left-[9%]" delay={1.5} />
-        <FloatingCandle className="top-[45%] left-[7%]" delay={2.0} />
-        <FloatingCandle className="top-[55%] left-[5%]" delay={2.5} />
-        <FloatingCandle className="top-[65%] left-[8%]" delay={3.0} />
+        {/* Candle glows - minimalist background lighting columns */}
+        <CandleGlow className="bottom-0 left-[2%]" delay={0} height="h-40" />
+        <CandleGlow className="bottom-0 left-[8%]" delay={0.5} height="h-32" />
+        <CandleGlow className="bottom-0 left-[14%]" delay={1.0} height="h-36" />
 
-        <FloatingCandle className="top-32 right-[6%]" delay={0.3} />
-        <FloatingCandle className="top-44 right-[9%]" delay={0.8} />
-        <FloatingCandle className="top-56 right-[7%]" delay={1.3} />
-        <FloatingCandle className="top-68 right-[10%]" delay={1.8} />
-        <FloatingCandle className="top-[48%] right-[8%]" delay={2.3} />
-        <FloatingCandle className="top-[58%] right-[6%]" delay={2.8} />
-        <FloatingCandle className="top-[68%] right-[9%]" delay={3.3} />
+        <CandleGlow className="bottom-0 right-[2%]" delay={0.3} height="h-38" />
+        <CandleGlow className="bottom-0 right-[8%]" delay={0.8} height="h-34" />
+        <CandleGlow className="bottom-0 right-[14%]" delay={1.3} height="h-40" />
 
-        {/* Floating open books with glow */}
-        <FloatingBook className="top-36 left-[15%]" delay={0} />
-        <FloatingBook className="top-48 right-[18%]" delay={1.2} />
-        <FloatingBook className="top-[42%] left-[20%]" delay={2.4} />
-        <FloatingBook className="top-[55%] right-[22%]" delay={3.6} />
+        {/* Floating open books with Phoenix Orange glow */}
+        <FloatingOpenBook className="top-[20%] left-[6%]" delay={0} />
+        <FloatingOpenBook className="top-[60%] right-[8%]" delay={1.8} />
+        <FloatingOpenBook className="top-[45%] left-[10%]" delay={3.2} />
 
-        {/* Flying skeleton keys with dragonfly wings */}
-        <FlyingKey className="top-24 left-[18%]" delay={0.5} keyShape="ornate" />
-        <FlyingKey className="top-35 right-[25%]" delay={1.2} keyShape="gothic" />
-        <FlyingKey className="top-[38%] left-[28%]" delay={1.8} keyShape="simple" />
-        <FlyingKey className="top-[52%] right-[20%]" delay={2.5} keyShape="ornate" />
-        <FlyingKey className="top-[62%] left-[22%]" delay={3.2} keyShape="gothic" />
-        <FlyingKey className="top-[72%] right-[15%]" delay={3.9} keyShape="simple" />
+        {/* Flying winged skeleton keys - different styles */}
+        <WingedKey className="top-[15%] left-[20%]" delay={0.5} keyShape="ornate" />
+        <WingedKey className="top-[28%] right-[18%]" delay={1.2} keyShape="gothic" />
+        <WingedKey className="top-[42%] left-[25%]" delay={1.8} keyShape="simple" />
+        <WingedKey className="top-[55%] right-[22%]" delay={2.5} keyShape="baroque" />
+        <WingedKey className="top-[68%] left-[18%]" delay={3.2} keyShape="victorian" />
 
         {/* Dust motes */}
-        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
-        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#F5E7C8]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
-        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
-        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#F5E7C8]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
-        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#F5E7C8]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
-        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
+        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#FFF4E6]/30 animate-dustMotes" />
+        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#FFF4E6]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
+        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#FFF4E6]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
+        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#FFF4E6]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
+        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#FFF4E6]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
+        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#FFF4E6]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
       </div>
 
-      {/* Warm library glow from bottom */}
-      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/10 to-transparent opacity-60" />
+      {/* Warm library glow from bottom - Phoenix Orange */}
+      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#FFB86B]/10 to-transparent opacity-60" />
 
       {/* HERO */}
       <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-20 lg:pb-28">
