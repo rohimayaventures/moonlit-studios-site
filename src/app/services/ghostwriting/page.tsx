@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, PenSquare, Sparkles, ScrollText, MessageCircle, F
 //  HOGWARTS LIBRARY SVG COMPONENTS
 // ═══════════════════════════════════════════════════════════════
 
-// Candle Glow - minimalist background light column
+// Candle Glow - minimalist background light column (Owlery Gold)
 const CandleGlow = ({
   className = "",
   delay = 0,
@@ -21,11 +21,11 @@ const CandleGlow = ({
     className={`absolute ${className} ${height} w-20 pointer-events-none animate-candleFlicker`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="absolute inset-0 bg-gradient-to-t from-[#FFB86B]/15 via-[#E2C18F]/8 to-transparent blur-2xl" />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#F0C979]/15 via-[#F0C979]/8 to-transparent blur-2xl" />
   </div>
 );
 
-// Floating Open Book - line art with Phoenix Orange glow
+// Floating Open Book - Warm Parchment with Owlery Gold glow
 const FloatingOpenBook = ({
   className = "",
   delay = 0,
@@ -46,13 +46,13 @@ const FloatingOpenBook = ({
       {/* Glow effect */}
       <defs>
         <radialGradient id={`bookGlow-${delay}`}>
-          <stop offset="0%" stopColor="#FFB86B" stopOpacity="0.3" />
-          <stop offset="50%" stopColor="#E2C18F" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#E2C18F" stopOpacity="0" />
+          <stop offset="0%" stopColor="#F0C979" stopOpacity="0.3" />
+          <stop offset="50%" stopColor="#F0C979" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#F0C979" stopOpacity="0" />
         </radialGradient>
       </defs>
 
-      {/* Phoenix Orange glow */}
+      {/* Owlery Gold glow */}
       <ellipse
         cx="50"
         cy="35"
@@ -61,37 +61,36 @@ const FloatingOpenBook = ({
         fill={`url(#bookGlow-${delay})`}
       />
 
-      {/* Left pages - cream with silver outline */}
+      {/* Left pages - Warm Parchment */}
       <path
         d="M10 15 C25 8 38 10 50 14 L50 48 C38 44 25 43 10 47 Z"
-        fill="#FFF4E6"
-        stroke="#D3DAE3"
+        fill="#F5E7C8"
+        stroke="#F0C979"
         strokeWidth="0.5"
         opacity="0.9"
       />
       {/* Right pages */}
       <path
         d="M50 14 C62 10 75 8 90 15 L90 47 C75 43 62 44 50 48 Z"
-        fill="#FFF4E6"
-        stroke="#D3DAE3"
+        fill="#F5E7C8"
+        stroke="#F0C979"
         strokeWidth="0.5"
         opacity="0.9"
       />
-      {/* Center fold with subtle shadow */}
+      {/* Center fold with gold shadow */}
       <path
         d="M50 14 L50 48"
-        stroke="#E2C18F"
+        stroke="#F0C979"
         strokeWidth="1"
-        opacity="0.5"
+        opacity="0.6"
       />
-      {/* Text lines on left page */}
-      <path d="M18 24 L42 26" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
-      <path d="M18 30 L40 32" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
-      <path d="M18 36 L42 38" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
-      {/* Text lines on right page */}
-      <path d="M58 26 L82 24" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
-      <path d="M60 32 L82 30" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
-      <path d="M58 38 L82 36" stroke="#D3DAE3" strokeWidth="0.4" opacity="0.4" />
+      {/* Text lines - subtle gold */}
+      <path d="M18 24 L42 26" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
+      <path d="M18 30 L40 32" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
+      <path d="M18 36 L42 38" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
+      <path d="M58 26 L82 24" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
+      <path d="M60 32 L82 30" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
+      <path d="M58 38 L82 36" stroke="#F0C979" strokeWidth="0.4" opacity="0.3" />
     </svg>
   </div>
 );
@@ -154,13 +153,13 @@ const WingedKey = ({
           </filter>
         </defs>
 
-        {/* Left dragonfly wings - teal with light cream fill */}
+        {/* Left dragonfly wings - Teal Enchantment with Warm Parchment fill */}
         <ellipse
           cx="20"
           cy="28"
           rx="14"
           ry="20"
-          fill="#FFF4E6"
+          fill="#F5E7C8"
           fillOpacity="0.15"
           transform="rotate(-25 20 28)"
         />
@@ -170,7 +169,7 @@ const WingedKey = ({
           rx="14"
           ry="20"
           fill="none"
-          stroke="#4FD0C3"
+          stroke="#58B6B1"
           strokeWidth="0.8"
           opacity="0.7"
           transform="rotate(-25 20 28)"
@@ -182,7 +181,7 @@ const WingedKey = ({
           rx="10"
           ry="15"
           fill="none"
-          stroke="#4FD0C3"
+          stroke="#58B6B1"
           strokeWidth="0.5"
           opacity="0.4"
           transform="rotate(-25 20 28)"
@@ -194,7 +193,7 @@ const WingedKey = ({
           cy="28"
           rx="14"
           ry="20"
-          fill="#FFF4E6"
+          fill="#F5E7C8"
           fillOpacity="0.15"
           transform="rotate(25 60 28)"
         />
@@ -204,7 +203,7 @@ const WingedKey = ({
           rx="14"
           ry="20"
           fill="none"
-          stroke="#4FD0C3"
+          stroke="#58B6B1"
           strokeWidth="0.8"
           opacity="0.7"
           transform="rotate(25 60 28)"
@@ -215,28 +214,28 @@ const WingedKey = ({
           rx="10"
           ry="15"
           fill="none"
-          stroke="#4FD0C3"
+          stroke="#58B6B1"
           strokeWidth="0.5"
           opacity="0.4"
           transform="rotate(25 60 28)"
         />
 
-        {/* Teal glow effect */}
+        {/* Teal Enchantment glow effect */}
         <ellipse
           cx="40"
           cy="28"
           rx="35"
           ry="25"
-          fill="#4FD0C3"
+          fill="#58B6B1"
           opacity="0.08"
           filter={`url(#wingGlow-${delay})`}
         />
 
-        {/* Key shaft - gold */}
+        {/* Key shaft - Owlery Gold */}
         <path
           d={design.shaft}
           fill="none"
-          stroke="#E2C18F"
+          stroke="#F0C979"
           strokeWidth="2.5"
           opacity="0.85"
         />
@@ -244,7 +243,7 @@ const WingedKey = ({
         <path
           d={design.shaft}
           fill="none"
-          stroke="#B8945F"
+          stroke="#C8A560"
           strokeWidth="1"
           opacity="0.6"
         />
@@ -255,7 +254,7 @@ const WingedKey = ({
           cy={design.head.cy}
           r={design.head.r1}
           fill="none"
-          stroke="#E2C18F"
+          stroke="#F0C979"
           strokeWidth="2.5"
           opacity="0.85"
         />
@@ -264,7 +263,7 @@ const WingedKey = ({
           cy={design.head.cy}
           r={design.head.r2}
           fill="none"
-          stroke="#E2C18F"
+          stroke="#F0C979"
           strokeWidth="1.5"
           opacity="0.85"
         />
@@ -274,7 +273,7 @@ const WingedKey = ({
           cy={design.head.cy}
           r={design.head.r3}
           fill="none"
-          stroke="#B8945F"
+          stroke="#C8A560"
           strokeWidth="1"
           opacity="0.6"
         />
@@ -282,13 +281,13 @@ const WingedKey = ({
         {/* Key teeth - unique to each style */}
         <path
           d={design.teeth}
-          fill="#E2C18F"
+          fill="#F0C979"
           opacity="0.85"
         />
         <path
           d={design.teeth}
           fill="none"
-          stroke="#B8945F"
+          stroke="#C8A560"
           strokeWidth="0.5"
           opacity="0.6"
         />
@@ -299,7 +298,7 @@ const WingedKey = ({
 
 export default function GhostwritingPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0A0F1F] via-[#121A2C] to-[#0A0F1F] text-[#FFF4E6] overflow-hidden relative">
+    <main className="min-h-screen bg-gradient-to-b from-[#121528] via-[#1A1E38] to-[#121528] text-[#F5E7C8] overflow-hidden relative">
 
       {/* MAGICAL LIBRARY AMBIENT ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -324,17 +323,17 @@ export default function GhostwritingPage() {
         <WingedKey className="top-[55%] right-[22%]" delay={2.5} keyShape="baroque" />
         <WingedKey className="top-[68%] left-[18%]" delay={3.2} keyShape="victorian" />
 
-        {/* Dust motes */}
-        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#FFF4E6]/30 animate-dustMotes" />
-        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#FFF4E6]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
-        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#FFF4E6]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
-        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#FFF4E6]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
-        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#FFF4E6]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
-        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#FFF4E6]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
+        {/* Dust motes - Warm Parchment */}
+        <div className="absolute top-[30%] left-[32%] w-1 h-1 rounded-full bg-[#F5E7C8]/30 animate-dustMotes" />
+        <div className="absolute top-[35%] right-[35%] w-1 h-1 rounded-full bg-[#F5E7C8]/25 animate-dustMotes" style={{ animationDelay: '0.8s' }} />
+        <div className="absolute top-[40%] left-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/20 animate-dustMotes" style={{ animationDelay: '1.6s' }} />
+        <div className="absolute top-[45%] right-[40%] w-1 h-1 rounded-full bg-[#F5E7C8]/28 animate-dustMotes" style={{ animationDelay: '2.4s' }} />
+        <div className="absolute top-[50%] left-[42%] w-1 h-1 rounded-full bg-[#F5E7C8]/22 animate-dustMotes" style={{ animationDelay: '3.2s' }} />
+        <div className="absolute top-[55%] right-[38%] w-1 h-1 rounded-full bg-[#F5E7C8]/26 animate-dustMotes" style={{ animationDelay: '4.0s' }} />
       </div>
 
-      {/* Warm library glow from bottom - Phoenix Orange */}
-      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#FFB86B]/10 to-transparent opacity-60" />
+      {/* Warm library glow from bottom - Owlery Gold */}
+      <div className="fixed bottom-0 left-0 right-0 h-1/3 pointer-events-none z-0 bg-gradient-to-t from-[#F0C979]/10 to-transparent opacity-60" />
 
       {/* HERO */}
       <section className="relative px-6 sm:px-10 lg:px-16 pt-28 pb-20 lg:pb-28">
