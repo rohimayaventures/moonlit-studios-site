@@ -1,33 +1,94 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles, Wind, Lightbulb, Target, TrendingUp } from 'lucide-react';
+import { Check, Target } from 'lucide-react';
 import Link from 'next/link';
 
-// 💨 AIR NOMAD DECORATIVE SVG COMPONENTS
-const AirCurrentDivider = ({ className = "" }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1200 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <path
-      d="M0 40 Q100 20, 200 40 T400 40 Q500 55, 600 40 T800 40 Q900 25, 1000 40 T1200 40"
-      stroke="currentColor"
-      strokeWidth="1.5"
+// LOTR Council Chamber SVG Components
+function ElvenScriptLine({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="200" height="40" viewBox="0 0 200 40" fill="none">
+      <path
+        d="M10 20 Q30 10, 50 20 T90 20 Q110 15, 130 20 T170 20"
+        stroke="#E9C97F"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.3"
+        className="animate-pulse"
+      />
+      <circle cx="30" cy="18" r="2" fill="#E9C97F" opacity="0.4" />
+      <circle cx="70" cy="22" r="2" fill="#E9C97F" opacity="0.4" />
+      <circle cx="110" cy="18" r="2" fill="#E9C97F" opacity="0.4" />
+      <circle cx="150" cy="22" r="2" fill="#E9C97F" opacity="0.4" />
+    </svg>
+  );
+}
+
+function LaurelLeaf({ className = '', delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg
+      className={className}
+      width="40"
+      height="60"
+      viewBox="0 0 40 60"
       fill="none"
-      opacity="0.2"
-    />
-    <path
-      d="M0 50 Q150 35, 300 50 T600 50 Q750 60, 900 50 T1200 50"
-      stroke="currentColor"
-      strokeWidth="1"
+      style={{ animationDelay: delay }}
+    >
+      <g className="animate-pulse" opacity="0.6">
+        <ellipse cx="20" cy="15" rx="6" ry="12" fill="#8CB7CF" opacity="0.7" />
+        <ellipse cx="20" cy="30" rx="7" ry="14" fill="#E9C97F" opacity="0.6" />
+        <ellipse cx="20" cy="45" rx="6" ry="12" fill="#8CB7CF" opacity="0.5" />
+        <path d="M20 5 Q25 30 20 55" stroke="#E9C97F" strokeWidth="1.5" fill="none" opacity="0.6" />
+      </g>
+    </svg>
+  );
+}
+
+function AncientSigil({ className = '', delay = '0s' }: { className?: string; delay?: string }) {
+  return (
+    <svg
+      className={className}
+      width="80"
+      height="80"
+      viewBox="0 0 80 80"
       fill="none"
-      opacity="0.15"
-    />
-  </svg>
-);
+      style={{ animationDelay: delay }}
+    >
+      <circle cx="40" cy="40" r="30" stroke="#E9C97F" strokeWidth="1" fill="none" opacity="0.2" className="animate-ping" />
+      <circle cx="40" cy="40" r="20" stroke="#8CB7CF" strokeWidth="1.5" fill="none" opacity="0.3" />
+      <path d="M40 20 L50 40 L40 60 L30 40 Z" stroke="#E9C97F" strokeWidth="1" fill="none" opacity="0.4" />
+      <circle cx="40" cy="40" r="5" fill="#F4E9D2" opacity="0.6" className="animate-pulse" />
+    </svg>
+  );
+}
+
+function WisdomFlow({ className = '' }: { className?: string }) {
+  return (
+    <svg className={className} width="300" height="100" viewBox="0 0 300 100" fill="none">
+      <path
+        d="M0 50 Q75 30, 150 50 T300 50"
+        stroke="#E9C97F"
+        strokeWidth="2"
+        fill="none"
+        opacity="0.2"
+        className="animate-pulse"
+      />
+      <path
+        d="M0 60 Q75 40, 150 60 T300 60"
+        stroke="#8CB7CF"
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.15"
+        className="animate-pulse"
+        style={{ animationDelay: '0.5s' }}
+      />
+    </svg>
+  );
+}
 
 export default function ConsultingPage() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // Reorganized packages - LOW to HIGH
   const packages = [
     {
       id: 1,
@@ -42,10 +103,6 @@ export default function ConsultingPage() {
         "Quick-win recommendations",
       ],
       ideal: "Creatives, job seekers, career pivoters",
-      color: "from-sky-600/20 to-blue-700/20",
-      borderColor: "border-sky-500/30",
-      accentColor: "text-sky-400",
-      glowColor: "shadow-sky-500/20",
     },
     {
       id: 2,
@@ -61,10 +118,6 @@ export default function ConsultingPage() {
         "Revised deck outline",
       ],
       ideal: "Founders, fundraisers, business developers",
-      color: "from-orange-600/20 to-amber-700/20",
-      borderColor: "border-orange-500/30",
-      accentColor: "text-orange-400",
-      glowColor: "shadow-orange-500/20",
       popular: true,
     },
     {
@@ -81,10 +134,6 @@ export default function ConsultingPage() {
         "Takeaway materials",
       ],
       ideal: "Teams, creative groups, learning organizations",
-      color: "from-blue-600/20 to-sky-700/20",
-      borderColor: "border-blue-500/30",
-      accentColor: "text-blue-400",
-      glowColor: "shadow-blue-500/20",
     },
     {
       id: 4,
@@ -99,10 +148,6 @@ export default function ConsultingPage() {
         "Actionable improvement list",
       ],
       ideal: "HealthTech companies, medical device firms",
-      color: "from-sky-600/20 to-cyan-700/20",
-      borderColor: "border-sky-500/30",
-      accentColor: "text-sky-400",
-      glowColor: "shadow-sky-500/20",
     },
     {
       id: 5,
@@ -117,10 +162,6 @@ export default function ConsultingPage() {
         "Risk reduction strategies",
       ],
       ideal: "HealthTech startups, product managers",
-      color: "from-amber-600/20 to-orange-700/20",
-      borderColor: "border-amber-500/30",
-      accentColor: "text-amber-400",
-      glowColor: "shadow-amber-500/20",
     },
     {
       id: 6,
@@ -137,10 +178,6 @@ export default function ConsultingPage() {
         "30-day email support",
       ],
       ideal: "Leadership teams, product teams, creative departments",
-      color: "from-blue-600/20 to-indigo-700/20",
-      borderColor: "border-blue-500/30",
-      accentColor: "text-blue-400",
-      glowColor: "shadow-blue-500/20",
       popular: true,
     },
     {
@@ -158,10 +195,6 @@ export default function ConsultingPage() {
         "30-day Slack/email support",
       ],
       ideal: "HealthTech Series A/B, enterprise pilots",
-      color: "from-amber-600/20 to-yellow-700/20",
-      borderColor: "border-amber-500/30",
-      accentColor: "text-amber-400",
-      glowColor: "shadow-amber-500/20",
       popular: true,
     },
     {
@@ -179,10 +212,6 @@ export default function ConsultingPage() {
         "2 weeks post-launch support",
       ],
       ideal: "HealthTech scale-ups, medical software companies",
-      color: "from-cyan-600/20 to-blue-700/20",
-      borderColor: "border-cyan-500/30",
-      accentColor: "text-cyan-400",
-      glowColor: "shadow-cyan-500/20",
     },
     {
       id: 9,
@@ -199,345 +228,199 @@ export default function ConsultingPage() {
         "Product roadmap alignment",
       ],
       ideal: "Funded HealthTech startups, growth-stage companies",
-      color: "from-orange-600/20 to-amber-700/20",
-      borderColor: "border-orange-500/30",
-      accentColor: "text-orange-400",
-      glowColor: "shadow-orange-500/20",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-nightNavy via-deepOcean to-midnight">
+    <div className="min-h-screen bg-gradient-to-b from-[#152022] via-[#2D3B45] to-midnight text-[#F4E9D2] overflow-hidden">
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 1: HERO
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section id="hero" className="relative overflow-hidden border-b border-sky-500/20 bg-gradient-to-br from-midnight via-deepOcean to-nightNavy py-20">
-        {/* Air Nomad ambient effects */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <AirCurrentDivider className="absolute top-1/4 left-0 w-full h-20 text-sky-300 opacity-20" />
-          <AirCurrentDivider className="absolute bottom-1/3 left-0 w-full h-20 text-orange-200 opacity-15" />
-          <Wind className="absolute top-32 right-1/3 w-16 h-16 text-sky-200 opacity-10" />
-          <Wind className="absolute bottom-40 left-1/4 w-20 h-20 text-orange-100 opacity-8" />
-        </div>
+      {/* Hero Section - LOTR Council Chamber */}
+      <section className="relative px-6 py-20 overflow-hidden">
+        {/* Ancient parchment glow background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2D3B45]/40 via-[#E9C97F]/5 to-transparent animate-pulse" style={{ animationDuration: '10s' }} />
 
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
-          {/* Air Nomad Moon Phases - EXACT PALETTE */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
-            {/* Phase 1: Sky Gold (New Moon) */}
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-yellow-200/50 hover:border-yellow-200/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-yellow-200/40"
-              title="New Moon - Clarity Dawns"
-            />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-yellow-200/30 to-orange-200/30" />
+        {/* Floating Elven Elements */}
+        <LaurelLeaf className="absolute top-10 left-[5%] opacity-50" delay="0s" />
+        <LaurelLeaf className="absolute top-32 left-[15%] opacity-35" delay="1s" />
+        <LaurelLeaf className="absolute top-20 right-[10%] opacity-45" delay="0.5s" />
+        <LaurelLeaf className="absolute bottom-10 right-[20%] opacity-40" delay="1.5s" />
 
-            {/* Phase 2: Pale Orange (Waxing Crescent) */}
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-orange-200/40 to-orange-200/70 border-2 border-orange-200/60 hover:border-orange-200/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-orange-200/40"
-              title="Waxing Crescent - Wisdom Builds"
-            />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-orange-200/30 to-amber-200/30" />
+        <WisdomFlow className="absolute top-1/4 left-0 opacity-40" />
+        <WisdomFlow className="absolute top-1/2 right-0 opacity-35 rotate-180" />
 
-            {/* Phase 3: Peach (Full Moon - CENTER) */}
-            <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-yellow-200 via-orange-200 to-amber-200 border-2 border-amber-200/80 shadow-lg shadow-amber-200/50 flex-shrink-0 animate-pulse"
-              title="Full Moon - Strategic Peak"
-            />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-amber-200/30 to-sky-300/30" />
+        <AncientSigil className="absolute top-0 left-1/4 opacity-30" delay="0s" />
+        <AncientSigil className="absolute bottom-0 right-1/3 opacity-25" delay="0.8s" />
 
-            {/* Phase 4: Soft Blue (Waning Crescent) */}
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-sky-300/40 to-sky-300/70 border-2 border-sky-300/60 hover:border-sky-300/90 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-sky-300/40"
-              title="Waning Crescent - Flow State"
-            />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-sky-300/30 to-slate-100/30" />
+        <ElvenScriptLine className="absolute top-1/3 right-[8%] opacity-60" />
+        <ElvenScriptLine className="absolute bottom-1/4 left-[12%] opacity-50" />
 
-            {/* Phase 5: Cloudy White (New Moon) */}
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-slate-100/50 hover:border-slate-100/80 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-slate-100/40"
-              title="New Moon - Fresh Perspective"
-            />
+        <div className="relative mx-auto max-w-5xl text-center">
+          {/* Moon Phases - LOTR Council: Gold → parchment → silver-blue → deep forest */}
+          <div className="mb-8 flex justify-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#E9C97F] to-[#F4E9D2] shadow-lg shadow-[#E9C97F]/50" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F4E9D2] to-white shadow-lg shadow-[#F4E9D2]/40" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8CB7CF] to-[#F4E9D2] shadow-lg shadow-[#8CB7CF]/50" />
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#2D3B45] to-[#152022] shadow-lg shadow-[#2D3B45]/50" />
           </div>
 
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm text-sky-300">
-            <Target className="h-4 w-4" />
-            <span>Strategy • Advisory • Workshops</span>
-          </div>
-
-          <h1 className="font-elegant mb-6 text-4xl font-bold text-pearlWhite md:text-6xl lg:text-7xl" style={{ lineHeight: '1.3' }}>
-            Consulting &
-            <span className="block bg-gradient-to-r from-yellow-200 via-orange-200 to-sky-300 bg-clip-text text-transparent mt-2">
-              Advisory
-            </span>
+          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">
+            Consulting & Advisory
           </h1>
-
-          <p className="font-serif mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-moonlightSilver md:text-xl italic">
+          <p className="mb-6 text-xl text-[#E9C97F]">
+            Strategic wisdom from the Council Chamber
+          </p>
+          <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-[#F4E9D2]/80">
             Expert consulting from a nurse-turned-developer. HealthTech product strategy,
-            tech advisory, AI/ML consulting, and creative workshops—15+ years operations leadership meets cutting-edge tech expertise.
+            tech advisory, AI/ML consulting, and creative workshops—15+ years operations leadership
+            meets cutting-edge tech expertise.
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-3 text-sm mb-8">
-            <span className="px-3 py-1 rounded-full bg-amber-200/20 text-amber-100 border border-amber-200/40">HealthTech Strategy</span>
-            <span className="px-3 py-1 rounded-full bg-sky-300/20 text-sky-200 border border-sky-300/40">UX Transformation</span>
-            <span className="px-3 py-1 rounded-full bg-orange-200/20 text-orange-100 border border-orange-200/40">Workshops</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group rounded-full bg-gradient-to-r from-amber-300 via-orange-200 to-sky-300 px-8 py-4 font-semibold text-midnight transition-all hover:shadow-lg hover:shadow-amber-300/50"
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-8 py-4 font-bold text-[#152022] shadow-xl shadow-[#E9C97F]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#E9C97F]/60"
             >
               Book a Consultation
-              <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">→</span>
+              <span>→</span>
             </Link>
-            <Link
+            <a
               href="#packages"
-              className="rounded-full border border-sky-400/30 px-8 py-4 font-semibold text-sky-300 transition-all hover:border-sky-400/50 hover:bg-sky-400/10"
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-[#E9C97F] bg-[#2D3B45]/60 px-8 py-4 font-semibold text-[#F4E9D2] backdrop-blur-sm transition-all hover:bg-[#E9C97F]/20 hover:shadow-lg hover:shadow-[#E9C97F]/30"
             >
               View Services
-            </Link>
+            </a>
           </div>
         </div>
-
-        {/* Air current divider at bottom */}
-        <AirCurrentDivider className="absolute bottom-0 left-0 w-full h-16 text-sky-300" />
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 2: WHO THIS IS FOR
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section id="who-this-is-for" className="relative border-b border-sky-500/20 bg-midnight/50 py-16">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4">
-              <Lightbulb className="w-12 h-12 text-amber-200 mx-auto mb-2" />
-            </div>
-            <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-4xl">
-              Who This Is For
-            </h2>
-            <p className="text-lg text-moonlightSilver italic">
-              Built for leaders who value clarity, outcomes, and strategic thinking.
-            </p>
+      {/* Who This Is For */}
+      <section className="relative px-6 py-16">
+        <WisdomFlow className="absolute top-0 left-0 w-full opacity-30" />
+
+        <div className="relative mx-auto max-w-6xl">
+          <h2 className="mb-12 text-center text-4xl font-bold text-white">
+            Who This Is For
+          </h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: '🏛️', title: 'HealthTech Founders', desc: 'Early to growth-stage startups building patient-facing tools, clinical workflows, or medical devices' },
+              { icon: '⚔️', title: 'Product Teams', desc: 'Product managers, UX designers, and engineers building tools for clinicians or patients' },
+              { icon: '📜', title: 'Creative Professionals', desc: 'Writers, designers, and creators looking to refine portfolios, pitches, or career positioning' },
+              { icon: '👑', title: 'Leadership Teams', desc: 'Executives and managers seeking strategic guidance, workshops, or team training' },
+              { icon: '🗡️', title: 'Investors & Advisors', desc: 'VC/PE firms and advisors needing clinical domain expertise for portfolio companies' },
+              { icon: '🏰', title: 'Enterprises & Health Systems', desc: 'Large organizations piloting new tech, implementing digital tools, or transforming care delivery' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="group relative overflow-hidden rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/60 to-[#152022]/80 p-6 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#F4E9D2] hover:shadow-xl hover:shadow-[#E9C97F]/30"
+              >
+                <AncientSigil className="absolute -top-10 -right-10 opacity-10" delay={`${i * 0.2}s`} />
+                <div className="relative">
+                  <div className="mb-3 text-4xl">{item.icon}</div>
+                  <h3 className="mb-2 text-lg font-semibold text-[#E9C97F]">{item.title}</h3>
+                  <p className="text-sm text-[#F4E9D2]/70">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-lg border border-amber-200/20 bg-amber-200/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <Target className="w-5 h-5 text-amber-100 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-amber-100 mb-2">HealthTech Founders</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    Early to growth-stage startups building patient-facing tools, clinical workflows, or medical devices.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-sky-300/20 bg-sky-300/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <TrendingUp className="w-5 h-5 text-sky-200 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-sky-200 mb-2">Product Teams</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    Product managers, UX designers, and engineers building tools for clinicians or patients.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-orange-200/20 bg-orange-200/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <Sparkles className="w-5 h-5 text-orange-100 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-orange-100 mb-2">Creative Professionals</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    Writers, designers, and creators looking to refine portfolios, pitches, or career positioning.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-blue-300/20 bg-blue-300/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <Lightbulb className="w-5 h-5 text-blue-200 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-blue-200 mb-2">Leadership Teams</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    Executives and managers seeking strategic guidance, workshops, or team training.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-cyan-300/20 bg-cyan-300/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <Wind className="w-5 h-5 text-cyan-200 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-cyan-200 mb-2">Investors & Advisors</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    VC/PE firms and advisors needing clinical domain expertise for portfolio companies.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-lg border border-yellow-200/20 bg-yellow-200/5 p-6 backdrop-blur-sm">
-              <div className="flex items-start gap-3">
-                <Target className="w-5 h-5 text-yellow-100 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-lg font-semibold text-yellow-100 mb-2">Enterprises & Health Systems</h3>
-                  <p className="text-moonlightSilver text-sm">
-                    Large organizations piloting new tech, implementing digital tools, or transforming care delivery.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div className="mt-8 text-center">
-            <p className="text-lg text-moonlightSilver">
-              <span className="text-amber-200 font-semibold">If you need clarity, not more complexity</span>,
+            <p className="text-lg text-[#F4E9D2]/80">
+              <span className="text-[#E9C97F] font-semibold">If you need clarity, not more complexity</span>,
               let's work together.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 3: HOW IT WORKS
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section id="how-it-works" className="border-b border-sky-500/20 bg-deepOcean/30 py-16 relative">
-        <AirCurrentDivider className="absolute top-10 left-0 w-full h-20 text-orange-200 opacity-15" />
-
-        <div className="mx-auto max-w-6xl px-6 relative">
-          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+      {/* How We Work Together */}
+      <section className="relative px-6 py-16">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-12 text-center text-4xl font-bold text-white">
             How We'll Work Together
           </h2>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-amber-500/20 border border-amber-300/30 relative">
-                  <Target className="w-8 h-8 text-amber-200" />
-                </div>
+          <div className="grid gap-10 md:grid-cols-3">
+            {[
+              { num: '1', icon: '🎯', title: 'Discover', desc: 'We\'ll clarify your goals, constraints, and success metrics. No fluff—just focused conversation about what matters most' },
+              { num: '2', icon: '💡', title: 'Design & Build', desc: 'I\'ll provide frameworks, recommendations, and actionable plans tailored to your context. You\'ll leave with clarity and direction' },
+              { num: '3', icon: '📈', title: 'Deliver & Support', desc: 'Receive deliverables, follow-up support, and strategic check-ins to ensure you\'re moving forward with confidence' },
+            ].map((step, i) => (
+              <div key={i} className="relative text-center">
+                <ElvenScriptLine className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-40" />
+                <div className="relative mb-4 text-6xl font-bold text-[#E9C97F]/20">{step.num}</div>
+                <div className="mb-3 text-5xl">{step.icon}</div>
+                <h3 className="mb-3 text-xl font-semibold text-[#E9C97F]">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-[#F4E9D2]/70">{step.desc}</p>
               </div>
-              <h3 className="mb-2 text-xl font-semibold text-amber-300">1. Discover</h3>
-              <p className="text-sm uppercase tracking-wider text-amber-200/70 mb-3">Define the Challenge</p>
-              <p className="text-moonlightSilver">
-                We'll clarify your goals, constraints, and success metrics. No fluff—just focused conversation
-                about what matters most.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sky-500/20 border border-sky-300/30 relative">
-                  <Lightbulb className="w-8 h-8 text-sky-200" />
-                </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-sky-300">2. Design & Build</h3>
-              <p className="text-sm uppercase tracking-wider text-sky-200/70 mb-3">Strategic Solutions</p>
-              <p className="text-moonlightSilver">
-                I'll provide frameworks, recommendations, and actionable plans tailored to your context.
-                You'll leave with clarity and direction.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="mb-4 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-orange-500/20 border border-orange-200/30 relative">
-                  <TrendingUp className="w-8 h-8 text-orange-100" />
-                </div>
-              </div>
-              <h3 className="mb-2 text-xl font-semibold text-orange-200">3. Deliver & Support</h3>
-              <p className="text-sm uppercase tracking-wider text-orange-100/70 mb-3">Outcomes & Momentum</p>
-              <p className="text-moonlightSilver">
-                Receive deliverables, follow-up support, and strategic check-ins to ensure
-                you're moving forward with confidence.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 4: TIERED PACKAGES (LOW → HIGH)
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section id="packages" className="py-20">
-        <div className="mx-auto max-w-7xl px-6">
+      {/* Tiered Packages */}
+      <section id="packages" className="relative px-6 py-20">
+        <WisdomFlow className="absolute top-1/3 left-0 opacity-25" />
+        <WisdomFlow className="absolute bottom-1/4 right-0 opacity-25 rotate-180" />
+
+        <div className="relative mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <p className="text-sm tracking-[0.35em] text-sky-300 uppercase mb-3">Tiered Pricing</p>
-            <h2 className="font-elegant mb-4 text-3xl font-bold text-pearlWhite md:text-5xl">
+            <p className="text-sm tracking-[0.35em] text-[#E9C97F] uppercase mb-3">Tiered Pricing</p>
+            <h2 className="mb-4 text-3xl font-bold text-white md:text-5xl">
               Choose Your Service
             </h2>
-            <p className="text-lg text-moonlightSilver">
+            <p className="text-lg text-[#F4E9D2]/80">
               From quick wins to strategic partnerships. Each tier designed for different needs and timelines.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {packages.map((pkg, index) => (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {packages.map((pkg) => (
               <div
                 key={pkg.id}
-                onMouseEnter={() => setHoveredCard(index)}
+                onMouseEnter={() => setHoveredCard(pkg.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`group relative overflow-hidden rounded-2xl border ${pkg.borderColor} bg-gradient-to-br ${pkg.color} backdrop-blur-sm transition-all duration-300 ${
-                  hoveredCard === index ? `scale-105 shadow-2xl ${pkg.glowColor}` : 'shadow-lg'
-                } ${pkg.popular ? 'ring-2 ring-amber-300/50' : ''}`}
+                className={`group relative overflow-visible rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/70 to-[#152022]/90 p-8 backdrop-blur-sm transition-all ${
+                  hoveredCard === pkg.id ? 'scale-105 shadow-2xl shadow-[#E9C97F]/40' : 'shadow-lg'
+                } ${pkg.popular ? 'border-2 border-[#E9C97F]' : ''}`}
               >
                 {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="px-4 py-1 rounded-full bg-gradient-to-r from-amber-300 via-orange-200 to-sky-300 text-xs font-bold text-midnight shadow-lg">
-                      ⭐ MOST POPULAR
-                    </span>
+                  <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#152022] shadow-lg">
+                    Most Popular
                   </div>
                 )}
 
-                {/* Card Header */}
-                <div className="border-b border-white/10 bg-midnight/40 p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br from-amber-300/30 to-sky-300/20 flex items-center justify-center border ${pkg.borderColor}`}>
-                      <span className={`text-xs font-bold ${pkg.accentColor}`}>{pkg.tier.slice(0,3).toUpperCase()}</span>
-                    </div>
-                    <div>
-                      <h3 className={`text-lg font-bold ${pkg.accentColor}`}>
-                        {pkg.title}
-                      </h3>
-                      <p className="text-xs text-moonlightSilver/70">{pkg.tier}</p>
-                    </div>
-                  </div>
-                  <p className="mb-2 text-sm text-moonlightSilver/70">{pkg.duration}</p>
-                  <div className="text-3xl font-bold text-pearlWhite">
-                    {pkg.price}
-                  </div>
-                </div>
+                <AncientSigil className="absolute -top-10 -right-10 opacity-10" />
 
-                {/* Card Body */}
-                <div className="p-6">
+                <div className="relative">
+                  <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#8CB7CF]">
+                    {pkg.tier}
+                  </div>
+                  <h4 className="mb-4 text-2xl font-bold text-white">{pkg.title}</h4>
+                  <p className="mb-4 text-sm text-[#F4E9D2]/60">{pkg.duration}</p>
                   <div className="mb-6">
-                    <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-sky-300">
+                    <span className="text-4xl font-bold text-[#E9C97F]">{pkg.price}</span>
+                  </div>
+                  <div className="mb-6">
+                    <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-[#8CB7CF]">
                       What's Included:
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
-                          <Check className={`mt-0.5 h-4 w-4 flex-shrink-0 ${pkg.accentColor}`} />
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[#F4E9D2]/80">
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#E9C97F]" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-
-                  <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
-                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-moonlightSilver/70">
+                  <div className="mb-6 rounded-lg border border-[#E9C97F]/20 bg-[#E9C97F]/5 p-4">
+                    <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#F4E9D2]/70">
                       Perfect For:
                     </p>
-                    <p className="text-sm text-pearlWhite">{pkg.ideal}</p>
+                    <p className="text-sm text-white">{pkg.ideal}</p>
                   </div>
-
                   <Link
                     href="/contact"
-                    className={`block w-full rounded-full border ${pkg.borderColor} py-3 text-center font-semibold ${pkg.accentColor} transition-all hover:bg-white/10`}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#E9C97F] bg-[#E9C97F]/10 px-6 py-3 font-semibold text-[#E9C97F] transition-all hover:bg-[#E9C97F]/30"
                   >
                     Book Now →
                   </Link>
@@ -548,120 +431,90 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 5: FAQ
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section id="faq" className="border-y border-sky-500/20 bg-midnight/50 py-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <h2 className="font-elegant mb-12 text-center text-3xl font-bold text-pearlWhite md:text-4xl">
+      {/* FAQ Section */}
+      <section className="relative px-6 py-16">
+        <WisdomFlow className="absolute top-0 left-0 w-full opacity-20" />
+
+        <div className="relative mx-auto max-w-4xl">
+          <h2 className="mb-12 text-center text-4xl font-bold text-white">
             Frequently Asked Questions
           </h2>
-
           <div className="space-y-6">
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-sky-400/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                How do consulting sessions work?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Most sessions are conducted via Zoom with screen sharing. You'll receive a calendar invite, pre-work (if applicable),
-                and follow-up notes/deliverables within 48 hours. For workshops, we can meet in-person or virtually depending on your needs.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-amber-300/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                What's the typical timeline for consulting projects?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Quick wins (Portfolio Review, Pitch Deck): 1-2 weeks. Strategy packages: 4-6 weeks. UX Transformation: 6-8 weeks.
-                Retainers are ongoing monthly engagements. Rush timelines available with planning.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-orange-200/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Can I customize a package or mix services?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Absolutely! Many clients combine HealthTech strategy with UX audits, or add workshops to retainer packages.
-                I'll create a custom scope that fits your needs and budget.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-sky-300/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                What makes your consulting different?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                I bridge clinical operations and modern tech. I've been a bedside nurse, managed healthcare teams, and built full-stack applications.
-                You get strategic thinking grounded in real-world clinical experience—not just theory.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-blue-300/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                Do you sign NDAs or confidentiality agreements?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Yes! All consulting engagements include standard confidentiality protections. If you have specific requirements
-                or need a custom NDA, we can review and execute before any work begins.
-              </p>
-            </details>
-
-            <details className="group rounded-lg border border-white/10 bg-white/5 p-6 hover:border-amber-200/30 transition-all">
-              <summary className="cursor-pointer text-lg font-semibold text-pearlWhite">
-                What if I'm not sure which service I need?
-              </summary>
-              <p className="mt-4 text-moonlightSilver">
-                Start with a free 20-minute discovery call. We'll discuss your goals, challenges, and timeline—then I'll recommend
-                the best fit. No pressure, no sales pitch. Just honest guidance.
-              </p>
-            </details>
+            {[
+              {
+                q: 'How do consulting sessions work?',
+                a: 'Most sessions are conducted via Zoom with screen sharing. You\'ll receive a calendar invite, pre-work (if applicable), and follow-up notes/deliverables within 48 hours. For workshops, we can meet in-person or virtually depending on your needs.',
+              },
+              {
+                q: 'What\'s the typical timeline for consulting projects?',
+                a: 'Quick wins (Portfolio Review, Pitch Deck): 1-2 weeks. Strategy packages: 4-6 weeks. UX Transformation: 6-8 weeks. Retainers are ongoing monthly engagements. Rush timelines available with planning.',
+              },
+              {
+                q: 'Can I customize a package or mix services?',
+                a: 'Absolutely! Many clients combine HealthTech strategy with UX audits, or add workshops to retainer packages. I\'ll create a custom scope that fits your needs and budget.',
+              },
+              {
+                q: 'What makes your consulting different?',
+                a: 'I bridge clinical operations and modern tech. I\'ve been a bedside nurse, managed healthcare teams, and built full-stack applications. You get strategic thinking grounded in real-world clinical experience—not just theory.',
+              },
+              {
+                q: 'Do you sign NDAs or confidentiality agreements?',
+                a: 'Yes! All consulting engagements include standard confidentiality protections. If you have specific requirements or need a custom NDA, we can review and execute before any work begins.',
+              },
+              {
+                q: 'What if I\'m not sure which service I need?',
+                a: 'Start with a free 20-minute discovery call. We\'ll discuss your goals, challenges, and timeline—then I\'ll recommend the best fit. No pressure, no sales pitch. Just honest guidance.',
+              },
+            ].map((faq, i) => (
+              <details
+                key={i}
+                className="group rounded-xl border border-[#E9C97F]/30 bg-gradient-to-br from-[#2D3B45]/50 to-[#152022]/70 p-6 backdrop-blur-sm transition-all hover:border-[#E9C97F]/50 hover:bg-[#E9C97F]/10"
+              >
+                <summary className="cursor-pointer text-lg font-semibold text-[#E9C97F] transition-colors group-hover:text-white">
+                  {faq.q}
+                </summary>
+                <p className="mt-4 leading-relaxed text-[#F4E9D2]/80">{faq.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          SECTION 6: FINAL CTA
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="relative rounded-2xl border border-sky-400/30 bg-gradient-to-br from-amber-300/10 via-orange-200/10 to-sky-300/10 p-12 backdrop-blur-sm overflow-hidden">
-            {/* Decorative air currents */}
-            <AirCurrentDivider className="absolute top-1/3 left-0 w-full h-16 text-sky-200 opacity-10" />
+      {/* Final CTA */}
+      <section className="relative px-6 py-20">
+        <AncientSigil className="absolute top-1/2 left-1/4 -translate-y-1/2 opacity-15" />
+        <AncientSigil className="absolute top-1/2 right-1/4 -translate-y-1/2 opacity-15" delay="0.5s" />
+        <LaurelLeaf className="absolute top-10 left-[10%] opacity-25" />
+        <LaurelLeaf className="absolute bottom-10 right-[15%] opacity-25" />
 
-            <div className="relative z-10 space-y-6">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-amber-300 via-orange-200 to-sky-300 mx-auto shadow-lg shadow-amber-300/40">
-                <Target className="w-10 h-10 text-midnight" />
-              </div>
-
-              <h2 className="font-elegant text-3xl font-bold text-pearlWhite md:text-4xl">
-                Ready for Strategic Clarity?
-              </h2>
-
-              <p className="text-lg text-moonlightSilver max-w-2xl mx-auto">
-                Whether you need a quick audit, strategic guidance, or ongoing partnership—
-                let's talk about how we can move your work forward.
-              </p>
-
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <Link
-                  href="/contact?service=consulting"
-                  className="rounded-full bg-gradient-to-r from-amber-300 via-orange-200 to-sky-300 px-8 py-4 font-semibold text-midnight transition-all hover:shadow-lg hover:shadow-amber-300/50"
-                >
-                  Schedule a Call
-                </Link>
-                <Link
-                  href="/portfolio"
-                  className="rounded-full border border-sky-400/30 px-8 py-4 font-semibold text-sky-300 transition-all hover:border-sky-400/50 hover:bg-sky-400/10"
-                >
-                  View Case Studies
-                </Link>
-              </div>
-            </div>
+        <div className="relative mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#E9C97F] to-[#F4E9D2] mx-auto mb-6 shadow-lg shadow-[#E9C97F]/40">
+            <Target className="w-10 h-10 text-[#152022]" />
+          </div>
+          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
+            Ready for Strategic Clarity?
+          </h2>
+          <p className="mb-10 text-lg leading-relaxed text-[#F4E9D2]/80">
+            Whether you need a quick audit, strategic guidance, or ongoing partnership—
+            let's talk about how we can move your work forward.
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Link
+              href="/contact?service=consulting"
+              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#E9C97F] to-[#F4E9D2] px-10 py-5 text-lg font-bold text-[#152022] shadow-2xl shadow-[#E9C97F]/60 transition-all hover:scale-105 hover:shadow-[#E9C97F]/80"
+            >
+              Schedule a Call
+            </Link>
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-3 rounded-xl border-2 border-[#E9C97F] bg-[#2D3B45]/60 px-10 py-5 text-lg font-semibold text-[#E9C97F] backdrop-blur-sm transition-all hover:bg-[#E9C97F]/20"
+            >
+              View Case Studies
+            </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }
