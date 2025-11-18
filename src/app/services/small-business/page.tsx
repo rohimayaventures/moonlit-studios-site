@@ -5,14 +5,16 @@ import { Check, Sparkles, Leaf, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import { TestimonialsSection } from '@/app/components/TestimonialsSection';
 
-// 🏮 STUDIO GHIBLI IMMERSIVE WORLD COMPONENTS
+// 🏮 STUDIO GHIBLI VILLAGE - IMMERSIVE WORLD COMPONENTS
+// Palette: Forest Tea Green (#88C9A1), Sky Spirit Blue (#8AC7E6), Warm Lantern Gold (#F6D28F),
+//          Ghibli Cloud Cream (#FAF3E6), Night Meadow Indigo (#1A2B42)
 
 // Floating magical lantern with warm glow
-const GhibliLantern = ({ className = "" }: { className?: string }) => (
-  <div className={`relative ${className}`}>
-    {/* Outer glow aura */}
-    <div className="absolute inset-0 animate-floatLantern">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-300/40 via-yellow-200/30 to-green-300/20 blur-xl" />
+const GhibliLantern = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+  <div className={`relative ${className}`} style={{ animationDelay: `${delay}s` }}>
+    {/* Outer glow aura - Warm Lantern Gold */}
+    <div className="absolute inset-0 animate-floatLantern" style={{ animationDelay: `${delay}s` }}>
+      <div className="absolute inset-0 rounded-full bg-[#F6D28F]/40 blur-xl" />
     </div>
 
     {/* Lantern SVG */}
@@ -21,7 +23,7 @@ const GhibliLantern = ({ className = "" }: { className?: string }) => (
       viewBox="0 0 80 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ animationDelay: '0.5s' }}
+      style={{ animationDelay: `${delay + 0.5}s` }}
     >
       {/* Handle */}
       <path d="M35 8 Q40 2, 45 8" stroke="#D4A574" strokeWidth="2" strokeLinecap="round" fill="none" />
@@ -29,10 +31,10 @@ const GhibliLantern = ({ className = "" }: { className?: string }) => (
       {/* Top cap */}
       <ellipse cx="40" cy="12" rx="12" ry="4" fill="#C9985F" />
 
-      {/* Body */}
+      {/* Body - Ghibli Cloud Cream */}
       <path
         d="M28 15 L28 70 Q28 75, 33 75 L47 75 Q52 75, 52 70 L52 15 Q52 12, 47 12 L33 12 Q28 12, 28 15 Z"
-        fill="#E8D5B7"
+        fill="#FAF3E6"
         opacity="0.9"
       />
 
@@ -42,16 +44,36 @@ const GhibliLantern = ({ className = "" }: { className?: string }) => (
       <line x1="34" y1="15" x2="34" y2="75" stroke="#C9985F" strokeWidth="1" opacity="0.5" />
       <line x1="46" y1="15" x2="46" y2="75" stroke="#C9985F" strokeWidth="1" opacity="0.5" />
 
-      {/* Inner magical glow */}
-      <ellipse cx="40" cy="45" rx="10" ry="15" fill="#FFF8DC" opacity="0.8" />
-      <ellipse cx="40" cy="45" rx="6" ry="10" fill="#FFFACD" opacity="0.9" className="animate-pulse" />
+      {/* Inner magical glow - Warm Lantern Gold */}
+      <ellipse cx="40" cy="45" rx="10" ry="15" fill="#F6D28F" opacity="0.6" />
+      <ellipse cx="40" cy="45" rx="6" ry="10" fill="#F6D28F" opacity="0.9" className="animate-pulse" />
 
       {/* Bottom */}
       <ellipse cx="40" cy="78" rx="12" ry="4" fill="#C9985F" />
       <circle cx="40" cy="82" r="3" fill="#D4A574" />
       <line x1="40" y1="85" x2="40" y2="92" stroke="#D4A574" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="40" cy="94" r="4" fill="#E8D5B7" />
+      <circle cx="40" cy="94" r="4" fill="#FAF3E6" />
     </svg>
+  </div>
+);
+
+// Soot Sprites - Floating magical spirits
+const SootSprite = ({ delay = 0, className = "" }: { delay?: number; className?: string }) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-floatLeaf`}
+    style={{ animationDelay: `${delay}s`, animationDuration: '5s' }}
+  >
+    <div className="relative w-8 h-8">
+      {/* Sprite body - Night Meadow Indigo */}
+      <div className="absolute inset-0 rounded-full bg-[#1A2B42] opacity-70" />
+
+      {/* Eyes */}
+      <div className="absolute top-3 left-2 w-1.5 h-1.5 rounded-full bg-white" />
+      <div className="absolute top-3 right-2 w-1.5 h-1.5 rounded-full bg-white" />
+
+      {/* Soft glow */}
+      <div className="absolute inset-0 rounded-full bg-[#88C9A1]/20 blur-sm animate-pulse" />
+    </div>
   </div>
 );
 
