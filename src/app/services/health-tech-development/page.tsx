@@ -108,21 +108,18 @@ export default function HealthTechDevelopmentPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#083B54]/40 via-[#50D4D0]/10 to-transparent animate-pulse" style={{ animationDuration: '8s' }} />
 
         {/* Floating Water Elements */}
-        <HealingDroplet className="absolute top-10 left-[5%] opacity-60" delay="0s" />
-        <HealingDroplet className="absolute top-32 left-[15%] opacity-40" delay="1s" />
-        <HealingDroplet className="absolute top-20 right-[10%] opacity-50" delay="0.5s" />
-        <HealingDroplet className="absolute bottom-10 right-[20%] opacity-45" delay="1.5s" />
+        <HealingDroplet className="absolute top-10 left-[5%] opacity-50 hidden md:block" delay="0s" />
+        <HealingDroplet className="absolute top-20 right-[10%] opacity-40 hidden lg:block" delay="0.5s" />
 
-        <WaterStream className="absolute top-1/4 left-0 opacity-60" />
-        <WaterStream className="absolute top-1/2 right-0 opacity-50 rotate-180" />
+        <WaterStream className="absolute top-1/4 left-0 opacity-50 hidden md:block" />
+        <WaterStream className="absolute top-1/2 right-0 opacity-40 rotate-180 hidden md:block" />
 
-        <RippleCircle className="absolute top-0 left-1/4 opacity-40" delay="0s" />
-        <RippleCircle className="absolute bottom-0 right-1/3 opacity-30" delay="0.8s" />
+        <RippleCircle className="absolute top-0 left-1/4 opacity-30 hidden lg:block" delay="0s" />
+        <RippleCircle className="absolute bottom-0 right-1/3 opacity-25 hidden lg:block" delay="0.8s" />
 
-        <LotusFlower className="absolute top-1/3 right-[8%] opacity-70" />
-        <LotusFlower className="absolute bottom-1/4 left-[12%] opacity-60" />
+        <LotusFlower className="absolute top-1/3 right-[8%] opacity-60 hidden md:block" />
 
-        <WaterBubbles className="absolute inset-0" />
+        <WaterBubbles className="absolute inset-0 hidden sm:block" />
 
         <div className="relative mx-auto max-w-5xl text-center">
           {/* Moon Phases - Water Tribe Colors: Icy blues → teal → silver → navy */}
@@ -138,12 +135,12 @@ export default function HealthTechDevelopmentPage() {
             Health × Tech Development
           </h1>
           <p className="mb-6 text-xl text-[#9FE8FF]">
-            Healing-driven platforms that protect patient data and empower care teams
+            Small, focused tools built by a nurse who codes
           </p>
-          <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-[#D5ECFA]/80">
-            As a registered nurse turned developer, I bridge clinical workflows with technical precision.
-            From HIPAA-compliant patient portals to EHR integrations and telehealth platforms —
-            I build tools that clinicians trust and patients love.
+          <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-[#D5ECFA]/90">
+            As a nurse turned developer, I bridge clinical workflows with technical execution.
+            I build focused internal tools, simple patient portals, and knowledge assistants—not full EHR replacements.
+            Small, intentional builds that fit into real clinical operations.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -151,7 +148,7 @@ export default function HealthTechDevelopmentPage() {
               href="/get-quote"
               className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#50D4D0] to-[#9FE8FF] px-8 py-4 font-bold text-[#083B54] shadow-xl shadow-[#50D4D0]/40 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-[#9FE8FF]/60"
             >
-              Start Your Platform
+              Start Your Tool
               <ArrowRight className="h-5 w-5" />
             </Link>
             <a
@@ -174,12 +171,12 @@ export default function HealthTechDevelopmentPage() {
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { icon: '🏥', title: 'Healthcare Startups', desc: 'Launch compliant patient platforms with confidence' },
-              { icon: '👨‍⚕️', title: 'Private Practices', desc: 'Streamline scheduling, charting, and telehealth visits' },
-              { icon: '💊', title: 'Health Tech Companies', desc: 'Build scalable, regulation-ready solutions' },
-              { icon: '🧬', title: 'Research Teams', desc: 'Secure data collection and analysis tools' },
-              { icon: '🩺', title: 'Medical Device Makers', desc: 'Connect hardware to cloud-based dashboards' },
-              { icon: '📊', title: 'Healthcare Consultants', desc: 'Tools that turn insights into action' },
+              { title: 'Small Clinics & Practices', desc: 'Simple portals and internal workflow tools for day-to-day operations' },
+              { title: 'Early-Stage HealthTech', desc: 'Focused MVPs and pilot tools to validate clinical workflows' },
+              { title: 'Healthcare Consultants', desc: 'Custom tools to organize client data, referrals, or follow-ups' },
+              { title: 'Research Teams', desc: 'Lightweight data collection and tracking interfaces' },
+              { title: 'Specialty Providers', desc: 'Niche workflow apps tailored to specific care models' },
+              { title: 'Health Operations Teams', desc: 'Internal dashboards and knowledge bases for staff training' },
             ].map((item, i) => (
               <div
                 key={i}
@@ -187,7 +184,6 @@ export default function HealthTechDevelopmentPage() {
               >
                 <RippleCircle className="absolute -top-10 -right-10 opacity-20" delay={`${i * 0.2}s`} />
                 <div className="relative">
-                  <div className="mb-3 text-4xl">{item.icon}</div>
                   <h3 className="mb-2 text-lg font-semibold text-[#9FE8FF]">{item.title}</h3>
                   <p className="text-sm text-[#D5ECFA]/70">{item.desc}</p>
                 </div>
@@ -205,14 +201,13 @@ export default function HealthTechDevelopmentPage() {
           </h2>
           <div className="grid gap-10 md:grid-cols-3">
             {[
-              { num: '1', icon: '🩺', title: 'Clinical Discovery', desc: 'We map your workflows, compliance needs, and patient touchpoints' },
-              { num: '2', icon: '⚕️', title: 'Healing-Centered Design', desc: 'I design interfaces clinicians understand and patients trust' },
-              { num: '3', icon: '🔐', title: 'Secure Deployment', desc: 'HIPAA-compliant hosting, encrypted data, and audit-ready logs' },
+              { num: '1', title: 'Clinical Discovery', desc: 'Map your specific workflow, compliance needs, and real user pain points' },
+              { num: '2', title: 'Focused Design & Build', desc: 'Design interfaces clinicians actually understand and build the core workflow—no bloat' },
+              { num: '3', title: 'Secure Deployment', desc: 'HIPAA-aligned best practices, encryption, audit logs, and vendor selection guidance' },
             ].map((step, i) => (
               <div key={i} className="relative text-center">
                 <LotusFlower className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-40" />
-                <div className="relative mb-4 text-6xl font-bold text-[#50D4D0]/20">{step.num}</div>
-                <div className="mb-3 text-5xl">{step.icon}</div>
+                <div className="relative mb-6 text-6xl font-bold text-[#50D4D0]/30">{step.num}</div>
                 <h3 className="mb-3 text-xl font-semibold text-[#9FE8FF]">{step.title}</h3>
                 <p className="text-sm leading-relaxed text-[#D5ECFA]/70">{step.desc}</p>
               </div>
@@ -234,38 +229,38 @@ export default function HealthTechDevelopmentPage() {
           {/* Patient-Facing Platforms */}
           <div className="mb-16">
             <h3 className="mb-8 text-center text-2xl font-bold text-[#9FE8FF]">
-              💧 Patient-Facing Platforms
+              Patient-Facing Tools
             </h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-              {/* Stardust */}
+              {/* Clinic Starter Portal */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <RippleCircle className="absolute -top-16 -right-16 opacity-10" />
                 <div className="relative">
                   <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#9FE8FF]/70">
-                    Stardust ⭐
+                    Starter
                   </div>
-                  <h4 className="mb-4 text-2xl font-bold text-white">Patient Portal Starter</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Clinic Starter Portal</h4>
                   <div className="mb-6">
                     <span className="text-4xl font-bold text-[#50D4D0]">$2,000</span>
-                    <span className="text-sm text-[#D5ECFA]/60"> - $3,500</span>
+                    <span className="text-sm text-[#D5ECFA]/60"> - $4,000</span>
                   </div>
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Appointment scheduling</span>
+                      <span>Simple, branded clinic/office website</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Secure messaging</span>
+                      <span>Secure contact/intake forms</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Patient registration forms</span>
+                      <span>Basic "request an appointment" flow</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>HIPAA-compliant hosting setup</span>
+                      <span>HIPAA-aligned form handling</span>
                     </li>
                   </ul>
                   <Link
@@ -277,7 +272,7 @@ export default function HealthTechDevelopmentPage() {
                 </div>
               </div>
 
-              {/* Nebula - MOST POPULAR */}
+              {/* Single Workflow Tool - MOST POPULAR */}
               <div className="group relative overflow-visible rounded-xl border-2 border-[#9FE8FF] bg-gradient-to-br from-[#50D4D0]/20 to-[#083B54]/90 p-8 shadow-2xl shadow-[#9FE8FF]/50 backdrop-blur-sm transition-all hover:scale-105 hover:shadow-[#9FE8FF]/70">
                 <div className="absolute -top-4 left-1/2 z-50 -translate-x-1/2 rounded-full bg-gradient-to-r from-[#50D4D0] to-[#9FE8FF] px-6 py-1.5 text-xs font-bold uppercase tracking-wider text-[#083B54] shadow-lg">
                   Most Popular
@@ -285,33 +280,33 @@ export default function HealthTechDevelopmentPage() {
                 <RippleCircle className="absolute -top-16 -right-16 opacity-20" />
                 <div className="relative">
                   <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#9FE8FF]">
-                    Nebula 🌌
+                    Focused Build
                   </div>
-                  <h4 className="mb-4 text-2xl font-bold text-white">Full Patient Experience Suite</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Single Workflow Tool</h4>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#9FE8FF]">$5,500</span>
-                    <span className="text-sm text-[#D5ECFA]/60"> - $8,000</span>
+                    <span className="text-4xl font-bold text-[#9FE8FF]">$7,500</span>
+                    <span className="text-sm text-[#D5ECFA]/60"> - $12,000</span>
                   </div>
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/90">
                     <li className="flex items-start gap-2">
                       <span className="text-[#9FE8FF]">✓</span>
-                      <span>Everything in Stardust</span>
+                      <span>One clearly defined workflow app</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#9FE8FF]">✓</span>
-                      <span>Telehealth video integration</span>
+                      <span>Examples: handoff board, referral tracker, triage queue</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#9FE8FF]">✓</span>
-                      <span>Patient chart access (read-only)</span>
+                      <span>Basic roles (admin/staff)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#9FE8FF]">✓</span>
-                      <span>Prescription refill requests</span>
+                      <span>Simple dashboards</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#9FE8FF]">✓</span>
-                      <span>Billing & payment portal</span>
+                      <span>2-4 weeks post-launch refinement</span>
                     </li>
                   </ul>
                   <Link
@@ -323,38 +318,34 @@ export default function HealthTechDevelopmentPage() {
                 </div>
               </div>
 
-              {/* Supernova */}
+              {/* Nurse-Led Knowledge Assistant */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <RippleCircle className="absolute -top-16 -right-16 opacity-10" />
                 <div className="relative">
                   <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#9FE8FF]/70">
-                    Supernova 💫
+                    AI Assistant
                   </div>
-                  <h4 className="mb-4 text-2xl font-bold text-white">Enterprise Health Platform</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Nurse-Led Knowledge Assistant</h4>
                   <div className="mb-6">
-                    <span className="text-4xl font-bold text-[#50D4D0]">$10,000</span>
-                    <span className="text-sm text-[#D5ECFA]/60"> - $20,000</span>
+                    <span className="text-4xl font-bold text-[#50D4D0]">$8,000</span>
+                    <span className="text-sm text-[#D5ECFA]/60"> - $15,000</span>
                   </div>
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Everything in Nebula</span>
+                      <span>RAG assistant over internal SOPs/policies/training docs</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>EHR integration (HL7/FHIR)</span>
+                      <span>Draft responses for human review only</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Custom clinical workflows</span>
+                      <span>Clear disclaimers: support tool, not clinical decision-maker</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Multi-location support</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#50D4D0]">✓</span>
-                      <span>Advanced analytics dashboard</span>
+                      <span>Basic admin configuration</span>
                     </li>
                   </ul>
                   <Link
@@ -372,14 +363,14 @@ export default function HealthTechDevelopmentPage() {
           {/* Clinical Team Tools */}
           <div className="mb-16">
             <h3 className="mb-8 text-center text-2xl font-bold text-[#9FE8FF]">
-              ⚕️ Clinical Team Tools
+              Clinical Team Tools
             </h3>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
-              {/* Charting Assistant */}
+              {/* Documentation Helper */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <div className="relative">
-                  <h4 className="mb-4 text-2xl font-bold text-white">Clinical Charting Assistant</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Documentation Helper</h4>
                   <div className="mb-6">
                     <span className="text-4xl font-bold text-[#50D4D0]">$3,000</span>
                     <span className="text-sm text-[#D5ECFA]/60"> - $6,000</span>
@@ -387,7 +378,7 @@ export default function HealthTechDevelopmentPage() {
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Voice-to-text documentation</span>
+                      <span>Note prompts and templates for clinician review</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
@@ -395,7 +386,7 @@ export default function HealthTechDevelopmentPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Clinical decision support</span>
+                      <span>No autonomous decision-making—human review required</span>
                     </li>
                   </ul>
                   <Link
@@ -418,7 +409,7 @@ export default function HealthTechDevelopmentPage() {
                   <ul className="mb-6 space-y-3 text-sm text-[#D5ECFA]/80">
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Shift scheduling & handoffs</span>
+                      <span>Shift scheduling & handoff tracking</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
@@ -426,7 +417,7 @@ export default function HealthTechDevelopmentPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Team messaging (HIPAA-secure)</span>
+                      <span>Basic team messaging (HIPAA-aligned)</span>
                     </li>
                   </ul>
                   <Link
@@ -438,10 +429,10 @@ export default function HealthTechDevelopmentPage() {
                 </div>
               </div>
 
-              {/* Compliance Tracker */}
+              {/* Policy & Compliance Tracker */}
               <div className="group relative overflow-hidden rounded-xl border border-[#50D4D0]/40 bg-gradient-to-br from-[#083B54]/70 to-[#0A2330]/90 p-8 backdrop-blur-sm transition-all hover:scale-105 hover:border-[#9FE8FF] hover:shadow-2xl hover:shadow-[#50D4D0]/40">
                 <div className="relative">
-                  <h4 className="mb-4 text-2xl font-bold text-white">Compliance Tracker</h4>
+                  <h4 className="mb-4 text-2xl font-bold text-white">Policy & Compliance Tracker</h4>
                   <div className="mb-6">
                     <span className="text-4xl font-bold text-[#50D4D0]">$1,500</span>
                     <span className="text-sm text-[#D5ECFA]/60"> - $3,500</span>
@@ -453,11 +444,11 @@ export default function HealthTechDevelopmentPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Automated compliance reports</span>
+                      <span>Policy version control & distribution</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#50D4D0]">✓</span>
-                      <span>Policy & training management</span>
+                      <span>Training completion tracking</span>
                     </li>
                   </ul>
                   <Link
@@ -475,23 +466,24 @@ export default function HealthTechDevelopmentPage() {
           {/* Add-On Services */}
           <div>
             <h3 className="mb-8 text-center text-2xl font-bold text-[#9FE8FF]">
-              🔧 Add-On Services
+              Add-On Services
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[
                 { title: 'HIPAA Risk Assessment', price: '$500 - $1,200' },
-                { title: 'Data Migration Services', price: '$800 - $2,500' },
-                { title: 'Custom API Integrations', price: '$1,000 - $4,000' },
-                { title: 'Ongoing Support (monthly)', price: '$300 - $1,500/mo' },
+                { title: 'Data Migration Support', price: '$800 - $2,500' },
+                { title: 'Focused API Integration', price: '$1,000 - $4,000', note: 'Small, scoped integrations between your existing tools' },
+                { title: 'Ongoing Support (monthly)', price: '$300 - $1,500/mo', note: 'Bug fixes, small enhancements, content updates' },
                 { title: 'Staff Training Sessions', price: '$400 - $1,000' },
-                { title: 'Mobile App Development', price: '$3,000 - $8,000' },
+                { title: 'Mobile-Responsive Optimization', price: '$1,500 - $3,000' },
               ].map((addon, i) => (
                 <div
                   key={i}
                   className="rounded-lg border border-[#50D4D0]/30 bg-[#083B54]/40 p-6 backdrop-blur-sm transition-all hover:border-[#9FE8FF]/50 hover:bg-[#50D4D0]/10"
                 >
                   <h4 className="mb-2 font-semibold text-white">{addon.title}</h4>
-                  <p className="text-sm text-[#9FE8FF]">{addon.price}</p>
+                  <p className="text-sm text-[#9FE8FF] mb-1">{addon.price}</p>
+                  {addon.note && <p className="text-xs text-[#D5ECFA]/60 italic">{addon.note}</p>}
                 </div>
               ))}
             </div>
@@ -512,23 +504,23 @@ export default function HealthTechDevelopmentPage() {
             {[
               {
                 q: 'Are your solutions HIPAA-compliant?',
-                a: 'Absolutely. Every platform includes encrypted data storage, secure authentication, audit logging, and Business Associate Agreements (BAAs) with all hosting providers.',
+                a: 'I design with HIPAA-aligned best practices—encryption at rest and in transit, role-based access controls, comprehensive audit logging, and secure authentication. I help you select vendors that offer Business Associate Agreements (BAAs). Final responsibility for HIPAA compliance rests with your organization as the covered entity and your chosen hosting providers.',
               },
               {
                 q: 'Can you integrate with our existing EHR?',
-                a: 'Yes! I work with HL7 and FHIR standards to connect with most major EHR systems (Epic, Cerner, Allscripts, etc.). Integration complexity varies by vendor.',
+                a: 'Case-by-case. I'm familiar with HL7 and FHIR standards and typically focus on small, read-only data flows or export/import patterns. Deep, custom integrations with systems like Epic or Cerner often require collaboration with their teams or a larger dev shop. I can help scope what's realistic for a 1-2 person studio.',
               },
               {
                 q: 'How long does a typical build take?',
-                a: 'Stardust packages: 3-4 weeks. Nebula packages: 6-8 weeks. Supernova packages: 10-14 weeks. Timelines include testing, compliance reviews, and training.',
+                a: 'Clinic starter portal: ~3-5 weeks. Single workflow tool: ~6-10 weeks. Knowledge assistant or larger packages: timeline depends on scope and discovery. All timelines include discovery, testing, and initial training. I prioritize getting it right over rushing to launch.',
               },
               {
                 q: 'Do you offer ongoing support?',
-                a: 'Yes! I offer monthly support plans starting at $300/month for bug fixes, updates, and minor feature additions.',
+                a: 'Yes! Monthly support plans starting at $300/month cover bug fixes, small enhancements, and content tweaks. This is not 24/7 enterprise-level SLA support—it's practical, ongoing partnership for small teams.',
               },
               {
                 q: 'What makes your approach different?',
-                a: 'I\'m a registered nurse AND a developer. I understand clinical workflows, patient safety, and the frustrations clinicians face with poorly designed tech. I build tools that actually fit into your day.',
+                a: 'I'm a nurse AND a developer. I've lived the clinical workflows, charted in the trenches, and experienced the frustrations of poorly designed tech firsthand. I build small, intentional tools that actually fit into how clinicians work—not bloated software that looks good in demos but fails in practice.',
               },
             ].map((faq, i) => (
               <details
@@ -554,17 +546,16 @@ export default function HealthTechDevelopmentPage() {
 
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl">
-            Ready to Build Healing-Driven Tech?
+            Ready to Build Focused Health Tech?
           </h2>
           <p className="mb-10 text-lg leading-relaxed text-[#D5ECFA]/80">
-            Let's create platforms that clinicians trust, patients love, and regulators approve.
+            Let's create small, intentional tools that fit into real clinical workflows.
             Get your custom quote in minutes.
           </p>
           <Link
             href="/get-quote"
             className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#50D4D0] to-[#9FE8FF] px-10 py-5 text-lg font-bold text-[#083B54] shadow-2xl shadow-[#9FE8FF]/60 transition-all hover:scale-105 hover:shadow-[#9FE8FF]/80"
           >
-            <span>💰</span>
             Get Instant Quote
             <ArrowRight className="h-6 w-6" />
           </Link>
