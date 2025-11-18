@@ -4,37 +4,337 @@ import { useState } from 'react';
 import { Check, Sparkles, BookOpen, Feather, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-// 🦉 HOGWARTS CASTLE LIBRARY - REAL ARCHITECTURAL ATMOSPHERE
+// 🦉 HOGWARTS CASTLE LIBRARY - REFINED AMBIENT COMPONENTS
 
-// Floating Candle - Simple version for accents only
-const FloatingCandle = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+// Floating Candle – slimmer, more realistic
+const FloatingCandle = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
   <div
-    className={`absolute ${className} pointer-events-none animate-candleFlicker w-4`}
+    className={`absolute ${className} pointer-events-none animate-candleFlicker`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="relative">
-      <div className="absolute -inset-4 rounded-full bg-gradient-radial from-[#F0C979]/30 via-[#E9C97F]/15 to-transparent blur-xl animate-goldShimmer" />
-      <div className="relative w-2 h-8 bg-gradient-to-b from-[#F0C979] to-[#F5E7C8] rounded-t-full" />
-      <div className="relative -mt-3 w-3 h-3 rounded-full bg-[#F0C979] blur-sm animate-pulse" />
-    </div>
+    <svg
+      width="22"
+      height="80"
+      viewBox="0 0 22 80"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Glow halo */}
+      <ellipse
+        cx="11"
+        cy="10"
+        rx="14"
+        ry="10"
+        fill="#F0C979"
+        opacity="0.12"
+      />
+      {/* Flame */}
+      <path
+        d="M11 3 C9 7 9 10 11 12 C13 10 13 7 11 3Z"
+        fill="url(#flameGradient)"
+        opacity="0.9"
+      />
+      {/* Candle body */}
+      <rect
+        x="6"
+        y="12"
+        width="10"
+        height="50"
+        rx="2"
+        fill="url(#waxGradient)"
+      />
+      {/* Wick */}
+      <rect x="10.5" y="9" width="1" height="4" fill="#3B2A1A" opacity="0.8" />
+      {/* Drips */}
+      <path
+        d="M7 20 C8 22 9 22 10 20 C10.5 22.5 11.5 22.5 12 20 C13 22 14 22 15 20"
+        fill="#F5E7C8"
+        opacity="0.9"
+      />
+      <defs>
+        <linearGradient
+          id="flameGradient"
+          x1="11"
+          y1="3"
+          x2="11"
+          y2="12"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#FFEBC2" />
+          <stop offset="0.5" stopColor="#F0C979" />
+          <stop offset="1" stopColor="#F29B4C" />
+        </linearGradient>
+        <linearGradient
+          id="waxGradient"
+          x1="6"
+          y1="12"
+          x2="16"
+          y2="62"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stopColor="#F5E7C8" />
+          <stop offset="1" stopColor="#E1C489" />
+        </linearGradient>
+      </defs>
+    </svg>
   </div>
 );
 
-// Dust Mote
-const DustMote = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => (
+// Ambient Book – closed, slightly tilted
+const AmbientBook = ({
+  className = "",
+  delay = 0,
+  tilt = -8,
+}: {
+  className?: string;
+  delay?: number;
+  tilt?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-cosmicFloat`}
+    style={{
+      animationDelay: `${delay}s`,
+      transformOrigin: "center",
+      rotate: `${tilt}deg`,
+    }}
+  >
+    <svg
+      width="72"
+      height="52"
+      viewBox="0 0 72 52"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Shadow */}
+      <ellipse
+        cx="36"
+        cy="46"
+        rx="26"
+        ry="6"
+        fill="#000000"
+        opacity="0.25"
+      />
+      {/* Pages block */}
+      <path
+        d="M10 10 L40 8 L62 12 L62 40 L32 42 L10 38 Z"
+        fill="#F8F1E2"
+      />
+      {/* Cover */}
+      <path
+        d="M10 10 L40 8 L40 36 L10 38 Z"
+        fill="#5B335F"
+        opacity="0.95"
+      />
+      {/* Spine highlight */}
+      <path
+        d="M12 11 L14 11 L14 37 L12 37 Z"
+        fill="#F0C979"
+        opacity="0.65"
+      />
+      {/* Top page lines */}
+      <path
+        d="M40 12 L60 14"
+        stroke="#D5C7B5"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+      <path
+        d="M40 16 L60 18"
+        stroke="#D5C7B5"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+    </svg>
+  </div>
+);
+
+// Ambient Open Book – looks like it's lying open in the air
+const AmbientOpenBook = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none animate-glowPulse`}
+    style={{ animationDelay: `${delay}s`, transformOrigin: "center" }}
+  >
+    <svg
+      width="90"
+      height="60"
+      viewBox="0 0 90 60"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Shadow */}
+      <ellipse
+        cx="45"
+        cy="50"
+        rx="30"
+        ry="7"
+        fill="#000000"
+        opacity="0.3"
+      />
+      {/* Left pages */}
+      <path
+        d="M10 15 C25 5 35 8 45 12 L45 42 C35 38 25 37 10 41 Z"
+        fill="#F8F1E2"
+      />
+      {/* Right pages */}
+      <path
+        d="M45 12 C55 8 65 5 80 15 L80 41 C65 37 55 38 45 42 Z"
+        fill="#F8F1E2"
+      />
+      {/* Center fold */}
+      <path
+        d="M45 12 L45 42"
+        stroke="#D0C0A5"
+        strokeWidth="1.2"
+        opacity="0.9"
+      />
+      {/* Glyphs / text suggestion */}
+      <path
+        d="M16 22 L36 24"
+        stroke="#C0AE94"
+        strokeWidth="1"
+        opacity="0.8"
+      />
+      <path
+        d="M16 28 L34 30"
+        stroke="#C0AE94"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+      <path
+        d="M54 24 L74 22"
+        stroke="#C0AE94"
+        strokeWidth="1"
+        opacity="0.8"
+      />
+      <path
+        d="M56 30 L74 28"
+        stroke="#C0AE94"
+        strokeWidth="1"
+        opacity="0.7"
+      />
+    </svg>
+  </div>
+);
+
+// Dust mote – keep but use fewer
+const DustMote = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
   <div
     className={`absolute ${className} pointer-events-none animate-dustMotes`}
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="w-0.5 h-0.5 rounded-full bg-[#F0C979] opacity-60" />
+    <div className="w-1 h-1 rounded-full bg-[#F5E7C8]/40" />
   </div>
 );
 
-// Glowing Divider
+// Owl with Letter – uses owl-float / owl-wing CSS
+const OwlPost = ({
+  className = "",
+  delay = 0,
+}: {
+  className?: string;
+  delay?: number;
+}) => (
+  <div
+    className={`absolute ${className} pointer-events-none`}
+    style={{ animationDelay: `${delay}s` }}
+  >
+    <svg
+      className="owl-float"
+      width="220"
+      height="180"
+      viewBox="0 0 220 180"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Body */}
+      <ellipse cx="110" cy="105" rx="28" ry="34" fill="#F8F5EF" />
+      {/* Head */}
+      <circle cx="110" cy="70" r="22" fill="#FDFBF6" />
+      {/* Face mask */}
+      <path
+        d="M92 72 C96 60 104 56 110 56 C116 56 124 60 128 72 C122 78 116 82 110 82 C104 82 98 78 92 72Z"
+        fill="#F0E5D4"
+      />
+      {/* Eyes */}
+      <circle cx="102" cy="69" r="4" fill="#1C1B1A" />
+      <circle cx="118" cy="69" r="4" fill="#1C1B1A" />
+      <circle cx="102" cy="69" r="1.5" fill="#F5F3EB" />
+      <circle cx="118" cy="69" r="1.5" fill="#F5F3EB" />
+      {/* Beak */}
+      <path
+        d="M110 72 L114 79 L106 79 Z"
+        fill="#D8A35A"
+      />
+      {/* Left wing */}
+      <g className="owl-wing owl-wing-left">
+        <path
+          d="M82 82 C60 84 50 96 46 110 C55 112 64 116 75 121 C82 115 86 104 88 92Z"
+          fill="#F2E8D2"
+        />
+      </g>
+      {/* Right wing */}
+      <g className="owl-wing owl-wing-right">
+        <path
+          d="M138 82 C160 84 170 96 174 110 C165 112 156 116 145 121 C138 115 134 104 132 92Z"
+          fill="#F2E8D2"
+        />
+      </g>
+      {/* Letter */}
+      <g className="owl-letter">
+        <rect
+          x="92"
+          y="118"
+          width="36"
+          height="22"
+          rx="2"
+          fill="#F8F1E2"
+          stroke="#D8A35A"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M92 118 L110 130 L128 118"
+          stroke="#D8A35A"
+          strokeWidth="1.2"
+          fill="none"
+        />
+        <circle cx="110" cy="130" r="2.5" fill="#D8A35A" />
+      </g>
+    </svg>
+  </div>
+);
+
+// Wax Seal
+const WaxSeal = ({ className = "" }: { className?: string }) => (
+  <div className={`${className} pointer-events-none`}>
+    <div className="relative w-10 h-10">
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#F0C979] to-[#E9C97F] opacity-90" />
+      <div className="absolute inset-2 rounded-full border-2 border-[#121528]/30" />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xs font-bold text-[#121528]">M</span>
+      </div>
+    </div>
+  </div>
+);
+
+// Golden Divider
 const EnchantedDivider = () => (
   <div className="relative my-12 h-px overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F0C979] to-transparent opacity-40" />
-    <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F0C979] shadow-lg shadow-[#F0C979]/50 animate-goldShimmer" />
+    <WaxSeal className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
   </div>
 );
 
@@ -433,29 +733,40 @@ export default function GhostwritingPage() {
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#0D0F1E]/60" />
       </div>
 
-      {/* ═══════════════════════════════════════════════════════════════
-          SPARSE FLOATING ELEMENTS - ABOVE CONTENT WITH PROPER Z-INDEX
-      ═══════════════════════════════════════════════════════════════ */}
-      <div className="fixed inset-0 pointer-events-none z-30">
-        {/* 8 Floating Candles (not 15) */}
-        <FloatingCandle className="absolute top-1/4 left-[15%] hidden lg:block" delay={0} />
-        <FloatingCandle className="absolute top-1/3 right-[18%] hidden lg:block" delay={1.5} />
-        <FloatingCandle className="absolute top-1/2 left-[12%] hidden lg:block" delay={3} />
-        <FloatingCandle className="absolute top-1/2 right-[15%] hidden lg:block" delay={0.8} />
-        <FloatingCandle className="absolute top-2/3 left-[20%] hidden lg:block" delay={2.2} />
-        <FloatingCandle className="absolute top-2/3 right-[22%] hidden lg:block" delay={1.2} />
-        <FloatingCandle className="absolute bottom-1/3 left-[17%] hidden lg:block" delay={2.8} />
-        <FloatingCandle className="absolute bottom-1/3 right-[19%] hidden lg:block" delay={0.5} />
+      {/* 🦉 HOGWARTS LIBRARY AMBIENT ELEMENTS – CALMER, MORE CINEMATIC */}
 
-        {/* 20 Dust Motes (not 30) */}
-        {Array.from({ length: 20 }).map((_, i) => (
-          <DustMote
-            key={i}
-            className={`absolute top-[${10 + i * 4}%] ${i % 2 === 0 ? 'left' : 'right'}-[${15 + (i % 5) * 10}%]`}
-            delay={i * 0.3}
-          />
-        ))}
-      </div>
+      {/* A few floating candles along the aisle */}
+      <FloatingCandle className="top-28 left-[8%] hidden lg:block" delay={0} />
+      <FloatingCandle className="top-32 right-[10%] hidden lg:block" delay={0.7} />
+      <FloatingCandle className="top-48 left-[14%] hidden lg:block" delay={1.4} />
+      <FloatingCandle className="top-52 right-[16%] hidden lg:block" delay={2.1} />
+      <FloatingCandle className="top-2/3 left-[10%] hidden lg:block" delay={2.8} />
+      <FloatingCandle className="top-2/3 right-[12%] hidden lg:block" delay={3.5} />
+
+      {/* A few floating books in the background */}
+      <AmbientBook
+        className="top-40 left-[20%] hidden xl:block"
+        delay={0.8}
+        tilt={-10}
+      />
+      <AmbientBook
+        className="top-44 right-[22%] hidden xl:block"
+        delay={1.6}
+        tilt={7}
+      />
+      <AmbientOpenBook
+        className="top-56 left-[26%] hidden xl:block"
+        delay={2.3}
+      />
+
+      {/* Soft dust motes near the hero only */}
+      <DustMote className="top-[30%] left-[32%]" delay={0} />
+      <DustMote className="top-[34%] right-[30%]" delay={0.8} />
+      <DustMote className="top-[40%] left-[40%]" delay={1.6} />
+      <DustMote className="top-[46%] right-[36%]" delay={2.4} />
+
+      {/* One owl with a letter gliding across the top of the hero */}
+      <OwlPost className="top-10 left-[5%] hidden lg:block" delay={0} />
 
       {/* ═══════════════════════════════════════════════════════════════
           HERO SECTION

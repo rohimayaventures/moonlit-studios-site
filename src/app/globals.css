@@ -1446,6 +1446,65 @@ body.chaos-mode * {
   animation: candleGlow 4s ease-in-out infinite;
 }
 
+/* Owl Float - Gentle hovering */
+@keyframes owlFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.owl-float {
+  animation: owlFloat 3s ease-in-out infinite;
+}
+
+/* Owl Wing Flap - Left Wing */
+@keyframes owlWingLeft {
+  0%, 100% {
+    transform: rotateZ(-5deg);
+  }
+  50% {
+    transform: rotateZ(-25deg);
+  }
+}
+
+.owl-wing-left {
+  transform-origin: right center;
+  animation: owlWingLeft 0.6s ease-in-out infinite;
+}
+
+/* Owl Wing Flap - Right Wing */
+@keyframes owlWingRight {
+  0%, 100% {
+    transform: rotateZ(5deg);
+  }
+  50% {
+    transform: rotateZ(25deg);
+  }
+}
+
+.owl-wing-right {
+  transform-origin: left center;
+  animation: owlWingRight 0.6s ease-in-out infinite;
+}
+
+/* Owl Letter - Subtle sway */
+@keyframes owlLetterSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+.owl-letter {
+  transform-origin: center top;
+  animation: owlLetterSway 1.5s ease-in-out infinite;
+}
+
 /* ========================================
    MOONLIT COSMIC CREATOR - Creative Design
    ======================================== */
