@@ -279,19 +279,56 @@ const OwlPost = ({
         d="M110 72 L114 79 L106 79 Z"
         fill="#D8A35A"
       />
-      {/* Left wing */}
+      {/* Left wing - Realistic feathers */}
       <g className="owl-wing owl-wing-left">
+        {/* Wing base */}
         <path
-          d="M82 82 C60 84 50 96 46 110 C55 112 64 116 75 121 C82 115 86 104 88 92Z"
-          fill="#F2E8D2"
+          d="M88 85 C75 88 65 95 58 105 C52 115 48 125 46 135"
+          stroke="#E8DCC8"
+          strokeWidth="12"
+          fill="none"
+          opacity="0.6"
         />
+
+        {/* Primary feathers (longest) */}
+        <path d="M46 135 Q40 145 38 155 Q40 150 46 140Z" fill="#F8F5EF" opacity="0.9" />
+        <path d="M48 132 Q44 142 43 152 Q45 147 50 137Z" fill="#F5F0E8" opacity="0.85" />
+        <path d="M52 128 Q48 138 47 148 Q49 143 54 133Z" fill="#F2EBE0" opacity="0.8" />
+
+        {/* Secondary feathers */}
+        <path d="M58 120 Q54 128 53 136 Q56 132 60 124Z" fill="#F8F5EF" opacity="0.85" />
+        <path d="M64 112 Q60 120 59 128 Q62 124 66 116Z" fill="#F5F0E8" opacity="0.8" />
+        <path d="M70 104 Q66 112 65 120 Q68 116 72 108Z" fill="#F2EBE0" opacity="0.75" />
+
+        {/* Coverts (shoulder feathers) */}
+        <ellipse cx="78" cy="92" rx="8" ry="14" fill="#FDFBF6" opacity="0.7" transform="rotate(-25 78 92)" />
+        <ellipse cx="82" cy="88" rx="6" ry="10" fill="#F8F5EF" opacity="0.6" transform="rotate(-20 82 88)" />
       </g>
-      {/* Right wing */}
+
+      {/* Right wing - Realistic feathers */}
       <g className="owl-wing owl-wing-right">
+        {/* Wing base */}
         <path
-          d="M138 82 C160 84 170 96 174 110 C165 112 156 116 145 121 C138 115 134 104 132 92Z"
-          fill="#F2E8D2"
+          d="M132 85 C145 88 155 95 162 105 C168 115 172 125 174 135"
+          stroke="#E8DCC8"
+          strokeWidth="12"
+          fill="none"
+          opacity="0.6"
         />
+
+        {/* Primary feathers (longest) */}
+        <path d="M174 135 Q180 145 182 155 Q180 150 174 140Z" fill="#F8F5EF" opacity="0.9" />
+        <path d="M172 132 Q176 142 177 152 Q175 147 170 137Z" fill="#F5F0E8" opacity="0.85" />
+        <path d="M168 128 Q172 138 173 148 Q171 143 166 133Z" fill="#F2EBE0" opacity="0.8" />
+
+        {/* Secondary feathers */}
+        <path d="M162 120 Q166 128 167 136 Q164 132 160 124Z" fill="#F8F5EF" opacity="0.85" />
+        <path d="M156 112 Q160 120 161 128 Q158 124 154 116Z" fill="#F5F0E8" opacity="0.8" />
+        <path d="M150 104 Q154 112 155 120 Q152 116 148 108Z" fill="#F2EBE0" opacity="0.75" />
+
+        {/* Coverts (shoulder feathers) */}
+        <ellipse cx="142" cy="92" rx="8" ry="14" fill="#FDFBF6" opacity="0.7" transform="rotate(25 142 92)" />
+        <ellipse cx="138" cy="88" rx="6" ry="10" fill="#F8F5EF" opacity="0.6" transform="rotate(20 138 88)" />
       </g>
       {/* Letter */}
       <g className="owl-letter">
