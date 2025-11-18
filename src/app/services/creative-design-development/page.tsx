@@ -175,10 +175,10 @@ const ShootingComet = ({ delay = 0, startPos = "top-left" }: { delay?: number; s
 };
 
 // Floating Stardust Particles
-const StardustParticle = ({ delay = 0, className = "" }: { delay?: number; className?: string }) => (
+const StardustParticle = ({ delay = 0, className = "", style }: { delay?: number; className?: string; style?: React.CSSProperties }) => (
   <div
     className={`absolute ${className} pointer-events-none animate-stardustDrift`}
-    style={{ animationDelay: `${delay}s` }}
+    style={{ animationDelay: `${delay}s`, ...style }}
   >
     <div className="w-1 h-1 rounded-full bg-gradient-to-br from-cyan-300 to-purple-400 opacity-60" />
   </div>
