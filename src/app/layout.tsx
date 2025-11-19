@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 import { Header } from "./components/Header";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -142,6 +143,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </ErrorBoundary>
         </ErrorBoundary>
         </EasterEggProvider>
+
+        {/* 📊 VERCEL ANALYTICS - Privacy-friendly page view tracking */}
+        <Analytics />
       </body>
     </html>
   );
