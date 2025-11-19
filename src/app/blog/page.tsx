@@ -131,11 +131,6 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group overflow-hidden rounded-xl border border-moonlightSilver/20 bg-gradient-to-br from-deepOcean/30 to-midnight/60 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-mermaidTeal/20"
               >
-                <div className="h-48 bg-gradient-to-br from-mermaidTeal/15 via-lunarGold/10 to-phoenixFire/10 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-midnight/60" />
-                  <span className="relative z-10 text-moonlightSilver/40 text-sm font-serif italic">Image placeholder</span>
-                </div>
-
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3 text-xs">
                     <span className="px-2 py-1 rounded-md bg-mermaidTeal/10 border border-mermaidTeal/30 text-mermaidTeal font-semibold">
