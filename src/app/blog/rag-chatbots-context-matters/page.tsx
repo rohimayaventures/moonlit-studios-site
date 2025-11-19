@@ -54,8 +54,9 @@ export default function RAGChatbotsArticle() {
       <article className="py-12 px-6">
         <div className="mx-auto max-w-3xl prose prose-invert prose-lg">
           <div className="space-y-6 text-moonlightSilver leading-relaxed">
-            <p className="text-xl font-serif italic text-pearlWhite/90 first-letter:text-6xl first-letter:font-elegant first-letter:text-lunarGold first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-2">
-              Every small business owner I talk to wants an AI chatbot. They've seen ChatGPT do magic tricks, answer obscure questions, write poetry, and debug code. They think, "If I just plug that into my website, it'll handle customer service!" And then reality hits.
+            <p className="text-xl font-serif italic text-pearlWhite/90 leading-relaxed">
+              <span className="text-6xl font-elegant text-lunarGold float-left leading-none mr-2 mt-2">ℰ</span>
+              very small business owner I talk to wants an AI chatbot. They've seen ChatGPT do magic tricks, answer obscure questions, write poetry, and debug code. They think, "If I just plug that into my website, it'll handle customer service!" And then reality hits.
             </p>
 
             <p>

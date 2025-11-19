@@ -54,8 +54,9 @@ export default function HIPAAComplianceArticle() {
       <article className="py-12 px-6">
         <div className="mx-auto max-w-3xl prose prose-invert prose-lg">
           <div className="space-y-6 text-moonlightSilver leading-relaxed">
-            <p className="text-xl font-serif italic text-pearlWhite/90 first-letter:text-6xl first-letter:font-elegant first-letter:text-lunarGold first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-2">
-              I've stood on both sides of the curtain. I've been the healthcare worker frantically trying to access patient data through a system designed by someone who clearly never set foot in a hospital. And I've been the developer building healthcare tech, suddenly understanding <em>why</em> every nurse I've ever worked with has trust issues with software.
+            <p className="text-xl font-serif italic text-pearlWhite/90 leading-relaxed">
+              <span className="text-6xl font-elegant text-lunarGold float-left leading-none mr-2 mt-2">ℐ</span>
+              've stood on both sides of the curtain. I've been the healthcare worker frantically trying to access patient data through a system designed by someone who clearly never set foot in a hospital. And I've been the developer building healthcare tech, suddenly understanding <em>why</em> every nurse I've ever worked with has trust issues with software.
             </p>
 
             <p>

@@ -54,8 +54,9 @@ export default function MoonlitTrifectaArticle() {
       <article className="py-12 px-6">
         <div className="mx-auto max-w-3xl prose prose-invert prose-lg">
           <div className="space-y-6 text-moonlightSilver leading-relaxed">
-            <p className="text-xl font-serif italic text-pearlWhite/90 first-letter:text-6xl first-letter:font-elegant first-letter:text-lunarGold first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-2">
-              Most developers can tell you their origin story in a sentence: "I learned to code, got a job, here we are." Mine involves IVs, fantasy novels, and a whole lot of existential questioning about what it means to build things that matter.
+            <p className="text-xl font-serif italic text-pearlWhite/90 leading-relaxed">
+              <span className="text-6xl font-elegant text-lunarGold float-left leading-none mr-2 mt-2">ℳ</span>
+              ost developers can tell you their origin story in a sentence: "I learned to code, got a job, here we are." Mine involves IVs, fantasy novels, and a whole lot of existential questioning about what it means to build things that matter.
             </p>
 
             <p>
