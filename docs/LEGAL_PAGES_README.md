@@ -382,7 +382,7 @@ To use a specific date:
 ### Disclaimers
 
 **Medical/Legal/Financial Advice:**
-- Even though founder is a registered nurse, **nothing on the site or from AI tools constitutes professional advice**
+- Even though founder is a nurse and healthcare leader, **nothing on the site or from AI tools constitutes professional advice**
 - Strong disclaimers in both Terms of Service and AI Use Disclosure
 
 **AI Limitations:**

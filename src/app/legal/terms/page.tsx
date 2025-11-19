@@ -55,7 +55,7 @@ export default function TermsPage() {
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold text-lunarGold">No Medical, Legal, or Financial Advice</h2>
             <p>
-              While our founder is a registered nurse, <strong>nothing on this website or provided through our
+              While our founder is a nurse and healthcare leader, <strong>nothing on this website or provided through our
               AI tools constitutes medical, legal, or financial advice</strong>. All content, including insights
               shared through AI chat tools like Kai, is provided for informational and creative purposes only.
             </p>
