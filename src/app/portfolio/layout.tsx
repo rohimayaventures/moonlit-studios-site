@@ -43,6 +43,9 @@ export const metadata: Metadata = {
       "Journey through 5 realms of completed quests. Web design, healthcare tech, AI innovation, writing, and experimental labs.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/portfolio",
+  },
 };
 
 export default function PortfolioLayout({

@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Turn stories into success. Author sites, ghostwriting, strategy, launches. Words meet wonder.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/ghostwriting",
+  },
 };
 
 export default function GhostwritingLayout({

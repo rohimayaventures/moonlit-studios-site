@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Design that delights, code that performs. Portfolios, brands, e-commerce, custom apps.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/creative-design-development",
+  },
 };
 
 export default function CreativeDesignDevelopmentLayout({

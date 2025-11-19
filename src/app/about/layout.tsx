@@ -43,6 +43,9 @@ export const metadata: Metadata = {
       "From bedside to bending master. The Master's Journey from healthcare to code.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/about",
+  },
 };
 
 export default function AboutLayout({

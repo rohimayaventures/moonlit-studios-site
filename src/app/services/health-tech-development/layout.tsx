@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "The Nurse Who Codes. Patient portals, clinical tools, HIPAA platforms, telehealth. Clinical expertise meets tech excellence.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/health-tech-development",
+  },
 };
 
 export default function HealthTechDevelopmentLayout({

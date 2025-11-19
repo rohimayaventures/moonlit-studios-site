@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "AI-powered quote generator. Get instant pricing for web dev, AI, healthcare tech, and creative projects.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/get-quote",
+  },
 };
 
 export default function GetQuoteLayout({

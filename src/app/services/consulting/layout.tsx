@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Code reviews, architecture, mentoring, project rescue. Real-world operational expertise.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/consulting",
+  },
 };
 
 export default function ConsultingLayout({

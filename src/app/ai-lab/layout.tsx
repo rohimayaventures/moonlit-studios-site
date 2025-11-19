@@ -41,6 +41,9 @@ export const metadata: Metadata = {
       "Live AI demos: Computer Vision, RAG, Healthcare Triage, Voice AI. Try the future today.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/ai-lab",
+  },
 };
 
 export default function AILabLayout({

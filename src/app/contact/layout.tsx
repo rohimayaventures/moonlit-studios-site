@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Full-stack dev, AI innovation, healthcare tech. Let's build something extraordinary together.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/contact",
+  },
 };
 
 export default function ContactLayout({

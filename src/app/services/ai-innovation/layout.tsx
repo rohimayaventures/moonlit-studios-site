@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "RAG chatbots, Voice AI, automation, healthcare platforms. Clinical expertise meets AI innovation.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/ai-innovation",
+  },
 };
 
 export default function AIInnovationLayout({

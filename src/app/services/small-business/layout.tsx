@@ -40,6 +40,9 @@ export const metadata: Metadata = {
       "Plant your roots, transform your presence, or cross into success. Beautiful websites for local heroes. Starting at $1,500.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services/small-business",
+  },
 };
 
 export default function SmallBusinessLayout({
