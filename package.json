@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:sow:connection": "tsx scripts/test-sow-connection.ts",
+    "test:sow:create": "tsx scripts/test-create-sow.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.69.0",

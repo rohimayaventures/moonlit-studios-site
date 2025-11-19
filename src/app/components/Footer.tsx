@@ -166,9 +166,35 @@ export function Footer() {
 
       {/* Copyright Section */}
       <div className="border-t border-deepOcean/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-6 text-xs text-moonlightSilver/80 md:flex-row md:items-center md:justify-between">
-          <p>© 2025 Moonlit Studios</p>
-          <p className="italic text-starlight/70">Mischief Managed</p>
+        <div className="mx-auto max-w-6xl px-6 py-6 space-y-4">
+          {/* Legal Links */}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-moonlightSilver/70">
+            <Link href="/legal/privacy-policy" className="hover:text-moonlightSilver transition">
+              Privacy
+            </Link>
+            <span className="text-moonlightSilver/40">·</span>
+            <Link href="/legal/terms" className="hover:text-moonlightSilver transition">
+              Terms
+            </Link>
+            <span className="text-moonlightSilver/40">·</span>
+            <Link href="/legal/refund-policy" className="hover:text-moonlightSilver transition">
+              Refunds
+            </Link>
+            <span className="text-moonlightSilver/40">·</span>
+            <Link href="/legal/cookies" className="hover:text-moonlightSilver transition">
+              Cookies
+            </Link>
+            <span className="text-moonlightSilver/40">·</span>
+            <Link href="/legal/ai-disclosure" className="hover:text-moonlightSilver transition">
+              AI Use
+            </Link>
+          </div>
+
+          {/* Copyright and Mischief Managed */}
+          <div className="flex flex-col gap-2 text-xs text-moonlightSilver/80 md:flex-row md:items-center md:justify-between">
+            <p>© 2025 Moonlit Studios · A Pagade Ventures Brand</p>
+            <p className="italic text-starlight/70">Mischief Managed</p>
+          </div>
         </div>
       </div>
     </footer>

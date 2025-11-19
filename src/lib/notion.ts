@@ -6,6 +6,9 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
+// Export the client for reuse in other modules (e.g., SOW generator)
+export { notion };
+
 const DATABASE_ID = process.env.NOTION_CRM_DATABASE_ID || '';
 
 // Types for Notion CRM entries
