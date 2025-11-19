@@ -123,20 +123,35 @@ export default function HealthTechDevelopmentPage() {
 
         <div className="relative mx-auto max-w-5xl text-center">
           {/* Moon Phases - Water Tribe Colors with Pulsing */}
-          <div className="mb-8 flex justify-center items-center gap-3 flex-wrap">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] border-2 border-[#9FE8FF]/50 shadow-lg shadow-[#9FE8FF]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3s' }} />
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#9FE8FF] to-[#D5ECFA] border-2 border-[#9FE8FF]/50 shadow-lg shadow-[#9FE8FF]/30 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3s' }}
+            />
             <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#9FE8FF]/40 to-[#50D4D0]/40" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#50D4D0] to-[#9FE8FF] border-2 border-[#50D4D0]/50 shadow-lg shadow-[#50D4D0]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#50D4D0]/50 to-[#D5ECFA]/50" />
+            <div
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#50D4D0] via-[#50D4D0]/70 to-[#9FE8FF]/70 border-2 border-[#50D4D0]/60 shadow-lg shadow-[#50D4D0]/40 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#50D4D0]/50 to-[#D5ECFA]/60" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#D5ECFA] to-white border-2 border-[#D5ECFA]/50 shadow-lg shadow-[#D5ECFA]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#D5ECFA]/50 to-[#0A2330]/40" />
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#9FE8FF] via-[#D5ECFA] to-white border-2 border-[#D5ECFA]/80 shadow-xl shadow-[#D5ECFA]/60 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '2.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#D5ECFA]/60 to-[#0A2330]/50" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#0A2330] to-[#083B54] border-2 border-[#0A2330]/50 shadow-lg shadow-[#0A2330]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#0A2330]/40 to-[#50D4D0]/40" />
+            <div
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#0A2330]/70 via-[#083B54]/50 to-[#0A2330] border-2 border-[#0A2330]/60 shadow-lg shadow-[#0A2330]/40 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#0A2330]/40 to-[#50D4D0]/30" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] border-2 border-[#083B54]/50 shadow-lg shadow-[#083B54]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3.8s', animationDelay: '1.2s' }} />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#083B54] to-[#50D4D0] border-2 border-[#50D4D0]/50 shadow-lg shadow-[#50D4D0]/30 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3s' }}
+            />
           </div>
 
           <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">

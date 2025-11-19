@@ -314,17 +314,29 @@ export default function ConsultingPage() {
           </div>
 
           {/* Moon Phases - Rivendell Elven Style with Pulsing */}
-          <div className="mb-8 flex justify-center items-center gap-3 flex-wrap">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3s' }} />
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3s' }}
+            />
             <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/40 to-[#A8C5E0]/40" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#A8C5E0] to-[#6B8FA3] border-2 border-[#A8C5E0]/50 shadow-lg shadow-[#A8C5E0]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#A8C5E0]/50 to-[#F5E7C8]/50" />
+            <div
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#A8C5E0] via-[#A8C5E0]/70 to-[#6B8FA3]/70 border-2 border-[#A8C5E0]/60 shadow-lg shadow-[#A8C5E0]/40 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#A8C5E0]/50 to-[#F5E7C8]/60" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#F5E7C8] to-[#E8D5B5] border-2 border-[#F5E7C8]/50 shadow-lg shadow-[#F5E7C8]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '4s', animationDelay: '0.6s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F5E7C8]/40 to-[#8B7355]/40" />
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#E8D5B5] border-2 border-[#F5E7C8]/80 shadow-xl shadow-[#F5E7C8]/60 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '2.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F5E7C8]/60 to-[#8B7355]/50" />
 
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] border-2 border-[#8B7355]/50 shadow-lg shadow-[#8B7355]/50 animate-pulse flex-shrink-0" style={{ animationDuration: '3.2s', animationDelay: '0.9s' }} />
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#8B7355] to-[#5C4A3A] border-2 border-[#8B7355]/50 shadow-lg shadow-[#8B7355]/30 animate-pulse flex-shrink-0"
+              style={{ animationDuration: '3s' }}
+            />
           </div>
 
           <h1 className="mb-4 text-5xl font-elegant text-[#F5E7C8] md:text-6xl" style={{ fontFamily: 'var(--font-playfair)' }}>
