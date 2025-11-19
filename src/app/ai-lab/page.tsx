@@ -694,27 +694,40 @@ export default function AILabPage() {
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
-          {/* System Status Indicator */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+          {/* System Status Indicator - SAO Moon Phases */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-midnight to-mermaidTeal/60 border-2 border-mermaidTeal/50 shadow-lg shadow-mermaidTeal/30 animate-pulse flex-shrink-0"
               title="System Standby"
+              style={{ animationDuration: '3s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-mermaidTeal/40 to-tealBright/40" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-mermaidTeal/30 to-midnight border-2 border-mermaidTeal/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-mermaidTeal via-mermaidTeal/80 to-tealBright/80 border-2 border-tealBright/60 shadow-lg shadow-tealBright/40 animate-pulse flex-shrink-0"
               title="System Initializing"
+              style={{ animationDuration: '3.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-tealBright/50 to-lunarGold/60" />
+
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-mermaidTeal border-2 border-lunarGold shadow-lg shadow-mermaidTeal/50 flex-shrink-0 animate-pulse"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-mermaidTeal via-tealBright to-lunarGold border-2 border-lunarGold/80 shadow-xl shadow-lunarGold/60 animate-pulse flex-shrink-0"
               title="All Systems Online - Full Power"
+              style={{ animationDuration: '2.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-lunarGold/60 to-tealBright/50" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-mermaidTeal/30 to-midnight border-2 border-mermaidTeal/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-tealBright/90 via-midnight/70 to-tealBright/80 border-2 border-tealBright/60 shadow-lg shadow-tealBright/40 animate-pulse flex-shrink-0"
               title="System Active"
+              style={{ animationDuration: '3.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-tealBright/40 to-mermaidTeal/40" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-mermaidTeal/70 transition-all cursor-pointer flex-shrink-0 hover:shadow-lg hover:shadow-mermaidTeal/30"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-midnight to-mermaidTeal/60 border-2 border-mermaidTeal/50 shadow-lg shadow-mermaidTeal/30 animate-pulse flex-shrink-0"
               title="System Standby"
+              style={{ animationDuration: '3s' }}
             />
           </div>
 
