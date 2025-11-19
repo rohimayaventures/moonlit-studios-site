@@ -85,75 +85,153 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CURRENT OFFERS */}
+      {/* CURRENT OFFERS & RETAINERS */}
       <section id="offers" className="py-20 bg-gradient-to-b from-midnight to-midnightNavy border-t border-deepOcean/60">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="text-center mb-16 fade-in-up">
+          <div className="text-center mb-12 fade-in-up">
             <h2 className="text-3xl md:text-4xl font-semibold text-pearlWhite mb-4">
-              Current Offers
+              Current Offers & Retainers
             </h2>
-            <p className="text-moonlightSilver text-lg max-w-2xl mx-auto">
-              Focused services for small businesses, founders, and healthcare or wellness brands ready to grow.
+            <p className="text-moonlightSilver text-base max-w-3xl mx-auto">
+              Clear starting points for small businesses, founders, and healthcare teams who need thoughtful design, AI systems, and ongoing support.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Offer 1: Small Business Launch Package */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-mermaidTeal/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-1">
-              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-mermaidTeal transition-colors">
-                Small Business Launch Package
-              </h3>
-              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                A modern, narrative-driven site with light brand refresh and simple booking or contact flows. Built for service-based businesses ready to make a strong first impression.
-              </p>
-              <div className="text-lunarGold font-semibold">
-                Starting at $1,500
+          {/* One-Time Builds */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-10">
+            {/* Card 1: Totoro's Garden */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-lunarGold/40 hover:shadow-xl hover:shadow-lunarGold/20 transition-all fade-in-up stagger-1">
+              <div className="inline-block px-3 py-1 rounded-full bg-mermaidTeal/20 border border-mermaidTeal/30 mb-3">
+                <span className="text-xs font-medium text-mermaidTeal tracking-wider uppercase">Small Business Launchpads</span>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-mermaidTeal/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-lg font-semibold text-pearlWhite mb-2">
+                Totoro&apos;s Garden
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Modern, narrative-driven starter site for small businesses and solo founders.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                Starting at $1,500–$1,800
+              </div>
             </div>
 
-            {/* Offer 2: AI Development Starter */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-lunarGold/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-2">
-              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-lunarGold transition-colors">
-                AI Development Starter
-              </h3>
-              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                One focused AI or automation build, like a quote tool, assistant, intake workflow, or internal dashboard. Scoped for real-world use and ready to deploy.
-              </p>
-              <div className="text-lunarGold font-semibold">
-                Starting at $1,200
+            {/* Card 2: Howl's Moving Castle */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-lunarGold/40 hover:shadow-xl hover:shadow-lunarGold/20 transition-all fade-in-up stagger-2">
+              <div className="inline-block px-3 py-1 rounded-full bg-mermaidTeal/20 border border-mermaidTeal/30 mb-3">
+                <span className="text-xs font-medium text-mermaidTeal tracking-wider uppercase">Small Business Launchpads</span>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-lunarGold/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-lg font-semibold text-pearlWhite mb-2">
+                Howl&apos;s Moving Castle
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Booking flows, automations, and service workflows for growing businesses.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $3,500
+              </div>
             </div>
 
-            {/* Offer 3: Health-Tech Setup and Advisory */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-starlight/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-3">
-              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-starlight transition-colors">
-                Health-Tech Setup and Advisory
-              </h3>
-              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                Strategy, workflows, and implementation support for clinics, wellness practices, and digital health projects. Guidance from a nurse and healthcare leader with 15+ years of experience.
-              </p>
-              <div className="text-lunarGold font-semibold">
-                Starting at $1,800
+            {/* Card 3: Spirited Away */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-lunarGold/40 hover:shadow-xl hover:shadow-lunarGold/20 transition-all fade-in-up stagger-3">
+              <div className="inline-block px-3 py-1 rounded-full bg-mermaidTeal/20 border border-mermaidTeal/30 mb-3">
+                <span className="text-xs font-medium text-mermaidTeal tracking-wider uppercase">Small Business Launchpads</span>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-starlight/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-lg font-semibold text-pearlWhite mb-2">
+                Spirited Away
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Story-driven shops for products, courses, or digital goods with full e-commerce.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $6,000–$6,500
+              </div>
             </div>
 
-            {/* Offer 4: Website Revamp Sprint */}
-            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-silverMist/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-4">
-              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-silverMist transition-colors">
-                Website Revamp Sprint
-              </h3>
-              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
-                A focused sprint to restructure, restyle, and clarify an existing site so it loads fast and supports your current offers. Perfect for businesses ready to refresh their online presence.
-              </p>
-              <div className="text-lunarGold font-semibold">
-                Starting at $950
+            {/* Card 4: AI & Health Systems */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-lunarGold/40 hover:shadow-xl hover:shadow-lunarGold/20 transition-all md:col-span-2 lg:col-span-3 fade-in-up stagger-4">
+              <div className="inline-block px-3 py-1 rounded-full bg-phoenixFire/20 border border-phoenixFire/30 mb-3">
+                <span className="text-xs font-medium text-phoenixFire tracking-wider uppercase">AI & Healthcare Systems</span>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-silverMist/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-lg font-semibold text-pearlWhite mb-2">
+                Rapid AI Builds & Deep Systems
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Weekend Sprint ($2,500) and Starter Copilot ($7,000) for rapid AI prototypes. AI Growth Copilot ($20,000) and Healthcare Tech Premium ($42,000) for production-ready systems with ongoing support.
+              </p>
             </div>
           </div>
+
+          {/* Retainers */}
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {/* Retainer 1: Website Maintenance */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-5">
+              <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+                <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
+              </div>
+              <h3 className="text-base font-semibold text-pearlWhite mb-2">
+                Website Maintenance
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Security updates, content tweaks, and hosting support.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $500–$750/mo
+              </div>
+            </div>
+
+            {/* Retainer 2: E-Commerce Maintenance */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-6">
+              <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+                <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
+              </div>
+              <h3 className="text-base font-semibold text-pearlWhite mb-2">
+                E-Commerce Maintenance
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Product updates, payment monitoring, and analytics review.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $1,000–$1,500/mo
+              </div>
+            </div>
+
+            {/* Retainer 3: AI Copilot Tuning */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-7">
+              <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+                <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
+              </div>
+              <h3 className="text-base font-semibold text-pearlWhite mb-2">
+                AI Copilot Tuning
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                Prompt optimization, performance monitoring, and monthly improvements.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $1,500–$2,500/mo
+              </div>
+            </div>
+
+            {/* Retainer 4: Healthcare Platform Support */}
+            <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-8">
+              <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+                <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
+              </div>
+              <h3 className="text-base font-semibold text-pearlWhite mb-2">
+                Healthcare Platform Support
+              </h3>
+              <p className="text-moonlightSilver text-sm mb-3">
+                HIPAA compliance updates, security patches, and user training.
+              </p>
+              <div className="mt-3 text-sm font-semibold text-lunarGold">
+                $3,000–$5,000/mo
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Note */}
+          <p className="mt-8 text-center text-sm text-moonlightSilver/70">
+            Not sure where you fit? We&apos;ll map your needs to the right package on our first call.
+          </p>
         </div>
       </section>
 
