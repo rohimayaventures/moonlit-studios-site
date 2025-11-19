@@ -292,27 +292,40 @@ export default function PortfolioPage() {
         </div>
 
         <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
-          {/* Moon Phases */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
+          {/* Moon Phases - Moonlit Portfolio with Pulsing */}
+          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-midnight to-moonlightSilver/60 border-2 border-moonlightSilver/50 shadow-lg shadow-moonlightSilver/30 animate-pulse flex-shrink-0"
               title="New Moon"
+              style={{ animationDuration: '3s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-moonlightSilver/40 to-starlight/40" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-moonlightSilver via-starlight/80 to-lunarGold/70 border-2 border-starlight/60 shadow-lg shadow-starlight/40 animate-pulse flex-shrink-0"
               title="Waxing Crescent"
+              style={{ animationDuration: '3.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-starlight/50 to-lunarGold/60" />
+
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/80 shadow-xl shadow-lunarGold/60 animate-pulse flex-shrink-0"
               title="Full Moon - You are here"
+              style={{ animationDuration: '2.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-lunarGold/60 to-starlight/50" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-starlight/90 via-midnight/70 to-moonlightSilver/80 border-2 border-starlight/60 shadow-lg shadow-starlight/40 animate-pulse flex-shrink-0"
               title="Waning Crescent"
+              style={{ animationDuration: '3.5s' }}
             />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-starlight/40 to-moonlightSilver/40" />
+
             <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-midnight to-moonlightSilver/60 border-2 border-moonlightSilver/50 shadow-lg shadow-moonlightSilver/30 animate-pulse flex-shrink-0"
               title="New Moon"
+              style={{ animationDuration: '3s' }}
             />
           </div>
 

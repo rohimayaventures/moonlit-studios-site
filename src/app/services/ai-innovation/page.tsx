@@ -297,31 +297,40 @@ export default function AiInnovationPage() {
         <div className="pointer-events-none absolute -left-40 bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-[#845EC2]/30 via-[#00A8E8]/20 to-[#00F5D4]/20 blur-3xl opacity-30 animate-neonPulse" style={{ animationDelay: '1s' }} />
 
         <div className="relative mx-auto max-w-5xl">
-          {/* 🌙 SAO Moon Phases - Neon Cyber Gradient */}
-          <div className="mb-8 flex items-center justify-center gap-3 sm:gap-4">
+          {/* 🌙 SAO Moon Phases - Neon Cyber Gradient with Pulsing */}
+          <div className="mb-8 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8] to-[#845EC2] border-2 border-[#00F5D4] hover:border-[#E6F7FF] transition-all cursor-pointer shadow-lg shadow-[#00F5D4]/60 flex-shrink-0 animate-neonPulse"
-              title="Full Moon - AI Innovation Suite"
-            />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#00F5D4]/60 to-[#845EC2]/50 flex-shrink-0" />
-            <div
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#845EC2] to-[#00A8E8] border border-[#845EC2] hover:border-[#00F5D4] transition-all cursor-pointer shadow-md shadow-[#845EC2]/40 flex-shrink-0"
-              title="Waning Moon"
-            />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#845EC2]/50 to-[#00A8E8]/40 flex-shrink-0" />
-            <div
-              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-br from-[#00A8E8] to-[#E6F7FF] border border-[#00A8E8]/60 hover:border-[#00F5D4] transition-all cursor-pointer shadow-sm shadow-[#00A8E8]/30 flex-shrink-0"
-              title="Half Moon"
-            />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#00A8E8]/40 to-[#E6F7FF]/30 flex-shrink-0" />
-            <div
-              className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full bg-[#E6F7FF] border border-[#E6F7FF]/40 hover:border-[#00F5D4] transition-all cursor-pointer shadow-sm shadow-[#E6F7FF]/20 flex-shrink-0"
-              title="Crescent Moon"
-            />
-            <div className="h-0.5 w-12 sm:w-16 md:w-20 bg-gradient-to-r from-[#E6F7FF]/30 to-[#020817]/20 flex-shrink-0" />
-            <div
-              className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded-full bg-[#020817] border border-[#00F5D4]/30 hover:border-[#00F5D4] transition-all cursor-pointer flex-shrink-0"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
               title="New Moon"
+              style={{ animationDuration: '3s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00F5D4]/40 to-[#845EC2]/40" />
+
+            <div
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8]/80 to-[#845EC2]/70 border-2 border-[#00F5D4]/60 shadow-lg shadow-[#00F5D4]/40 animate-pulse flex-shrink-0"
+              title="Waxing Crescent"
+              style={{ animationDuration: '3.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00F5D4]/50 to-[#00A8E8]/60" />
+
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8] to-[#845EC2] border-2 border-[#00F5D4]/80 shadow-xl shadow-[#00F5D4]/60 animate-pulse flex-shrink-0"
+              title="Full Moon - AI Innovation Suite"
+              style={{ animationDuration: '2.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00A8E8]/60 to-[#845EC2]/50" />
+
+            <div
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#845EC2]/90 via-[#020817]/70 to-[#00A8E8]/80 border-2 border-[#845EC2]/60 shadow-lg shadow-[#845EC2]/40 animate-pulse flex-shrink-0"
+              title="Waning Crescent"
+              style={{ animationDuration: '3.5s' }}
+            />
+            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#845EC2]/40 to-[#00F5D4]/40" />
+
+            <div
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
+              title="New Moon"
+              style={{ animationDuration: '3s' }}
             />
           </div>
 
