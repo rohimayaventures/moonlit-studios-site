@@ -85,6 +85,78 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CURRENT OFFERS */}
+      <section id="offers" className="py-20 bg-gradient-to-b from-midnight to-midnightNavy border-t border-deepOcean/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="text-center mb-16 fade-in-up">
+            <h2 className="text-3xl md:text-4xl font-semibold text-pearlWhite mb-4">
+              Current Offers
+            </h2>
+            <p className="text-moonlightSilver text-lg max-w-2xl mx-auto">
+              Focused services for small businesses, founders, and healthcare or wellness brands ready to grow.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Offer 1: Small Business Launch Package */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-mermaidTeal/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-1">
+              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-mermaidTeal transition-colors">
+                Small Business Launch Package
+              </h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
+                A modern, narrative-driven site with light brand refresh and simple booking or contact flows. Built for service-based businesses ready to make a strong first impression.
+              </p>
+              <div className="text-lunarGold font-semibold">
+                Starting at $1,500
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-mermaidTeal/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+
+            {/* Offer 2: AI Development Starter */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-lunarGold/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-2">
+              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-lunarGold transition-colors">
+                AI Development Starter
+              </h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
+                One focused AI or automation build, like a quote tool, assistant, intake workflow, or internal dashboard. Scoped for real-world use and ready to deploy.
+              </p>
+              <div className="text-lunarGold font-semibold">
+                Starting at $1,200
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-lunarGold/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+
+            {/* Offer 3: Health-Tech Setup and Advisory */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-starlight/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-3">
+              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-starlight transition-colors">
+                Health-Tech Setup and Advisory
+              </h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
+                Strategy, workflows, and implementation support for clinics, wellness practices, and digital health projects. Guidance from a nurse and healthcare leader with 15+ years of experience.
+              </p>
+              <div className="text-lunarGold font-semibold">
+                Starting at $1,800
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-starlight/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+
+            {/* Offer 4: Website Revamp Sprint */}
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-moonlightSilver/5 to-silverMist/5 border-2 border-moonlightSilver/20 hover:border-moonlightSilver hover:shadow-xl hover:shadow-moonlightSilver/30 transition-all duration-500 p-6 fade-in-up stagger-4">
+              <h3 className="text-xl font-semibold text-pearlWhite mb-3 group-hover:text-silverMist transition-colors">
+                Website Revamp Sprint
+              </h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed mb-4">
+                A focused sprint to restructure, restyle, and clarify an existing site so it loads fast and supports your current offers. Perfect for businesses ready to refresh their online presence.
+              </p>
+              <div className="text-lunarGold font-semibold">
+                Starting at $950
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-silverMist/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PORTAL HUB - THE FIVE REALMS */}
       <section className="py-20 bg-gradient-to-b from-midnightNavy to-midnight">
         <div className="mx-auto max-w-7xl px-6">
