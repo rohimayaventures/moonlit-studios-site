@@ -4,7 +4,7 @@
  */
 
 interface StructuredDataProps {
-  type: 'Organization' | 'LocalBusiness' | 'ProfessionalService' | 'Service';
+  type: 'Organization' | 'LocalBusiness' | 'ProfessionalService' | 'Service' | 'BlogPosting';
   data?: Record<string, any>;
 }
 
@@ -177,6 +177,39 @@ export function StructuredData({ type, data }: StructuredDataProps) {
               },
             ],
           },
+          ...data,
+        };
+
+      case 'BlogPosting':
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: data?.title || '',
+          description: data?.excerpt || '',
+          author: {
+            '@type': 'Person',
+            name: data?.author || 'Hannah Pagade',
+            jobTitle: 'The Nurse Who Codes',
+            url: 'https://www.moonlitstudios.com/about',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Moonlit Studios',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://www.moonlitstudios.com/square-logo.png',
+            },
+          },
+          datePublished: data?.datePublished || '',
+          dateModified: data?.dateModified || data?.datePublished || '',
+          image: data?.image || 'https://www.moonlitstudios.com/og-image.png',
+          url: data?.url || '',
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': data?.url || '',
+          },
+          keywords: data?.tags?.join(', ') || '',
+          articleSection: data?.category || '',
           ...data,
         };
 
