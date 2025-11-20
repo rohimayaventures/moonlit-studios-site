@@ -1,7 +1,18 @@
 {
   "permissions": {
     "allow": [
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(for dir in about portfolio services contact get-quote)",
+      "Bash(do if [ -f \"src/app/$dir/layout.tsx\" ])",
+      "Bash(then echo \"$dir: has layout.tsx\")",
+      "Bash(else echo \"$dir: NO layout.tsx\")",
+      "Bash(fi:*)",
+      "Bash(for dir in services/ai-innovation services/creative-design-development services/health-tech-development contact get-quote)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
