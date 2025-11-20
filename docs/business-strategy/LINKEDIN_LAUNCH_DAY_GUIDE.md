@@ -287,11 +287,37 @@ These are entry-level packages across services:
 - **Health-Tech Setup and Advisory:** $1,800+ (strategy + implementation)
 - **Website Revamp Sprint:** $950+ (redesign/restructure existing site)
 
-**Retainer Packages:**
-- Website Maintenance ($500-$750/mo)
-- E-Commerce Maintenance ($1,000-$1,500/mo)
-- AI Copilot Tuning ($1,500-$2,500/mo)
-- Healthcare Platform Support ($3,000-$5,000/mo)
+**Retainer Packages (Recurring Revenue):**
+
+**Creative Design & Development Retainers:**
+- Website Maintenance & Updates: $500-$750/mo
+- E-Commerce Maintenance & Growth: $1,000-$1,500/mo
+- Creative Studio Partner: $2,000-$3,500/mo
+
+**Health x Tech Development Retainers:**
+- Healthcare Platform Maintenance: $1,200-$2,000/mo
+- Clinical Workflow Optimization: $2,500-$4,000/mo
+- Enterprise Healthcare Platform Support: $3,000-$5,000/mo
+
+**AI Innovation Suite Retainers:**
+- AI Copilot Tuning & Monitoring: $1,500-$2,500/mo
+- AI System Evolution: $3,000-$5,000/mo
+- Fractional AI Product Leader: $6,000-$10,000/mo
+
+**Consulting Retainers:**
+- Strategic Advisor (Quarterly): $2,500-$4,000/quarter
+- Strategic Partner (Monthly): $3,000-$5,000/mo
+- Fractional Product Strategist: $6,000-$9,000/mo
+
+**Author & Ghostwriting Studio Retainers:**
+- Monthly Content Partner: $1,500-$2,500/mo
+- Full-Service Content Studio: $3,000-$5,000/mo
+- Author Platform Manager: $4,000-$7,000/mo
+
+**Small Business Retainers:**
+- Small Business Website Maintenance: $300-$500/mo
+- Small Business Growth Partner: $800-$1,200/mo
+- All-In-One Small Business Support: $1,500-$2,000/mo
 
 **Key Website Differentiators to Mention:**
 ✨ AI-powered 60-second quote generator
