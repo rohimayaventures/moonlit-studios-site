@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StructuredData } from "../../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Creative Design & Development - Beautiful Web Solutions | Moonlit Studios",
@@ -50,5 +51,29 @@ export default function CreativeDesignDevelopmentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <StructuredData
+        type="Service"
+        data={{
+          serviceType: "Creative Web Design & Development",
+          name: "Creative Design & Development",
+          description: "Beautiful, conversion-focused websites. Professional portfolios, brand sites, e-commerce platforms, and custom web applications. Design that delights, code that performs.",
+          provider: {
+            "@type": "Organization",
+            name: "Moonlit Studios",
+            url: "https://www.moonlstudios.com"
+          },
+          areaServed: ["Colorado", "United States", "Worldwide"],
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: "1800",
+            highPrice: "15000"
+          }
+        }}
+      />
+      {children}
+    </>
+  );
 }

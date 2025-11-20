@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StructuredData } from "../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "AI Lab - Interactive AI Demos | Moonlit Studios",
@@ -51,5 +52,17 @@ export default function AILabLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <StructuredData
+        type="SoftwareApplication"
+        data={{
+          name: "AI Lab - Interactive AI Demos",
+          description: "Experience AI firsthand with interactive demos: Computer Vision, RAG Q&A, Healthcare Triage, and Voice AI. Built by The Nurse Who Codes.",
+          url: "https://www.moonlstudios.com/ai-lab",
+        }}
+      />
+      {children}
+    </>
+  );
 }

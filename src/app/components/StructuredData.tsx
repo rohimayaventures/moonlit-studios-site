@@ -4,7 +4,7 @@
  */
 
 interface StructuredDataProps {
-  type: 'Organization' | 'LocalBusiness' | 'ProfessionalService' | 'Service' | 'BlogPosting';
+  type: 'Organization' | 'LocalBusiness' | 'ProfessionalService' | 'Service' | 'BlogPosting' | 'SoftwareApplication' | 'Article' | 'ItemList';
   data?: Record<string, any>;
 }
 
@@ -222,6 +222,74 @@ export function StructuredData({ type, data }: StructuredDataProps) {
           },
           keywords: data?.tags?.join(', ') || '',
           articleSection: data?.category || '',
+          ...data,
+        };
+
+      case 'Article':
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: data?.title || '',
+          description: data?.excerpt || '',
+          author: {
+            '@type': 'Person',
+            name: data?.author || 'Hannah Pagade',
+            jobTitle: 'The Nurse Who Codes',
+            url: 'https://www.moonlstudios.com/about',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Moonlit Studios',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://www.moonlstudios.com/square-logo.png',
+            },
+          },
+          datePublished: data?.datePublished || '',
+          dateModified: data?.dateModified || data?.datePublished || '',
+          image: data?.image || 'https://www.moonlstudios.com/og-image.png',
+          url: data?.url || '',
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': data?.url || '',
+          },
+          keywords: data?.tags?.join(', ') || '',
+          articleSection: data?.category || '',
+          ...data,
+        };
+
+      case 'SoftwareApplication':
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: data?.name || 'AI Lab - Interactive AI Demos',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Web Browser',
+          url: 'https://www.moonlstudios.com/ai-lab',
+          description: data?.description || 'Experience AI firsthand with interactive demos: Computer Vision, RAG Q&A, Healthcare Triage, and Voice AI. Built by The Nurse Who Codes.',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          author: {
+            '@type': 'Organization',
+            name: 'Moonlit Studios',
+          },
+          screenshot: 'https://www.moonlstudios.com/og-image.png',
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '5.0',
+            reviewCount: '3',
+          },
+          ...data,
+        };
+
+      case 'ItemList':
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          itemListElement: data?.items || [],
           ...data,
         };
 

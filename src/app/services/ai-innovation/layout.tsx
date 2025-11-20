@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StructuredData } from "../../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "AI Innovation Suite - Advanced AI Development | Moonlit Studios",
@@ -50,5 +51,29 @@ export default function AIInnovationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <StructuredData
+        type="Service"
+        data={{
+          serviceType: "AI Development & Innovation",
+          name: "AI Innovation Suite",
+          description: "Enterprise AI solutions: RAG chatbots, Voice AI assistants, workflow automation, and healthcare platforms. Built by The Nurse Who Codes with 15+ years clinical expertise.",
+          provider: {
+            "@type": "Organization",
+            name: "Moonlit Studios",
+            url: "https://www.moonlstudios.com"
+          },
+          areaServed: ["Colorado", "United States", "Worldwide"],
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: "5000",
+            highPrice: "50000"
+          }
+        }}
+      />
+      {children}
+    </>
+  );
 }

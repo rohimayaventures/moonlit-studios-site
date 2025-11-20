@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { StructuredData } from "../../components/StructuredData";
 
 export const metadata: Metadata = {
   title: "Health x Tech Development - HIPAA-Compliant Healthcare Solutions | Moonlit Studios",
@@ -50,5 +51,29 @@ export default function HealthTechDevelopmentLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <StructuredData
+        type="Service"
+        data={{
+          serviceType: "Healthcare Technology Development",
+          name: "Health x Tech Development",
+          description: "HIPAA-compliant healthcare solutions built by a nurse-turned-developer. Patient portals, clinical workflow tools, telehealth platforms. 15+ years clinical experience meets cutting-edge development.",
+          provider: {
+            "@type": "Organization",
+            name: "Moonlit Studios",
+            url: "https://www.moonlstudios.com"
+          },
+          areaServed: ["Colorado", "United States"],
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: "3500",
+            highPrice: "25000"
+          }
+        }}
+      />
+      {children}
+    </>
+  );
 }
