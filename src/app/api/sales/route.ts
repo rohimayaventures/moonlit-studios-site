@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
-import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import {
+  rateLimit,
+  getClientIdentifier,
+  addRateLimitHeaders,
+  isAiLabDemoMode,
+  getAiLabConfig,
+} from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -79,16 +85,34 @@ Remember: You're here to have natural conversations, qualify leads, and book dis
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting - AI operations
+    // AI Lab specific rate limiting
     const identifier = getClientIdentifier(req);
-    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+    const config = getAiLabConfig('sales');
+    const rateLimitResult = rateLimit(`ai-lab:sales:${identifier}`, config);
 
     if (!rateLimitResult.success) {
       const headers = new Headers();
       addRateLimitHeaders(headers, rateLimitResult);
       return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
+        {
+          error: 'rate_limited',
+          message: 'This demo has reached its safe usage limit. Please try again in a few minutes.',
+        },
         { status: 429, headers }
+      );
+    }
+
+    // Demo mode - return mocked response
+    if (isAiLabDemoMode()) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        {
+          reply: "Demo mode: I'm Echo, your AI sales assistant. In a live session, I'd walk you through which service package fits your needs—whether that's a small business launchpad, healthcare platform, or AI copilot. What brings you to Moonlit Studios today?",
+          audioUrl: null,
+          success: true,
+        },
+        { headers }
       );
     }
 
@@ -138,11 +162,14 @@ export async function POST(req: NextRequest) {
     const audioBase64 = audioBuffer.toString('base64');
     const audioUrl = `data:audio/mp3;base64,${audioBase64}`;
 
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
     return NextResponse.json({
       reply: replyText,
       audioUrl,
       success: true,
-    });
+    }, { headers });
   } catch (error) {
     console.error('Sales chat error:', error);
     return NextResponse.json(

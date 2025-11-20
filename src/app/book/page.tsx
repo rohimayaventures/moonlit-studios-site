@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Schedule a free consultation. Healthcare tech, AI innovation, creative design, ghostwriting. Let's discuss your vision.",
     type: "website",
-    url: "https://www.moonlitstudios.com/book",
+    url: "https://www.moonlstudios.com/book",
   },
   twitter: {
     card: "summary_large_image",

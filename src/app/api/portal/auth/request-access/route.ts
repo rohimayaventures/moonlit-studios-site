@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Build magic link
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://www.moonlitstudios.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://www.moonlstudios.com';
     const magicLink = `${siteUrl}/portal/auth/verify?token=${authToken.token}`;
 
     // Send magic link email
@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
     </div>
 
     <div class="footer">
-      <p>Questions? Reply to this email or contact us at <a href="mailto:hello@moonlitstudios.com" style="color: #4A9B9B;">hello@moonlitstudios.com</a></p>
+      <p>Questions? Reply to this email or contact us at <a href="mailto:hello@moonlstudios.com" style="color: #4A9B9B;">hello@moonlstudios.com</a></p>
       <p style="margin-top: 8px;">Built with 🌙 by Moonlit Studios</p>
     </div>
   </div>
@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
     `;
 
     await resend.emails.send({
-      from: 'Moonlit Studios Portal <hello@moonlitstudios.com>',
+      from: 'Moonlit Studios Portal <hello@moonlstudios.com>',
       to: email,
       subject: '🔐 Your Moonlit Studios Portal Access Link',
       html: emailHtml,

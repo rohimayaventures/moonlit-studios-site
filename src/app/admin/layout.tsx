@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 bg-midnight border border-moonlightSilver/20 rounded-lg text-moonlightSilver focus:outline-none focus:border-lunarGold"
-                placeholder="hello@moonlitstudios.com"
+                placeholder="hello@moonlstudios.com"
                 required
               />
             </div>

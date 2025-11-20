@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description:
       "7 things developers get wrong about patient data—and how to get them right. From a nurse's perspective.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/hipaa-compliance-nurses-perspective",
+    url: "https://www.moonlstudios.com/blog/hipaa-compliance-nurses-perspective",
     publishedTime: "2025-01-08T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["HIPAA", "Healthcare Tech", "Compliance", "Patient Privacy", "Development"],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/hipaa-compliance-nurses-perspective",
+    canonical: "https://www.moonlstudios.com/blog/hipaa-compliance-nurses-perspective",
   },
 };
 

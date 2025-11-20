@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
-import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import {
+  rateLimit,
+  getClientIdentifier,
+  addRateLimitHeaders,
+  isAiLabDemoMode,
+  getAiLabConfig,
+} from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -51,16 +57,37 @@ Be conservative - when in doubt, recommend higher level of care.`;
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting - AI operations
+    // AI Lab specific rate limiting
     const identifier = getClientIdentifier(req);
-    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+    const config = getAiLabConfig('triage');
+    const rateLimitResult = rateLimit(`ai-lab:triage:${identifier}`, config);
 
     if (!rateLimitResult.success) {
       const headers = new Headers();
       addRateLimitHeaders(headers, rateLimitResult);
       return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
+        {
+          error: 'rate_limited',
+          message: 'This demo has reached its safe usage limit. Please try again in a few minutes.',
+        },
         { status: 429, headers }
+      );
+    }
+
+    // Demo mode - return mocked response
+    if (isAiLabDemoMode()) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        {
+          triage: {
+            level: 'routine',
+            recommendation: "Demo mode: Based on your description, this would typically be appropriate for a routine clinic visit within the next few days.",
+            reasoning: "This demo illustrates how a clinical triage assistant analyzes symptoms while encouraging follow-up with a real healthcare provider. Always consult a licensed professional for medical advice.",
+          },
+          success: true,
+        },
+        { headers }
       );
     }
 
@@ -111,6 +138,9 @@ Provide triage recommendation in JSON format.`,
       };
     }
 
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
     return NextResponse.json({
       triage: {
         level: triageResult.level as TriageLevel,
@@ -118,7 +148,7 @@ Provide triage recommendation in JSON format.`,
         reasoning: triageResult.reasoning,
       },
       success: true,
-    });
+    }, { headers });
   } catch (error) {
     console.error('Triage error:', error);
     return NextResponse.json(

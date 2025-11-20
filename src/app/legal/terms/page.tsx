@@ -21,7 +21,7 @@ export default function TermsPage() {
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold text-lunarGold">Acceptance of Terms</h2>
             <p>
-              By accessing or using the Moonlit Studios website (moonlitstudios.com) or engaging our services,
+              By accessing or using the Moonlit Studios website (moonlstudios.com) or engaging our services,
               you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not
               use our website or services.
             </p>
@@ -165,8 +165,8 @@ export default function TermsPage() {
             </p>
             <p className="ml-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>
               <br />
               <strong>Location:</strong> Colorado, USA

@@ -157,8 +157,8 @@ ${context.objectionsMentioned && context.objectionsMentioned.length > 0 ? `- Obj
 
     // Send notification email to business owner
     await resend.emails.send({
-      from: 'Kai @ Moonlit Studios <kai@moonlitstudios.com>',
-      to: process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com',
+      from: 'Kai @ Moonlit Studios <kai@moonlstudios.com>',
+      to: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
       subject: `📬 Email Captured: ${name || email} - Moonlit Studios`,
       html: ownerEmailHtml,
     });

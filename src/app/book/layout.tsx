@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description:
       "Free 30-minute strategy call. Discuss your project, explore solutions, get expert guidance. No obligation.",
     type: "website",
-    url: "https://www.moonlitstudios.com/book",
+    url: "https://www.moonlstudios.com/book",
     images: [
       {
         url: "/og-image.png",

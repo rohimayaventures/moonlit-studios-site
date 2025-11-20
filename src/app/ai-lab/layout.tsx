@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
       "Try live AI demos: Computer Vision, RAG Q&A, Healthcare Triage, Voice Sales. Experience the future of intelligent systems built by The Nurse Who Codes.",
     type: "website",
-    url: "https://www.moonlitstudios.com/ai-lab",
+    url: "https://www.moonlstudios.com/ai-lab",
     images: [
       {
         url: "/og-image.png",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/ai-lab",
+    canonical: "https://www.moonlstudios.com/ai-lab",
   },
 };
 

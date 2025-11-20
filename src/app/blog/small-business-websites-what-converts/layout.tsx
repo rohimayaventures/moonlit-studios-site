@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "What cafe owners, salon owners, and boutique businesses ACTUALLY need to convert visitors into customers.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/small-business-websites-what-converts",
+    url: "https://www.moonlstudios.com/blog/small-business-websites-what-converts",
     publishedTime: "2025-01-05T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["Small Business", "Web Design", "Conversion", "Local Business", "Marketing"],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/small-business-websites-what-converts",
+    canonical: "https://www.moonlstudios.com/blog/small-business-websites-what-converts",
   },
 };
 

@@ -240,7 +240,7 @@ export default async function PortalDashboardPage() {
           </Link>
 
           <Link
-            href="mailto:hello@moonlitstudios.com"
+            href="mailto:hello@moonlstudios.com"
             className="bg-deepOcean/50 backdrop-blur-sm border border-moonlightSilver/20 rounded-lg p-6 hover:border-starlight/40 transition-colors group"
           >
             <div className="flex items-center gap-4">

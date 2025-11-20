@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Portfolios, brand sites, e-commerce, custom apps. Where art meets engineering for conversion-focused excellence.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/creative-design-development",
+    url: "https://www.moonlstudios.com/services/creative-design-development",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/creative-design-development",
+    canonical: "https://www.moonlstudios.com/services/creative-design-development",
   },
 };
 

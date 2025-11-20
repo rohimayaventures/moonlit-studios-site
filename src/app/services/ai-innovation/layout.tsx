@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Enterprise-grade AI solutions: RAG chatbots, Voice AI, workflow automation, healthcare platforms. Built by The Nurse Who Codes with 15+ years clinical expertise.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/ai-innovation",
+    url: "https://www.moonlstudios.com/services/ai-innovation",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/ai-innovation",
+    canonical: "https://www.moonlstudios.com/services/ai-innovation",
   },
 };
 

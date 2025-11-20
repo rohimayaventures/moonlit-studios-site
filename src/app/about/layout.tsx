@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description:
       "15 years of clinical operations meets full-stack mastery. The origin story of healthcare meets code.",
     type: "website",
-    url: "https://www.moonlitstudios.com/about",
+    url: "https://www.moonlstudios.com/about",
     images: [
       {
         url: "/og-image.png",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/about",
+    canonical: "https://www.moonlstudios.com/about",
   },
 };
 

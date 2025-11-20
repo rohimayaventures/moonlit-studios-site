@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createLogger } from "@/lib/logger";
 import OpenAI from 'openai';
-import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import {
+  rateLimit,
+  getClientIdentifier,
+  addRateLimitHeaders,
+  isAiLabDemoMode,
+  getAiLabConfig,
+} from '@/lib/rateLimit';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -9,16 +15,33 @@ const openai = new OpenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting - AI operations
+    // AI Lab specific rate limiting
     const identifier = getClientIdentifier(req);
-    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+    const config = getAiLabConfig('voice');
+    const rateLimitResult = rateLimit(`ai-lab:voice:${identifier}`, config);
 
     if (!rateLimitResult.success) {
       const headers = new Headers();
       addRateLimitHeaders(headers, rateLimitResult);
       return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
+        {
+          error: 'rate_limited',
+          message: 'This demo has reached its safe usage limit. Please try again in a few minutes.',
+        },
         { status: 429, headers }
+      );
+    }
+
+    // Demo mode - return mocked response
+    if (isAiLabDemoMode()) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        {
+          text: "Demo transcription: Hi, I'd love to learn more about your AI Lab demos and how you built them.",
+          success: true,
+        },
+        { headers }
       );
     }
 
@@ -39,10 +62,13 @@ export async function POST(req: NextRequest) {
       language: 'en',
     });
 
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
     return NextResponse.json({
       text: transcription.text,
       success: true,
-    });
+    }, { headers });
   } catch (error) {
     console.error('Transcription error:', error);
     return NextResponse.json(

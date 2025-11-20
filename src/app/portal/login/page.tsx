@@ -391,10 +391,10 @@ function LoginContent() {
           <p>
             Need help? Email us at{' '}
             <a
-              href="mailto:hello@moonlitstudios.com"
+              href="mailto:hello@moonlstudios.com"
               className="text-starlight hover:text-lunarGold transition-colors"
             >
-              hello@moonlitstudios.com
+              hello@moonlstudios.com
             </a>
           </p>
           <Link

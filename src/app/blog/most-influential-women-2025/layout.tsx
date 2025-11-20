@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description:
       "How Moonlit Studios came to be and how it serves through healthcare tech, AI innovation, and creative design.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/most-influential-women-2025",
+    url: "https://www.moonlstudios.com/blog/most-influential-women-2025",
     publishedTime: "2025-01-18T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["Press", "Most Influential Women", "Moonlit Studios", "Entrepreneurship"],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/most-influential-women-2025",
+    canonical: "https://www.moonlstudios.com/blog/most-influential-women-2025",
   },
 };
 

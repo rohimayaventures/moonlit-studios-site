@@ -367,7 +367,7 @@ export default function ContactPage() {
                           {currentTheme.successMessage}
                         </p>
                         <p className="text-xs text-moonlightSilver/70 mt-3 italic">
-                          Check your email for confirmation from hello@moonlitstudios.com
+                          Check your email for confirmation from hello@moonlstudios.com
                         </p>
                       </div>
                     </div>
@@ -399,7 +399,7 @@ export default function ContactPage() {
                           ⚠️ The owl couldn&apos;t take flight!
                         </p>
                         <p className="text-xs text-moonlightSilver mt-1">
-                          {errorMessage || "Please try again or send a direct owl to hello@moonlitstudios.com"}
+                          {errorMessage || "Please try again or send a direct owl to hello@moonlstudios.com"}
                         </p>
                       </div>
                     </div>
@@ -414,7 +414,7 @@ export default function ContactPage() {
                   <p className="text-xs text-moonlightSilver/90 text-center">
                     Prefer Muggle communication? Email me directly at{" "}
                     <a
-                      href="mailto:hello@moonlitstudios.com"
+                      href="mailto:hello@moonlstudios.com"
                       className="font-semibold transition-colors underline"
                       style={{
                         color: 'var(--theme-primary)',
@@ -429,7 +429,7 @@ export default function ContactPage() {
                         e.currentTarget.style.textDecorationColor = 'var(--theme-border)';
                       }}
                     >
-                      hello@moonlitstudios.com
+                      hello@moonlstudios.com
                     </a>
                   </p>
                 </div>

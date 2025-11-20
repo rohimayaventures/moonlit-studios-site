@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description:
       "5 realms explored. 15+ quests completed. Infinite honor earned. Journey through The Shire, Rivendell, Lothlórien, Gondor, and the Grey Havens.",
     type: "website",
-    url: "https://www.moonlitstudios.com/portfolio",
+    url: "https://www.moonlstudios.com/portfolio",
     images: [
       {
         url: "/og-image.png",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/portfolio",
+    canonical: "https://www.moonlstudios.com/portfolio",
   },
 };
 

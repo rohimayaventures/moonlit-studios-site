@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Your voice, expertly crafted. Author sites, ghostwriting, content strategy, launch platforms. Stories that resonate, words that sell.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/ghostwriting",
+    url: "https://www.moonlstudios.com/services/ghostwriting",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/ghostwriting",
+    canonical: "https://www.moonlstudios.com/services/ghostwriting",
   },
 };
 

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Every great story starts small. Magical web solutions for local businesses—from coffee shops to creative studios. Starting at $1,500.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/small-business",
+    url: "https://www.moonlstudios.com/services/small-business",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/small-business",
+    canonical: "https://www.moonlstudios.com/services/small-business",
   },
 };
 

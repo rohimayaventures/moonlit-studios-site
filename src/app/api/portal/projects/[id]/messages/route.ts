@@ -129,7 +129,7 @@ export async function POST(
       </div>
 
       <div style="text-align: center; margin-top: 32px;">
-        <a href="${process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://www.moonlitstudios.com'}/admin/portal/projects/${projectId}" class="button">
+        <a href="${process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://www.moonlstudios.com'}/admin/portal/projects/${projectId}" class="button">
           View in Admin Portal
         </a>
       </div>
@@ -140,8 +140,8 @@ export async function POST(
       `;
 
       await resend.emails.send({
-        from: 'Client Portal <hello@moonlitstudios.com>',
-        to: process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com',
+        from: 'Client Portal <hello@moonlstudios.com>',
+        to: process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com',
         subject: `💬 New message from ${client.name} - ${project.title}`,
         html: emailHtml,
       });

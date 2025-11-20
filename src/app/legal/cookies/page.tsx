@@ -172,8 +172,8 @@ export default function CookiesPage() {
             </p>
             <p className="ml-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>
               <br />
               <strong>Location:</strong> Colorado, USA

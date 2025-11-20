@@ -155,6 +155,18 @@ const sections = [
       "Like Galadriel's mirror revealing what might be, AI that sees patterns invisible to mortal eyes. Innovation blessed with foresight.",
     projects: [
       {
+        tag: "LIVE AI DEMOS",
+        title: "AI Lab — SAO-Themed AI Demo Arena",
+        points: [
+          "Four interactive AI consoles: computer vision, RAG Q&A, healthcare triage, and voice assistant",
+          "Built using modern LLMs and clinical UX patterns",
+          "Protected by smart rate limits + demo mode for safe real-world demonstration",
+        ],
+        tech: "Next.js · TypeScript · Tailwind · OpenAI · Whisper · Claude",
+        status: "Journey Ongoing",
+        link: "/ai-lab",
+      },
+      {
         tag: "SALES AUTOMATION",
         title: "Lead Qualification Copilot – SDR Assistant",
         points: [

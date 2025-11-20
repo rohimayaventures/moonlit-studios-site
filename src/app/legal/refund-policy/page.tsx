@@ -109,8 +109,8 @@ export default function RefundPolicyPage() {
             <h2 className="text-2xl font-semibold text-lunarGold">How to Request a Cancellation</h2>
             <p>
               To cancel a service or project, please send a written request via email to{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>.
             </p>
             <p>
@@ -127,8 +127,8 @@ export default function RefundPolicyPage() {
             </p>
             <p className="ml-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>
               <br />
               <strong>Location:</strong> Colorado, USA

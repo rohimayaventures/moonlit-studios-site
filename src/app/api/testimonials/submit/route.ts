@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { notifyNewTestimonial } from '@/lib/slack';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || 'hello@moonlitstudios.com';
+const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || 'hello@moonlstudios.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
 
     // Send notification to you that a new testimonial was submitted
     await resend.emails.send({
-      from: 'Moonlit Studios <notifications@moonlitstudios.com>',
+      from: 'Moonlit Studios <notifications@moonlstudios.com>',
       to: BUSINESS_EMAIL,
       subject: `⭐ New Testimonial Submitted: ${rating}/5 stars from ${name}`,
       html: `
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="margin-top: 20px; text-align: center;">
-            <a href="https://www.moonlitstudios.com/admin/testimonials"
+            <a href="https://www.moonlstudios.com/admin/testimonials"
                style="display: inline-block; background: #0ea5e9; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600;">
               Review Testimonial
             </a>
@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
 
     // Send thank you email to client
     await resend.emails.send({
-      from: 'Moonlit Studios <hello@moonlitstudios.com>',
+      from: 'Moonlit Studios <hello@moonlstudios.com>',
       to: email,
       subject: 'Thank you for your feedback! 🙏',
       html: `

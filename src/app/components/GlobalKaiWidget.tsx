@@ -551,7 +551,7 @@ export function GlobalKaiWidget() {
 **LEGAL PAGES & POLICIES:**
 Moonlit Studios has 5 legal policy pages for trust and transparency:
 
-1. **Privacy Policy** - Data collection, usage, protection. No selling of personal data. Contact: hello@moonlitstudios.com
+1. **Privacy Policy** - Data collection, usage, protection. No selling of personal data. Contact: hello@moonlstudios.com
 2. **Terms of Service** - Legal terms. Important: No medical/legal/financial advice despite founder being a nurse. AI outputs may be inaccurate.
 3. **Refund Policy** - Consultations/deposits non-refundable once work begins. Digital deliverables non-refundable once delivered.
 4. **Cookie Notice** - Essential cookies required. Privacy-friendly analytics (no cross-site tracking). Users can manage via browser.
@@ -568,7 +568,7 @@ Moonlit Studios has 5 legal policy pages for trust and transparency:
 **YOUR RULES:**
 1. Be helpful but DON'T solve their entire technical problem
 2. Guide them toward working with Moonlit Studios
-3. If they need actual help: "Email Moonlit Studios at hello@moonlitstudios.com"
+3. If they need actual help: "Email Moonlit Studios at hello@moonlstudios.com"
 4. Don't hallucinate services or prices
 5. Be conversational but occasionally profound
 6. Share wisdom naturally (not forced!)
@@ -1209,7 +1209,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
         {
           role: "assistant",
           content:
-            "Oops! Something went wrong. Try again or email Moonlit Studios directly at hello@moonlitstudios.com",
+            "Oops! Something went wrong. Try again or email Moonlit Studios directly at hello@moonlstudios.com",
         },
       ]);
     } finally {
@@ -1301,7 +1301,7 @@ ${conversationContext.objectionsMentioned && conversationContext.objectionsMenti
         ...prev,
         {
           role: "assistant",
-          content: "Hmm, something went wrong capturing your email. No worries - you can always reach out directly at hello@moonlitstudios.com!",
+          content: "Hmm, something went wrong capturing your email. No worries - you can always reach out directly at hello@moonlstudios.com!",
         },
       ]);
     }

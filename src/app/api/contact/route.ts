@@ -86,8 +86,8 @@ export async function POST(req: NextRequest) {
 
     // Send notification email to Moonlit Studios
     const ownerEmail = await resend.emails.send({
-      from: "Moonlit Studios Contact Form <hello@moonlitstudios.com>",
-      to: ["hello@moonlitstudios.com"],
+      from: "Moonlit Studios Contact Form <hello@moonlstudios.com>",
+      to: ["hello@moonlstudios.com"],
       subject: `New Inquiry from ${name} - ${serviceType || "General Inquiry"}`,
       html: `
         <!DOCTYPE html>
@@ -168,7 +168,7 @@ export async function POST(req: NextRequest) {
           </head>
           <body>
             <div class="header">
-              <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlitstudios.com'}square-logo.png" alt="Moonlit Studios" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px;" />
+              <img src="${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.moonlstudios.com'}square-logo.png" alt="Moonlit Studios" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 16px;" />
               <h1>🌙 New Contact Form Submission</h1>
               <p>Someone is interested in working with Moonlit Studios!</p>
             </div>
@@ -212,7 +212,7 @@ export async function POST(req: NextRequest) {
               </div>
 
               <div class="footer">
-                <p>Submitted from <a href="https://www.moonlitstudios.com/contact">www.moonlitstudios.com/contact</a></p>
+                <p>Submitted from <a href="https://www.moonlstudios.com/contact">www.moonlstudios.com/contact</a></p>
                 <p>🌙 Where Dreams Surface and Ideas Flow</p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export async function POST(req: NextRequest) {
 
     // Send auto-response to the person who submitted the form
     const userEmail = await resend.emails.send({
-      from: "Moonlit Studios <hello@moonlitstudios.com>",
+      from: "Moonlit Studios <hello@moonlstudios.com>",
       to: [email],
       subject: "Thank you for reaching out to Moonlit Studios 🌙",
       html: `
@@ -365,8 +365,8 @@ export async function POST(req: NextRequest) {
 
               <div class="footer">
                 <p>
-                  <a href="https://www.moonlitstudios.com">moonlstudios.com</a> •
-                  <a href="mailto:hello@moonlitstudios.com">hello@moonlitstudios.com</a>
+                  <a href="https://www.moonlstudios.com">moonlstudios.com</a> •
+                  <a href="mailto:hello@moonlstudios.com">hello@moonlstudios.com</a>
                 </p>
                 <p style="margin-top: 15px; font-size: 12px; color: #999;">
                   Creative Design • HealthTech Development • AI Innovation • Consulting • Ghostwriting
@@ -400,7 +400,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "Failed to send your inquiry. Please try again or email hello@moonlitstudios.com directly.",
+        error: "Failed to send your inquiry. Please try again or email hello@moonlstudios.com directly.",
         details: errorMessage
       },
       { status: 500 }

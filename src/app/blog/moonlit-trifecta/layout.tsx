@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "How healing, building, and storytelling became the three elements I bend to create digital magic.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/moonlit-trifecta",
+    url: "https://www.moonlstudios.com/blog/moonlit-trifecta",
     publishedTime: "2025-01-15T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["Personal Story", "Healthcare", "Development", "Creativity", "Brand Story"],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/moonlit-trifecta",
+    canonical: "https://www.moonlstudios.com/blog/moonlit-trifecta",
   },
 };
 

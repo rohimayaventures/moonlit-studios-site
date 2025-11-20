@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description:
       "Share your project experience with Moonlit Studios. Help others discover quality tech services.",
     type: "website",
-    url: "https://www.moonlitstudios.com/testimonial",
+    url: "https://www.moonlstudios.com/testimonial",
     images: [
       {
         url: "/og-image.png",

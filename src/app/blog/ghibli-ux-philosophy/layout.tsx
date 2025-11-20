@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       "Building websites like Hayao Miyazaki builds films—with warmth, intention, and a little bit of magic.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/ghibli-ux-philosophy",
+    url: "https://www.moonlstudios.com/blog/ghibli-ux-philosophy",
     publishedTime: "2025-01-12T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["UX Design", "Studio Ghibli", "Small Business", "Web Design", "User Experience"],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/ghibli-ux-philosophy",
+    canonical: "https://www.moonlstudios.com/blog/ghibli-ux-philosophy",
   },
 };
 

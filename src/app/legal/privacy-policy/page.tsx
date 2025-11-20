@@ -112,8 +112,8 @@ export default function PrivacyPolicyPage() {
               We retain your personal information for as long as necessary to provide our services and
               meet legal, financial, and contractual obligations. You may request deletion of your data
               where applicable by contacting us at{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>.
             </p>
           </section>
@@ -130,8 +130,8 @@ export default function PrivacyPolicyPage() {
             </ul>
             <p className="mt-4">
               To exercise these rights, please contact us at{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>.
             </p>
           </section>
@@ -163,8 +163,8 @@ export default function PrivacyPolicyPage() {
             </p>
             <p className="ml-4">
               <strong>Email:</strong>{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="text-starlight hover:underline">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="text-starlight hover:underline">
+                hello@moonlstudios.com
               </a>
               <br />
               <strong>Location:</strong> Colorado, USA

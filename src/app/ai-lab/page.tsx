@@ -121,6 +121,28 @@ function ComputerVisionDemo() {
         body: JSON.stringify({ image: imageData }),
       });
 
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+
+        if (response.status === 429) {
+          setAnalysis({
+            description: data?.message ?? "This demo has temporarily reached its safe usage limit. Please try again in a few minutes.",
+            objects: [],
+            scene: '',
+            colors: [],
+          });
+        } else {
+          setAnalysis({
+            description: "Something went wrong analyzing this image. Please try again or contact me if this keeps happening.",
+            objects: [],
+            scene: '',
+            colors: [],
+          });
+        }
+        setIsAnalyzing(false);
+        return;
+      }
+
       const data = await response.json();
       setAnalysis(data.analysis);
     } catch (error) {
@@ -211,6 +233,26 @@ function RAGDemo() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query }),
       });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+
+        if (response.status === 429) {
+          setResult({
+            answer: data?.message ?? "This demo has temporarily reached its safe usage limit. Please try again in a few minutes.",
+            sources: [],
+            confidence: 0,
+          });
+        } else {
+          setResult({
+            answer: "Something went wrong while searching. Please try again.",
+            sources: [],
+            confidence: 0,
+          });
+        }
+        setIsSearching(false);
+        return;
+      }
 
       const data = await response.json();
       setResult(data.result);
@@ -314,6 +356,26 @@ function HealthcareTriageDemo() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ symptoms, age }),
       });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+
+        if (response.status === 429) {
+          setTriage({
+            level: 'routine',
+            recommendation: data?.message ?? "This demo has temporarily reached its safe usage limit.",
+            reasoning: "Please try again in a few minutes, or contact our team for a real consultation.",
+          });
+        } else {
+          setTriage({
+            level: 'routine',
+            recommendation: "Unable to analyze symptoms. Please consult a healthcare professional.",
+            reasoning: "",
+          });
+        }
+        setIsAnalyzing(false);
+        return;
+      }
 
       const data = await response.json();
       setTriage(data.triage);
@@ -442,6 +504,18 @@ function VoiceSalesDemo() {
         body: JSON.stringify({ message: messageToSend, history: messages }),
       });
 
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const errorMsg = response.status === 429
+          ? (data?.message ?? "Echo needs a breather! Please try again in a few minutes.")
+          : "I apologize, I'm having trouble connecting. Please try again.";
+
+        const errorMessage: ChatMessage = { role: 'assistant', content: errorMsg };
+        setMessages(prev => [...prev, errorMessage]);
+        setIsTyping(false);
+        return;
+      }
+
       const data = await response.json();
       const assistantMessage: ChatMessage = { role: 'assistant', content: data.reply };
       setMessages(prev => [...prev, assistantMessage]);
@@ -500,6 +574,16 @@ function VoiceSalesDemo() {
             method: 'POST',
             body: formData,
           });
+
+          if (!response.ok) {
+            const data = await response.json().catch(() => null);
+            if (response.status === 429) {
+              alert(data?.message ?? 'Voice transcription limit reached. Please type your message instead.');
+            } else {
+              alert('Failed to transcribe audio. Please try typing instead.');
+            }
+            return;
+          }
 
           const data = await response.json();
           if (data.text) {

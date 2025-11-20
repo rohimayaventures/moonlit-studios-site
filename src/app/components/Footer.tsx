@@ -114,8 +114,8 @@ export function Footer() {
           <div className="space-y-2 text-sm">
             <p>
               <span className="text-lunarGold">Email:</span>{" "}
-              <a href="mailto:hello@moonlitstudios.com" className="transition-colors hover:text-starlight">
-                hello@moonlitstudios.com
+              <a href="mailto:hello@moonlstudios.com" className="transition-colors hover:text-starlight">
+                hello@moonlstudios.com
               </a>
             </p>
             <p>

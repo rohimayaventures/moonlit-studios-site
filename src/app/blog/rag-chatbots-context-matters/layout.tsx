@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description:
       "Your business needs an AI that understands YOUR context. How RAG changes everything.",
     type: "article",
-    url: "https://www.moonlitstudios.com/blog/rag-chatbots-context-matters",
+    url: "https://www.moonlstudios.com/blog/rag-chatbots-context-matters",
     publishedTime: "2025-01-10T00:00:00.000Z",
     authors: ["Hannah Pagade"],
     tags: ["AI", "RAG", "Chatbots", "Business Automation", "OpenAI"],
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/blog/rag-chatbots-context-matters",
+    canonical: "https://www.moonlstudios.com/blog/rag-chatbots-context-matters",
   },
 };
 

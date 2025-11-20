@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
-import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import {
+  rateLimit,
+  getClientIdentifier,
+  addRateLimitHeaders,
+  isAiLabDemoMode,
+  getAiLabConfig,
+} from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -57,21 +63,42 @@ Author platforms, books, cookbooks, and ongoing written content done in your voi
 "Where Dreams Surface and Ideas Flow" - Moonlit Studios combines the adaptability of water (inspired by Avatar: The Last Airbender) with the precision of technical excellence. Every project is approached with patience, balance, and a focus on healing broken systems.
 
 ## Contact
-Email: hello@moonlitstudios.com
+Email: hello@moonlstudios.com
 `;
 
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting - AI operations
+    // AI Lab specific rate limiting
     const identifier = getClientIdentifier(req);
-    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+    const config = getAiLabConfig('rag');
+    const rateLimitResult = rateLimit(`ai-lab:rag:${identifier}`, config);
 
     if (!rateLimitResult.success) {
       const headers = new Headers();
       addRateLimitHeaders(headers, rateLimitResult);
       return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
+        {
+          error: 'rate_limited',
+          message: 'This demo has reached its safe usage limit. Please try again in a few minutes.',
+        },
         { status: 429, headers }
+      );
+    }
+
+    // Demo mode - return mocked response
+    if (isAiLabDemoMode()) {
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+      return NextResponse.json(
+        {
+          result: {
+            answer: "Demo mode: Moonlit Studios offers five service suites: Creative Design & Development, Health x Tech Development, AI Innovation, Consulting, and Author & Ghostwriting Studio. Each combines The Nurse Who Codes' clinical expertise with cutting-edge tech.",
+            sources: ['Demo Knowledge Base: Services Overview', 'Demo: About Moonlit Studios'],
+            confidence: 92,
+          },
+          success: true,
+        },
+        { headers }
       );
     }
 
@@ -130,6 +157,9 @@ ${KNOWLEDGE_BASE}`,
       sources.push('General Knowledge Base');
     }
 
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
     return NextResponse.json({
       result: {
         answer: answerText,
@@ -137,7 +167,7 @@ ${KNOWLEDGE_BASE}`,
         confidence,
       },
       success: true,
-    });
+    }, { headers });
   } catch (error) {
     console.error('RAG search error:', error);
     return NextResponse.json(

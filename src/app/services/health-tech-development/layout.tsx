@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Built by The Nurse Who Codes. Patient portals, clinical tools, HIPAA platforms, telehealth. 15+ years bedside experience meets full-stack mastery.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/health-tech-development",
+    url: "https://www.moonlstudios.com/services/health-tech-development",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/health-tech-development",
+    canonical: "https://www.moonlstudios.com/services/health-tech-development",
   },
 };
 

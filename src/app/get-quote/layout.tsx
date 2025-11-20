@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Answer a few questions, get instant pricing. AI-powered quote generator for web dev, AI solutions, healthcare tech, and creative projects.",
     type: "website",
-    url: "https://www.moonlitstudios.com/get-quote",
+    url: "https://www.moonlstudios.com/get-quote",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/get-quote",
+    canonical: "https://www.moonlstudios.com/get-quote",
   },
 };
 

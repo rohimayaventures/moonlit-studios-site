@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
   description:
     "Award-winning full-stack development, AI innovation, and healthcare tech solutions. 15+ years healthcare ops turned tech mastery. HIPAA-compliant platforms, RAG chatbots, voice AI & creative design.",
-  metadataBase: new URL("https://www.moonlitstudios.com"),
+  metadataBase: new URL("https://www.moonlstudios.com"),
   keywords: [
     "full-stack developer",
     "AI development",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.moonlitstudios.com",
+    url: "https://www.moonlstudios.com",
     siteName: "Moonlit Studios",
     title: "Moonlit Studios - The Nurse Who Codes",
     description:
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com",
+    canonical: "https://www.moonlstudios.com",
   },
 };
 

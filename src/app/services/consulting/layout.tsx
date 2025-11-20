@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description:
       "Strategic consulting for founders & teams. Code reviews, architecture, mentoring, project rescue. 15+ years operations + full-stack mastery.",
     type: "website",
-    url: "https://www.moonlitstudios.com/services/consulting",
+    url: "https://www.moonlstudios.com/services/consulting",
     images: [
       {
         url: "/og-image.png",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.moonlitstudios.com/services/consulting",
+    canonical: "https://www.moonlstudios.com/services/consulting",
   },
 };
 
