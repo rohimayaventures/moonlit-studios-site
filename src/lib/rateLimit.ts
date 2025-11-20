@@ -129,6 +129,13 @@ export const rateLimitConfigs = {
 
   // AI operations - higher limits but longer window
   ai: { limit: 20, window: 300000 }, // 20 requests per 5 minutes
+
+  // AI Lab specific configs (10 minutes window for demos)
+  aiLabVision: { limit: 5, window: 600000 }, // 5 per 10 min
+  aiLabVoice: { limit: 5, window: 600000 }, // 5 per 10 min
+  aiLabSales: { limit: 10, window: 600000 }, // 10 per 10 min
+  aiLabRag: { limit: 15, window: 600000 }, // 15 per 10 min
+  aiLabTriage: { limit: 10, window: 600000 }, // 10 per 10 min
 };
 
 /**
@@ -160,4 +167,44 @@ export function addRateLimitHeaders(
   headers.set('X-RateLimit-Reset', new Date(result.reset).toISOString());
 
   return headers;
+}
+
+/**
+ * Check if AI Lab demo mode is enabled
+ * When true, returns mocked responses instead of calling real AI APIs
+ */
+export function isAiLabDemoMode(): boolean {
+  return process.env.AI_LAB_DEMO_MODE === 'true';
+}
+
+/**
+ * Get AI Lab rate limit config from environment or use defaults
+ */
+export function getAiLabConfig(endpoint: 'vision' | 'voice' | 'sales' | 'rag' | 'triage') {
+  const envMap = {
+    vision: 'AI_LAB_VISION_LIMIT',
+    voice: 'AI_LAB_VOICE_LIMIT',
+    sales: 'AI_LAB_SALES_LIMIT',
+    rag: 'AI_LAB_RAG_LIMIT',
+    triage: 'AI_LAB_TRIAGE_LIMIT',
+  };
+
+  const configMap = {
+    vision: rateLimitConfigs.aiLabVision,
+    voice: rateLimitConfigs.aiLabVoice,
+    sales: rateLimitConfigs.aiLabSales,
+    rag: rateLimitConfigs.aiLabRag,
+    triage: rateLimitConfigs.aiLabTriage,
+  };
+
+  const envKey = envMap[endpoint];
+  const defaultConfig = configMap[endpoint];
+
+  const envLimit = process.env[envKey];
+  const limit = envLimit ? parseInt(envLimit, 10) : defaultConfig.limit;
+
+  return {
+    limit: isNaN(limit) ? defaultConfig.limit : limit,
+    window: defaultConfig.window,
+  };
 }

@@ -1,27 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createLogger } from "@/lib/logger";
 import Anthropic from '@anthropic-ai/sdk';
-import { rateLimit, getClientIdentifier, rateLimitConfigs, addRateLimitHeaders } from '@/lib/rateLimit';
+import {
+  rateLimit,
+  getClientIdentifier,
+  addRateLimitHeaders,
+  isAiLabDemoMode,
+  getAiLabConfig,
+} from '@/lib/rateLimit';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+const log = createLogger('VisionAPI');
+
 export async function POST(req: NextRequest) {
   try {
-    // Rate limiting - AI operations
+    // AI Lab specific rate limiting
     const identifier = getClientIdentifier(req);
-    const rateLimitResult = rateLimit(identifier, rateLimitConfigs.ai);
+    const config = getAiLabConfig('vision');
+    const rateLimitResult = rateLimit(`ai-lab:vision:${identifier}`, config);
 
     if (!rateLimitResult.success) {
+      log.warn(`Rate limit exceeded for ${identifier}`);
       const headers = new Headers();
       addRateLimitHeaders(headers, rateLimitResult);
+
       return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429, headers }
+        {
+          error: 'rate_limited',
+          message: 'This demo has reached its safe usage limit. Please try again in a few minutes.',
+        },
+        {
+          status: 429,
+          headers,
+        }
       );
     }
 
+    // Demo mode - return mocked response
+    if (isAiLabDemoMode()) {
+      log.info('Demo mode active - returning mock vision analysis');
+      const headers = new Headers();
+      addRateLimitHeaders(headers, rateLimitResult);
+
+      return NextResponse.json(
+        {
+          analysis: {
+            description: "Demo mode: Detected a cozy workspace with a laptop, notebook, and warm drink. The scene features modern tech equipment in a comfortable, well-lit environment perfect for creative work.",
+            objects: ['laptop', 'coffee mug', 'notebook', 'desk', 'lamp'],
+            scene: 'indoor workspace',
+            colors: ['teal', 'gold', 'white', 'wood tones'],
+            text: 'Demo Mode Active',
+          },
+          success: true,
+        },
+        { headers }
+      );
+    }
+
+    // Real AI implementation
     const { image } = await req.json();
 
     if (!image || typeof image !== 'string') {
@@ -79,17 +118,23 @@ Format your response as a natural paragraph, then list specific details.`,
       ? response.content[0].text
       : 'Unable to analyze image';
 
-    return NextResponse.json({
-      analysis: {
-        description: analysisText,
-        objects: [],
-        scene: '',
-        colors: [],
+    const headers = new Headers();
+    addRateLimitHeaders(headers, rateLimitResult);
+
+    return NextResponse.json(
+      {
+        analysis: {
+          description: analysisText,
+          objects: [],
+          scene: '',
+          colors: [],
+        },
+        success: true,
       },
-      success: true,
-    });
+      { headers }
+    );
   } catch (error) {
-    console.error('Vision analysis error:', error);
+    log.error('Vision analysis error:', error);
     return NextResponse.json(
       { error: 'Failed to analyze image' },
       { status: 500 }
