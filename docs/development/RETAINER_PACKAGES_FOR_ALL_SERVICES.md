@@ -264,12 +264,12 @@ All retainer cards should use a consistent design pattern:
 ### Color Coding by Service Category
 
 To maintain visual consistency with each service page's theme:
-- **Creative Design & Development:** Cosmic purple/indigo/teal gradients
-- **Health x Tech Development:** Water tribe blue/teal gradients
-- **AI Innovation:** Cyber neon cyan/purple gradients
-- **Consulting:** Fire nation warm orange/gold gradients
-- **Ghostwriting:** Earthy brown/amber gradients
-- **Small Business:** Simplified starlight silver/gold gradients
+- **Creative Design & Development:** MOONLIT COSMIC CREATOR - Nebula Rose Gold (#F6CBAA), Starlight Blue (#6FB6E7), Aurora Green (#A1F0D1), Cosmic Violet (#5148A2), Deep Night Blue (#0D1323)
+- **Health x Tech Development:** WATER TRIBE HEALER - Healing Water Teal (#50D4D0), Spirit Glow Blue (#9FE8FF), Deep Ocean (#083B54), Moonwater Silver (#D5ECFA), Calm Mist Navy (#0A2330)
+- **AI Innovation:** SAO MIDNIGHT CYBER FANTASY - SAO Neon Teal (#00F5D4), Cyber Blue (#00A8E8), Deep Tech Navy (#020817), Photon Violet (#845EC2), Crystal White (#E6F7FF)
+- **Consulting:** LOTR COUNCIL CHAMBER - Elven Gold (#E9C97F), Ancient Parchment (#F4E9D2), Silverleaf Blue (#8CB7CF), Council Stone Gray (#2D3B45), Forest Shadow (#152022)
+- **Ghostwriting:** HOGWARTS CASTLE LIBRARY - Owlery Gold (#F0C979), Warm Parchment (#F5E7C8), Ink Plum (#5B335F), Midnight Stacks (#121528), Teal Enchantment (#58B6B1)
+- **Small Business:** GHIBLI VILLAGE - Forest Tea Green (#88C9A1), Sky Spirit Blue (#8AC7E6), Warm Lantern Gold (#F6D28F), Ghibli Cloud Cream (#FAF3E6), Night Meadow Indigo (#1A2B42)
 
 ---
 
