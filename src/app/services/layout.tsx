@@ -41,6 +41,9 @@ export const metadata: Metadata = {
       "5 service suites: Creative Design, Health x Tech, AI Innovation, Consulting, Ghostwriting.",
     images: ["/og-image.png"],
   },
+  alternates: {
+    canonical: "https://www.moonlitstudios.com/services",
+  },
 };
 
 export default function ServicesLayout({
