@@ -35,28 +35,32 @@ const crimson = Crimson_Text({
 });
 
 export const metadata: Metadata = {
-  title: "Moonlit Studios - The Nurse Who Codes | Full-Stack Development & AI Innovation",
+  title: "Moonlit Studios — Web Design, Branding, & AI Development",
   description:
-    "Award-winning full-stack development, AI innovation, and healthcare tech solutions. 15+ years healthcare ops turned tech mastery. HIPAA-compliant platforms, RAG chatbots, voice AI & creative design.",
+    "Moonlit Studios builds high-conversion websites, AI copilots, healthcare AI tools, brand identities, and creative tech solutions for founders, small businesses, and innovators. Built by The Nurse Who Codes™.",
   metadataBase: new URL("https://www.moonlstudios.com"),
   keywords: [
-    "full-stack developer",
+    "web design",
     "AI development",
-    "healthcare technology",
+    "AI engineer",
+    "small business branding",
+    "Colorado web designer",
+    "healthcare AI developer",
+    "Next.js developer",
+    "creative tech studio",
+    "Moonlit Studios",
+    "nurse who codes",
     "HIPAA compliant development",
     "RAG chatbots",
     "voice AI",
-    "Next.js developer",
-    "React developer",
     "healthcare UX",
-    "nurse developer",
     "AI innovation",
     "custom web development",
-    "healthtech solutions",
-    "clinical workflow tools",
-    "ghostwriting services"
+    "brand identity design",
+    "Denver web design",
+    "Colorado AI development"
   ],
-  authors: [{ name: "Moonlit Studios" }],
+  authors: [{ name: "Moonlit Studios" }, { name: "The Nurse Who Codes" }],
   creator: "Moonlit Studios - The Nurse Who Codes",
   publisher: "Moonlit Studios",
   icons: {
@@ -74,9 +78,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.moonlstudios.com",
     siteName: "Moonlit Studios",
-    title: "Moonlit Studios - The Nurse Who Codes",
+    title: "Moonlit Studios — Web Design, Branding, & AI Development",
     description:
-      "Full-stack development, AI innovation, and healthcare tech. From 15+ years healthcare ops to cutting-edge AI solutions. HIPAA-compliant platforms, RAG systems, voice AI.",
+      "Moonlit Studios builds high-conversion websites, AI copilots, healthcare AI tools, brand identities, and creative tech solutions for founders, small businesses, and innovators. Built by The Nurse Who Codes™.",
     images: [
       {
         url: "/og-image.png",
@@ -88,10 +92,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moonlit Studios - The Nurse Who Codes",
+    title: "Moonlit Studios — Web Design, Branding, & AI Development",
     description:
-      "Full-stack development, AI innovation, healthcare tech. 15+ years clinical experience meets cutting-edge development.",
+      "High-conversion websites, AI copilots, healthcare AI tools, and brand identities. Built by The Nurse Who Codes™.",
     images: ["/og-image.png"],
+    creator: "@moonlitstudios",
   },
   robots: {
     index: true,
@@ -106,6 +111,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://www.moonlstudios.com",
+  },
+  other: {
+    'theme-color': '#0a1929',
   },
 };
 

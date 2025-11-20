@@ -17,7 +17,10 @@ export const metadata: Metadata = {
     "brand development",
     "tech consulting services",
     "ghostwriting services",
-    "author website development"
+    "author website development",
+    "Colorado web development",
+    "Denver tech services",
+    "Colorado AI developer"
   ],
   openGraph: {
     title: "Services - Full-Stack Development & AI Innovation | Moonlit Studios",

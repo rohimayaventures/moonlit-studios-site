@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "writer and coder",
     "healthcare tech consultant",
     "digital transformation specialist",
+    "Colorado developer",
+    "Denver software engineer",
   ],
   openGraph: {
     title: "About - The Moonlit Archives | Moonlit Studios",

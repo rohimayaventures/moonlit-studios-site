@@ -59,12 +59,14 @@ export function StructuredData({ type, data }: StructuredDataProps) {
           priceRange: '$$$',
           address: {
             '@type': 'PostalAddress',
+            addressLocality: 'Denver',
+            addressRegion: 'CO',
             addressCountry: 'US',
           },
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: '',
-            longitude: '',
+            latitude: '39.7392',
+            longitude: '-104.9903',
           },
           openingHoursSpecification: {
             '@type': 'OpeningHoursSpecification',
@@ -92,10 +94,20 @@ export function StructuredData({ type, data }: StructuredDataProps) {
             'Brand Design',
             'Ghostwriting',
           ],
-          serviceArea: {
-            '@type': 'Place',
-            name: 'Worldwide',
-          },
+          serviceArea: [
+            {
+              '@type': 'State',
+              name: 'Colorado',
+            },
+            {
+              '@type': 'Country',
+              name: 'United States',
+            },
+            {
+              '@type': 'Place',
+              name: 'Worldwide',
+            },
+          ],
           aggregateRating: {
             '@type': 'AggregateRating',
             ratingValue: '5.0',

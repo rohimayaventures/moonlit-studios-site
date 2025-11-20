@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "web design pricing",
     "small business solutions",
     "affordable tech services",
+    "Colorado small business website",
+    "Denver local business web design",
   ],
   openGraph: {
     title: "Small Business Packages - Studio Ghibli Journeys | Moonlit Studios",
