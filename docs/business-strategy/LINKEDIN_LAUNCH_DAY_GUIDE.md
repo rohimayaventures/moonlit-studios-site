@@ -210,6 +210,107 @@ AI Demos: moonlstudios.com/ai-lab
 
 ---
 
+#### **7. Your Website Branding Elements to Reference**
+
+**Use these in your LinkedIn content for consistency:**
+
+**Main Tagline:**
+> "Where Dreams Surface and Ideas Flow"
+
+**Alternative Taglines from Homepage:**
+- "The Nurse Who Codes" (primary identity)
+- "15 years of clinical operations meets full-stack mastery"
+- "Four AI systems. Five creative realms. Infinite possibilities under moonlight."
+
+**Website Layout/Navigation Structure:**
+- 🌙 **The Moonlit Archives** (About) - "From bedside nurse to bending master"
+- 🌊 **The Five Bending Paths** (Services) - Water/Earth/Fire/Air/Spirit themes (ATLA)
+- 📖 **Chronicles of the Realms** (Portfolio) - LOTR-themed 6 realms
+- ⚡ **The AI Battle System** (AI Lab) - SAO-themed gaming interface
+- 📧 **Send a Howler** (Contact) - Harry Potter Owlery theme
+
+**Moon Phase Philosophy:**
+Your site uses 5 moon phases to represent the journey:
+1. New Moon - Journey Begins
+2. Waxing Crescent - Growing Dreams
+3. Full Moon - Peak Power (current state)
+4. Waning Crescent - Infinite Potential
+5. New Moon - New Beginnings
+
+**ALL SERVICE CATEGORIES & PRICING:**
+
+### **1. CREATIVE DESIGN & DEVELOPMENT** (Has Stardust/Nebula/Supernova Tiers)
+**Service Tiers:**
+- ⭐ **Stardust** (Essential) - $800-$3,000
+- 🌌 **Nebula** (Professional) - $1,200-$5,500 ⭐ Most Popular
+- 💫 **Supernova** (Premium) - $4,500-$8,500
+
+**Specific Services:**
+- **Packaging & Product Design:** Stardust $800, Nebula $1,200
+- **Branding & Identity:** Stardust $1,800, Nebula $2,800, Supernova $4,500
+- **Web Development:** Stardust $3,000 (3 pages), Nebula $5,500 (5-7 pages), Supernova $8,500 (7+ pages, e-commerce)
+- **Creative Copywriting:** $125/hr or packaged ($600-$1,500)
+
+### **2. HEALTH x TECH DEVELOPMENT** (Project-based pricing)
+**Range:** $4,500 - $15,000
+**Services:**
+- Clinical Workflow Solutions (dashboards, triage systems, team messaging)
+- Patient-Facing Applications (portals, recovery apps, symptom tracking)
+- Telehealth Platforms (video visits, e-prescriptions, secure messaging)
+
+### **3. AI INNOVATION SUITE** (Project-based pricing)
+**Range:** $5,000 - $18,000
+**Services:**
+- **AI Product Architecture:** $5,000-$8,000
+- **Conversational AI (Chatbots/Voice):** $8,000-$12,000
+- **RAG Systems (Knowledge Bases):** $10,000-$15,000
+- **Computer Vision:** $12,000-$18,000
+
+### **4. CONSULTING** (Hourly or packaged)
+**Hourly Rate:** $150-$200/hr
+**Packaged Services:**
+- **Discovery Sprint:** $3,000 (strategy workshop, research, roadmap)
+- **UX Audit:** $2,500 (evaluation, recommendations)
+- **Product Strategy:** $5,000 (positioning, GTM planning)
+
+### **5. AUTHOR & GHOSTWRITING STUDIO**
+**Range:** $200/post - $50,000/book
+**Services:**
+- **Ongoing Content:** $250-$600/deliverable (blog posts, newsletters, social)
+- **Full Books:** $18,000-$50,000 (cookbooks, memoirs, business books, novels)
+- **Author Platforms:** $4,000-$10,000 (book landing pages, reader hubs)
+
+### **6. SMALL BUSINESS (Simplified Homepage Offers)**
+These are entry-level packages across services:
+- **Small Business Launch Package:** $1,500+ (web development focused)
+- **AI Development Starter:** $1,200+ (one focused AI build)
+- **Health-Tech Setup and Advisory:** $1,800+ (strategy + implementation)
+- **Website Revamp Sprint:** $950+ (redesign/restructure existing site)
+
+**Retainer Packages:**
+- Website Maintenance ($500-$750/mo)
+- E-Commerce Maintenance ($1,000-$1,500/mo)
+- AI Copilot Tuning ($1,500-$2,500/mo)
+- Healthcare Platform Support ($3,000-$5,000/mo)
+
+**Key Website Differentiators to Mention:**
+✨ AI-powered 60-second quote generator
+✨ 4 live AI demos (no signup required)
+✨ Client portal (file-based, zero monthly cost)
+✨ Transparent pricing (no "contact us for pricing")
+✨ Studio Ghibli UX philosophy (cozy, no aggressive popups)
+✨ Water bending aesthetic (ATLA-inspired adaptability)
+
+**Use these phrases in LinkedIn posts:**
+- "Where healthcare expertise meets modern tech"
+- "HIPAA-compliant by experience, not certification"
+- "Built by a nurse, for clinicians"
+- "AI systems designed for humans, not just algorithms"
+- "Healthcare-grade attention to detail"
+- "Small business pricing that actually makes sense"
+
+---
+
 ## 🗓️ LAUNCH DAY TIMELINE
 
 ### **Morning (8:00 AM - 12:00 PM MT)**
