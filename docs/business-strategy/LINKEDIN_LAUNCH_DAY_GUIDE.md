@@ -337,6 +337,72 @@ These are entry-level packages across services:
 
 ---
 
+#### **8. Essential URLs for LinkedIn Promotion**
+
+**Use these URLs in your LinkedIn posts, comments, and profile:**
+
+**🏠 Main Pages:**
+- **Homepage:** https://www.moonlstudios.com
+- **About (Moonlit Archives):** https://www.moonlstudios.com/about
+- **Contact (Send a Howler):** https://www.moonlstudios.com/contact
+- **Portfolio (Chronicles):** https://www.moonlstudios.com/portfolio
+
+**🎯 High-Value Conversion Pages:**
+- **AI Lab (SHOWCASE THIS!):** https://www.moonlstudios.com/ai-lab
+- **Get Quote (60-second AI quotes):** https://www.moonlstudios.com/get-quote
+- **Client Portal:** https://www.moonlstudios.com/portal
+
+**📖 Service Pages (The Five Bending Paths):**
+- **Creative Design & Development:** https://www.moonlstudios.com/services/creative-design-development
+- **Health x Tech Development:** https://www.moonlstudios.com/services/health-tech-development
+- **AI Innovation Suite:** https://www.moonlstudios.com/services/ai-innovation
+- **Consulting:** https://www.moonlstudios.com/services/consulting
+- **Author & Ghostwriting Studio:** https://www.moonlstudios.com/services/ghostwriting
+- **Small Business:** https://www.moonlstudios.com/services/small-business
+
+**📝 Blog Posts (Share these for thought leadership):**
+- **Top 7 AI Tools 2025:** https://www.moonlstudios.com/blog/top-7-ai-tools-2025
+- **How AI Saves 10 Hours/Week:** https://www.moonlstudios.com/blog/how-ai-saves-10-hours-per-week
+- **Small Business Guide to AI 2025:** https://www.moonlstudios.com/blog/small-business-guide-to-ai-2025
+- **Blog Index:** https://www.moonlstudios.com/blog
+
+**🔗 Booking & Scheduling:**
+- **Calendly (30-min consultation):** https://calendly.com/pagadeventures/30min
+- **Email:** hello@moonlstudios.com
+
+**📱 Social Proof & Legal:**
+- **Legal Pages:** https://www.moonlstudios.com/legal
+- **Privacy Policy:** https://www.moonlstudios.com/legal/privacy-policy
+- **Terms of Service:** https://www.moonlstudios.com/legal/terms-of-service
+
+**💡 UTM Parameters for Tracking (Use these in LinkedIn posts):**
+```
+Example for AI Lab:
+https://www.moonlstudios.com/ai-lab?utm_source=linkedin&utm_medium=social&utm_campaign=launch_week1
+
+Example for Get Quote:
+https://www.moonlstudios.com/get-quote?utm_source=linkedin&utm_medium=social&utm_campaign=launch_week1
+
+Example for specific service:
+https://www.moonlstudios.com/services/ai-innovation?utm_source=linkedin&utm_medium=profile&utm_campaign=organic
+```
+
+**🎯 Best URLs to Feature in LinkedIn Posts:**
+1. **AI Lab** - Most impressive, interactive proof of capability
+2. **Get Quote** - Low friction, instant gratification
+3. **Blog Posts** - Thought leadership, sharable content
+4. **Portfolio** - Visual proof of work
+5. **Service Pages** - When targeting specific audiences
+
+**📍 LinkedIn Profile Featured Section:**
+Add these as featured links on your LinkedIn profile:
+1. **Moonlit Studios Website** (homepage)
+2. **Try My AI Lab** (ai-lab page)
+3. **Get Instant Quote** (get-quote page)
+4. **Latest Blog Post** (rotate monthly)
+
+---
+
 ## 🗓️ LAUNCH DAY TIMELINE
 
 ### **Morning (8:00 AM - 12:00 PM MT)**
