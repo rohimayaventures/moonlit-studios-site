@@ -126,7 +126,7 @@ export function Header() {
         </nav>
 
         {/* MOBILE Navigation - Horizontal Scrollable Magic */}
-        <nav className="md:hidden flex-1 ml-4 overflow-x-auto scrollbar-hide" aria-label="Mobile navigation">
+        <nav className="md:hidden flex-1 ml-4 overflow-x-auto scrollbar-mobile" aria-label="Mobile navigation">
           <div className="flex gap-3 items-center min-w-max px-2">
             {navLinks.map((link) => (
               <Link
@@ -169,14 +169,25 @@ export function Header() {
         </nav>
       </div>
 
-      {/* Custom scrollbar hide for mobile navigation */}
+      {/* Custom scrollbar styling for mobile navigation */}
       <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+        .scrollbar-mobile {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(94, 234, 212, 0.3) rgba(15, 23, 42, 0.5);
         }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
+        .scrollbar-mobile::-webkit-scrollbar {
+          height: 6px;
+        }
+        .scrollbar-mobile::-webkit-scrollbar-track {
+          background: rgba(15, 23, 42, 0.5);
+          border-radius: 3px;
+        }
+        .scrollbar-mobile::-webkit-scrollbar-thumb {
+          background: rgba(94, 234, 212, 0.3);
+          border-radius: 3px;
+        }
+        .scrollbar-mobile::-webkit-scrollbar-thumb:hover {
+          background: rgba(94, 234, 212, 0.5);
         }
       `}</style>
     </header>
