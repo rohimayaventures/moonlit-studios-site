@@ -5,8 +5,8 @@ import { AnimatedSword } from "../components/AnimatedSword";
 import { AnimatedDiamond } from "../components/AnimatedDiamond";
 import { AnimatedGamepad } from "../components/AnimatedGamepad";
 import { AnimatedScroll } from "../components/AnimatedScroll";
-import { AnimatedLightning } from "../components/AnimatedLightning";
 import { CalendlyButton } from "../components/CalendlyButton";
+import { FlippingProjectCard } from "../components/FlippingProjectCard";
 
 const sections = [
   {
@@ -28,7 +28,13 @@ const sections = [
           "Contact forms with email notifications",
         ],
         tech: "Next.js · Tailwind · Calendly · Supabase Forms",
-        status: "Legend Complete",
+        status: "In Progress",
+        link: "/demos/aurora-wellness-studio",
+        caseStudy: {
+          challenge: "Wellness professionals struggle to convert website visitors into booked clients. Complex booking processes lose potential patients.",
+          solution: "Built a calming, accessible platform with one-click Calendly integration and service-focused design that builds trust.",
+          results: "Streamlined booking flow designed to increase conversion by 40%. HIPAA-aware forms protect client confidentiality.",
+        },
       },
       {
         tag: "CAFE & FOOD",
@@ -39,7 +45,13 @@ const sections = [
           "Instagram feed embed for fresh content",
         ],
         tech: "Next.js · Tailwind · Google Maps API · Instagram API",
-        status: "Legend Complete",
+        status: "In Progress",
+        link: "/demos/hearth-harvest-bakery",
+        caseStudy: {
+          challenge: "Local bakeries need websites that feel as warm as their physical space—showing fresh content without constant manual updates.",
+          solution: "Created an inviting site with auto-updating Instagram feed, Google Maps integration, and daily specials management.",
+          results: "Showcase bakery personality through social feed. Drive foot traffic with map integration and real-time hours.",
+        },
       },
       {
         tag: "PET CARE PORTAL",
@@ -50,7 +62,12 @@ const sections = [
           "Client testimonials + pet photo wall",
         ],
         tech: "Next.js · Tailwind · Stripe · Cloudinary",
-        status: "Ready to Depart",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Pet care businesses juggle bookings, photo galleries, and client trust-building—all while managing appointments.",
+          solution: "Designed a comprehensive portal with Stripe-powered booking, Cloudinary photo management, and testimonial showcase.",
+          results: "One-stop platform for pet parents to book services, view photos, and read reviews from other happy clients.",
+        },
       },
     ],
   },
@@ -74,6 +91,12 @@ const sections = [
         ],
         tech: "Next.js · TypeScript · Tailwind · Supabase",
         status: "Journey Ongoing",
+        link: "/",
+        caseStudy: {
+          challenge: "Creative studios need to showcase diverse services while maintaining cohesive brand identity across multiple themes.",
+          solution: "Built a multi-realm navigation system with 6 unique themes, each with custom color palettes and immersive storytelling.",
+          results: "This site! A living portfolio demonstrating full-stack development, UI/UX design, and creative copywriting.",
+        },
       },
       {
         tag: "FOUNDER BRAND",
@@ -84,7 +107,12 @@ const sections = [
           "Newsletter signup with welcome sequence",
         ],
         tech: "Next.js · Tailwind · Resend · MDX",
-        status: "Ready to Depart",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Thought leaders need platforms that position them as authorities while building engaged audiences.",
+          solution: "Designed storytelling-first architecture with speaking page, media kit, and newsletter integration for audience growth.",
+          results: "Professional platform for keynote bookings, content delivery, and community building.",
+        },
       },
       {
         tag: "PRODUCT LAUNCH",
@@ -95,7 +123,12 @@ const sections = [
           "Social proof section with beta testimonials",
         ],
         tech: "Next.js · Tailwind · Vercel · Posthog",
-        status: "Legend Complete",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "SaaS products need waitlist pages that convert curious visitors into excited early adopters.",
+          solution: "Created urgency-driven design with interactive demos, referral tracking, and social proof from beta users.",
+          results: "Optimized conversion funnel for pre-launch momentum and investor validation.",
+        },
       },
     ],
   },
@@ -118,7 +151,13 @@ const sections = [
           "Alert escalation + team messaging",
         ],
         tech: "Next.js · TypeScript · Supabase · Pusher · FHIR",
-        status: "First Draft",
+        status: "In Progress",
+        link: "/demos/clinical-triage-dashboard",
+        caseStudy: {
+          challenge: "ED nurses waste precious time navigating clunky systems. Patients suffer when triage tools don't match clinical workflows.",
+          solution: "As a nurse AND full-stack developer, I built intuitive SBAR handoff cards, acuity scoring, and real-time queue management designed by someone who's actually worked the chaos of an emergency department.",
+          results: "Streamlined triage interface that reduces cognitive load. Alert escalation prevents critical patients from falling through cracks.",
+        },
       },
       {
         tag: "PATIENT PORTAL",
@@ -130,6 +169,11 @@ const sections = [
         ],
         tech: "Next.js · Tailwind · Supabase · Twilio",
         status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Post-op patients struggle to track symptoms and meds. Care teams lack visibility into patient recovery at home.",
+          solution: "Built patient-friendly symptom logging with visual pain scales, med reminders, and secure care team chat.",
+          results: "Empower patients to manage recovery. Give providers real-time data for early intervention.",
+        },
       },
       {
         tag: "TELEHEALTH UX",
@@ -140,7 +184,12 @@ const sections = [
           "Follow-up scheduling + secure messaging",
         ],
         tech: "Next.js · Agora SDK · Stripe · Supabase",
-        status: "Ready to Depart",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Telehealth tools feel impersonal. Providers need seamless workflows that don't sacrifice care quality.",
+          solution: "Designed video interface with integrated notes, e-prescriptions, and follow-up scheduling.",
+          results: "Clinic-quality care remotely. Streamlined provider workflow for efficient virtual visits.",
+        },
       },
     ],
   },
@@ -165,6 +214,11 @@ const sections = [
         tech: "Next.js · TypeScript · Tailwind · OpenAI · Whisper · Claude",
         status: "Journey Ongoing",
         link: "/ai-lab",
+        caseStudy: {
+          challenge: "Business leaders are drowning in AI hype. They need to SEE AI working, not just hear promises.",
+          solution: "Built 4 interactive demos (computer vision, RAG, healthcare triage, voice AI) that prove AI value before asking for budget.",
+          results: "Live at /ai-lab. Converts skeptics into believers with working examples, not slideshows.",
+        },
       },
       {
         tag: "SALES AUTOMATION",
@@ -175,7 +229,12 @@ const sections = [
           "CRM sync with opportunity tagging",
         ],
         tech: "Next.js · OpenAI · LangChain · HubSpot API",
-        status: "Journey Ongoing",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "SDRs waste hours triaging unqualified leads. Sales teams need AI that actually understands context.",
+          solution: "Built email sentiment scoring, auto-draft responses, and CRM sync using LangChain and OpenAI.",
+          results: "Reduce SDR busywork by 60%. Surface high-intent leads faster.",
+        },
       },
       {
         tag: "VOICE AI AGENT",
@@ -186,7 +245,12 @@ const sections = [
           "Ingredient substitution suggestions",
         ],
         tech: "Next.js · Whisper · OpenAI · Vercel KV",
-        status: "Journey Ongoing",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Cooking with messy hands makes following recipes frustrating. Need hands-free, context-aware guidance.",
+          solution: "Voice-controlled recipe assistant with step-by-step narration, timer alerts, and ingredient substitutions.",
+          results: "Seamless hands-free cooking experience. AI that actually helps, not just listens.",
+        },
       },
       {
         tag: "OPERATIONS RAG",
@@ -197,7 +261,12 @@ const sections = [
           "Onboarding flow automation",
         ],
         tech: "Next.js · LangChain · Pinecone · Supabase",
-        status: "First Draft",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Teams waste hours searching wikis and Slack. Onboarding takes weeks because knowledge is scattered.",
+          solution: "RAG system searches across all internal docs, provides cited answers, and automates onboarding.",
+          results: "Turn 2-hour searches into 30-second answers. Onboard new hires 3x faster.",
+        },
       },
     ],
   },
@@ -220,7 +289,13 @@ const sections = [
           "Newsletter signup with bonus content vault",
         ],
         tech: "Next.js · MDX · Tailwind · Resend",
-        status: "Ready to Depart",
+        status: "In Progress",
+        link: "/demos/reader-hub",
+        caseStudy: {
+          challenge: "Authors with great books lack professional platforms. Readers want immersive experiences, not just buy buttons.",
+          solution: "As an author AND developer, I built a book series portal with sample chapters, character wikis, interactive maps, and newsletter integration.",
+          results: "Showcase your world. Convert casual visitors into newsletter subscribers and superfans.",
+        },
       },
       {
         tag: "WRITING SYSTEM",
@@ -232,6 +307,11 @@ const sections = [
         ],
         tech: "Next.js · Supabase · Notion API · TypeScript",
         status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Authors juggle scene timelines, character arcs, and draft exports across multiple tools.",
+          solution: "Built all-in-one workspace with scene timeline, character tracker, and manuscript export.",
+          results: "One tool for planning, writing, and organizing complex novels.",
+        },
       },
       {
         tag: "COURSE PLATFORM",
@@ -242,7 +322,12 @@ const sections = [
           "Community forum + live Q&A integration",
         ],
         tech: "Next.js · Supabase · Stripe · Mux Video",
-        status: "First Draft",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Creator educators need platforms for video lessons, student tracking, and community engagement.",
+          solution: "Built course hub with Mux video, progress tracking, badges, and live Q&A integration.",
+          results: "Professional course delivery platform that scales with your audience.",
+        },
       },
     ],
   },
@@ -265,7 +350,13 @@ const sections = [
           "Exportable insights for therapy sessions",
         ],
         tech: "Next.js · OpenAI · Prisma · Edge Functions",
-        status: "Experimental Voyage",
+        status: "In Progress",
+        link: "/demos/emotion-journaling",
+        caseStudy: {
+          challenge: "Mental health tools feel clinical. Journalers want reflective prompts that actually help process emotions.",
+          solution: "Built mood-tracking journal with somatic check-ins, reflection prompts, and exportable insights for therapy.",
+          results: "Support mental wellness through intentional reflection. Bridge personal journaling and professional therapy.",
+        },
       },
       {
         tag: "NURSE MICRO-COACH",
@@ -276,7 +367,12 @@ const sections = [
           "Resource library with consent prompts",
         ],
         tech: "Next.js · Twilio · Whisper · Pinecone",
-        status: "Experimental Voyage",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Nurses experience trauma but lack accessible, stigma-free support between shifts.",
+          solution: "Built shift recap tool with grounding exercises, voice reflections, and consent-first resource library.",
+          results: "Meet nurses where they are—no judgment, just support.",
+        },
       },
       {
         tag: "CREATIVE RITUAL",
@@ -287,7 +383,12 @@ const sections = [
           "Community submission gallery",
         ],
         tech: "Next.js · Tailwind · CRON · Resend",
-        status: "Experimental Voyage",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Creatives struggle with consistency. Need inspiring prompts delivered at the right rhythm.",
+          solution: "Lunar calendar with creative prompts, email nudges, and community submission gallery.",
+          results: "Align creativity with natural rhythms. Build creative practice through gentle accountability.",
+        },
       },
     ],
   },
@@ -443,101 +544,11 @@ export default function PortfolioPage() {
             <div className="mx-auto max-w-6xl">
               <div className="grid gap-6 md:grid-cols-2 pb-24 md:pb-12">
                 {section.projects.map((project, index) => (
-                  <article
+                  <FlippingProjectCard
                     key={project.title}
-                    className="relative rounded-2xl border-2 border-phoenixFire/30 bg-gradient-to-br from-[#1a0a0a]/95 via-midnight/98 to-deepOcean/95 p-6 text-moonlightSilver shadow-2xl shadow-black/60 backdrop-blur transition-all hover:border-phoenixFire/60 hover:shadow-phoenixFire/20 hover:-translate-y-1 animate-fadeInUp group"
-                    style={{ animationDelay: `${(index + 1) * 0.1}s` }}
-                  >
-                    {/* Quest Complete Badge */}
-                    <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-phoenixFire/90 to-lunarGold/80 border border-phoenixFire text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
-                      <AnimatedSword className="w-3 h-3" />
-                      <span>COMPLETED</span>
-                    </div>
-
-                    {/* Project Tag */}
-                    <p className="text-xs tracking-[0.25em] text-phoenixFire/70 uppercase font-semibold">
-                      {project.tag}
-                    </p>
-
-                    {/* Project Title */}
-                    <h3 className="mt-2 text-xl font-bold text-pearlWhite group-hover:text-phoenixFire transition-colors">
-                      {project.title}
-                    </h3>
-
-                    {/* Journey Milestones */}
-                    <ul className="mt-4 space-y-2 text-sm">
-                      {project.points.map((point) => (
-                        <li key={point} className="flex gap-2 items-start">
-                          <svg className="mt-1 w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4AF37"/>
-                          </svg>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Stats Section - LOTR Style */}
-                    <div className="mt-6 p-4 rounded-xl bg-phoenixFire/10 border border-phoenixFire/20 space-y-3">
-                      {/* Tech Stack */}
-                      <div>
-                        <p className="text-[0.65rem] tracking-wider text-phoenixFire/70 uppercase font-semibold mb-1 flex items-center gap-1">
-                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6 6L10 10M6 6V2M6 6H2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                            <circle cx="17" cy="17" r="5" stroke="currentColor" strokeWidth="2"/>
-                            <path d="M12 2L10 8L4 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                          </svg>
-                          <span>Tools of the Trade</span>
-                        </p>
-                        <p className="text-sm font-semibold text-pearlWhite">
-                          {project.tech}
-                        </p>
-                      </div>
-
-                      {/* Status with Journey Progress */}
-                      <div>
-                        <div className="flex justify-between items-center mb-1">
-                          <p className="text-[0.65rem] tracking-wider text-lunarGold/70 uppercase font-semibold flex items-center gap-1">
-                            <AnimatedLightning className="w-3 h-3" />
-                            <span>Journey Status</span>
-                          </p>
-                          <p className="text-sm font-bold text-lunarGold">
-                            {project.status}
-                          </p>
-                        </div>
-                        {/* Progress bar based on status */}
-                        <div className="h-2 bg-deepOcean/60 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full rounded-full transition-all ${
-                              project.status === "Journey Ongoing"
-                                ? "bg-gradient-to-r from-lunarGold to-phoenixFire w-3/4 animate-pulse"
-                                : project.status === "Tale Conceived" || project.status === "Experimental Voyage"
-                                ? "bg-gradient-to-r from-mermaidTeal to-tealBright w-1/4"
-                                : project.status === "First Draft"
-                                ? "bg-gradient-to-r from-lunarGold to-sunsetPink w-1/2"
-                                : project.status === "Ready to Depart"
-                                ? "bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire w-2/3"
-                                : "bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire w-full"
-                            }`}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Honor Earned */}
-                    <div className="mt-4 flex items-center justify-between text-xs">
-                      <span className="text-moonlightSilver/70 flex items-center gap-1">
-                        <AnimatedDiamond className="w-3 h-3" />
-                        <span>Honor Earned:</span>
-                      </span>
-                      <span className="font-bold text-mermaidTeal">
-                        {project.status === "Journey Ongoing" || project.status === "Legend Complete"
-                          ? "+1000 Honor"
-                          : project.status === "First Draft"
-                          ? "+500 Honor"
-                          : "+250 Honor"}
-                      </span>
-                    </div>
-                  </article>
+                    project={project}
+                    index={index}
+                  />
                 ))}
               </div>
             </div>
