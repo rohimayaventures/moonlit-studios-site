@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Mock menu items
 const menuCategories = [
@@ -65,6 +66,18 @@ export default function HearthHarvestBakery() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+      {/* Hero Image */}
+      <div className="mb-8 sm:mb-12 rounded-2xl overflow-hidden border-2 border-amber-400/30">
+        <Image
+          src="/demos/hearth-harvest-bakery/Hearth & Harvest Bakery Hero Homepage.png"
+          alt="Hearth & Harvest Bakery Homepage"
+          width={1920}
+          height={1080}
+          className="w-full h-auto"
+          priority
+        />
+      </div>
+
       {/* Hero Section - Mobile Responsive */}
       <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
         <div className="inline-block p-3 sm:p-4 rounded-full bg-gradient-to-br from-amber-400/20 to-green-400/20 mb-4 sm:mb-6">
@@ -181,19 +194,33 @@ export default function HearthHarvestBakery() {
         <div className="p-6 sm:p-8 rounded-2xl border-2 border-green-400/30 bg-gradient-to-br from-green-900/20 to-midnight/60">
           <h3 className="text-xl sm:text-2xl font-bold text-pearlWhite mb-4">Find Us</h3>
 
-          {/* Map Placeholder - Mobile Responsive */}
-          <div className="aspect-video bg-midnight/60 rounded-xl border border-moonlightSilver/20 flex items-center justify-center mb-4">
-            <div className="text-center p-6">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
-                <span className="text-2xl sm:text-3xl">📍</span>
+          {/* Google Maps Embed - Mobile Responsive */}
+          <div className="aspect-video rounded-xl overflow-hidden border border-moonlightSilver/20 mb-4">
+            {process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ? (
+              <iframe
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=Westminster,CO&zoom=15`}
+              />
+            ) : (
+              <div className="w-full h-full bg-midnight/60 flex items-center justify-center">
+                <div className="text-center p-6">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <span className="text-2xl sm:text-3xl">📍</span>
+                  </div>
+                  <p className="text-sm sm:text-base text-moonlightSilver/80 mb-2">
+                    <strong>Google Maps Integration</strong>
+                  </p>
+                  <p className="text-xs text-moonlightSilver/60">
+                    Add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to .env.local
+                  </p>
+                </div>
               </div>
-              <p className="text-sm sm:text-base text-moonlightSilver/80 mb-2">
-                <strong>Google Maps Integration</strong>
-              </p>
-              <p className="text-xs text-moonlightSilver/60">
-                Set up Google Maps API to display interactive map
-              </p>
-            </div>
+            )}
           </div>
 
           {/* Address */}

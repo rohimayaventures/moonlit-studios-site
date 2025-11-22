@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Mock patient data
 const mockPatients = [
@@ -113,6 +114,18 @@ export default function ClinicalTriageDashboard() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+      {/* Hero Image */}
+      <div className="mb-8 sm:mb-12 rounded-2xl overflow-hidden border-2 border-healingWaterTeal/30">
+        <Image
+          src="/demos/clinical-triage-dashboard/Hero Image - Dashboard Overview.png"
+          alt="Clinical Triage Dashboard Overview"
+          width={1920}
+          height={1080}
+          className="w-full h-auto"
+          priority
+        />
+      </div>
+
       {/* Hero Section - Mobile Responsive */}
       <div className="mb-6 sm:mb-8 lg:mb-12">
         <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
