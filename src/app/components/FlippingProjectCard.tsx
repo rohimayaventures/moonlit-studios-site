@@ -41,14 +41,25 @@ export function FlippingProjectCard({ project, index }: FlippingProjectCardProps
 
   // Determine status badge style
   const getStatusBadge = () => {
-    if (project.status === "Journey Ongoing" || project.link) {
+    // Live and evolving projects (LIVE badge in teal)
+    if (project.status === "Journey Ongoing" && project.link) {
       return (
-        <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-phoenixFire/90 to-lunarGold/80 border border-phoenixFire text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
+        <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-mermaidTeal to-tealBright border border-mermaidTeal text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
           <AnimatedSword className="w-3 h-3" />
-          <span>{project.link ? "IN PROGRESS" : "ONGOING"}</span>
+          <span>LIVE</span>
         </div>
       );
     }
+    // Projects in active development with demos (JOURNEY ONGOING badge in orange/gold)
+    if (project.status === "In Progress" && project.link) {
+      return (
+        <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-phoenixFire/90 to-lunarGold/80 border border-phoenixFire text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
+          <AnimatedSword className="w-3 h-3" />
+          <span>JOURNEY ONGOING</span>
+        </div>
+      );
+    }
+    // Not started - no badge
     return null;
   };
 
@@ -127,7 +138,9 @@ export function FlippingProjectCard({ project, index }: FlippingProjectCardProps
                 <div className="h-2 bg-deepOcean/60 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${
-                      project.status === "Journey Ongoing" || project.status === "In Progress"
+                      project.status === "Journey Ongoing"
+                        ? "bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire w-full"
+                        : project.status === "In Progress"
                         ? "bg-gradient-to-r from-lunarGold to-phoenixFire w-3/4 animate-pulse"
                         : project.status === "Tale Conceived" || project.status === "Experimental Voyage"
                         ? "bg-gradient-to-r from-mermaidTeal to-tealBright w-1/4"
