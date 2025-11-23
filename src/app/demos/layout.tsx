@@ -14,7 +14,7 @@ export default function DemosLayout({
   return (
     <>
       {/* Demo Banner - Mobile Responsive */}
-      <div className="sticky top-0 z-50 bg-gradient-to-r from-phoenixFire/95 via-lunarGold/90 to-phoenixFire/95 border-b-2 border-phoenixFire/60 backdrop-blur-sm shadow-lg">
+      <div className="sticky top-0 z-40 bg-gradient-to-r from-phoenixFire/95 via-lunarGold/90 to-phoenixFire/95 border-b-2 border-phoenixFire/60 backdrop-blur-sm shadow-lg">
         <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
             {/* Banner Text */}
@@ -47,7 +47,7 @@ export default function DemosLayout({
       </div>
 
       {/* Demo Content */}
-      <div className="min-h-screen bg-gradient-to-br from-midnight via-deepOcean to-[#0a0a0a]">
+      <div className="min-h-screen">
         {children}
       </div>
     </>
