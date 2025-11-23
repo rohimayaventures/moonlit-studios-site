@@ -12,7 +12,7 @@ const config: Config = {
         midnight: "#0A1128",          // Darkest navy background
         nightNavy: "#0D1B2A",         // Dark navy
         midnightNavy: "#1B3A4B",      // Medium navy
-        deepOcean: "#1B4965",         // Ocean blue
+        deepOcean: "#083B54",         // Deep Ocean (Water Tribe dark blue)
         oceanDark: "#2D5F6F",         // Medium ocean
 
         // 🌊 WATER BENDING TEALS (Primary Brand Colors)
@@ -21,6 +21,10 @@ const config: Config = {
         aquaMist: "#7DD3C0",          // Light aqua-teal
         seafoamGreen: "#9FEDD7",      // Very light greenish teal
         turquoiseBreeze: "#6FCCB1",   // Medium aqua
+
+        // 💧 CLINICAL TRIAGE COLORS (Water Tribe Palette)
+        healingWaterTeal: "#50D4D0",  // Healing Water Teal (primary triage color)
+        spiritGlowBlue: "#9FE8FF",    // Spirit Glow Blue (secondary triage color)
 
         // 🔥 PHOENIX FIRE SPECTRUM (Warm Accents)
         phoenixFire: "#FF8C42",       // Bright orange
@@ -42,6 +46,13 @@ const config: Config = {
         moonlightSilver: "#E8E8E8",   // Light silver
         silverMist: "#C9D3D8",        // Medium silver
         starlight: "#CAE9FF",         // Light sky blue
+
+        // 📚 READER HUB COLORS (Hogwarts Library Palette)
+        owleryGold: "#F0C979",        // Owlery Gold (primary reader hub color)
+        inkPlum: "#5B335F",           // Ink Plum (secondary reader hub color)
+        tealEnchantment: "#58B6B1",   // Teal Enchantment (accent)
+        warmParchment: "#F5E7C8",     // Warm Parchment (text/background)
+        midnightStacks: "#121528",    // Midnight Stacks (dark background)
 
         // Legacy (keeping for backward compatibility)
         moonlitTeal: "#1da6a5",       // Old teal (use mermaidTeal instead)
