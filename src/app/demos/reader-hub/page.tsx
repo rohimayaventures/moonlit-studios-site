@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { toast } from 'sonner';
 
 // Mock book series data
 const books = [
@@ -69,72 +69,155 @@ const characters = [
   }
 ];
 
+// Sample chapter content
+const sampleChapterContent = `The night Aria Nightshade's powers awakened, the castle shook with thunder that had no clouds.
+
+She had always known she was different. The whispers in the corridors, the way servants averted their eyes, the heavy silence that fell whenever she entered a room. But nothing had prepared her for the moment the shadows themselves reached out to greet her.
+
+"You cannot run from what you are," the High Priestess had warned her, years ago. "The blood of the Shadowborn flows through your veins. One day, it will demand its due."
+
+That day had finally come.
+
+As purple lightning crackled between her fingers, Aria understood that her life as she knew it was over. The prophecy spoke of a Shadowborn heir who would either save the realm or destroy it entirely.
+
+She had never asked for this power. She had never wanted it.
+
+But as the castle guards burst through her chamber doors, weapons drawn and fear in their eyes, she knew one thing with absolute certainty:
+
+She would not let them take her without a fight.
+
+---
+
+*End of Chapter 1 Preview*
+
+Want to continue reading? Get the full book now!`;
+
 export default function ReaderHub() {
   const [selectedBook, setSelectedBook] = useState(books[0]);
   const [selectedCharacter, setSelectedCharacter] = useState(characters[0]);
+  const [showSampleModal, setShowSampleModal] = useState(false);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleReadSample = () => {
+    setShowSampleModal(true);
+  };
+
+  const handleBuyNow = () => {
+    toast.success('Opening bookstore...', {
+      description: 'In a live site, this would take you to Amazon, Bookshop.org, or your preferred retailer.',
+      duration: 4000
+    });
+  };
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newsletterEmail.trim()) {
+      toast.error('Email required', { description: 'Please enter your email address.' });
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail)) {
+      toast.error('Invalid email', { description: 'Please enter a valid email address.' });
+      return;
+    }
+
+    setIsSubscribing(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      toast.success('Welcome to the community!', {
+        description: 'Check your inbox for exclusive bonus content and updates.',
+        duration: 5000
+      });
+      setNewsletterEmail('');
+      setIsSubscribing(false);
+    }, 1000);
+  };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-      {/* Hero Image */}
-      <div className="mb-8 sm:mb-12 rounded-2xl overflow-hidden border-2 border-owleryGold/30">
-        <Image
-          src="/demos/reader-hub/Hero Image - Author Platform.png"
-          alt="Reader Hub Author Platform"
-          width={1920}
-          height={1080}
-          className="w-full h-auto"
-          priority
-        />
-      </div>
-
-      {/* Hero Section - Mobile Responsive */}
-      <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
-        <div className="inline-block p-3 sm:p-4 rounded-full bg-gradient-to-br from-owleryGold/20 to-inkPlum/20 mb-4 sm:mb-6">
-          <svg className="w-12 h-12 sm:w-16 sm:h-16 text-owleryGold" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-          </svg>
+    <div className="min-h-screen bg-midnight text-pearlWhite">
+      {/* Professional Hero Section */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-owleryGold/45 via-tealEnchantment/30 to-inkPlum/35 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-inkPlum/30 via-tealEnchantment/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-pearlWhite mb-4">
-          The Shadowborn Legacy
-        </h1>
-        <p className="text-base sm:text-lg lg:text-xl text-moonlightSilver/80 max-w-3xl mx-auto mb-2">
-          A fantasy romance trilogy where ancient magic awakens, forbidden love ignites, and destiny demands sacrifice.
-        </p>
-        <p className="text-sm sm:text-base text-moonlightSilver/60 italic">
-          By [Author Name]
-        </p>
+        <div className="relative mx-auto max-w-6xl">
+          <div className="text-center space-y-6 sm:space-y-8 px-4">
+            {/* Professional Icon Badge */}
+            <div className="inline-block p-4 sm:p-5 rounded-full bg-gradient-to-br from-owleryGold/20 to-inkPlum/20 border border-owleryGold/30 mb-4">
+              <svg className="w-12 h-12 sm:w-16 sm:h-16 text-owleryGold" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
+              </svg>
+            </div>
 
-        {/* CTA Buttons - Mobile Responsive */}
-        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-owleryGold/50 hover:scale-105 transition-all">
-            Read Sample Chapter →
-          </button>
-          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-owleryGold/10 transition-all">
-            Join Newsletter for Bonus Content
-          </button>
-        </div>
+            {/* Tag */}
+            <div className="inline-block">
+              <span className="px-4 py-2 rounded-full bg-owleryGold/20 border border-owleryGold/40 text-owleryGold text-xs sm:text-sm font-bold uppercase tracking-wider">
+                Author Platform Demo
+              </span>
+            </div>
 
-        {/* Series Stats - Mobile Responsive */}
-        <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-4 sm:gap-8 text-sm sm:text-base">
-          <div className="text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-owleryGold">3</p>
-            <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Books</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-tealEnchantment">15K+</p>
-            <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Readers</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-inkPlum">4.8★</p>
-            <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Average Rating</p>
-          </div>
-          <div className="text-center">
-            <p className="text-2xl sm:text-3xl font-bold text-owleryGold">2026</p>
-            <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Book 3 Release</p>
+            {/* Title */}
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-pearlWhite">
+              The Shadowborn Legacy
+            </h1>
+
+            {/* Subtitle */}
+            <p className="font-serif text-lg sm:text-xl md:text-2xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+              A fantasy romance trilogy where ancient magic awakens, forbidden love ignites, and destiny demands sacrifice.
+            </p>
+
+            {/* Author */}
+            <p className="text-base sm:text-lg text-moonlightSilver/70 italic">
+              By Elara Nightwood
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4">
+              <button
+                onClick={handleReadSample}
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-owleryGold/50 hover:scale-105 transition-all"
+              >
+                Read Sample Chapter →
+              </button>
+              <a
+                href="#newsletter"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-owleryGold/10 transition-all text-center"
+              >
+                Join Newsletter for Bonus Content
+              </a>
+            </div>
+
+            {/* Series Stats */}
+            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 pt-6">
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-owleryGold">3</p>
+                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Books</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-tealEnchantment">15K+</p>
+                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Readers</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-inkPlum">4.8★</p>
+                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Average Rating</p>
+              </div>
+              <div className="text-center">
+                <p className="text-3xl sm:text-4xl font-bold text-owleryGold">2026</p>
+                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Book 3 Release</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
 
       {/* Books Section - Mobile Responsive */}
       <div className="mb-12 sm:mb-16 lg:mb-20">
@@ -218,15 +301,24 @@ export default function ReaderHub() {
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   {book.sampleChapter ? (
                     <>
-                      <button className="flex-1 px-4 py-2 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-lg transition-all">
+                      <button
+                        onClick={handleReadSample}
+                        className="flex-1 px-4 py-2 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-lg transition-all"
+                      >
                         Read Sample
                       </button>
-                      <button className="flex-1 px-4 py-2 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-owleryGold/10 transition-all">
+                      <button
+                        onClick={handleBuyNow}
+                        className="flex-1 px-4 py-2 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-owleryGold/10 transition-all"
+                      >
                         Buy Now
                       </button>
                     </>
                   ) : (
-                    <button className="w-full px-4 py-2 rounded-full bg-inkPlum/40 border border-inkPlum/60 text-inkPlum font-bold text-xs sm:text-sm uppercase tracking-wider cursor-not-allowed">
+                    <button
+                      onClick={() => toast.info('Coming in 2026!', { description: 'Join the newsletter to be notified when this book releases.' })}
+                      className="w-full px-4 py-2 rounded-full bg-inkPlum/40 border border-inkPlum/60 text-inkPlum font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-inkPlum/50 transition-all"
+                    >
                       Coming 2026
                     </button>
                   )}
@@ -314,7 +406,7 @@ export default function ReaderHub() {
       </div>
 
       {/* Newsletter Signup - Mobile Responsive */}
-      <div className="mb-12 sm:mb-16 p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-owleryGold/10 via-tealEnchantment/5 to-inkPlum/10">
+      <div id="newsletter" className="mb-12 sm:mb-16 p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-owleryGold/10 via-tealEnchantment/5 to-inkPlum/10">
         <div className="max-w-2xl mx-auto text-center">
           <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-owleryGold/20 flex items-center justify-center">
             <span className="text-3xl sm:text-4xl">📬</span>
@@ -328,14 +420,20 @@ export default function ReaderHub() {
           </p>
 
           {/* Newsletter Form - Mobile Responsive */}
-          <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
             <input
               type="email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder="your@email.com"
               className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full bg-midnight/60 border-2 border-owleryGold/30 text-pearlWhite text-sm sm:text-base focus:border-owleryGold focus:outline-none transition-colors"
             />
-            <button className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider hover:shadow-lg hover:scale-105 transition-all whitespace-nowrap">
-              Subscribe →
+            <button
+              type="submit"
+              disabled={isSubscribing}
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider hover:shadow-lg hover:scale-105 transition-all whitespace-nowrap disabled:opacity-50"
+            >
+              {isSubscribing ? 'Subscribing...' : 'Subscribe →'}
             </button>
           </form>
 
@@ -416,6 +514,62 @@ export default function ReaderHub() {
           </Link>
         </div>
       </div>
+      </div>
+
+      {/* Sample Chapter Modal */}
+      {showSampleModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight/90 backdrop-blur-sm">
+          <div className="relative w-full max-w-2xl max-h-[80vh] overflow-hidden rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-midnight to-deepOcean shadow-2xl">
+            {/* Modal Header */}
+            <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 border-b border-owleryGold/20 bg-midnight/95">
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-pearlWhite">Crown of Shadows</h3>
+                <p className="text-xs sm:text-sm text-owleryGold">Chapter 1 Preview</p>
+              </div>
+              <button
+                onClick={() => setShowSampleModal(false)}
+                className="p-2 rounded-full hover:bg-owleryGold/20 transition-colors"
+              >
+                <svg className="w-6 h-6 text-moonlightSilver" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(80vh-140px)]">
+              <div className="prose prose-invert prose-sm sm:prose-base max-w-none">
+                {sampleChapterContent.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-moonlightSilver/90 leading-relaxed mb-4">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="sticky bottom-0 p-4 sm:p-6 border-t border-owleryGold/20 bg-midnight/95">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button
+                  onClick={() => {
+                    handleBuyNow();
+                    setShowSampleModal(false);
+                  }}
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm uppercase tracking-wider hover:shadow-lg transition-all"
+                >
+                  Get the Full Book →
+                </button>
+                <button
+                  onClick={() => setShowSampleModal(false)}
+                  className="px-6 py-3 rounded-full border-2 border-moonlightSilver/30 text-moonlightSilver font-semibold text-sm hover:bg-moonlightSilver/10 transition-all"
+                >
+                  Close Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

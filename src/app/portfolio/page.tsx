@@ -151,7 +151,7 @@ const sections = [
           "Alert escalation + team messaging",
         ],
         tech: "Next.js · TypeScript · Supabase · Pusher · FHIR",
-        status: "In Progress",
+        status: "Quest Complete",
         link: "/demos/clinical-triage-dashboard",
         caseStudy: {
           challenge: "ED nurses waste precious time navigating clunky systems. Patients suffer when triage tools don't match clinical workflows.",
@@ -289,7 +289,7 @@ const sections = [
           "Newsletter signup with bonus content vault",
         ],
         tech: "Next.js · MDX · Tailwind · Resend",
-        status: "In Progress",
+        status: "Quest Complete",
         link: "/demos/reader-hub",
         caseStudy: {
           challenge: "Authors with great books lack professional platforms. Readers want immersive experiences, not just buy buttons.",
@@ -367,7 +367,7 @@ const sections = [
           "Crisis resources + healthcare worker support",
         ],
         tech: "Next.js · TypeScript · Tailwind · Local Storage",
-        status: "Journey Ongoing",
+        status: "Quest Complete",
         link: "/demos/nurse-resilience",
         caseStudy: {
           challenge: "Nurses carry trauma home after shifts but lack accessible, stigma-free mental health support. Existing tools feel clinical or require scheduling appointments.",

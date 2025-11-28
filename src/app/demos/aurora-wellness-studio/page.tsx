@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 // Color palette: Soft Lavender, Sage Green, Warm Beige
 // Background: Light pastels
@@ -95,6 +96,41 @@ const testimonials = [
 
 export default function AuroraWellnessStudio() {
   const [selectedService, setSelectedService] = useState(services[0]);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleBookNow = (serviceName: string) => {
+    toast.success(`Booking ${serviceName}`, {
+      description: 'In a production site, this would open a Calendly scheduling widget.',
+      duration: 4000
+    });
+  };
+
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!contactForm.name.trim() || !contactForm.email.trim() || !contactForm.message.trim()) {
+      toast.error('Please fill in all fields', { description: 'All fields are required.' });
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactForm.email)) {
+      toast.error('Invalid email', { description: 'Please enter a valid email address.' });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      toast.success('Message sent!', {
+        description: 'Dr. Chen will respond within 24 hours.',
+        duration: 5000
+      });
+      setContactForm({ name: '', email: '', message: '' });
+      setIsSubmitting(false);
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F5F0FA] via-[#FAF5F0] to-[#F0F5F0]">
@@ -133,10 +169,16 @@ export default function AuroraWellnessStudio() {
 
           {/* CTA Buttons - LIGHT THEME */}
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+            <button
+              onClick={() => handleBookNow('Session')}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+            >
               Book a Session
             </button>
-            <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-[#A8C5A0] text-[#5A7C55] bg-white/60 font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-[#A8C5A0]/20 transition-all">
+            <button
+              onClick={() => handleBookNow('Free Consultation')}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-[#A8C5A0] text-[#5A7C55] bg-white/60 font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-[#A8C5A0]/20 transition-all"
+            >
               Free Consultation
             </button>
           </div>
@@ -209,7 +251,10 @@ export default function AuroraWellnessStudio() {
                 </ul>
 
                 {/* Book Button */}
-                <button className="w-full mt-4 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-lg transition-all">
+                <button
+                  onClick={() => handleBookNow(service.title)}
+                  className="w-full mt-4 px-4 py-2.5 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-lg transition-all"
+                >
                   Book Now
                 </button>
               </div>
@@ -298,11 +343,13 @@ export default function AuroraWellnessStudio() {
               Have questions? Send us a message and we'll respond within 24 hours.
             </p>
 
-            <form className="space-y-4">
+            <form onSubmit={handleContactSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs sm:text-sm text-[#6B5F7B] mb-2">Name</label>
                 <input
                   type="text"
+                  value={contactForm.name}
+                  onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
                   className="w-full px-4 py-2.5 sm:py-3 rounded-lg bg-white border-2 border-[#E8DDEF] text-[#5A4570] text-sm sm:text-base focus:border-[#9B7DB8] focus:outline-none transition-colors"
                   placeholder="Your name"
                 />
@@ -311,6 +358,8 @@ export default function AuroraWellnessStudio() {
                 <label className="block text-xs sm:text-sm text-[#6B5F7B] mb-2">Email</label>
                 <input
                   type="email"
+                  value={contactForm.email}
+                  onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
                   className="w-full px-4 py-2.5 sm:py-3 rounded-lg bg-white border-2 border-[#E8DDEF] text-[#5A4570] text-sm sm:text-base focus:border-[#9B7DB8] focus:outline-none transition-colors"
                   placeholder="your@email.com"
                 />
@@ -319,12 +368,18 @@ export default function AuroraWellnessStudio() {
                 <label className="block text-xs sm:text-sm text-[#6B5F7B] mb-2">Message</label>
                 <textarea
                   rows={4}
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
                   className="w-full px-4 py-2.5 sm:py-3 rounded-lg bg-white border-2 border-[#E8DDEF] text-[#5A4570] text-sm sm:text-base focus:border-[#9B7DB8] focus:outline-none transition-colors resize-none"
                   placeholder="Tell us about what you're looking for..."
                 />
               </div>
-              <button className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[#A8C5A0] to-[#8AB58A] text-white font-bold text-sm sm:text-base uppercase tracking-wider hover:shadow-lg transition-all">
-                Send Message
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[#A8C5A0] to-[#8AB58A] text-white font-bold text-sm sm:text-base uppercase tracking-wider hover:shadow-lg transition-all disabled:opacity-50"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -421,7 +476,10 @@ export default function AuroraWellnessStudio() {
             Book your first session today. New clients receive a free 15-minute consultation to ensure we're the right fit.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <button className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+            <button
+              onClick={() => handleBookNow('First Session')}
+              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#9B7DB8] to-[#D4B5E8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+            >
               Book Your Session →
             </button>
             <Link

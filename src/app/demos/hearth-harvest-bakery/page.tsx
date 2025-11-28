@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Phone, Clock, Instagram, Star } from "lucide-react";
+import { MapPin, Phone, Clock } from "lucide-react";
+import { toast } from 'sonner';
 
 // Mock menu items
 const menuCategories = [
@@ -64,6 +65,20 @@ const instagramPosts = [
 
 export default function HearthHarvestBakery() {
   const [selectedCategory, setSelectedCategory] = useState(menuCategories[0]);
+
+  const handleInstagramClick = () => {
+    toast.success('Opening Instagram...', {
+      description: 'In a production site, this would link to the actual Instagram account.',
+      duration: 3000
+    });
+  };
+
+  const handleMenuItemClick = (itemName: string) => {
+    toast.info(`${itemName} selected!`, {
+      description: 'In a production site, you could add this to an order or see more details.',
+      duration: 2500
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#FAF3E6]">
@@ -145,7 +160,8 @@ export default function HearthHarvestBakery() {
             {selectedCategory.items.map((item, index) => (
               <div
                 key={index}
-                className="p-5 sm:p-6 rounded-xl border-2 border-[#E8DCC8] bg-white/80 hover:border-[#F6D28F] hover:shadow-lg transition-all"
+                onClick={() => handleMenuItemClick(item.name)}
+                className="p-5 sm:p-6 rounded-xl border-2 border-[#E8DCC8] bg-white/80 hover:border-[#F6D28F] hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex-1">
@@ -319,14 +335,12 @@ export default function HearthHarvestBakery() {
           </div>
 
           <div className="mt-6 text-center">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handleInstagramClick}
               className="inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#F6D28F] to-[#F0C979] text-[#8B4513] font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all border-2 border-[#D4A574]"
             >
               View Full Gallery on Instagram →
-            </a>
+            </button>
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 import { GlobalKaiWidget } from "./components/GlobalKaiWidget";
 import { Header } from "./components/Header";
 import { ErrorBoundary } from "./components/ErrorBoundary";
@@ -157,6 +158,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         {/* 📊 VERCEL ANALYTICS - Privacy-friendly page view tracking */}
         <Analytics />
+
+        {/* 🍞 TOAST NOTIFICATIONS - Global toast system for user feedback */}
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: '#1a2744',
+              border: '1px solid rgba(77, 166, 166, 0.3)',
+              color: '#e8f0f5',
+            },
+            className: 'font-sans',
+          }}
+          richColors
+          closeButton
+        />
       </body>
     </html>
   );

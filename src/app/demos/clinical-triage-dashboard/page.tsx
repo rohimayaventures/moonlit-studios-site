@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { toast } from 'sonner';
 
 // Mock patient data
 const mockPatients = [
@@ -112,55 +112,93 @@ export default function ClinicalTriageDashboard() {
   const [selectedPatient, setSelectedPatient] = useState(mockPatients[0]);
   const [showSBAR, setShowSBAR] = useState(false);
 
-  return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-      {/* Hero Image */}
-      <div className="mb-8 sm:mb-12 rounded-2xl overflow-hidden border-2 border-healingWaterTeal/30">
-        <Image
-          src="/demos/clinical-triage-dashboard/Hero Image - Dashboard Overview.png"
-          alt="Clinical Triage Dashboard Overview"
-          width={1920}
-          height={1080}
-          className="w-full h-auto"
-          priority
-        />
-      </div>
+  const handleSendToRoom = () => {
+    toast.success(`${selectedPatient.name} assigned to treatment room`, {
+      description: 'In a production system, this would update the patient queue and notify staff.',
+      duration: 4000
+    });
+  };
 
-      {/* Hero Section - Mobile Responsive */}
-      <div className="mb-6 sm:mb-8 lg:mb-12">
-        <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-healingWaterTeal to-spiritGlowBlue flex items-center justify-center">
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-midnight" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-            </svg>
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pearlWhite">
+  const handleEscalateAlert = () => {
+    toast.warning(`Alert escalated for ${selectedPatient.name}`, {
+      description: 'Charge nurse and attending physician have been notified.',
+      duration: 4000
+    });
+  };
+
+  const handlePrintSBAR = () => {
+    toast.success('SBAR report ready', {
+      description: 'In a production system, this would generate a printable PDF.',
+      duration: 3000
+    });
+  };
+
+  const handleNewPatient = () => {
+    toast.info('Add New Patient', {
+      description: 'This would open a patient intake form in a production system.',
+      duration: 3000
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-midnight text-pearlWhite">
+      {/* Professional Hero Section */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-healingWaterTeal/45 via-spiritGlowBlue/30 to-mermaidTeal/35 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-spiritGlowBlue/30 via-healingWaterTeal/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl">
+          <div className="text-center space-y-6 sm:space-y-8 px-4">
+            {/* Professional Icon Badge */}
+            <div className="inline-block p-4 sm:p-5 rounded-full bg-gradient-to-br from-healingWaterTeal/20 to-spiritGlowBlue/20 border border-healingWaterTeal/30 mb-4">
+              <svg className="w-12 h-12 sm:w-16 sm:h-16 text-healingWaterTeal" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+              </svg>
+            </div>
+
+            {/* Tag */}
+            <div className="inline-block">
+              <span className="px-4 py-2 rounded-full bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-bold uppercase tracking-wider">
+                Health x Tech Demo
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-pearlWhite">
               Clinical Triage Dashboard
             </h1>
-            <p className="text-xs sm:text-sm text-moonlightSilver/70 mt-1">
+
+            {/* Subtitle */}
+            <p className="font-serif text-lg sm:text-xl md:text-2xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
               Emergency Department Workflow System
             </p>
+
+            {/* Description */}
+            <p className="text-base sm:text-lg text-moonlightSilver/90 leading-relaxed max-w-4xl mx-auto">
+              Built by a nurse AND full-stack developer who understands ED chaos. Real-time patient queue management,
+              acuity scoring, SBAR handoff cards, and alert escalation designed for clinical workflows.
+            </p>
+
+            {/* Tech Stack */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-4">
+              {["Next.js", "TypeScript", "Supabase", "Pusher", "FHIR"].map((tech) => (
+                <span
+                  key={tech}
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
+      </section>
 
-        <p className="text-sm sm:text-base text-moonlightSilver/90 leading-relaxed max-w-3xl">
-          Built by a nurse AND full-stack developer who understands ED chaos. Real-time patient queue management,
-          acuity scoring, SBAR handoff cards, and alert escalation designed for clinical workflows.
-        </p>
-
-        {/* Tech Stack - Mobile Responsive */}
-        <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
-          {["Next.js", "TypeScript", "Supabase", "Pusher", "FHIR"].map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 rounded-full bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
 
       {/* Dashboard Grid - Mobile Responsive */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -171,7 +209,10 @@ export default function ClinicalTriageDashboard() {
               <span className="w-2 h-2 rounded-full bg-healingWaterTeal animate-pulse"></span>
               Patient Queue ({mockPatients.length})
             </h2>
-            <button className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors">
+            <button
+              onClick={handleNewPatient}
+              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors"
+            >
               + New Patient
             </button>
           </div>
@@ -342,13 +383,22 @@ export default function ClinicalTriageDashboard() {
             {/* Quick Actions - Mobile Responsive */}
             <div className="p-4 rounded-xl border-2 border-moonlightSilver/20 bg-midnight/40 space-y-2">
               <h4 className="text-sm font-bold text-pearlWhite mb-3">Quick Actions</h4>
-              <button className="w-full px-4 py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors">
+              <button
+                onClick={handleSendToRoom}
+                className="w-full px-4 py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors"
+              >
                 Send to Room
               </button>
-              <button className="w-full px-4 py-2 rounded-lg bg-phoenixFire/20 border border-phoenixFire/40 text-phoenixFire text-sm font-semibold hover:bg-phoenixFire/30 transition-colors">
+              <button
+                onClick={handleEscalateAlert}
+                className="w-full px-4 py-2 rounded-lg bg-phoenixFire/20 border border-phoenixFire/40 text-phoenixFire text-sm font-semibold hover:bg-phoenixFire/30 transition-colors"
+              >
                 Escalate Alert
               </button>
-              <button className="w-full px-4 py-2 rounded-lg bg-lunarGold/20 border border-lunarGold/40 text-lunarGold text-sm font-semibold hover:bg-lunarGold/30 transition-colors">
+              <button
+                onClick={handlePrintSBAR}
+                className="w-full px-4 py-2 rounded-lg bg-lunarGold/20 border border-lunarGold/40 text-lunarGold text-sm font-semibold hover:bg-lunarGold/30 transition-colors"
+              >
                 Print SBAR
               </button>
             </div>
@@ -406,6 +456,7 @@ export default function ClinicalTriageDashboard() {
             Get a Custom Health x Tech Solution →
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );

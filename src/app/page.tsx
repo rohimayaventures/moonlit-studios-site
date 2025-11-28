@@ -168,67 +168,91 @@ export default function Home() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Retainer 1: Website Maintenance */}
-              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-5">
-                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-5 flex flex-col">
+                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3 w-fit">
                   <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
                 </div>
                 <h4 className="text-base font-semibold text-pearlWhite mb-2">
                   Website Maintenance
                 </h4>
-                <p className="text-moonlightSilver text-sm mb-3">
+                <p className="text-moonlightSilver text-sm mb-3 flex-1">
                   Security updates, content tweaks, and hosting support.
                 </p>
-                <div className="mt-3 text-sm font-semibold text-lunarGold">
+                <div className="text-sm font-semibold text-lunarGold mb-4">
                   $500–$750/mo
                 </div>
+                <Link
+                  href="/get-quote?service=website-maintenance"
+                  className="w-full py-2 rounded-full bg-gradient-to-r from-starlight/20 to-mermaidTeal/20 border border-starlight/40 text-starlight text-xs font-semibold text-center hover:bg-starlight/30 transition-all"
+                >
+                  Request Quote →
+                </Link>
               </div>
 
               {/* Retainer 2: E-Commerce Maintenance */}
-              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-6">
-                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-6 flex flex-col">
+                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3 w-fit">
                   <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
                 </div>
                 <h4 className="text-base font-semibold text-pearlWhite mb-2">
                   E-Commerce Maintenance
                 </h4>
-                <p className="text-moonlightSilver text-sm mb-3">
+                <p className="text-moonlightSilver text-sm mb-3 flex-1">
                   Product updates, payment monitoring, and analytics review.
                 </p>
-                <div className="mt-3 text-sm font-semibold text-lunarGold">
+                <div className="text-sm font-semibold text-lunarGold mb-4">
                   $1,000–$1,500/mo
                 </div>
+                <Link
+                  href="/get-quote?service=ecommerce-maintenance"
+                  className="w-full py-2 rounded-full bg-gradient-to-r from-starlight/20 to-mermaidTeal/20 border border-starlight/40 text-starlight text-xs font-semibold text-center hover:bg-starlight/30 transition-all"
+                >
+                  Request Quote →
+                </Link>
               </div>
 
               {/* Retainer 3: AI Copilot Tuning */}
-              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-7">
-                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-7 flex flex-col">
+                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3 w-fit">
                   <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
                 </div>
                 <h4 className="text-base font-semibold text-pearlWhite mb-2">
                   AI Copilot Tuning
                 </h4>
-                <p className="text-moonlightSilver text-sm mb-3">
+                <p className="text-moonlightSilver text-sm mb-3 flex-1">
                   Prompt optimization, performance monitoring, and monthly improvements.
                 </p>
-                <div className="mt-3 text-sm font-semibold text-lunarGold">
+                <div className="text-sm font-semibold text-lunarGold mb-4">
                   $1,500–$2,500/mo
                 </div>
+                <Link
+                  href="/get-quote?service=ai-copilot-tuning"
+                  className="w-full py-2 rounded-full bg-gradient-to-r from-starlight/20 to-mermaidTeal/20 border border-starlight/40 text-starlight text-xs font-semibold text-center hover:bg-starlight/30 transition-all"
+                >
+                  Request Quote →
+                </Link>
               </div>
 
               {/* Retainer 4: Healthcare Platform Support */}
-              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-8">
-                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3">
+              <div className="rounded-2xl bg-gradient-to-br from-deepOcean/40 to-midnight border border-moonlightSilver/20 p-6 hover:border-starlight/40 hover:shadow-xl hover:shadow-starlight/20 transition-all fade-in-up stagger-8 flex flex-col">
+                <div className="inline-block px-3 py-1 rounded-full bg-starlight/20 border border-starlight/30 mb-3 w-fit">
                   <span className="text-xs font-medium text-starlight tracking-wider uppercase">Retainer</span>
                 </div>
                 <h4 className="text-base font-semibold text-pearlWhite mb-2">
                   Healthcare Platform Support
                 </h4>
-                <p className="text-moonlightSilver text-sm mb-3">
+                <p className="text-moonlightSilver text-sm mb-3 flex-1">
                   HIPAA compliance updates, security patches, and user training.
                 </p>
-                <div className="mt-3 text-sm font-semibold text-lunarGold">
+                <div className="text-sm font-semibold text-lunarGold mb-4">
                   $3,000–$5,000/mo
                 </div>
+                <Link
+                  href="/get-quote?service=healthcare-platform-support"
+                  className="w-full py-2 rounded-full bg-gradient-to-r from-starlight/20 to-mermaidTeal/20 border border-starlight/40 text-starlight text-xs font-semibold text-center hover:bg-starlight/30 transition-all"
+                >
+                  Request Quote →
+                </Link>
               </div>
             </div>
 

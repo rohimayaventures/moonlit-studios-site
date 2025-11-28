@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { toast } from 'sonner';
 
 // Mock shift debrief prompts
 const debriefPrompts = [
@@ -83,22 +83,82 @@ const resources = [
   }
 ];
 
+// Types for saved entries
+interface SavedEntry {
+  id: string;
+  date: string;
+  time: string;
+  prompt: string;
+  entry: string;
+  wordCount: number;
+}
+
 export default function NurseResilience() {
   const [currentPrompt, setCurrentPrompt] = useState(debriefPrompts[0]);
   const [debriefEntry, setDebriefEntry] = useState('');
   const [selectedExercise, setSelectedExercise] = useState(groundingExercises[0]);
   const [currentStep, setCurrentStep] = useState(0);
   const [wordCount, setWordCount] = useState(0);
+  const [savedEntries, setSavedEntries] = useState<SavedEntry[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Load saved entries from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('nurse-resilience-entries');
+    if (saved) {
+      setSavedEntries(JSON.parse(saved));
+    }
+  }, []);
 
   const handleNewPrompt = () => {
     const randomPrompt = debriefPrompts[Math.floor(Math.random() * debriefPrompts.length)];
     setCurrentPrompt(randomPrompt);
+    toast.success('New prompt generated', { description: 'Take your time with this one.' });
   };
 
   const handleDebriefChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = e.target.value;
     setDebriefEntry(text);
     setWordCount(text.trim().split(/\s+/).filter(word => word.length > 0).length);
+  };
+
+  const handleSaveEntry = () => {
+    if (!debriefEntry.trim()) {
+      toast.error('Nothing to save', { description: 'Write something first before saving.' });
+      return;
+    }
+
+    setIsSaving(true);
+
+    const newEntry: SavedEntry = {
+      id: Date.now().toString(),
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      prompt: currentPrompt,
+      entry: debriefEntry,
+      wordCount: wordCount,
+    };
+
+    const updatedEntries = [newEntry, ...savedEntries];
+    setSavedEntries(updatedEntries);
+    localStorage.setItem('nurse-resilience-entries', JSON.stringify(updatedEntries));
+
+    // Clear the form
+    setDebriefEntry('');
+    setWordCount(0);
+    setIsSaving(false);
+
+    toast.success('Entry saved privately', {
+      description: 'Your reflection is stored locally on this device only.',
+      duration: 4000
+    });
+  };
+
+  const handleVoiceMemo = () => {
+    toast.info('Voice memo coming soon', {
+      description: 'This feature is in development. For now, try typing your thoughts.',
+      duration: 3000
+    });
   };
 
   const nextStep = () => {
@@ -118,33 +178,59 @@ export default function NurseResilience() {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-      {/* Hero Section - Mobile Responsive */}
-      <div className="mb-8 sm:mb-12 text-center">
-        <div className="inline-block p-3 sm:p-4 rounded-full bg-gradient-to-br from-tealEnchantment/20 to-inkPlum/20 mb-4 sm:mb-6">
-          <svg className="w-12 h-12 sm:w-16 sm:h-16 text-tealEnchantment" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
+    <div className="min-h-screen bg-midnight text-pearlWhite">
+      {/* Professional Hero Section */}
+      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
+          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-tealEnchantment/45 via-inkPlum/30 to-healingWaterTeal/35 blur-3xl animate-floatSlow" />
+          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-inkPlum/30 via-tealEnchantment/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-pearlWhite mb-4">
-          Nurse Resilience Micro-Coach
-        </h1>
-        <p className="text-base sm:text-lg text-moonlightSilver/80 max-w-3xl mx-auto mb-2">
-          A safe space to process your shift, release what you're carrying, and find your way back to yourself.
-        </p>
-        <p className="text-sm sm:text-base text-moonlightSilver/60 italic">
-          No judgment. No reporting. Just support when you need it most.
-        </p>
+        <div className="relative mx-auto max-w-6xl">
+          <div className="text-center space-y-6 sm:space-y-8 px-4">
+            {/* Professional Icon Badge */}
+            <div className="inline-block p-4 sm:p-5 rounded-full bg-gradient-to-br from-tealEnchantment/20 to-inkPlum/20 border border-tealEnchantment/30 mb-4">
+              <svg className="w-12 h-12 sm:w-16 sm:h-16 text-tealEnchantment" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </div>
 
-        {/* Privacy Badge */}
-        <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tealEnchantment/10 border border-tealEnchantment/30">
-          <svg className="w-5 h-5 text-tealEnchantment" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-          </svg>
-          <span className="text-xs sm:text-sm text-tealEnchantment font-semibold">Private & Anonymous • Nothing is reported to management</span>
+            {/* Tag */}
+            <div className="inline-block">
+              <span className="px-4 py-2 rounded-full bg-tealEnchantment/20 border border-tealEnchantment/40 text-tealEnchantment text-xs sm:text-sm font-bold uppercase tracking-wider">
+                Moonlit Labs Demo
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-pearlWhite">
+              Nurse Resilience Micro-Coach
+            </h1>
+
+            {/* Subtitle */}
+            <p className="font-serif text-lg sm:text-xl md:text-2xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
+              A safe space to process your shift, release what you're carrying, and find your way back to yourself.
+            </p>
+
+            {/* Description */}
+            <p className="text-base sm:text-lg text-moonlightSilver/80 leading-relaxed max-w-4xl mx-auto italic">
+              No judgment. No reporting. Just support when you need it most.
+            </p>
+
+            {/* Privacy Badge */}
+            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-tealEnchantment/10 border border-tealEnchantment/30">
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 text-tealEnchantment" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+              </svg>
+              <span className="text-xs sm:text-sm text-tealEnchantment font-semibold">Private & Anonymous • Nothing is reported to management</span>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
 
       {/* Shift Debrief Section - Mobile Responsive */}
       <div className="mb-12 sm:mb-16 lg:mb-20">
@@ -192,10 +278,17 @@ export default function NurseResilience() {
             />
 
             <div className="mt-4 flex flex-col sm:flex-row gap-3">
-              <button className="flex-1 px-6 py-3 rounded-full bg-gradient-to-r from-inkPlum to-tealEnchantment text-white font-bold text-sm uppercase tracking-wider shadow-lg hover:shadow-inkPlum/50 hover:scale-105 transition-all">
-                Save Entry (Private)
+              <button
+                onClick={handleSaveEntry}
+                disabled={isSaving}
+                className="flex-1 px-6 py-3 rounded-full bg-gradient-to-r from-inkPlum to-tealEnchantment text-white font-bold text-sm uppercase tracking-wider shadow-lg hover:shadow-inkPlum/50 hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSaving ? 'Saving...' : 'Save Entry (Private)'}
               </button>
-              <button className="flex-1 px-6 py-3 rounded-full border-2 border-moonlightSilver/30 text-moonlightSilver font-bold text-sm uppercase tracking-wider hover:bg-moonlightSilver/10 transition-all">
+              <button
+                onClick={handleVoiceMemo}
+                className="flex-1 px-6 py-3 rounded-full border-2 border-moonlightSilver/30 text-moonlightSilver font-bold text-sm uppercase tracking-wider hover:bg-moonlightSilver/10 transition-all"
+              >
                 Voice Memo Instead
               </button>
             </div>
@@ -382,6 +475,7 @@ export default function NurseResilience() {
             ← Back to Portfolio
           </Link>
         </div>
+      </div>
       </div>
     </div>
   );

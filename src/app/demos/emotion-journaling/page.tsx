@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 // Color scheme: Teal, Lavender, Sage green, Lighter midnight backgrounds, Moonlight silver
 // Theme: Calm, introspective, supportive - LIGHTER than before
@@ -50,10 +51,95 @@ const mockEntries = [
   }
 ];
 
+// Types for saved entries
+interface JournalEntry {
+  id: string;
+  date: string;
+  time: string;
+  mood: string;
+  emoji: string;
+  intensity: number;
+  entry: string;
+  bodyAreas: string[];
+}
+
 export default function EmotionJournaling() {
   const [selectedMood, setSelectedMood] = useState(moods[0]);
   const [moodIntensity, setMoodIntensity] = useState(5);
   const [journalText, setJournalText] = useState("");
+  const [selectedBodyAreas, setSelectedBodyAreas] = useState<string[]>([]);
+  const [savedEntries, setSavedEntries] = useState<JournalEntry[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Load saved entries from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('emotion-journal-entries');
+    if (saved) {
+      setSavedEntries(JSON.parse(saved));
+    }
+  }, []);
+
+  const handleBodyAreaClick = (area: string) => {
+    setSelectedBodyAreas(prev =>
+      prev.includes(area)
+        ? prev.filter(a => a !== area)
+        : [...prev, area]
+    );
+  };
+
+  const handleSaveEntry = () => {
+    if (!journalText.trim()) {
+      toast.error('Add some thoughts first', { description: 'Write something in the journal before saving.' });
+      return;
+    }
+
+    setIsSaving(true);
+
+    const newEntry: JournalEntry = {
+      id: Date.now().toString(),
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      mood: selectedMood.name,
+      emoji: selectedMood.emoji,
+      intensity: moodIntensity,
+      entry: journalText,
+      bodyAreas: selectedBodyAreas,
+    };
+
+    const updatedEntries = [newEntry, ...savedEntries];
+    setSavedEntries(updatedEntries);
+    localStorage.setItem('emotion-journal-entries', JSON.stringify(updatedEntries));
+
+    // Clear the form
+    setJournalText('');
+    setSelectedBodyAreas([]);
+    setMoodIntensity(5);
+    setIsSaving(false);
+
+    toast.success('Journal entry saved', {
+      description: 'Your reflection is stored privately on this device.',
+      duration: 4000
+    });
+  };
+
+  const handleExportPDF = () => {
+    toast.info('PDF Export coming soon', {
+      description: 'This feature is in development. Your entries are safely stored locally.',
+      duration: 3000
+    });
+  };
+
+  const handleGeneratePrompt = () => {
+    const prompts = [
+      "What would you say to a friend feeling this way?",
+      "What triggered this emotion today?",
+      "Where in your body do you notice this feeling?",
+      "What do you need right now?",
+      "What would help you feel 10% better?",
+    ];
+    const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+    toast.success('New prompt', { description: randomPrompt, duration: 5000 });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#E8F4F4] via-[#F0E8F4] to-[#E8F0E8]">
@@ -192,7 +278,12 @@ export default function EmotionJournaling() {
                 {["Head", "Chest", "Stomach", "Shoulders", "Arms", "Legs", "Hands", "Whole Body"].map((area) => (
                   <button
                     key={area}
-                    className="px-3 py-2 rounded-lg bg-[#F8F4FC] border-2 border-[#E8DCF4] text-[#6A7A8A] text-xs sm:text-sm hover:border-[#D8B8C8] hover:text-[#A88898] transition-colors font-medium"
+                    onClick={() => handleBodyAreaClick(area)}
+                    className={`px-3 py-2 rounded-lg border-2 text-xs sm:text-sm transition-colors font-medium ${
+                      selectedBodyAreas.includes(area)
+                        ? 'bg-[#D8B8C8] border-[#A88898] text-white'
+                        : 'bg-[#F8F4FC] border-[#E8DCF4] text-[#6A7A8A] hover:border-[#D8B8C8] hover:text-[#A88898]'
+                    }`}
                   >
                     {area}
                   </button>
@@ -205,8 +296,12 @@ export default function EmotionJournaling() {
             </div>
 
             {/* Save Entry Button - LIGHT THEME */}
-            <button className="w-full px-6 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#5AAEAE] to-[#8878B8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all">
-              Save Journal Entry
+            <button
+              onClick={handleSaveEntry}
+              disabled={isSaving}
+              className="w-full px-6 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#5AAEAE] to-[#8878B8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSaving ? 'Saving...' : 'Save Journal Entry'}
             </button>
           </div>
 
@@ -225,7 +320,10 @@ export default function EmotionJournaling() {
                 "What would you say to a friend feeling this way? Can you offer yourself that same compassion?"
               </p>
 
-              <button className="w-full px-4 py-2 rounded-lg border-2 border-[#7ECECE]/60 text-[#5AAEAE] text-xs sm:text-sm font-semibold hover:bg-[#7ECECE]/10 transition-colors">
+              <button
+                onClick={handleGeneratePrompt}
+                className="w-full px-4 py-2 rounded-lg border-2 border-[#7ECECE]/60 text-[#5AAEAE] text-xs sm:text-sm font-semibold hover:bg-[#7ECECE]/10 transition-colors"
+              >
                 Generate New Prompt
               </button>
             </div>
@@ -339,7 +437,10 @@ export default function EmotionJournaling() {
               <p className="text-xs sm:text-sm text-[#6A7A8A] mb-4">
                 Export your entries as a PDF report to share with your mental health provider.
               </p>
-              <button className="w-full px-4 py-2 rounded-lg bg-[#B8A8D8]/20 border-2 border-[#B8A8D8]/60 text-[#8878B8] text-xs sm:text-sm font-semibold hover:bg-[#B8A8D8]/30 transition-colors">
+              <button
+                onClick={handleExportPDF}
+                className="w-full px-4 py-2 rounded-lg bg-[#B8A8D8]/20 border-2 border-[#B8A8D8]/60 text-[#8878B8] text-xs sm:text-sm font-semibold hover:bg-[#B8A8D8]/30 transition-colors"
+              >
                 Export PDF Report
               </button>
             </div>
