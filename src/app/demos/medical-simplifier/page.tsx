@@ -179,7 +179,7 @@ export default function MedicalSimplifierPage() {
     setTimeout(() => {
       setIsProcessing(false);
       setShowOutput(true);
-      setReadingLevel("5th Grade");
+      setReadingLevel("Patient-Friendly");
     }, 1500);
   };
 
@@ -401,8 +401,8 @@ export default function MedicalSimplifierPage() {
           <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-start gap-3">
             <Check className="w-5 h-5 text-emerald-600 mt-0.5" />
             <div>
-              <h4 className="font-bold text-slate-800 text-sm">5th Grade Level</h4>
-              <p className="text-xs text-slate-500 mt-1">Optimized for universal comprehension.</p>
+              <h4 className="font-bold text-slate-800 text-sm">Patient-Friendly Language</h4>
+              <p className="text-xs text-slate-500 mt-1">Clear, accessible explanations for everyone.</p>
             </div>
           </div>
           <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-start gap-3">
