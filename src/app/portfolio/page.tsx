@@ -28,7 +28,7 @@ const sections = [
           "Contact forms with email notifications",
         ],
         tech: "Next.js · Tailwind · Calendly · Supabase Forms",
-        status: "In Progress",
+        status: "Quest Complete",
         link: "/demos/aurora-wellness-studio",
         caseStudy: {
           challenge: "Wellness professionals struggle to convert website visitors into booked clients. Complex booking processes lose potential patients.",
@@ -45,7 +45,7 @@ const sections = [
           "Instagram feed embed for fresh content",
         ],
         tech: "Next.js · Tailwind · Google Maps API · Instagram API",
-        status: "In Progress",
+        status: "Quest Complete",
         link: "/demos/hearth-harvest-bakery",
         caseStudy: {
           challenge: "Local bakeries need websites that feel as warm as their physical space—showing fresh content without constant manual updates.",
@@ -350,7 +350,7 @@ const sections = [
           "Exportable insights for therapy sessions",
         ],
         tech: "Next.js · OpenAI · Prisma · Edge Functions",
-        status: "In Progress",
+        status: "Quest Complete",
         link: "/demos/emotion-journaling",
         caseStudy: {
           challenge: "Mental health tools feel clinical. Journalers want reflective prompts that actually help process emotions.",
@@ -465,8 +465,8 @@ export default function PortfolioPage() {
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Realms Explored</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">18</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Quests Completed</div>
+                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">19</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Legendary Quests</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-mermaidTeal">∞</div>

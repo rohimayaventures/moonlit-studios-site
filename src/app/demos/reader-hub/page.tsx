@@ -1,575 +1,650 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { toast } from 'sonner';
 
-// Mock book series data
+// Book series data
 const books = [
   {
     id: 1,
-    title: "Crown of Shadows",
-    subtitle: "The Shadowborn Legacy - Book 1",
-    status: "Published",
-    coverColor: "from-purple-600 to-indigo-600",
-    rating: 4.8,
-    reviews: 1247,
-    description: "When a forbidden ritual awakens ancient magic, a reluctant heir must choose between her kingdom's salvation and a love that could doom them all.",
-    sampleChapter: true
+    title: "The Shattered Crown",
+    subtitle: "Throne of Shadows, Book One",
+    tagline: "A kingdom divided. A power awakened. A war begins.",
+    description: "When Princess Elara discovers she can wield forbidden shadow magic, she must choose between her birthright and the dark power that could save—or destroy—her kingdom. As civil war looms and ancient enemies stir, Elara finds unlikely allies in a disgraced knight and a mysterious stranger with secrets of his own.",
+    releaseDate: "March 2023",
+    pages: 412,
+    rating: 4.7,
+    reviews: 2847,
+    buyLinks: { amazon: '#', barnes: '#', bookshop: '#' },
+    sampleChapter: `Chapter One: The Inheritance
+
+The crown felt heavier than Elara remembered.
+
+She stood before the mirror in her mother's chambers—her chambers now, she supposed—and adjusted the circlet of silver and onyx that marked her as heir to the Shadowthrone. The metal was cold against her temples, a weight that pressed not just on her brow but somewhere deeper, in the hollow space beneath her ribs where grief had taken root.
+
+Three days since the Queen's burial. Three days since Elara had spoken the words that bound her to a kingdom on the brink of war.
+
+"Your Highness." Commander Thorne's voice came from the doorway, carefully neutral. "The council awaits."
+
+Elara met her own eyes in the mirror—her mother's eyes, everyone said, that peculiar shade of violet that marked the royal bloodline. But where Queen Seraphine's gaze had been steady as stone, Elara saw only uncertainty reflected back.
+
+She was twenty-three years old, trained in diplomacy and swordcraft, educated in the histories of seven kingdoms. None of it had prepared her for this.
+
+"Has there been word from the border?" she asked without turning.
+
+"The Valdris forces have not moved. Yet." A pause. "But our scouts report their numbers growing. Duke Maren has called his banners."
+
+Her uncle. Her mother's own brother, who had smiled at Elara's nameday celebrations and brought her sweets from the southern provinces. Who now marched an army toward the capital to take what he believed should have been his.
+
+"How long do we have?"
+
+"Perhaps a fortnight. Perhaps less."
+
+Elara finally turned from the mirror. Commander Thorne stood at attention, his weathered face betraying nothing, though she'd known him since childhood. He'd taught her to hold a sword, had stood vigil outside her nursery, had wept at her mother's funeral when he thought no one was watching.
+
+"Then we have work to do," she said, and swept past him into the corridor.
+
+She did not see his expression shift—the flicker of something that might have been hope, or might have been fear. She did not see him touch the hidden scar beneath his sleeve, the one shaped like a crescent moon.
+
+She did not know that everything was about to change.`
   },
   {
     id: 2,
-    title: "Throne of Starlight",
-    subtitle: "The Shadowborn Legacy - Book 2",
-    status: "Published",
-    coverColor: "from-blue-600 to-teal-600",
-    rating: 4.9,
-    reviews: 892,
-    description: "With war on the horizon and betrayal lurking in every shadow, star-crossed lovers must unite divided realms before darkness consumes everything.",
-    sampleChapter: true
+    title: "The Ember Throne",
+    subtitle: "Throne of Shadows, Book Two",
+    tagline: "Alliances forged. Secrets revealed. The shadows deepen.",
+    description: "With civil war raging and her powers growing beyond her control, Elara must journey to the ancient citadel where shadow magic was born. But the path is guarded by those who would see her dead—and the answers she seeks may cost her everything she loves.",
+    releaseDate: "September 2023",
+    pages: 478,
+    rating: 4.8,
+    reviews: 1923,
+    buyLinks: { amazon: '#', barnes: '#', bookshop: '#' },
+    sampleChapter: `Chapter One: Ashes
+
+The citadel burned.
+
+Elara watched from the ridge as flames consumed the place where she'd first learned to harness the darkness within her. Orange light painted the snow-covered peaks, and even from this distance, she could feel the heat on her face—or perhaps that was the fury building in her chest.
+
+"They found us." Kael's voice was flat, dangerous. "Someone told them where we'd be."
+
+She didn't answer. There would be time for traitors later. Now, she had to decide: flee into the mountains with winter closing in, or face the army below with barely a hundred soldiers at her back.
+
+Her shadow stirred, restless, hungry. It wanted her to fight.
+
+For the first time in months, she considered letting it.`
   },
   {
     id: 3,
-    title: "Empire of Moonfire",
-    subtitle: "The Shadowborn Legacy - Book 3",
-    status: "Coming 2026",
-    coverColor: "from-pink-600 to-orange-600",
+    title: "The Obsidian War",
+    subtitle: "Throne of Shadows, Book Three",
+    tagline: "The final battle for the realm begins.",
+    description: "The epic conclusion to the Throne of Shadows trilogy. As the barrier between worlds weakens and an ancient evil awakens, Elara must unite fractured kingdoms against an enemy that cannot be killed by mortal weapons. The cost of victory may be her humanity—and her heart.",
+    releaseDate: "Coming Spring 2025",
+    pages: null,
     rating: null,
     reviews: null,
-    description: "The final confrontation. Prophecy fulfilled. Two souls bound by fate must sacrifice everything to save the world they love.",
-    sampleChapter: false
+    buyLinks: null,
+    sampleChapter: null
   }
 ];
 
-// Mock characters
+// Character data
 const characters = [
   {
-    id: 1,
-    name: "Aria Nightshade",
-    title: "The Shadowborn Heir",
-    house: "House Nightshade",
-    description: "Reluctant princess with forbidden magic running through her veins. Torn between duty and destiny, she must master powers she never asked for.",
-    relationships: ["Kael (love interest)", "High Priestess Lyra (mentor)", "Lord Malachar (enemy)"]
+    id: 'elara',
+    name: "Princess Elara Valdris",
+    title: "Shadow-Wielder, Heir to the Shadowthrone",
+    description: "Born with the forbidden gift of shadow magic, Elara never expected to rule. But when her mother falls to an assassin's blade, she must claim her birthright while mastering powers that threaten to consume her.",
+    traits: ["Determined", "Compassionate", "Struggling with darkness"],
+    quote: "I will not let fear make me a monster. But I will not let mercy make me weak.",
+    relationships: [
+      { name: "Commander Thorne", relation: "Mentor & Protector" },
+      { name: "Kael", relation: "Unlikely ally, possible more" },
+      { name: "Duke Maren", relation: "Uncle & Enemy" }
+    ]
   },
   {
-    id: 2,
-    name: "Kael Stormwind",
-    title: "The Starlight Warrior",
-    house: "House Stormwind",
-    description: "A warrior bound by ancient vows, hiding secrets that could change the fate of the realm. His heart belongs to the one person he can never have.",
-    relationships: ["Aria (love interest)", "Commander Theron (rival)", "Elena (sister)"]
+    id: 'kael',
+    name: "Kael of the Wandering",
+    title: "Exiled Prince, Shadow Walker",
+    description: "A mysterious stranger with shadow powers of his own, Kael claims to be the last survivor of a kingdom destroyed by the same magic Elara now wields. His motives remain unclear—but his loyalty to Elara never wavers.",
+    traits: ["Secretive", "Protective", "Haunted by the past"],
+    quote: "I've seen what shadow magic can do when wielded without conscience. I won't let that happen again.",
+    relationships: [
+      { name: "Princess Elara", relation: "Ally & Something more" },
+      { name: "The Shadow Court", relation: "Former member" }
+    ]
   },
   {
-    id: 3,
-    name: "High Priestess Lyra",
-    title: "The Oracle",
-    house: "Temple of the Moon",
-    description: "Guardian of ancient prophecies and keeper of forbidden knowledge. She knows the truth about the Shadowborn curse—but telling it could doom them all.",
-    relationships: ["Aria (protégée)", "Lord Malachar (enemy)", "King Aldric (political ally)"]
+    id: 'thorne',
+    name: "Commander Aldric Thorne",
+    title: "Commander of the Royal Guard",
+    description: "A veteran soldier who served Queen Seraphine for thirty years, Thorne has protected Elara since birth. His gruff exterior hides a fierce loyalty—and secrets he's kept for two decades.",
+    traits: ["Loyal", "Honorable", "Burdened by old promises"],
+    quote: "I swore an oath to your mother. I'll keep it until my last breath.",
+    relationships: [
+      { name: "Princess Elara", relation: "Ward & Princess" },
+      { name: "Queen Seraphine", relation: "Former Queen (deceased)" }
+    ]
+  },
+  {
+    id: 'maren',
+    name: "Duke Aldric Maren",
+    title: "Duke of the Southern Reaches, The Usurper",
+    description: "Queen Seraphine's younger brother, Maren believes the throne should pass to him as the last male heir. His ambition has festered for decades, and he's gathered an army of loyalists who share his belief that women cannot rule.",
+    traits: ["Ambitious", "Charismatic", "Ruthless"],
+    quote: "I do not hate my niece. I simply believe she is unfit to rule. History will prove me right.",
+    relationships: [
+      { name: "Princess Elara", relation: "Niece & Enemy" },
+      { name: "Queen Seraphine", relation: "Sister (deceased)" }
+    ]
   }
 ];
 
-// Sample chapter content
-const sampleChapterContent = `The night Aria Nightshade's powers awakened, the castle shook with thunder that had no clouds.
-
-She had always known she was different. The whispers in the corridors, the way servants averted their eyes, the heavy silence that fell whenever she entered a room. But nothing had prepared her for the moment the shadows themselves reached out to greet her.
-
-"You cannot run from what you are," the High Priestess had warned her, years ago. "The blood of the Shadowborn flows through your veins. One day, it will demand its due."
-
-That day had finally come.
-
-As purple lightning crackled between her fingers, Aria understood that her life as she knew it was over. The prophecy spoke of a Shadowborn heir who would either save the realm or destroy it entirely.
-
-She had never asked for this power. She had never wanted it.
-
-But as the castle guards burst through her chamber doors, weapons drawn and fear in their eyes, she knew one thing with absolute certainty:
-
-She would not let them take her without a fight.
-
----
-
-*End of Chapter 1 Preview*
-
-Want to continue reading? Get the full book now!`;
+// World map locations
+const mapLocations = [
+  { id: 'shadowkeep', name: 'Shadowkeep', x: 45, y: 35, description: 'The capital city and seat of the Shadowthrone' },
+  { id: 'valdris', name: 'Valdris Reaches', x: 30, y: 65, description: "Duke Maren's stronghold in the south" },
+  { id: 'citadel', name: 'The Citadel of Echoes', x: 75, y: 25, description: 'Ancient fortress where shadow magic was born' },
+  { id: 'wandering', name: 'The Wandering Wastes', x: 85, y: 55, description: "Kael's homeland, destroyed by shadow magic" },
+  { id: 'barrier', name: 'The Barrier Peaks', x: 55, y: 15, description: 'Mountain range separating the mortal realm from the beyond' },
+];
 
 export default function ReaderHub() {
+  const [activeTab, setActiveTab] = useState<'books' | 'characters' | 'world' | 'newsletter'>('books');
   const [selectedBook, setSelectedBook] = useState(books[0]);
   const [selectedCharacter, setSelectedCharacter] = useState(characters[0]);
-  const [showSampleModal, setShowSampleModal] = useState(false);
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [showSampleChapter, setShowSampleChapter] = useState(false);
+  const [hoveredLocation, setHoveredLocation] = useState<string | null>(null);
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
-  const handleReadSample = () => {
-    setShowSampleModal(true);
-  };
-
-  const handleBuyNow = () => {
-    toast.success('Opening bookstore...', {
-      description: 'In a live site, this would take you to Amazon, Bookshop.org, or your preferred retailer.',
-      duration: 4000
-    });
-  };
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!newsletterEmail.trim()) {
-      toast.error('Email required', { description: 'Please enter your email address.' });
-      return;
+    if (email) {
+      setSubscribed(true);
     }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail)) {
-      toast.error('Invalid email', { description: 'Please enter a valid email address.' });
-      return;
-    }
-
-    setIsSubscribing(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      toast.success('Welcome to the community!', {
-        description: 'Check your inbox for exclusive bonus content and updates.',
-        duration: 5000
-      });
-      setNewsletterEmail('');
-      setIsSubscribing(false);
-    }, 1000);
   };
 
   return (
-    <div className="min-h-screen bg-midnight text-pearlWhite">
-      {/* Professional Hero Section */}
-      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
-        {/* Animated Background Gradients */}
-        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-owleryGold/45 via-tealEnchantment/30 to-inkPlum/35 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-inkPlum/30 via-tealEnchantment/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+    <div className="min-h-screen bg-stone-950 text-stone-100">
+      {/* Navigation */}
+      <nav className="bg-stone-900 border-b border-stone-800 sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded bg-amber-600 flex items-center justify-center">
+                <svg className="w-5 h-5 text-stone-950" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <div>
+                <span className="font-semibold text-stone-100">Victoria Blackwood</span>
+                <span className="hidden sm:block text-xs text-stone-400">Fantasy Author</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1">
+              {(['books', 'characters', 'world', 'newsletter'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-lg transition-colors capitalize ${
+                    activeTab === tab
+                      ? 'bg-amber-600/20 text-amber-500'
+                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-stone-900 via-stone-950 to-stone-950 py-16 sm:py-20 px-4 sm:px-6 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 bg-amber-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative mx-auto max-w-6xl">
-          <div className="text-center space-y-6 sm:space-y-8 px-4">
-            {/* Professional Icon Badge */}
-            <div className="inline-block p-4 sm:p-5 rounded-full bg-gradient-to-br from-owleryGold/20 to-inkPlum/20 border border-owleryGold/30 mb-4">
-              <svg className="w-12 h-12 sm:w-16 sm:h-16 text-owleryGold" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-              </svg>
-            </div>
-
-            {/* Tag */}
-            <div className="inline-block">
-              <span className="px-4 py-2 rounded-full bg-owleryGold/20 border border-owleryGold/40 text-owleryGold text-xs sm:text-sm font-bold uppercase tracking-wider">
-                Author Platform Demo
-              </span>
-            </div>
-
-            {/* Title */}
-            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-pearlWhite">
-              The Shadowborn Legacy
-            </h1>
-
-            {/* Subtitle */}
-            <p className="font-serif text-lg sm:text-xl md:text-2xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
-              A fantasy romance trilogy where ancient magic awakens, forbidden love ignites, and destiny demands sacrifice.
-            </p>
-
-            {/* Author */}
-            <p className="text-base sm:text-lg text-moonlightSilver/70 italic">
-              By Elara Nightwood
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4">
-              <button
-                onClick={handleReadSample}
-                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-owleryGold/50 hover:scale-105 transition-all"
-              >
-                Read Sample Chapter →
-              </button>
-              <a
-                href="#newsletter"
-                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-owleryGold/10 transition-all text-center"
-              >
-                Join Newsletter for Bonus Content
-              </a>
-            </div>
-
-            {/* Series Stats */}
-            <div className="flex flex-wrap justify-center gap-6 sm:gap-8 pt-6">
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-owleryGold">3</p>
-                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Books</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-tealEnchantment">15K+</p>
-                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Readers</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-inkPlum">4.8★</p>
-                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Average Rating</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-owleryGold">2026</p>
-                <p className="text-xs sm:text-sm text-moonlightSilver/60 uppercase tracking-wider">Book 3 Release</p>
-              </div>
-            </div>
+        <div className="relative max-w-4xl mx-auto text-center">
+          <p className="text-amber-500 text-sm font-medium tracking-widest uppercase mb-3">The Throne of Shadows Series</p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-stone-100 mb-4">
+            Where Darkness Becomes Power
+          </h1>
+          <p className="text-lg sm:text-xl text-stone-400 mb-8 max-w-2xl mx-auto">
+            An epic fantasy trilogy of forbidden magic, political intrigue, and a princess who must embrace
+            the shadows to save her kingdom.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button
+              onClick={() => {
+                setActiveTab('books');
+                setSelectedBook(books[0]);
+                setShowSampleChapter(true);
+              }}
+              className="px-6 py-3 bg-amber-600 text-stone-950 font-semibold rounded-lg hover:bg-amber-500 transition-colors"
+            >
+              Read Chapter One Free
+            </button>
+            <button
+              onClick={() => setActiveTab('newsletter')}
+              className="px-6 py-3 bg-stone-800 text-stone-100 font-semibold rounded-lg border border-stone-700 hover:bg-stone-700 transition-colors"
+            >
+              Join the Reader Circle
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Main Content Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 
-      {/* Books Section - Mobile Responsive */}
-      <div className="mb-12 sm:mb-16 lg:mb-20">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pearlWhite text-center mb-8 sm:mb-12">
-          The Series
-        </h2>
+        {/* Books Tab */}
+        {activeTab === 'books' && (
+          <div>
+            {/* Book Selection */}
+            <div className="flex gap-3 overflow-x-auto pb-4 mb-8">
+              {books.map((book) => (
+                <button
+                  key={book.id}
+                  onClick={() => {
+                    setSelectedBook(book);
+                    setShowSampleChapter(false);
+                  }}
+                  className={`flex-shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    selectedBook.id === book.id
+                      ? 'bg-amber-600 text-stone-950'
+                      : 'bg-stone-800 text-stone-300 hover:bg-stone-700'
+                  }`}
+                >
+                  Book {book.id}
+                </button>
+              ))}
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {books.map((book) => (
-            <div
-              key={book.id}
-              onClick={() => setSelectedBook(book)}
-              className={`group cursor-pointer transition-all ${
-                selectedBook.id === book.id ? 'scale-105' : 'hover:scale-102'
-              }`}
-            >
-              {/* Book Cover Mockup - Mobile Responsive */}
-              <div className="relative mb-4 sm:mb-6">
-                <div className={`aspect-[2/3] rounded-xl bg-gradient-to-br ${book.coverColor} shadow-2xl flex items-center justify-center p-6 sm:p-8 border-2 ${
-                  selectedBook.id === book.id ? 'border-owleryGold' : 'border-transparent'
-                }`}>
+            {/* Book Detail */}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Book Cover Placeholder */}
+              <div className="lg:col-span-1">
+                <div className="aspect-[2/3] bg-gradient-to-br from-stone-800 via-stone-900 to-stone-950 rounded-xl border border-stone-800 flex items-center justify-center p-8">
                   <div className="text-center">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3">
-                      {book.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-white/80 mb-4 sm:mb-6">
-                      {book.subtitle}
-                    </p>
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-white/20 flex items-center justify-center">
-                      <svg className="w-8 h-8 sm:w-10 sm:h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-600/20 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                       </svg>
                     </div>
+                    <p className="text-amber-500 text-xs uppercase tracking-widest mb-2">Throne of Shadows</p>
+                    <h3 className="text-xl font-serif font-bold text-stone-100 mb-1">{selectedBook.title}</h3>
+                    <p className="text-sm text-stone-500">Book {selectedBook.id}</p>
                   </div>
                 </div>
 
-                {/* Status Badge */}
-                <div className="absolute -top-3 -right-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    book.status === "Published"
-                      ? "bg-tealEnchantment text-midnight"
-                      : "bg-inkPlum text-white"
-                  }`}>
-                    {book.status}
-                  </span>
-                </div>
+                {/* Book Stats */}
+                {selectedBook.rating && (
+                  <div className="mt-4 p-4 bg-stone-900 rounded-xl border border-stone-800">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <svg
+                            key={i}
+                            className={`w-4 h-4 ${i < Math.floor(selectedBook.rating!) ? 'text-amber-500' : 'text-stone-700'}`}
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                          </svg>
+                        ))}
+                        <span className="ml-2 text-sm font-medium text-stone-300">{selectedBook.rating}</span>
+                      </div>
+                      <span className="text-xs text-stone-500">{selectedBook.reviews?.toLocaleString()} reviews</span>
+                    </div>
+                    <div className="text-sm text-stone-400">
+                      <span>{selectedBook.pages} pages</span>
+                      <span className="mx-2">·</span>
+                      <span>{selectedBook.releaseDate}</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Book Details - Mobile Responsive */}
-              <div className="p-4 sm:p-6 rounded-xl border-2 border-owleryGold/30 bg-midnight/40">
-                <h4 className="text-lg sm:text-xl font-bold text-pearlWhite mb-2">
-                  {book.title}
-                </h4>
-                <p className="text-xs sm:text-sm text-moonlightSilver/80 mb-4 line-clamp-3">
-                  {book.description}
-                </p>
+              {/* Book Info */}
+              <div className="lg:col-span-2">
+                <div className="mb-6">
+                  <p className="text-amber-500 text-sm font-medium mb-2">{selectedBook.subtitle}</p>
+                  <h2 className="text-3xl font-serif font-bold text-stone-100 mb-3">{selectedBook.title}</h2>
+                  <p className="text-xl text-stone-400 italic mb-6">"{selectedBook.tagline}"</p>
+                  <p className="text-stone-300 leading-relaxed">{selectedBook.description}</p>
+                </div>
 
-                {/* Rating - Mobile Responsive */}
-                {book.rating && (
-                  <div className="flex items-center gap-2 mb-4 pb-4 border-b border-moonlightSilver/10">
-                    <div className="flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className={`w-3 h-3 sm:w-4 sm:h-4 ${
-                            i < Math.floor(book.rating!) ? 'text-owleryGold' : 'text-moonlightSilver/30'
-                          } fill-current`}
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                      ))}
+                {/* Buy Links or Coming Soon */}
+                {selectedBook.buyLinks ? (
+                  <div className="mb-8">
+                    <p className="text-sm text-stone-500 mb-3">Available at:</p>
+                    <div className="flex flex-wrap gap-3">
+                      <a href="#" className="px-5 py-2.5 bg-amber-600 text-stone-950 font-medium rounded-lg hover:bg-amber-500 transition-colors">
+                        Amazon
+                      </a>
+                      <a href="#" className="px-5 py-2.5 bg-stone-800 text-stone-200 font-medium rounded-lg border border-stone-700 hover:bg-stone-700 transition-colors">
+                        Barnes & Noble
+                      </a>
+                      <a href="#" className="px-5 py-2.5 bg-stone-800 text-stone-200 font-medium rounded-lg border border-stone-700 hover:bg-stone-700 transition-colors">
+                        Bookshop.org
+                      </a>
                     </div>
-                    <span className="text-xs sm:text-sm text-moonlightSilver/70">
-                      {book.rating} ({book.reviews} reviews)
-                    </span>
+                  </div>
+                ) : (
+                  <div className="mb-8 p-4 bg-amber-600/10 border border-amber-600/30 rounded-lg">
+                    <p className="text-amber-500 font-medium">{selectedBook.releaseDate}</p>
+                    <p className="text-sm text-stone-400 mt-1">Join the newsletter to be notified when pre-orders open.</p>
                   </div>
                 )}
 
-                {/* Action Buttons - Mobile Responsive */}
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                  {book.sampleChapter ? (
-                    <>
-                      <button
-                        onClick={handleReadSample}
-                        className="flex-1 px-4 py-2 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-xs sm:text-sm uppercase tracking-wider hover:shadow-lg transition-all"
-                      >
-                        Read Sample
-                      </button>
-                      <button
-                        onClick={handleBuyNow}
-                        className="flex-1 px-4 py-2 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-owleryGold/10 transition-all"
-                      >
-                        Buy Now
-                      </button>
-                    </>
-                  ) : (
+                {/* Sample Chapter */}
+                {selectedBook.sampleChapter && (
+                  <div>
                     <button
-                      onClick={() => toast.info('Coming in 2026!', { description: 'Join the newsletter to be notified when this book releases.' })}
-                      className="w-full px-4 py-2 rounded-full bg-inkPlum/40 border border-inkPlum/60 text-inkPlum font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-inkPlum/50 transition-all"
+                      onClick={() => setShowSampleChapter(!showSampleChapter)}
+                      className="flex items-center gap-2 text-amber-500 font-medium hover:text-amber-400 transition-colors"
                     >
-                      Coming 2026
+                      <svg className={`w-5 h-5 transition-transform ${showSampleChapter ? 'rotate-90' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      {showSampleChapter ? 'Hide Sample Chapter' : 'Read Sample Chapter'}
                     </button>
-                  )}
-                </div>
+
+                    {showSampleChapter && (
+                      <div className="mt-6 p-6 bg-stone-900 rounded-xl border border-stone-800">
+                        <div className="prose prose-invert prose-stone max-w-none">
+                          <div className="whitespace-pre-line text-stone-300 leading-relaxed font-serif">
+                            {selectedBook.sampleChapter}
+                          </div>
+                        </div>
+                        <div className="mt-6 pt-6 border-t border-stone-800 text-center">
+                          <p className="text-stone-500 mb-3">Want to keep reading?</p>
+                          <a href="#" className="inline-block px-6 py-2.5 bg-amber-600 text-stone-950 font-medium rounded-lg hover:bg-amber-500 transition-colors">
+                            Get the Full Book
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Character Encyclopedia - Mobile Responsive */}
-      <div className="mb-12 sm:mb-16 lg:mb-20">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pearlWhite text-center mb-8 sm:mb-12">
-          Character Encyclopedia
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-          {characters.map((character) => (
-            <div
-              key={character.id}
-              onClick={() => setSelectedCharacter(character)}
-              className={`p-5 sm:p-6 rounded-2xl border-2 cursor-pointer transition-all ${
-                selectedCharacter.id === character.id
-                  ? 'border-tealEnchantment bg-tealEnchantment/10 shadow-lg shadow-tealEnchantment/20'
-                  : 'border-moonlightSilver/20 bg-midnight/40 hover:border-tealEnchantment/50'
-              }`}
-            >
-              {/* Character Portrait Placeholder - Mobile Responsive */}
-              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-owleryGold to-inkPlum flex items-center justify-center">
-                <span className="text-3xl sm:text-4xl">👤</span>
-              </div>
-
-              {/* Character Name & Title */}
-              <h3 className="text-lg sm:text-xl font-bold text-pearlWhite text-center mb-1">
-                {character.name}
-              </h3>
-              <p className="text-xs sm:text-sm text-tealEnchantment text-center mb-3 font-semibold">
-                {character.title}
-              </p>
-              <p className="text-xs text-moonlightSilver/60 text-center mb-4 pb-4 border-b border-moonlightSilver/10">
-                {character.house}
-              </p>
-
-              {/* Character Description */}
-              <p className="text-xs sm:text-sm text-moonlightSilver/80 mb-4 leading-relaxed">
-                {character.description}
-              </p>
-
-              {/* Relationships */}
-              <div>
-                <p className="text-xs text-owleryGold/70 uppercase tracking-wider font-semibold mb-2">
-                  Key Relationships
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {character.relationships.map((rel) => (
-                    <span
-                      key={rel}
-                      className="px-2 py-1 rounded-full bg-inkPlum/20 border border-inkPlum/40 text-inkPlum text-[0.65rem] sm:text-xs"
-                    >
-                      {rel}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Relationship Map Placeholder - Mobile Responsive */}
-        <div className="mt-8 sm:mt-12 p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-tealEnchantment/30 bg-gradient-to-br from-inkPlum/20 to-midnight/60">
-          <h3 className="text-xl sm:text-2xl font-bold text-pearlWhite text-center mb-6 sm:mb-8">
-            Character Relationship Web
-          </h3>
-          <div className="min-h-[200px] sm:min-h-[300px] flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 rounded-full bg-tealEnchantment/20 flex items-center justify-center">
-                <span className="text-3xl sm:text-4xl">🕸️</span>
-              </div>
-              <p className="text-sm sm:text-base text-moonlightSilver/80">
-                Interactive relationship diagram showing alliances, rivalries, and hidden connections
-              </p>
             </div>
           </div>
-        </div>
-      </div>
+        )}
 
-      {/* Newsletter Signup - Mobile Responsive */}
-      <div id="newsletter" className="mb-12 sm:mb-16 p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-owleryGold/10 via-tealEnchantment/5 to-inkPlum/10">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-owleryGold/20 flex items-center justify-center">
-            <span className="text-3xl sm:text-4xl">📬</span>
-          </div>
+        {/* Characters Tab */}
+        {activeTab === 'characters' && (
+          <div>
+            <h2 className="text-2xl font-serif font-bold text-stone-100 mb-6">Character Encyclopedia</h2>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pearlWhite mb-4">
-            Join the Reader Community
-          </h2>
-          <p className="text-sm sm:text-base text-moonlightSilver/90 mb-6 sm:mb-8">
-            Get exclusive bonus content, deleted scenes, character art, early chapter previews, and behind-the-scenes writing updates.
-          </p>
-
-          {/* Newsletter Form - Mobile Responsive */}
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
-            <input
-              type="email"
-              value={newsletterEmail}
-              onChange={(e) => setNewsletterEmail(e.target.value)}
-              placeholder="your@email.com"
-              className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full bg-midnight/60 border-2 border-owleryGold/30 text-pearlWhite text-sm sm:text-base focus:border-owleryGold focus:outline-none transition-colors"
-            />
-            <button
-              type="submit"
-              disabled={isSubscribing}
-              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider hover:shadow-lg hover:scale-105 transition-all whitespace-nowrap disabled:opacity-50"
-            >
-              {isSubscribing ? 'Subscribing...' : 'Subscribe →'}
-            </button>
-          </form>
-
-          {/* Subscriber Benefits - Mobile Responsive */}
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm">
-            <div className="flex items-center gap-2 text-moonlightSilver/70">
-              <span>✓</span>
-              <span>Deleted Scenes</span>
-            </div>
-            <div className="flex items-center gap-2 text-moonlightSilver/70">
-              <span>✓</span>
-              <span>Character Art</span>
-            </div>
-            <div className="flex items-center gap-2 text-moonlightSilver/70">
-              <span>✓</span>
-              <span>Early Previews</span>
-            </div>
-            <div className="flex items-center gap-2 text-moonlightSilver/70">
-              <span>✓</span>
-              <span>Writing Updates</span>
-            </div>
-          </div>
-
-          <p className="text-xs text-moonlightSilver/50 mt-6">
-            No spam. Unsubscribe anytime. Emails sent monthly.
-          </p>
-        </div>
-      </div>
-
-      {/* Feature Highlights - Mobile Responsive */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
-        <div className="p-6 rounded-xl border-2 border-owleryGold/30 bg-gradient-to-br from-inkPlum/20 to-midnight/40">
-          <span className="text-3xl sm:text-4xl mb-3 block">📖</span>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">Sample Chapters</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Read the first three chapters of each book before you buy. No email required.
-          </p>
-        </div>
-
-        <div className="p-6 rounded-xl border-2 border-tealEnchantment/30 bg-gradient-to-br from-inkPlum/20 to-midnight/40">
-          <span className="text-3xl sm:text-4xl mb-3 block">🗺️</span>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">Interactive World Map</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Explore the kingdoms, cities, and landmarks from the series with an illustrated map.
-          </p>
-        </div>
-
-        <div className="p-6 rounded-xl border-2 border-inkPlum/30 bg-gradient-to-br from-inkPlum/20 to-midnight/40">
-          <span className="text-3xl sm:text-4xl mb-3 block">👥</span>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">Character Encyclopedia</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Dive deep into character backstories, relationships, and hidden secrets.
-          </p>
-        </div>
-      </div>
-
-      {/* Final CTA - Mobile Responsive */}
-      <div className="p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-owleryGold/10 via-tealEnchantment/5 to-midnight/20 text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-pearlWhite mb-4">
-          Build Your Own Reader Hub
-        </h2>
-        <p className="text-sm sm:text-base text-moonlightSilver/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
-          As an author AND developer, I built this platform to showcase books, engage readers, and grow my audience.
-          Let me build yours.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <Link
-            href="/get-quote"
-            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-owleryGold/50 hover:scale-105 transition-all text-center"
-          >
-            Get Your Author Platform →
-          </Link>
-          <Link
-            href="/portfolio"
-            className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-owleryGold/40 text-owleryGold font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-owleryGold/10 transition-all text-center"
-          >
-            ← Back to Portfolio
-          </Link>
-        </div>
-      </div>
-      </div>
-
-      {/* Sample Chapter Modal */}
-      {showSampleModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight/90 backdrop-blur-sm">
-          <div className="relative w-full max-w-2xl max-h-[80vh] overflow-hidden rounded-2xl border-2 border-owleryGold/40 bg-gradient-to-br from-midnight to-deepOcean shadow-2xl">
-            {/* Modal Header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between p-4 sm:p-6 border-b border-owleryGold/20 bg-midnight/95">
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-pearlWhite">Crown of Shadows</h3>
-                <p className="text-xs sm:text-sm text-owleryGold">Chapter 1 Preview</p>
-              </div>
-              <button
-                onClick={() => setShowSampleModal(false)}
-                className="p-2 rounded-full hover:bg-owleryGold/20 transition-colors"
-              >
-                <svg className="w-6 h-6 text-moonlightSilver" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Content */}
-            <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(80vh-140px)]">
-              <div className="prose prose-invert prose-sm sm:prose-base max-w-none">
-                {sampleChapterContent.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="text-moonlightSilver/90 leading-relaxed mb-4">
-                    {paragraph}
-                  </p>
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Character List */}
+              <div className="space-y-2">
+                {characters.map((char) => (
+                  <button
+                    key={char.id}
+                    onClick={() => setSelectedCharacter(char)}
+                    className={`w-full text-left p-4 rounded-lg transition-all ${
+                      selectedCharacter.id === char.id
+                        ? 'bg-amber-600/20 border border-amber-600/40'
+                        : 'bg-stone-900 border border-stone-800 hover:border-stone-700'
+                    }`}
+                  >
+                    <h3 className={`font-semibold ${selectedCharacter.id === char.id ? 'text-amber-500' : 'text-stone-200'}`}>
+                      {char.name}
+                    </h3>
+                    <p className="text-sm text-stone-500">{char.title}</p>
+                  </button>
                 ))}
               </div>
-            </div>
 
-            {/* Modal Footer */}
-            <div className="sticky bottom-0 p-4 sm:p-6 border-t border-owleryGold/20 bg-midnight/95">
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  onClick={() => {
-                    handleBuyNow();
-                    setShowSampleModal(false);
-                  }}
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-owleryGold to-tealEnchantment text-midnight font-bold text-sm uppercase tracking-wider hover:shadow-lg transition-all"
-                >
-                  Get the Full Book →
-                </button>
-                <button
-                  onClick={() => setShowSampleModal(false)}
-                  className="px-6 py-3 rounded-full border-2 border-moonlightSilver/30 text-moonlightSilver font-semibold text-sm hover:bg-moonlightSilver/10 transition-all"
-                >
-                  Close Preview
-                </button>
+              {/* Character Detail */}
+              <div className="lg:col-span-2 bg-stone-900 rounded-xl border border-stone-800 p-6">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-serif font-bold text-stone-100 mb-1">{selectedCharacter.name}</h3>
+                  <p className="text-amber-500">{selectedCharacter.title}</p>
+                </div>
+
+                <p className="text-stone-300 leading-relaxed mb-6">{selectedCharacter.description}</p>
+
+                <blockquote className="mb-6 p-4 bg-stone-950 rounded-lg border-l-4 border-amber-600">
+                  <p className="text-stone-300 italic">"{selectedCharacter.quote}"</p>
+                </blockquote>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-3">Character Traits</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedCharacter.traits.map((trait) => (
+                      <span key={trait} className="px-3 py-1 bg-stone-800 text-stone-300 text-sm rounded-full">
+                        {trait}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-3">Key Relationships</h4>
+                  <div className="space-y-2">
+                    {selectedCharacter.relationships.map((rel, i) => (
+                      <div key={i} className="flex items-center justify-between p-3 bg-stone-950 rounded-lg">
+                        <span className="text-stone-200">{rel.name}</span>
+                        <span className="text-sm text-stone-500">{rel.relation}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        )}
+
+        {/* World Tab */}
+        {activeTab === 'world' && (
+          <div>
+            <h2 className="text-2xl font-serif font-bold text-stone-100 mb-6">The Realm of Shadows</h2>
+
+            {/* Interactive Map */}
+            <div className="bg-stone-900 rounded-xl border border-stone-800 p-6 mb-8">
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-stone-800 via-stone-900 to-stone-950 rounded-lg overflow-hidden">
+                {/* Map Background Pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-amber-500"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#grid)" />
+                  </svg>
+                </div>
+
+                {/* Location Markers */}
+                {mapLocations.map((loc) => (
+                  <div
+                    key={loc.id}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                    style={{ left: `${loc.x}%`, top: `${loc.y}%` }}
+                    onMouseEnter={() => setHoveredLocation(loc.id)}
+                    onMouseLeave={() => setHoveredLocation(null)}
+                  >
+                    <div className={`w-4 h-4 rounded-full transition-all ${
+                      hoveredLocation === loc.id
+                        ? 'bg-amber-500 scale-150'
+                        : 'bg-amber-600/60'
+                    }`}>
+                      <div className="absolute inset-0 rounded-full bg-amber-500 animate-ping opacity-30"></div>
+                    </div>
+
+                    {/* Tooltip */}
+                    {hoveredLocation === loc.id && (
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-stone-950 border border-stone-700 rounded-lg shadow-xl z-10">
+                        <h4 className="font-semibold text-amber-500 text-sm">{loc.name}</h4>
+                        <p className="text-xs text-stone-400 mt-1">{loc.description}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                {/* Map Labels */}
+                <div className="absolute bottom-4 left-4 text-xs text-stone-500">
+                  <p>Hover over locations to explore</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Location List */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {mapLocations.map((loc) => (
+                <div
+                  key={loc.id}
+                  className={`p-4 rounded-lg border transition-all ${
+                    hoveredLocation === loc.id
+                      ? 'bg-amber-600/10 border-amber-600/40'
+                      : 'bg-stone-900 border-stone-800'
+                  }`}
+                  onMouseEnter={() => setHoveredLocation(loc.id)}
+                  onMouseLeave={() => setHoveredLocation(null)}
+                >
+                  <h3 className="font-semibold text-stone-100 mb-1">{loc.name}</h3>
+                  <p className="text-sm text-stone-400">{loc.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Newsletter Tab */}
+        {activeTab === 'newsletter' && (
+          <div className="max-w-2xl mx-auto">
+            {!subscribed ? (
+              <div className="bg-stone-900 rounded-xl border border-stone-800 p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-amber-600/20 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-serif font-bold text-stone-100 mb-2">Join the Reader Circle</h2>
+                <p className="text-stone-400 mb-6">
+                  Get exclusive content, early cover reveals, deleted scenes, and be the first to know about new releases.
+                </p>
+
+                <form onSubmit={handleSubscribe} className="mb-6">
+                  <div className="flex gap-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      className="flex-1 px-4 py-3 bg-stone-950 border border-stone-700 rounded-lg text-stone-100 placeholder-stone-500 focus:outline-none focus:border-amber-500"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="px-6 py-3 bg-amber-600 text-stone-950 font-semibold rounded-lg hover:bg-amber-500 transition-colors"
+                    >
+                      Subscribe
+                    </button>
+                  </div>
+                </form>
+
+                <div className="text-left bg-stone-950 rounded-lg p-6">
+                  <h3 className="font-semibold text-stone-200 mb-4">Subscriber Bonus Content:</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-stone-300">Exclusive prequel short story: "The Night Before the Crown"</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-stone-300">High-resolution character art and world map</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-stone-300">Deleted scenes from Books 1 & 2</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-stone-300">Early access to cover reveals and release dates</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <p className="text-xs text-stone-500 mt-6">No spam, ever. Unsubscribe anytime.</p>
+              </div>
+            ) : (
+              <div className="bg-stone-900 rounded-xl border border-stone-800 p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-green-600/20 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-serif font-bold text-stone-100 mb-2">Welcome to the Reader Circle!</h2>
+                <p className="text-stone-400 mb-6">
+                  Check your inbox for a welcome email with your exclusive bonus content.
+                </p>
+                <div className="p-4 bg-stone-950 rounded-lg">
+                  <p className="text-sm text-stone-400">
+                    Didn't receive the email? Check your spam folder or contact support@victoriablackwood.com
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-stone-900 border-t border-stone-800 py-10 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded bg-amber-600 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-stone-950" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                  </svg>
+                </div>
+                <span className="font-semibold text-stone-100">Victoria Blackwood</span>
+              </div>
+              <p className="text-sm text-stone-400">
+                Epic fantasy author. Lover of morally complex characters and kingdoms on the brink.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-stone-200 mb-3">Quick Links</h4>
+              <div className="space-y-2 text-sm text-stone-400">
+                <p><a href="#" className="hover:text-amber-500 transition-colors">All Books</a></p>
+                <p><a href="#" className="hover:text-amber-500 transition-colors">About the Author</a></p>
+                <p><a href="#" className="hover:text-amber-500 transition-colors">Media Kit</a></p>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-stone-200 mb-3">Connect</h4>
+              <div className="space-y-2 text-sm text-stone-400">
+                <p><a href="#" className="hover:text-amber-500 transition-colors">Instagram</a></p>
+                <p><a href="#" className="hover:text-amber-500 transition-colors">Goodreads</a></p>
+                <p><a href="#" className="hover:text-amber-500 transition-colors">Contact</a></p>
+              </div>
+            </div>
+          </div>
+          <div className="pt-6 border-t border-stone-800 text-center text-sm text-stone-500">
+            <p>© 2024 Victoria Blackwood. All rights reserved.</p>
+          </div>
         </div>
-      )}
+      </footer>
     </div>
   );
 }

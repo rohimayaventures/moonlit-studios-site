@@ -54,6 +54,20 @@ const config: Config = {
         warmParchment: "#F5E7C8",     // Warm Parchment (text/background)
         midnightStacks: "#121528",    // Midnight Stacks (dark background)
 
+        // 🧘 AURORA WELLNESS COLORS (Therapy/Wellness Palette)
+        sage: {
+          50: "#f6f7f6",
+          100: "#e3e7e3",
+          200: "#c7d0c7",
+          300: "#a3b1a3",
+          400: "#7d8f7d",
+          500: "#627462",
+          600: "#4d5c4d",
+          700: "#404b40",
+          800: "#363e36",
+          900: "#2e352e",
+        },
+
         // Legacy (keeping for backward compatibility)
         moonlitTeal: "#1da6a5",       // Old teal (use mermaidTeal instead)
         peacockTeal: "#4A9B9B",       // Duplicate of mermaidTeal

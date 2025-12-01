@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Portfolio - Quest Chronicles | Moonlit Studios",
   description:
-    "Journey through five realms of completed quests. From the Shire's welcoming brands to Rivendell's healing platforms, Lothlórien's AI visions, Gondor's preserved lore, and the Grey Havens' experimental voyages. Every project a legend forged.",
+    "Journey through six realms of completed quests. From Bree's welcoming brands to the Shire's nourishing creations, Rivendell's healing platforms, Lothlórien's AI visions, Gondor's preserved lore, and the Grey Havens' experimental voyages. Every project a legend forged.",
   keywords: [
     "web development portfolio",
     "AI development projects",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Portfolio - Quest Chronicles | Moonlit Studios",
     description:
-      "5 realms explored. 15+ quests completed. Infinite honor earned. Journey through The Shire, Rivendell, Lothlórien, Gondor, and the Grey Havens.",
+      "6 realms explored. 19 legendary quests. Infinite honor earned. Journey through Bree, The Shire, Rivendell, Lothlórien, Gondor, and the Grey Havens.",
     type: "website",
     url: "https://www.moonlstudios.com/portfolio",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Portfolio - Quest Chronicles | Moonlit Studios",
     description:
-      "Journey through 5 realms of completed quests. Web design, healthcare tech, AI innovation, writing, and experimental labs.",
+      "Journey through 6 realms of completed quests. Web design, healthcare tech, AI innovation, writing, and experimental labs.",
     images: ["/og-image.png"],
   },
   alternates: {

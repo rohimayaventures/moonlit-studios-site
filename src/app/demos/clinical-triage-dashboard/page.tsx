@@ -1,463 +1,779 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { toast } from 'sonner';
+import { useState, useEffect } from 'react';
 
-// Mock patient data
+// Mock patient data with vital history for trends
 const mockPatients = [
   {
     id: 1,
-    name: "Patient A",
-    mrn: "MRN-001234",
+    name: "Rodriguez, Maria",
+    mrn: "MRN-847291",
     age: 67,
-    chiefComplaint: "Chest pain radiating to left arm",
-    acuity: "Level 2 - Urgent",
+    gender: "F",
+    chiefComplaint: "Chest pain radiating to left arm, onset 45 min ago",
+    acuity: 2,
+    acuityLabel: "ESI-2 Emergent",
     acuityColor: "bg-orange-500",
     vitals: {
       hr: 105,
       bp: "165/95",
-      temp: "98.6°F",
+      temp: 98.6,
       spo2: 94,
-      rr: 22
+      rr: 22,
+      pain: 8
+    },
+    vitalHistory: {
+      hr: [98, 102, 105, 108, 105],
+      spo2: [96, 95, 94, 94, 94],
+      bp: [158, 160, 163, 165, 165]
     },
     arrivalTime: "14:23",
-    waitTime: "12 min",
+    waitTime: 12,
+    location: "Triage Bay 1",
     assignedTo: "RN Thompson",
-    alerts: ["High BP", "Cardiac Alert"]
+    assignedMD: "Dr. Patel",
+    allergies: ["Penicillin", "Sulfa"],
+    pmh: ["HTN", "DM Type 2", "Hyperlipidemia"],
+    alerts: ["Cardiac Protocol", "High BP"],
+    lastAssessed: "14:31",
+    orders: ["12-Lead EKG", "Troponin", "BMP", "CBC"],
+    notes: "Patient appears diaphoretic, clutching chest. Denies SOB. Family at bedside."
   },
   {
     id: 2,
-    name: "Patient B",
-    mrn: "MRN-005678",
+    name: "Chen, William",
+    mrn: "MRN-392847",
     age: 34,
+    gender: "M",
     chiefComplaint: "Laceration to right hand - needs sutures",
-    acuity: "Level 3 - Less Urgent",
-    acuityColor: "bg-yellow-500",
+    acuity: 4,
+    acuityLabel: "ESI-4 Less Urgent",
+    acuityColor: "bg-green-500",
     vitals: {
       hr: 82,
       bp: "128/76",
-      temp: "98.2°F",
+      temp: 98.2,
       spo2: 99,
-      rr: 16
+      rr: 16,
+      pain: 4
+    },
+    vitalHistory: {
+      hr: [80, 81, 82, 82, 82],
+      spo2: [99, 99, 99, 99, 99],
+      bp: [126, 127, 128, 128, 128]
     },
     arrivalTime: "14:45",
-    waitTime: "34 min",
+    waitTime: 34,
+    location: "Waiting Room",
     assignedTo: "RN Martinez",
-    alerts: []
+    assignedMD: "Dr. Kim",
+    allergies: ["NKDA"],
+    pmh: [],
+    alerts: [],
+    lastAssessed: "14:52",
+    orders: ["Wound care", "Tetanus if needed"],
+    notes: "Clean laceration ~3cm, controlled bleeding with pressure. Pt stable."
   },
   {
     id: 3,
-    name: "Patient C",
-    mrn: "MRN-009012",
+    name: "Thompson, Aiden",
+    mrn: "MRN-194728",
     age: 8,
-    chiefComplaint: "Fever 102°F, vomiting x3",
-    acuity: "Level 3 - Less Urgent",
+    gender: "M",
+    chiefComplaint: "Fever 102.3°F, vomiting x3, decreased PO intake",
+    acuity: 3,
+    acuityLabel: "ESI-3 Urgent",
     acuityColor: "bg-yellow-500",
     vitals: {
       hr: 118,
       bp: "95/62",
-      temp: "102.3°F",
+      temp: 102.3,
       spo2: 98,
-      rr: 24
+      rr: 24,
+      pain: 5
+    },
+    vitalHistory: {
+      hr: [110, 112, 115, 118, 118],
+      spo2: [99, 99, 98, 98, 98],
+      bp: [98, 96, 95, 95, 95]
     },
     arrivalTime: "15:02",
-    waitTime: "17 min",
+    waitTime: 17,
+    location: "Peds Bay 2",
     assignedTo: "RN Chen",
-    alerts: ["Pediatric", "High Temp"]
+    assignedMD: "Dr. Williams",
+    allergies: ["NKDA"],
+    pmh: ["Asthma"],
+    alerts: ["Pediatric", "Fever Protocol"],
+    lastAssessed: "15:08",
+    orders: ["IV access", "Flu swab", "CBC", "BMP"],
+    notes: "Mom reports illness started 2 days ago. Last void 6 hrs ago. Appears lethargic."
   },
   {
     id: 4,
-    name: "Patient D",
-    mrn: "MRN-003456",
+    name: "Jackson, Dorothy",
+    mrn: "MRN-582910",
     age: 52,
-    chiefComplaint: "Difficulty breathing, wheezing",
-    acuity: "Level 2 - Urgent",
+    gender: "F",
+    chiefComplaint: "Difficulty breathing, wheezing, productive cough x2 days",
+    acuity: 2,
+    acuityLabel: "ESI-2 Emergent",
     acuityColor: "bg-orange-500",
     vitals: {
       hr: 112,
       bp: "142/88",
-      temp: "98.9°F",
+      temp: 99.1,
       spo2: 91,
-      rr: 28
+      rr: 28,
+      pain: 3
+    },
+    vitalHistory: {
+      hr: [105, 108, 110, 112, 112],
+      spo2: [94, 93, 92, 91, 91],
+      bp: [138, 140, 141, 142, 142]
     },
     arrivalTime: "15:11",
-    waitTime: "8 min",
+    waitTime: 8,
+    location: "Room 4",
     assignedTo: "RN Thompson",
-    alerts: ["Low O2", "Respiratory"]
+    assignedMD: "Dr. Patel",
+    allergies: ["Aspirin"],
+    pmh: ["COPD", "CHF", "Former smoker"],
+    alerts: ["Low O2", "Resp Distress", "COPD Exacerbation"],
+    lastAssessed: "15:15",
+    orders: ["Nebulizer", "ABG", "Chest X-ray", "Prednisone"],
+    notes: "On 4L NC, still labored. Tripoding. Continuous pulse ox ordered. May need BiPAP."
   },
   {
     id: 5,
-    name: "Patient E",
-    mrn: "MRN-007890",
+    name: "Martinez, Carlos",
+    mrn: "MRN-847261",
     age: 23,
-    chiefComplaint: "Ankle sprain after fall",
-    acuity: "Level 4 - Standard",
+    gender: "M",
+    chiefComplaint: "Right ankle injury after basketball, unable to bear weight",
+    acuity: 4,
+    acuityLabel: "ESI-4 Less Urgent",
     acuityColor: "bg-green-500",
     vitals: {
       hr: 78,
       bp: "118/72",
-      temp: "98.4°F",
+      temp: 98.4,
       spo2: 99,
-      rr: 14
+      rr: 14,
+      pain: 6
+    },
+    vitalHistory: {
+      hr: [76, 77, 78, 78, 78],
+      spo2: [99, 99, 99, 99, 99],
+      bp: [118, 118, 118, 118, 118]
     },
     arrivalTime: "15:18",
-    waitTime: "1 min",
+    waitTime: 1,
+    location: "Waiting Room",
     assignedTo: "RN Martinez",
-    alerts: []
+    assignedMD: "Dr. Kim",
+    allergies: ["NKDA"],
+    pmh: [],
+    alerts: [],
+    lastAssessed: "15:19",
+    orders: ["X-ray right ankle"],
+    notes: "Visible swelling lateral ankle. Good distal pulses. Ice applied."
+  },
+  {
+    id: 6,
+    name: "Williams, Robert",
+    mrn: "MRN-019283",
+    age: 71,
+    gender: "M",
+    chiefComplaint: "Altered mental status, found confused by family",
+    acuity: 2,
+    acuityLabel: "ESI-2 Emergent",
+    acuityColor: "bg-orange-500",
+    vitals: {
+      hr: 88,
+      bp: "178/102",
+      temp: 98.8,
+      spo2: 96,
+      rr: 18,
+      pain: 0
+    },
+    vitalHistory: {
+      hr: [85, 86, 87, 88, 88],
+      spo2: [97, 96, 96, 96, 96],
+      bp: [172, 175, 176, 178, 178]
+    },
+    arrivalTime: "15:25",
+    waitTime: 3,
+    location: "Room 2",
+    assignedTo: "RN Chen",
+    assignedMD: "Dr. Patel",
+    allergies: ["Codeine"],
+    pmh: ["A-fib", "HTN", "Prior CVA 2019"],
+    alerts: ["Stroke Alert", "High BP", "Fall Risk"],
+    lastAssessed: "15:26",
+    orders: ["STAT CT Head", "Stroke protocol", "Neuro consult", "BMP", "CBC", "PT/INR"],
+    notes: "Last known well 2 hours ago per wife. Slurred speech, right-sided weakness. CODE STROKE activated."
   }
 ];
 
-export default function ClinicalTriageDashboard() {
-  const [selectedPatient, setSelectedPatient] = useState(mockPatients[0]);
-  const [showSBAR, setShowSBAR] = useState(false);
+// Team messages
+const teamMessages = [
+  { id: 1, from: "Charge RN", time: "15:28", message: "Room 7 ready for next patient", urgent: false },
+  { id: 2, from: "Dr. Patel", time: "15:26", message: "Need RN in Room 2 for stroke protocol NOW", urgent: true },
+  { id: 3, from: "Lab", time: "15:20", message: "STAT troponin resulted for Rodriguez - see chart", urgent: true },
+  { id: 4, from: "Radiology", time: "15:15", message: "Portable chest ready for Room 4", urgent: false },
+  { id: 5, from: "RN Thompson", time: "15:10", message: "Taking Rodriguez to EKG, back in 10", urgent: false },
+];
 
-  const handleSendToRoom = () => {
-    toast.success(`${selectedPatient.name} assigned to treatment room`, {
-      description: 'In a production system, this would update the patient queue and notify staff.',
-      duration: 4000
-    });
-  };
-
-  const handleEscalateAlert = () => {
-    toast.warning(`Alert escalated for ${selectedPatient.name}`, {
-      description: 'Charge nurse and attending physician have been notified.',
-      duration: 4000
-    });
-  };
-
-  const handlePrintSBAR = () => {
-    toast.success('SBAR report ready', {
-      description: 'In a production system, this would generate a printable PDF.',
-      duration: 3000
-    });
-  };
-
-  const handleNewPatient = () => {
-    toast.info('Add New Patient', {
-      description: 'This would open a patient intake form in a production system.',
-      duration: 3000
-    });
-  };
+// Sparkline component for vital trends
+function Sparkline({ data, color, alert }: { data: number[]; color: string; alert?: boolean }) {
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const range = max - min || 1;
 
   return (
-    <div className="min-h-screen bg-midnight text-pearlWhite">
-      {/* Professional Hero Section */}
-      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
-        {/* Animated Background Gradients */}
-        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-healingWaterTeal/45 via-spiritGlowBlue/30 to-mermaidTeal/35 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-spiritGlowBlue/30 via-healingWaterTeal/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
-        </div>
+    <div className="flex items-end gap-0.5 h-4">
+      {data.map((value, i) => (
+        <div
+          key={i}
+          className={`w-1 rounded-sm ${alert ? 'bg-red-400' : color}`}
+          style={{ height: `${((value - min) / range) * 100}%`, minHeight: '2px' }}
+        />
+      ))}
+    </div>
+  );
+}
 
-        <div className="relative mx-auto max-w-6xl">
-          <div className="text-center space-y-6 sm:space-y-8 px-4">
-            {/* Professional Icon Badge */}
-            <div className="inline-block p-4 sm:p-5 rounded-full bg-gradient-to-br from-healingWaterTeal/20 to-spiritGlowBlue/20 border border-healingWaterTeal/30 mb-4">
-              <svg className="w-12 h-12 sm:w-16 sm:h-16 text-healingWaterTeal" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-              </svg>
+export default function ClinicalTriageDashboard() {
+  const [selectedPatient, setSelectedPatient] = useState(mockPatients[0]);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [messageInput, setMessageInput] = useState('');
+  const [messages, setMessages] = useState(teamMessages);
+  const [showNewPatientModal, setShowNewPatientModal] = useState(false);
+  const [patients, setPatients] = useState(mockPatients);
+
+  // Update time every minute
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleSendMessage = () => {
+    if (!messageInput.trim()) return;
+
+    const newMessage = {
+      id: messages.length + 1,
+      from: "You",
+      time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      message: messageInput,
+      urgent: false
+    };
+
+    setMessages([newMessage, ...messages]);
+    setMessageInput('');
+  };
+
+  const handleAssignRoom = (room: string) => {
+    setPatients(patients.map(p =>
+      p.id === selectedPatient.id
+        ? { ...p, location: room, waitTime: 0 }
+        : p
+    ));
+    setSelectedPatient({ ...selectedPatient, location: room, waitTime: 0 });
+  };
+
+  const getAcuityStats = () => {
+    const stats = { esi1: 0, esi2: 0, esi3: 0, esi4: 0, esi5: 0 };
+    patients.forEach(p => {
+      if (p.acuity === 1) stats.esi1++;
+      else if (p.acuity === 2) stats.esi2++;
+      else if (p.acuity === 3) stats.esi3++;
+      else if (p.acuity === 4) stats.esi4++;
+      else stats.esi5++;
+    });
+    return stats;
+  };
+
+  const acuityStats = getAcuityStats();
+  const waitingCount = patients.filter(p => p.location === "Waiting Room").length;
+  const criticalCount = patients.filter(p => p.acuity <= 2).length;
+
+  return (
+    <div className="min-h-screen bg-slate-900 text-white">
+      {/* Top Navigation Bar - Clinical Software Style */}
+      <header className="bg-slate-800 border-b border-slate-700 px-4 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            {/* Logo/Title */}
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded bg-teal-500 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <div>
+                <h1 className="text-sm font-bold text-white">TriageFlow</h1>
+                <p className="text-[10px] text-slate-400">Emergency Department</p>
+              </div>
             </div>
 
-            {/* Tag */}
-            <div className="inline-block">
-              <span className="px-4 py-2 rounded-full bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-bold uppercase tracking-wider">
-                Health x Tech Demo
-              </span>
+            {/* Department Quick Stats */}
+            <div className="hidden md:flex items-center gap-4 text-xs">
+              <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-700">
+                <span className="text-slate-400">Census:</span>
+                <span className="font-bold text-white">{patients.length}</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-700">
+                <span className="text-slate-400">Waiting:</span>
+                <span className="font-bold text-amber-400">{waitingCount}</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1 rounded bg-red-900/50 border border-red-700">
+                <span className="text-red-300">Critical:</span>
+                <span className="font-bold text-red-400">{criticalCount}</span>
+              </div>
             </div>
+          </div>
 
-            {/* Title */}
-            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-pearlWhite">
-              Clinical Triage Dashboard
-            </h1>
-
-            {/* Subtitle */}
-            <p className="font-serif text-lg sm:text-xl md:text-2xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto">
-              Emergency Department Workflow System
-            </p>
-
-            {/* Description */}
-            <p className="text-base sm:text-lg text-moonlightSilver/90 leading-relaxed max-w-4xl mx-auto">
-              Built by a nurse AND full-stack developer who understands ED chaos. Real-time patient queue management,
-              acuity scoring, SBAR handoff cards, and alert escalation designed for clinical workflows.
-            </p>
-
-            {/* Tech Stack */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-4">
-              {["Next.js", "TypeScript", "Supabase", "Pusher", "FHIR"].map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold"
-                >
-                  {tech}
-                </span>
-              ))}
+          {/* Right Side - User & Time */}
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p className="text-xs text-slate-400">
+                {currentTime.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+              </p>
+              <p className="text-sm font-mono font-bold text-white">
+                {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              </p>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-slate-700">
+              <div className="w-6 h-6 rounded-full bg-teal-500 flex items-center justify-center text-xs font-bold">
+                ST
+              </div>
+              <div className="hidden sm:block">
+                <p className="text-xs font-semibold">Sarah Thompson, RN</p>
+                <p className="text-[10px] text-slate-400">Triage Lead</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Main Content Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-
-      {/* Dashboard Grid - Mobile Responsive */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* Patient Queue - Full width on mobile, 2/3 on desktop */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg sm:text-xl font-bold text-pearlWhite flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-healingWaterTeal animate-pulse"></span>
-              Patient Queue ({mockPatients.length})
-            </h2>
+      {/* Acuity Bar */}
+      <div className="bg-slate-800/50 border-b border-slate-700 px-4 py-2">
+        <div className="flex items-center gap-2 text-xs">
+          <span className="text-slate-400 mr-2">Acuity:</span>
+          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-red-600">
+            <span>ESI-1</span>
+            <span className="font-bold">{acuityStats.esi1}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-orange-500">
+            <span>ESI-2</span>
+            <span className="font-bold">{acuityStats.esi2}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-yellow-500 text-slate-900">
+            <span>ESI-3</span>
+            <span className="font-bold">{acuityStats.esi3}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-green-500 text-slate-900">
+            <span>ESI-4</span>
+            <span className="font-bold">{acuityStats.esi4}</span>
+          </div>
+          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-blue-500">
+            <span>ESI-5</span>
+            <span className="font-bold">{acuityStats.esi5}</span>
+          </div>
+          <div className="ml-auto flex items-center gap-2">
             <button
-              onClick={handleNewPatient}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-xs sm:text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors"
+              onClick={() => setShowNewPatientModal(true)}
+              className="px-3 py-1 rounded bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
             >
               + New Patient
             </button>
           </div>
+        </div>
+      </div>
 
-          {/* Patient Cards - Scrollable on mobile */}
-          <div className="space-y-3 sm:space-y-4">
-            {mockPatients.map((patient) => (
-              <div
-                key={patient.id}
-                onClick={() => {
-                  setSelectedPatient(patient);
-                  setShowSBAR(false);
-                }}
-                className={`p-4 sm:p-5 rounded-xl border-2 cursor-pointer transition-all ${
-                  selectedPatient.id === patient.id
-                    ? 'border-healingWaterTeal bg-healingWaterTeal/10'
-                    : 'border-moonlightSilver/20 bg-midnight/40 hover:border-healingWaterTeal/50'
-                }`}
-              >
-                {/* Patient Header - Mobile Responsive */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 sm:gap-3 mb-1">
-                      <h3 className="text-base sm:text-lg font-bold text-pearlWhite">{patient.name}</h3>
-                      <span className="text-xs text-moonlightSilver/60">{patient.mrn}</span>
+      {/* Main Dashboard Grid */}
+      <div className="p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+          {/* Patient Queue - Left Panel */}
+          <div className="lg:col-span-5 space-y-2">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-sm font-bold text-slate-300 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Patient Queue
+              </h2>
+              <span className="text-xs text-slate-500">Sorted by acuity & wait time</span>
+            </div>
+
+            <div className="space-y-2 max-h-[calc(100vh-220px)] overflow-y-auto pr-2">
+              {patients
+                .sort((a, b) => a.acuity - b.acuity || b.waitTime - a.waitTime)
+                .map((patient) => (
+                <div
+                  key={patient.id}
+                  onClick={() => setSelectedPatient(patient)}
+                  className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                    selectedPatient.id === patient.id
+                      ? 'border-teal-500 bg-teal-500/10'
+                      : 'border-slate-700 bg-slate-800/50 hover:border-slate-600'
+                  }`}
+                >
+                  {/* Patient Header */}
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-sm font-bold text-white truncate">{patient.name}</h3>
+                        <span className="text-[10px] text-slate-500">{patient.mrn}</span>
+                      </div>
+                      <p className="text-xs text-slate-400 truncate">{patient.chiefComplaint}</p>
                     </div>
-                    <p className="text-xs sm:text-sm text-moonlightSilver/80 line-clamp-1">
-                      {patient.chiefComplaint}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <span className={`px-3 py-1 rounded-full ${patient.acuityColor} text-white text-xs font-bold whitespace-nowrap`}>
-                      {patient.acuity}
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap ${patient.acuityColor}`}>
+                      {patient.acuityLabel}
                     </span>
                   </div>
-                </div>
 
-                {/* Vitals - Mobile Responsive Grid */}
-                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mb-3">
-                  <div className="text-center p-2 rounded-lg bg-deepOcean/60">
-                    <p className="text-[0.65rem] text-moonlightSilver/60 uppercase">HR</p>
-                    <p className="text-sm sm:text-base font-bold text-pearlWhite">{patient.vitals.hr}</p>
+                  {/* Vitals Row with Sparklines */}
+                  <div className="grid grid-cols-5 gap-1 mb-2">
+                    <div className="text-center p-1.5 rounded bg-slate-900/50">
+                      <div className="flex items-center justify-center gap-1">
+                        <span className={`text-xs font-bold ${patient.vitals.hr > 100 ? 'text-red-400' : 'text-white'}`}>
+                          {patient.vitals.hr}
+                        </span>
+                        <Sparkline
+                          data={patient.vitalHistory.hr}
+                          color="bg-teal-400"
+                          alert={patient.vitals.hr > 100}
+                        />
+                      </div>
+                      <p className="text-[9px] text-slate-500 uppercase">HR</p>
+                    </div>
+                    <div className="text-center p-1.5 rounded bg-slate-900/50">
+                      <p className={`text-xs font-bold ${parseInt(patient.vitals.bp.split('/')[0]) > 160 ? 'text-red-400' : 'text-white'}`}>
+                        {patient.vitals.bp}
+                      </p>
+                      <p className="text-[9px] text-slate-500 uppercase">BP</p>
+                    </div>
+                    <div className="text-center p-1.5 rounded bg-slate-900/50">
+                      <div className="flex items-center justify-center gap-1">
+                        <span className={`text-xs font-bold ${patient.vitals.spo2 < 94 ? 'text-red-400' : 'text-white'}`}>
+                          {patient.vitals.spo2}%
+                        </span>
+                        <Sparkline
+                          data={patient.vitalHistory.spo2}
+                          color="bg-blue-400"
+                          alert={patient.vitals.spo2 < 94}
+                        />
+                      </div>
+                      <p className="text-[9px] text-slate-500 uppercase">SpO2</p>
+                    </div>
+                    <div className="text-center p-1.5 rounded bg-slate-900/50">
+                      <p className={`text-xs font-bold ${patient.vitals.temp > 100.4 ? 'text-red-400' : 'text-white'}`}>
+                        {patient.vitals.temp}°
+                      </p>
+                      <p className="text-[9px] text-slate-500 uppercase">Temp</p>
+                    </div>
+                    <div className="text-center p-1.5 rounded bg-slate-900/50">
+                      <p className={`text-xs font-bold ${patient.vitals.rr > 24 ? 'text-red-400' : 'text-white'}`}>
+                        {patient.vitals.rr}
+                      </p>
+                      <p className="text-[9px] text-slate-500 uppercase">RR</p>
+                    </div>
                   </div>
-                  <div className="text-center p-2 rounded-lg bg-deepOcean/60">
-                    <p className="text-[0.65rem] text-moonlightSilver/60 uppercase">BP</p>
-                    <p className="text-sm sm:text-base font-bold text-pearlWhite">{patient.vitals.bp}</p>
-                  </div>
-                  <div className="text-center p-2 rounded-lg bg-deepOcean/60">
-                    <p className="text-[0.65rem] text-moonlightSilver/60 uppercase">SpO2</p>
-                    <p className="text-sm sm:text-base font-bold text-pearlWhite">{patient.vitals.spo2}%</p>
-                  </div>
-                  <div className="text-center p-2 rounded-lg bg-deepOcean/60">
-                    <p className="text-[0.65rem] text-moonlightSilver/60 uppercase">Temp</p>
-                    <p className="text-sm sm:text-base font-bold text-pearlWhite">{patient.vitals.temp}</p>
-                  </div>
-                  <div className="text-center p-2 rounded-lg bg-deepOcean/60">
-                    <p className="text-[0.65rem] text-moonlightSilver/60 uppercase">RR</p>
-                    <p className="text-sm sm:text-base font-bold text-pearlWhite">{patient.vitals.rr}</p>
-                  </div>
-                </div>
 
-                {/* Footer - Mobile Responsive */}
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    <span className="text-moonlightSilver/60">Arrived: {patient.arrivalTime}</span>
-                    <span className="text-lunarGold font-semibold">Wait: {patient.waitTime}</span>
-                  </div>
-                  <span className="text-moonlightSilver/60">{patient.assignedTo}</span>
-                </div>
-
-                {/* Alerts - Mobile Responsive */}
-                {patient.alerts.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {patient.alerts.map((alert) => (
-                      <span
-                        key={alert}
-                        className="px-2 py-1 rounded-full bg-phoenixFire/20 border border-phoenixFire/40 text-phoenixFire text-[0.65rem] font-bold"
-                      >
-                        ⚠️ {alert}
+                  {/* Footer Row */}
+                  <div className="flex items-center justify-between text-[10px]">
+                    <div className="flex items-center gap-3">
+                      <span className="text-slate-500">
+                        <span className="text-slate-400">Loc:</span> {patient.location}
                       </span>
-                    ))}
+                      <span className={`font-semibold ${patient.waitTime > 30 ? 'text-amber-400' : 'text-slate-400'}`}>
+                        Wait: {patient.waitTime} min
+                      </span>
+                    </div>
+                    <span className="text-slate-500">{patient.assignedTo}</span>
                   </div>
-                )}
-              </div>
-            ))}
+
+                  {/* Alerts */}
+                  {patient.alerts.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {patient.alerts.map((alert) => (
+                        <span
+                          key={alert}
+                          className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-900/50 border border-red-700 text-red-300"
+                        >
+                          ⚠ {alert}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Patient Detail Sidebar - Full width on mobile, 1/3 on desktop */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-24 space-y-4">
-            {/* SBAR Handoff Card */}
-            <div className="p-4 sm:p-5 rounded-xl border-2 border-spiritGlowBlue/30 bg-gradient-to-br from-deepOcean/80 to-midnight/60 backdrop-blur">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base sm:text-lg font-bold text-pearlWhite">Patient Detail</h3>
-                <button
-                  onClick={() => setShowSBAR(!showSBAR)}
-                  className="px-3 py-1.5 rounded-lg bg-spiritGlowBlue/20 border border-spiritGlowBlue/40 text-spiritGlowBlue text-xs font-semibold hover:bg-spiritGlowBlue/30 transition-colors"
-                >
-                  {showSBAR ? 'Hide' : 'View'} SBAR
-                </button>
+          {/* Patient Detail - Center Panel */}
+          <div className="lg:col-span-4 space-y-3">
+            {/* Patient Header Card */}
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <h2 className="text-lg font-bold text-white">{selectedPatient.name}</h2>
+                  <p className="text-xs text-slate-400">
+                    {selectedPatient.age} y/o {selectedPatient.gender} • {selectedPatient.mrn}
+                  </p>
+                </div>
+                <span className={`px-3 py-1 rounded text-xs font-bold ${selectedPatient.acuityColor}`}>
+                  {selectedPatient.acuityLabel}
+                </span>
               </div>
 
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xs text-moonlightSilver/60 uppercase tracking-wider mb-1">Patient</p>
-                  <p className="text-sm sm:text-base font-bold text-pearlWhite">{selectedPatient.name}</p>
-                  <p className="text-xs text-moonlightSilver/70">{selectedPatient.mrn} • Age {selectedPatient.age}</p>
-                </div>
+              <div className="p-3 rounded bg-slate-900/50 mb-3">
+                <p className="text-xs text-slate-400 uppercase tracking-wide mb-1">Chief Complaint</p>
+                <p className="text-sm text-white">{selectedPatient.chiefComplaint}</p>
+              </div>
 
+              <div className="grid grid-cols-2 gap-2 text-xs">
                 <div>
-                  <p className="text-xs text-moonlightSilver/60 uppercase tracking-wider mb-1">Chief Complaint</p>
-                  <p className="text-sm text-moonlightSilver/90">{selectedPatient.chiefComplaint}</p>
+                  <span className="text-slate-500">Location:</span>
+                  <span className="ml-2 text-white">{selectedPatient.location}</span>
                 </div>
-
                 <div>
-                  <p className="text-xs text-moonlightSilver/60 uppercase tracking-wider mb-1">Acuity Level</p>
-                  <span className={`inline-block px-3 py-1 rounded-full ${selectedPatient.acuityColor} text-white text-xs font-bold`}>
-                    {selectedPatient.acuity}
-                  </span>
+                  <span className="text-slate-500">Arrived:</span>
+                  <span className="ml-2 text-white">{selectedPatient.arrivalTime}</span>
                 </div>
-
-                {showSBAR && (
-                  <div className="mt-4 p-4 rounded-lg bg-midnight/60 border border-healingWaterTeal/30 space-y-3">
-                    <div>
-                      <p className="text-xs font-bold text-healingWaterTeal uppercase tracking-wider mb-1">
-                        Situation
-                      </p>
-                      <p className="text-xs text-moonlightSilver/90">
-                        {selectedPatient.age}-year-old presenting with {selectedPatient.chiefComplaint.toLowerCase()}.
-                        {selectedPatient.alerts.length > 0 && ` Active alerts: ${selectedPatient.alerts.join(', ')}.`}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-spiritGlowBlue uppercase tracking-wider mb-1">
-                        Background
-                      </p>
-                      <p className="text-xs text-moonlightSilver/90">
-                        Patient arrived at {selectedPatient.arrivalTime}, currently waiting {selectedPatient.waitTime}.
-                        Assigned to {selectedPatient.assignedTo}.
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-lunarGold uppercase tracking-wider mb-1">
-                        Assessment
-                      </p>
-                      <p className="text-xs text-moonlightSilver/90">
-                        Vital signs: HR {selectedPatient.vitals.hr}, BP {selectedPatient.vitals.bp},
-                        SpO2 {selectedPatient.vitals.spo2}%, RR {selectedPatient.vitals.rr},
-                        Temp {selectedPatient.vitals.temp}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-phoenixFire uppercase tracking-wider mb-1">
-                        Recommendation
-                      </p>
-                      <p className="text-xs text-moonlightSilver/90">
-                        {selectedPatient.acuity === "Level 2 - Urgent"
-                          ? "Expedite to treatment room. Consider EKG/labs/imaging based on complaint."
-                          : "Continue monitoring in waiting room. Reassess if condition changes."}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                <div>
+                  <span className="text-slate-500">RN:</span>
+                  <span className="ml-2 text-white">{selectedPatient.assignedTo}</span>
+                </div>
+                <div>
+                  <span className="text-slate-500">MD:</span>
+                  <span className="ml-2 text-white">{selectedPatient.assignedMD}</span>
+                </div>
               </div>
             </div>
 
-            {/* Quick Actions - Mobile Responsive */}
-            <div className="p-4 rounded-xl border-2 border-moonlightSilver/20 bg-midnight/40 space-y-2">
-              <h4 className="text-sm font-bold text-pearlWhite mb-3">Quick Actions</h4>
+            {/* Clinical Info */}
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700">
+              <div className="grid grid-cols-2 gap-4 text-xs">
+                <div>
+                  <p className="text-slate-400 uppercase tracking-wide mb-1">Allergies</p>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedPatient.allergies.map((allergy) => (
+                      <span key={allergy} className={`px-2 py-0.5 rounded ${allergy === 'NKDA' ? 'bg-green-900/50 text-green-300' : 'bg-red-900/50 text-red-300'}`}>
+                        {allergy}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-slate-400 uppercase tracking-wide mb-1">PMH</p>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedPatient.pmh.length > 0 ? selectedPatient.pmh.map((condition) => (
+                      <span key={condition} className="px-2 py-0.5 rounded bg-slate-700 text-slate-300">
+                        {condition}
+                      </span>
+                    )) : <span className="text-slate-500">None documented</span>}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SBAR Card */}
+            <div className="p-4 rounded-lg bg-gradient-to-br from-teal-900/30 to-slate-800 border border-teal-700/50">
+              <h3 className="text-sm font-bold text-teal-400 mb-3 flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                SBAR Handoff
+              </h3>
+
+              <div className="space-y-3 text-xs">
+                <div>
+                  <p className="font-bold text-teal-300 uppercase tracking-wide mb-0.5">Situation</p>
+                  <p className="text-slate-300">
+                    {selectedPatient.age} y/o {selectedPatient.gender} presenting with {selectedPatient.chiefComplaint.toLowerCase()}.
+                    {selectedPatient.alerts.length > 0 && ` Active alerts: ${selectedPatient.alerts.join(', ')}.`}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold text-blue-300 uppercase tracking-wide mb-0.5">Background</p>
+                  <p className="text-slate-300">
+                    PMH: {selectedPatient.pmh.length > 0 ? selectedPatient.pmh.join(', ') : 'None'}.
+                    Allergies: {selectedPatient.allergies.join(', ')}.
+                    Arrived {selectedPatient.arrivalTime}, waiting {selectedPatient.waitTime} min.
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold text-amber-300 uppercase tracking-wide mb-0.5">Assessment</p>
+                  <p className="text-slate-300">
+                    VS: HR {selectedPatient.vitals.hr}, BP {selectedPatient.vitals.bp}, SpO2 {selectedPatient.vitals.spo2}%,
+                    RR {selectedPatient.vitals.rr}, Temp {selectedPatient.vitals.temp}°F, Pain {selectedPatient.vitals.pain}/10.
+                    <br />{selectedPatient.notes}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-bold text-red-300 uppercase tracking-wide mb-0.5">Recommendation</p>
+                  <p className="text-slate-300">
+                    {selectedPatient.orders.length > 0
+                      ? `Orders: ${selectedPatient.orders.join(', ')}.`
+                      : 'Awaiting provider orders.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="grid grid-cols-2 gap-2">
               <button
-                onClick={handleSendToRoom}
-                className="w-full px-4 py-2 rounded-lg bg-healingWaterTeal/20 border border-healingWaterTeal/40 text-healingWaterTeal text-sm font-semibold hover:bg-healingWaterTeal/30 transition-colors"
+                onClick={() => handleAssignRoom('Room 7')}
+                className="p-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
               >
-                Send to Room
+                Assign to Room
               </button>
               <button
-                onClick={handleEscalateAlert}
-                className="w-full px-4 py-2 rounded-lg bg-phoenixFire/20 border border-phoenixFire/40 text-phoenixFire text-sm font-semibold hover:bg-phoenixFire/30 transition-colors"
+                onClick={() => {
+                  const newMsg = {
+                    id: messages.length + 1,
+                    from: "ALERT",
+                    time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    message: `ESCALATION: ${selectedPatient.name} - ${selectedPatient.alerts[0] || 'Needs immediate attention'}`,
+                    urgent: true
+                  };
+                  setMessages([newMsg, ...messages]);
+                }}
+                className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors"
               >
                 Escalate Alert
               </button>
               <button
-                onClick={handlePrintSBAR}
-                className="w-full px-4 py-2 rounded-lg bg-lunarGold/20 border border-lunarGold/40 text-lunarGold text-sm font-semibold hover:bg-lunarGold/30 transition-colors"
+                onClick={() => window.print()}
+                className="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
               >
                 Print SBAR
               </button>
+              <button
+                onClick={() => {
+                  setPatients(patients.map(p =>
+                    p.id === selectedPatient.id
+                      ? { ...p, lastAssessed: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
+                      : p
+                  ));
+                }}
+                className="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
+              >
+                Update Assessment
+              </button>
+            </div>
+          </div>
+
+          {/* Team Messages - Right Panel */}
+          <div className="lg:col-span-3">
+            <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 h-full flex flex-col">
+              <h3 className="text-sm font-bold text-slate-300 mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                Team Messages
+              </h3>
+
+              {/* Message List */}
+              <div className="flex-1 space-y-2 overflow-y-auto max-h-[400px] mb-3">
+                {messages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`p-2 rounded text-xs ${
+                      msg.urgent
+                        ? 'bg-red-900/30 border border-red-700'
+                        : 'bg-slate-900/50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`font-bold ${msg.urgent ? 'text-red-400' : 'text-teal-400'}`}>
+                        {msg.from}
+                      </span>
+                      <span className="text-slate-500">{msg.time}</span>
+                    </div>
+                    <p className={msg.urgent ? 'text-red-200' : 'text-slate-300'}>
+                      {msg.message}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Message Input */}
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={messageInput}
+                  onChange={(e) => setMessageInput(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                  placeholder="Type message..."
+                  className="flex-1 px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:border-teal-500"
+                />
+                <button
+                  onClick={handleSendMessage}
+                  className="px-3 py-2 rounded bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Feature Highlights - Mobile Responsive */}
-      <div className="mt-8 sm:mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <div className="p-6 rounded-xl border-2 border-healingWaterTeal/30 bg-gradient-to-br from-deepOcean/60 to-midnight/40">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-healingWaterTeal/20 flex items-center justify-center mb-4">
-            <span className="text-2xl">⏱️</span>
+      {/* New Patient Modal */}
+      {showNewPatientModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-md p-6 rounded-lg bg-slate-800 border border-slate-700">
+            <h3 className="text-lg font-bold text-white mb-4">Quick Registration</h3>
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Patient Name (Last, First)"
+                className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-teal-500"
+              />
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="number"
+                  placeholder="Age"
+                  className="px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-teal-500"
+                />
+                <select className="px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-teal-500">
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <textarea
+                placeholder="Chief Complaint"
+                rows={2}
+                className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-teal-500"
+              />
+              <select className="w-full px-3 py-2 rounded bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-teal-500">
+                <option>ESI-1 Resuscitation</option>
+                <option>ESI-2 Emergent</option>
+                <option>ESI-3 Urgent</option>
+                <option>ESI-4 Less Urgent</option>
+                <option>ESI-5 Non-Urgent</option>
+              </select>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => setShowNewPatientModal(false)}
+                className="flex-1 px-4 py-2 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => setShowNewPatientModal(false)}
+                className="flex-1 px-4 py-2 rounded bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold transition-colors"
+              >
+                Add Patient
+              </button>
+            </div>
           </div>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">Real-Time Queue Management</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Track patient wait times, acuity levels, and room assignments in real-time. Built for the chaos of ED workflows.
-          </p>
         </div>
-
-        <div className="p-6 rounded-xl border-2 border-spiritGlowBlue/30 bg-gradient-to-br from-deepOcean/60 to-midnight/40">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-spiritGlowBlue/20 flex items-center justify-center mb-4">
-            <span className="text-2xl">📋</span>
-          </div>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">SBAR Handoff Cards</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Structured handoff communication designed by a nurse. Reduce cognitive load, prevent critical details from falling through cracks.
-          </p>
-        </div>
-
-        <div className="p-6 rounded-xl border-2 border-phoenixFire/30 bg-gradient-to-br from-deepOcean/60 to-midnight/40">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-phoenixFire/20 flex items-center justify-center mb-4">
-            <span className="text-2xl">🚨</span>
-          </div>
-          <h3 className="text-base sm:text-lg font-bold text-pearlWhite mb-2">Alert Escalation System</h3>
-          <p className="text-xs sm:text-sm text-moonlightSilver/80">
-            Automated alerts for critical vitals, prolonged wait times, and high-acuity patients. Never miss a decompensating patient.
-          </p>
-        </div>
-      </div>
-
-      {/* CTA Section - Mobile Responsive */}
-      <div className="mt-12 sm:mt-16 p-6 sm:p-8 rounded-2xl border-2 border-healingWaterTeal/40 bg-gradient-to-br from-healingWaterTeal/10 via-spiritGlowBlue/5 to-deepOcean/20">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-pearlWhite mb-4">
-            Built by Someone Who's Actually Worked ED
-          </h2>
-          <p className="text-sm sm:text-base text-moonlightSilver/90 mb-6">
-            I'm a nurse AND full-stack developer. I've triaged patients, worked code blues, and felt the frustration
-            of clunky EHR systems. This dashboard is designed for real clinical workflows—not tech demos.
-          </p>
-          <Link
-            href="/get-quote"
-            className="inline-block px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-healingWaterTeal to-spiritGlowBlue text-midnight font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-healingWaterTeal/50 hover:scale-105 transition-all"
-          >
-            Get a Custom Health x Tech Solution →
-          </Link>
-        </div>
-      </div>
-      </div>
+      )}
     </div>
   );
 }

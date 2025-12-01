@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatedSword } from "./AnimatedSword";
 import { AnimatedDiamond } from "./AnimatedDiamond";
 import { AnimatedLightning } from "./AnimatedLightning";
+import { AnimatedTrophy } from "./AnimatedTrophy";
 
 interface Project {
   tag: string;
@@ -41,6 +42,15 @@ export function FlippingProjectCard({ project, index }: FlippingProjectCardProps
 
   // Determine status badge style
   const getStatusBadge = () => {
+    // Completed projects (QUEST COMPLETE badge in gold)
+    if (project.status === "Quest Complete") {
+      return (
+        <div className="absolute -top-3 -right-3 px-3 py-1 rounded-full bg-gradient-to-r from-lunarGold to-phoenixFire border border-lunarGold text-xs font-bold text-midnight shadow-lg flex items-center gap-1">
+          <AnimatedTrophy className="w-3 h-3" />
+          <span>QUEST COMPLETE</span>
+        </div>
+      );
+    }
     // Live and evolving projects (LIVE badge in teal)
     if (project.status === "Journey Ongoing" && project.link) {
       return (

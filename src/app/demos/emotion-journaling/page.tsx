@@ -1,504 +1,568 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { toast } from 'sonner';
-
-// Color scheme: Teal, Lavender, Sage green, Lighter midnight backgrounds, Moonlight silver
-// Theme: Calm, introspective, supportive - LIGHTER than before
 
 // Mood options
 const moods = [
-  { id: 1, name: "Joy", emoji: "😊", color: "bg-yellow-400" },
-  { id: 2, name: "Sadness", emoji: "😢", color: "bg-blue-400" },
-  { id: 3, name: "Anger", emoji: "😠", color: "bg-red-400" },
-  { id: 4, name: "Fear", emoji: "😰", color: "bg-purple-400" },
-  { id: 5, name: "Surprise", emoji: "😲", color: "bg-pink-400" },
-  { id: 6, name: "Calm", emoji: "😌", color: "bg-teal-400" },
-  { id: 7, name: "Excited", emoji: "🤩", color: "bg-orange-400" },
-  { id: 8, name: "Anxious", emoji: "😬", color: "bg-indigo-400" }
+  { id: 'joyful', label: 'Joyful', color: 'bg-yellow-400', emoji: '' },
+  { id: 'content', label: 'Content', color: 'bg-green-400', emoji: '' },
+  { id: 'calm', label: 'Calm', color: 'bg-teal-400', emoji: '' },
+  { id: 'neutral', label: 'Neutral', color: 'bg-slate-400', emoji: '' },
+  { id: 'anxious', label: 'Anxious', color: 'bg-orange-400', emoji: '' },
+  { id: 'sad', label: 'Sad', color: 'bg-blue-400', emoji: '' },
+  { id: 'frustrated', label: 'Frustrated', color: 'bg-red-400', emoji: '' },
+  { id: 'overwhelmed', label: 'Overwhelmed', color: 'bg-purple-400', emoji: '' },
 ];
 
-// Mock journal entries
-const mockEntries = [
+// Body areas for somatic check-in
+const bodyAreas = [
+  { id: 'head', label: 'Head', top: '8%', left: '50%' },
+  { id: 'throat', label: 'Throat', top: '18%', left: '50%' },
+  { id: 'chest', label: 'Chest', top: '30%', left: '50%' },
+  { id: 'stomach', label: 'Stomach', top: '42%', left: '50%' },
+  { id: 'shoulders', label: 'Shoulders', top: '24%', left: '50%' },
+  { id: 'hands', label: 'Hands', top: '52%', left: '30%' },
+  { id: 'legs', label: 'Legs', top: '70%', left: '50%' },
+];
+
+// Reflection prompts based on mood
+const reflectionPrompts: Record<string, string[]> = {
+  joyful: [
+    "What contributed to this feeling of joy today?",
+    "How can you carry this positive energy forward?",
+    "Who or what are you grateful for right now?",
+  ],
+  content: [
+    "What needs are being met that contribute to this contentment?",
+    "How does your body feel in this state of ease?",
+    "What small pleasures are you noticing today?",
+  ],
+  calm: [
+    "What practices helped you reach this peaceful state?",
+    "How can you protect this sense of calm?",
+    "What does your ideal calm environment look like?",
+  ],
+  neutral: [
+    "What thoughts are present without strong emotions attached?",
+    "Is there anything you're avoiding feeling?",
+    "What would help you move toward a more positive state?",
+  ],
+  anxious: [
+    "What specific worries are present right now?",
+    "Where do you feel the anxiety in your body?",
+    "What's one small thing within your control today?",
+  ],
+  sad: [
+    "What losses or disappointments might be contributing to this sadness?",
+    "What comfort do you need right now?",
+    "How can you be gentle with yourself today?",
+  ],
+  frustrated: [
+    "What expectations aren't being met?",
+    "What boundary might need to be set?",
+    "What's one thing you can release control of?",
+  ],
+  overwhelmed: [
+    "What can be removed from your plate right now?",
+    "What's the single most important thing to focus on?",
+    "Who can you ask for support?",
+  ],
+};
+
+// Sample journal entries
+const sampleEntries = [
   {
     id: 1,
-    date: "2025-11-19",
-    time: "7:30 PM",
-    mood: "Calm",
-    emoji: "😌",
-    entry: "Today was a good day. Took a long walk in the park and felt the stress melt away. Grateful for small moments of peace.",
-    intensity: 7
+    date: 'November 28, 2024',
+    time: '8:15 AM',
+    mood: 'calm',
+    intensity: 7,
+    bodyAreas: ['chest'],
+    prompt: "What practices helped you reach this peaceful state?",
+    entry: "Morning meditation made a huge difference. Even just 10 minutes of breathing before checking my phone. The house was quiet and I could hear birds outside. I want to make this a daily habit.",
   },
   {
     id: 2,
-    date: "2025-11-18",
-    time: "9:15 AM",
-    mood: "Anxious",
-    emoji: "😬",
-    entry: "Big presentation today. Feeling nervous but trying to focus on my breathing exercises.",
-    intensity: 6
+    date: 'November 27, 2024',
+    time: '9:30 PM',
+    mood: 'anxious',
+    intensity: 6,
+    bodyAreas: ['chest', 'stomach'],
+    prompt: "Where do you feel the anxiety in your body?",
+    entry: "Work presentation tomorrow. Tightness in my chest and that familiar knot in my stomach. Reminded myself that I've prepared well. Going to do some box breathing before bed.",
   },
   {
     id: 3,
-    date: "2025-11-17",
-    time: "3:45 PM",
-    mood: "Joy",
-    emoji: "😊",
-    entry: "Got great feedback from my team! Feeling proud and accomplished. Hard work pays off.",
-    intensity: 9
-  }
+    date: 'November 26, 2024',
+    time: '2:00 PM',
+    mood: 'content',
+    intensity: 8,
+    bodyAreas: [],
+    prompt: "What small pleasures are you noticing today?",
+    entry: "Had lunch with an old friend. We laughed about memories from college. Realized I need to prioritize these connections more often. Feeling grateful for the people in my life.",
+  },
 ];
 
-// Types for saved entries
-interface JournalEntry {
-  id: string;
-  date: string;
-  time: string;
-  mood: string;
-  emoji: string;
-  intensity: number;
-  entry: string;
-  bodyAreas: string[];
-}
+// Weekly mood data for chart
+const weeklyMoodData = [
+  { day: 'Mon', mood: 'content', intensity: 7 },
+  { day: 'Tue', mood: 'anxious', intensity: 6 },
+  { day: 'Wed', mood: 'calm', intensity: 8 },
+  { day: 'Thu', mood: 'frustrated', intensity: 5 },
+  { day: 'Fri', mood: 'content', intensity: 7 },
+  { day: 'Sat', mood: 'joyful', intensity: 9 },
+  { day: 'Sun', mood: 'calm', intensity: 8 },
+];
 
 export default function EmotionJournaling() {
-  const [selectedMood, setSelectedMood] = useState(moods[0]);
-  const [moodIntensity, setMoodIntensity] = useState(5);
-  const [journalText, setJournalText] = useState("");
+  const [activeTab, setActiveTab] = useState<'journal' | 'history' | 'insights'>('journal');
+  const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const [intensity, setIntensity] = useState(5);
   const [selectedBodyAreas, setSelectedBodyAreas] = useState<string[]>([]);
-  const [savedEntries, setSavedEntries] = useState<JournalEntry[]>([]);
-  const [isSaving, setIsSaving] = useState(false);
+  const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
+  const [journalEntry, setJournalEntry] = useState('');
+  const [entries, setEntries] = useState(sampleEntries);
+  const [showSaveConfirm, setShowSaveConfirm] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Load saved entries from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('emotion-journal-entries');
-    if (saved) {
-      setSavedEntries(JSON.parse(saved));
-    }
+    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
+    return () => clearInterval(timer);
   }, []);
 
-  const handleBodyAreaClick = (area: string) => {
+  const handleBodyAreaToggle = (areaId: string) => {
     setSelectedBodyAreas(prev =>
-      prev.includes(area)
-        ? prev.filter(a => a !== area)
-        : [...prev, area]
+      prev.includes(areaId)
+        ? prev.filter(id => id !== areaId)
+        : [...prev, areaId]
     );
   };
 
   const handleSaveEntry = () => {
-    if (!journalText.trim()) {
-      toast.error('Add some thoughts first', { description: 'Write something in the journal before saving.' });
-      return;
-    }
+    if (!selectedMood || !journalEntry.trim()) return;
 
-    setIsSaving(true);
-
-    const newEntry: JournalEntry = {
-      id: Date.now().toString(),
-      date: new Date().toLocaleDateString(),
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      mood: selectedMood.name,
-      emoji: selectedMood.emoji,
-      intensity: moodIntensity,
-      entry: journalText,
+    const newEntry = {
+      id: entries.length + 1,
+      date: currentTime.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      time: currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+      mood: selectedMood,
+      intensity,
       bodyAreas: selectedBodyAreas,
+      prompt: selectedPrompt || '',
+      entry: journalEntry,
     };
 
-    const updatedEntries = [newEntry, ...savedEntries];
-    setSavedEntries(updatedEntries);
-    localStorage.setItem('emotion-journal-entries', JSON.stringify(updatedEntries));
+    setEntries([newEntry, ...entries]);
+    setShowSaveConfirm(true);
 
-    // Clear the form
-    setJournalText('');
-    setSelectedBodyAreas([]);
-    setMoodIntensity(5);
-    setIsSaving(false);
-
-    toast.success('Journal entry saved', {
-      description: 'Your reflection is stored privately on this device.',
-      duration: 4000
-    });
+    // Reset form
+    setTimeout(() => {
+      setSelectedMood(null);
+      setIntensity(5);
+      setSelectedBodyAreas([]);
+      setSelectedPrompt(null);
+      setJournalEntry('');
+      setShowSaveConfirm(false);
+    }, 2000);
   };
 
-  const handleExportPDF = () => {
-    toast.info('PDF Export coming soon', {
-      description: 'This feature is in development. Your entries are safely stored locally.',
-      duration: 3000
-    });
+  const handleExport = () => {
+    const exportData = entries.map(entry => ({
+      Date: entry.date,
+      Time: entry.time,
+      Mood: entry.mood,
+      Intensity: `${entry.intensity}/10`,
+      'Body Sensations': entry.bodyAreas.join(', ') || 'None noted',
+      Prompt: entry.prompt,
+      Entry: entry.entry,
+    }));
+
+    const csv = [
+      Object.keys(exportData[0]).join(','),
+      ...exportData.map(row => Object.values(row).map(v => `"${v}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `journal-export-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
   };
 
-  const handleGeneratePrompt = () => {
-    const prompts = [
-      "What would you say to a friend feeling this way?",
-      "What triggered this emotion today?",
-      "Where in your body do you notice this feeling?",
-      "What do you need right now?",
-      "What would help you feel 10% better?",
-    ];
-    const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-    toast.success('New prompt', { description: randomPrompt, duration: 5000 });
+  const getMoodColor = (moodId: string) => {
+    return moods.find(m => m.id === moodId)?.color || 'bg-slate-400';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#E8F4F4] via-[#F0E8F4] to-[#E8F0E8]">
-      {/* Hero Image */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 mb-8 sm:mb-12">
-        <div className="rounded-2xl overflow-hidden border-2 border-[#7ECECE]/30 shadow-lg">
-          <Image
-            src="/demos/emotion-journaling/Hero Image - Journal Interface.png"
-            alt="Emotion-Aware Journaling Interface"
-            width={1920}
-            height={1080}
-            className="w-full h-auto"
-            priority
-          />
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        {/* Hero Section - LIGHT THEME */}
-        <div className="mb-8 sm:mb-12 lg:mb-16 text-center">
-          <div className="inline-block p-3 sm:p-4 rounded-full bg-gradient-to-br from-[#7ECECE]/20 to-[#B8A8D8]/20 mb-4 sm:mb-6">
-            <svg className="w-12 h-12 sm:w-16 sm:h-16 text-[#5AAEAE]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-            </svg>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#4A5A6A] mb-4">
-            Emotion-Aware Journaling Companion
-          </h1>
-          <p className="text-base sm:text-lg text-[#6A7A8A] max-w-3xl mx-auto mb-2">
-            Track your emotions, reflect on patterns, and support your mental wellness journey
-          </p>
-          <p className="text-xs sm:text-sm text-[#8A9AAA] italic">
-            A mindful space for emotional processing and self-reflection
-          </p>
-
-          {/* Feature Pills - LIGHT THEME */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-[#7ECECE]/50 text-[#5AAEAE] font-semibold">
-              <span>✓</span>
-              <span>Mood Tracking</span>
+    <div className="min-h-screen bg-slate-50">
+      {/* Navigation */}
+      <nav className="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center">
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <span className="font-semibold text-slate-800">Reflect</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-[#B8A8D8]/50 text-[#8878B8] font-semibold">
-              <span>✓</span>
-              <span>Somatic Check-ins</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-[#A8C8A8]/50 text-[#78A878] font-semibold">
-              <span>✓</span>
-              <span>Reflection Prompts</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border-2 border-[#7ECECE]/50 text-[#5AAEAE] font-semibold">
-              <span>✓</span>
-              <span>Privacy First</span>
+
+            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+              {(['journal', 'history', 'insights'] as const).map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all capitalize ${
+                    activeTab === tab
+                      ? 'bg-white text-slate-900 shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
             </div>
           </div>
         </div>
+      </nav>
 
-        {/* Main Journal Interface - LIGHT THEME */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-          {/* Journal Entry Form - 2/3 width on desktop */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Mood Selector - LIGHT THEME */}
-            <div className="p-5 sm:p-6 rounded-2xl border-2 border-[#7ECECE]/40 bg-white/80">
-              <h2 className="text-lg sm:text-xl font-bold text-[#4A5A6A] mb-4">How are you feeling right now?</h2>
+      {/* Main Content */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
 
-              {/* Mood Grid */}
-              <div className="grid grid-cols-4 sm:grid-cols-8 gap-3 mb-6">
+        {/* Journal Tab */}
+        {activeTab === 'journal' && (
+          <div className="space-y-6">
+            {/* Date/Time Header */}
+            <div className="text-center">
+              <p className="text-sm text-slate-500">
+                {currentTime.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+              </p>
+              <p className="text-xs text-slate-400">
+                {currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+              </p>
+            </div>
+
+            {/* Mood Selection */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <h2 className="text-sm font-semibold text-slate-700 mb-4">How are you feeling?</h2>
+              <div className="grid grid-cols-4 gap-3">
                 {moods.map((mood) => (
                   <button
                     key={mood.id}
-                    onClick={() => setSelectedMood(mood)}
-                    className={`aspect-square rounded-xl flex flex-col items-center justify-center gap-1 sm:gap-2 transition-all ${
-                      selectedMood.id === mood.id
-                        ? `${mood.color} shadow-lg scale-110`
-                        : 'bg-[#F5FAFA] border-2 border-[#D8E8E8] hover:border-[#7ECECE]/60'
+                    onClick={() => {
+                      setSelectedMood(mood.id);
+                      setSelectedPrompt(null);
+                    }}
+                    className={`p-3 rounded-xl border-2 transition-all ${
+                      selectedMood === mood.id
+                        ? 'border-slate-800 bg-slate-50'
+                        : 'border-transparent bg-slate-50 hover:bg-slate-100'
                     }`}
                   >
-                    <span className="text-2xl sm:text-3xl">{mood.emoji}</span>
-                    <span className="text-[0.6rem] sm:text-xs font-semibold text-[#4A5A6A]">{mood.name}</span>
+                    <div className={`w-8 h-8 mx-auto rounded-full ${mood.color} mb-2`}></div>
+                    <span className="text-xs font-medium text-slate-700">{mood.label}</span>
                   </button>
                 ))}
               </div>
+            </div>
 
-              {/* Intensity Slider - LIGHT THEME */}
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="text-sm sm:text-base text-[#6A7A8A]">How intense is this feeling?</label>
-                  <span className="text-lg sm:text-xl font-bold text-[#5AAEAE]">{moodIntensity}/10</span>
+            {/* Intensity Slider */}
+            {selectedMood && (
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-sm font-semibold text-slate-700">Intensity</h2>
+                  <span className="text-2xl font-bold text-slate-800">{intensity}</span>
                 </div>
                 <input
                   type="range"
                   min="1"
                   max="10"
-                  value={moodIntensity}
-                  onChange={(e) => setMoodIntensity(Number(e.target.value))}
-                  className="w-full h-2 bg-[#E8F4F4] rounded-lg appearance-none cursor-pointer accent-teal-400"
+                  value={intensity}
+                  onChange={(e) => setIntensity(parseInt(e.target.value))}
+                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
                 />
-                <div className="flex justify-between text-xs text-[#8A9AAA] mt-1">
+                <div className="flex justify-between text-xs text-slate-400 mt-2">
                   <span>Mild</span>
                   <span>Moderate</span>
                   <span>Intense</span>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Journal Text Editor - LIGHT THEME */}
-            <div className="p-5 sm:p-6 rounded-2xl border-2 border-[#B8A8D8]/40 bg-white/80">
-              <h3 className="text-lg sm:text-xl font-bold text-[#4A5A6A] mb-4">What's on your mind?</h3>
+            {/* Somatic Check-in */}
+            {selectedMood && (
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h2 className="text-sm font-semibold text-slate-700 mb-4">Where do you feel it in your body?</h2>
+                <div className="flex flex-col sm:flex-row gap-6">
+                  {/* Body outline */}
+                  <div className="relative w-32 h-64 mx-auto sm:mx-0 bg-slate-100 rounded-full flex-shrink-0">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-20 h-48 bg-slate-200 rounded-full"></div>
+                    </div>
+                    {/* Head */}
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-200 rounded-full"></div>
 
-              <textarea
-                value={journalText}
-                onChange={(e) => setJournalText(e.target.value)}
-                rows={8}
-                className="w-full px-4 py-3 rounded-xl bg-[#F8F4FC] border-2 border-[#E8DCF4] text-[#4A5A6A] text-sm sm:text-base leading-relaxed focus:border-[#B8A8D8] focus:outline-none transition-colors resize-none"
-                placeholder="Start writing... let your thoughts flow freely. This is your safe space."
-              />
+                    {/* Clickable areas */}
+                    {bodyAreas.map((area) => (
+                      <button
+                        key={area.id}
+                        onClick={() => handleBodyAreaToggle(area.id)}
+                        className={`absolute w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all ${
+                          selectedBodyAreas.includes(area.id)
+                            ? `${getMoodColor(selectedMood)} ring-2 ring-offset-2 ring-slate-400`
+                            : 'bg-white border-2 border-slate-300 hover:border-slate-400'
+                        }`}
+                        style={{ top: area.top, left: area.left }}
+                        title={area.label}
+                      />
+                    ))}
+                  </div>
 
-              {/* Character Count */}
-              <div className="flex justify-between items-center mt-3 text-xs sm:text-sm text-[#8A9AAA]">
-                <span>{journalText.length} characters</span>
-                <span className="flex items-center gap-2">
-                  <svg className="w-3 h-3 sm:w-4 sm:h-4 text-[#5AAEAE]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                  </svg>
-                  <span>Private & Encrypted</span>
-                </span>
+                  {/* Body area labels */}
+                  <div className="flex-1">
+                    <p className="text-xs text-slate-500 mb-3">Tap areas where you notice sensations:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {bodyAreas.map((area) => (
+                        <button
+                          key={area.id}
+                          onClick={() => handleBodyAreaToggle(area.id)}
+                          className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+                            selectedBodyAreas.includes(area.id)
+                              ? 'bg-teal-100 text-teal-800 font-medium'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {area.label}
+                        </button>
+                      ))}
+                    </div>
+                    {selectedBodyAreas.length > 0 && (
+                      <p className="text-xs text-slate-500 mt-3">
+                        Selected: {selectedBodyAreas.map(id => bodyAreas.find(a => a.id === id)?.label).join(', ')}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Somatic Check-in - LIGHT THEME */}
-            <div className="p-5 sm:p-6 rounded-2xl border-2 border-[#D8B8C8]/40 bg-white/80">
-              <h3 className="text-lg sm:text-xl font-bold text-[#4A5A6A] mb-4">Body Scan: Where do you feel this emotion?</h3>
+            {/* Reflection Prompt */}
+            {selectedMood && (
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h2 className="text-sm font-semibold text-slate-700 mb-4">Reflection prompts</h2>
+                <div className="space-y-2">
+                  {reflectionPrompts[selectedMood]?.map((prompt, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedPrompt(prompt)}
+                      className={`w-full text-left p-3 rounded-lg text-sm transition-all ${
+                        selectedPrompt === prompt
+                          ? 'bg-teal-50 border-2 border-teal-200 text-teal-800'
+                          : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                      }`}
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
-              {/* Body Diagram Placeholder */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-                {["Head", "Chest", "Stomach", "Shoulders", "Arms", "Legs", "Hands", "Whole Body"].map((area) => (
+            {/* Journal Entry */}
+            {selectedMood && (
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h2 className="text-sm font-semibold text-slate-700 mb-4">
+                  {selectedPrompt || "Write your thoughts..."}
+                </h2>
+                <textarea
+                  value={journalEntry}
+                  onChange={(e) => setJournalEntry(e.target.value)}
+                  placeholder="Start writing..."
+                  className="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                />
+                <div className="flex items-center justify-between mt-4">
+                  <span className="text-xs text-slate-400">{journalEntry.length} characters</span>
                   <button
-                    key={area}
-                    onClick={() => handleBodyAreaClick(area)}
-                    className={`px-3 py-2 rounded-lg border-2 text-xs sm:text-sm transition-colors font-medium ${
-                      selectedBodyAreas.includes(area)
-                        ? 'bg-[#D8B8C8] border-[#A88898] text-white'
-                        : 'bg-[#F8F4FC] border-[#E8DCF4] text-[#6A7A8A] hover:border-[#D8B8C8] hover:text-[#A88898]'
+                    onClick={handleSaveEntry}
+                    disabled={!journalEntry.trim()}
+                    className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                      journalEntry.trim()
+                        ? 'bg-teal-600 text-white hover:bg-teal-700'
+                        : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                     }`}
                   >
-                    {area}
+                    {showSaveConfirm ? 'Saved!' : 'Save Entry'}
                   </button>
-                ))}
-              </div>
-
-              <p className="text-xs sm:text-sm text-[#8A9AAA] italic">
-                Notice sensations without judgment. Where does this emotion live in your body?
-              </p>
-            </div>
-
-            {/* Save Entry Button - LIGHT THEME */}
-            <button
-              onClick={handleSaveEntry}
-              disabled={isSaving}
-              className="w-full px-6 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#5AAEAE] to-[#8878B8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSaving ? 'Saving...' : 'Save Journal Entry'}
-            </button>
-          </div>
-
-          {/* Sidebar - 1/3 width on desktop - LIGHT THEME */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Reflection Prompt - LIGHT THEME */}
-            <div className="p-5 sm:p-6 rounded-2xl border-2 border-[#7ECECE]/40 bg-white/80 sticky top-24">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-full bg-[#7ECECE]/20 flex items-center justify-center">
-                  <span className="text-xl">💭</span>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A]">Today's Reflection Prompt</h3>
               </div>
+            )}
+          </div>
+        )}
 
-              <p className="text-sm sm:text-base text-[#5AAEAE] mb-4 leading-relaxed">
-                "What would you say to a friend feeling this way? Can you offer yourself that same compassion?"
-              </p>
-
+        {/* History Tab */}
+        {activeTab === 'history' && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-slate-800">Journal History</h2>
               <button
-                onClick={handleGeneratePrompt}
-                className="w-full px-4 py-2 rounded-lg border-2 border-[#7ECECE]/60 text-[#5AAEAE] text-xs sm:text-sm font-semibold hover:bg-[#7ECECE]/10 transition-colors"
+                onClick={handleExport}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-teal-700 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors"
               >
-                Generate New Prompt
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Export for Therapy
               </button>
             </div>
 
-            {/* Quick Stats - LIGHT THEME */}
-            <div className="p-5 sm:p-6 rounded-2xl border-2 border-[#B8A8D8]/40 bg-white/80">
-              <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A] mb-4">Your Journey</h3>
-
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs sm:text-sm text-[#6A7A8A]">Entries This Week</span>
-                  <span className="text-lg sm:text-xl font-bold text-[#8878B8]">5</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs sm:text-sm text-[#6A7A8A]">Current Streak</span>
-                  <span className="text-lg sm:text-xl font-bold text-[#5AAEAE]">3 days</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xs sm:text-sm text-[#6A7A8A]">Total Entries</span>
-                  <span className="text-lg sm:text-xl font-bold text-[#A88898]">42</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Recent Entries - LIGHT THEME */}
-        <div className="mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#4A5A6A] mb-6 sm:mb-8">Recent Entries</h2>
-
-          <div className="space-y-4">
-            {mockEntries.map((entry) => (
-              <div
-                key={entry.id}
-                className="p-5 sm:p-6 rounded-xl border-2 border-[#D8E8E8] bg-white/80 hover:border-[#7ECECE]/60 transition-colors cursor-pointer"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl sm:text-4xl">{entry.emoji}</span>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A]">{entry.mood}</h3>
-                      <p className="text-xs sm:text-sm text-[#8A9AAA]">{entry.date} at {entry.time}</p>
-                    </div>
+            {entries.map((entry) => (
+              <div key={entry.id} className="bg-white rounded-xl border border-slate-200 p-5">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="font-medium text-slate-800">{entry.date}</p>
+                    <p className="text-xs text-slate-500">{entry.time}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-[#8A9AAA]">Intensity:</span>
-                    <span className="text-sm font-bold text-[#5AAEAE]">{entry.intensity}/10</span>
+                    <div className={`w-4 h-4 rounded-full ${getMoodColor(entry.mood)}`}></div>
+                    <span className="text-sm font-medium text-slate-700 capitalize">{entry.mood}</span>
+                    <span className="text-xs text-slate-400">({entry.intensity}/10)</span>
                   </div>
                 </div>
 
-                <p className="text-sm sm:text-base text-[#6A7A8A] leading-relaxed line-clamp-2">
-                  {entry.entry}
-                </p>
+                {entry.bodyAreas.length > 0 && (
+                  <div className="mb-3">
+                    <p className="text-xs text-slate-500 mb-1">Body sensations:</p>
+                    <div className="flex gap-1">
+                      {entry.bodyAreas.map((area) => (
+                        <span key={area} className="px-2 py-0.5 bg-slate-100 rounded text-xs text-slate-600 capitalize">
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {entry.prompt && (
+                  <p className="text-sm text-slate-500 italic mb-2">"{entry.prompt}"</p>
+                )}
+
+                <p className="text-slate-700 text-sm leading-relaxed">{entry.entry}</p>
               </div>
             ))}
           </div>
+        )}
 
-          <button className="w-full mt-6 px-6 py-3 rounded-full border-2 border-[#7ECECE]/60 text-[#5AAEAE] font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-[#7ECECE]/10 transition-colors">
-            View All Entries
-          </button>
-        </div>
+        {/* Insights Tab */}
+        {activeTab === 'insights' && (
+          <div className="space-y-6">
+            <h2 className="text-lg font-semibold text-slate-800">Your Insights</h2>
 
-        {/* Insights Dashboard Preview - LIGHT THEME */}
-        <div className="mb-12 sm:mb-16 p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-[#B8A8D8]/40 bg-white/60">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#4A5A6A] text-center mb-6 sm:mb-8">
-            Your Emotional Insights
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Mock Chart 1 */}
-            <div className="p-5 rounded-xl bg-[#F5FAFA] border-2 border-[#D8E8E8]">
-              <h3 className="text-sm font-bold text-[#6A7A8A] uppercase tracking-wider mb-4">Mood Trends (30 Days)</h3>
-              <div className="h-32 sm:h-40 flex items-end gap-2">
-                {[7, 5, 8, 6, 9, 7, 8].map((height, i) => (
-                  <div key={i} className="flex-1 bg-gradient-to-t from-[#5AAEAE] to-[#8878B8] rounded-t" style={{ height: `${height * 10}%` }}></div>
+            {/* Weekly Mood Chart */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <h3 className="text-sm font-semibold text-slate-700 mb-4">This Week's Moods</h3>
+              <div className="flex items-end justify-between h-40 gap-2">
+                {weeklyMoodData.map((day, i) => (
+                  <div key={i} className="flex-1 flex flex-col items-center">
+                    <div
+                      className={`w-full rounded-t-lg ${getMoodColor(day.mood)} transition-all`}
+                      style={{ height: `${day.intensity * 10}%` }}
+                    ></div>
+                    <span className="text-xs text-slate-500 mt-2">{day.day}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Mock Chart 2 */}
-            <div className="p-5 rounded-xl bg-[#F5FAFA] border-2 border-[#D8E8E8]">
-              <h3 className="text-sm font-bold text-[#6A7A8A] uppercase tracking-wider mb-4">Most Common Emotions</h3>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">😊</span>
-                  <div className="flex-1 h-2 bg-[#E8F4F4] rounded-full overflow-hidden">
-                    <div className="h-full bg-yellow-400 rounded-full" style={{ width: '75%' }}></div>
-                  </div>
-                  <span className="text-xs text-[#8A9AAA]">75%</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">😌</span>
-                  <div className="flex-1 h-2 bg-[#E8F4F4] rounded-full overflow-hidden">
-                    <div className="h-full bg-teal-400 rounded-full" style={{ width: '60%' }}></div>
-                  </div>
-                  <span className="text-xs text-[#8A9AAA]">60%</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xl">😬</span>
-                  <div className="flex-1 h-2 bg-[#E8F4F4] rounded-full overflow-hidden">
-                    <div className="h-full bg-indigo-400 rounded-full" style={{ width: '40%' }}></div>
-                  </div>
-                  <span className="text-xs text-[#8A9AAA]">40%</span>
-                </div>
+            {/* Mood Distribution */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <h3 className="text-sm font-semibold text-slate-700 mb-4">Mood Distribution</h3>
+              <div className="space-y-3">
+                {['calm', 'content', 'joyful', 'anxious'].map((mood) => {
+                  const count = entries.filter(e => e.mood === mood).length;
+                  const percentage = (count / entries.length) * 100;
+                  return (
+                    <div key={mood} className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${getMoodColor(mood)}`}></div>
+                      <span className="text-sm text-slate-700 capitalize w-24">{mood}</span>
+                      <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div
+                          className={`h-full ${getMoodColor(mood)} transition-all`}
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-xs text-slate-500 w-8">{count}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Export to Therapy */}
-            <div className="p-5 rounded-xl bg-[#F5FAFA] border-2 border-[#D8E8E8]">
-              <h3 className="text-sm font-bold text-[#6A7A8A] uppercase tracking-wider mb-4">Share with Therapist</h3>
-              <p className="text-xs sm:text-sm text-[#6A7A8A] mb-4">
-                Export your entries as a PDF report to share with your mental health provider.
+            {/* Body Patterns */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <h3 className="text-sm font-semibold text-slate-700 mb-4">Common Body Sensations</h3>
+              <div className="flex flex-wrap gap-2">
+                {bodyAreas.map((area) => {
+                  const count = entries.filter(e => e.bodyAreas.includes(area.id)).length;
+                  return (
+                    <div
+                      key={area.id}
+                      className={`px-3 py-2 rounded-lg ${count > 0 ? 'bg-teal-50 text-teal-800' : 'bg-slate-50 text-slate-400'}`}
+                    >
+                      <span className="font-medium">{area.label}</span>
+                      {count > 0 && <span className="ml-2 text-xs">({count})</span>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Export Section */}
+            <div className="bg-gradient-to-r from-teal-500 to-emerald-600 rounded-xl p-6 text-white">
+              <h3 className="font-semibold mb-2">Share with Your Therapist</h3>
+              <p className="text-sm text-teal-100 mb-4">
+                Export your journal entries as a CSV file to share patterns and insights with your mental health provider.
               </p>
               <button
-                onClick={handleExportPDF}
-                className="w-full px-4 py-2 rounded-lg bg-[#B8A8D8]/20 border-2 border-[#B8A8D8]/60 text-[#8878B8] text-xs sm:text-sm font-semibold hover:bg-[#B8A8D8]/30 transition-colors"
+                onClick={handleExport}
+                className="px-5 py-2 bg-white text-teal-700 font-medium rounded-lg hover:bg-teal-50 transition-colors"
               >
-                Export PDF Report
+                Export Journal Data
               </button>
             </div>
-          </div>
-        </div>
 
-        {/* Feature Highlights - LIGHT THEME */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
-          <div className="p-6 rounded-xl border-2 border-[#7ECECE]/40 bg-white/80">
-            <span className="text-3xl sm:text-4xl mb-3 block">🔒</span>
-            <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A] mb-2">Privacy First</h3>
-            <p className="text-xs sm:text-sm text-[#6A7A8A]">
-              Your journal is encrypted and private. No one reads your entries but you.
-            </p>
+            {/* Patterns & Tips */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <h3 className="text-sm font-semibold text-slate-700 mb-4">Patterns We've Noticed</h3>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                  <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-slate-800">Morning entries tend to be calmer</p>
+                    <p className="text-xs text-slate-500">Your entries before 10am show higher contentment levels.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
+                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-slate-800">Chest tension appears with anxiety</p>
+                    <p className="text-xs text-slate-500">You frequently note chest sensations when feeling anxious.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="p-6 rounded-xl border-2 border-[#B8A8D8]/40 bg-white/80">
-            <span className="text-3xl sm:text-4xl mb-3 block">📊</span>
-            <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A] mb-2">Pattern Recognition</h3>
-            <p className="text-xs sm:text-sm text-[#6A7A8A]">
-              Track emotional patterns over time. Notice what triggers certain feelings.
-            </p>
-          </div>
-
-          <div className="p-6 rounded-xl border-2 border-[#A8C8A8]/40 bg-white/80">
-            <span className="text-3xl sm:text-4xl mb-3 block">💝</span>
-            <h3 className="text-base sm:text-lg font-bold text-[#4A5A6A] mb-2">Therapist-Friendly</h3>
-            <p className="text-xs sm:text-sm text-[#6A7A8A]">
-              Export insights to share with your mental health provider. Bridge journaling and therapy.
-            </p>
-          </div>
-        </div>
-
-        {/* Final CTA - LIGHT THEME */}
-        <div className="p-6 sm:p-8 lg:p-12 rounded-2xl border-2 border-[#7ECECE]/50 bg-gradient-to-br from-[#E8F4F4]/60 via-white/80 to-[#F0E8F4]/40 text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#4A5A6A] mb-4">
-            Build Your Own Mental Wellness Tool
-          </h2>
-          <p className="text-sm sm:text-base text-[#6A7A8A] mb-6 sm:mb-8 max-w-2xl mx-auto">
-            This emotion-aware journaling companion demonstrates thoughtful UX design for mental health applications.
-            Gentle, supportive, and privacy-focused.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <Link
-              href="/get-quote"
-              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#5AAEAE] to-[#8878B8] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all text-center"
-            >
-              Get Your Custom Wellness App →
-            </Link>
-            <Link
-              href="/portfolio"
-              className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border-2 border-[#7ECECE]/60 text-[#5AAEAE] bg-white/60 font-bold text-sm sm:text-base uppercase tracking-wider hover:bg-[#7ECECE]/10 transition-all text-center"
-            >
-              ← Back to Portfolio
-            </Link>
-          </div>
-        </div>
-      </div>
+        )}
+      </main>
     </div>
   );
 }
