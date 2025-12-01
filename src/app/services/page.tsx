@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight, Star, CheckCircle, Flame, Droplets, Wind, Mountain, Sparkles, Store } from 'lucide-react';
 import { AnimatedPalette } from '../components/AnimatedPalette';
 import { AnimatedMedical } from '../components/AnimatedMedical';
 import { AnimatedWizard } from '../components/AnimatedWizard';
@@ -13,231 +13,170 @@ import { AnimatedDiamond } from '../components/AnimatedDiamond';
 import { CalendlyButton } from '../components/CalendlyButton';
 import { TestimonialsSection } from '../components/TestimonialsSection';
 
+// --- Data Configuration ---
 const suites = [
   {
+    id: "commerce",
     name: "Small Business Launchpads",
-    questTitle: "The Path of the Crossroads",
+    pathName: "The Path of Commerce",
     element: "Commerce",
-    elementDesc: "Local • Accessible • Practical",
-    difficulty: 1, // Novice Path
-    description:
-      "Where local heroes meet digital magic. Approachable websites and systems for cafés, studios, salons, and service providers—big dreams start small.",
-    includes: [
-      "Single-page to 5-page websites",
-      "Booking & contact integrations",
-      "Google Business + SEO setup",
-      "Social media connections",
-    ],
-    rewards: [
-      "Professional web presence",
-      "Lead capture system",
-      "Mobile-friendly design",
-    ],
+    elementIcon: Store,
+    master: "The Merchant of the Crossroads",
+    description: "Where local heroes meet digital magic. Approachable websites and systems for cafés, studios, salons, and service providers—big dreams start small.",
+    includes: ["Single to 5-page sites", "Booking integrations", "Google Business SEO", "Social connections"],
+    rewards: ["Professional presence", "Lead capture system", "Mobile-first design"],
     starting: "$1,500+",
     href: "/services/small-business",
-    color: "lunarGold",
+    difficulty: 1,
+    // Static classes for Tailwind purging
+    cardClass: "service-card-commerce",
+    textColorClass: "text-lunarGold",
+    borderColorClass: "border-lunarGold",
+    bgGradientClass: "from-lunarGold/20 to-amber-900/20",
     tiers: [
-      { name: "Totoro's Garden", price: "$1,500+", popular: true, features: ["Beautiful single-page website", "Mobile-responsive design", "Contact form with email notifications", "Google Business Profile setup", "Basic SEO optimization", "Social media integration", "1 month of support & updates"] },
-      { name: "Howl's Moving Castle", price: "$3,500+", features: ["3-5 page custom website", "Advanced booking calendar", "Payment processing (Stripe/Square)", "Blog or portfolio section", "Newsletter signup system", "Enhanced SEO + local search", "2 months support & updates"] },
-      { name: "Spirited Away", price: "$6,000+", features: ["Full e-commerce capabilities", "Customer portal with login", "Inventory management", "Email automation sequences", "Analytics dashboard", "Advanced integrations", "3 months premium support"] },
+      { name: "The Teahouse", price: "$1,500+", features: ["Beautiful single-page site", "Mobile-responsive", "Contact & Booking forms", "Google Business Setup", "Basic SEO"] },
+      { name: "The Market Stall", price: "$3,500+", popular: true, features: ["3-5 Page Custom Site", "Advanced Booking Calendar", "Payment Processing", "Blog/News Section", "Local SEO Dominance"] },
+      { name: "The Trade Route", price: "$6,000+", features: ["Full E-Commerce Store", "Customer Login Portal", "Inventory Management", "Email Automation", "Analytics Dashboard"] },
     ],
   },
   {
+    id: "water",
     name: "Creative Design & Development",
-    questTitle: "The Path of Water",
+    pathName: "The Path of Water",
     element: "Water",
-    elementDesc: "Adaptability • Flow • Creativity",
-    difficulty: 2, // Intermediate Bender
-    description:
-      "Like water flowing around obstacles, branding and design that adapts to your vision while maintaining its essential nature.",
-    includes: [
-      "Branding & identity systems",
-      "Custom web + UI builds",
-      "Packaging & product visuals",
-      "Creative visual direction",
-    ],
-    rewards: [
-      "Professional brand identity",
-      "Custom-built web presence",
-      "Client-ready marketing assets",
-    ],
+    elementIcon: Droplets,
+    master: "The Shaper of Tides",
+    description: "Like water flowing around obstacles, branding and design that adapts to your vision while maintaining its essential nature.",
+    includes: ["Brand Identity Systems", "Custom Web/UI Builds", "Product Visuals", "Creative Direction"],
+    rewards: ["Cohesive Brand Identity", "Custom Web Presence", "Marketing Assets"],
     starting: "$1,800+",
     href: "/services/creative-design-development",
-    color: "coralPink",
+    difficulty: 2,
+    cardClass: "service-card-water",
+    textColorClass: "text-mermaidTeal",
+    borderColorClass: "border-mermaidTeal",
+    bgGradientClass: "from-mermaidTeal/20 to-cyan-900/20",
     tiers: [
-      { name: "Branding Essential", price: "$1,800", features: ["Logo suite (3 variations)", "2-color palette + 2 fonts", "Basic brand guidelines", "1 round of revisions"] },
-      { name: "Branding Professional", price: "$2,800", popular: true, features: ["Logo suite (5 variations)", "Full color palette + font pairing", "Comprehensive brand guidelines", "Social media kit", "2 rounds of revisions"] },
-      { name: "Branding Premium", price: "$4,500", features: ["Everything in Professional", "Brand strategy workshop", "Extended logo suite (10+ variations)", "Print collateral designs", "3 rounds of revisions"] },
-      { name: "Web Essential", price: "$3,000", features: ["3-page website", "Mobile responsive", "Basic SEO setup", "Contact form integration", "1 month post-launch support"] },
-      { name: "Web Professional", price: "$5,500", popular: true, features: ["5-7 page website", "Blog or portfolio section", "Advanced SEO optimization", "Newsletter signup integration", "Custom animations", "2 months support"] },
-      { name: "Web Premium", price: "$8,000", features: ["10+ page site", "CMS integration", "E-commerce capabilities", "Advanced animations", "Performance optimization", "3 months support"] },
+      { name: "River's Flow (Identity)", price: "$1,800", features: ["Logo Suite (3 Variations)", "Color & Typography System", "Brand Guidelines", "Social Media Kit"] },
+      { name: "Ocean's Depth (Web)", price: "$5,500", popular: true, features: ["5-7 Page Custom Site", "Advanced Animations", "CMS Integration", "SEO Optimization", "Interactive Elements"] },
+      { name: "Tsunami (Full Suite)", price: "$8,000+", features: ["Complete Brand & Web", "E-Commerce Capability", "3D/Advanced Visuals", "Performance Optimization", "3 Months Support"] },
     ],
   },
   {
+    id: "earth",
     name: "Health x Tech Development",
-    questTitle: "The Path of Earth",
+    pathName: "The Path of Earth",
     element: "Earth",
-    elementDesc: "Foundation • Stability • Strength",
-    difficulty: 3, // Master Bender
-    description:
-      "Rooted in clinical reality like bedrock beneath your feet. Healthcare platforms built with the unwavering strength and stability of stone.",
-    includes: [
-      "HIPAA-aligned UI and flows",
-      "Nurse-to-nurse platforms",
-      "Health data dashboards",
-    ],
-    rewards: [
-      "HIPAA-compliant platform",
-      "Clinical workflow mastery",
-      "Healthcare-grade security",
-    ],
+    elementIcon: Mountain,
+    master: "The Healer of Roots",
+    description: "Rooted in clinical reality like bedrock. Healthcare platforms built with the unwavering strength, stability, and compliance of stone.",
+    includes: ["HIPAA-Aligned UI", "Nurse-to-Nurse Platforms", "Health Dashboards", "Clinical Workflows"],
+    rewards: ["HIPAA Compliance", "Clinical Workflow Fit", "Enterprise Security"],
     starting: "$3,500+",
     href: "/services/health-tech-development",
-    color: "mermaidTeal",
+    difficulty: 3,
+    cardClass: "service-card-earth",
+    textColorClass: "text-emerald-400",
+    borderColorClass: "border-emerald-500",
+    bgGradientClass: "from-emerald-500/20 to-green-900/20",
     tiers: [
-      { name: "Healthcare Platform Essential", price: "$10,000", features: ["3-5 core features", "Basic HIPAA compliance", "User authentication", "Simple dashboard", "1 user role", "1 month post-launch support"] },
-      { name: "Healthcare Platform Professional", price: "$18,000", popular: true, features: ["5-10 features", "Full HIPAA compliance (BAA)", "Multi-role user system", "Advanced workflows", "Data visualization", "Integration with 1 third-party system", "2 months support"] },
-      { name: "Healthcare Platform Premium", price: "$30,000", features: ["Complex clinical workflows", "Multi-facility support", "Advanced data analytics", "EHR/EMR integration", "Custom API development", "Regulatory documentation package", "3 months support + training"] },
-      { name: "Clinical Dashboard Basic", price: "$3,500", features: ["Census tracking", "Alert system", "Basic metrics & KPIs", "Staff directory", "Shift handoff tools"] },
-      { name: "Clinical Dashboard Advanced", price: "$6,500", popular: true, features: ["Real-time data feeds", "Custom charts & visualizations", "Predictive analytics", "Quality metrics tracking", "Automated reporting"] },
-      { name: "Patient Portal Essential", price: "$4,000", features: ["Secure messaging", "Appointment scheduling", "Medical records access", "Prescription refills", "Educational resources"] },
+      { name: "Foundation", price: "$3,500", features: ["Clinical Dashboard UI (Non-PHI)", "Prototype/MVP Development", "Staff Directory", "Shift Handoff Tools", "Team Communication Hub"] },
+      { name: "Bedrock", price: "$10,000", popular: true, features: ["HIPAA-Compliant Core", "User Authentication", "3-5 Custom Workflows", "Secure Messaging", "1 Month Support"] },
+      { name: "Mountain", price: "$30,000+", features: ["Full Platform Build", "EHR/EMR Integration", "Advanced Analytics", "Multi-Facility Support", "Regulatory Documentation"] },
     ],
   },
   {
-    name: "Consulting",
-    questTitle: "The Path of Air",
+    id: "air",
+    name: "Strategic Consulting",
+    pathName: "The Path of Air",
     element: "Air",
-    elementDesc: "Wisdom • Freedom • Perspective",
-    difficulty: 1, // Novice Path
-    description:
-      "Strategic wisdom that flows freely, seeing from heights others cannot reach. Guidance as light and adaptable as the wind itself.",
-    includes: [
-      "Healthtech product strategy",
-      "UX for clinician workflows",
-      "Creative/portfolio coaching",
-    ],
-    rewards: [
-      "Clear product roadmap",
-      "Expert guidance",
-      "Actionable insights",
-    ],
+    elementIcon: Wind,
+    master: "The Sage of the Winds",
+    description: "Strategic wisdom that flows freely, seeing from heights others cannot reach. Guidance as light and adaptable as the wind itself.",
+    includes: ["Healthtech Strategy", "Clinical UX Audits", "Workflow Analysis", "Go-To-Market Plans"],
+    rewards: ["Clear Product Roadmap", "Clinical Validation", "Risk Reduction"],
     starting: "$250/hr",
     href: "/services/consulting",
-    color: "starlight",
+    difficulty: 1,
+    cardClass: "service-card-air",
+    textColorClass: "text-starlight",
+    borderColorClass: "border-starlight",
+    bgGradientClass: "from-starlight/20 to-slate-800/20",
     tiers: [
-      { name: "Single Session", price: "$250/hr", features: ["Product roadmap review", "Safety pattern assessment", "Clinical validation insights", "Risk reduction strategies"] },
-      { name: "Strategy Package", price: "$4,000", popular: true, features: ["Everything in Single Session", "Go-to-market planning (5 sessions)", "Pilot program design", "Regulatory pathway guidance", "Stakeholder presentation deck", "30-day Slack/email support"] },
-      { name: "Strategic Partner", price: "$8,000/mo", features: ["Everything in Strategy Package", "Weekly strategic sessions", "Unlimited async consultation", "Board/investor deck review", "Clinical advisory network access", "Priority response time"] },
-      { name: "UX Audit", price: "$2,000", features: ["Heuristic evaluation (clinical lens)", "Workflow friction analysis", "Adoption barrier identification", "Actionable improvement list"] },
-      { name: "UX Transformation", price: "$5,000", features: ["Everything in UX Audit", "User testing with clinicians", "Interface redesign recommendations", "Load reduction strategies"] },
+      { name: "The Gust (Audit)", price: "$2,000", features: ["Clinical UX Audit", "Workflow Friction Analysis", "Adoption Barrier Report", "Action Plan"] },
+      { name: "The Wind (Strategy)", price: "$4,000", popular: true, features: ["Go-To-Market Strategy", "Pilot Program Design", "Regulatory Pathway Guide", "Pitch Deck Review"] },
+      { name: "The Gale (Partner)", price: "$8,000/mo", features: ["Fractional Chief Clinical Officer", "Weekly Strategy Calls", "Investor Relations Support", "Unlimited Async Advice"] },
     ],
   },
   {
+    id: "fire",
     name: "AI Innovation Suite",
-    questTitle: "The Path of Fire",
+    pathName: "The Path of Fire",
     element: "Fire",
-    elementDesc: "Power • Innovation • Transformation",
-    difficulty: 3, // Master Bender
-    description:
-      "Transformative AI forged in the flames of innovation. Power that burns away the impossible, creating entirely new possibilities.",
-    includes: [
-      "AI product architecture",
-      "Conversational & voice AI",
-      "Moonlit Labs experiments",
-    ],
-    rewards: [
-      "Intelligent automation",
-      "Custom AI copilot",
-      "Competitive advantage",
-    ],
+    elementIcon: Flame,
+    master: "The Forger of Sparks",
+    description: "Transformative AI forged in the flames of innovation. Power that burns away the impossible, creating entirely new possibilities.",
+    includes: ["AI Product Architecture", "Conversational Agents", "RAG Systems", "Voice AI"],
+    rewards: ["Intelligent Automation", "24/7 AI Copilots", "Competitive Edge"],
     starting: "$12,000+",
     href: "/services/ai-innovation",
-    color: "lunarGold",
+    difficulty: 3,
+    cardClass: "service-card-fire",
+    textColorClass: "text-phoenixFire",
+    borderColorClass: "border-phoenixFire",
+    bgGradientClass: "from-phoenixFire/20 to-red-900/20",
     tiers: [
-      { name: "Essential RAG", price: "$12,000", features: ["Basic RAG chatbot setup", "Document ingestion pipeline", "Claude/OpenAI integration", "Simple query handling", "Basic UI implementation"] },
-      { name: "Professional RAG", price: "$25,000", popular: true, features: ["Everything in Essential", "Multimodal capabilities (text + images)", "Context-aware conversations", "Role-based assistants", "Advanced prompt engineering", "Custom UI/UX design", "2 weeks post-launch support"] },
-      { name: "Enterprise RAG", price: "$50,000", features: ["Everything in Professional", "Multi-agent orchestration", "Custom knowledge graphs", "Real-time learning loops", "Advanced safety guardrails", "Analytics & monitoring dashboard", "30-day premium support"] },
+      { name: "The Spark", price: "$12,000", features: ["Basic RAG Chatbot", "Document Ingestion", "OpenAI/Claude Integration", "Web Embed"] },
+      { name: "The Flame", price: "$25,000", popular: true, features: ["Multimodal Agent (Text+Image)", "Context-Aware Memory", "Custom UI/UX", "Advanced Prompt Engineering"] },
+      { name: "The Inferno", price: "$50,000+", features: ["Multi-Agent Orchestration", "Custom Knowledge Graphs", "Real-time Learning", "Enterprise Security Guardrails"] },
     ],
   },
   {
-    name: "Author & Ghostwriting Studio",
-    questTitle: "The Path of Spirit",
+    id: "spirit",
+    name: "Author & Ghostwriting",
+    pathName: "The Path of Spirit",
     element: "Spirit",
-    elementDesc: "Connection • Balance • Voice",
-    difficulty: 2, // Intermediate Bender
-    description:
-      "Channel the spiritual essence of your authentic voice. Stories that bridge worlds and connect deeply with readers' spirits.",
-    includes: [
-      "Book & cookbook ghostwriting",
-      "Blogs + newsletters",
-      "Brand stories & about pages",
-      "Speeches & launch flows",
-      "Author websites + reader magnets",
-    ],
-    rewards: [
-      "Published work in your voice",
-      "Author platform presence",
-      "Reader engagement system",
-    ],
+    elementIcon: Sparkles,
+    master: "The Keeper of Stories",
+    description: "Channel the spiritual essence of your authentic voice. Stories that bridge worlds and connect deeply with readers' spirits.",
+    includes: ["Ghostwriting", "Book Coaching", "Brand Storytelling", "Newsletters"],
+    rewards: ["Published Legacy", "Authentic Voice", "Reader Connection"],
     starting: "$18,000+",
     href: "/services/ghostwriting",
-    color: "roseGold",
+    difficulty: 2,
+    cardClass: "service-card-spirit",
+    textColorClass: "text-roseGold",
+    borderColorClass: "border-roseGold",
+    bgGradientClass: "from-roseGold/20 to-purple-900/20",
     tiers: [
-      { name: "Short Book (50K words)", price: "$18,000", features: ["Voice alignment interviews", "Structure & chapter planning", "Full manuscript drafting (50K words)", "One revision cycle", "Final polish & formatting"] },
-      { name: "Full Novel (80K words)", price: "$35,000", popular: true, features: ["Everything in Short Book", "Extended manuscript (80K words)", "Character development sessions", "Two revision cycles", "Plot structure consulting", "Query letter & synopsis"] },
-      { name: "Premium Book (100K+ words)", price: "$50,000", features: ["Everything in Full Novel", "Extended manuscript (100K+ words)", "Multiple POV coordination", "Three revision cycles", "Author platform development", "Marketing copy & launch materials", "6 months post-completion support"] },
-      { name: "Essential Cookbook", price: "$18,000", features: ["Recipe structuring + headnotes (50 recipes)", "Cultural storytelling integration", "Testing support notes", "Interior copy & introductions", "One revision cycle"] },
-      { name: "Premium Cookbook", price: "$32,000", popular: true, features: ["75+ recipes", "Extended storytelling sections", "Recipe development collaboration", "Photography direction notes", "Two revision cycles", "Marketing copy"] },
+      { name: "The Scroll", price: "$18,000", features: ["Short Book (50k words)", "Voice Alignment", "Structure Planning", "One Revision Cycle"] },
+      { name: "The Tome", price: "$35,000", popular: true, features: ["Full Novel (80k words)", "Character Development", "Plot Consulting", "Two Revision Cycles"] },
+      { name: "The Legend", price: "$50,000+", features: ["Premium Book (100k+ words)", "Marketing Strategy", "Launch Materials", "Platform Development"] },
     ],
   },
 ];
 
-// Helper function to get quest icon component
-const getQuestIcon = (suiteName: string, className?: string) => {
-  switch (suiteName) {
-    case "Small Business Launchpads":
-      return <AnimatedDiamond className={className} />;
-    case "Creative Design & Development":
-      return <AnimatedPalette className={className} />;
-    case "Health x Tech Development":
-      return <AnimatedMedical className={className} />;
-    case "Consulting":
-      return <AnimatedWizard className={className} />;
-    case "AI Innovation Suite":
-      return <AnimatedLightning className={className} />;
-    case "Author & Ghostwriting Studio":
-      return <AnimatedBook className={className} />;
-    default:
-      return <AnimatedScroll className={className} />;
-  }
+// Helper for difficulty stars (Mastery Level)
+const getMasteryStars = (difficulty: number) => {
+  return (
+    <div className="flex gap-0.5">
+      {[...Array(3)].map((_, i) => (
+        <Star
+          key={i}
+          className={`w-3 h-3 ${i < difficulty ? "fill-lunarGold text-lunarGold" : "text-stone-700"}`}
+        />
+      ))}
+    </div>
+  );
 };
 
-// Helper function to render difficulty stars
-const getDifficultyStars = (difficulty: number) => {
-  const stars = [];
-  for (let i = 0; i < 3; i++) {
-    stars.push(
-      <svg
-        key={i}
-        className={`w-4 h-4 ${i < difficulty ? "opacity-100" : "opacity-20"}`}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4AF37"/>
-      </svg>
-    );
-  }
-  return stars;
-};
-
-// Get mastery level label (ATLA theme)
+// Get mastery level label
 const getMasteryLabel = (difficulty: number) => {
   switch (difficulty) {
     case 1:
       return "NOVICE PATH";
     case 2:
-      return "INTERMEDIATE BENDER";
+      return "INTERMEDIATE";
     case 3:
       return "MASTER BENDER";
     default:
@@ -245,9 +184,40 @@ const getMasteryLabel = (difficulty: number) => {
   }
 };
 
+// Get icon component based on suite ID
+const getIconComponent = (suiteId: string, className?: string) => {
+  switch (suiteId) {
+    case "commerce":
+      return <AnimatedDiamond className={className} />;
+    case "water":
+      return <AnimatedPalette className={className} />;
+    case "earth":
+      return <AnimatedMedical className={className} />;
+    case "air":
+      return <AnimatedWizard className={className} />;
+    case "fire":
+      return <AnimatedLightning className={className} />;
+    case "spirit":
+      return <AnimatedBook className={className} />;
+    default:
+      return <AnimatedScroll className={className} />;
+  }
+};
+
 export default function ServicesPage() {
+  const [expandedTier, setExpandedTier] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState('');
-  const [expandedAccordion, setExpandedAccordion] = useState<string | null>(null);
+
+  const toggleTierDetails = (tierId: string) => {
+    setExpandedTier(expandedTier === tierId ? null : tierId);
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -256,291 +226,243 @@ export default function ServicesPage() {
     }
   };
 
-  const toggleAccordion = (suiteName: string) => {
-    setExpandedAccordion(expandedAccordion === suiteName ? null : suiteName);
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite">
-      {/* HERO SECTION with Moon Phases */}
-      <section id="hero" className="relative overflow-hidden px-6 py-12 sm:py-16 md:py-20">
-        {/* Background Orbs */}
-        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/60 via-lunarGold/40 to-mermaidTeal/60 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/40 via-tealBright/30 to-transparent blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
-        </div>
+    <main className="min-h-screen bg-midnight text-pearlWhite selection:bg-mermaidTeal/30">
 
-        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
-          {/* Moon Phases */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 md:gap-8 mb-6 sm:mb-8">
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
-              title="New Moon - Top"
-              aria-label="Scroll to top"
-            >
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Top</span>
-            </button>
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
-            <button
-              onClick={() => scrollToSection('quests')}
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
-              title="Waxing Crescent - Quest Board"
-              aria-label="Scroll to quest board"
-            >
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Quests</span>
-            </button>
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-moonlightSilver/30 to-lunarGold/40" />
-            <div
-              className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 transition-all shadow-lg shadow-lunarGold/30 flex-shrink-0"
-              title="Full Moon - You are here"
-            />
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-lunarGold/40 to-phoenixFire/30" />
-            <button
-              onClick={() => scrollToSection('help')}
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
-              title="Waning Crescent - Get Help"
-              aria-label="Scroll to help section"
-            >
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Help</span>
-            </button>
-            <div className="h-0.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-phoenixFire/30 to-moonlightSilver/30" />
-            <button
-              onClick={() => scrollToSection('help')}
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 hover:scale-110 transition-all cursor-pointer flex-shrink-0 group relative"
-              title="New Moon - Contact"
-              aria-label="Scroll to contact"
-            >
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-moonlightSilver opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Contact</span>
-            </button>
+      {/* --- HERO SECTION --- */}
+      <section id="hero" className="relative overflow-hidden px-6 py-16 md:py-24">
+        {/* Ambient Background Effects */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-deepOcean/20 via-midnight/50 to-midnight rounded-full blur-3xl -z-10"></div>
+
+        <div className="relative mx-auto max-w-6xl text-center space-y-8">
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md animate-fade-in-up">
+            <AnimatedScroll className="w-4 h-4 text-lunarGold" />
+            <span className="text-xs font-bold tracking-[0.2em] text-lunarGold uppercase">
+              Master The Elements
+            </span>
           </div>
 
-          <div className="text-center space-y-4 sm:space-y-6">
-            {/* Bending Paths Title */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-mermaidTeal/20 to-tealBright/20 border border-mermaidTeal/40">
-              <AnimatedScroll className="w-6 h-6" />
-              <p className="text-xs sm:text-sm tracking-[0.35em] text-mermaidTeal uppercase font-semibold">
-                Six Bending Paths
-              </p>
-            </div>
-            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold px-4">
-              Choose your element. Master your path.
-            </h1>
-            <p className="font-serif text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto px-4 italic">
-              Like the Avatar mastering all elements, every journey begins by choosing your path. Led by a nurse who codes,
-              these six bending disciplines offer unique approaches—from local business magic to enterprise AI.
-              Which path resonates with your vision?
-            </p>
+          {/* Headline */}
+          <h1 className="font-elegant text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight animate-fade-in-up delay-100">
+            Choose Your Path.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-mermaidTeal via-starlight to-phoenixFire">
+              Master Your Vision.
+            </span>
+          </h1>
 
-            {/* Service Dropdown Navigation */}
-            <div className="max-w-md mx-auto pt-4">
-              <div className="relative">
-                <select
-                  value={selectedService}
-                  onChange={handleServiceChange}
-                  className="w-full appearance-none rounded-2xl bg-gradient-to-r from-deepOcean/80 via-midnight/90 to-deepOcean/80 border-2 border-mermaidTeal/50 px-6 py-4 pr-12 text-base text-pearlWhite cursor-pointer hover:border-mermaidTeal hover:bg-gradient-to-r hover:from-deepOcean hover:to-midnight transition-all focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal backdrop-blur-sm"
-                  style={{
-                    colorScheme: 'dark'
-                  }}
+          <p className="font-serif text-lg md:text-xl text-moonlightSilver max-w-2xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+            Like the Avatar mastering the elements, every project requires a unique discipline.
+            From the grounded stability of Health-Tech to the transformative fire of AI.
+          </p>
+
+          {/* "Choose Your Element" Navigation Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-12 animate-fade-in-up delay-300">
+            {suites.map((suite) => {
+              const Icon = suite.elementIcon;
+              return (
+                <button
+                  key={suite.id}
+                  onClick={() => scrollToSection(suite.id)}
+                  className={`group flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-1 hover:border-white/20`}
                 >
-                  <option value="" style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>Select a service to explore...</option>
-                  {suites.map((suite) => (
-                    <option key={suite.href} value={suite.href} style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>
-                      {suite.name} — Starting at {suite.starting}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-mermaidTeal pointer-events-none" />
-              </div>
-              <p className="text-xs text-moonlightSilver/70 mt-2">Or scroll down to browse all suites</p>
-            </div>
+                  <div className={`mb-2 text-moonlightSilver transition-colors ${suite.textColorClass.replace('text-', 'group-hover:text-')}`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-moonlightSilver group-hover:text-white">
+                    {suite.element}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* Primary CTA - Book Free Consultation */}
-            <div className="pt-6 fade-in-up">
-              <CalendlyButton
-                url="https://calendly.com/pagadeventures/30min"
-                text="Book Free Consultation"
-                variant="primary"
-              />
-              <p className="text-xs text-moonlightSilver/60 mt-3">
-                Not sure which path to choose? Let's discuss your vision.
-              </p>
+          {/* Service Dropdown Navigation */}
+          <div className="max-w-md mx-auto pt-6 animate-fade-in-up delay-400">
+            <div className="relative">
+              <select
+                value={selectedService}
+                onChange={handleServiceChange}
+                className="w-full appearance-none rounded-2xl bg-gradient-to-r from-deepOcean/80 via-midnight/90 to-deepOcean/80 border-2 border-mermaidTeal/50 px-6 py-4 pr-12 text-base text-pearlWhite cursor-pointer hover:border-mermaidTeal hover:bg-gradient-to-r hover:from-deepOcean hover:to-midnight transition-all focus:outline-none focus:ring-2 focus:ring-mermaidTeal/70 focus:border-mermaidTeal backdrop-blur-sm"
+                style={{ colorScheme: 'dark' }}
+              >
+                <option value="" style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>Jump to a service...</option>
+                {suites.map((suite) => (
+                  <option key={suite.href} value={suite.href} style={{ backgroundColor: '#0A1128', color: '#FAFAFA' }}>
+                    {suite.name} — Starting at {suite.starting}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-mermaidTeal pointer-events-none" />
             </div>
+            <p className="text-xs text-moonlightSilver/70 mt-2">Or scroll down to browse all paths</p>
+          </div>
+
+          {/* CTA */}
+          <div className="pt-8 animate-fade-in-up delay-500">
+            <CalendlyButton
+              url="https://calendly.com/pagadeventures/30min"
+              text="Consult The Oracle (Book Call)"
+              variant="primary"
+            />
           </div>
         </div>
       </section>
 
-      <section id="quests" className="px-6 pb-16">
-        <div className="mx-auto max-w-6xl space-y-8">
-          {/* Bending Paths Header */}
-          <div className="space-y-3 text-center">
-            <div className="inline-flex items-center gap-2">
-              <AnimatedSword className="w-5 h-5" />
-              <p className="text-sm tracking-[0.35em] text-starlight uppercase">
-                Master The Elements
-              </p>
-              <AnimatedSword className="w-5 h-5" />
-            </div>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              Each path adapts to your resources and timeline. Choose your element to begin training.
-            </p>
-          </div>
+      {/* --- SERVICES LIST --- */}
+      <div className="max-w-6xl mx-auto px-6 pb-24 space-y-24">
+        {suites.map((suite) => {
+          const Icon = suite.elementIcon;
+          return (
+            <section key={suite.id} id={suite.id} className={`scroll-mt-32 ${suite.cardClass}`}>
 
-          {/* Quest Cards - Parchment Style */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {suites.map((suite, index) => (
-              <article
-                key={suite.name}
-                className="relative rounded-2xl border-2 border-lunarGold/30 bg-gradient-to-br from-[#2a2520]/95 via-[#1a1510]/98 to-midnight/95 p-6 text-moonlightSilver shadow-2xl shadow-black/60 transition-all hover:border-lunarGold/70 hover:shadow-lunarGold/20 hover:-translate-y-1 animate-fadeInUp backdrop-blur-sm"
-                style={{
-                  animationDelay: `${(index + 1) * 0.1}s`,
-                  backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3CfeColorMatrix values=\'0 0 0 0 0, 0 0 0 0 0, 0 0 0 0 0, 0 0 0 0.03 0\' /%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\' /%3E%3C/svg%3E")'
-                }}
-              >
-                {/* Quest Icon */}
-                <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-gradient-to-br from-lunarGold/40 to-phoenixFire/30 border-2 border-lunarGold/60 flex items-center justify-center shadow-lg backdrop-blur">
-                  {getQuestIcon(suite.name, "w-7 h-7")}
+              {/* Section Header */}
+              <div className="flex flex-col md:flex-row items-start gap-6 mb-8">
+                <div className={`p-4 rounded-2xl bg-gradient-to-br ${suite.bgGradientClass} border ${suite.borderColorClass} service-icon-container`}>
+                  <Icon className={`w-8 h-8 ${suite.textColorClass}`} />
                 </div>
-
-                {/* Difficulty Stars */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex gap-0.5 text-sm">
-                    {getDifficultyStars(suite.difficulty)}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={`text-xs font-bold uppercase tracking-widest ${suite.textColorClass}`}>
+                      {suite.pathName}
+                    </span>
+                    <div className="h-px w-12 bg-white/20"></div>
+                    {getMasteryStars(suite.difficulty)}
+                    <span className="text-[10px] text-moonlightSilver/60 uppercase tracking-wider">
+                      {getMasteryLabel(suite.difficulty)}
+                    </span>
                   </div>
-                  <span className="text-[0.65rem] tracking-[0.2em] text-lunarGold/70 font-semibold">
-                    {getMasteryLabel(suite.difficulty)}
-                  </span>
-                </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{suite.name}</h2>
+                  <p className="text-moonlightSilver text-lg max-w-2xl leading-relaxed">
+                    {suite.description}
+                  </p>
 
-                {/* Quest Title */}
-                <h2 className="text-xl font-bold text-pearlWhite mb-1 font-serif">
-                  {suite.questTitle}
-                </h2>
-                <h3 className="text-sm text-lunarGold/80 mb-3">
-                  {suite.name}
-                </h3>
-
-                {/* Quest Description */}
-                <p className="mt-2 text-sm leading-relaxed">{suite.description}</p>
-
-                {/* Training Focus */}
-                <div className="mt-4 space-y-2">
-                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold">Training Focus:</p>
-                  <ul className="space-y-1.5 text-xs">
-                    {suite.includes.map((item) => (
-                      <li key={item} className="flex gap-2 items-start">
-                        <svg className="mt-1 w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 0L14 9L23 9L16 14L19 23L12 18L5 23L8 14L1 9L10 9L12 0Z" fill="#D4AF37"/>
-                        </svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Mastery Achievements */}
-                <div className="mt-4 p-3 rounded-xl bg-lunarGold/10 border border-lunarGold/20">
-                  <p className="text-xs text-lunarGold/70 uppercase tracking-wider font-semibold mb-2">Mastery Achievements:</p>
-                  <ul className="space-y-1 text-xs">
-                    {suite.rewards.map((reward) => (
-                      <li key={reward} className="flex gap-2 items-start">
-                        <span className="inline-block w-4 h-4">
-                          <AnimatedDiamond className="w-4 h-4" />
+                  {/* Master & ROI Chips */}
+                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                    <div className="flex items-center gap-2 text-xs text-stone-400">
+                      <span className="uppercase tracking-wider font-bold text-stone-500">Master:</span>
+                      <span className="text-white font-serif italic">{suite.master}</span>
+                    </div>
+                    <div className="h-4 w-px bg-white/10"></div>
+                    <div className="flex flex-wrap gap-2">
+                      {suite.rewards.map((reward) => (
+                        <span key={reward} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] text-moonlightSilver font-medium">
+                          <AnimatedDiamond className={`w-3 h-3 ${suite.textColorClass}`} />
+                          {reward}
                         </span>
-                        <span className="text-pearlWhite">{reward}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Training Investment */}
-                <div className="mt-4 flex items-center gap-2">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" fill="url(#coinGold)" stroke="#D4AF37" strokeWidth="2"/>
-                    <text x="12" y="16" fontSize="12" fill="#654321" textAnchor="middle" fontWeight="bold">$</text>
-                    <defs>
-                      <linearGradient id="coinGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style={{ stopColor: '#FFD700' }} />
-                        <stop offset="100%" style={{ stopColor: '#D4AF37' }} />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-moonlightSilver/70">Training Investment</span>
-                    <span className="text-xl font-bold text-lunarGold">{suite.starting}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                {/* Pricing Tiers Accordion */}
-                {suite.tiers && suite.tiers.length > 0 && (
-                  <div className="mt-4">
-                    <button
-                      onClick={() => toggleAccordion(suite.name)}
-                      className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-lunarGold/10 border border-lunarGold/30 hover:bg-lunarGold/20 hover:border-lunarGold/50 transition-all text-left"
+                {/* Starting Price Badge */}
+                <div className="text-right hidden md:block">
+                  <p className="text-xs text-stone-500 uppercase tracking-widest font-bold mb-1">Investment</p>
+                  <p className={`text-2xl font-bold ${suite.textColorClass}`}>{suite.starting}</p>
+                </div>
+              </div>
+
+              {/* Pricing Tiers Grid */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {suite.tiers.map((tier, i) => {
+                  const tierId = `${suite.id}-${i}`;
+                  const isExpanded = expandedTier === tierId;
+                  // Show first 3 features in collapsed state
+                  const previewFeatures = tier.features.slice(0, 3);
+                  const hasMoreFeatures = tier.features.length > 3;
+
+                  return (
+                    <div
+                      key={i}
+                      className={`relative p-6 rounded-xl border transition-all duration-300 group ${
+                        tier.popular
+                          ? `tier-card-popular border-white/30 shadow-xl z-10 md:scale-105`
+                          : 'bg-midnight/50 border-white/10 hover:border-white/20'
+                      }`}
                     >
-                      <span className="text-sm font-semibold text-lunarGold">View Pricing Tiers</span>
-                      <ChevronDown className={`w-4 h-4 text-lunarGold transition-transform ${expandedAccordion === suite.name ? 'rotate-180' : ''}`} />
-                    </button>
+                      {tier.popular && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest tier-popular-badge shadow-lg">
+                          Mastery Path
+                        </div>
+                      )}
 
-                    {expandedAccordion === suite.name && (
-                      <div className="mt-2 space-y-2 animate-fade-in-up">
-                        {suite.tiers.map((tier: any, tierIndex: number) => (
-                          <div
-                            key={tierIndex}
-                            className={`p-3 rounded-lg border ${tier.popular ? 'bg-mermaidTeal/10 border-mermaidTeal/40' : 'bg-deepOcean/40 border-deepOcean/60'} hover:border-lunarGold/50 transition-all`}
-                          >
-                            <div className="flex items-start justify-between mb-2">
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2">
-                                  <h4 className="text-sm font-bold text-pearlWhite">{tier.name}</h4>
-                                  {tier.popular && (
-                                    <span className="px-2 py-0.5 text-[0.6rem] bg-mermaidTeal/30 text-mermaidTeal rounded-full font-semibold uppercase tracking-wide">
-                                      Popular
-                                    </span>
-                                  )}
-                                </div>
-                                <p className="text-lg font-bold text-lunarGold mt-1">{tier.price}</p>
-                              </div>
-                            </div>
-                            <ul className="space-y-1 text-xs text-moonlightSilver">
-                              {tier.features.map((feature: string, featureIndex: number) => (
-                                <li key={featureIndex} className="flex gap-2 items-start">
-                                  <span className="text-lunarGold mt-0.5">•</span>
-                                  <span>{feature}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
+                      <div className="mb-4">
+                        <h3 className={`text-lg font-bold mb-2 ${tier.popular ? 'text-white' : 'text-stone-300'}`}>
+                          {tier.name}
+                        </h3>
+                        <p className={`text-2xl font-bold ${suite.textColorClass}`}>{tier.price}</p>
                       </div>
-                    )}
-                  </div>
-                )}
 
-                {/* Begin Training Button */}
+                      {/* Preview Features */}
+                      <ul className="space-y-2 mb-4">
+                        {previewFeatures.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-moonlightSilver">
+                            <CheckCircle className={`w-4 h-4 mt-0.5 flex-shrink-0 ${suite.textColorClass}`} />
+                            <span className="leading-tight">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* View More Button & Dropdown */}
+                      {hasMoreFeatures && (
+                        <div className="relative mb-4">
+                          <button
+                            onClick={() => toggleTierDetails(tierId)}
+                            className={`flex items-center gap-2 text-xs font-semibold ${suite.textColorClass} hover:underline underline-offset-2`}
+                          >
+                            <span>{isExpanded ? 'Hide Details' : `+${tier.features.length - 3} more features`}</span>
+                            <ChevronDown className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                          </button>
+
+                          {/* Dropdown Overlay */}
+                          {isExpanded && (
+                            <div className="absolute left-0 right-0 top-full mt-2 p-3 md:p-4 rounded-lg bg-midnight/98 border border-white/20 shadow-2xl z-50 backdrop-blur-sm animate-fade-in max-h-48 overflow-y-auto">
+                              <ul className="space-y-2">
+                                {tier.features.slice(3).map((feature, idx) => (
+                                  <li key={idx} className="flex items-start gap-2 text-xs md:text-sm text-moonlightSilver">
+                                    <CheckCircle className={`w-3 h-3 md:w-4 md:h-4 mt-0.5 flex-shrink-0 ${suite.textColorClass}`} />
+                                    <span className="leading-tight">{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      <a
+                        href={suite.href}
+                        className={`block w-full py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all text-center mt-auto ${
+                          tier.popular
+                            ? 'service-cta-btn'
+                            : 'bg-white/5 text-white hover:bg-white/10'
+                        }`}
+                      >
+                        Begin Training
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Link to full service page */}
+              <div className="mt-8 text-center">
                 <a
                   href={suite.href}
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-lunarGold/90 to-phoenixFire/80 px-6 py-3 text-sm font-bold text-midnight transition-all hover:from-lunarGold hover:to-phoenixFire hover:shadow-lg hover:shadow-lunarGold/40 hover:-translate-y-0.5 group"
+                  className={`inline-flex items-center gap-2 text-sm font-semibold ${suite.textColorClass} hover:underline underline-offset-4 transition-all group`}
                 >
-                  <span>Begin Training</span>
-                  <span className="group-hover:translate-x-1 transition-transform inline-block w-4 h-4">
-                    <AnimatedSword className="w-4 h-4" />
-                  </span>
+                  <span>Explore Full {suite.name} Details</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
 
-      {/* CROSS-REALM PORTALS */}
+            </section>
+          );
+        })}
+      </div>
+
+      {/* --- CROSS-REALM PORTALS --- */}
       <section className="py-16 bg-gradient-to-b from-midnight to-midnightNavy border-t border-deepOcean/40">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center mb-12">
@@ -557,9 +479,7 @@ export default function ServicesPage() {
             <a href="/ai-lab" className="group block">
               <div className="p-6 rounded-xl bg-gradient-to-br from-lunarGold/10 to-phoenixFire/10 border border-lunarGold/30 hover:border-lunarGold transition-all hover:shadow-lg hover:shadow-lunarGold/20">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lunarGold/30 to-phoenixFire/30 flex items-center justify-center mb-3 border border-lunarGold/50 group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-lunarGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+                  <AnimatedLightning className="w-5 h-5 text-lunarGold" />
                 </div>
                 <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-lunarGold transition-colors">AI Battle System</h3>
                 <p className="text-xs text-moonlightSilver">Four AI warriors ready to deploy. See the systems in action.</p>
@@ -568,11 +488,9 @@ export default function ServicesPage() {
 
             {/* Portfolio Portal */}
             <a href="/portfolio" className="group block">
-              <div className="p-6 rounded-xl bg-gradient-to-br from-silverMist/10 to-stoneGray/10 border border-silverMist/30 hover:border-silverMist transition-all hover:shadow-lg hover:shadow-silverMist/20">
+              <div className="p-6 rounded-xl bg-gradient-to-br from-silverMist/10 to-slate-800/10 border border-silverMist/30 hover:border-silverMist transition-all hover:shadow-lg hover:shadow-silverMist/20">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-silverMist/30 to-lunarGold/20 flex items-center justify-center mb-3 border border-silverMist/50 group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-silverMist" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+                  <AnimatedBook className="w-5 h-5 text-silverMist" />
                 </div>
                 <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-silverMist transition-colors">Quest Chronicles</h3>
                 <p className="text-xs text-moonlightSilver">Journey through five realms of completed legends and victories.</p>
@@ -583,9 +501,7 @@ export default function ServicesPage() {
             <a href="/about" className="group block">
               <div className="p-6 rounded-xl bg-gradient-to-br from-starlight/10 to-moonlightSilver/10 border border-starlight/30 hover:border-starlight transition-all hover:shadow-lg hover:shadow-starlight/20">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-starlight/30 to-moonlightSilver/20 flex items-center justify-center mb-3 border border-starlight/50 group-hover:scale-110 transition-transform">
-                  <svg className="w-5 h-5 text-starlight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
+                  <AnimatedWizard className="w-5 h-5 text-starlight" />
                 </div>
                 <h3 className="text-lg font-semibold text-pearlWhite mb-1 group-hover:text-starlight transition-colors">Moonlit Archives</h3>
                 <p className="text-xs text-moonlightSilver">The Master&apos;s Journey from nurse to code warrior to Avatar State.</p>
@@ -595,10 +511,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
-      <TestimonialsSection limit={6} showTitle={true} />
+      {/* --- TESTIMONIALS --- */}
+      <TestimonialsSection limit={3} showTitle={true} />
 
-      <section id="help" className="border-t border-deepOcean/60 bg-nightNavy/70 relative overflow-hidden">
+      {/* --- FOOTER CTA --- */}
+      <section id="help" className="border-t border-deepOcean/30 bg-midnightNavy/50 relative overflow-hidden py-20">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-mermaidTeal via-midnight to-midnight"></div>
+
         {/* Background quest scroll */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute left-10 top-10">
@@ -609,34 +528,28 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex max-w-4xl flex-col gap-4 px-6 py-10 text-center">
-          <div className="inline-flex justify-center mb-2">
-            <AnimatedWizard className="w-16 h-16" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center space-y-6">
+          <div className="inline-flex justify-center mb-4">
+            <AnimatedWizard className="w-16 h-16 text-starlight" />
           </div>
-          <h3 className="text-2xl font-semibold text-pearlWhite mb-2">
-            Need guidance choosing your element?
-          </h3>
-          <p className="text-sm text-moonlightSilver max-w-2xl mx-auto">
-            Finding balance between elements requires wisdom. Let's discuss which bending path aligns with your vision, timeline, and resources.
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            The Scroll is Open. The Path is Yours.
+          </h2>
+          <p className="text-moonlightSilver text-lg max-w-2xl mx-auto">
+            Whether you seek the stability of Earth or the innovation of Fire, we are ready to begin your training.
+            Finding balance between elements requires wisdom—let&apos;s discuss which path aligns with your vision.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <CalendlyButton
               url="https://calendly.com/pagadeventures/30min"
-              text="Book Free Consultation"
+              text="Consult The Oracle"
               variant="primary"
             />
             <a
               href="/contact?topic=services"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-mermaidTeal/70 px-8 py-4 text-base font-semibold text-mermaidTeal transition-all hover:bg-mermaidTeal hover:text-midnight hover:border-mermaidTeal hover:shadow-lg hover:shadow-mermaidTeal/40 group"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-mermaidTeal/70 text-mermaidTeal font-bold hover:bg-mermaidTeal hover:text-midnight transition-all"
             >
-              <span>Send a Message</span>
-              <span className="group-hover:rotate-12 transition-transform inline-block">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.5"/>
-                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" fill="none"/>
-                  <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                </svg>
-              </span>
+              Send a Message <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>

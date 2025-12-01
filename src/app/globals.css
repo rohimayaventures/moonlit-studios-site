@@ -1787,3 +1787,85 @@ body.chaos-mode * {
 .pulse-float {
   animation: pulseFloat 2s ease-in-out infinite;
 }
+
+/* ========================================
+   SERVICES PAGE - FADE IN UP WITH DELAYS
+   ======================================== */
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up.delay-100 { animation-delay: 100ms; }
+.animate-fade-in-up.delay-200 { animation-delay: 200ms; }
+.animate-fade-in-up.delay-300 { animation-delay: 300ms; }
+.animate-fade-in-up.delay-400 { animation-delay: 400ms; }
+.animate-fade-in-up.delay-500 { animation-delay: 500ms; }
+.animate-fade-in-up.delay-600 { animation-delay: 600ms; }
+
+/* Services page element-specific styles */
+.service-card-commerce {
+  --card-color: #FFD700;
+  --card-gradient: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(139, 69, 19, 0.2));
+}
+
+.service-card-water {
+  --card-color: #4A9B9B;
+  --card-gradient: linear-gradient(135deg, rgba(74, 155, 155, 0.2), rgba(6, 95, 70, 0.2));
+}
+
+.service-card-earth {
+  --card-color: #10B981;
+  --card-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 46, 22, 0.2));
+}
+
+.service-card-air {
+  --card-color: #CAE9FF;
+  --card-gradient: linear-gradient(135deg, rgba(202, 233, 255, 0.2), rgba(71, 85, 105, 0.2));
+}
+
+.service-card-fire {
+  --card-color: #FF8C42;
+  --card-gradient: linear-gradient(135deg, rgba(255, 140, 66, 0.2), rgba(127, 29, 29, 0.2));
+}
+
+.service-card-spirit {
+  --card-color: #ECC5B8;
+  --card-gradient: linear-gradient(135deg, rgba(236, 197, 184, 0.2), rgba(88, 28, 135, 0.2));
+}
+
+/* Service element icon container */
+.service-icon-container {
+  background: var(--card-gradient);
+  border-color: var(--card-color);
+  box-shadow: 0 10px 40px -10px color-mix(in srgb, var(--card-color) 30%, transparent);
+}
+
+/* Service tier popular badge */
+.tier-popular-badge {
+  background-color: var(--card-color);
+  color: #0A1128;
+}
+
+/* Service tier card popular state */
+.tier-card-popular {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--card-color) 10%, transparent), #0A1128);
+  border-color: color-mix(in srgb, var(--card-color) 50%, transparent);
+  box-shadow: 0 25px 50px -12px color-mix(in srgb, var(--card-color) 15%, transparent);
+}
+
+/* Service CTA button */
+.service-cta-btn {
+  background-color: var(--card-color);
+  color: #0A1128;
+}
+
+.service-cta-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Tier dropdown fade-in */
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}

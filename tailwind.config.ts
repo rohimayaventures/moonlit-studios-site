@@ -228,6 +228,20 @@ const config: Config = {
         "slide-in-right": "slideInRight 0.5s ease-out forwards",
         "bounce-subtle": "bounceSubtle 1.5s ease-in-out infinite",
         "progress-bar": "progressBar 5s linear forwards",
+
+        // Services page fade-in-up
+        "fade-in-up": "fadeInUp 0.6s ease-out forwards",
+      },
+      // Animation delay utilities
+      animationDelay: {
+        "100": "100ms",
+        "200": "200ms",
+        "300": "300ms",
+        "400": "400ms",
+        "500": "500ms",
+        "600": "600ms",
+        "700": "700ms",
+        "800": "800ms",
       },
     },
   },
