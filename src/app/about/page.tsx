@@ -1,917 +1,169 @@
 'use client';
 
+import { 
+  Heart, 
+  Code, 
+  PenTool, 
+  TrendingUp, 
+  Users, 
+  Zap, 
+  Award,
+  ArrowRight,
+  Star,
+  Coffee
+} from 'lucide-react';
+import { CalendlyButton } from '../components/CalendlyButton';
 import { TestimonialsSection } from '../components/TestimonialsSection';
-import { PageCTASection } from '../components/PageCTASection';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-midnight text-pearlWhite">
+    <main className="min-h-screen bg-midnight text-pearlWhite selection:bg-mermaidTeal/30">
       
-      {/* HERO SECTION with Moon Phases */}
-      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 px-6">
-        <div className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none">
-          <div className="absolute -right-32 top-10 h-96 w-96 rounded-full bg-gradient-to-br from-phoenixFire/45 via-lunarGold/30 to-mermaidTeal/35 blur-3xl animate-floatSlow" />
-          <div className="absolute -left-24 bottom-20 h-80 w-80 rounded-full bg-gradient-to-br from-mermaidTeal/30 via-tealBright/25 to-deepOcean/40 blur-3xl" style={{ animation: 'floatSlow 20s ease-in-out infinite 5s' }} />
+      {/* --- HERO: The Hook --- */}
+      <section className="relative py-24 px-6 overflow-hidden">
+        {/* Abstract Background Depth */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-phoenixFire/10 rounded-full blur-3xl -mr-40 -mt-40"></div>
+           <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-mermaidTeal/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
         </div>
 
-        <div className="relative mx-auto max-w-6xl space-y-6 sm:space-y-8">
-          {/* Moon Phases */}
-          <div className="flex justify-center items-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
-            <div
-              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
-            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-moonlightSilver/30 to-mermaidTeal/30" />
-            <div
-              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waxing Crescent"
-            />
-            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-moonlightSilver/30 to-lunarGold/40" />
-            <div
-              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-lunarGold via-moonlightSilver to-starlight border-2 border-lunarGold/70 hover:border-lunarGold transition-all cursor-pointer shadow-lg shadow-lunarGold/30 flex-shrink-0"
-              title="Full Moon - You are here"
-            />
-            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-lunarGold/40 to-moonlightSilver/30" />
-            <div
-              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-l from-midnight via-moonlightSilver/30 to-moonlightSilver/60 border-2 border-moonlightSilver/50 hover:border-moonlightSilver/80 transition-all cursor-pointer flex-shrink-0"
-              title="Waning Crescent"
-            />
-            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-moonlightSilver/30 to-moonlightSilver/20" />
-            <div
-              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-moonlightSilver/40 hover:border-moonlightSilver/70 transition-all cursor-pointer flex-shrink-0"
-              title="New Moon"
-            />
+        <div className="relative mx-auto max-w-5xl text-center space-y-8 z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md animate-fade-in-up">
+            <span className="w-2 h-2 rounded-full bg-lunarGold animate-pulse"></span>
+            <span className="text-xs font-bold tracking-[0.2em] text-lunarGold uppercase">
+              The Nurse Who Codes
+            </span>
           </div>
 
-          <div className="text-center space-y-4 sm:space-y-6 fade-in-up px-4">
-            <p className="text-xs sm:text-sm tracking-[0.35em] text-starlight uppercase">About Moonlit Studios</p>
-            <h1 className="font-elegant text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
-              The Nurse Who Learned to Code
-            </h1>
-            <p className="font-serif text-base sm:text-lg md:text-xl text-moonlightSilver leading-relaxed max-w-3xl mx-auto italic">
-              From bedside care to healthcare operations leadership, from fantasy romance author to
-              full-stack developer—every transformation taught me something new about healing through technology.
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-3 text-sm text-starlight">
-              <span>15+ Years Healthcare Operations</span>
-              <span>•</span>
-              <span>Full-Stack Developer</span>
-              <span>•</span>
-              <span>Published Author</span>
-            </div>
-          </div>
+          <h1 className="font-elegant text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight animate-fade-in-up delay-100">
+            High-Stakes Precision Meets<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-mermaidTeal via-starlight to-phoenixFire">
+              Creative Soul.
+            </span>
+          </h1>
+
+          <p className="font-serif text-xl text-moonlightSilver max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+            I built Moonlit Studios on a simple premise: <strong>Technology should care.</strong><br/>
+            Whether it's a small business website or an enterprise AI agent, I bring the empathy of a nurse, the storytelling of an author, and the precision of an engineer to every project.
+          </p>
         </div>
       </section>
 
-      {/* MOONLIT TRANSFORMATION - Moon Phases Journey */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/30 to-midnight">
+      {/* --- THE VALUE STACK: Why Hire You? --- */}
+      <section className="py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/30 to-midnight border-y border-white/5">
         <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">The Journey</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">The Moonlit Transformation</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              Every phase of the moon brought new wisdom, new power, new purpose.
-            </p>
-          </div>
-
-          <div className="space-y-16">
-            {/* Phase 1: New Moon - Bedside Healer */}
-            <div className="flex flex-col md:flex-row items-start gap-8 fade-in-up">
-              <div className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-deepOcean to-midnight border-2 border-moonlightSilver/30 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-moonlightSilver/60" fill="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                  </svg>
-                </div>
-                <p className="text-center mt-2 text-xs text-starlight">New Moon</p>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1: The Operator */}
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-mermaidTeal/50 transition-all group">
+              <div className="w-14 h-14 bg-mermaidTeal/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <TrendingUp className="w-7 h-7 text-mermaidTeal" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Bedside Healer</h3>
-                <p className="text-moonlightSilver leading-relaxed mb-4">
-                  My journey began at the bedside, where I learned that healing is both art and science. 
-                  Each patient taught me about empathy, systems thinking, and the critical importance of 
-                  clear communication in high-stakes environments.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-mermaidTeal/20 text-mermaidTeal text-sm border border-mermaidTeal/30">
-                    Patient Care
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-mermaidTeal/20 text-mermaidTeal text-sm border border-mermaidTeal/30">
-                    Clinical Workflows
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-mermaidTeal/20 text-mermaidTeal text-sm border border-mermaidTeal/30">
-                    Systems Thinking
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Phase 2: Waxing Crescent - Operations Master */}
-            <div className="flex flex-col md:flex-row items-start gap-8 fade-in-up">
-              <div className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-deepOcean via-moonlightSilver/20 to-midnight border-2 border-moonlightSilver/50 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-moonlightSilver" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12c0-4.41 3.59-8 8-8v16z"/>
-                  </svg>
-                </div>
-                <p className="text-center mt-2 text-xs text-starlight">Waxing Crescent</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Operations Master</h3>
-                <p className="text-moonlightSilver leading-relaxed mb-4">
-                  Scaling from one patient to leading teams of 130+ people managing multimillion-dollar budgets. 
-                  I partnered with Kaiser, Optum, and university health networks, achieving 96% audit success rates 
-                  and 20-25% improvement in staff retention. This is where I learned that great leadership is about 
-                  empowering others.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-phoenixFire/20 text-phoenixFire text-sm border border-phoenixFire/30">
-                    130+ Team Members
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-phoenixFire/20 text-phoenixFire text-sm border border-phoenixFire/30">
-                    96% Audit Success
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-phoenixFire/20 text-phoenixFire text-sm border border-phoenixFire/30">
-                    25% Retention Improvement
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Phase 3: Full Moon - The Storyteller */}
-            <div className="flex flex-col md:flex-row items-start gap-8 fade-in-up">
-              <div className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-lunarGold via-pearlWhite/30 to-starlight border-2 border-lunarGold flex items-center justify-center shadow-lg shadow-lunarGold/30">
-                  <svg className="w-12 h-12 text-lunarGold" fill="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                  </svg>
-                </div>
-                <p className="text-center mt-2 text-xs text-lunarGold font-semibold">Full Moon</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Storyteller Emerges</h3>
-                <p className="text-moonlightSilver leading-relaxed mb-4">
-                  As a published fantasy romance author with 300,000+ words across multiple manuscripts, I discovered
-                  that every great product needs a compelling story. Writing taught me the power of narrative in building
-                  brands and connecting with audiences—skills that translate directly to creating memorable digital experiences.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-lunarGold/20 text-lunarGold text-sm border border-lunarGold/30">
-                    Published Author
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-lunarGold/20 text-lunarGold text-sm border border-lunarGold/30">
-                    300K+ Words
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-lunarGold/20 text-lunarGold text-sm border border-lunarGold/30">
-                    4 Completed Manuscripts
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Phase 4: Waning Crescent - Code Awakening */}
-            <div className="flex flex-col md:flex-row items-start gap-8 fade-in-up">
-              <div className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-midnight via-tealBright/20 to-deepOcean border-2 border-tealBright/50 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-tealBright" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8v16c-1.85 0-3.55-.63-4.9-1.69l11.21-11.21C19.37 8.45 20 10.15 20 12c0 4.41-3.59 8-8 8z"/>
-                  </svg>
-                </div>
-                <p className="text-center mt-2 text-xs text-starlight">Waning Crescent</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Code Awakening</h3>
-                <p className="text-moonlightSilver leading-relaxed mb-4">
-                  Self-taught full-stack developer specializing in AI/ML systems. I discovered that code is
-                  poetry, algorithms are empathy, and AI can amplify human healing at scale. Every line of code became
-                  another way to help people, just like nursing—but now I could help thousands at once.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-tealBright/20 text-tealBright text-sm border border-tealBright/30">
-                    Self-Taught Developer
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-tealBright/20 text-tealBright text-sm border border-tealBright/30">
-                    AI/ML Specialist
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-tealBright/20 text-tealBright text-sm border border-tealBright/30">
-                    Full-Stack + AI
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Phase 5: Moonlit Studios - The Master Phase */}
-            <div className="flex flex-col md:flex-row items-start gap-8 fade-in-up">
-              <div className="flex-shrink-0">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-mermaidTeal via-lunarGold/30 to-phoenixFire/20 border-2 border-starlight flex items-center justify-center shadow-xl shadow-mermaidTeal/40 relative">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-mermaidTeal/20 to-phoenixFire/20 animate-pulse"></div>
-                  <svg className="w-12 h-12 text-starlight relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-                  </svg>
-                </div>
-                <p className="text-center mt-2 text-xs text-starlight font-semibold">Moonlit Studios</p>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-lunarGold mb-3">The Master Phase</h3>
-                <p className="text-moonlightSilver leading-relaxed mb-4">
-                  Founder of Moonlit Studios, where healthcare expertise, creative storytelling, and technical mastery 
-                  converge. This is the Avatar state of digital creation—bringing together nursing wisdom, author vision, 
-                  and developer skills to build products that heal, inspire, and transform. From $1,500 websites to $20,000 
-                  full-stack applications, every project gets the same obsessive attention to detail.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 rounded-full bg-starlight/20 text-starlight text-sm border border-starlight/30">
-                    Founder & Lead Developer
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-starlight/20 text-starlight text-sm border border-starlight/30">
-                    Full-Stack Consultancy
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-starlight/20 text-starlight text-sm border border-starlight/30">
-                    Healthcare + Creative + Tech
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FOUR ELEMENTS MASTERY - ATLA Themed */}
-      <section className="relative py-20 px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">The Four Elements</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">Mastery of All Elements</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              "It is important to draw wisdom from many different places." — Uncle Iroh
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Water - Adaptability */}
-            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-mermaidTeal/10 to-deepOcean/20 border border-mermaidTeal/30 hover:border-mermaidTeal/60 transition-all duration-300 hover:shadow-lg hover:shadow-mermaidTeal/20 fade-in-up">
-              <div className="flex items-start gap-4 mb-4">
-                {/* Circular Progress */}
-                <div className="relative flex-shrink-0 w-20 h-20">
-                  <svg className="transform -rotate-90 w-20 h-20">
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-mermaidTeal transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-mermaidTeal" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-mermaidTeal mb-2">Water — Adaptability</h3>
-                  <p className="text-sm text-mermaidTeal/80 mb-2">The Healing Element</p>
-                  <p className="text-xs text-mermaidTeal font-mono">Mastery: 100%</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-moonlightSilver">
-                <li className="flex items-start gap-2">
-                  <span className="text-mermaidTeal mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Healthcare Foundation:</strong> 15+ years in operations, clinical workflows, patient care</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-mermaidTeal mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Healing Touch:</strong> Understanding patient needs, HIPAA compliance, empathy-first design</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-mermaidTeal mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Flow State:</strong> Adapting to any client, any challenge, finding the path of least resistance</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Fire - Transformation */}
-            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-midnight border border-phoenixFire/30 hover:border-phoenixFire/60 transition-all duration-300 hover:shadow-lg hover:shadow-phoenixFire/20 fade-in-up">
-              <div className="flex items-start gap-4 mb-4">
-                {/* Circular Progress */}
-                <div className="relative flex-shrink-0 w-20 h-20">
-                  <svg className="transform -rotate-90 w-20 h-20">
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-phoenixFire transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-phoenixFire" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-phoenixFire mb-2">Fire — Transformation</h3>
-                  <p className="text-sm text-phoenixFire/80 mb-2">The Creative Flame</p>
-                  <p className="text-xs text-phoenixFire font-mono">Mastery: 100%</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-moonlightSilver">
-                <li className="flex items-start gap-2">
-                  <span className="text-phoenixFire mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Author Fire:</strong> 300K+ words published, fantasy romance storyteller</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-phoenixFire mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Creative Vision:</strong> Storytelling through every pixel, brand narratives that resonate</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-phoenixFire mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Passion Projects:</strong> 6 businesses built from pure creative fire and determination</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Earth - Foundation */}
-            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-lunarGold/10 to-deepOcean/20 border border-lunarGold/30 hover:border-lunarGold/60 transition-all duration-300 hover:shadow-lg hover:shadow-lunarGold/20 fade-in-up">
-              <div className="flex items-start gap-4 mb-4">
-                {/* Circular Progress */}
-                <div className="relative flex-shrink-0 w-20 h-20">
-                  <svg className="transform -rotate-90 w-20 h-20">
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="0" className="text-lunarGold transition-all duration-1000" style={{ strokeDashoffset: 0 }} />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-lunarGold" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-lunarGold mb-2">Earth — Foundation</h3>
-                  <p className="text-sm text-lunarGold/80 mb-2">The Grounded Leader</p>
-                  <p className="text-xs text-lunarGold font-mono">Mastery: 100%</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-moonlightSilver">
-                <li className="flex items-start gap-2">
-                  <span className="text-lunarGold mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Operations Mastery:</strong> Led teams of 130+, managed multimillion-dollar budgets</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-lunarGold mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Systems Thinking:</strong> Building sustainable, scalable solutions that last</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-lunarGold mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Grounded Leadership:</strong> Real-world experience over theory, results over promises</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Air - Innovation */}
-            <div className="group relative p-8 rounded-2xl bg-gradient-to-br from-starlight/10 to-midnight border border-starlight/30 hover:border-starlight/60 transition-all duration-300 hover:shadow-lg hover:shadow-starlight/20 fade-in-up">
-              <div className="flex items-start gap-4 mb-4">
-                {/* Circular Progress */}
-                <div className="relative flex-shrink-0 w-20 h-20">
-                  <svg className="transform -rotate-90 w-20 h-20">
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" className="text-deepOcean/40" />
-                    <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="4" fill="none" strokeDasharray="226" strokeDashoffset="22.6" className="text-starlight transition-all duration-1000" style={{ strokeDashoffset: 22.6 }} />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-starlight" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-starlight mb-2">Air — Innovation</h3>
-                  <p className="text-sm text-starlight/80 mb-2">The Tech Pioneer</p>
-                  <p className="text-xs text-starlight font-mono">Mastery: 90%</p>
-                </div>
-              </div>
-              <ul className="space-y-3 text-moonlightSilver">
-                <li className="flex items-start gap-2">
-                  <span className="text-starlight mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">AI/ML Expertise:</strong> Specialized in building intelligent systems with Claude, RAG, and computer vision</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-starlight mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Full-Stack Skills:</strong> React, Next.js, Python, TypeScript, Claude API integrations</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-starlight mt-1">▸</span>
-                  <span><strong className="text-pearlWhite">Cutting Edge:</strong> Always learning, always evolving, never satisfied with the status quo</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS PROGRESSION - Animated Progress Bars */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/20 to-midnight">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Technical Skills</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">Coding Journey</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              200+ hours of intensive development work. From zero to full-stack in record time.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-            {/* React & Next.js */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">React & Next.js</span>
-                <span className="text-mermaidTeal font-semibold">90%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-mermaidTeal to-tealBright rounded-full" style={{ width: '90%' }}></div>
-              </div>
-            </div>
-
-            {/* UI/UX Design */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">UI/UX Design</span>
-                <span className="text-lunarGold font-semibold">95%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-lunarGold to-starlight rounded-full" style={{ width: '95%' }}></div>
-              </div>
-            </div>
-
-            {/* TypeScript */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">TypeScript</span>
-                <span className="text-tealBright font-semibold">85%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-tealBright to-mermaidTeal rounded-full" style={{ width: '85%' }}></div>
-              </div>
-            </div>
-
-            {/* Tailwind CSS */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">Tailwind CSS</span>
-                <span className="text-phoenixFire font-semibold">98%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-phoenixFire to-lunarGold rounded-full" style={{ width: '98%' }}></div>
-              </div>
-            </div>
-
-            {/* Python & AI/ML */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">Python & AI/ML</span>
-                <span className="text-starlight font-semibold">80%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-starlight to-pearlWhite rounded-full" style={{ width: '80%' }}></div>
-              </div>
-            </div>
-
-            {/* Responsive Design */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">Responsive Design</span>
-                <span className="text-mermaidTeal font-semibold">100%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-mermaidTeal via-tealBright to-starlight rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-
-            {/* Healthcare Tech Integration */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">Healthcare Tech</span>
-                <span className="text-lunarGold font-semibold">100%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-lunarGold to-phoenixFire rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-
-            {/* Storytelling & Brand Design */}
-            <div className="fade-in-up">
-              <div className="flex justify-between mb-2">
-                <span className="text-pearlWhite font-medium">Storytelling & Brand</span>
-                <span className="text-phoenixFire font-semibold">100%</span>
-              </div>
-              <div className="h-3 rounded-full bg-deepOcean/60 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-phoenixFire via-lunarGold to-starlight rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BY THE NUMBERS - Animated Stats */}
-      <section className="relative py-20 px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Impact</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">By The Numbers</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-mermaidTeal mb-2">15+</div>
-              <p className="text-sm text-moonlightSilver">Years Healthcare Operations</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-phoenixFire mb-2">130+</div>
-              <p className="text-sm text-moonlightSilver">Team Members Led</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-lunarGold mb-2">300K+</div>
-              <p className="text-sm text-moonlightSilver">Words Published</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-tealBright mb-2">200+</div>
-              <p className="text-sm text-moonlightSilver">Hours Coding</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-starlight mb-2">96%</div>
-              <p className="text-sm text-moonlightSilver">Audit Success Rate</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-mermaidTeal mb-2">25%</div>
-              <p className="text-sm text-moonlightSilver">Retention Improvement</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-phoenixFire mb-2">1</div>
-              <p className="text-sm text-moonlightSilver">Published Fantasy Series</p>
-            </div>
-            <div className="text-center fade-in-up">
-              <div className="text-4xl md:text-5xl font-bold text-lunarGold mb-2">∞</div>
-              <p className="text-sm text-moonlightSilver">Cups of Tea</p>
-              <p className="text-xs text-starlight/60 italic mt-1">(Uncle Iroh approved)</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SAO PLAYER STATS - Epic Stats Card */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-deepOcean/40 via-midnight to-deepOcean/40">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-12 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Player Profile</p>
-            <h2 className="text-3xl md:text-4xl font-semibold mb-2">System Status</h2>
-            <p className="text-xs text-starlight/70 italic">&quot;Link Start&quot;</p>
-          </div>
-
-          <div className="relative fade-in-up">
-            {/* SAO-style HUD Border */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-mermaidTeal/20 to-lunarGold/10 blur-xl"></div>
-
-            <div className="relative p-8 md:p-10 rounded-2xl bg-midnight/90 border-2 border-lunarGold/50 backdrop-blur">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-8 pb-6 border-b border-mermaidTeal/30">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-lunarGold mb-1">Player: Moonlit</h3>
-                  <p className="text-sm text-starlight">Class: Tri-Force Developer</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl md:text-4xl font-bold gradient-moonlight">∞</div>
-                  <p className="text-xs text-mermaidTeal uppercase tracking-wider">Level MAX</p>
-                </div>
-              </div>
-
-              {/* Main Stats Grid */}
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                {/* HP - Healthcare Points */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-pearlWhite font-medium">Healthcare Points (HP)</span>
-                    <span className="text-sm text-mermaidTeal font-mono">15 / 15</span>
-                  </div>
-                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-mermaidTeal/30">
-                    <div className="h-full bg-gradient-to-r from-mermaidTeal to-tealBright rounded-full shadow-lg shadow-mermaidTeal/40" style={{ width: '100%' }}></div>
-                  </div>
-                  <p className="text-xs text-moonlightSilver/70 mt-1">Years of operations mastery</p>
-                </div>
-
-                {/* MP - Mana Points (Creative Power) */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-pearlWhite font-medium">Mana Points (MP)</span>
-                    <span className="text-sm text-phoenixFire font-mono">300K / 300K</span>
-                  </div>
-                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-phoenixFire/30">
-                    <div className="h-full bg-gradient-to-r from-phoenixFire to-lunarGold rounded-full shadow-lg shadow-phoenixFire/40" style={{ width: '100%' }}></div>
-                  </div>
-                  <p className="text-xs text-moonlightSilver/70 mt-1">Words of creative power</p>
-                </div>
-
-                {/* STR - Technical Strength */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-pearlWhite font-medium">Strength (STR)</span>
-                    <span className="text-sm text-lunarGold font-mono">200+ / 200+</span>
-                  </div>
-                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-lunarGold/30">
-                    <div className="h-full bg-gradient-to-r from-lunarGold to-starlight rounded-full shadow-lg shadow-lunarGold/40" style={{ width: '100%' }}></div>
-                  </div>
-                  <p className="text-xs text-moonlightSilver/70 mt-1">Hours of intensive coding</p>
-                </div>
-
-                {/* AGI - Agility (Adaptation Speed) */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-pearlWhite font-medium">Agility (AGI)</span>
-                    <span className="text-sm text-tealBright font-mono">∞ / ∞</span>
-                  </div>
-                  <div className="h-3 bg-deepOcean/60 rounded-full overflow-hidden border border-tealBright/30">
-                    <div className="h-full bg-gradient-to-r from-tealBright via-aquaMist to-starlight rounded-full shadow-lg shadow-tealBright/40 animate-pulse" style={{ width: '100%' }}></div>
-                  </div>
-                  <p className="text-xs text-moonlightSilver/70 mt-1">Water bender's adaptation</p>
-                </div>
-              </div>
-
-              {/* Special Abilities */}
-              <div className="mb-6">
-                <h4 className="text-sm text-lunarGold uppercase tracking-wider mb-4">Equipped Skills</h4>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="p-3 rounded-lg bg-mermaidTeal/10 border border-mermaidTeal/40 text-center">
-                    <div className="text-xl mb-1">💧</div>
-                    <p className="text-xs text-mermaidTeal font-medium">Water Bending</p>
-                  </div>
-                  <div className="p-3 rounded-lg bg-phoenixFire/10 border border-phoenixFire/40 text-center">
-                    <div className="text-xl mb-1">🔥</div>
-                    <p className="text-xs text-phoenixFire font-medium">Fire Bending</p>
-                  </div>
-                  <div className="p-3 rounded-lg bg-lunarGold/10 border border-lunarGold/40 text-center">
-                    <div className="text-xl mb-1">⚡</div>
-                    <p className="text-xs text-lunarGold font-medium">Lumos</p>
-                  </div>
-                  <div className="p-3 rounded-lg bg-starlight/10 border border-starlight/40 text-center">
-                    <div className="text-xl mb-1">🌙</div>
-                    <p className="text-xs text-starlight font-medium">Moonlight</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Achievement Banner */}
-              <div className="p-4 rounded-lg bg-gradient-to-r from-mermaidTeal/10 via-lunarGold/10 to-phoenixFire/10 border border-lunarGold/40">
-                <p className="text-center text-sm text-lunarGold font-semibold mb-1">
-                  ⚔️ Achievement Unlocked: Avatar State ⚔️
-                </p>
-                <p className="text-center text-xs text-moonlightSilver">
-                  Mastered all four elements: Water (Healthcare) • Earth (Operations) • Fire (Creativity) • Air (Tech)
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* THE TRIFECTA - Venn Diagram Concept */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/30 to-midnight">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">The Convergence</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">The Trifecta</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto mb-8">
-              Most people are one. I'm all three.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-mermaidTeal/10 to-deepOcean/20 border border-mermaidTeal/30 fade-in-up">
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-mermaidTeal/20 border-2 border-mermaidTeal mb-4">
-                  <svg className="w-8 h-8 text-mermaidTeal" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H9.5v-2H11v-2H9.5V7H11V5H9.5v2H8V5H6.5v2h-2v2h2v6h-2v2h2v2H8v-2h1.5v2zm6.5-4h-4v-2h4v2z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-mermaidTeal mb-2">Healthcare Expert</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-moonlightSilver">
-                <li>✓ 15+ years operations</li>
-                <li>✓ Clinical workflows</li>
-                <li>✓ HIPAA compliance</li>
-                <li>✓ Real-world experience</li>
-              </ul>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-deepOcean/20 border border-phoenixFire/30 fade-in-up">
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-phoenixFire/20 border-2 border-phoenixFire mb-4">
-                  <svg className="w-8 h-8 text-phoenixFire" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-phoenixFire mb-2">Creative Storyteller</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-moonlightSilver">
-                <li>✓ Published author</li>
-                <li>✓ 300K+ words</li>
-                <li>✓ Brand narratives</li>
-                <li>✓ Emotional design</li>
-              </ul>
-            </div>
-
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-starlight/10 to-deepOcean/20 border border-starlight/30 fade-in-up">
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-starlight/20 border-2 border-starlight mb-4">
-                  <svg className="w-8 h-8 text-starlight" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-starlight mb-2">Technical Builder</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-moonlightSilver">
-                <li>✓ Full-stack developer</li>
-                <li>✓ AI/ML specialist</li>
-                <li>✓ React & Next.js expert</li>
-                <li>✓ Ships products fast</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="text-center fade-in-up">
-            <div className="inline-block p-6 rounded-2xl bg-gradient-to-br from-lunarGold/20 via-mermaidTeal/10 to-phoenixFire/10 border-2 border-lunarGold/50">
-              <p className="text-xl md:text-2xl font-semibold text-lunarGold mb-2">
-                Where All Three Converge
+              <h3 className="text-xl font-bold text-white mb-3">Operational Strategy</h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed">
+                <strong>The Nurse Mindset:</strong> I spent 15 years managing hospital units where chaos was the norm and failure wasn't an option. I apply that same rigorous systems thinking to your project—ensuring it launches on time, on budget, and without the stress.
               </p>
-              <p className="text-moonlightSilver">
-                Healthcare expertise + Creative vision + Technical mastery = Products that heal, inspire, and transform
+            </div>
+
+            {/* Card 2: The Creator */}
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-phoenixFire/50 transition-all group">
+              <div className="w-14 h-14 bg-phoenixFire/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <PenTool className="w-7 h-7 text-phoenixFire" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Narrative Design</h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed">
+                <strong>The Author Mindset:</strong> As a published novelist, I know that facts tell, but stories sell. I don't just write code; I craft the visual and written narrative of your brand so it resonates emotionally with your audience.
+              </p>
+            </div>
+
+            {/* Card 3: The Builder */}
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-lunarGold/50 transition-all group">
+              <div className="w-14 h-14 bg-lunarGold/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Code className="w-7 h-7 text-lunarGold" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Technical Architecture</h3>
+              <p className="text-moonlightSilver text-sm leading-relaxed">
+                <strong>The Developer Mindset:</strong> Self-taught and obsessed with the bleeding edge. From Next.js web apps to custom AI agents, I build modern, fast, and scalable solutions that put you ahead of the curve.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* THE PHOENIX & PEACOCK CHRONICLES - Book Showcase */}
-      <section className="relative py-20 px-6">
-        <div className="mx-auto max-w-6xl">
-          <div className="text-center mb-16 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Published Works</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">The Phoenix & Peacock Chronicles</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              A 7-book epic fantasy romance series from our published author
+      {/* --- THE BRAND STORY: Concise & Impactful --- */}
+      <section className="py-24 px-6">
+        <div className="mx-auto max-w-4xl flex flex-col md:flex-row items-center gap-16">
+          <div className="flex-1 space-y-6">
+             <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-2">My Philosophy</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              "Classy, Not Flashy."
+            </h2>
+            <p className="text-moonlightSilver leading-relaxed">
+              In a digital world screaming for attention, <strong>clarity is the ultimate luxury</strong>.
             </p>
+            <p className="text-moonlightSilver leading-relaxed">
+              My studio isn't an agency with 50 interns. It's a boutique consultancy. When you hire Moonlit Studios, you get <em>me</em>—my strategic brain, my creative eye, and my technical hands.
+            </p>
+            <p className="text-moonlightSilver leading-relaxed">
+              I partner with a select number of clients at a time to ensure deep focus. Whether you are a solo founder needing a launchpad or a health-tech startup needing an AI prototype, I treat your business with the same care I used to treat my patients.
+            </p>
+            
+            <div className="pt-4">
+               <div className="flex items-center gap-4">
+                  <div className="flex -space-x-2">
+                    <div className="w-10 h-10 rounded-full border-2 border-midnight bg-mermaidTeal"></div>
+                    <div className="w-10 h-10 rounded-full border-2 border-midnight bg-lunarGold"></div>
+                    <div className="w-10 h-10 rounded-full border-2 border-midnight bg-phoenixFire"></div>
+                  </div>
+                  <div>
+                     <p className="text-white font-bold text-sm">Multidisciplinary Approach</p>
+                     <p className="text-xs text-moonlightSilver">Design • Code • Strategy</p>
+                  </div>
+               </div>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Book Display */}
-            <div className="fade-in-up">
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 via-lunarGold/5 to-deepOcean/20 border-2 border-lunarGold/40">
-                <div className="flex items-center gap-6">
-                  {/* Book Cover Placeholder */}
-                  <div className="flex-shrink-0 w-48 h-64 rounded-lg bg-gradient-to-br from-phoenixFire via-lunarGold to-mermaidTeal flex items-center justify-center shadow-xl">
-                    <div className="text-center p-4">
-                      <p className="text-xs text-midnight font-semibold uppercase tracking-wider">Eclipse of</p>
-                      <p className="text-xs text-midnight font-semibold uppercase tracking-wider">Fire & Wings</p>
-                    </div>
-                  </div>
-                  
-                  {/* Book Info */}
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-semibold text-lunarGold mb-2">Book 1: Eclipse of Fire & Wings</h3>
-                    <p className="text-sm text-phoenixFire mb-4">Published • 95,400 words</p>
-                    <p className="text-moonlightSilver leading-relaxed text-sm mb-4">
-                      An epic tale of fire and grace, transformation and healing. Where the Phoenix rises from 
-                      destruction and the Peacock dances through trials, their destinies intertwine in a world 
-                      where magic and love collide.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-3 py-1 rounded-full bg-phoenixFire/20 text-phoenixFire text-xs border border-phoenixFire/30">
-                        Fantasy Romance
-                      </span>
-                      <span className="px-3 py-1 rounded-full bg-lunarGold/20 text-lunarGold text-xs border border-lunarGold/30">
-                        Adult Fiction
-                      </span>
-                      <span className="px-3 py-1 rounded-full bg-mermaidTeal/20 text-mermaidTeal text-xs border border-mermaidTeal/30">
-                        Fated Mates
-                      </span>
-                    </div>
-                  </div>
+          {/* Visual Element: Abstract "Moonlit" Graphic */}
+          <div className="w-full md:w-1/3 flex justify-center relative">
+             <div className="absolute inset-0 bg-lunarGold/20 blur-[60px] rounded-full"></div>
+             <div className="relative z-10 w-64 h-80 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-2xl backdrop-blur-lg p-8 flex flex-col justify-between transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                <div className="text-4xl">🌙</div>
+                <div>
+                   <p className="text-lunarGold font-serif italic text-lg mb-2">"The moon does not fight. It simply creates the tides."</p>
+                   <p className="text-xs text-starlight/60 uppercase tracking-widest">— Studio Mantra</p>
                 </div>
-              </div>
-            </div>
-
-            {/* Series Info */}
-            <div className="fade-in-up space-y-6">
-              <div>
-                <h4 className="text-xl font-semibold text-pearlWhite mb-4">The Complete Series</h4>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-lunarGold/20 border border-lunarGold flex items-center justify-center text-xs text-lunarGold font-semibold">1</span>
-                    <div>
-                      <p className="text-pearlWhite font-medium">Eclipse of Fire & Wings</p>
-                      <p className="text-xs text-starlight">Published • 95,400 words</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-phoenixFire/20 border border-phoenixFire flex items-center justify-center text-xs text-phoenixFire font-semibold">2</span>
-                    <div>
-                      <p className="text-pearlWhite font-medium">Shadows of the Lioness</p>
-                      <p className="text-xs text-starlight">Complete • 94,250 words</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-mermaidTeal/20 border border-mermaidTeal flex items-center justify-center text-xs text-mermaidTeal font-semibold">3</span>
-                    <div>
-                      <p className="text-pearlWhite font-medium">Throne of Moon & Flame</p>
-                      <p className="text-xs text-starlight">Complete • 90,500 words</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-starlight/20 border border-starlight flex items-center justify-center text-xs text-starlight font-semibold">4</span>
-                    <div>
-                      <p className="text-pearlWhite font-medium">Shattered Crowns</p>
-                      <p className="text-xs text-starlight">In Progress • Chapters 1-24</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-moonlightSilver/20 border border-moonlightSilver flex items-center justify-center text-xs text-moonlightSilver font-semibold">5-7</span>
-                    <div>
-                      <p className="text-moonlightSilver font-medium">Books 5-7</p>
-                      <p className="text-xs text-moonlightSilver/60">Planned</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-6 rounded-xl bg-deepOcean/20 border border-starlight/20">
-                <p className="text-moonlightSilver italic text-sm leading-relaxed">
-                  "A nurse who writes fantasy romance AND builds AI systems. Balance isn't choosing one 
-                  path—it's mastering them all and letting them strengthen each other."
-                </p>
-                <p className="text-lunarGold text-xs mt-3">— Moonlit Studios</p>
-              </div>
-            </div>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* MEET THE TEAM - Chief Design Critic */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-midnight via-deepOcean/20 to-midnight">
-        <div className="mx-auto max-w-4xl text-center fade-in-up">
-          <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">The Team</p>
-          <h2 className="text-3xl md:text-5xl font-semibold mb-8">Meet Our Chief Critic</h2>
+      {/* --- TESTIMONIALS --- */}
+      <TestimonialsSection limit={3} showTitle={true} />
 
-          <div className="inline-block p-8 rounded-2xl bg-gradient-to-br from-phoenixFire/10 to-mermaidTeal/10 border-2 border-lunarGold/40">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-lunarGold to-phoenixFire flex items-center justify-center">
-            </div>
-            <h3 className="text-2xl font-semibold text-lunarGold mb-2">G.P.</h3>
-            <p className="text-phoenixFire mb-4 text-sm uppercase tracking-widest">Chief Design Critic</p>
-            <div className="max-w-md mx-auto">
-              <p className="text-moonlightSilver leading-relaxed mb-4">
-                The toughest critic on the team. If our chief critic doesn't approve the design, it goes back to the drawing board.
-              </p>
-              <div className="p-4 rounded-lg bg-midnight/40 border border-starlight/20">
-                <p className="text-starlight italic">
-                  "Classy, not flashy."
-                </p>
-                <p className="text-xs text-moonlightSilver/60 mt-2">— Design Philosophy</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CLIENT TESTIMONIALS */}
-      <section className="relative py-20 px-6 bg-gradient-to-b from-deepOcean/30 via-midnight to-deepOcean/30">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12 fade-in-up">
-            <p className="text-xs tracking-[0.35em] text-lunarGold uppercase mb-3">Success Stories</p>
-            <h2 className="text-3xl md:text-5xl font-semibold mb-4">What Clients Say</h2>
-            <p className="text-moonlightSilver max-w-2xl mx-auto">
-              Real feedback from healthcare innovators who've worked with Moonlit Studios
-            </p>
-          </div>
-          <TestimonialsSection limit={3} showTitle={false} />
-        </div>
-      </section>
-
-      {/* HIDDEN WISDOM - Multiple Fandom Easter Eggs */}
-      <section className="relative py-12 px-6">
-        <div className="mx-auto max-w-4xl text-center space-y-6">
-          <div className="hidden-wisdom select-text">
-            It is our choices, not our abilities, that truly show who we are
-          </div>
-          <p className="text-xs text-starlight/60 italic">
-            "After all this time?" — "Always."
+      {/* --- CTA SECTION --- */}
+      <section className="py-24 px-6 bg-midnightNavy/30 border-t border-white/5">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Your Vision. My Craft.
+          </h2>
+          <p className="text-slate-400 mb-10 text-lg">
+            I am currently accepting new clients for <strong>Q1 2025</strong>. 
+            Let's build something that doesn't just look good, but works beautifully.
           </p>
-          <div className="hidden-wisdom select-text mt-8">
-            In the moment when I truly understand my enemy, in that moment I also love them
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <CalendlyButton
+              url="https://calendly.com/pagadeventures/30min"
+              text="Book Free Discovery Call"
+              variant="primary"
+            />
+            <a 
+              href="/services"
+              className="px-8 py-4 rounded-full border border-slate-700 text-white font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2 group"
+            >
+              View Services <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
-          <p className="text-xs text-lunarGold/60 italic mt-2">
-            — Ender&apos;s Game
-          </p>
-          <div className="hidden-wisdom select-text mt-8">
-            It&apos;s dangerous to go alone
-          </div>
-          <p className="text-xs text-mermaidTeal/60 italic mt-2">
-            ⚔️ Take this wisdom with you
-          </p>
         </div>
       </section>
-
-      {/* CTA SECTION */}
-      <PageCTASection
-        title="Let's Build Something Amazing Together"
-        description="With a unique blend of healthcare expertise and full-stack development, I bring a perspective that transforms ideas into impactful solutions."
-      />
 
     </main>
   );
