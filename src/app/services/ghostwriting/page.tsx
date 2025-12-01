@@ -35,20 +35,20 @@ export default function GhostwritingPage() {
         <div className="mx-auto max-w-6xl">
 
           {/* Moon Phases - 5 phases with pulsing animation */}
-          <div className="mb-10 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#121528] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0" title="New Moon - Dark Library" style={{ animationDuration: '3s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/40 to-[#F5E7C8]/40" />
+          <div className="mb-10 flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 flex-wrap">
+            <div className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-[#121528] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0" title="New Moon - Dark Library" style={{ animationDuration: '3s' }} />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#F0C979]/40 to-[#F5E7C8]/40" />
 
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#121528] via-[#F0C979]/50 to-[#F0C979]/70 border-2 border-[#F0C979]/60 shadow-lg shadow-[#F0C979]/40 animate-pulse flex-shrink-0" title="Crescent - Stories Awakening" style={{ animationDuration: '3.5s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/50 to-[#F5E7C8]/60" />
+            <div className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#121528] via-[#F0C979]/50 to-[#F0C979]/70 border-2 border-[#F0C979]/60 shadow-lg shadow-[#F0C979]/40 animate-pulse flex-shrink-0" title="Crescent - Stories Awakening" style={{ animationDuration: '3.5s' }} />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#F0C979]/50 to-[#F5E7C8]/60" />
 
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#58B6B1] border-2 border-[#F0C979]/80 shadow-xl shadow-[#F0C979]/60 animate-pulse flex-shrink-0" title="Full Moon - Your Story" style={{ animationDuration: '2.5s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#58B6B1]/60 to-[#5B335F]/50" />
+            <div className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#58B6B1] border-2 border-[#F0C979]/80 shadow-xl shadow-[#F0C979]/60 animate-pulse flex-shrink-0" title="Full Moon - Your Story" style={{ animationDuration: '2.5s' }} />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#58B6B1]/60 to-[#5B335F]/50" />
 
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#5B335F]/70 via-[#5B335F]/50 to-[#121528] border-2 border-[#5B335F]/60 shadow-lg shadow-[#5B335F]/40 animate-pulse flex-shrink-0" title="Waning - Wisdom Gathered" style={{ animationDuration: '3.5s' }} />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#5B335F]/40 to-[#121528]/30" />
+            <div className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#5B335F]/70 via-[#5B335F]/50 to-[#121528] border-2 border-[#5B335F]/60 shadow-lg shadow-[#5B335F]/40 animate-pulse flex-shrink-0" title="Waning - Wisdom Gathered" style={{ animationDuration: '3.5s' }} />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#5B335F]/40 to-[#121528]/30" />
 
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#121528] border-2 border-[#58B6B1]/50 shadow-lg shadow-[#58B6B1]/30 animate-pulse flex-shrink-0" title="New Moon - Endless Pages" style={{ animationDuration: '3s' }} />
+            <div className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-[#121528] border-2 border-[#58B6B1]/50 shadow-lg shadow-[#58B6B1]/30 animate-pulse flex-shrink-0" title="New Moon - Endless Pages" style={{ animationDuration: '3s' }} />
           </div>
 
           <div className="space-y-6">

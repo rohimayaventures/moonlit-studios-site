@@ -520,37 +520,37 @@ export default function CreativeDesignDevelopmentPage() {
 
         <div className="relative mx-auto max-w-4xl px-6 text-center">
           {/* Starlit Atelier Moon Phases - 5 phases with pulsing animation */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
+          <div className="flex justify-center items-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 flex-wrap mb-6 sm:mb-8">
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-cyan-400/50 shadow-lg shadow-cyan-400/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-cyan-400/50 shadow-lg shadow-cyan-400/30 animate-pulse flex-shrink-0"
               title="New Moon - Creative Dawn"
               style={{ animationDuration: '3s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-cyan-400/40 to-purple-300/40" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-cyan-400/40 to-purple-300/40" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-midnight via-purple-300/50 to-purple-300/70 border-2 border-purple-300/60 shadow-lg shadow-purple-300/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-midnight via-purple-300/50 to-purple-300/70 border-2 border-purple-300/60 shadow-lg shadow-purple-300/40 animate-pulse flex-shrink-0"
               title="Crescent - Vision Forms"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-purple-300/50 to-amber-300/60" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-purple-300/50 to-amber-300/60" />
 
             <div
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-cyan-400 via-amber-300 to-purple-400 border-2 border-amber-300/80 shadow-xl shadow-amber-300/60 animate-pulse flex-shrink-0"
+              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-cyan-400 via-amber-300 to-purple-400 border-2 border-amber-300/80 shadow-xl shadow-amber-300/60 animate-pulse flex-shrink-0"
               title="Full Moon - Creation Peak"
               style={{ animationDuration: '2.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-amber-300/60 to-indigo-400/50" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-amber-300/60 to-indigo-400/50" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-indigo-400/70 via-indigo-400/50 to-midnight border-2 border-indigo-400/60 shadow-lg shadow-indigo-400/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-indigo-400/70 via-indigo-400/50 to-midnight border-2 border-indigo-400/60 shadow-lg shadow-indigo-400/40 animate-pulse flex-shrink-0"
               title="Waning - Refinement"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-indigo-400/40 to-teal-400/30" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-indigo-400/40 to-teal-400/30" />
 
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-midnight border-2 border-teal-400/50 shadow-lg shadow-teal-400/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-midnight border-2 border-teal-400/50 shadow-lg shadow-teal-400/30 animate-pulse flex-shrink-0"
               title="New Moon - Next Chapter"
               style={{ animationDuration: '3s' }}
             />

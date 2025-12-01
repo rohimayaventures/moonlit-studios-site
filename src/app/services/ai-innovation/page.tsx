@@ -298,37 +298,37 @@ export default function AiInnovationPage() {
 
         <div className="relative mx-auto max-w-5xl">
           {/* 🌙 SAO Moon Phases - Neon Cyber Gradient with Pulsing */}
-          <div className="mb-8 flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+          <div className="mb-8 flex items-center justify-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 flex-wrap">
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
               title="New Moon"
               style={{ animationDuration: '3s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00F5D4]/40 to-[#845EC2]/40" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#00F5D4]/40 to-[#845EC2]/40" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8]/80 to-[#845EC2]/70 border-2 border-[#00F5D4]/60 shadow-lg shadow-[#00F5D4]/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8]/80 to-[#845EC2]/70 border-2 border-[#00F5D4]/60 shadow-lg shadow-[#00F5D4]/40 animate-pulse flex-shrink-0"
               title="Waxing Crescent"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00F5D4]/50 to-[#00A8E8]/60" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#00F5D4]/50 to-[#00A8E8]/60" />
 
             <div
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8] to-[#845EC2] border-2 border-[#00F5D4]/80 shadow-xl shadow-[#00F5D4]/60 animate-pulse flex-shrink-0"
+              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#00F5D4] via-[#00A8E8] to-[#845EC2] border-2 border-[#00F5D4]/80 shadow-xl shadow-[#00F5D4]/60 animate-pulse flex-shrink-0"
               title="Full Moon - AI Innovation Suite"
               style={{ animationDuration: '2.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#00A8E8]/60 to-[#845EC2]/50" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#00A8E8]/60 to-[#845EC2]/50" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#845EC2]/90 via-[#020817]/70 to-[#00A8E8]/80 border-2 border-[#845EC2]/60 shadow-lg shadow-[#845EC2]/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#845EC2]/90 via-[#020817]/70 to-[#00A8E8]/80 border-2 border-[#845EC2]/60 shadow-lg shadow-[#845EC2]/40 animate-pulse flex-shrink-0"
               title="Waning Crescent"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#845EC2]/40 to-[#00F5D4]/40" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#845EC2]/40 to-[#00F5D4]/40" />
 
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#020817] to-[#00A8E8]/60 border-2 border-[#00F5D4]/50 shadow-lg shadow-[#00F5D4]/30 animate-pulse flex-shrink-0"
               title="New Moon"
               style={{ animationDuration: '3s' }}
             />

@@ -314,33 +314,33 @@ export default function ConsultingPage() {
           </div>
 
           {/* Moon Phases - Rivendell Elven Style with Pulsing */}
-          <div className="flex justify-center items-center gap-3 sm:gap-4 flex-wrap mb-6 sm:mb-8">
+          <div className="flex justify-center items-center gap-1.5 xs:gap-2 sm:gap-4 md:gap-6 flex-wrap mb-6 sm:mb-8">
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#F0C979] to-[#C9A961] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0"
               style={{ animationDuration: '3s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F0C979]/40 to-[#A8C5E0]/40" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#F0C979]/40 to-[#A8C5E0]/40" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#A8C5E0] via-[#A8C5E0]/80 to-[#6B8FA3]/80 border-2 border-[#A8C5E0]/60 shadow-lg shadow-[#A8C5E0]/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#A8C5E0] via-[#A8C5E0]/80 to-[#6B8FA3]/80 border-2 border-[#A8C5E0]/60 shadow-lg shadow-[#A8C5E0]/40 animate-pulse flex-shrink-0"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#A8C5E0]/50 to-[#F5E7C8]/60" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#A8C5E0]/50 to-[#F5E7C8]/60" />
 
             <div
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#E8D5B5] border-2 border-[#F5E7C8]/80 shadow-xl shadow-[#F5E7C8]/60 animate-pulse flex-shrink-0"
+              className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#F0C979] via-[#F5E7C8] to-[#E8D5B5] border-2 border-[#F5E7C8]/80 shadow-xl shadow-[#F5E7C8]/60 animate-pulse flex-shrink-0"
               style={{ animationDuration: '2.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#F5E7C8]/60 to-[#8B7355]/50" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#F5E7C8]/60 to-[#8B7355]/50" />
 
             <div
-              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-[#8B7355]/90 via-[#5C4A3A]/70 to-[#8B7355]/80 border-2 border-[#8B7355]/60 shadow-lg shadow-[#8B7355]/40 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-7 xs:h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#8B7355]/90 via-[#5C4A3A]/70 to-[#8B7355]/80 border-2 border-[#8B7355]/60 shadow-lg shadow-[#8B7355]/40 animate-pulse flex-shrink-0"
               style={{ animationDuration: '3.5s' }}
             />
-            <div className="h-0.5 w-12 sm:w-16 bg-gradient-to-r from-[#8B7355]/40 to-[#F0C979]/40" />
+            <div className="hidden xs:block h-0.5 w-4 sm:w-8 md:w-12 bg-gradient-to-r from-[#8B7355]/40 to-[#F0C979]/40" />
 
             <div
-              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-[#C9A961] to-[#F0C979] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0"
+              className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#C9A961] to-[#F0C979] border-2 border-[#F0C979]/50 shadow-lg shadow-[#F0C979]/30 animate-pulse flex-shrink-0"
               style={{ animationDuration: '3s' }}
             />
           </div>
