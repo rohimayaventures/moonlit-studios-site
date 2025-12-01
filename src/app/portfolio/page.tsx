@@ -53,22 +53,6 @@ const sections = [
           results: "Showcase bakery personality through social feed. Drive foot traffic with map integration and real-time hours.",
         },
       },
-      {
-        tag: "PET CARE PORTAL",
-        title: "Pawsitive Companions – Pet Grooming & Boarding",
-        points: [
-          "Service packages with photo galleries",
-          "Booking calendar with availability sync",
-          "Client testimonials + pet photo wall",
-        ],
-        tech: "Next.js · Tailwind · Stripe · Cloudinary",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Pet care businesses juggle bookings, photo galleries, and client trust-building—all while managing appointments.",
-          solution: "Designed a comprehensive portal with Stripe-powered booking, Cloudinary photo management, and testimonial showcase.",
-          results: "One-stop platform for pet parents to book services, view photos, and read reviews from other happy clients.",
-        },
-      },
     ],
   },
   {
@@ -96,38 +80,6 @@ const sections = [
           challenge: "Creative studios need to showcase diverse services while maintaining cohesive brand identity across multiple themes.",
           solution: "Built a multi-realm navigation system with 6 unique themes, each with custom color palettes and immersive storytelling.",
           results: "This site! A living portfolio demonstrating full-stack development, UI/UX design, and creative copywriting.",
-        },
-      },
-      {
-        tag: "FOUNDER BRAND",
-        title: "Personal Brand Site – Thought Leader Platform",
-        points: [
-          "Hero storytelling with mission-driven copy",
-          "Speaking page with past engagements + media kit",
-          "Newsletter signup with welcome sequence",
-        ],
-        tech: "Next.js · Tailwind · Resend · MDX",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Thought leaders need platforms that position them as authorities while building engaged audiences.",
-          solution: "Designed storytelling-first architecture with speaking page, media kit, and newsletter integration for audience growth.",
-          results: "Professional platform for keynote bookings, content delivery, and community building.",
-        },
-      },
-      {
-        tag: "PRODUCT LAUNCH",
-        title: "SaaS Product Launch Page – Waitlist Campaign",
-        points: [
-          "Feature showcase with interactive demos",
-          "Early access signup with referral tracking",
-          "Social proof section with beta testimonials",
-        ],
-        tech: "Next.js · Tailwind · Vercel · Posthog",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "SaaS products need waitlist pages that convert curious visitors into excited early adopters.",
-          solution: "Created urgency-driven design with interactive demos, referral tracking, and social proof from beta users.",
-          results: "Optimized conversion funnel for pre-launch momentum and investor validation.",
         },
       },
     ],
@@ -174,38 +126,6 @@ const sections = [
           challenge: "Nurses carry trauma home after shifts but lack accessible, stigma-free mental health support. Existing tools feel clinical or require scheduling appointments.",
           solution: "As a nurse AND developer, I built a private micro-coach for shift debriefs, grounding exercises, and crisis resources—available 24/7 without judgment or reporting.",
           results: "Safe space for nurses to process trauma immediately after shifts. All data stored locally—nothing reported to management.",
-        },
-      },
-      {
-        tag: "PATIENT PORTAL",
-        title: "Recovery Companion – Post-Op Patient App",
-        points: [
-          "Symptom logging with visual pain scales",
-          "Medication reminders with photo verification",
-          "Care team chat + educational resources",
-        ],
-        tech: "Next.js · Tailwind · Supabase · Twilio",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Post-op patients struggle to track symptoms and meds. Care teams lack visibility into patient recovery at home.",
-          solution: "Built patient-friendly symptom logging with visual pain scales, med reminders, and secure care team chat.",
-          results: "Empower patients to manage recovery. Give providers real-time data for early intervention.",
-        },
-      },
-      {
-        tag: "TELEHEALTH UX",
-        title: "Virtual Care Platform – Remote Consultation System",
-        points: [
-          "Video visit interface with notes sidebar",
-          "E-prescription workflow with pharmacy integration",
-          "Follow-up scheduling + secure messaging",
-        ],
-        tech: "Next.js · Agora SDK · Stripe · Supabase",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Telehealth tools feel impersonal. Providers need seamless workflows that don't sacrifice care quality.",
-          solution: "Designed video interface with integrated notes, e-prescriptions, and follow-up scheduling.",
-          results: "Clinic-quality care remotely. Streamlined provider workflow for efficient virtual visits.",
         },
       },
       {
@@ -271,38 +191,6 @@ const sections = [
           results: "Live at /ai-lab. Converts skeptics into believers with working examples, not slideshows.",
         },
       },
-      {
-        tag: "SALES AUTOMATION",
-        title: "Lead Qualification Copilot – SDR Assistant",
-        points: [
-          "Email triage with sentiment scoring",
-          "Auto-draft responses for common inquiries",
-          "CRM sync with opportunity tagging",
-        ],
-        tech: "Next.js · OpenAI · LangChain · HubSpot API",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "SDRs waste hours triaging unqualified leads. Sales teams need AI that actually understands context.",
-          solution: "Built email sentiment scoring, auto-draft responses, and CRM sync using LangChain and OpenAI.",
-          results: "Reduce SDR busywork by 60%. Surface high-intent leads faster.",
-        },
-      },
-      {
-        tag: "OPERATIONS RAG",
-        title: "Internal Knowledge Assistant – Team Copilot",
-        points: [
-          "Document search across wikis + Slack history",
-          "Context-aware answers with source citations",
-          "Onboarding flow automation",
-        ],
-        tech: "Next.js · LangChain · Pinecone · Supabase",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Teams waste hours searching wikis and Slack. Onboarding takes weeks because knowledge is scattered.",
-          solution: "RAG system searches across all internal docs, provides cited answers, and automates onboarding.",
-          results: "Turn 2-hour searches into 30-second answers. Onboard new hires 3x faster.",
-        },
-      },
     ],
   },
   {
@@ -349,6 +237,135 @@ const sections = [
           results: "Support mental wellness through intentional reflection. Bridge personal journaling and professional therapy.",
         },
       },
+    ],
+  },
+  {
+    id: "moonlit-labs",
+    label: "MOONLIT LABS",
+    title: "Future Quests",
+    realm: "The Grey Havens",
+    realmDesc: "Port of Departure",
+    questGiver: "The Voyager of Mithlond",
+    description:
+      "Where future adventures await their moment. Tales conceived but not yet written—each a journey waiting for the right traveler to begin.",
+    projects: [
+      // Small Business Future Quests
+      {
+        tag: "PET CARE PORTAL",
+        title: "Pawsitive Companions – Pet Grooming & Boarding",
+        points: [
+          "Service packages with photo galleries",
+          "Booking calendar with availability sync",
+          "Client testimonials + pet photo wall",
+        ],
+        tech: "Next.js · Tailwind · Stripe · Cloudinary",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Pet care businesses juggle bookings, photo galleries, and client trust-building—all while managing appointments.",
+          solution: "Designed a comprehensive portal with Stripe-powered booking, Cloudinary photo management, and testimonial showcase.",
+          results: "One-stop platform for pet parents to book services, view photos, and read reviews from other happy clients.",
+        },
+      },
+      // Web & Brand Future Quests
+      {
+        tag: "FOUNDER BRAND",
+        title: "Personal Brand Site – Thought Leader Platform",
+        points: [
+          "Hero storytelling with mission-driven copy",
+          "Speaking page with past engagements + media kit",
+          "Newsletter signup with welcome sequence",
+        ],
+        tech: "Next.js · Tailwind · Resend · MDX",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Thought leaders need platforms that position them as authorities while building engaged audiences.",
+          solution: "Designed storytelling-first architecture with speaking page, media kit, and newsletter integration for audience growth.",
+          results: "Professional platform for keynote bookings, content delivery, and community building.",
+        },
+      },
+      {
+        tag: "PRODUCT LAUNCH",
+        title: "SaaS Product Launch Page – Waitlist Campaign",
+        points: [
+          "Feature showcase with interactive demos",
+          "Early access signup with referral tracking",
+          "Social proof section with beta testimonials",
+        ],
+        tech: "Next.js · Tailwind · Vercel · Posthog",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "SaaS products need waitlist pages that convert curious visitors into excited early adopters.",
+          solution: "Created urgency-driven design with interactive demos, referral tracking, and social proof from beta users.",
+          results: "Optimized conversion funnel for pre-launch momentum and investor validation.",
+        },
+      },
+      // Health Tech Future Quests
+      {
+        tag: "PATIENT PORTAL",
+        title: "Recovery Companion – Post-Op Patient App",
+        points: [
+          "Symptom logging with visual pain scales",
+          "Medication reminders with photo verification",
+          "Care team chat + educational resources",
+        ],
+        tech: "Next.js · Tailwind · Supabase · Twilio",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Post-op patients struggle to track symptoms and meds. Care teams lack visibility into patient recovery at home.",
+          solution: "Built patient-friendly symptom logging with visual pain scales, med reminders, and secure care team chat.",
+          results: "Empower patients to manage recovery. Give providers real-time data for early intervention.",
+        },
+      },
+      {
+        tag: "TELEHEALTH UX",
+        title: "Virtual Care Platform – Remote Consultation System",
+        points: [
+          "Video visit interface with notes sidebar",
+          "E-prescription workflow with pharmacy integration",
+          "Follow-up scheduling + secure messaging",
+        ],
+        tech: "Next.js · Agora SDK · Stripe · Supabase",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Telehealth tools feel impersonal. Providers need seamless workflows that don't sacrifice care quality.",
+          solution: "Designed video interface with integrated notes, e-prescriptions, and follow-up scheduling.",
+          results: "Clinic-quality care remotely. Streamlined provider workflow for efficient virtual visits.",
+        },
+      },
+      // AI Innovation Future Quests
+      {
+        tag: "SALES AUTOMATION",
+        title: "Lead Qualification Copilot – SDR Assistant",
+        points: [
+          "Email triage with sentiment scoring",
+          "Auto-draft responses for common inquiries",
+          "CRM sync with opportunity tagging",
+        ],
+        tech: "Next.js · OpenAI · LangChain · HubSpot API",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "SDRs waste hours triaging unqualified leads. Sales teams need AI that actually understands context.",
+          solution: "Built email sentiment scoring, auto-draft responses, and CRM sync using LangChain and OpenAI.",
+          results: "Reduce SDR busywork by 60%. Surface high-intent leads faster.",
+        },
+      },
+      {
+        tag: "OPERATIONS RAG",
+        title: "Internal Knowledge Assistant – Team Copilot",
+        points: [
+          "Document search across wikis + Slack history",
+          "Context-aware answers with source citations",
+          "Onboarding flow automation",
+        ],
+        tech: "Next.js · LangChain · Pinecone · Supabase",
+        status: "Tale Conceived",
+        caseStudy: {
+          challenge: "Teams waste hours searching wikis and Slack. Onboarding takes weeks because knowledge is scattered.",
+          solution: "RAG system searches across all internal docs, provides cited answers, and automates onboarding.",
+          results: "Turn 2-hour searches into 30-second answers. Onboard new hires 3x faster.",
+        },
+      },
+      // Author & Writing Future Quests
       {
         tag: "WRITING SYSTEM",
         title: "Novel Planning Workspace – Author Dashboard",
@@ -381,18 +398,7 @@ const sections = [
           results: "Professional course delivery platform that scales with your audience.",
         },
       },
-    ],
-  },
-  {
-    id: "moonlit-labs",
-    label: "MOONLIT LABS",
-    title: "Moonlit Labs",
-    realm: "The Grey Havens",
-    realmDesc: "Port of Departure",
-    questGiver: "The Voyager of Mithlond",
-    description:
-      "Where experiments depart for unexplored lands. Labs where the next great journey begins, blessed by moonlight and possibility.",
-    projects: [
+      // Moonlit Labs Original Future Quests
       {
         tag: "VOICE AI AGENT",
         title: "Kitchen Voice Assistant – Recipe Guide",
@@ -430,6 +436,13 @@ const sections = [
 ];
 
 export default function PortfolioPage() {
+  // Calculate stats dynamically
+  const allProjects = sections.flatMap(s => s.projects);
+  const completedQuests = allProjects.filter(p => p.status === 'Quest Complete').length;
+  const ongoingQuests = allProjects.filter(p => p.status === 'Journey Ongoing').length;
+  const futureQuests = allProjects.filter(p => p.status === 'Tale Conceived').length;
+  const activeRealms = sections.filter(s => s.projects.some(p => p.status === 'Quest Complete' || p.status === 'Journey Ongoing')).length;
+
   return (
     <main className="min-h-screen bg-midnight text-pearlWhite">
       {/* HERO SECTION with Moon Phases */}
@@ -490,21 +503,21 @@ export default function PortfolioPage() {
             </h1>
             <p className="font-serif text-base sm:text-lg text-moonlightSilver max-w-3xl mx-auto italic">
               Every project is a legendary quest—from brand journeys in the Shire to AI visions in Lothlórien. Each realm represents
-              mastery in a different craft. Some are complete tales, others are ongoing voyages from the Grey Havens.
+              mastery in a different craft. Completed quests are live demos. Future adventures await in the Grey Havens.
             </p>
             {/* Stats Display */}
             <div className="flex justify-center gap-6 sm:gap-8 mt-6">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-phoenixFire">6</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Realms Explored</div>
+                <div className="text-2xl sm:text-3xl font-bold text-phoenixFire">{activeRealms}</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Active Realms</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">21</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Legendary Quests</div>
+                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">{completedQuests + ongoingQuests}</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Live Demos</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-mermaidTeal">∞</div>
-                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Tales Written</div>
+                <div className="text-2xl sm:text-3xl font-bold text-mermaidTeal">{futureQuests}</div>
+                <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Future Quests</div>
               </div>
             </div>
 
@@ -535,13 +548,13 @@ export default function PortfolioPage() {
           <div className="mx-auto max-w-6xl mb-12">
             <div className="relative">
               {/* Main Realm Banner */}
-              <div className="bg-gradient-to-r from-transparent via-phoenixFire/20 to-transparent border-y-2 border-phoenixFire/40 py-6 relative overflow-hidden">
+              <div className={`bg-gradient-to-r from-transparent ${section.id === 'moonlit-labs' ? 'via-starlight/20' : 'via-phoenixFire/20'} to-transparent border-y-2 ${section.id === 'moonlit-labs' ? 'border-starlight/40' : 'border-phoenixFire/40'} py-6 relative overflow-hidden`}>
                 {/* Animated glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-phoenixFire/10 to-transparent animate-pulse"></div>
+                <div className={`absolute inset-0 bg-gradient-to-r from-transparent ${section.id === 'moonlit-labs' ? 'via-starlight/10' : 'via-phoenixFire/10'} to-transparent animate-pulse`}></div>
 
                 <div className="relative text-center space-y-2">
                   {/* Realm Name */}
-                  <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-phoenixFire/60 leading-none">
+                  <div className={`text-3xl sm:text-4xl md:text-5xl font-bold ${section.id === 'moonlit-labs' ? 'text-starlight/60' : 'text-phoenixFire/60'} leading-none`}>
                     {section.realm}
                   </div>
                   <div className="text-sm sm:text-base text-lunarGold/70 italic">
@@ -550,11 +563,11 @@ export default function PortfolioPage() {
 
                   {/* REALM EXPLORED text */}
                   <div className="flex items-center justify-center gap-3 pt-2">
-                    <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-phoenixFire"></div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-phoenixFire tracking-[0.3em] uppercase">
-                      Realm Explored
+                    <div className={`h-px w-12 sm:w-20 bg-gradient-to-r from-transparent ${section.id === 'moonlit-labs' ? 'to-starlight' : 'to-phoenixFire'}`}></div>
+                    <h2 className={`text-xl sm:text-2xl md:text-3xl font-bold ${section.id === 'moonlit-labs' ? 'text-starlight' : 'text-phoenixFire'} tracking-[0.3em] uppercase`}>
+                      {section.id === 'moonlit-labs' ? 'Tales Awaiting' : 'Realm Explored'}
                     </h2>
-                    <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-phoenixFire"></div>
+                    <div className={`h-px w-12 sm:w-20 bg-gradient-to-l from-transparent ${section.id === 'moonlit-labs' ? 'to-starlight' : 'to-phoenixFire'}`}></div>
                   </div>
 
                   {/* Quest Giver */}
