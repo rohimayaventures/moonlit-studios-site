@@ -1,568 +1,443 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import {
+  BookHeart,
+  Calendar,
+  BarChart3,
+  Download,
+  Brain,
+  Sparkles,
+  X,
+  TrendingUp,
+  MessageCircle,
+  ChevronRight
+} from 'lucide-react';
 
-// Mood options
+// --- Configuration ---
 const moods = [
-  { id: 'joyful', label: 'Joyful', color: 'bg-yellow-400', emoji: '' },
-  { id: 'content', label: 'Content', color: 'bg-green-400', emoji: '' },
-  { id: 'calm', label: 'Calm', color: 'bg-teal-400', emoji: '' },
-  { id: 'neutral', label: 'Neutral', color: 'bg-slate-400', emoji: '' },
-  { id: 'anxious', label: 'Anxious', color: 'bg-orange-400', emoji: '' },
-  { id: 'sad', label: 'Sad', color: 'bg-blue-400', emoji: '' },
-  { id: 'frustrated', label: 'Frustrated', color: 'bg-red-400', emoji: '' },
-  { id: 'overwhelmed', label: 'Overwhelmed', color: 'bg-purple-400', emoji: '' },
+  { id: 'joyful', label: 'Joyful', color: 'bg-yellow-400', ring: 'ring-yellow-400/50' },
+  { id: 'content', label: 'Content', color: 'bg-emerald-400', ring: 'ring-emerald-400/50' },
+  { id: 'calm', label: 'Calm', color: 'bg-teal-400', ring: 'ring-teal-400/50' },
+  { id: 'neutral', label: 'Neutral', color: 'bg-slate-400', ring: 'ring-slate-400/50' },
+  { id: 'anxious', label: 'Anxious', color: 'bg-orange-400', ring: 'ring-orange-400/50' },
+  { id: 'sad', label: 'Sad', color: 'bg-blue-400', ring: 'ring-blue-400/50' },
+  { id: 'frustrated', label: 'Frustrated', color: 'bg-red-400', ring: 'ring-red-400/50' },
+  { id: 'overwhelmed', label: 'Overwhelmed', color: 'bg-purple-400', ring: 'ring-purple-400/50' },
 ];
 
-// Body areas for somatic check-in
-const bodyAreas = [
-  { id: 'head', label: 'Head', top: '8%', left: '50%' },
-  { id: 'throat', label: 'Throat', top: '18%', left: '50%' },
-  { id: 'chest', label: 'Chest', top: '30%', left: '50%' },
-  { id: 'stomach', label: 'Stomach', top: '42%', left: '50%' },
-  { id: 'shoulders', label: 'Shoulders', top: '24%', left: '50%' },
-  { id: 'hands', label: 'Hands', top: '52%', left: '30%' },
-  { id: 'legs', label: 'Legs', top: '70%', left: '50%' },
-];
-
-// Reflection prompts based on mood
 const reflectionPrompts: Record<string, string[]> = {
   joyful: [
     "What contributed to this feeling of joy today?",
     "How can you carry this positive energy forward?",
-    "Who or what are you grateful for right now?",
   ],
   content: [
     "What needs are being met that contribute to this contentment?",
-    "How does your body feel in this state of ease?",
     "What small pleasures are you noticing today?",
   ],
   calm: [
     "What practices helped you reach this peaceful state?",
-    "How can you protect this sense of calm?",
-    "What does your ideal calm environment look like?",
+    "How does your body feel in this state of ease?",
   ],
   neutral: [
     "What thoughts are present without strong emotions attached?",
-    "Is there anything you're avoiding feeling?",
     "What would help you move toward a more positive state?",
   ],
   anxious: [
     "What specific worries are present right now?",
     "Where do you feel the anxiety in your body?",
-    "What's one small thing within your control today?",
   ],
   sad: [
-    "What losses or disappointments might be contributing to this sadness?",
     "What comfort do you need right now?",
     "How can you be gentle with yourself today?",
   ],
   frustrated: [
     "What expectations aren't being met?",
-    "What boundary might need to be set?",
     "What's one thing you can release control of?",
   ],
   overwhelmed: [
     "What can be removed from your plate right now?",
     "What's the single most important thing to focus on?",
-    "Who can you ask for support?",
   ],
 };
 
-// Sample journal entries
-const sampleEntries = [
+// Mock Initial Data
+const initialEntries = [
   {
     id: 1,
-    date: 'November 28, 2024',
-    time: '8:15 AM',
-    mood: 'calm',
-    intensity: 7,
-    bodyAreas: ['chest'],
-    prompt: "What practices helped you reach this peaceful state?",
-    entry: "Morning meditation made a huge difference. Even just 10 minutes of breathing before checking my phone. The house was quiet and I could hear birds outside. I want to make this a daily habit.",
+    date: new Date(Date.now() - 86400000 * 2).toLocaleDateString(),
+    time: '08:30 AM',
+    mood: 'anxious',
+    intensity: 6,
+    bodyAreas: ['chest', 'shoulders'],
+    entry: "Big presentation today. Feeling tight.",
+    prompt: "Where do you feel the anxiety in your body?"
   },
   {
     id: 2,
-    date: 'November 27, 2024',
-    time: '9:30 PM',
-    mood: 'anxious',
-    intensity: 6,
-    bodyAreas: ['chest', 'stomach'],
-    prompt: "Where do you feel the anxiety in your body?",
-    entry: "Work presentation tomorrow. Tightness in my chest and that familiar knot in my stomach. Reminded myself that I've prepared well. Going to do some box breathing before bed.",
-  },
-  {
-    id: 3,
-    date: 'November 26, 2024',
-    time: '2:00 PM',
+    date: new Date(Date.now() - 86400000).toLocaleDateString(),
+    time: '09:00 PM',
     mood: 'content',
     intensity: 8,
     bodyAreas: [],
-    prompt: "What small pleasures are you noticing today?",
-    entry: "Had lunch with an old friend. We laughed about memories from college. Realized I need to prioritize these connections more often. Feeling grateful for the people in my life.",
-  },
+    entry: "Presentation went well. Relaxing now.",
+    prompt: "What needs are being met?"
+  }
 ];
 
-// Weekly mood data for chart
-const weeklyMoodData = [
-  { day: 'Mon', mood: 'content', intensity: 7 },
-  { day: 'Tue', mood: 'anxious', intensity: 6 },
-  { day: 'Wed', mood: 'calm', intensity: 8 },
-  { day: 'Thu', mood: 'frustrated', intensity: 5 },
-  { day: 'Fri', mood: 'content', intensity: 7 },
-  { day: 'Sat', mood: 'joyful', intensity: 9 },
-  { day: 'Sun', mood: 'calm', intensity: 8 },
-];
-
-export default function EmotionJournaling() {
+export default function EmotionJournalingDemo() {
   const [activeTab, setActiveTab] = useState<'journal' | 'history' | 'insights'>('journal');
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [intensity, setIntensity] = useState(5);
   const [selectedBodyAreas, setSelectedBodyAreas] = useState<string[]>([]);
-  const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
   const [journalEntry, setJournalEntry] = useState('');
-  const [entries, setEntries] = useState(sampleEntries);
+  const [entries, setEntries] = useState(initialEntries);
   const [showSaveConfirm, setShowSaveConfirm] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentPrompt, setCurrentPrompt] = useState<string | null>(null);
+  const [filterMood, setFilterMood] = useState<string | null>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleBodyAreaToggle = (areaId: string) => {
+  // --- Logic ---
+  const handleBodyClick = (area: string) => {
     setSelectedBodyAreas(prev =>
-      prev.includes(areaId)
-        ? prev.filter(id => id !== areaId)
-        : [...prev, areaId]
+      prev.includes(area) ? prev.filter(a => a !== area) : [...prev, area]
     );
   };
 
-  const handleSaveEntry = () => {
-    if (!selectedMood || !journalEntry.trim()) return;
+  const handleSave = () => {
+    if (!selectedMood) return;
 
     const newEntry = {
-      id: entries.length + 1,
-      date: currentTime.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-      time: currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       mood: selectedMood,
       intensity,
       bodyAreas: selectedBodyAreas,
-      prompt: selectedPrompt || '',
       entry: journalEntry,
+      prompt: currentPrompt || ''
     };
 
     setEntries([newEntry, ...entries]);
     setShowSaveConfirm(true);
 
-    // Reset form
     setTimeout(() => {
       setSelectedMood(null);
-      setIntensity(5);
-      setSelectedBodyAreas([]);
-      setSelectedPrompt(null);
       setJournalEntry('');
+      setSelectedBodyAreas([]);
+      setIntensity(5);
+      setCurrentPrompt(null);
       setShowSaveConfirm(false);
-    }, 2000);
+      setActiveTab('history');
+    }, 1500);
   };
 
-  const handleExport = () => {
-    const exportData = entries.map(entry => ({
-      Date: entry.date,
-      Time: entry.time,
-      Mood: entry.mood,
-      Intensity: `${entry.intensity}/10`,
-      'Body Sensations': entry.bodyAreas.join(', ') || 'None noted',
-      Prompt: entry.prompt,
-      Entry: entry.entry,
-    }));
+  // Get mood color helper
+  const getMoodColor = (id: string) => moods.find(m => m.id === id)?.color || 'bg-slate-500';
 
-    const csv = [
-      Object.keys(exportData[0]).join(','),
-      ...exportData.map(row => Object.values(row).map(v => `"${v}"`).join(','))
-    ].join('\n');
-
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `journal-export-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-  };
-
-  const getMoodColor = (moodId: string) => {
-    return moods.find(m => m.id === moodId)?.color || 'bg-slate-400';
-  };
+  // Filter entries for history tab
+  const displayedEntries = filterMood
+    ? entries.filter(e => e.mood === filterMood)
+    : entries;
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-14">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <span className="font-semibold text-slate-800">Reflect</span>
-            </div>
+    <div className="min-h-screen bg-zinc-950 text-slate-200 font-sans selection:bg-teal-500/30 relative">
 
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
-              {(['journal', 'history', 'insights'] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all capitalize ${
-                    activeTab === tab
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+      {/* Header */}
+      <header className="bg-zinc-900/80 backdrop-blur-md border-b border-white/5 sticky top-0 z-50">
+        <div className="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-teal-900/20">
+              <BookHeart className="w-6 h-6 text-white" />
+            </div>
+            <div className="flex items-center">
+              <h1 className="font-bold text-lg tracking-tight">Inner<span className="text-teal-400">Voice</span></h1>
+              {/* Live Indicator */}
+              <span className="flex items-center gap-1 text-emerald-400 ml-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-[10px] font-semibold">Live</span>
+              </span>
             </div>
           </div>
+
+          <nav className="flex bg-white/5 p-1 rounded-lg">
+            {[
+              { id: 'journal', icon: Sparkles, label: 'Reflect' },
+              { id: 'history', icon: Calendar, label: 'History' },
+              { id: 'insights', icon: BarChart3, label: 'Insights' }
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as 'journal' | 'history' | 'insights')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all ${
+                  activeTab === tab.id
+                    ? 'bg-teal-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <tab.icon className="w-4 h-4" />
+                <span className="hidden sm:inline">{tab.label}</span>
+              </button>
+            ))}
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+      <main className="max-w-3xl mx-auto px-4 py-8 pb-24">
 
-        {/* Journal Tab */}
+        {/* --- JOURNAL TAB --- */}
         {activeTab === 'journal' && (
-          <div className="space-y-6">
-            {/* Date/Time Header */}
-            <div className="text-center">
-              <p className="text-sm text-slate-500">
-                {currentTime.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-              </p>
-              <p className="text-xs text-slate-400">
-                {currentTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
-              </p>
-            </div>
+          <div className="space-y-8 animate-fade-in">
 
-            {/* Mood Selection */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h2 className="text-sm font-semibold text-slate-700 mb-4">How are you feeling?</h2>
+            {/* 1. Mood Selector */}
+            <div className="space-y-4">
+              <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest">How are you feeling right now?</h2>
               <div className="grid grid-cols-4 gap-3">
-                {moods.map((mood) => (
+                {moods.map(mood => (
                   <button
                     key={mood.id}
                     onClick={() => {
                       setSelectedMood(mood.id);
-                      setSelectedPrompt(null);
+                      const prompts = reflectionPrompts[mood.id];
+                      setCurrentPrompt(prompts[Math.floor(Math.random() * prompts.length)]);
                     }}
-                    className={`p-3 rounded-xl border-2 transition-all ${
+                    className={`p-3 rounded-xl border transition-all duration-200 flex flex-col items-center gap-2 ${
                       selectedMood === mood.id
-                        ? 'border-slate-800 bg-slate-50'
-                        : 'border-transparent bg-slate-50 hover:bg-slate-100'
+                        ? `bg-zinc-800 border-teal-500/50 shadow-lg shadow-teal-900/20 scale-105 ring-1 ${mood.ring}`
+                        : 'bg-zinc-900 border-white/5 hover:bg-zinc-800 hover:border-white/10'
                     }`}
                   >
-                    <div className={`w-8 h-8 mx-auto rounded-full ${mood.color} mb-2`}></div>
-                    <span className="text-xs font-medium text-slate-700">{mood.label}</span>
+                    <div className={`w-8 h-8 rounded-full ${mood.color} shadow-inner`} />
+                    <span className="text-xs font-medium text-slate-300">{mood.label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Intensity Slider */}
             {selectedMood && (
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-sm font-semibold text-slate-700">Intensity</h2>
-                  <span className="text-2xl font-bold text-slate-800">{intensity}</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={intensity}
-                  onChange={(e) => setIntensity(parseInt(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
-                />
-                <div className="flex justify-between text-xs text-slate-400 mt-2">
-                  <span>Mild</span>
-                  <span>Moderate</span>
-                  <span>Intense</span>
-                </div>
-              </div>
-            )}
+              <div className="space-y-8 animate-fade-in">
 
-            {/* Somatic Check-in */}
-            {selectedMood && (
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <h2 className="text-sm font-semibold text-slate-700 mb-4">Where do you feel it in your body?</h2>
-                <div className="flex flex-col sm:flex-row gap-6">
-                  {/* Body outline */}
-                  <div className="relative w-32 h-64 mx-auto sm:mx-0 bg-slate-100 rounded-full flex-shrink-0">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-48 bg-slate-200 rounded-full"></div>
-                    </div>
-                    {/* Head */}
-                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-12 bg-slate-200 rounded-full"></div>
-
-                    {/* Clickable areas */}
-                    {bodyAreas.map((area) => (
-                      <button
-                        key={area.id}
-                        onClick={() => handleBodyAreaToggle(area.id)}
-                        className={`absolute w-6 h-6 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all ${
-                          selectedBodyAreas.includes(area.id)
-                            ? `${getMoodColor(selectedMood)} ring-2 ring-offset-2 ring-slate-400`
-                            : 'bg-white border-2 border-slate-300 hover:border-slate-400'
-                        }`}
-                        style={{ top: area.top, left: area.left }}
-                        title={area.label}
-                      />
-                    ))}
+                {/* 2. Intensity Slider */}
+                <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5">
+                  <div className="flex justify-between mb-4">
+                    <label className="text-sm font-bold text-slate-400 uppercase tracking-widest">Intensity</label>
+                    <span className="text-2xl font-bold text-teal-400">{intensity}<span className="text-sm text-slate-500">/10</span></span>
                   </div>
+                  <input
+                    type="range"
+                    min="1" max="10"
+                    value={intensity}
+                    onChange={(e) => setIntensity(Number(e.target.value))}
+                    className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+                  />
+                  <div className="flex justify-between mt-2 text-xs text-slate-500">
+                    <span>Mild</span>
+                    <span>Moderate</span>
+                    <span>Overwhelming</span>
+                  </div>
+                </div>
 
-                  {/* Body area labels */}
+                {/* 3. Somatic Body Map (SVG) */}
+                <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5 flex flex-col md:flex-row items-center gap-8">
                   <div className="flex-1">
-                    <p className="text-xs text-slate-500 mb-3">Tap areas where you notice sensations:</p>
+                    <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Somatic Check-in</h2>
+                    <p className="text-sm text-slate-500 mb-4">Tap where you feel this emotion in your body.</p>
                     <div className="flex flex-wrap gap-2">
-                      {bodyAreas.map((area) => (
-                        <button
-                          key={area.id}
-                          onClick={() => handleBodyAreaToggle(area.id)}
-                          className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-                            selectedBodyAreas.includes(area.id)
-                              ? 'bg-teal-100 text-teal-800 font-medium'
-                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                          }`}
-                        >
-                          {area.label}
-                        </button>
-                      ))}
-                    </div>
-                    {selectedBodyAreas.length > 0 && (
-                      <p className="text-xs text-slate-500 mt-3">
-                        Selected: {selectedBodyAreas.map(id => bodyAreas.find(a => a.id === id)?.label).join(', ')}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Reflection Prompt */}
-            {selectedMood && (
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <h2 className="text-sm font-semibold text-slate-700 mb-4">Reflection prompts</h2>
-                <div className="space-y-2">
-                  {reflectionPrompts[selectedMood]?.map((prompt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setSelectedPrompt(prompt)}
-                      className={`w-full text-left p-3 rounded-lg text-sm transition-all ${
-                        selectedPrompt === prompt
-                          ? 'bg-teal-50 border-2 border-teal-200 text-teal-800'
-                          : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
-                      }`}
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Journal Entry */}
-            {selectedMood && (
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <h2 className="text-sm font-semibold text-slate-700 mb-4">
-                  {selectedPrompt || "Write your thoughts..."}
-                </h2>
-                <textarea
-                  value={journalEntry}
-                  onChange={(e) => setJournalEntry(e.target.value)}
-                  placeholder="Start writing..."
-                  className="w-full h-40 p-4 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
-                />
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-xs text-slate-400">{journalEntry.length} characters</span>
-                  <button
-                    onClick={handleSaveEntry}
-                    disabled={!journalEntry.trim()}
-                    className={`px-6 py-2 rounded-lg font-medium transition-all ${
-                      journalEntry.trim()
-                        ? 'bg-teal-600 text-white hover:bg-teal-700'
-                        : 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                    }`}
-                  >
-                    {showSaveConfirm ? 'Saved!' : 'Save Entry'}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* History Tab */}
-        {activeTab === 'history' && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-slate-800">Journal History</h2>
-              <button
-                onClick={handleExport}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-teal-700 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Export for Therapy
-              </button>
-            </div>
-
-            {entries.map((entry) => (
-              <div key={entry.id} className="bg-white rounded-xl border border-slate-200 p-5">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <p className="font-medium text-slate-800">{entry.date}</p>
-                    <p className="text-xs text-slate-500">{entry.time}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className={`w-4 h-4 rounded-full ${getMoodColor(entry.mood)}`}></div>
-                    <span className="text-sm font-medium text-slate-700 capitalize">{entry.mood}</span>
-                    <span className="text-xs text-slate-400">({entry.intensity}/10)</span>
-                  </div>
-                </div>
-
-                {entry.bodyAreas.length > 0 && (
-                  <div className="mb-3">
-                    <p className="text-xs text-slate-500 mb-1">Body sensations:</p>
-                    <div className="flex gap-1">
-                      {entry.bodyAreas.map((area) => (
-                        <span key={area} className="px-2 py-0.5 bg-slate-100 rounded text-xs text-slate-600 capitalize">
-                          {area}
+                      {selectedBodyAreas.map(area => (
+                        <span key={area} className="px-3 py-1 rounded-full bg-teal-900/30 border border-teal-500/30 text-teal-300 text-xs flex items-center gap-2">
+                          {area} <X className="w-3 h-3 cursor-pointer" onClick={() => handleBodyClick(area)} />
                         </span>
                       ))}
                     </div>
                   </div>
-                )}
 
-                {entry.prompt && (
-                  <p className="text-sm text-slate-500 italic mb-2">"{entry.prompt}"</p>
-                )}
+                  {/* Interactive SVG Body */}
+                  <div className="relative h-64 w-32 flex-shrink-0">
+                    <svg viewBox="0 0 100 200" className="w-full h-full drop-shadow-2xl">
+                      {/* Silhouette */}
+                      <path
+                        d="M50,10 C60,10 65,18 65,28 C65,35 60,40 55,42 L65,45 L75,50 L85,80 L80,85 L65,65 L65,110 L75,180 L60,190 L50,130 L40,190 L25,180 L35,110 L35,65 L20,85 L15,80 L25,50 L35,45 L45,42 C40,40 35,35 35,28 C35,18 40,10 50,10 Z"
+                        fill="#27272a"
+                        stroke="#3f3f46"
+                        strokeWidth="1"
+                      />
+                      {/* Clickable Zones */}
+                      <circle cx="50" cy="25" r="12" fill={selectedBodyAreas.includes('head') ? '#2dd4bf' : 'transparent'} className="cursor-pointer hover:fill-white/10 transition-colors" onClick={() => handleBodyClick('head')} />
+                      <rect x="40" y="45" width="20" height="25" fill={selectedBodyAreas.includes('chest') ? '#2dd4bf' : 'transparent'} className="cursor-pointer hover:fill-white/10 transition-colors" onClick={() => handleBodyClick('chest')} />
+                      <rect x="40" y="75" width="20" height="25" fill={selectedBodyAreas.includes('stomach') ? '#2dd4bf' : 'transparent'} className="cursor-pointer hover:fill-white/10 transition-colors" onClick={() => handleBodyClick('stomach')} />
+                      <circle cx="20" cy="80" r="8" fill={selectedBodyAreas.includes('hands') ? '#2dd4bf' : 'transparent'} className="cursor-pointer hover:fill-white/10 transition-colors" onClick={() => handleBodyClick('hands')} />
+                      <circle cx="80" cy="80" r="8" fill={selectedBodyAreas.includes('hands') ? '#2dd4bf' : 'transparent'} className="cursor-pointer hover:fill-white/10 transition-colors" onClick={() => handleBodyClick('hands')} />
+                    </svg>
+                  </div>
+                </div>
 
-                <p className="text-slate-700 text-sm leading-relaxed">{entry.entry}</p>
+                {/* 4. Reflection Prompt */}
+                <div className="bg-zinc-900/50 rounded-2xl p-6 border border-white/5">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Brain className="w-4 h-4 text-indigo-400" />
+                    <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">AI Reflection Prompt</span>
+                  </div>
+                  <p className="text-lg text-slate-200 font-medium mb-4 italic">&ldquo;{currentPrompt}&rdquo;</p>
+                  <textarea
+                    value={journalEntry}
+                    onChange={(e) => setJournalEntry(e.target.value)}
+                    placeholder="Start writing here..."
+                    className="w-full h-32 bg-black/20 border border-white/10 rounded-xl p-4 text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-teal-500/50 transition-all resize-none"
+                  />
+                </div>
+
+                {/* Save Button */}
+                <button
+                  onClick={handleSave}
+                  disabled={!journalEntry}
+                  className="w-full py-4 bg-teal-600 hover:bg-teal-500 text-white rounded-xl font-bold tracking-wide transition-all shadow-lg shadow-teal-900/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {showSaveConfirm ? <span className="text-white">Saved Successfully!</span> : <span>Save Entry</span>}
+                </button>
               </div>
-            ))}
+            )}
           </div>
         )}
 
-        {/* Insights Tab */}
-        {activeTab === 'insights' && (
-          <div className="space-y-6">
-            <h2 className="text-lg font-semibold text-slate-800">Your Insights</h2>
-
-            {/* Weekly Mood Chart */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-700 mb-4">This Week's Moods</h3>
-              <div className="flex items-end justify-between h-40 gap-2">
-                {weeklyMoodData.map((day, i) => (
-                  <div key={i} className="flex-1 flex flex-col items-center">
-                    <div
-                      className={`w-full rounded-t-lg ${getMoodColor(day.mood)} transition-all`}
-                      style={{ height: `${day.intensity * 10}%` }}
-                    ></div>
-                    <span className="text-xs text-slate-500 mt-2">{day.day}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Mood Distribution */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-700 mb-4">Mood Distribution</h3>
-              <div className="space-y-3">
-                {['calm', 'content', 'joyful', 'anxious'].map((mood) => {
-                  const count = entries.filter(e => e.mood === mood).length;
-                  const percentage = (count / entries.length) * 100;
-                  return (
-                    <div key={mood} className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${getMoodColor(mood)}`}></div>
-                      <span className="text-sm text-slate-700 capitalize w-24">{mood}</span>
-                      <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full ${getMoodColor(mood)} transition-all`}
-                          style={{ width: `${percentage}%` }}
-                        ></div>
-                      </div>
-                      <span className="text-xs text-slate-500 w-8">{count}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Body Patterns */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-700 mb-4">Common Body Sensations</h3>
-              <div className="flex flex-wrap gap-2">
-                {bodyAreas.map((area) => {
-                  const count = entries.filter(e => e.bodyAreas.includes(area.id)).length;
-                  return (
-                    <div
-                      key={area.id}
-                      className={`px-3 py-2 rounded-lg ${count > 0 ? 'bg-teal-50 text-teal-800' : 'bg-slate-50 text-slate-400'}`}
-                    >
-                      <span className="font-medium">{area.label}</span>
-                      {count > 0 && <span className="ml-2 text-xs">({count})</span>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Export Section */}
-            <div className="bg-gradient-to-r from-teal-500 to-emerald-600 rounded-xl p-6 text-white">
-              <h3 className="font-semibold mb-2">Share with Your Therapist</h3>
-              <p className="text-sm text-teal-100 mb-4">
-                Export your journal entries as a CSV file to share patterns and insights with your mental health provider.
-              </p>
-              <button
-                onClick={handleExport}
-                className="px-5 py-2 bg-white text-teal-700 font-medium rounded-lg hover:bg-teal-50 transition-colors"
-              >
-                Export Journal Data
+        {/* --- HISTORY TAB --- */}
+        {activeTab === 'history' && (
+          <div className="space-y-4 animate-fade-in">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg font-bold text-white">
+                {filterMood ? `Entries tagged '${filterMood}'` : 'Recent Entries'}
+                {filterMood && <button onClick={() => setFilterMood(null)} className="ml-2 text-xs text-teal-400 hover:underline">(Clear Filter)</button>}
+              </h2>
+              <button className="text-xs font-bold text-teal-400 hover:text-teal-300 flex items-center gap-1">
+                <Download className="w-3 h-3" /> Export PDF
               </button>
             </div>
 
-            {/* Patterns & Tips */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="text-sm font-semibold text-slate-700 mb-4">Patterns We've Noticed</h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
-                  <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
+            {displayedEntries.length === 0 ? (
+               <p className="text-slate-500 text-center py-8">No entries found.</p>
+            ) : (
+               displayedEntries.map(entry => (
+                <div key={entry.id} className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-all">
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-3 h-3 rounded-full ${getMoodColor(entry.mood)}`} />
+                      <div>
+                        <p className="text-sm font-bold text-slate-200 capitalize">{entry.mood}</p>
+                        <p className="text-xs text-slate-500">{entry.date} &bull; {entry.time}</p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-mono text-slate-600 bg-zinc-950 px-2 py-1 rounded">
+                      Intensity: {entry.intensity}
+                    </span>
                   </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-800">Morning entries tend to be calmer</p>
-                    <p className="text-xs text-slate-500">Your entries before 10am show higher contentment levels.</p>
-                  </div>
+                  {entry.bodyAreas.length > 0 && (
+                    <div className="flex gap-2 mb-3">
+                      {entry.bodyAreas.map(area => (
+                        <span key={area} className="text-[10px] px-2 py-0.5 bg-zinc-800 text-slate-400 rounded-full capitalize">
+                          {area}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    {entry.entry}
+                  </p>
                 </div>
-                <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-lg">
-                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-800">Chest tension appears with anxiety</p>
-                    <p className="text-xs text-slate-500">You frequently note chest sensations when feeling anxious.</p>
-                  </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* --- INSIGHTS TAB --- */}
+        {activeTab === 'insights' && (
+          <div className="space-y-6 animate-fade-in">
+
+            {/* Weekly Trend (Resilience Pulse) */}
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-teal-400" /> Weekly Mood Pattern
+              </h3>
+              <div className="h-40 flex items-end justify-between gap-2 relative">
+                {/* Grid lines for visual reference */}
+                <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                   <div className="border-t border-zinc-800/50 w-full h-px"></div>
+                   <div className="border-t border-zinc-800/50 w-full h-px"></div>
+                   <div className="border-t border-zinc-800/50 w-full h-px"></div>
+                   <div className="border-t border-zinc-800/50 w-full h-px"></div>
                 </div>
+
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, i) => {
+                  // Mock heights for visual demo
+                  const heights = [45, 60, 35, 80, 55, 70, 65];
+                  const colors = ['bg-teal-500', 'bg-blue-500', 'bg-yellow-500', 'bg-emerald-500', 'bg-orange-500', 'bg-teal-500', 'bg-blue-500'];
+
+                  return (
+                    <div key={day} className="flex-1 flex flex-col items-center gap-2 group z-10">
+                      <div
+                        className={`w-full rounded-t-sm opacity-60 group-hover:opacity-100 transition-all ${colors[i]}`}
+                        style={{ height: `${heights[i]}%` }}
+                      />
+                      <span className="text-xs text-slate-600 font-mono">{day}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Insight Cards (Clickable) */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              <button
+                onClick={() => { setFilterMood('anxious'); setActiveTab('history'); }}
+                className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 cursor-pointer hover:bg-zinc-800/80 transition-colors group text-left"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Brain className="w-4 h-4 text-purple-400" />
+                    <h4 className="text-sm font-bold text-slate-200 group-hover:text-white">Top Trigger</h4>
+                  </div>
+                  <ChevronRight className="w-3 h-3 text-slate-600 group-hover:text-slate-400" />
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed group-hover:text-slate-300">
+                  &ldquo;Chest tightness&rdquo; appears in 80% of your &lsquo;Anxious&rsquo; entries. Tap to review.
+                </p>
+              </button>
+              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-yellow-400" />
+                  <h4 className="text-sm font-bold text-slate-200">Resilience Win</h4>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  You&apos;ve logged 3 &lsquo;Joyful&rsquo; or &lsquo;Content&rsquo; entries this week, up from 1 last week. Keep it up!
+                </p>
               </div>
             </div>
           </div>
         )}
+
       </main>
+
+      {/* AI Coach Chat Bubble (Floating) */}
+      <div className="fixed bottom-6 right-6 z-50">
+         <button
+            className="w-12 h-12 bg-teal-600 rounded-full shadow-lg shadow-teal-900/50 flex items-center justify-center text-white hover:scale-110 transition-transform hover:bg-teal-500 group"
+            title="Ask AI Coach"
+         >
+            <MessageCircle className="w-6 h-6" />
+            <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-zinc-800 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-zinc-700">
+               Try Box Breathing now?
+            </span>
+         </button>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-zinc-900 border-t border-zinc-800 py-4 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="text-xs text-slate-500">
+            InnerVoice.ai | Demo for Moonlit Studios Portfolio
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

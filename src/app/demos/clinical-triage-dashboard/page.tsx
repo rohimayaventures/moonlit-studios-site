@@ -1,9 +1,88 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import {
+  Activity,
+  Heart,
+  Thermometer,
+  Wind,
+  Droplets,
+  AlertTriangle,
+  Users,
+  Clock,
+  Send,
+  FileText,
+  Stethoscope,
+  BedDouble,
+  AlertCircle,
+  ClipboardList,
+  MessageSquare,
+  UserPlus,
+  Printer,
+  RefreshCw,
+  Brain,
+  Shield,
+  ChevronRight
+} from 'lucide-react';
+
+// TypeScript Interfaces
+interface Vitals {
+  hr: number;
+  bp: string;
+  temp: number;
+  spo2: number;
+  rr: number;
+  pain: number;
+}
+
+interface VitalHistory {
+  hr: number[];
+  spo2: number[];
+  bp: number[];
+}
+
+interface AIInsights {
+  sepsisScore: number;
+  protocol: string;
+  suggestion: string;
+}
+
+interface Patient {
+  id: number;
+  name: string;
+  mrn: string;
+  age: number;
+  gender: string;
+  chiefComplaint: string;
+  acuity: number;
+  acuityLabel: string;
+  acuityColor: string;
+  vitals: Vitals;
+  vitalHistory: VitalHistory;
+  arrivalTime: string;
+  waitTime: number;
+  location: string;
+  assignedTo: string;
+  assignedMD: string;
+  allergies: string[];
+  pmh: string[];
+  alerts: string[];
+  lastAssessed: string;
+  orders: string[];
+  notes: string;
+  aiInsights: AIInsights;
+}
+
+interface TeamMessage {
+  id: number;
+  from: string;
+  time: string;
+  message: string;
+  urgent: boolean;
+}
 
 // Mock patient data with vital history for trends
-const mockPatients = [
+const mockPatients: Patient[] = [
   {
     id: 1,
     name: "Rodriguez, Maria",
@@ -37,7 +116,12 @@ const mockPatients = [
     alerts: ["Cardiac Protocol", "High BP"],
     lastAssessed: "14:31",
     orders: ["12-Lead EKG", "Troponin", "BMP", "CBC"],
-    notes: "Patient appears diaphoretic, clutching chest. Denies SOB. Family at bedside."
+    notes: "Patient appears diaphoretic, clutching chest. Denies SOB. Family at bedside.",
+    aiInsights: {
+      sepsisScore: 15,
+      protocol: "STEMI Alert",
+      suggestion: "Consider cath lab activation if troponin elevated"
+    }
   },
   {
     id: 2,
@@ -72,7 +156,12 @@ const mockPatients = [
     alerts: [],
     lastAssessed: "14:52",
     orders: ["Wound care", "Tetanus if needed"],
-    notes: "Clean laceration ~3cm, controlled bleeding with pressure. Pt stable."
+    notes: "Clean laceration ~3cm, controlled bleeding with pressure. Pt stable.",
+    aiInsights: {
+      sepsisScore: 0,
+      protocol: "Minor Trauma",
+      suggestion: "Standard wound care protocol"
+    }
   },
   {
     id: 3,
@@ -107,7 +196,12 @@ const mockPatients = [
     alerts: ["Pediatric", "Fever Protocol"],
     lastAssessed: "15:08",
     orders: ["IV access", "Flu swab", "CBC", "BMP"],
-    notes: "Mom reports illness started 2 days ago. Last void 6 hrs ago. Appears lethargic."
+    notes: "Mom reports illness started 2 days ago. Last void 6 hrs ago. Appears lethargic.",
+    aiInsights: {
+      sepsisScore: 28,
+      protocol: "Pediatric Fever",
+      suggestion: "Monitor for dehydration, consider fluid bolus"
+    }
   },
   {
     id: 4,
@@ -142,7 +236,12 @@ const mockPatients = [
     alerts: ["Low O2", "Resp Distress", "COPD Exacerbation"],
     lastAssessed: "15:15",
     orders: ["Nebulizer", "ABG", "Chest X-ray", "Prednisone"],
-    notes: "On 4L NC, still labored. Tripoding. Continuous pulse ox ordered. May need BiPAP."
+    notes: "On 4L NC, still labored. Tripoding. Continuous pulse ox ordered. May need BiPAP.",
+    aiInsights: {
+      sepsisScore: 22,
+      protocol: "Respiratory Distress",
+      suggestion: "Consider BiPAP if no improvement in 30 min"
+    }
   },
   {
     id: 5,
@@ -177,7 +276,12 @@ const mockPatients = [
     alerts: [],
     lastAssessed: "15:19",
     orders: ["X-ray right ankle"],
-    notes: "Visible swelling lateral ankle. Good distal pulses. Ice applied."
+    notes: "Visible swelling lateral ankle. Good distal pulses. Ice applied.",
+    aiInsights: {
+      sepsisScore: 0,
+      protocol: "Orthopedic Trauma",
+      suggestion: "Apply Ottawa Ankle Rules"
+    }
   },
   {
     id: 6,
@@ -212,17 +316,38 @@ const mockPatients = [
     alerts: ["Stroke Alert", "High BP", "Fall Risk"],
     lastAssessed: "15:26",
     orders: ["STAT CT Head", "Stroke protocol", "Neuro consult", "BMP", "CBC", "PT/INR"],
-    notes: "Last known well 2 hours ago per wife. Slurred speech, right-sided weakness. CODE STROKE activated."
+    notes: "Last known well 2 hours ago per wife. Slurred speech, right-sided weakness. CODE STROKE activated.",
+    aiInsights: {
+      sepsisScore: 8,
+      protocol: "Stroke Alert",
+      suggestion: "tPA window assessment - LKW 2 hrs ago"
+    }
   }
 ];
 
 // Team messages
-const teamMessages = [
+const initialMessages: TeamMessage[] = [
   { id: 1, from: "Charge RN", time: "15:28", message: "Room 7 ready for next patient", urgent: false },
   { id: 2, from: "Dr. Patel", time: "15:26", message: "Need RN in Room 2 for stroke protocol NOW", urgent: true },
   { id: 3, from: "Lab", time: "15:20", message: "STAT troponin resulted for Rodriguez - see chart", urgent: true },
   { id: 4, from: "Radiology", time: "15:15", message: "Portable chest ready for Room 4", urgent: false },
   { id: 5, from: "RN Thompson", time: "15:10", message: "Taking Rodriguez to EKG, back in 10", urgent: false },
+];
+
+// Available rooms for bed assignment
+const availableRooms = [
+  { id: "room-1", name: "Room 1", status: "occupied" },
+  { id: "room-2", name: "Room 2", status: "occupied" },
+  { id: "room-3", name: "Room 3", status: "available" },
+  { id: "room-4", name: "Room 4", status: "occupied" },
+  { id: "room-5", name: "Room 5", status: "available" },
+  { id: "room-6", name: "Room 6", status: "available" },
+  { id: "room-7", name: "Room 7", status: "available" },
+  { id: "trauma-1", name: "Trauma 1", status: "available" },
+  { id: "trauma-2", name: "Trauma 2", status: "available" },
+  { id: "peds-1", name: "Peds Bay 1", status: "available" },
+  { id: "peds-2", name: "Peds Bay 2", status: "occupied" },
+  { id: "triage-1", name: "Triage Bay 1", status: "occupied" },
 ];
 
 // Sparkline component for vital trends
@@ -245,12 +370,15 @@ function Sparkline({ data, color, alert }: { data: number[]; color: string; aler
 }
 
 export default function ClinicalTriageDashboard() {
-  const [selectedPatient, setSelectedPatient] = useState(mockPatients[0]);
+  const [selectedPatient, setSelectedPatient] = useState<Patient>(mockPatients[0]);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [messageInput, setMessageInput] = useState('');
-  const [messages, setMessages] = useState(teamMessages);
+  const [messages, setMessages] = useState<TeamMessage[]>(initialMessages);
   const [showNewPatientModal, setShowNewPatientModal] = useState(false);
-  const [patients, setPatients] = useState(mockPatients);
+  const [showBedModal, setShowBedModal] = useState(false);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+  const [patients, setPatients] = useState<Patient[]>(mockPatients);
+  const [activeTab, setActiveTab] = useState<'sbar' | 'orders'>('sbar');
 
   // Update time every minute
   useEffect(() => {
@@ -261,9 +389,9 @@ export default function ClinicalTriageDashboard() {
   const handleSendMessage = () => {
     if (!messageInput.trim()) return;
 
-    const newMessage = {
+    const newMessage: TeamMessage = {
       id: messages.length + 1,
-      from: "You",
+      from: "RN Thompson",
       time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       message: messageInput,
       urgent: false
@@ -273,13 +401,35 @@ export default function ClinicalTriageDashboard() {
     setMessageInput('');
   };
 
-  const handleAssignRoom = (room: string) => {
+  const handleAssignBed = (room: string) => {
     setPatients(patients.map(p =>
       p.id === selectedPatient.id
         ? { ...p, location: room, waitTime: 0 }
         : p
     ));
     setSelectedPatient({ ...selectedPatient, location: room, waitTime: 0 });
+    setShowBedModal(false);
+
+    // Send notification to team
+    const bedMessage: TeamMessage = {
+      id: messages.length + 1,
+      from: "System",
+      time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      message: `${selectedPatient.name} assigned to ${room}`,
+      urgent: false
+    };
+    setMessages([bedMessage, ...messages]);
+  };
+
+  const handleEscalate = () => {
+    const escalationMessage: TeamMessage = {
+      id: messages.length + 1,
+      from: "ALERT",
+      time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      message: `ESCALATION: ${selectedPatient.name} - ${selectedPatient.alerts[0] || 'Needs immediate attention'}`,
+      urgent: true
+    };
+    setMessages([escalationMessage, ...messages]);
   };
 
   const getAcuityStats = () => {
@@ -304,15 +454,24 @@ export default function ClinicalTriageDashboard() {
       <header className="bg-slate-800 border-b border-slate-700 px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
-            {/* Logo/Title */}
+            {/* Logo/Title with Live Indicator */}
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded bg-teal-500 flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+                <Shield className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-sm font-bold text-white">TriageFlow</h1>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-sm font-bold text-white">TriageFlow</h1>
+                  <span className="text-[10px] text-teal-400 font-semibold">.ai</span>
+                  {/* Live Indicator */}
+                  <span className="flex items-center gap-1 text-emerald-400 ml-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-[10px] font-semibold">Live</span>
+                  </span>
+                </div>
                 <p className="text-[10px] text-slate-400">Emergency Department</p>
               </div>
             </div>
@@ -320,14 +479,17 @@ export default function ClinicalTriageDashboard() {
             {/* Department Quick Stats */}
             <div className="hidden md:flex items-center gap-4 text-xs">
               <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-700">
+                <Users className="w-3 h-3 text-slate-400" />
                 <span className="text-slate-400">Census:</span>
                 <span className="font-bold text-white">{patients.length}</span>
               </div>
               <div className="flex items-center gap-2 px-3 py-1 rounded bg-slate-700">
+                <Clock className="w-3 h-3 text-amber-400" />
                 <span className="text-slate-400">Waiting:</span>
                 <span className="font-bold text-amber-400">{waitingCount}</span>
               </div>
               <div className="flex items-center gap-2 px-3 py-1 rounded bg-red-900/50 border border-red-700">
+                <AlertTriangle className="w-3 h-3 text-red-400" />
                 <span className="text-red-300">Critical:</span>
                 <span className="font-bold text-red-400">{criticalCount}</span>
               </div>
@@ -357,10 +519,10 @@ export default function ClinicalTriageDashboard() {
         </div>
       </header>
 
-      {/* Acuity Bar */}
-      <div className="bg-slate-800/50 border-b border-slate-700 px-4 py-2">
-        <div className="flex items-center gap-2 text-xs">
-          <span className="text-slate-400 mr-2">Acuity:</span>
+      {/* Acuity Summary Bar */}
+      <div className="bg-slate-900/50 border-b border-slate-800 px-4 md:px-6 py-2">
+        <div className="flex items-center gap-2 text-xs flex-wrap">
+          <span className="text-slate-400 mr-2 font-semibold">Acuity:</span>
           <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-red-600">
             <span>ESI-1</span>
             <span className="font-bold">{acuityStats.esi1}</span>
@@ -384,9 +546,10 @@ export default function ClinicalTriageDashboard() {
           <div className="ml-auto flex items-center gap-2">
             <button
               onClick={() => setShowNewPatientModal(true)}
-              className="px-3 py-1 rounded bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
             >
-              + New Patient
+              <UserPlus className="w-3 h-3" />
+              New Patient
             </button>
           </div>
         </div>
@@ -400,7 +563,7 @@ export default function ClinicalTriageDashboard() {
           <div className="lg:col-span-5 space-y-2">
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                <Activity className="w-4 h-4 text-green-500" />
                 Patient Queue
               </h2>
               <span className="text-xs text-slate-500">Sorted by acuity & wait time</span>
@@ -437,6 +600,7 @@ export default function ClinicalTriageDashboard() {
                   <div className="grid grid-cols-5 gap-1 mb-2">
                     <div className="text-center p-1.5 rounded bg-slate-900/50">
                       <div className="flex items-center justify-center gap-1">
+                        <Heart className={`w-3 h-3 ${patient.vitals.hr > 100 ? 'text-red-400' : 'text-slate-400'}`} />
                         <span className={`text-xs font-bold ${patient.vitals.hr > 100 ? 'text-red-400' : 'text-white'}`}>
                           {patient.vitals.hr}
                         </span>
@@ -456,6 +620,7 @@ export default function ClinicalTriageDashboard() {
                     </div>
                     <div className="text-center p-1.5 rounded bg-slate-900/50">
                       <div className="flex items-center justify-center gap-1">
+                        <Droplets className={`w-3 h-3 ${patient.vitals.spo2 < 94 ? 'text-red-400' : 'text-slate-400'}`} />
                         <span className={`text-xs font-bold ${patient.vitals.spo2 < 94 ? 'text-red-400' : 'text-white'}`}>
                           {patient.vitals.spo2}%
                         </span>
@@ -468,15 +633,21 @@ export default function ClinicalTriageDashboard() {
                       <p className="text-[9px] text-slate-500 uppercase">SpO2</p>
                     </div>
                     <div className="text-center p-1.5 rounded bg-slate-900/50">
-                      <p className={`text-xs font-bold ${patient.vitals.temp > 100.4 ? 'text-red-400' : 'text-white'}`}>
-                        {patient.vitals.temp}°
-                      </p>
+                      <div className="flex items-center justify-center gap-1">
+                        <Thermometer className={`w-3 h-3 ${patient.vitals.temp > 100.4 ? 'text-red-400' : 'text-slate-400'}`} />
+                        <span className={`text-xs font-bold ${patient.vitals.temp > 100.4 ? 'text-red-400' : 'text-white'}`}>
+                          {patient.vitals.temp}°
+                        </span>
+                      </div>
                       <p className="text-[9px] text-slate-500 uppercase">Temp</p>
                     </div>
                     <div className="text-center p-1.5 rounded bg-slate-900/50">
-                      <p className={`text-xs font-bold ${patient.vitals.rr > 24 ? 'text-red-400' : 'text-white'}`}>
-                        {patient.vitals.rr}
-                      </p>
+                      <div className="flex items-center justify-center gap-1">
+                        <Wind className={`w-3 h-3 ${patient.vitals.rr > 24 ? 'text-red-400' : 'text-slate-400'}`} />
+                        <span className={`text-xs font-bold ${patient.vitals.rr > 24 ? 'text-red-400' : 'text-white'}`}>
+                          {patient.vitals.rr}
+                        </span>
+                      </div>
                       <p className="text-[9px] text-slate-500 uppercase">RR</p>
                     </div>
                   </div>
@@ -500,9 +671,10 @@ export default function ClinicalTriageDashboard() {
                       {patient.alerts.map((alert) => (
                         <span
                           key={alert}
-                          className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-900/50 border border-red-700 text-red-300"
+                          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-red-900/50 border border-red-700 text-red-300"
                         >
-                          ⚠ {alert}
+                          <AlertCircle className="w-2.5 h-2.5" />
+                          {alert}
                         </span>
                       ))}
                     </div>
@@ -553,6 +725,33 @@ export default function ClinicalTriageDashboard() {
               </div>
             </div>
 
+            {/* AI Clinical Insights */}
+            <div className="p-4 rounded-lg bg-gradient-to-br from-purple-900/30 to-slate-800 border border-purple-700/50">
+              <h3 className="text-sm font-bold text-purple-400 mb-3 flex items-center gap-2">
+                <Brain className="w-4 h-4" />
+                AI Clinical Insights
+              </h3>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center justify-between p-2 rounded bg-slate-900/50">
+                  <span className="text-slate-400">Sepsis Risk Score</span>
+                  <span className={`font-bold ${
+                    selectedPatient.aiInsights.sepsisScore > 30 ? 'text-red-400' :
+                    selectedPatient.aiInsights.sepsisScore > 15 ? 'text-amber-400' : 'text-green-400'
+                  }`}>
+                    {selectedPatient.aiInsights.sepsisScore}%
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2 rounded bg-slate-900/50">
+                  <span className="text-slate-400">Protocol</span>
+                  <span className="font-bold text-purple-300">{selectedPatient.aiInsights.protocol}</span>
+                </div>
+                <div className="p-2 rounded bg-slate-900/50">
+                  <p className="text-slate-400 mb-1">AI Suggestion</p>
+                  <p className="text-purple-200">{selectedPatient.aiInsights.suggestion}</p>
+                </div>
+              </div>
+            </div>
+
             {/* Clinical Info */}
             <div className="p-4 rounded-lg bg-slate-800 border border-slate-700">
               <div className="grid grid-cols-2 gap-4 text-xs">
@@ -579,78 +778,103 @@ export default function ClinicalTriageDashboard() {
               </div>
             </div>
 
-            {/* SBAR Card */}
+            {/* SBAR/Orders Tabs */}
             <div className="p-4 rounded-lg bg-gradient-to-br from-teal-900/30 to-slate-800 border border-teal-700/50">
-              <h3 className="text-sm font-bold text-teal-400 mb-3 flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                SBAR Handoff
-              </h3>
-
-              <div className="space-y-3 text-xs">
-                <div>
-                  <p className="font-bold text-teal-300 uppercase tracking-wide mb-0.5">Situation</p>
-                  <p className="text-slate-300">
-                    {selectedPatient.age} y/o {selectedPatient.gender} presenting with {selectedPatient.chiefComplaint.toLowerCase()}.
-                    {selectedPatient.alerts.length > 0 && ` Active alerts: ${selectedPatient.alerts.join(', ')}.`}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold text-blue-300 uppercase tracking-wide mb-0.5">Background</p>
-                  <p className="text-slate-300">
-                    PMH: {selectedPatient.pmh.length > 0 ? selectedPatient.pmh.join(', ') : 'None'}.
-                    Allergies: {selectedPatient.allergies.join(', ')}.
-                    Arrived {selectedPatient.arrivalTime}, waiting {selectedPatient.waitTime} min.
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold text-amber-300 uppercase tracking-wide mb-0.5">Assessment</p>
-                  <p className="text-slate-300">
-                    VS: HR {selectedPatient.vitals.hr}, BP {selectedPatient.vitals.bp}, SpO2 {selectedPatient.vitals.spo2}%,
-                    RR {selectedPatient.vitals.rr}, Temp {selectedPatient.vitals.temp}°F, Pain {selectedPatient.vitals.pain}/10.
-                    <br />{selectedPatient.notes}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-300 uppercase tracking-wide mb-0.5">Recommendation</p>
-                  <p className="text-slate-300">
-                    {selectedPatient.orders.length > 0
-                      ? `Orders: ${selectedPatient.orders.join(', ')}.`
-                      : 'Awaiting provider orders.'}
-                  </p>
-                </div>
+              {/* Tab Headers */}
+              <div className="flex gap-2 mb-3">
+                <button
+                  onClick={() => setActiveTab('sbar')}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold transition-colors ${
+                    activeTab === 'sbar' ? 'bg-teal-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  <FileText className="w-3 h-3" />
+                  SBAR Handoff
+                </button>
+                <button
+                  onClick={() => setActiveTab('orders')}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded text-xs font-semibold transition-colors ${
+                    activeTab === 'orders' ? 'bg-teal-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  }`}
+                >
+                  <ClipboardList className="w-3 h-3" />
+                  Orders
+                </button>
               </div>
+
+              {activeTab === 'sbar' ? (
+                <div className="space-y-3 text-xs">
+                  <div>
+                    <p className="font-bold text-teal-300 uppercase tracking-wide mb-0.5">Situation</p>
+                    <p className="text-slate-300">
+                      {selectedPatient.age} y/o {selectedPatient.gender} presenting with {selectedPatient.chiefComplaint.toLowerCase()}.
+                      {selectedPatient.alerts.length > 0 && ` Active alerts: ${selectedPatient.alerts.join(', ')}.`}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-blue-300 uppercase tracking-wide mb-0.5">Background</p>
+                    <p className="text-slate-300">
+                      PMH: {selectedPatient.pmh.length > 0 ? selectedPatient.pmh.join(', ') : 'None'}.
+                      Allergies: {selectedPatient.allergies.join(', ')}.
+                      Arrived {selectedPatient.arrivalTime}, waiting {selectedPatient.waitTime} min.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-amber-300 uppercase tracking-wide mb-0.5">Assessment</p>
+                    <p className="text-slate-300">
+                      VS: HR {selectedPatient.vitals.hr}, BP {selectedPatient.vitals.bp}, SpO2 {selectedPatient.vitals.spo2}%,
+                      RR {selectedPatient.vitals.rr}, Temp {selectedPatient.vitals.temp}°F, Pain {selectedPatient.vitals.pain}/10.
+                      <br />{selectedPatient.notes}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-red-300 uppercase tracking-wide mb-0.5">Recommendation</p>
+                    <p className="text-slate-300">
+                      {selectedPatient.orders.length > 0
+                        ? `Orders: ${selectedPatient.orders.join(', ')}.`
+                        : 'Awaiting provider orders.'}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2 text-xs">
+                  {selectedPatient.orders.length > 0 ? (
+                    selectedPatient.orders.map((order, i) => (
+                      <div key={i} className="flex items-center gap-2 p-2 rounded bg-slate-900/50">
+                        <ChevronRight className="w-3 h-3 text-teal-400" />
+                        <span className="text-slate-300">{order}</span>
+                        <span className="ml-auto text-[10px] text-slate-500">Pending</span>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-slate-500 text-center py-4">No orders placed</p>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Quick Actions */}
             <div className="grid grid-cols-2 gap-2">
               <button
-                onClick={() => handleAssignRoom('Room 7')}
-                className="p-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
+                onClick={() => setShowBedModal(true)}
+                className="flex items-center justify-center gap-1 p-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
               >
-                Assign to Room
+                <BedDouble className="w-4 h-4" />
+                Assign Bed
               </button>
               <button
-                onClick={() => {
-                  const newMsg = {
-                    id: messages.length + 1,
-                    from: "ALERT",
-                    time: currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    message: `ESCALATION: ${selectedPatient.name} - ${selectedPatient.alerts[0] || 'Needs immediate attention'}`,
-                    urgent: true
-                  };
-                  setMessages([newMsg, ...messages]);
-                }}
-                className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors"
+                onClick={handleEscalate}
+                className="flex items-center justify-center gap-1 p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition-colors"
               >
-                Escalate Alert
+                <AlertTriangle className="w-4 h-4" />
+                Escalate
               </button>
               <button
-                onClick={() => window.print()}
-                className="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
+                onClick={() => setShowHistoryModal(true)}
+                className="flex items-center justify-center gap-1 p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
               >
-                Print SBAR
+                <Stethoscope className="w-4 h-4" />
+                View History
               </button>
               <button
                 onClick={() => {
@@ -660,8 +884,9 @@ export default function ClinicalTriageDashboard() {
                       : p
                   ));
                 }}
-                className="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
+                className="flex items-center justify-center gap-1 p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold transition-colors"
               >
+                <RefreshCw className="w-4 h-4" />
                 Update Assessment
               </button>
             </div>
@@ -671,7 +896,7 @@ export default function ClinicalTriageDashboard() {
           <div className="lg:col-span-3">
             <div className="p-4 rounded-lg bg-slate-800 border border-slate-700 h-full flex flex-col">
               <h3 className="text-sm font-bold text-slate-300 mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                <MessageSquare className="w-4 h-4 text-green-500" />
                 Team Messages
               </h3>
 
@@ -713,7 +938,7 @@ export default function ClinicalTriageDashboard() {
                   onClick={handleSendMessage}
                   className="px-3 py-2 rounded bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition-colors"
                 >
-                  Send
+                  <Send className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -725,7 +950,10 @@ export default function ClinicalTriageDashboard() {
       {showNewPatientModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
           <div className="w-full max-w-md p-6 rounded-lg bg-slate-800 border border-slate-700">
-            <h3 className="text-lg font-bold text-white mb-4">Quick Registration</h3>
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <UserPlus className="w-5 h-5 text-teal-400" />
+              Quick Registration
+            </h3>
             <div className="space-y-3">
               <input
                 type="text"
@@ -769,6 +997,156 @@ export default function ClinicalTriageDashboard() {
                 className="flex-1 px-4 py-2 rounded bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold transition-colors"
               >
                 Add Patient
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bed Assignment Modal */}
+      {showBedModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-lg p-6 rounded-lg bg-slate-800 border border-slate-700">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <BedDouble className="w-5 h-5 text-teal-400" />
+              Assign Bed - {selectedPatient.name}
+            </h3>
+            <div className="grid grid-cols-3 gap-2 mb-4">
+              {availableRooms.map((room) => (
+                <button
+                  key={room.id}
+                  onClick={() => room.status === 'available' && handleAssignBed(room.name)}
+                  disabled={room.status === 'occupied'}
+                  className={`p-3 rounded-lg text-sm font-semibold transition-colors ${
+                    room.status === 'available'
+                      ? 'bg-green-600 hover:bg-green-500 text-white cursor-pointer'
+                      : 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                  }`}
+                >
+                  {room.name}
+                  <p className="text-[10px] font-normal mt-1">
+                    {room.status === 'available' ? 'Available' : 'Occupied'}
+                  </p>
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowBedModal(false)}
+              className="w-full px-4 py-2 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Patient History Modal */}
+      {showHistoryModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+          <div className="w-full max-w-2xl p-6 rounded-lg bg-slate-800 border border-slate-700 max-h-[80vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <Stethoscope className="w-5 h-5 text-teal-400" />
+              Patient History - {selectedPatient.name}
+            </h3>
+
+            <div className="space-y-4">
+              {/* Demographics */}
+              <div className="p-4 rounded bg-slate-900/50">
+                <h4 className="text-sm font-bold text-teal-400 mb-2">Demographics</h4>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <p><span className="text-slate-400">Age:</span> <span className="text-white">{selectedPatient.age} years</span></p>
+                  <p><span className="text-slate-400">Gender:</span> <span className="text-white">{selectedPatient.gender}</span></p>
+                  <p><span className="text-slate-400">MRN:</span> <span className="text-white">{selectedPatient.mrn}</span></p>
+                  <p><span className="text-slate-400">Arrived:</span> <span className="text-white">{selectedPatient.arrivalTime}</span></p>
+                </div>
+              </div>
+
+              {/* Medical History */}
+              <div className="p-4 rounded bg-slate-900/50">
+                <h4 className="text-sm font-bold text-teal-400 mb-2">Past Medical History</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedPatient.pmh.length > 0 ? (
+                    selectedPatient.pmh.map((condition, i) => (
+                      <span key={i} className="px-2 py-1 rounded bg-slate-700 text-slate-300 text-xs">{condition}</span>
+                    ))
+                  ) : (
+                    <span className="text-slate-500 text-xs">No documented history</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Allergies */}
+              <div className="p-4 rounded bg-slate-900/50">
+                <h4 className="text-sm font-bold text-red-400 mb-2">Allergies</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedPatient.allergies.map((allergy, i) => (
+                    <span key={i} className={`px-2 py-1 rounded text-xs ${
+                      allergy === 'NKDA' ? 'bg-green-900/50 text-green-300' : 'bg-red-900/50 text-red-300'
+                    }`}>
+                      {allergy}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Vital Trends */}
+              <div className="p-4 rounded bg-slate-900/50">
+                <h4 className="text-sm font-bold text-teal-400 mb-2">Vital Sign Trends (Last 5 Readings)</h4>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <p className="text-xs text-slate-400 mb-1">Heart Rate</p>
+                    <div className="flex items-end gap-1 h-12">
+                      {selectedPatient.vitalHistory.hr.map((val, i) => (
+                        <div key={i} className="flex-1 bg-red-500/50 rounded-t" style={{ height: `${(val / 150) * 100}%` }}>
+                          <span className="text-[8px] text-white text-center block">{val}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-1">SpO2 %</p>
+                    <div className="flex items-end gap-1 h-12">
+                      {selectedPatient.vitalHistory.spo2.map((val, i) => (
+                        <div key={i} className="flex-1 bg-blue-500/50 rounded-t" style={{ height: `${val}%` }}>
+                          <span className="text-[8px] text-white text-center block">{val}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-400 mb-1">Systolic BP</p>
+                    <div className="flex items-end gap-1 h-12">
+                      {selectedPatient.vitalHistory.bp.map((val, i) => (
+                        <div key={i} className="flex-1 bg-purple-500/50 rounded-t" style={{ height: `${(val / 200) * 100}%` }}>
+                          <span className="text-[8px] text-white text-center block">{val}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Clinical Notes */}
+              <div className="p-4 rounded bg-slate-900/50">
+                <h4 className="text-sm font-bold text-teal-400 mb-2">Clinical Notes</h4>
+                <p className="text-xs text-slate-300">{selectedPatient.notes}</p>
+                <p className="text-[10px] text-slate-500 mt-2">Last assessed: {selectedPatient.lastAssessed}</p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => window.print()}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold transition-colors"
+              >
+                <Printer className="w-4 h-4" />
+                Print
+              </button>
+              <button
+                onClick={() => setShowHistoryModal(false)}
+                className="flex-1 px-4 py-2 rounded bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold transition-colors"
+              >
+                Close
               </button>
             </div>
           </div>

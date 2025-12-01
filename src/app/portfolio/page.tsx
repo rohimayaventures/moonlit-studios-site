@@ -160,6 +160,23 @@ const sections = [
         },
       },
       {
+        tag: "NURSE MICRO-COACH",
+        title: "Nurse Resilience Micro-Coach",
+        points: [
+          "Shift debrief with guided reflection prompts",
+          "Interactive grounding exercises (4-7-8 breathing, body scan, 5-4-3-2-1)",
+          "Crisis resources + healthcare worker support",
+        ],
+        tech: "Next.js · TypeScript · Tailwind · Local Storage",
+        status: "Quest Complete",
+        link: "/demos/nurse-resilience",
+        caseStudy: {
+          challenge: "Nurses carry trauma home after shifts but lack accessible, stigma-free mental health support. Existing tools feel clinical or require scheduling appointments.",
+          solution: "As a nurse AND developer, I built a private micro-coach for shift debriefs, grounding exercises, and crisis resources—available 24/7 without judgment or reporting.",
+          results: "Safe space for nurses to process trauma immediately after shifts. All data stored locally—nothing reported to management.",
+        },
+      },
+      {
         tag: "PATIENT PORTAL",
         title: "Recovery Companion – Post-Op Patient App",
         points: [
@@ -189,6 +206,40 @@ const sections = [
           challenge: "Telehealth tools feel impersonal. Providers need seamless workflows that don't sacrifice care quality.",
           solution: "Designed video interface with integrated notes, e-prescriptions, and follow-up scheduling.",
           results: "Clinic-quality care remotely. Streamlined provider workflow for efficient virtual visits.",
+        },
+      },
+      {
+        tag: "HEALTH LITERACY AI",
+        title: "HealthLiteracy.ai – Medical Simplifier",
+        points: [
+          "Split-screen translator: clinical notes → patient-friendly language",
+          "5th-grade reading level output with medical term definitions",
+          "Anti-hallucination guardrails for clinical accuracy",
+        ],
+        tech: "Next.js · TypeScript · Tailwind · NLP · Claude API",
+        status: "Quest Complete",
+        link: "/demos/medical-simplifier",
+        caseStudy: {
+          challenge: "Patients leave appointments confused by medical jargon. Discharge instructions written at college reading level cause medication errors and readmissions.",
+          solution: "Built a split-screen translator that converts complex clinical notes to 5th-grade reading level while preserving medical accuracy with anti-hallucination guardrails.",
+          results: "Empowers patients to understand their care. Reduces confusion-related callbacks and improves medication adherence.",
+        },
+      },
+      {
+        tag: "STAFFING INTELLIGENCE",
+        title: "StaffingForecast.io – Predictive Staffing Dashboard",
+        points: [
+          "48-hour staffing shortage predictions with unit-level detail",
+          "Interactive surge simulator with real-time ratio calculations",
+          "Color-coded alerts: safe (green), warning (amber), critical (red)",
+        ],
+        tech: "Next.js · TypeScript · Tailwind · Predictive Analytics",
+        status: "Quest Complete",
+        link: "/demos/staffing-dashboard",
+        caseStudy: {
+          challenge: "Hospital administrators scramble to fill staffing gaps reactively. Nurse-to-patient ratios suffer during unexpected surges, compromising care quality.",
+          solution: "Built a predictive command center that forecasts staffing needs 48 hours in advance with interactive surge simulation for real-time scenario planning.",
+          results: "Proactive staffing decisions prevent understaffing crises. Visual ratio alerts ensure patient safety compliance.",
         },
       },
     ],
@@ -237,22 +288,6 @@ const sections = [
         },
       },
       {
-        tag: "VOICE AI AGENT",
-        title: "Kitchen Voice Assistant – Recipe Guide",
-        points: [
-          "Hands-free voice commands during cooking",
-          "Step-by-step narrative with timer alerts",
-          "Ingredient substitution suggestions",
-        ],
-        tech: "Next.js · Whisper · OpenAI · Vercel KV",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Cooking with messy hands makes following recipes frustrating. Need hands-free, context-aware guidance.",
-          solution: "Voice-controlled recipe assistant with step-by-step narration, timer alerts, and ingredient substitutions.",
-          results: "Seamless hands-free cooking experience. AI that actually helps, not just listens.",
-        },
-      },
-      {
         tag: "OPERATIONS RAG",
         title: "Internal Knowledge Assistant – Team Copilot",
         points: [
@@ -295,6 +330,23 @@ const sections = [
           challenge: "Authors with great books lack professional platforms. Readers want immersive experiences, not just buy buttons.",
           solution: "As an author AND developer, I built a book series portal with sample chapters, character wikis, interactive maps, and newsletter integration.",
           results: "Showcase your world. Convert casual visitors into newsletter subscribers and superfans.",
+        },
+      },
+      {
+        tag: "JOURNALING AI",
+        title: "Emotion-Aware Journaling Companion",
+        points: [
+          "Mood tagging with reflection prompts",
+          "Somatic check-in reminders",
+          "Exportable insights for therapy sessions",
+        ],
+        tech: "Next.js · OpenAI · Prisma · Edge Functions",
+        status: "Quest Complete",
+        link: "/demos/emotion-journaling",
+        caseStudy: {
+          challenge: "Mental health tools feel clinical. Journalers want reflective prompts that actually help process emotions.",
+          solution: "Built mood-tracking journal with somatic check-ins, reflection prompts, and exportable insights for therapy.",
+          results: "Support mental wellness through intentional reflection. Bridge personal journaling and professional therapy.",
         },
       },
       {
@@ -342,37 +394,19 @@ const sections = [
       "Where experiments depart for unexplored lands. Labs where the next great journey begins, blessed by moonlight and possibility.",
     projects: [
       {
-        tag: "JOURNALING AI",
-        title: "Emotion-Aware Journaling Companion",
+        tag: "VOICE AI AGENT",
+        title: "Kitchen Voice Assistant – Recipe Guide",
         points: [
-          "Mood tagging with reflection prompts",
-          "Somatic check-in reminders",
-          "Exportable insights for therapy sessions",
+          "Hands-free voice commands during cooking",
+          "Step-by-step narrative with timer alerts",
+          "Ingredient substitution suggestions",
         ],
-        tech: "Next.js · OpenAI · Prisma · Edge Functions",
-        status: "Quest Complete",
-        link: "/demos/emotion-journaling",
+        tech: "Next.js · Whisper · OpenAI · Vercel KV",
+        status: "Tale Conceived",
         caseStudy: {
-          challenge: "Mental health tools feel clinical. Journalers want reflective prompts that actually help process emotions.",
-          solution: "Built mood-tracking journal with somatic check-ins, reflection prompts, and exportable insights for therapy.",
-          results: "Support mental wellness through intentional reflection. Bridge personal journaling and professional therapy.",
-        },
-      },
-      {
-        tag: "NURSE MICRO-COACH",
-        title: "Nurse Resilience Micro-Coach",
-        points: [
-          "Shift debrief with guided reflection prompts",
-          "Interactive grounding exercises (4-7-8 breathing, body scan, 5-4-3-2-1)",
-          "Crisis resources + healthcare worker support",
-        ],
-        tech: "Next.js · TypeScript · Tailwind · Local Storage",
-        status: "Quest Complete",
-        link: "/demos/nurse-resilience",
-        caseStudy: {
-          challenge: "Nurses carry trauma home after shifts but lack accessible, stigma-free mental health support. Existing tools feel clinical or require scheduling appointments.",
-          solution: "As a nurse AND developer, I built a private micro-coach for shift debriefs, grounding exercises, and crisis resources—available 24/7 without judgment or reporting.",
-          results: "Safe space for nurses to process trauma immediately after shifts. All data stored locally—nothing reported to management.",
+          challenge: "Cooking with messy hands makes following recipes frustrating. Need hands-free, context-aware guidance.",
+          solution: "Voice-controlled recipe assistant with step-by-step narration, timer alerts, and ingredient substitutions.",
+          results: "Seamless hands-free cooking experience. AI that actually helps, not just listens.",
         },
       },
       {
@@ -465,7 +499,7 @@ export default function PortfolioPage() {
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Realms Explored</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">19</div>
+                <div className="text-2xl sm:text-3xl font-bold text-lunarGold">21</div>
                 <div className="text-xs text-moonlightSilver/70 uppercase tracking-wider">Legendary Quests</div>
               </div>
               <div className="text-center">

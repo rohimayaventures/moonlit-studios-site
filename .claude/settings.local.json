@@ -14,7 +14,10 @@
       "Bash(git push:*)",
       "Bash(ls:*)",
       "Bash(gh repo view:*)",
-      "Bash(code:*)"
+      "Bash(code:*)",
+      "Bash(dir:*)",
+      "Bash(npm install:*)",
+      "Bash(paste:*)"
     ],
     "deny": [],
     "ask": []
