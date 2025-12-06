@@ -11,17 +11,17 @@
     "test:sow:create": "tsx scripts/test-create-sow.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.69.0",
+    "@anthropic-ai/sdk": "^0.71.2",
     "@notionhq/client": "^5.4.0",
-    "@supabase/supabase-js": "^2.81.1",
-    "@vercel/analytics": "^1.5.0",
+    "@supabase/supabase-js": "^2.86.2",
+    "@vercel/analytics": "^1.6.1",
     "cloudinary": "^2.8.0",
-    "lucide-react": "^0.553.0",
+    "lucide-react": "^0.556.0",
     "next": "^16.0.7",
-    "openai": "^6.9.0",
+    "openai": "^6.10.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "resend": "^6.4.2",
+    "resend": "^6.5.2",
     "sonner": "^2.0.7",
     "stripe": "^19.3.1"
   },
@@ -29,12 +29,12 @@
     "@types/node": "20.11.17",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
-    "autoprefixer": "10.4.17",
+    "autoprefixer": "^10.4.22",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.7",
-    "postcss": "8.4.35",
+    "postcss": "^8.5.6",
     "tailwindcss": "3.4.3",
-    "typescript": "5.4.2",
-    "wrangler": "^4.47.0"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.53.0"
   }
 }

@@ -48,8 +48,8 @@ export async function GET(
     // Read file
     const fileBuffer = await readFile(filePath);
 
-    // Return file with proper headers
-    return new NextResponse(fileBuffer, {
+    // Return file with proper headers (Buffer is compatible with BodyInit in runtime)
+    return new NextResponse(fileBuffer as unknown as BodyInit, {
       headers: {
         'Content-Type': file.fileType || 'application/octet-stream',
         'Content-Disposition': `attachment; filename="${file.originalName}"`,

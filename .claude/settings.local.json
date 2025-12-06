@@ -17,7 +17,10 @@
       "Bash(code:*)",
       "Bash(dir:*)",
       "Bash(npm install:*)",
-      "Bash(paste:*)"
+      "Bash(paste:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash push:*)",
+      "Bash(npm outdated:*)"
     ],
     "deny": [],
     "ask": []

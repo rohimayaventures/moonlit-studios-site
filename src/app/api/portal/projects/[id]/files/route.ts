@@ -68,8 +68,8 @@ export async function POST(
     const filesDir = await getProjectFilesDir(projectId);
     const filePath = path.join(filesDir, fileName);
 
-    // Save file
-    await writeFile(filePath, buffer);
+    // Save file (Buffer is compatible with writeFile in runtime)
+    await writeFile(filePath, buffer as unknown as Uint8Array);
 
     // Add file metadata to project
     const projectFile = await addProjectFile(projectId, {
