@@ -95,20 +95,20 @@ const sections = [
       "As Elrond's house mends the weary, healthcare platforms built with clinical precision and healing intent. Wisdom meeting innovation.",
     projects: [
       {
-        tag: "NURSE DASHBOARD",
-        title: "Clinical Triage Dashboard – ED Workflow System",
+        tag: "CLINICAL AI — LIVE PRODUCT",
+        title: "OrixLink AI – Universal Clinical Triage",
         points: [
-          "Real-time patient queue with acuity scoring",
-          "SBAR handoff cards with vital trends",
-          "Alert escalation + team messaging",
+          "Natural language symptom input returns structured clinical differential",
+          "Four-tier urgency classification with red flag criteria",
+          "Stripe billing, credit packs, Google OAuth, and usage enforcement",
         ],
-        tech: "Next.js · TypeScript · Supabase · Pusher · FHIR",
+        tech: "Next.js · Claude API · Supabase · Stripe · Resend · Vercel",
         status: "Quest Complete",
-        link: "/demos/clinical-triage-dashboard",
+        link: "https://triage.rohimaya.ai",
         caseStudy: {
-          challenge: "ED nurses waste precious time navigating clunky systems. Patients suffer when triage tools don't match clinical workflows.",
-          solution: "As a nurse AND full-stack developer, I built intuitive SBAR handoff cards, acuity scoring, and real-time queue management designed by someone who's actually worked the chaos of an emergency department.",
-          results: "Streamlined triage interface that reduces cognitive load. Alert escalation prevents critical patients from falling through cracks.",
+          challenge: "At least 12 million Americans experience a diagnostic error in outpatient settings each year. Most happen because the intake process gives clinicians no structured way to connect a full symptom picture to a working differential before the encounter begins.",
+          solution: "Built by a 17-year LPN and full-stack developer: natural language intake, structured differential output, red flag cards, four-tier urgency classification, tiered Stripe billing with atomic usage enforcement, and idempotent credit delivery. Validated against a real compartment syndrome presentation that matched the clinical workup.",
+          results: "Live at triage.rohimaya.ai with Stripe subscriptions, credit packs, Google OAuth, follow-up reminders, and a compliance-aware legal layer. Early commercial pilot active.",
         },
       },
       {
@@ -138,7 +138,7 @@ const sections = [
         ],
         tech: "Next.js · TypeScript · Tailwind · NLP · Claude API",
         status: "Quest Complete",
-        link: "/demos/medical-simplifier",
+        link: "https://literacy.rohimaya.ai",
         caseStudy: {
           challenge: "Patients leave appointments confused by medical jargon. Discharge instructions written at college reading level cause medication errors and readmissions.",
           solution: "Built a split-screen translator that converts complex clinical notes to 5th-grade reading level while preserving medical accuracy with anti-hallucination guardrails.",
@@ -189,6 +189,40 @@ const sections = [
           challenge: "Business leaders are drowning in AI hype. They need to SEE AI working, not just hear promises.",
           solution: "Built 4 interactive demos (computer vision, RAG, healthcare triage, voice AI) that prove AI value before asking for budget.",
           results: "Live at /ai-lab. Converts skeptics into believers with working examples, not slideshows.",
+        },
+      },
+      {
+        tag: "ENTERPRISE NLU — LIVE PRODUCT",
+        title: "ClearChannel by Vestara – Enterprise Routing Simulator",
+        points: [
+          "SSE streaming NLU routing for financial services contact centers",
+          "Sentiment-driven UI with five data-sentiment CSS token states",
+          "OpenAI Realtime bidirectional voice sessions with Whisper and TTS",
+        ],
+        tech: "Next.js · TypeScript · OpenAI Realtime · Whisper · SSE · Tailwind",
+        status: "Quest Complete",
+        link: "https://clearchannel-vestara.vercel.app",
+        caseStudy: {
+          challenge: "Financial services contact centers lose millions annually to misrouted calls and poor intent recognition. Legacy IVR systems cannot parse nuanced customer language or adapt to sentiment in real time.",
+          solution: "Built an enterprise NLU routing simulator with SSE streaming progressive panel fill, sentiment-driven CSS token system across five data states, and OpenAI Realtime bidirectional voice sessions. Designed to demo the capability a contact center would purchase.",
+          results: "Live at clearchannel-vestara.vercel.app. Demonstrates enterprise-grade NLU routing, voice AI, and real-time sentiment adaptation in a single polished interface.",
+        },
+      },
+      {
+        tag: "FINTECH AI — LIVE PRODUCT",
+        title: "FinanceLens AI – Financial Intelligence Platform",
+        points: [
+          "AI-powered financial document analysis with shareable deck URLs",
+          "WSJ Editorial design system with compare accordion output",
+          "Supabase-backed session persistence with 30-day TTL",
+        ],
+        tech: "Next.js · Claude Sonnet · Supabase · Tailwind · Vercel",
+        status: "Quest Complete",
+        link: "https://financelens-ai.vercel.app",
+        caseStudy: {
+          challenge: "Financial analysts and founders waste hours manually reviewing documents, building comparison decks, and formatting outputs for stakeholders. Existing AI tools return raw text with no structure or shareability.",
+          solution: "Built a financial intelligence platform with AI-powered document analysis, a polished compare accordion, shareable deck URLs with 30-day TTL, and a WSJ Editorial light-background design system built for professional credibility.",
+          results: "Live at financelens-ai.vercel.app. Demonstrates production-grade AI analysis, UX polish, and shareable output in a fintech context.",
         },
       },
     ],
@@ -250,22 +284,6 @@ const sections = [
       "Where future adventures await their moment. Tales conceived but not yet written—each a journey waiting for the right traveler to begin.",
     projects: [
       // Small Business Future Quests
-      {
-        tag: "PET CARE PORTAL",
-        title: "Pawsitive Companions – Pet Grooming & Boarding",
-        points: [
-          "Service packages with photo galleries",
-          "Booking calendar with availability sync",
-          "Client testimonials + pet photo wall",
-        ],
-        tech: "Next.js · Tailwind · Stripe · Cloudinary",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Pet care businesses juggle bookings, photo galleries, and client trust-building—all while managing appointments.",
-          solution: "Designed a comprehensive portal with Stripe-powered booking, Cloudinary photo management, and testimonial showcase.",
-          results: "One-stop platform for pet parents to book services, view photos, and read reviews from other happy clients.",
-        },
-      },
       // Web & Brand Future Quests
       {
         tag: "FOUNDER BRAND",
@@ -366,71 +384,7 @@ const sections = [
         },
       },
       // Author & Writing Future Quests
-      {
-        tag: "WRITING SYSTEM",
-        title: "Novel Planning Workspace – Author Dashboard",
-        points: [
-          "Scene timeline with chapter organization",
-          "Character profiles + relationship tracker",
-          "Draft export to manuscript format",
-        ],
-        tech: "Next.js · Supabase · Notion API · TypeScript",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Authors juggle scene timelines, character arcs, and draft exports across multiple tools.",
-          solution: "Built all-in-one workspace with scene timeline, character tracker, and manuscript export.",
-          results: "One tool for planning, writing, and organizing complex novels.",
-        },
-      },
-      {
-        tag: "COURSE PLATFORM",
-        title: "Writing Course Site – Creator Education Hub",
-        points: [
-          "Lesson modules with video + worksheets",
-          "Student progress tracking + badges",
-          "Community forum + live Q&A integration",
-        ],
-        tech: "Next.js · Supabase · Stripe · Mux Video",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Creator educators need platforms for video lessons, student tracking, and community engagement.",
-          solution: "Built course hub with Mux video, progress tracking, badges, and live Q&A integration.",
-          results: "Professional course delivery platform that scales with your audience.",
-        },
-      },
       // Moonlit Labs Original Future Quests
-      {
-        tag: "VOICE AI AGENT",
-        title: "Kitchen Voice Assistant – Recipe Guide",
-        points: [
-          "Hands-free voice commands during cooking",
-          "Step-by-step narrative with timer alerts",
-          "Ingredient substitution suggestions",
-        ],
-        tech: "Next.js · Whisper · OpenAI · Vercel KV",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Cooking with messy hands makes following recipes frustrating. Need hands-free, context-aware guidance.",
-          solution: "Voice-controlled recipe assistant with step-by-step narration, timer alerts, and ingredient substitutions.",
-          results: "Seamless hands-free cooking experience. AI that actually helps, not just listens.",
-        },
-      },
-      {
-        tag: "CREATIVE RITUAL",
-        title: "Moon Phase Creative Prompts",
-        points: [
-          "Lunar-inspired prompt calendar",
-          "Audio + text delivery with email nudges",
-          "Community submission gallery",
-        ],
-        tech: "Next.js · Tailwind · CRON · Resend",
-        status: "Tale Conceived",
-        caseStudy: {
-          challenge: "Creatives struggle with consistency. Need inspiring prompts delivered at the right rhythm.",
-          solution: "Lunar calendar with creative prompts, email nudges, and community submission gallery.",
-          results: "Align creativity with natural rhythms. Build creative practice through gentle accountability.",
-        },
-      },
     ],
   },
 ];

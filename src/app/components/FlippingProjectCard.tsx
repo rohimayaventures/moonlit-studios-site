@@ -246,6 +246,7 @@ export function FlippingProjectCard({ project, index }: FlippingProjectCardProps
                   href={project.link}
                   className="block w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-phoenixFire to-lunarGold text-midnight font-bold text-sm uppercase tracking-wider shadow-lg hover:shadow-phoenixFire/50 hover:scale-105 transition-all"
                   onClick={(e) => e.stopPropagation()}
+                  {...(project.link.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
                   View Live Demo →
                 </Link>
