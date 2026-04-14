@@ -3,6 +3,14 @@
 import { useState, useEffect } from "react";
 import { getAchievementIcon } from "./AchievementIcons";
 
+declare global {
+  interface Window {
+    moonlitTrophyRoom?: {
+      open: () => void;
+    };
+  }
+}
+
 export type Achievement = {
   id: string;
   title: string;
@@ -158,6 +166,7 @@ export const ACHIEVEMENTS: Achievement[] = [
 export function AchievementSystem() {
   const [unlockedAchievements, setUnlockedAchievements] = useState<string[]>([]);
   const [recentlyUnlocked, setRecentlyUnlocked] = useState<Achievement | null>(null);
+  const [showTrophyRoom, setShowTrophyRoom] = useState(false);
   const [achievementData, setAchievementData] = useState<AchievementData>({
     pagesVisited: [],
     kaiMessagesCount: 0,
@@ -318,6 +327,16 @@ export function AchievementSystem() {
     };
   }, []);
 
+  useEffect(() => {
+    window.moonlitTrophyRoom = {
+      open: () => setShowTrophyRoom(true),
+    };
+
+    return () => {
+      delete window.moonlitTrophyRoom;
+    };
+  }, []);
+
   const getTierColor = (tier: Achievement["tier"]) => {
     switch (tier) {
       case "bronze":
@@ -335,44 +354,88 @@ export function AchievementSystem() {
 
   return (
     <>
-      {/* SAO-Style Achievement Notification */}
-      {recentlyUnlocked && (
-        <div className="fixed top-6 right-6 z-[10001] animate-slide-in-right">
-          <div className="bg-gradient-to-r from-midnight via-deepOcean to-midnight border-2 border-lunarGold/60 rounded-lg shadow-2xl shadow-lunarGold/50 overflow-hidden max-w-sm">
-            {/* Achievement Header */}
-            <div className="bg-gradient-to-r from-lunarGold/20 to-phoenixFire/20 px-4 py-2 border-b border-lunarGold/40">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-lunarGold animate-pulse"></div>
-                <p className="text-xs text-lunarGold uppercase tracking-widest font-bold">
-                  Achievement Unlocked!
-                </p>
-                <div className="w-2 h-2 rounded-full bg-lunarGold animate-pulse"></div>
-              </div>
-            </div>
+      {showTrophyRoom && (
+        <div className="fixed inset-0 z-[10001] bg-midnight/95 backdrop-blur-lg">
+          <div className="absolute inset-x-0 bottom-0 max-h-[90vh] rounded-t-3xl border-t border-lunarGold/30 bg-gradient-to-b from-deepOcean via-midnight to-midnight p-6 shadow-2xl shadow-black/60">
+            <button
+              type="button"
+              aria-label="Close Trophy Room"
+              onClick={() => setShowTrophyRoom(false)}
+              className="absolute right-6 top-6 text-moonlightSilver/80 hover:text-lunarGold transition-colors text-2xl"
+            >
+              ×
+            </button>
 
-            {/* Achievement Content */}
-            <div className="p-4 flex items-center gap-4">
-              <div className={`bg-gradient-to-br ${getTierColor(recentlyUnlocked.tier)} bg-clip-text text-transparent animate-bounce-subtle`}>
-                {getAchievementIcon(recentlyUnlocked.id, "w-12 h-12")}
-              </div>
-              <div className="flex-1">
-                <h3 className="text-pearlWhite font-bold text-sm mb-1">
-                  {recentlyUnlocked.title}
-                </h3>
-                <p className="text-moonlightSilver text-xs">
-                  {recentlyUnlocked.description}
-                </p>
-                <div className="mt-2 flex items-center gap-2">
-                  <div className={`px-2 py-0.5 rounded-full bg-gradient-to-r ${getTierColor(recentlyUnlocked.tier)} text-white text-xs font-bold uppercase tracking-wide`}>
-                    {recentlyUnlocked.tier}
-                  </div>
+            <div className="mx-auto max-w-6xl h-full overflow-y-auto pr-1">
+              <h2 className="text-3xl font-bold text-lunarGold">🏆 Trophy Room</h2>
+              <p className="mt-2 text-sm text-moonlightSilver/80">
+                Secrets discovered by explorers of Moonlit Studios
+              </p>
+
+              <div className="mt-5 rounded-xl border border-lunarGold/20 bg-midnight/50 p-4">
+                <div className="flex items-center justify-between text-sm text-moonlightSilver">
+                  <span>Progress</span>
+                  <span className="font-semibold text-lunarGold">
+                    {unlockedAchievements.length}/{ACHIEVEMENTS.length} achievements unlocked
+                  </span>
+                </div>
+                <div className="mt-2 h-2 rounded-full bg-deepOcean/70 overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-mermaidTeal via-lunarGold to-phoenixFire transition-all"
+                    style={{ width: `${(unlockedAchievements.length / ACHIEVEMENTS.length) * 100}%` }}
+                  />
                 </div>
               </div>
-            </div>
 
-            {/* Progress bar animation */}
-            <div className="h-1 bg-midnight/50">
-              <div className="h-full bg-gradient-to-r from-lunarGold via-phoenixFire to-lunarGold animate-progress-bar"></div>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {ACHIEVEMENTS.map((achievement) => {
+                  const unlocked = unlockedAchievements.includes(achievement.id);
+                  const isHiddenLocked = achievement.hidden && !unlocked;
+
+                  return (
+                    <div
+                      key={achievement.id}
+                      className={`rounded-xl border p-4 transition-all ${
+                        unlocked
+                          ? "border-lunarGold/40 bg-midnight/60"
+                          : "border-moonlightSilver/20 bg-midnight/30 grayscale"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className={unlocked ? `bg-gradient-to-br ${getTierColor(achievement.tier)} bg-clip-text text-transparent` : "text-moonlightSilver/40"}>
+                          {unlocked ? (
+                            getAchievementIcon(achievement.id, "w-10 h-10")
+                          ) : (
+                            <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M7 11V8a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                              <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className={`font-semibold ${unlocked ? "text-pearlWhite" : "text-moonlightSilver/60"}`}>
+                            {isHiddenLocked ? "???" : achievement.title}
+                          </p>
+                          <p className={`text-sm mt-1 ${unlocked ? "text-moonlightSilver/80" : "text-moonlightSilver/50"}`}>
+                            {isHiddenLocked ? "???" : achievement.description}
+                          </p>
+                          <div className="mt-3">
+                            <span
+                              className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${
+                                unlocked
+                                  ? `bg-gradient-to-r ${getTierColor(achievement.tier)} text-white`
+                                  : "bg-moonlightSilver/20 text-moonlightSilver/60"
+                              }`}
+                            >
+                              {achievement.tier}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

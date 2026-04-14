@@ -1,5 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+
+declare global {
+  interface Window {
+    moonlitTrophyRoom?: {
+      open: () => void;
+    };
+  }
+}
 
 export function Footer() {
   return (
@@ -194,6 +204,18 @@ export function Footer() {
           <div className="flex flex-col gap-2 text-xs text-moonlightSilver/80 md:flex-row md:items-center md:justify-between">
             <p>© 2025 Moonlit Studios · A Pagade Ventures Brand</p>
             <p className="italic text-starlight/70">Mischief Managed</p>
+          </div>
+
+          <div className="flex justify-center">
+            <button
+              type="button"
+              title="🌙"
+              aria-label="Moon"
+              onClick={() => window.moonlitTrophyRoom?.open()}
+              className="text-xs text-moonlightSilver/20 hover:text-lunarGold transition-colors"
+            >
+              🌙
+            </button>
           </div>
         </div>
       </div>
